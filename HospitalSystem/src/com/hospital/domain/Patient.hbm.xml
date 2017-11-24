@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.hospital.domain.Patient" dynamic-insert="true" dynamic-update="true">
+		<id name="patientId" type="java.lang.Integer">
+			<column name="patientId" />
+			<generator class="increment" />
+		</id>
+		<property name="pwd" type="java.lang.String">
+			<column name="pwd" />
+		</property>
+		
+		<property name="name" type="java.lang.String" >
+			<column name="name" />
+		</property>
+		
+		<property name="openID" type="java.lang.String">
+			<column name="openID" />
+		</property>
+		
+		
+		<property name="phone" type="java.lang.String" >
+			<column name="phone"  />
+		</property>
+		
+		
+		<property name="email" type="java.lang.String"  >
+			<column name="email"  />
+		</property>
+			
+	
+		<property name="createTime" type="java.util.Date" >
+			<column name="createTime"/>
+		</property>
+
+		
+		<!-- failed to lazily initialize a collection of role: com.hospital.domain.Patient.deliveryInfos,  no session or session was closed -->
+		<!-- 解决方案改动 lazy="false" -->
+		<set name="deliveryInfos"  lazy="false" inverse="true">
+			<key>
+				<column name="patientId" ></column>
+			</key>
+			
+			<one-to-many class="com.hospital.domain.DeliveryInfo"/>
+		</set>
+		
+		
+		
+		<many-to-one name="patientType" class="com.hospital.domain.PatientType" lazy="false">
+			<column name="patientTypeId"></column>
+		</many-to-one>
+		
+		
+		<many-to-one name="doctor" class="com.hospital.domain.Doctor" lazy="false" >
+			<column name="aid"></column>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

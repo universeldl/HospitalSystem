@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Java EE 6-Java EE 6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/lib/javax/javax.resource.jar!/" />
+      <root url="jar://$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/lib/javax/javax.jms.jar!/" />
+      <root url="jar://$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/lib/javax/javax.ejb.jar!/" />
+      <root url="jar://$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/lib/javax/javax.persistence.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

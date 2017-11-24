@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+
+   <constant name="struts.devMode" value="false"/><!-- no error/warning messages in devMode -->
+
+   <!-- spring will handle creating Action instances, others handled by Struts -->
+   <constant name="struts.objectFactory" value="spring" />
+
+	<constant name="struts.custom.i18n.resources"
+			value="com.hospital.action.fileuploadmessage">
+	</constant>
+
+
+  	<include file="struts2/struts-authorization.xml"></include>
+	<include file="struts2/struts-doctor-login.xml"></include>
+ 	<include file="struts2/struts-patient-login.xml"></include>
+	<include file="struts2/struts-doctor-info.xml"></include>
+ 	<include file="struts2/struts-patient-info.xml"></include>
+	<include file="struts2/struts-doctor-manage.xml"></include>
+ 	<include file="struts2/struts-patient-manage.xml"></include>
+ 	<include file="struts2/struts-patientType-manage.xml"></include>
+ 	<include file="struts2/struts-surveyType-manage.xml"></include>
+ 	<include file="struts2/struts-survey-manage.xml"></include>
+ 	<include file="struts2/struts-delivery-manage.xml"></include>
+ 	<include file="struts2/struts-forfeit-manage.xml"></include>
+ 	<include file="struts2/struts-retrieve-manage.xml"></include>
+ 	<include file="struts2/struts-delivery-search.xml"></include>
+ 	<include file="struts2/struts-survey.xml"></include>
+ 	<include file="struts2/struts-delivery.xml"></include>
+ 	<include file="struts2/struts-forfeit.xml"></include>
+ 	<include file="struts2/struts-download.xml"></include>
+ 	<include file="struts2/struts-upload.xml"></include>
+</struts>

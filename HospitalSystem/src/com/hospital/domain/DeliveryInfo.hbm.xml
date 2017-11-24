@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.hospital.domain.DeliveryInfo" table="deliveryInfo" dynamic-insert="true" dynamic-update="true">
+		<id name="deliveryId" type="java.lang.Integer" >
+			<column name="deliveryId" />
+			<generator class="increment" />
+		</id>
+		<property name="deliveryDate" type="java.util.Date">
+			<column name="deliveryDate" />
+		</property>
+		
+		
+		<property name="endDate" type="java.util.Date">
+			<column name="endDate" />
+		</property>
+		
+
+		
+		<property name="overday" type="java.lang.Integer" >
+			<column name="overday" default="0"/>
+		</property>
+		
+		<property name="penalty" type="java.lang.Double" >
+			<column name="penalty"/>
+		</property>
+		
+		<property name="state" type="java.lang.Integer" >
+			<column name="state" default="0"/>
+		</property>
+		
+		
+		<many-to-one name="patient" class="com.hospital.domain.Patient"  lazy="false" >
+			<column name="patientId"></column>
+		</many-to-one>
+		
+		<many-to-one name="survey" class="com.hospital.domain.Survey"  lazy="false" >
+			<column name="surveyId"></column>
+		</many-to-one>
+		
+		
+		<many-to-one name="doctor" class="com.hospital.domain.Doctor" lazy="false" >
+			<column name="aid"></column>
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>

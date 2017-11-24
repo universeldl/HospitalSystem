@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+  <package name="delivery" extends="struts-default" namespace="/patient">
+  	<action name="deliveryAction_*" method="{1}" class="deliveryAction">
+  		<result name="success">/WEB-INF/patient/delivery.jsp</result>
+  	</action>
+  </package>
+  
+
+  
+</struts>	
