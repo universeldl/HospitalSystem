@@ -30,6 +30,7 @@ public class RetrieveManageAction extends ActionSupport{
 	private Set<Answer> myAnswers;
 	
 	private int deliveryId;
+	private int surveyId;
 	private String openID;
 
 	public void setOpenID(String openID) {
@@ -37,6 +38,8 @@ public class RetrieveManageAction extends ActionSupport{
 	}
 
 	public void setMyAnswers(Set<Answer> myAnswers) { this.myAnswers = myAnswers; }
+
+	public void setSurveyId(int surveyId) { this.surveyId = surveyId; }
 
 	public void setDeliveryId(int deliveryId) {
 		this.deliveryId = deliveryId;
@@ -70,8 +73,22 @@ public class RetrieveManageAction extends ActionSupport{
 		ServletActionContext.getRequest().setAttribute("pb", pb);
 		return  "success";
 	}
-	
-	
+
+
+	public String  getAnswerBySurveyId(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		RetrieveInfo retrieveInfo = new RetrieveInfo();
+		retrieveInfo.setDeliveryId(surveyId);
+		myAnswers = retrieveService.getAnswerBySurveyId(retrieveInfo);
+
+		ActionContext actionContext = ActionContext.getContext();
+		actionContext.put("myAnswers", myAnswers);
+		ServletActionContext.getRequest().setAttribute("myAnswers", myAnswers);
+		return  "success";
+	}
+
+
 	public String  getRetrieveInfoById(){
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=utf-8");

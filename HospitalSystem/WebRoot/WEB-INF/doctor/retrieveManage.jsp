@@ -162,7 +162,7 @@
 	                                <td><s:date name="#retrieve.deliveryInfo.endDate" format="yyyy-MM-dd" /></td>
 	                                <td>         
 	                                	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findRetrieveModal" onclick="getRetrieveInfoById(<s:property value="#retrieve.deliveryId"/>)">详细</button>
-										<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#findAnswerSheetModal" onclick="getRetrieveInfoById(<s:property value="#retrieve.deliveryId"/>)">查看答卷</button>
+										<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#findAnswerSheetModal" onclick="getAnswerBySurveyId(<s:property value="#retrieve.surveyId"/>)">查看答卷</button>
 	                                	<button type="button" class="btn btn-success btn-xs" onclick="retrieveSurvey(<s:property value="#retrieve.deliveryId"/>)" >答卷</button>
 	                               	</td>                                              
                           	  </tbody>
@@ -270,98 +270,27 @@
 
 										<!---------------------表单-------------------->
 
-                            <s:iterator value="#request.myAnswers" var="answer">
+                            			<s:iterator value="#request.myAnswers" var="answer">
+													 <div class="form-group">
+														<label for="firstname" class="col-sm-3 control-label"><s:property value="#answer.question.questionContent"/></label>
+															<div class="col-sm-7">
+																<input type="text" class="form-control" id="deliveryId"  readonly="readonly">
+
+															</div>
+													</div>
+                            			</s:iterator>
+										<%for (int i=0;i<3;i++){
+										%>
 										 <div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label"><s:property value="#answer.answerId"/></label>
+											<label for="firstname" class="col-sm-3 control-label"><s:property value="#retrieve.deliveryId"/>问题测试</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="deliveryId"  readonly="readonly">
 
 												</div>
 										</div>
-                            </s:iterator>
-													<%for (int i=0;i<3;i++){
-
-													%>
-										 <div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label"><s:property value="#retrieve.deliveryId"/>分发编号</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="deliveryId"  readonly="readonly">
-
-												</div>
-										</div>
-                                                    <%
-														}
-													%>
-
-										 <div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">分发编号</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="deliveryId"  readonly="readonly">
-
-												</div>
-										</div>
-										<div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">分发问卷名称</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="surveyName"  readonly="readonly">
-
-												</div>
-										</div>
-										<div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">分发问卷类型</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="surveyType"  readonly="readonly">
-
-												</div>
-										</div>
-
-										<div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">病人用户名</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="openID"  readonly="readonly">
-
-												</div>
-										</div>
-										<div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">病人名称</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="patientName"  readonly="readonly">
-
-												</div>
-										</div>
-
-										<div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">病人类型</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="patientType"  readonly="readonly">
-
-												</div>
-										</div>
-
-										<div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">逾期天数</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="overday"  readonly="readonly">
-
-												</div>
-										</div>
-
-										<div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">操作医生</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="doctor"  readonly="readonly">
-
-												</div>
-										</div>
-
-
-										<div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label">答卷状态</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="state"  readonly="readonly">
-
-												</div>
-										</div>
+                                        <%
+										}
+										%>
 
 
 										<!---------------------表单-------------------->

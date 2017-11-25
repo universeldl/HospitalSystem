@@ -5,12 +5,12 @@ $(function () {
     	});
 });
 
-function getRetrieveInfoById(id){
+function getAnswerBySurveyId(id){
 	ajax(
 		  {
 		  	method:'POST',
-		  	url:'doctor/retrieveManageAction_getRetrieveInfoById.action',
-			params: "deliveryId=" + id,
+		  	url:'doctor/retrieveManageAction_getAnswerBySurveyId.action',
+			params: "surveyId=" + id,
 			type:"json",
     		callback:function(data) {
 				

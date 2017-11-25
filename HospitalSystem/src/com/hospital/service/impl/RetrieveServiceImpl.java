@@ -3,6 +3,7 @@ package com.hospital.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.hospital.dao.RetrieveDao;
 import com.hospital.dao.SurveyDao;
@@ -12,6 +13,7 @@ import com.hospital.domain.Survey;
 import com.hospital.domain.DeliveryInfo;
 import com.hospital.domain.PageBean;
 import com.hospital.domain.Patient;
+import com.hospital.domain.Answer;
 import com.hospital.service.RetrieveService;
 
 public class RetrieveServiceImpl implements RetrieveService{
@@ -43,6 +45,12 @@ public class RetrieveServiceImpl implements RetrieveService{
 	public RetrieveInfo getRetrieveInfoById(RetrieveInfo retrieveInfo) {
 		// TODO Auto-generated method stub
 		return retrieveDao.getRetrieveInfoById(retrieveInfo);
+	}
+
+	@Override
+	public Set<Answer> getAnswerBySurveyId(RetrieveInfo retrieveInfo) {
+		// TODO Auto-generated method stub
+		return retrieveDao.getAnswerBySurveyId(retrieveInfo);
 	}
 
 	@Override

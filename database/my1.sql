@@ -175,30 +175,30 @@ INSERT INTO Authorization VALUES(6,1,1,1,1,1,1,1,1);
 INSERT INTO survey VALUES(1,"survey1","admin",10,2,"a1","aaa","2017-06-25 00:00:00",1,2);
 INSERT INTO survey VALUES(2,"survey2","doctor2",10,2,"a2","baa","2017-06-25 00:00:00",1,6);
 
-INSERT INTO deliveryInfo VALUES(1,"2017-01-15 00:00:00","2017-03-04 00:00:00",0,0,1,1,1,2);
-INSERT INTO deliveryInfo VALUES(2,"2017-02-15 00:00:00","2017-04-04 00:00:00",0,0,1,2,1,6);
-INSERT INTO deliveryInfo VALUES(3,"2017-03-15 00:00:00","2017-05-04 00:00:00",0,0,1,2,1,6);
+INSERT INTO deliveryInfo VALUES(1,"2017-01-15 00:00:00","2017-03-04 00:00:00",0,0,1,1,1,6);
+INSERT INTO deliveryInfo VALUES(2,"2017-02-15 00:00:00","2017-04-04 00:00:00",0,0,1,1,1,6);
+INSERT INTO deliveryInfo VALUES(3,"2017-03-15 00:00:00","2017-05-04 00:00:00",0,0,1,1,1,6);
 INSERT INTO deliveryInfo VALUES(4,"2017-04-15 00:00:00","2017-06-04 00:00:00",0,0,1,2,1,6);
 INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,1,6);
 INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,1,6);
 
 INSERT INTO Question VALUES(1,1,"第一个问题",2,6);
-INSERT INTO Question VALUES(2,2,"2nd question",1,6);
-INSERT INTO Question VALUES(3,2,"text question",3,6);
+INSERT INTO Question VALUES(2,1,"2nd question",2,6);
+INSERT INTO Question VALUES(3,1,"text question",2,6);
 
 INSERT INTO Answer VALUES(1,1,1,1,1,"a2",6);
-INSERT INTO Answer VALUES(2,2,3,1,1,"some text1",6);
-INSERT INTO Answer VALUES(3,3,2,2,1,"a5",6);
+INSERT INTO Answer VALUES(2,1,3,1,1,"some text1",6);
+INSERT INTO Answer VALUES(3,1,2,1,1,"a5",6);
 INSERT INTO Answer VALUES(4,4,2,2,1,"a6",6);
 INSERT INTO Answer VALUES(5,5,2,2,2,"some text2",6);
 
-INSERT INTO Choice VALUES(1,1,1,1,"a1",6);
-INSERT INTO Choice VALUES(2,1,1,1,"a2",6);
-INSERT INTO Choice VALUES(3,2,3,1,"a3",6);
-INSERT INTO Choice VALUES(4,2,2,2,"a4",6);
-INSERT INTO Choice VALUES(5,3,2,2,"a5",6);
-INSERT INTO Choice VALUES(6,4,2,2,"a6",6);
-INSERT INTO Choice VALUES(7,5,3,2,"a7",6);
+INSERT INTO Choice VALUES(1,1,1,1,"choice_1",6);
+INSERT INTO Choice VALUES(2,1,1,1,"choice_2",6);
+INSERT INTO Choice VALUES(3,2,3,1,"choice_3",6);
+INSERT INTO Choice VALUES(4,2,2,2,"choice_4",6);
+INSERT INTO Choice VALUES(5,3,2,2,"choice_5",6);
+INSERT INTO Choice VALUES(6,4,2,2,"choice_6",6);
+INSERT INTO Choice VALUES(7,5,3,2,"choice_7",6);
 
 INSERT INTO RetrieveInfo VALUES(1,1,1,"2017-06-25 00:00:00",6);
 INSERT INTO RetrieveInfo VALUES(2,1,1,"2017-05-25 00:00:00",6);

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -19,6 +20,7 @@ import com.hospital.domain.Survey;
 import com.hospital.domain.DeliveryInfo;
 import com.hospital.domain.PageBean;
 import com.hospital.domain.Patient;
+import com.hospital.domain.Answer;
 
 public class RetrieveDaoImpl extends HibernateDaoSupport implements RetrieveDao{
 
@@ -99,6 +101,18 @@ public class RetrieveDaoImpl extends HibernateDaoSupport implements RetrieveDao{
 		List list = this.getHibernateTemplate().find(hql, retrieveInfo.getDeliveryId());
 		if(list!=null && list.size()>0){
 			return (RetrieveInfo) list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public Set<Answer> getAnswerBySurveyId(RetrieveInfo retrieveInfo) {
+		String hql= "from RetrieveInfo b where b.survey.surveyId=?";
+		List list = this.getHibernateTemplate().find(hql, retrieveInfo.getSurvey().getSurveyId());
+		if(list!=null && list.size()>0){
+			RetrieveInfo r = (RetrieveInfo) list.get(0);
+			Set<Answer> answers = r.getAnswers();
+			return answers;
 		}
 		return null;
 	}
