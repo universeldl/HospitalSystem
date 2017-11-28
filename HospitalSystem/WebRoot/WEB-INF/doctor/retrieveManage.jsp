@@ -162,7 +162,7 @@
 	                                <td><s:date name="#retrieve.deliveryInfo.endDate" format="yyyy-MM-dd" /></td>
 	                                <td>         
 	                                	<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findRetrieveModal" onclick="getRetrieveInfoById(<s:property value="#retrieve.deliveryId"/>)">详细</button>
-										<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#findAnswerSheetModal" onclick="getAnswerBySurveyId(<s:property value="#retrieve.surveyId"/>)">查看答卷</button>
+										<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#findAnswerSheetModal" onclick="getAnswerBySurveyId(<s:property value="#retrieve.surveyId"/>)">查看答卷</button>
 	                                	<button type="button" class="btn btn-success btn-xs" onclick="retrieveSurvey(<s:property value="#retrieve.deliveryId"/>)" >答卷</button>
 	                               	</td>                                              
                           	  </tbody>

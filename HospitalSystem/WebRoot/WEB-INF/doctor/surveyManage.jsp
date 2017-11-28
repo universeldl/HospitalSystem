@@ -45,6 +45,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+function choiceDisplay()
+{
+    var options = new Array("inputOptionA", "inputOptionB", "inputOptionC", "inputOptionD", "inputOptionE");
+    for(var i=0;i<options.length;i++)
+      document.getElementById(options[i]).style.display="block";
+}
+function choiceHide()
+{
+    var options = new Array("inputOptionA", "inputOptionB", "inputOptionC", "inputOptionD", "inputOptionE");
+    for(var i=0;i<options.length;i++)
+        document.getElementById(options[i]).style.display="none";
+}
+</script>
+
 
 <body class="bootstrap-doctor-with-small-navbar">
     <nav class="navbar navbar-inverse navbar-fixed-top bootstrap-doctor-navbar bootstrap-doctor-navbar-under-small" role="navigation">
@@ -477,7 +492,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     
     
-     <!--------------------------------------增加问卷数量的模糊框------------------------>  
+     <!--------------------------------------增加问卷问题的模糊框------------------------>
                                  <form class="form-horizontal">   <!--保证样式水平不混乱-->   
                                         <!-- 模态框（Modal） -->
 									<div class="modal fade" id="addNumModal" tabindex="-1" role="dialog" aria-labelledby="addNumModalLabel" aria-hidden="true">
@@ -488,23 +503,65 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 														&times;
 													</button>
 													<h4 class="modal-title" id="addNumModalLabel">
-														新增问卷数量
+														新增问卷问题
 													</h4>
 												</div>
 												<div class="modal-body">
 												
 										<!---------------------表单-------------------->
 
-										<div class="form-group">	
-											<label for="firstname" class="col-sm-3 control-label">新增数量</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="addSurveyNum" placeholder="请输入新增的问卷数量">
-												<label class="control-label" for="addSurveyNum" style="display: none;"></label>	
-												</div>
-										</div>
-										
+
+                                            <button type="button" class="btn btn-default" onclick="choiceDisplay()" id="add1">选择题</button>
+                                            <button type="button" class="btn btn-default" onclick="choiceHide()" id="add2">问答题</button>
+
+                                                <input type="hidden" value="1" name="qstType">
+                                                <div class="form-group">
+                                                    <label for="firstname" class="col-sm-3 control-label">问题题目</label>
+                                                    <div class="col-sm-7">
+                                                        <textarea class="form-control" rows="3" id="addDescription" placeholder="请输入问题题目"></textarea>
+                                                        <label class="control-label" for="addDescription" style="display: none;"></label>
+                                                    </div>
+                                                </div>
+										        <div class="form-group" id="inputOptionA">
+										        	<label for="inputOptionA" class="col-sm-3 control-label">A. </label>
+											        	<div class="col-sm-7">
+												        	<input type="text" class="form-control" id="inputOption" placeholder="请输入选项内容">
+												        <label class="control-label" for="inputOption" style="display: none;"></label>
+												        </div>
+										        </div>
+										        <div class="form-group" id="inputOptionB">
+										        	<label for="inputOptionB" class="col-sm-3 control-label">B. </label>
+											        	<div class="col-sm-7">
+												        	<input type="text" class="form-control" id="inputOption" placeholder="请输入选项内容">
+												        <label class="control-label" for="inputOption" style="display: none;"></label>
+												        </div>
+										        </div>
+										        <div class="form-group" id="inputOptionC">
+										        	<label for="inputOptionC" class="col-sm-3 control-label">C. </label>
+											        	<div class="col-sm-7">
+												        	<input type="text" class="form-control" id="inputOption" placeholder="请输入选项内容">
+												        <label class="control-label" for="inputOption" style="display: none;"></label>
+												        </div>
+										        </div>
+										        <div class="form-group" id="inputOptionD">
+										        	<label for="inputOptionD" class="col-sm-3 control-label">D. </label>
+											        	<div class="col-sm-7">
+												        	<input type="text" class="form-control" id="inputOption" placeholder="请输入选项内容">
+												        <label class="control-label" for="inputOption" style="display: none;"></label>
+												        </div>
+										        </div>
+										        <div class="form-group" id="inputOptionE">
+										        	<label for="inputOptionE" class="col-sm-3 control-label">E. </label>
+											        	<div class="col-sm-7">
+												        	<input type="text" class="form-control" id="inputOption" placeholder="请输入选项内容">
+												        <label class="control-label" for="inputOption" style="display: none;"></label>
+												        </div>
+										        </div>
+                                                <input type="submit" class="btn btn-success" id="add_qst" value="继续添加">
+
+
 										<!---------------------表单-------------------->
-									</div>
+                                    </div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
@@ -517,7 +574,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 
                                  </form>	
- 								<!--------------------------------------增加问卷数量的模糊框------------------------>  
+ 								<!--------------------------------------增加问卷问题的模糊框------------------------>
     
     
     
@@ -648,44 +705,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<label class="control-label" for="updateSurveyName" style="display: none;"></label>
 												</div>
 										</div>
-											
-										<div class="form-group">	
+
+										<div class="form-group">
 											<label for="firstname" class="col-sm-3 control-label">问卷类型</label>
 											<div class="col-sm-7">
 												 <select class="form-control" id="updateSurveyType">
-                                           				 <option value="-1">请选择</option>                                         
+                                           				 <option value="-1">请选择</option>
                                       			  </select>
 											<label class="control-label" for="updateSurveyType" style="display: none;"></label>
 											</div>
 										</div>
-											
-										<div class="form-group">	
+
+										<div class="form-group">
 											<label for="firstname" class="col-sm-3 control-label">作者名称</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="updateAuthor"  placeholder="请输入作者名称">
 												<label class="control-label" for="updateAuthor" style="display: none;"></label>
 												</div>
 										</div>
-										
-										
-										<div class="form-group">	
+
+
+										<div class="form-group">
 											<label for="firstname" class="col-sm-3 control-label">科室</label>
 												<div class="col-sm-7">
 													<input type="text" class="form-control" id="updateDepartment"  placeholder="请输入科室">
 												<label class="control-label" for="updateDepartment" style="display: none;"></label>
 												</div>
 										</div>
-										
-										
 
-										<div class="form-group">	
+
+
+										<div class="form-group">
 											<label for="firstname" class="col-sm-3 control-label">简介</label>
 												<div class="col-sm-7">
 												<textarea class="form-control" rows="3" id="updateDescription" placeholder="请输入问卷简介"></textarea>
 												<label class="control-label" for="updateDescription" style="display: none;"></label>
 												</div>
 										</div>
-										
+
+
 										<!---------------------表单-------------------->
 															
 										</div>
