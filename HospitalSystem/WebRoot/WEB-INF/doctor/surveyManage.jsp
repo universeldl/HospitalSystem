@@ -239,7 +239,8 @@ function choiceHide()
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" id="btn_update" onclick="updateSurvey(<s:property value="#survey.surveyId"/>)">修改</button>
 	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteSurvey(<s:property value="#survey.surveyId"/>)">删除</button>
 	                                	<button type="button" class="btn btn-success btn-xs" onclick="addSurveyNum(<s:property value="#survey.surveyId"/>)"  data-toggle="modal" data-target="#addNumModal">新增</button>
-	                               	</td>                                              
+										<button type="button" class="btn btn-primary btn-xs" onclick="checkSurvey(<s:property value="#survey.surveyId"/>)"  data-toggle="modal" data-target="#checkSurvey">浏览</button>
+	                               	</td>
                           	  </tbody>
                             </s:iterator>
                             </s:if>
@@ -487,8 +488,63 @@ function choiceHide()
     
     
     
-    
-    
+
+     <!--------------------------------------浏览问卷的模态框------------------------>
+                                 <form class="form-horizontal">   <!--保证样式水平不混乱-->
+                                        <!-- 模态框（Modal） -->
+									<div class="modal fade" id="checkSurvey" tabindex="-1" role="dialog" aria-labelledby="addNumModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+														&times;
+													</button>
+													<h4 class="modal-title" id="addNumModalLabel">
+														浏览问卷
+													</h4>
+												</div>
+												<div class="modal-body">
+
+										<!---------------------表单-------------------->
+
+                                        <% int i=1; %>
+                            			<s:iterator value="#request.myAnswers" var="answer">
+											<div class="form-group">
+												<label for="firstname" class="col-lg-3 control-label"></label>
+												<div class="col-lg-7">
+                                                    <p class="text-left"><b><%=i%>.  ${answer.question.questionContent}.</b></p>
+												</div>
+											</div>
+												<s:iterator value="#answer.question.choices" var="choice">
+												<div class="form-group">
+													<label for="firstname" class="col-lg-3 control-label"></label>
+													<div class="form-group" class="col-lg-7  col-lg-offset-3">
+													   <label>
+                                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">${choice.choiceContent}.
+													   </label>
+													</div>
+												</div>
+                            					</s:iterator>
+                                            <% i++; %>
+										</s:iterator>
+
+										<!---------------------表单-------------------->
+                                    </div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+													</button>
+													<button type="button" class="btn btn-primary" id="add_SurveyNum">
+														新增
+													</button>
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+
+                                 </form>
+ 								<!--------------------------------------浏览问卷的模态框------------------------>
+
+
     
     
     
@@ -580,7 +636,7 @@ function choiceHide()
     
     
     
-    
+
     
     
     

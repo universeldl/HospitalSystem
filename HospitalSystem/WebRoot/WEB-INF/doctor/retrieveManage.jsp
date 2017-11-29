@@ -270,28 +270,41 @@
 
 										<!---------------------表单-------------------->
 
+                                        <% int i=1; %>
                             			<s:iterator value="#request.myAnswers" var="answer">
-													 <div class="form-group">
-														<label for="firstname" class="col-sm-3 control-label"><s:property value="#answer.question.questionContent"/></label>
-															<div class="col-sm-7">
-																<input type="text" class="form-control" id="deliveryId"  readonly="readonly">
 
-															</div>
-													</div>
-                            			</s:iterator>
-										<%for (int i=0;i<3;i++){
-										%>
-										 <div class="form-group">
-											<label for="firstname" class="col-sm-3 control-label"><s:property value="#retrieve.deliveryId"/>问题测试</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" id="deliveryId"  readonly="readonly">
-
+											<div class="form-group">
+												<label for="firstname" class="col-lg-3 control-label"></label>
+												<div class="col-lg-7">
+                                                    <p class="text-left"><b><%=i%>.  ${answer.question.questionContent}.</b></p>
 												</div>
-										</div>
-                                        <%
-										}
-										%>
+											</div>
+												<s:iterator value="#answer.question.choices" var="choice">
+												<div class="form-group">
+													<label for="firstname" class="col-lg-3 control-label"></label>
+													<div class="form-group" class="col-lg-7  col-lg-offset-3">
+													   <label>
+                                                           <ul>
+                                                            <s:set var="flag" value="true" ></s:set>
+                                                            <s:iterator value="#answer.choices" var="cho">
+                                                                <s:if test="#cho == #choice">
+                                                                    <s:set var="flag" value="false"></s:set>
+                                                                </s:if>
+                                                            </s:iterator>
+                                                                <s:if test="#flag == false">
+                                                                    <li>${choice.choiceContent}.</li>
+                                                                </s:if>
+                                                                <s:else>
+                                                                    <li style="color:green;">${choice.choiceContent}.</li>
+                                                                </s:else>
+                                                           </ul>
+													   </label>
+													</div>
+												</div>
+                            					</s:iterator>
 
+                                            <% i++; %>
+										</s:iterator>
 
 										<!---------------------表单-------------------->
 									</div>
@@ -364,7 +377,7 @@
 										
 												</div>
 										</div>
-										
+
 										<div class="form-group">	
 											<label for="firstname" class="col-sm-3 control-label">病人类型</label>
 												<div class="col-sm-7">
