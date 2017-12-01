@@ -2,12 +2,8 @@ package com.hospital.service;
 
 import java.util.List;
 
+import com.hospital.domain.*;
 import net.sf.json.JSONObject;
-
-import com.hospital.domain.Doctor;
-import com.hospital.domain.Survey;
-import com.hospital.domain.SurveyType;
-import com.hospital.domain.PageBean;
 
 public interface SurveyService {
 
@@ -17,6 +13,7 @@ public interface SurveyService {
 
 	boolean addSurvey(Survey survey);
 
+	boolean addQuestion(Question question);
 
 	Survey getSurveyById(Survey survey);
 

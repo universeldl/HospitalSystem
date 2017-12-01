@@ -2,6 +2,7 @@ package com.hospital.dao;
 
 import java.util.List;
 
+import com.hospital.domain.Question;
 import com.hospital.domain.Survey;
 import com.hospital.domain.SurveyType;
 import com.hospital.domain.PageBean;
@@ -11,6 +12,8 @@ public interface SurveyDao {
 	PageBean<Survey> findSurveyByPage(int pageCode, int pageSize);
 
 	boolean addSurvey(Survey survey);
+
+	boolean addQuestion(Question question);
 
 	Survey getSurveyById(Survey survey);
 

@@ -8,9 +8,9 @@
         <id name="questionId" type="java.lang.Integer">
             <column name="questionId"/>
         </id>
-  <!--      <property name="surveyId" type="java.lang.Integer">
+        <property name="surveyId" type="java.lang.Integer">
             <column name="surveyId"/>
-        </property> -->
+        </property>
         <property name="questionContent" type="java.lang.String">
             <column name="questionContent"/>
         </property>
@@ -21,7 +21,7 @@
             <column name="aid"/>
         </property>
 
-        <many-to-one name="survey" class="com.hospital.domain.Survey" column="surveyId"></many-to-one>
+        <!--<many-to-one name="survey" class="com.hospital.domain.Survey" column="surveyId"></many-to-one>-->
 
 		<set name="choices"  lazy="false" inverse="true">
 			<key>

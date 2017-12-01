@@ -15,14 +15,14 @@ public class Question {
     private String questionContent;
     private int questionType;
     private int aid;
-    private Survey survey;
+    //private Survey survey;
 	private Set<Choice> choices = new HashSet<>();
 
     public Set<Choice> getChoices() {  return choices;  }
     public void setChoices(Set<Choice> choices) {  this.choices = choices;  }
 
-	public Survey getSurvey() { return survey; }
-	public void setSurvey(Survey survey) { this.survey = survey; }
+	//public Survey getSurvey() { return survey; }
+	//public void setSurvey(Survey survey) { this.survey = survey; }
 
     public int getQuestionId() {
         return questionId;
@@ -58,6 +58,19 @@ public class Question {
     public void setAid(int aid) {
         this.aid = aid;
     }
+
+	public Question() {
+
+	}
+
+    public Question( int aid, int surveyId, String questionContent, int questionType, Set<Choice> choices) {
+		super();
+		this.aid = aid;
+        this.surveyId = surveyId;
+		this.questionContent = questionContent;
+		this.questionType = questionType;
+		this.choices = choices;
+	}
 
 /*    @Override
     public boolean equals(Object o) {

@@ -28,7 +28,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                 
        <script src="${pageContext.request.contextPath}/js/getAllSurveyTypes.js"></script>
-       			 <script src="${pageContext.request.contextPath}/js/addSurvey.js"></script>
+				<script src="${pageContext.request.contextPath}/js/addSurvey.js"></script>
+				<script src="${pageContext.request.contextPath}/js/addQuestion.js"></script>
                 
                  <script src="${pageContext.request.contextPath}/js/updateSurvey.js"></script>
                   <script src="${pageContext.request.contextPath}/js/deleteSurvey.js"></script>
@@ -44,21 +45,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
-<script type="text/javascript">
-function choiceDisplay()
-{
-    var options = new Array("inputOptionA", "inputOptionB", "inputOptionC", "inputOptionD", "inputOptionE");
-    for(var i=0;i<options.length;i++)
-      document.getElementById(options[i]).style.display="block";
-}
-function choiceHide()
-{
-    var options = new Array("inputOptionA", "inputOptionB", "inputOptionC", "inputOptionD", "inputOptionE");
-    for(var i=0;i<options.length;i++)
-        document.getElementById(options[i]).style.display="none";
-}
-</script>
 
 
 <body class="bootstrap-doctor-with-small-navbar">
@@ -238,7 +224,7 @@ function choiceHide()
 	                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getSurveyInfo(<s:property value="#survey.surveyId"/>)" >查看</button>
 	                                	<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" id="btn_update" onclick="updateSurvey(<s:property value="#survey.surveyId"/>)">修改</button>
 	                                	<button type="button" class="btn btn-danger btn-xs" onclick="deleteSurvey(<s:property value="#survey.surveyId"/>)">删除</button>
-	                                	<button type="button" class="btn btn-success btn-xs" onclick="addSurveyNum(<s:property value="#survey.surveyId"/>)"  data-toggle="modal" data-target="#addNumModal">新增</button>
+	                                	<button type="button" class="btn btn-success btn-xs" onclick="addQuestion(<s:property value="#survey.surveyId"/>)"  data-toggle="modal" data-target="#addQuestionModal">新增</button>
 										<button type="button" class="btn btn-primary btn-xs" onclick="checkSurvey(<s:property value="#survey.surveyId"/>)"  data-toggle="modal" data-target="#checkSurvey">浏览</button>
 	                               	</td>
                           	  </tbody>
@@ -533,7 +519,7 @@ function choiceHide()
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
-													<button type="button" class="btn btn-primary" id="add_SurveyNum">
+													<button type="button" class="btn btn-primary" id="check_Survey">
 														新增
 													</button>
 												</div>
@@ -551,14 +537,14 @@ function choiceHide()
      <!--------------------------------------增加问卷问题的模糊框------------------------>
                                  <form class="form-horizontal">   <!--保证样式水平不混乱-->   
                                         <!-- 模态框（Modal） -->
-									<div class="modal fade" id="addNumModal" tabindex="-1" role="dialog" aria-labelledby="addNumModalLabel" aria-hidden="true">
+									<div class="modal fade" id="addQuestionModal" tabindex="-1" role="dialog" aria-labelledby="addQuestionModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 														&times;
 													</button>
-													<h4 class="modal-title" id="addNumModalLabel">
+													<h4 class="modal-title" id="addQuestionModalLabel">
 														新增问卷问题
 													</h4>
 												</div>
@@ -570,47 +556,46 @@ function choiceHide()
                                             <button type="button" class="btn btn-default" onclick="choiceDisplay()" id="add1">选择题</button>
                                             <button type="button" class="btn btn-default" onclick="choiceHide()" id="add2">问答题</button>
 
-                                                <input type="hidden" value="1" name="qstType">
                                                 <div class="form-group">
                                                     <label for="firstname" class="col-sm-3 control-label">问题题目</label>
                                                     <div class="col-sm-7">
-                                                        <textarea class="form-control" rows="3" id="addDescription" placeholder="请输入问题题目"></textarea>
-                                                        <label class="control-label" for="addDescription" style="display: none;"></label>
+                                                        <textarea class="form-control" rows="3" id="addQuestionContent" placeholder="请输入问题题目"></textarea>
+                                                        <label class="control-label" for="addQuestionContent" style="display: none;"></label>
                                                     </div>
                                                 </div>
 										        <div class="form-group" id="inputOptionA">
 										        	<label for="inputOptionA" class="col-sm-3 control-label">A. </label>
 											        	<div class="col-sm-7">
-												        	<input type="text" class="form-control" id="inputOption" placeholder="请输入选项内容">
-												        <label class="control-label" for="inputOption" style="display: none;"></label>
+												        	<input type="text" class="form-control" id="choiceOption1" placeholder="请输入选项内容">
+												        <label class="control-label" for="choiceOption1" style="display: none;"></label>
 												        </div>
 										        </div>
 										        <div class="form-group" id="inputOptionB">
 										        	<label for="inputOptionB" class="col-sm-3 control-label">B. </label>
 											        	<div class="col-sm-7">
-												        	<input type="text" class="form-control" id="inputOption" placeholder="请输入选项内容">
-												        <label class="control-label" for="inputOption" style="display: none;"></label>
+												        	<input type="text" class="form-control" id="choiceOption2" placeholder="请输入选项内容">
+												        <label class="control-label" for="choiceOption2" style="display: none;"></label>
 												        </div>
 										        </div>
 										        <div class="form-group" id="inputOptionC">
 										        	<label for="inputOptionC" class="col-sm-3 control-label">C. </label>
 											        	<div class="col-sm-7">
-												        	<input type="text" class="form-control" id="inputOption" placeholder="请输入选项内容">
-												        <label class="control-label" for="inputOption" style="display: none;"></label>
+												        	<input type="text" class="form-control" id="choiceOption3" placeholder="请输入选项内容">
+												        <label class="control-label" for="choiceOption3" style="display: none;"></label>
 												        </div>
 										        </div>
 										        <div class="form-group" id="inputOptionD">
 										        	<label for="inputOptionD" class="col-sm-3 control-label">D. </label>
 											        	<div class="col-sm-7">
-												        	<input type="text" class="form-control" id="inputOption" placeholder="请输入选项内容">
-												        <label class="control-label" for="inputOption" style="display: none;"></label>
+												        	<input type="text" class="form-control" id="choiceOption4" placeholder="请输入选项内容">
+												        <label class="control-label" for="choiceOption4" style="display: none;"></label>
 												        </div>
 										        </div>
 										        <div class="form-group" id="inputOptionE">
 										        	<label for="inputOptionE" class="col-sm-3 control-label">E. </label>
 											        	<div class="col-sm-7">
-												        	<input type="text" class="form-control" id="inputOption" placeholder="请输入选项内容">
-												        <label class="control-label" for="inputOption" style="display: none;"></label>
+												        	<input type="text" class="form-control" id="choiceOption5" placeholder="请输入选项内容">
+												        <label class="control-label" for="choiceOption5" style="display: none;"></label>
 												        </div>
 										        </div>
                                                 <input type="submit" class="btn btn-success" id="add_qst" value="继续添加">
@@ -621,8 +606,8 @@ function choiceHide()
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 													</button>
-													<button type="button" class="btn btn-primary" id="add_SurveyNum">
-														新增
+													<button type="button" class="btn btn-primary" id="add_Question">
+														确认添加
 													</button>
 												</div>
 											</div><!-- /.modal-content -->

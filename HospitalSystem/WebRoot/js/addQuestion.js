@@ -1,29 +1,46 @@
+var questionType = 1;
+var surveyId = 1;
+
+function addQuestion(id){
+    surveyId = id;
+}
 
 $(function () {
 	
 
-  $('#addSurvey').click(function () {
+  $('#add_Question').click(function () {
 
 
- 	if (!validAddSurvey()) {
+ 	if (!validAddQuestion()) {
         return;
     }
 
-	var postdata = "surveyName="+$.trim($("#addSurveyName").val())+"&author="+ $.trim($("#addAuthor").val())+"&department="+ $.trim($("#addDepartment").val())+"&num="+ $.trim($("#addNum").val())+"&description="
-	+ $.trim($("#addDescription").val())+"&surveyTypeId="+ $.trim($("#addSurveyType").val());
-	
+    var postdata;
+    if ( questionType == 1) {
+      postdata = "questionType=1&questionContent="+$.trim($("#addQuestionContent").val())
+          +"&surveyId="+ surveyId
+          +"&choiceOption1="+ $.trim($("#choiceOption1").val())
+          +"&choiceOption2="+ $.trim($("#choiceOption2").val())
+          +"&choiceOption3="+ $.trim($("#choiceOption3").val())
+          +"&choiceOption4="+ $.trim($("#choiceOption4").val())
+          +"&choiceOption5="+ $.trim($("#choiceOption5").val());
+    }
+    else if ( questionType == 2) {
+        postdata = "questionTypeId=2&questionContent="+$.trim($("#addQuestionContent").val())
+	}
+
 	ajax(
     		  {
 			  	method:'POST',
-	    		url:'doctor/surveyManageAction_addSurvey.action',
+	    		url:'doctor/surveyManageAction_addQuestion.action',
 				params: postdata,
 	    		callback:function(data) {
 					if (data == 1) {
-						$("#addModal").modal("hide");//关闭模糊框		
+						$("#addQuestionModal").modal("hide");//关闭模糊框
 						showInfo("添加成功");	
 
 	                }else {
-						$("#addModal").modal("hide");//关闭模糊框
+						$("#addQuestionModal").modal("hide");//关闭模糊框
 						showInfo("添加失败");
 					}
 								
@@ -36,116 +53,85 @@ $(function () {
 	});
 
 
+	$('#modal_info').on('hide.bs.modal',function() {//提示模糊框隐藏时候触发
+       	location.reload();  	//刷新当前页面
+    });
+		
 
-		
-   
-	
-		$('#modal_info').on('hide.bs.modal',function() {//提示模糊框隐藏时候触发
-       		 location.reload();  	//刷新当前页面
-    	});
-		
-		
-		 $('#btn_add').click(function () {
-		 	$("#addSurveyType option[value!=-1]").remove();//移除先前的选项
-			ajax(
-					  {
-			    		url:"doctor/surveyManageAction_getAllSurveyTypes.action",
-			    		type:"json",
-			    		callback:function(data) {
-							// 循环遍历每个问卷分类，每个名称生成一个option对象，添加到<select>中
-							for(var index in data) {
-								var op = document.createElement("option");//创建一个指名名称元素
-								op.value = data[index].typeId;//设置op的实际值为当前的问卷分类编号
-								var textNode = document.createTextNode(data[index].typeName);//创建文本节点
-								op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
-								
-								document.getElementById("addSurveyType").appendChild(op);
-							}
-						}
-			  		 }
-				);	
-		});
-		
-		
 });
 
 
 
-function validAddSurvey() {
-    var flag = true;
-
-    var surveyName = $.trim($("#addSurveyName").val());
-    if (surveyName == "") {
-        $('#addSurveyName').parent().addClass("has-error");
-        $('#addSurveyName').next().text("请输入问卷名称");
-        $("#addSurveyName").next().show();
-        flag = false;
-    }else {
-        $('#addSurveyName').parent().removeClass("has-error");
-        $('#addSurveyName').next().text("");
-        $("#addSurveyName").next().hide();
-    }
-	
-	
-	var surveyType = $.trim($("#addSurveyType").val());
-	if(surveyType == -1){
-		 $('#addSurveyType').parent().addClass("has-error");
-        $('#addSurveyType').next().text("请选择问卷分类");
-        $("#addSurveyType").next().show();
-        flag = false;
-	}else {
-        $('#addSurveyType').parent().removeClass("has-error");
-        $('#addSurveyType').next().text("");
-        $("#addSurveyType").next().hide();
-    }
-	
-	var author = $.trim($("#addAuthor").val());
-	if(author == ""){
-		 $('#addAuthor').parent().addClass("has-error");
-        $('#addAuthor').next().text("请输入作者名称");
-        $("#addAuthor").next().show();
-        flag = false;
-	}else {
-        $('#addAuthor').parent().removeClass("has-error");
-        $('#addAuthor').next().text("");
-        $("#addAuthor").next().hide();
-    } 
-
-
-	var department = $.trim($("#addDepartment").val());
-	if(department == ""){
-		 $('#addDepartment').parent().addClass("has-error");
-        $('#addDepartment').next().text("请输入科室名称");
-        $("#addDepartment").next().show();
-        flag = false;
-	}else {
-        $('#addDepartment').parent().removeClass("has-error");
-        $('#addDepartment').next().text("");
-        $("#addDepartment").next().hide();
-    } 
-	
-	var num = $.trim($("#addNum").val());
-	if(num == ""){
-		 $('#addNum').parent().addClass("has-error");
-        $('#addNum').next().text("请输入总分发数");
-        $("#addNum").next().show();
-        flag = false;
-	}else if(num<=0 || num!=parseInt(num)){
-		 $('#addNum').parent().addClass("has-error");
-        $('#addNum').next().text("数量必须为正整数");
-        $("#addNum").next().show();
-        flag = false;
-	}else {
-        $('#addNum').parent().removeClass("has-error");
-        $('#addNum').next().text("");
-        $("#addNum").next().hide();
-    } 
-
-	
-    return flag;
+function choiceDisplay()
+{
+    questionType = 1;
+    var options = new Array("inputOptionA", "inputOptionB", "inputOptionC", "inputOptionD", "inputOptionE");
+    for(var i=0;i<options.length;i++)
+      document.getElementById(options[i]).style.display="block";
 }
 
 
+
+function choiceHide()
+{
+    questionType = 2;
+    var options = new Array("inputOptionA", "inputOptionB", "inputOptionC", "inputOptionD", "inputOptionE");
+    for(var i=0;i<options.length;i++)
+        document.getElementById(options[i]).style.display="none";
+}
+
+
+
+
+function unique(arr) {
+  var result = [], hash = {};
+  for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+    if (!hash[elem]) {
+      result.push(elem);
+      hash[elem] = true;
+    }
+  }
+  return result;
+}
+
+
+
+function validAddQuestion() {
+    var flag = true;
+
+    var questionContent = $.trim($("#addQuestionContent").val());
+    var choiceOption1 = $.trim($("#choiceOption1").val());
+    var choiceOption2 = $.trim($("#choiceOption2").val());
+    var choiceOption3 = $.trim($("#choiceOption3").val());
+    var choiceOption4 = $.trim($("#choiceOption4").val());
+    var choiceOption5 = $.trim($("#choiceOption5").val());
+
+    if (questionContent == "") {
+        $('#addQuestionContent').parent().addClass("has-error");
+        $('#addQuestionContent').next().text("请输入问题");
+        $("#addQuestionContent").next().show();
+        flag = false;
+    }else {
+        $('#addQuestionContent').parent().removeClass("has-error");
+        $('#addQuestionContent').next().text("");
+        $("#addQuestionContent").next().hide();
+    }
+
+    var x = Array(choiceOption1, choiceOption2, choiceOption3, choiceOption4, choiceOption5);
+    var y = unique(x);
+    if(y.length < 2) {
+    	$('#choiceOption1').parent().addClass("has-error");
+        $('#choiceOption1').next().text("每个问题至少需要有两个不重复的选项");
+        $("#choiceOption1").next().show();
+        flag = false;
+	}else {
+        $('#choiceOption1').parent().removeClass("has-error");
+        $('#choiceOption1').next().text("");
+        $("#choiceOption1").next().hide();
+    } 
+
+    return flag;
+}
 
 
 function showInfo(msg) {

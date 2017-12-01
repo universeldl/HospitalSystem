@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.hospital.domain.*;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -20,12 +21,6 @@ import com.hospital.dao.SurveyDao;
 import com.hospital.dao.SurveyTypeDao;
 import com.hospital.dao.DeliveryDao;
 import com.hospital.dao.ForfeitDao;
-import com.hospital.domain.Doctor;
-import com.hospital.domain.Survey;
-import com.hospital.domain.SurveyType;
-import com.hospital.domain.DeliveryInfo;
-import com.hospital.domain.ForfeitInfo;
-import com.hospital.domain.PageBean;
 import com.hospital.service.SurveyService;
 
 public class SurveyServiceImpl implements SurveyService{
@@ -68,6 +63,11 @@ public class SurveyServiceImpl implements SurveyService{
 		return surveyDao.addSurvey(survey);
 	}
 
+	@Override
+	public boolean addQuestion(Question question) {
+		// TODO Auto-generated method stub
+		return surveyDao.addQuestion(question);
+	}
 
 	@Override
 	public Survey getSurveyById(Survey survey) {
