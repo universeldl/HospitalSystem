@@ -1,3 +1,6 @@
-workspace.xml
-HospitalSystem/WebRoot/WEB-INF/classes/
 out/
+.idea/
+*.ipr
+*.iws
+*.iml
+HospitalSystem/WebRoot/WEB-INF/classes/
