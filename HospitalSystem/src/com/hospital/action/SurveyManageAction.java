@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.hospital.domain.*;
+import com.hospital.service.ChoiceService;
+import com.hospital.service.QuestionService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -14,11 +18,6 @@ import net.sf.json.util.PropertyFilter;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.hospital.domain.Doctor;
-import com.hospital.domain.Authorization;
-import com.hospital.domain.Survey;
-import com.hospital.domain.SurveyType;
-import com.hospital.domain.PageBean;
 import com.hospital.service.SurveyService;
 import com.hospital.service.SurveyTypeService;
 import com.opensymphony.xwork2.ActionSupport;
@@ -29,8 +28,10 @@ public class SurveyManageAction extends ActionSupport{
 	
 	private SurveyService surveyService;
 	private SurveyTypeService surveyTypeService;
-	
-	
+
+	private QuestionService questionService;
+    private ChoiceService choiceService;
+
 
 	public void setSurveyTypeService(SurveyTypeService surveyTypeService) {
 		this.surveyTypeService = surveyTypeService;
@@ -40,11 +41,26 @@ public class SurveyManageAction extends ActionSupport{
 	public void setSurveyService(SurveyService surveyService) {
 		this.surveyService = surveyService;
 	}
-	
+
+	public void setChoiceService(ChoiceService choiceService) {
+		this.choiceService= choiceService;
+	}
+
+	public void setQuestionService(QuestionService questionService) {
+		this.questionService = questionService;
+	}
+
 	private int pageCode;
-	
-	
-	
+
+
+	private Integer questionType;
+	private String questionContent;
+	private String choiceOption1;
+	private String choiceOption2;
+	private String choiceOption3;
+	private String choiceOption4;
+	private String choiceOption5;
+
 	
 	public void setPageCode(int pageCode) {
 		this.pageCode = pageCode;
@@ -66,6 +82,41 @@ public class SurveyManageAction extends ActionSupport{
 	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+
+	public void setQuestionType(Integer questionType) {
+		this.questionType = questionType;
+	}
+
+
+	public void setQuestionContent(String questionContent) {
+		this.questionContent = questionContent;
+	}
+
+
+	public void setChoiceOption1(String choiceOption1) {
+		this.choiceOption1 = choiceOption1;
+	}
+
+
+	public void setChoiceOption2(String choiceOption2) {
+		this.choiceOption2 = choiceOption2;
+	}
+
+
+	public void setChoiceOption3(String choiceOption3) {
+		this.choiceOption3 = choiceOption3;
+	}
+
+
+	public void setChoiceOption4(String choiceOption4) {
+		this.choiceOption4 = choiceOption4;
+	}
+
+
+	public void setChoiceOption5(String choiceOption5) {
+		this.choiceOption5 = choiceOption5;
 	}
 
 
@@ -173,7 +224,53 @@ public class SurveyManageAction extends ActionSupport{
 		return null;
 	}
 	
-	
+
+	/**
+	 * 添加问题
+	 * @return
+	 */
+	public String addQuestion(){
+
+        Set<Choice> choices = new HashSet<>();
+        Set<String> chos = new HashSet<>();
+        chos.add(choiceOption1);
+        chos.add(choiceOption2);
+        chos.add(choiceOption3);
+        chos.add(choiceOption4);
+        chos.add(choiceOption5);
+        boolean b = true;
+        for(String choiceOption : chos) {
+            if(!"".equals(choiceOption.trim())) {
+                Choice choice = new Choice(surveyId, choiceOption);
+                choices.add(choice);
+            }
+        }
+
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        Question question = new Question(doctor.getAid(), surveyId, questionContent, questionType, choices);
+        b = questionService.addQuestion(question);
+
+        //if(b) {
+        //    for(Choice choice: choices) {
+        //        b = choiceService.addChoice(choice);//if add Question successfully, then add Choice
+        //        if(!b) break;//break whenever add failing
+        //    }
+        //}
+		int success = 0;
+		if(b){
+			success = 1;
+		}else{
+			success = 0;
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
+
 	/**
 	 * 得到指定问卷编号的问卷信息
 	 * ajax请求该方法

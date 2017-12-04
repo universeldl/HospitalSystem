@@ -53,6 +53,18 @@ public class Choice {
         this.aid = aid;
     }
 
+
+    public Choice() {
+	}
+
+    public Choice( int surveyId, String choiceContent) {
+		super();
+		this.surveyId = surveyId;
+		this.choiceContent = choiceContent;
+	}
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

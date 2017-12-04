@@ -41,5 +41,11 @@
  		<property name="surveyTypeService">
  			<ref bean="surveyTypeService"/>
  		</property>
+ 		<property name="questionService">
+ 			<ref bean="questionService"/>
+ 		</property>
+ 		<property name="choiceService">
+ 			<ref bean="choiceService"/>
+ 		</property>
  	</bean>
  </beans>

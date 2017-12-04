@@ -3,6 +3,7 @@ package com.hospital.dao.impl;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.hospital.domain.Question;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -89,6 +90,20 @@ public class SurveyDaoImpl extends HibernateDaoSupport implements SurveyDao{
 		return b;
 	}
 
+	@Override
+	public boolean addQuestion(Question question) {
+		boolean b = true;
+		try{
+			this.getHibernateTemplate().clear();
+			this.getHibernateTemplate().save(question);
+			this.getHibernateTemplate().flush();
+		}catch (Throwable e1) {
+			b = false;
+			e1.printStackTrace();
+			throw new RuntimeException(e1.getMessage());
+		}
+		return b;
+	}
 
 
 
