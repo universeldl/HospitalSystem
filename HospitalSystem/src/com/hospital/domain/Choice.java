@@ -6,17 +6,21 @@ import java.util.Set;
 public class Choice {
     private int choiceId;
     private int questionId;
-    private int surveyId;
+    private int answerId;
+    //private int surveyId;
     private String choiceContent;
     private int aid;
     private Question question;
-    private Answer answer;
+    //private Answer answer;
 
-    public Answer getAnswer() { return answer; }
-    public void setAnswer(Answer answer) { this.answer = answer; }
+    //public Answer getAnswer() { return answer; }
+    //public void setAnswer(Answer answer) { this.answer = answer; }
 
 	public Question getQuestion() { return question; }
 	public void setQuestion(Question question) { this.question = question; }
+
+	public int getAnswerId() { return answerId; }
+	public void setAnswerId(int answerId) { this.answerId = answerId; }
 
     public int getChoiceId() {
         return choiceId;
@@ -32,12 +36,12 @@ public class Choice {
         this.questionId = questionId;
     }
 
-    public int getSurveyId() {
-        return surveyId;
-    }
-    public void setSurveyId(int surveyId) {
-        this.surveyId = surveyId;
-    }
+    //public int getSurveyId() {
+    //    return surveyId;
+    //}
+    //public void setSurveyId(int surveyId) {
+    //    this.surveyId = surveyId;
+    //}
 
     public String getChoiceContent() {
         return choiceContent;
@@ -57,40 +61,13 @@ public class Choice {
     public Choice() {
 	}
 
-    public Choice( int surveyId, String choiceContent) {
+    public Choice( int aid, /*int surveyId, */int questionId,  String choiceContent) {
 		super();
-		this.surveyId = surveyId;
+		this.aid = aid;
+		//this.surveyId = surveyId;
+        this.questionId = questionId;
 		this.choiceContent = choiceContent;
 	}
-
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Choice choice = (Choice) o;
-
-        if (choiceId != choice.choiceId) return false;
-        if (questionId != choice.questionId) return false;
-        if (surveyId != choice.surveyId) return false;
-        if (aid != choice.aid) return false;
-        if (choiceContent != null ? !choiceContent.equals(choice.choiceContent) : choice.choiceContent != null)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = choiceId;
-        result = 31 * result + questionId;
-        result = 31 * result + surveyId;
-        result = 31 * result + (choiceContent != null ? choiceContent.hashCode() : 0);
-        result = 31 * result + aid;
-        return result;
-    }
 
 
 }

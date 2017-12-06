@@ -8,12 +8,15 @@
         <id name="choiceId" type="java.lang.Integer">
             <column name="choiceId"/>
         </id>
-  <!--      <property name="questionId" type="java.lang.Integer">
+        <property name="questionId" type="java.lang.Integer">
             <column name="questionId"/>
-        </property> -->
-        <property name="surveyId" type="java.lang.Integer">
-            <column name="surveyId"/>
         </property>
+        <property name="answerId" type="java.lang.Integer">
+            <column name="answerId"/>
+        </property>
+    <!--    <property name="surveyId" type="java.lang.Integer">
+            <column name="surveyId"/>
+        </property>-->
         <property name="choiceContent" type="java.lang.String">
             <column name="choiceContent"/>
         </property>
@@ -21,13 +24,13 @@
             <column name="aid"/>
         </property>
 
-        <many-to-one name="answer" class="com.hospital.domain.Answer">
+  <!--      <many-to-one name="answer" class="com.hospital.domain.Answer">
             <column name="answerId"/>
         </many-to-one>
 
         <many-to-one name="question" class="com.hospital.domain.Question">
             <column name="questionId"/>
-        </many-to-one>
+        </many-to-one>-->
 
     </class>
 </hibernate-mapping>

@@ -231,7 +231,6 @@ public class SurveyManageAction extends ActionSupport{
 	 */
 	public String addQuestion(){
 
-        Set<Choice> choices = new HashSet<>();
         Set<String> chos = new HashSet<>();
         chos.add(choiceOption1);
         chos.add(choiceOption2);
@@ -239,23 +238,22 @@ public class SurveyManageAction extends ActionSupport{
         chos.add(choiceOption4);
         chos.add(choiceOption5);
         boolean b = true;
+
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        Question question = new Question(doctor.getAid(), surveyId, questionContent, questionType);
+        b = questionService.addQuestion(question);
+
         for(String choiceOption : chos) {
             if(!"".equals(choiceOption.trim())) {
-                Choice choice = new Choice(surveyId, choiceOption);
-                choices.add(choice);
+                Choice choice = new Choice(doctor.getAid(), question.getQuestionId(), choiceOption);
+                question.getChoices().add(choice);
+                //choice.setQuestionId(question.getQuestionId());
+                b = choiceService.addChoice(choice);
+                if(!b) break;//break whenever add failing
+                //TODO for robustness, we should remove the question and added choices if failed
             }
         }
 
-        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
-        Question question = new Question(doctor.getAid(), surveyId, questionContent, questionType, choices);
-        b = questionService.addQuestion(question);
-
-        //if(b) {
-        //    for(Choice choice: choices) {
-        //        b = choiceService.addChoice(choice);//if add Question successfully, then add Choice
-        //        if(!b) break;//break whenever add failing
-        //    }
-        //}
 		int success = 0;
 		if(b){
 			success = 1;

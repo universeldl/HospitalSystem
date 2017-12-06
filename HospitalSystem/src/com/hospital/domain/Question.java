@@ -63,13 +63,12 @@ public class Question {
 
 	}
 
-    public Question( int aid, int surveyId, String questionContent, int questionType, Set<Choice> choices) {
+    public Question( int aid, int surveyId, String questionContent, int questionType) {
 		super();
 		this.aid = aid;
         this.surveyId = surveyId;
 		this.questionContent = questionContent;
 		this.questionType = questionType;
-		this.choices = choices;
 	}
 
 /*    @Override
