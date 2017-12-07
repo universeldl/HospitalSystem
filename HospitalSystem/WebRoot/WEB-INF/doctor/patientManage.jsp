@@ -35,6 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 
 				  <script src="${pageContext.request.contextPath}/js/batchAddPatient.js"></script>
 				  <script src="${pageContext.request.contextPath}/js/exportPatient.js"></script>
+			<script src="${pageContext.request.contextPath}/js/echarts.js"></script>
 </head>
 
 
@@ -153,12 +154,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</div>
 		                                    
 		                                     <div class="col-lg-1 form-group"></div>
-		                                    
+
 		                                    <div class="col-lg-2 form-group">
 		                                        <button type="submit" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
-		                                        
 		                                    </div>
-		                                    
+
+		                                    <div class="col-lg-2 form-group">
+		                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkSummary">统计信息</button>
+		                                    </div>
+
 										  <div class="col-lg-2 form-group">
 											 <button type="button" class="btn btn-primary"   data-toggle="modal" data-target="#addModal">添加病人</button>
 										 </div>
@@ -347,12 +351,168 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 
                                  </form>	
- 								<!--------------------------------------添加的模糊框------------------------>  
+ 								<!--------------------------------------批量添加的模糊框------------------------>
                 
   
     
     
-    
+
+
+     <!--------------------------------------查看统计信息的模糊框------------------------>
+                                 <form class="form-horizontal">   <!--保证样式水平不混乱-->
+                                        <!-- 模态框（Modal） -->
+									<div class="modal fade" id="checkSummary" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+														&times;
+													</button>
+													<h4 class="modal-title" id="myModalLabel">
+														查看统计信息
+													</h4>
+												</div>
+												<div class="modal-body">
+
+
+                                                    <!--TODO data sources are not available, hard coded for now, will add real data later -->
+                                                    <div id="pie" style="width: 540px;height:360px;"></div>
+                                                    <script type="text/javascript">
+                                                        // 基于准备好的dom，初始化echarts实例
+                                                        var myChart = echarts.init(document.getElementById('pie'));
+                                                        var option = {
+                                                            title : {
+                                                                text: '答卷患者性别比例',
+                                                                //subtext: '子标题',
+                                                                x:'center'
+                                                            },
+                                                            tooltip : {
+                                                                trigger: 'item',
+                                                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                                                            },
+                                                            legend: {
+                                                                orient: 'vertical',
+                                                                left: 'left',
+                                                                data: ['男','女']
+                                                            },
+                                                            series : [
+                                                                {
+                                                                    name: '患者性别',
+                                                                    type: 'pie',
+                                                                    radius : '55%',
+                                                                    center: ['50%', '60%'],
+                                                                    data:[
+                                                                        {value:35, name:'男'},
+                                                                        {value:48, name:'女'}
+                                                                    ],
+                                                                    itemStyle: {
+                                                                        emphasis: {
+                                                                            shadowBlur: 10,
+                                                                            shadowOffsetX: 0,
+                                                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ]
+                                                        };
+
+                                                        // 使用刚指定的配置项和数据显示图表。
+                                                        myChart.setOption(option);
+                                                    </script>
+
+                                                    <hr>
+                                                    <div id="line_bar" style="width: 540px;height:360px;"></div>
+                                                    <script type="text/javascript">
+                                                        // 基于准备好的dom，初始化echarts实例
+                                                        var myChart = echarts.init(document.getElementById('line_bar'));
+                                                        var option = {
+                                                            tooltip: {
+                                                                trigger: 'axis',
+                                                                axisPointer: {
+                                                                    type: 'cross',
+                                                                    crossStyle: {
+                                                                        color: '#999'
+                                                                    }
+                                                                }
+                                                            },
+                                                            toolbox: {
+                                                                feature: {
+                                                                    dataView: {show: true, readOnly: false},
+                                                                    magicType: {show: true, type: ['line', 'bar']},
+                                                                    restore: {show: true},
+                                                                    saveAsImage: {show: true}
+                                                                }
+                                                            },
+                                                            legend: {
+                                                                data:['新增患者人数','患者总人数']
+                                                            },
+                                                            xAxis: [
+                                                                {
+                                                                    type: 'category',
+                                                                    data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+                                                                    axisPointer: {
+                                                                        type: 'shadow'
+                                                                    }
+                                                                }
+                                                            ],
+                                                            yAxis: [
+                                                                {
+                                                                    type: 'value',
+                                                                    name: '新增人数',
+                                                                    min: 0,
+                                                                    max: 250,
+                                                                    interval: 50,
+                                                                    axisLabel: {
+                                                                        formatter: '{value} 人'
+                                                                    }
+                                                                },
+                                                                {
+                                                                    type: 'value',
+                                                                    name: '总人数',
+                                                                    min: 0,
+                                                                    max: 1500,
+                                                                    interval: 300,
+                                                                    axisLabel: {
+                                                                        formatter: '{value} 人'
+                                                                    }
+                                                                }
+                                                            ],
+                                                            series: [
+                                                                {
+                                                                    name:'新增患者人数',
+                                                                    type:'bar',
+                                                                    data:[20, 49, 70, 232, 25, 76, 135, 162, 33, 200, 64, 33]
+                                                                },
+                                                                {
+                                                                    name:'患者总人数',
+                                                                    type:'line',
+                                                                    yAxisIndex: 1,
+                                                                    data:[20, 69, 159, 391, 414, 490, 625, 787, 820, 1020, 1084, 1117]
+                                                                }
+                                                            ]
+                                                        };
+
+                                                        // 使用刚指定的配置项和数据显示图表。
+                                                        myChart.setOption(option);
+                                                    </script>
+
+
+                                                </div>
+
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+													</button>
+												<!-- 	<button type="button" class="btn btn-primary" id="addPatient">
+														添加
+													</button>-->
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+
+                                 </form>
+ 								<!--------------------------------------查看统计信息的模糊框------------------------>
+
     
     
     
@@ -766,7 +926,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                  </form>	
  								<!--------------------------------------查看的模糊框------------------------>  
- 
+
 
  
 </body>
