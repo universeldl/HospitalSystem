@@ -88,6 +88,7 @@
             <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-survey-manage.xml</file>
             <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-survey.xml</file>
             <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-surveyType-manage.xml</file>
+            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-test-survey.xml</file>
             <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-upload.xml</file>
             <file>file://$MODULE_DIR$/HospitalSystem/config/struts.xml</file>
             <file>jar://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/lib/struts2/struts2-core-2.1.8.1.jar!/struts-default.xml</file>
@@ -100,40 +101,40 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-answer.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-answer.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-authorization.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-answer.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-authorization.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-choice.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-authorization.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-choice.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-db.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-choice.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-db.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-delivery-manage.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-db.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-delivery-manage.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-delivery-search.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-delivery-manage.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-delivery-search.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-delivery-search.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-delivery.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-delivery.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-doctor-info.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-doctor-info.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-doctor-info.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-doctor-login.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-doctor-login.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-doctor-manage.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-doctor-manage.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-doctor-manage.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-download.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-download.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-forfeit-manage.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-forfeit-manage.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-forfeit.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-forfeit-manage.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-forfeit.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-patient-info.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-forfeit.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-patient-info.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-patient-info.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-patient-login.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-patient-login.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-patient-manage.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-patient-manage.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-patientType-manage.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-patient-manage.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-patientType-manage.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-patientType-manage.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-quartz.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-quartz.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-question.xml</file>
@@ -142,12 +143,14 @@
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-retrieve-manage.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-survey-manage.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-survey-manage.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-survey.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-survey.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-survey.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-surveyType-manage.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-surveyType-manage.xml</file>
-          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-upload.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-test-survey.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-test-survey.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext-upload.xml</file>
+          <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext-upload.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/classes/spring/applicationContext.xml</file>
           <file>file://$MODULE_DIR$/HospitalSystem/config/spring/applicationContext.xml</file>
         </fileset>
