@@ -17,7 +17,7 @@
 <meta name="format-detection" content="email=no"/>
 <title></title>
 <link href="/css/style.css" rel="stylesheet" type="text/css" />
-<script language="javascript" type="text/javascript" src="http://www.xiaomafeiteng.com/js/jquery-1.7.2.min.js"></script>
+<script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
 </head>
 
 <body>
