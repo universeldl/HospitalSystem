@@ -16,8 +16,8 @@ public class GetOpenIdOauth2 {
             return open_id;
         } catch (Exception e){
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
 }
