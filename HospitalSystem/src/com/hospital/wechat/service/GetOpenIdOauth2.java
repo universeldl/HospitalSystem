@@ -19,5 +19,4 @@ public class GetOpenIdOauth2 {
             return null;
         }
     }
-
 }

@@ -10,10 +10,10 @@ public class AccessTokenMgrHXTS extends AccessTokenMgr{
     public AccessTokenMgrHXTS(){
     }
 
-    private static String AppId = "";
-    private static String AppSecret = "";
+    final static String AppId = "";
+    final static String AppSecret = "";
 
-    private static AccessTokenMgrHXTS m_instance = new AccessTokenMgrHXTS();
+    static AccessTokenMgrHXTS m_instance = new AccessTokenMgrHXTS();
 
     public static synchronized AccessTokenMgrHXTS getInstance(){
         return m_instance;
