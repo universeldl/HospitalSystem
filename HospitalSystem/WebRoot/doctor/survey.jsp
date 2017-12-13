@@ -91,7 +91,7 @@
         </div>
     </div>
 </div>
-<script language="javascript" type="text/javascript" src="http://www.xiaomafeiteng.com/js/jquery-1.7.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="/jQuery/jquery-3.1.1.min.js"></script>
 <script>
 //选择题选项动画
 aa(0);
