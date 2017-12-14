@@ -55,7 +55,7 @@
           <unit-entry name="sessionFactory" value="feb8a20f-2f2f-4ffa-9ca4-8e26704e1c00" />
         </datasource-map>
         <naming-strategy-map />
-        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/HospitalSystem/config/hibernate/hibernate.cfg.xml" />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/hospital-config/src/main/java/hibernate/hibernate.cfg.xml" />
       </configuration>
     </facet>
     <facet type="web" name="Web">
@@ -73,26 +73,26 @@
       <facet type="Struts2" name="Struts 2">
         <configuration>
           <fileset id="s2fileset" name="My Fileset " removed="false">
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-authorization.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-delivery-manage.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-delivery-search.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-delivery.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-doctor-info.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-doctor-login.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-doctor-manage.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-download.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-forfeit-manage.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-forfeit.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-patient-info.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-patient-login.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-patient-manage.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-patientType-manage.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-retrieve-manage.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-survey-manage.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-survey.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-surveyType-manage.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts2/struts-upload.xml</file>
-            <file>file://$MODULE_DIR$/HospitalSystem/config/struts.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-authorization.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-delivery-manage.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-delivery-search.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-delivery.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-doctor-info.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-doctor-login.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-doctor-manage.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-download.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-forfeit-manage.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-forfeit.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-patient-info.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-patient-login.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-patient-manage.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-patientType-manage.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-retrieve-manage.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-survey-manage.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-survey.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-surveyType-manage.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts-upload.xml</file>
+            <file>file://$MODULE_DIR$/hospital-config/src/main/java/struts2/struts.xml</file>
             <file>jar://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/lib/struts2/struts2-core-2.1.8.1.jar!/struts-default.xml</file>
             <file>jar://$MODULE_DIR$/HospitalSystem/WebRoot/WEB-INF/lib/struts2/struts2-spring-plugin-2.1.8.1.jar!/struts-plugin.xml</file>
           </fileset>

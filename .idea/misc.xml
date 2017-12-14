@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/hospital-survey" />
+    <file type="web" url="file://$PROJECT_DIR$/hospital-web" />
+    <file type="web" url="file://$PROJECT_DIR$/hospital-wechat" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
