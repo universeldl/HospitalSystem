@@ -6,7 +6,7 @@
   <package name="surveyManage" extends="struts-default" namespace="/doctor">
 
           <interceptors>
-            <interceptor name="surveyInterceptor" class="com.hospital.action.interceptor.surveyInterceptor" />
+            <interceptor name="surveyInterceptor" class="com.hospital.action.interceptor.SurveyInterceptor" />
 
             <interceptor-stack name="surveyStack">
                 <interceptor-ref name="defaultStack"/>

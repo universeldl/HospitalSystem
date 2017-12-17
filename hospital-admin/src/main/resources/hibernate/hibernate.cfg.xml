@@ -24,18 +24,18 @@
 -->
 	<property name="show_sql">true</property>
 
-	<mapping resource="com/hospital/domain/Doctor.hbm.xml" />
-	<mapping resource="com/hospital/domain/SurveyType.hbm.xml" />
-	<mapping resource="com/hospital/domain/PatientType.hbm.xml" />
-	<mapping resource="com/hospital/domain/Survey.hbm.xml" />
-	<mapping resource="com/hospital/domain/DeliveryInfo.hbm.xml" />
-	<mapping resource="com/hospital/domain/ForfeitInfo.hbm.xml" />
-	<mapping resource="com/hospital/domain/Patient.hbm.xml" />
-	<mapping resource="com/hospital/domain/Authorization.hbm.xml" />
-	<mapping resource="com/hospital/domain/RetrieveInfo.hbm.xml" />
-    <mapping resource="com/hospital/domain/Answer.hbm.xml" />
-    <mapping resource="com/hospital/domain/Question.hbm.xml" />
-    <mapping resource="com/hospital/domain/Choice.hbm.xml" />
+	<mapping resource="com.hospital.domain/Doctor.hbm.xml" />
+	<mapping resource="com.hospital.domain/SurveyType.hbm.xml" />
+	<mapping resource="com.hospital.domain/PatientType.hbm.xml" />
+	<mapping resource="com.hospital.domain/Survey.hbm.xml" />
+	<mapping resource="com.hospital.domain/DeliveryInfo.hbm.xml" />
+	<mapping resource="com.hospital.domain/ForfeitInfo.hbm.xml" />
+	<mapping resource="com.hospital.domain/Patient.hbm.xml" />
+	<mapping resource="com.hospital.domain/Authorization.hbm.xml" />
+	<mapping resource="com.hospital.domain/RetrieveInfo.hbm.xml" />
+    <mapping resource="com.hospital.domain/Answer.hbm.xml" />
+    <mapping resource="com.hospital.domain/Question.hbm.xml" />
+    <mapping resource="com.hospital.domain/Choice.hbm.xml" />
 
     </session-factory>
     </hibernate-configuration>

@@ -4,9 +4,21 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  <display-name></display-name>	
-  
-  
+  <display-name></display-name>
+
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>classpath:log4j.properties</param-value>
+  </context-param>
+  <context-param>
+    <param-name>log4jRefreshInterval</param-name>
+    <param-value>6000</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+
+
 <!-- 整合Spring -->
   <listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -15,7 +27,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/applicationContext.xml</param-value>
 	</context-param>
-	
+
 	<!-- 配置Spring的OpenSessionInViewFilter,以解决懒加载异常 -->
 	<filter>
 		<filter-name>OpenSessionInViewFilter</filter-name>
@@ -25,9 +37,7 @@
 		<filter-name>OpenSessionInViewFilter</filter-name>
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
-	
-	
-	
+
 	
 <!-- 医生权限的过滤 -->
  	 <filter>

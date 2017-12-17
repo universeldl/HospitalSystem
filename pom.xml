@@ -22,14 +22,13 @@
     </plugins>
   </build>
     <modules>
-        <module>../hospital-common</module>
-        <module>../hospital-config</module>
-        <module>../hospital-dao</module>
-        <module>../hospital-model</module>
-        <module>../hospital-service</module>
-        <module>../hospital-web</module>
-        <module>../hospital-wechat</module>
-        <module>../hospital-survey</module>
+        <module>hospital-common</module>
+        <module>hospital-dao</module>
+        <module>hospital-model</module>
+        <module>hospital-service</module>
+        <module>hospital-wechat</module>
+        <module>hospital-survey</module>
+        <module>hospital-admin</module>
     </modules>
 
     <!--添加依赖-->
@@ -123,12 +122,6 @@
             <artifactId>antlr</artifactId>
             <version>2.7.7</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>3.2.1</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
         <dependency>
             <groupId>dom4j</groupId>
@@ -158,19 +151,6 @@
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
             <version>1.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.ejb/ejb-api -->
         <dependency>
@@ -209,12 +189,6 @@
             <artifactId>freemarker</artifactId>
             <version>2.3.23</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -252,6 +226,12 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-pool/commons-pool -->
+     <!--    <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.6</version>
+        </dependency>-->
 
         <!-- 单元测试 -->
         <dependency>
@@ -300,6 +280,16 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>3.0.3.RELEASE</version>
         </dependency>
         <!-- 事务管理 -->
         <dependency>

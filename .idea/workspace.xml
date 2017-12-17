@@ -3,296 +3,231 @@
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
       <artifact name="hospital-survey:war exploded" />
-      <artifact name="hospital-web:war exploded" />
       <artifact name="hospital-wechat:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08d425d6-fc1b-4a6c-b269-f9cdf463903f" name="Default" comment="Re-org the whole project into modules, this is step 1, adding Maven control.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-common/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-config/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-dao/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-model/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-service/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-survey/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-web/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/log4j.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-wechat/pom.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/HospitalSystem_war_exploded.xml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/META-INF/MANIFEST.MF" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/deliveryManage.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/deliverySearch.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/doctorManage.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/doctorManage.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/forfeitManage.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/forfeitManage.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/patientManage.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/patientManage.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/patientTypeManage.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/retrieveManage.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/surveyManage.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/surveyManage.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/surveyTypeManage.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/error.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/error.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/patient/delivery.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/patient/delivery.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/patient/forfeit.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/patient/forfeit.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/patient/survey.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/patient/survey.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/ajax-lib/ajaxutils.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/ajax-lib/ajaxutils.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/css/bootstrap-doctor-theme.css" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap-doctor-theme.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap-theme.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/css/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap-theme.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap-theme.min.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/css/bootstrap-theme.min.css.map" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap-theme.min.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/css/bootstrap.css" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap.min.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/css/bootstrap.min.css.map" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap.min.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/css/dataTables.bootstrap.css" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/dataTables.bootstrap.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/css/style.css" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/style.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/doctor/doctor.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/doctor/doctor.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/doctor/survey.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/doctor/survey.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/doctor/survey_index.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/doctor/survey_index.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/doctorLogin.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/doctorLogin.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/download/patient.xls" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/download/patient.xls" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/download/survey.xls" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/download/survey.xls" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/error/400.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/error/400.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/error/500.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/error/500.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/error/nopass.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/error/nopass.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/fonts/glyphicons-halflings-regular.eot" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/fonts/glyphicons-halflings-regular.woff" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/fonts/glyphicons-halflings-regular.woff2" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/fonts/glyphicons-halflings-regular.woff2" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/img/404.png" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/404.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/img/404view.png" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/404view.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/img/500.png" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/500.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/img/500view.jpg" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/500view.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/img/animate_bg.gif" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/animate_bg.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/img/con_bg.png" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/con_bg.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/img/dc_tit.png" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/dc_tit.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/img/head.jpg" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/head.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/img/nopass.png" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/nopass.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/img/wxz.png" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/wxz.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/img/xz.png" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/xz.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/index.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/index.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/jQuery/ajaxfileupload.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/jQuery/ajaxfileupload.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/jQuery/jquery-3.1.1.min.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/jQuery/jquery-3.1.1.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/addDoctor.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addDoctor.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/addPatient.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addPatient.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/addPatientType.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addPatientType.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/addQuestion.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addQuestion.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/addSurvey.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addSurvey.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/addSurveyNum.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addSurveyNum.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/addSurveyType.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addSurveyType.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/ajax_upload.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/ajax_upload.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/batchAddPatient.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/batchAddPatient.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/batchAddSurvey.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/batchAddSurvey.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/bootstrap-dropdown.min.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/bootstrap-dropdown.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/bootstrap.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/bootstrap.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/bootstrap.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/dataTables.bootstrap.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/dataTables.bootstrap.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/deleteDoctor.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/deleteDoctor.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/deletePatient.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/deletePatient.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/deleteSurvey.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/deleteSurvey.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/deleteSurveyType.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/deleteSurveyType.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/deliverySurvey.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/deliverySurvey.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/doctorLogin.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/doctorLogin.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/doctorUpdateInfo.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/doctorUpdateInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/doctorUpdatePwd.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/doctorUpdatePwd.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/echarts.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/echarts.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/exportPatient.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/exportPatient.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/exportSurvey.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/exportSurvey.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getAllPatientTypes.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getAllPatientTypes.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getAllSurveyTypes.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getAllSurveyTypes.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getAnswerSheetInfo.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getAnswerSheetInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getDeliveryInfo.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getDeliveryInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getForfeitInfo.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getForfeitInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getPatient.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getPatient.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getPatientForfeitInfo.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getPatientForfeitInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getPatientRetrieveInfo.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getPatientRetrieveInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getPatientSurveyInfo.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getPatientSurveyInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getRetrieveInfo.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getRetrieveInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getSurveyInfo.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getSurveyInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/getSurveyTypes.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getSurveyTypes.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/jquery.dataTables.zh_CN.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/jquery.dataTables.zh_CN.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/login.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/login.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/npm.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/npm.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/patient.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/patient.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/patientUpdateInfo.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/patientUpdateInfo.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/patientUpdatePwd.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/patientUpdatePwd.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/pay.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/pay.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/resendSurvey.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/resendSurvey.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/retrieveSurvey.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/retrieveSurvey.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/updateAuthorization.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updateAuthorization.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/updateDoctor.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updateDoctor.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/updatePatient.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updatePatient.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/updatePatientType.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updatePatientType.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/updateSurvey.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updateSurvey.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/js/updateSurveyType.js" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updateSurveyType.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/login.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/login.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/WebRoot/patient.jsp" afterPath="$PROJECT_DIR$/hospital-web/src/main/webapp/patient.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/hibernate/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/hibernate/hibernate.cfg.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-answer.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-answer.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-authorization.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-authorization.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-choice.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-choice.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-db.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-db.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-delivery-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-delivery-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-delivery-search.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-delivery-search.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-delivery.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-delivery.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-doctor-info.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-doctor-info.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-doctor-login.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-doctor-login.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-doctor-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-doctor-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-download.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-download.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-forfeit-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-forfeit-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-forfeit.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-forfeit.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-patient-info.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-patient-info.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-patient-login.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-patient-login.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-patient-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-patient-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-patientType-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-patientType-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-quartz.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-quartz.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-question.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-question.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-retrieve-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-retrieve-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-survey-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-survey-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-survey.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-survey.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-surveyType-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-surveyType-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-upload.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-upload.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-authorization.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-authorization.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-delivery-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-delivery-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-delivery-search.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-delivery-search.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-delivery.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-delivery.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-doctor-info.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-doctor-info.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-doctor-login.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-doctor-login.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-doctor-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-doctor-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-download.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-download.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-forfeit-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-forfeit-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-forfeit.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-forfeit.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-patient-info.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-patient-info.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-patient-login.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-patient-login.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-patient-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-patient-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-patientType-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-patientType-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-retrieve-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-retrieve-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-survey-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-survey-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-survey.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-survey.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-surveyType-manage.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-surveyType-manage.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-upload.xml" afterPath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-upload.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/AuthorizationAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/AuthorizationAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/DeliveryAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DeliveryAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/DeliveryManageAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DeliveryManageAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/DeliverySearchAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DeliverySearchAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/DoctorInfoAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DoctorInfoAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/DoctorLoginAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DoctorLoginAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/DoctorManageAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DoctorManageAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/FileDownloadAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/FileDownloadAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/FileUploadAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/FileUploadAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/ForfeitAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/ForfeitAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/ForfeitManageAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/ForfeitManageAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/PatientInfoAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/PatientInfoAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/PatientLoginAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/PatientLoginAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/PatientManageAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/PatientManageAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/PatientTypeManageAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/PatientTypeManageAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/RetrieveManageAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/RetrieveManageAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/SurveyAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/SurveyManageAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/SurveyTypeManageAction.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyTypeManageAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/fileuploadmessage.properties" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/fileuploadmessage.properties" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/interceptor/DeliveryInterceptor.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/DeliveryInterceptor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/interceptor/DoctorInterceptor.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/DoctorInterceptor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/interceptor/ForfeitInterceptor.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/ForfeitInterceptor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/interceptor/PatientInterceptor.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/PatientInterceptor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/interceptor/PatientTypeInterceptor.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/PatientTypeInterceptor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/interceptor/RetrieveInterceptor.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/RetrieveInterceptor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/interceptor/SurveyInterceptor.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/SurveyInterceptor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/interceptor/SurveyTypeInterceptor.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/SurveyTypeInterceptor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/AnswerDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/AnswerDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/AuthorizationDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/AuthorizationDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/ChoiceDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/ChoiceDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/DeliveryDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/DeliveryDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/DoctorDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/DoctorDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/ForfeitDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/ForfeitDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/PatientDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/PatientDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/PatientTypeDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/PatientTypeDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/QuestionDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/QuestionDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/RetrieveDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/RetrieveDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/SurveyDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/SurveyDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/SurveyTypeDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/SurveyTypeDao.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/AnswerDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/AnswerDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/AuthorizationDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/AuthorizationDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/ChoiceDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/ChoiceDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/DeliveryDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/DeliveryDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/DoctorDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/DoctorDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/ForfeitDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/ForfeitDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/PatientDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/PatientDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/PatientTypeDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/PatientTypeDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/QuestionDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/QuestionDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/RetrieveDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/RetrieveDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/SurveyDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/SurveyDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/SurveyTypeDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/SurveyTypeDaoImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Answer.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Answer.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Answer.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Answer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Authorization.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Authorization.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Authorization.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Authorization.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Choice.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Choice.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Choice.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Choice.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/DeliveryInfo.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/DeliveryInfo.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/DeliveryInfo.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/DeliveryInfo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Doctor.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Doctor.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Doctor.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Doctor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/ForfeitInfo.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/ForfeitInfo.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/ForfeitInfo.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/ForfeitInfo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/PageBean.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/PageBean.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Patient.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Patient.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Patient.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Patient.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/PatientType.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/PatientType.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/PatientType.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/PatientType.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Question.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Question.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Question.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Question.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/RetrieveInfo.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/RetrieveInfo.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/RetrieveInfo.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/RetrieveInfo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Survey.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Survey.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/Survey.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Survey.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/SurveyType.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/SurveyType.hbm.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/domain/SurveyType.java" afterPath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/SurveyType.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/quartz/CheckDeliveryInfo.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/quartz/CheckDeliveryInfo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/AnswerService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/AnswerService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/AuthorizationService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/AuthorizationService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/ChoiceService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/ChoiceService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/DeliveryService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/DeliveryService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/DoctorService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/DoctorService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/ForfeitService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/ForfeitService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/PatientService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/PatientService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/PatientTypeService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/PatientTypeService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/QuestionService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/QuestionService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/RetrieveService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/RetrieveService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/SurveyService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/SurveyService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/SurveyTypeService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/SurveyTypeService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/AnswerServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/AnswerServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/AuthorizationServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/AuthorizationServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/ChoiceServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/ChoiceServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/DeliveryServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/DeliveryServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/DoctorServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/DoctorServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/ForfeitServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/ForfeitServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/PatientServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/PatientServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/PatientTypeServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/PatientTypeServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/QuestionServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/QuestionServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/RetrieveServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/RetrieveServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/SurveyServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/SurveyServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/impl/SurveyTypeServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/SurveyTypeServiceImpl.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/util/CheckUtils.java" afterPath="$PROJECT_DIR$/hospital-common/src/main/java/com/hospital/util/CheckUtils.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/util/Md5Utils.java" afterPath="$PROJECT_DIR$/hospital-common/src/main/java/com/hospital/util/Md5Utils.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/util/WeixinUtil.java" afterPath="$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/util/WeixinUtil.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/web/filter/DoctorFilter.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/web/filter/DoctorFilter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/web/filter/PatientFilter.java" afterPath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/web/filter/PatientFilter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/wechat/service/AccessTokenMgr.java" afterPath="$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/wechat/service/AccessTokenMgr.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/wechat/service/AccessTokenMgrHXTS.java" afterPath="$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/wechat/service/AccessTokenMgrHXTS.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/wechat/service/GetOpenIdOauth2.java" afterPath="$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/wechat/service/GetOpenIdOauth2.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/wechat/service/MyX509TrustManager.java" afterPath="$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/wechat/service/MyX509TrustManager.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/wechat/service/TemplateMessageMgr.java" afterPath="$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/wechat/service/TemplateMessageMgr.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/wechat/service/UserGroupMgr.java" afterPath="$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/wechat/service/UserGroupMgr.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/wechat/servlet/setUsrGroup.java" afterPath="$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/wechat/servlet/setUsrGroup.java" />
+    <list default="true" id="08d425d6-fc1b-4a6c-b269-f9cdf463903f" name="Default" comment="Re-org the whole project into modules, this is step 3:&#10;1. rename hospital-web to hospital-admin.&#10;2. add log4j support to have more debug info.&#10;3. remove hospital-config module since it's actually belongs to hospital-admin.&#10;Re-org finished.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/log4j.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-survey/src/main/webapp/WEB-INF/web.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-survey/src/main/webapp/index.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-wechat/src/main/webapp/WEB-INF/web.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hospital-wechat/src/main/webapp/index.jsp" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources/98421e12-5e31-4abd-852f-37fec75456dc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/HospitalSystem.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hospital-web/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/META-INF/MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/log4j.xml" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/HospitalSystem/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/pom.xml" afterPath="$PROJECT_DIR$/hospital-admin/pom.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-answer.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-answer.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-authorization.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-authorization.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-choice.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-choice.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-db.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-db.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-delivery-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-delivery-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-delivery-search.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-delivery-search.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-delivery.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-delivery.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-doctor-info.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-doctor-info.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-doctor-login.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-doctor-login.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-doctor-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-doctor-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-download.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-download.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-forfeit-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-forfeit-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-forfeit.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-forfeit.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-patient-info.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-patient-info.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-patient-login.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-patient-login.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-patient-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-patient-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-patientType-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-patientType-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-quartz.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-quartz.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-question.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-question.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-retrieve-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-retrieve-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-survey-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-survey-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-survey.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-survey.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-surveyType-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-surveyType-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-upload.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-upload.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-authorization.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-authorization.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-delivery-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-delivery-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-delivery-search.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-delivery-search.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-delivery.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-delivery.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-doctor-info.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-doctor-info.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-doctor-login.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-doctor-login.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-doctor-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-doctor-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-download.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-download.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-forfeit-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-forfeit-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-forfeit.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-forfeit.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-patient-info.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-patient-info.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-patient-login.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-patient-login.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-patient-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-patient-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-patientType-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-patientType-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-retrieve-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-retrieve-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-survey-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-survey-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-survey.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-survey.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-surveyType-manage.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-surveyType-manage.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts-upload.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-upload.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-config/src/main/java/struts2/struts.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/struts.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-dao/src/main/java/hibernate/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/resources/hibernate/hibernate.cfg.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Answer.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/Answer.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Authorization.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/Authorization.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Choice.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/Choice.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/DeliveryInfo.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/DeliveryInfo.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Doctor.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/Doctor.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/ForfeitInfo.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/ForfeitInfo.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Patient.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/Patient.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/PatientType.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/PatientType.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Question.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/Question.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/RetrieveInfo.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/RetrieveInfo.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Survey.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/Survey.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/SurveyType.hbm.xml" afterPath="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/SurveyType.hbm.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/AuthorizationAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/AuthorizationAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DeliveryAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DeliveryAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DeliveryManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DeliveryManageAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DeliverySearchAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DeliverySearchAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DoctorInfoAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DoctorInfoAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DoctorLoginAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DoctorLoginAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/DoctorManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DoctorManageAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/FileDownloadAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/FileDownloadAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/FileUploadAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/FileUploadAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/ForfeitAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/ForfeitAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/ForfeitManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/ForfeitManageAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/PatientInfoAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PatientInfoAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/PatientLoginAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PatientLoginAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/PatientManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PatientManageAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/PatientTypeManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PatientTypeManageAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/RetrieveManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyTypeManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyTypeManageAction.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/fileuploadmessage.properties" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/fileuploadmessage.properties" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/DeliveryInterceptor.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/interceptor/DeliveryInterceptor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/DoctorInterceptor.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/interceptor/DoctorInterceptor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/ForfeitInterceptor.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/interceptor/ForfeitInterceptor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/PatientInterceptor.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/interceptor/PatientInterceptor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/PatientTypeInterceptor.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/interceptor/PatientTypeInterceptor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/RetrieveInterceptor.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/interceptor/RetrieveInterceptor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/SurveyInterceptor.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/interceptor/SurveyInterceptor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/SurveyTypeInterceptor.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/interceptor/SurveyTypeInterceptor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/quartz/CheckDeliveryInfo.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/quartz/CheckDeliveryInfo.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/web/filter/DoctorFilter.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/web/filter/DoctorFilter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/web/filter/PatientFilter.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/web/filter/PatientFilter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/doctorManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/forfeitManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/forfeitManage.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/patientManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/surveyManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyManage.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/error.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/error.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/patient/delivery.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/patient/delivery.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/patient/forfeit.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/patient/forfeit.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/patient/survey.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/patient/survey.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/web.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/ajax-lib/ajaxutils.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/ajax-lib/ajaxutils.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap-doctor-theme.css" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/css/bootstrap-doctor-theme.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/css/bootstrap-theme.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/css/bootstrap-theme.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/css/bootstrap-theme.min.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap-theme.min.css.map" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/css/bootstrap-theme.min.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap.css" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/css/bootstrap.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/css/bootstrap.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/css/bootstrap.min.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/bootstrap.min.css.map" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/css/bootstrap.min.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/dataTables.bootstrap.css" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/css/dataTables.bootstrap.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/css/style.css" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/css/style.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/doctor/doctor.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/doctor/survey.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/survey.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/doctor/survey_index.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/survey_index.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/doctorLogin.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctorLogin.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/download/patient.xls" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/download/patient.xls" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/download/survey.xls" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/download/survey.xls" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/error/400.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/error/400.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/error/500.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/error/500.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/error/nopass.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/error/nopass.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/fonts/glyphicons-halflings-regular.eot" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/fonts/glyphicons-halflings-regular.woff" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/fonts/glyphicons-halflings-regular.woff2" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/fonts/glyphicons-halflings-regular.woff2" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/404.png" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/img/404.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/404view.png" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/img/404view.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/500.png" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/img/500.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/500view.jpg" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/img/500view.jpg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/animate_bg.gif" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/img/animate_bg.gif" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/con_bg.png" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/img/con_bg.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/dc_tit.png" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/img/dc_tit.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/head.jpg" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/img/head.jpg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/nopass.png" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/img/nopass.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/wxz.png" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/img/wxz.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/img/xz.png" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/img/xz.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/index.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/jQuery/ajaxfileupload.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/jQuery/ajaxfileupload.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/jQuery/jquery-3.1.1.min.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/jQuery/jquery-3.1.1.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addDoctor.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addDoctor.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addPatient.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addPatient.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addPatientType.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addPatientType.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addQuestion.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addQuestion.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addSurvey.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addSurvey.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addSurveyNum.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addSurveyNum.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/addSurveyType.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addSurveyType.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/ajax_upload.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/ajax_upload.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/batchAddPatient.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/batchAddPatient.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/batchAddSurvey.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/batchAddSurvey.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/bootstrap-dropdown.min.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/bootstrap-dropdown.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/bootstrap.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/bootstrap.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/bootstrap.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/dataTables.bootstrap.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/dataTables.bootstrap.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/deleteDoctor.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deleteDoctor.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/deletePatient.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deletePatient.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/deleteSurvey.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deleteSurvey.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/deleteSurveyType.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deleteSurveyType.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/deliverySurvey.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deliverySurvey.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/doctorLogin.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/doctorLogin.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/doctorUpdateInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/doctorUpdateInfo.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/doctorUpdatePwd.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/doctorUpdatePwd.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/echarts.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/echarts.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/exportPatient.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/exportPatient.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/exportSurvey.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/exportSurvey.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getAllPatientTypes.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getAllPatientTypes.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getAllSurveyTypes.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getAllSurveyTypes.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getAnswerSheetInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getAnswerSheetInfo.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getDeliveryInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getDeliveryInfo.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getForfeitInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getForfeitInfo.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getPatient.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getPatient.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getPatientForfeitInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getPatientForfeitInfo.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getPatientRetrieveInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getPatientRetrieveInfo.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getPatientSurveyInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getPatientSurveyInfo.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getRetrieveInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getRetrieveInfo.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getSurveyInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getSurveyInfo.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/getSurveyTypes.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getSurveyTypes.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/jquery.dataTables.zh_CN.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/jquery.dataTables.zh_CN.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/login.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/login.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/npm.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/npm.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/patient.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/patient.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/patientUpdateInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/patientUpdateInfo.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/patientUpdatePwd.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/patientUpdatePwd.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/pay.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/pay.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/resendSurvey.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/resendSurvey.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/retrieveSurvey.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/retrieveSurvey.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updateAuthorization.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updateAuthorization.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updateDoctor.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updateDoctor.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updatePatient.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updatePatient.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updatePatientType.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updatePatientType.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updateSurvey.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updateSurvey.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/js/updateSurveyType.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updateSurveyType.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/login.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/login.jsp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/hospital-web/src/main/webapp/patient.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/patient.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HospitalSystem.iml" afterPath="$PROJECT_DIR$/HospitalSystem.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HospitalSystem/pom.xml" afterPath="$PROJECT_DIR$/HospitalSystem/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hospital-common/pom.xml" afterPath="$PROJECT_DIR$/hospital-common/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hospital-dao/pom.xml" afterPath="$PROJECT_DIR$/hospital-dao/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hospital-model/pom.xml" afterPath="$PROJECT_DIR$/hospital-model/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hospital-service/pom.xml" afterPath="$PROJECT_DIR$/hospital-service/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hospital-survey/pom.xml" afterPath="$PROJECT_DIR$/hospital-survey/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hospital-wechat/pom.xml" afterPath="$PROJECT_DIR$/hospital-wechat/pom.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/HospitalSystem/test/" />
@@ -305,6 +240,8 @@
     <ignored path="$PROJECT_DIR$/hospital-web/target/" />
     <ignored path="$PROJECT_DIR$/hospital-wechat/target/" />
     <ignored path="$PROJECT_DIR$/hospital-survey/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/hospital-admin/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -323,104 +260,78 @@
     <expand>
       <path>
         <item name="" type="eadb38e5:DatabaseStructure$Root" />
-        <item name="hibernate:hibernate.cfg.xml/Hibernate" type="e3449647:DbNodeDescriptor" />
+        <item name="sessionFactory/Hibernate" type="e3449647:DbNodeDescriptor" />
       </path>
       <path>
         <item name="" type="eadb38e5:DatabaseStructure$Root" />
-        <item name="hibernate:hibernate.cfg.xml/Hibernate" type="e3449647:DbNodeDescriptor" />
+        <item name="sessionFactory/Hibernate" type="e3449647:DbNodeDescriptor" />
         <item name="HospitalSurvey" type="e3449647:DbNodeDescriptor" />
-      </path>
-      <path>
-        <item name="" type="eadb38e5:DatabaseStructure$Root" />
-        <item name="hibernate:hibernate.cfg.xml/Hibernate" type="e3449647:DbNodeDescriptor" />
-        <item name="HospitalSurvey" type="e3449647:DbNodeDescriptor" />
-        <item name="Choice" type="e3449647:DbNodeDescriptor" />
-      </path>
-      <path>
-        <item name="" type="eadb38e5:DatabaseStructure$Root" />
-        <item name="hibernate:hibernate.cfg.xml/Hibernate" type="e3449647:DbNodeDescriptor" />
-        <item name="HospitalSurvey" type="e3449647:DbNodeDescriptor" />
-        <item name="Question" type="e3449647:DbNodeDescriptor" />
-      </path>
-      <path>
-        <item name="" type="eadb38e5:DatabaseStructure$Root" />
-        <item name="hibernate:hibernate.cfg.xml/Hibernate" type="e3449647:DbNodeDescriptor" />
-        <item name="HospitalSurvey" type="e3449647:DbNodeDescriptor" />
-        <item name="RetrieveInfo" type="e3449647:DbNodeDescriptor" />
-      </path>
-      <path>
-        <item name="" type="eadb38e5:DatabaseStructure$Root" />
-        <item name="hibernate:hibernate.cfg.xml/Hibernate" type="e3449647:DbNodeDescriptor" />
-        <item name="HospitalSurvey" type="e3449647:DbNodeDescriptor" />
-        <item name="survey" type="e3449647:DbNodeDescriptor" />
       </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HospitalSystem/pom.xml">
+      <file leaf-file-name="DoctorLoginAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DoctorLoginAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="676">
-              <caret line="130" column="20" lean-forward="false" selection-start-line="130" selection-start-column="20" selection-end-line="130" selection-end-column="20" />
+            <state relative-caret-position="234">
+              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="struts.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/struts.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="com.intellij.struts2.graph.fileEditor.Struts2GraphFileEditorProvider">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/login.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="doctorLogin.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/doctorLogin.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="struts-doctor-login.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-doctor-login.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="10" column="9" lean-forward="false" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="com.intellij.struts2.graph.fileEditor.Struts2GraphFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/index.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/login.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="23" column="14" lean-forward="false" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/hospital-web/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-common/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-config/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="16" column="9" lean-forward="false" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="patient.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/patient.jsp">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -429,31 +340,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="deliverySearch.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp">
+      <file leaf-file-name="patient.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/patient.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-234">
-              <caret line="26" column="6" lean-forward="false" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addDoctor.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/js/addDoctor.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-324">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="doctor.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/doctor/doctor.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-756">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="396">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -484,56 +375,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/surveyManage.jsp" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/js/addQuestion.js" />
-        <option value="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-question.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-survey-manage.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/com/hospital/domain/Question.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/com/hospital/domain/Answer.hbm.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/com/hospital/domain/Question.hbm.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/com/hospital/domain/Choice.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/com/hospital/domain/Choice.hbm.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/com/hospital/action/SurveyManageAction.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/patientManage.jsp" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/doctorManage.jsp" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/doctorManage.html" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/survey.html" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/survey_index1.html" />
-        <option value="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-doctor-manage.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-survey.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/survey_index.html" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-test-survey.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/com/hospital/action/testSurveyAction.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/survey.jsp" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/com/hospital/action/interceptor/PatientTypeInterceptor.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/com/hospital/action/interceptor/testSurveyInterceptor.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-test-survey.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor/survey_index.jsp" />
-        <option value="$PROJECT_DIR$/HospitalSystem/config/struts.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/config/struts2/struts-patientType-manage.xml" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/css/style.css" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/doctor/survey_index.jsp" />
-        <option value="$PROJECT_DIR$/HospitalSystem/WebRoot/doctor/survey.jsp" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/service/PatientService.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/action/DoctorManageAction.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/wechat/service/UserGroupMgr.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/quartz/CheckDeliveryInfo.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/DeliveryDaoImpl.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/dao/impl/DoctorDaoImpl.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/config/spring/applicationContext-quartz.xml" />
-        <option value="$PROJECT_DIR$/hospital-config/pom.xml" />
-        <option value="$PROJECT_DIR$/hospital-model/pom.xml" />
-        <option value="$PROJECT_DIR$/hospital-dao/pom.xml" />
-        <option value="$PROJECT_DIR$/hospital-service/pom.xml" />
-        <option value="$PROJECT_DIR$/hospital-wechat/pom.xml" />
-        <option value="$PROJECT_DIR$/hospital-survey/pom.xml" />
-        <option value="$PROJECT_DIR$/hospital-common/src/main/java/com/hospital/quartz/CheckDeliveryInfo.java" />
-        <option value="$PROJECT_DIR$/hospital-wechat/src/main/java/util/WeixinUtil.java" />
-        <option value="$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/util/WeixinUtil.java" />
-        <option value="$PROJECT_DIR$/HospitalSystem/pom.xml" />
-        <option value="$PROJECT_DIR$/hospital-common/pom.xml" />
         <option value="$PROJECT_DIR$/hospital-web/pom.xml" />
+        <option value="$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-delivery-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-answer.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-authorization.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-delivery.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-delivery-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-delivery-search.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-doctor-info.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-doctor-login.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-doctor-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-download.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-forfeit.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-forfeit-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-patient-info.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-patient-login.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-patient-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-patientType-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-retrieve-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-survey.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-survey-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-surveyType-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-upload.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-delivery-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-delivery-search.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-doctor-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-forfeit-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-patient-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-patientType-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-retrieve-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-surveyType-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-survey-manage.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-quartz.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/hospital-admin.iml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/quartz/CheckDeliveryInfo.java" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/log4j.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/log4j.properties" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/java/log4j.properties" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/java/dao/impl/PatientTypeDaoImpl.java" />
+        <option value="$PROJECT_DIR$/hospital-admin/pom.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-db.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/hibernate/hibernate.cfg.xml" />
+        <option value="cdn.bootcss.com/jquery/3.2.1/jquery.min.js" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DoctorLoginAction.java" />
+        <option value="$PROJECT_DIR$/hospital-wechat/target/hospital-wechat/META-INF/MANIFEST.MF" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/struts.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctorLogin.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/patient.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/login.jsp" />
       </list>
     </option>
   </component>
@@ -559,6 +451,7 @@
     </option>
     <option name="importingSettings">
       <MavenImportingSettings>
+        <option name="createModuleGroups" value="true" />
         <option name="importAutomatically" value="true" />
       </MavenImportingSettings>
     </option>
@@ -568,20 +461,20 @@
       <expand>
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="hospital-common" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="hospital-admin Maven Webapp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
         </path>
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="hospital-common" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="hospital-admin Maven Webapp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
         </path>
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="hospital-web" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="HospitalSystem" type="9519ce18:MavenProjectsStructure$ProjectNode" />
         </path>
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="hospital-web" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="HospitalSystem" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
         </path>
       </expand>
@@ -589,8 +482,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1" />
-    <option name="width" value="961" />
+    <option name="x" value="960" />
+    <option name="width" value="953" />
     <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -611,6 +504,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="Scope" />
@@ -619,41 +513,32 @@
           <expand>
             <path>
               <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hospital-common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hospital-web" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
               <item name="HospitalSystem" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15638964" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/hospital-wechat/src/main/java" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/hospital-dao/src/main/java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hospital-admin/src/main/java" />
+    <property name="settings.editor.selected.configurable" value="com.intellij.jarRepository.settings.RemoteRepositoriesConfigurable" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/hospital-admin/src/main/java" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/hospital-web/src/main/webapp" />
-      <recent name="$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF" />
-      <recent name="$PROJECT_DIR$/hospital-config/src/main/java/struts2" />
-      <recent name="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital" />
-      <recent name="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital/web" />
+      <recent name="$PROJECT_DIR$/hospital-admin/src/main/resources" />
+      <recent name="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain" />
+      <recent name="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain" />
+      <recent name="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao" />
+      <recent name="$PROJECT_DIR$/hospital-admin/src/main/resources/hibernate" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.hospital.util" />
@@ -663,11 +548,11 @@
       <recent name="com.hospital.action" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/hospital-admin/target/hospital-admin" />
+      <recent name="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital" />
+      <recent name="$PROJECT_DIR$/hospital-admin/src/main/java" />
+      <recent name="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao" />
       <recent name="$PROJECT_DIR$/hospital-wechat/src/main/java" />
-      <recent name="$PROJECT_DIR$/HospitalSystem/src/main/java/com/hospital" />
-      <recent name="$PROJECT_DIR$/HospitalSystem/config/spring" />
-      <recent name="$PROJECT_DIR$/HospitalSystem/config/struts2" />
-      <recent name="$PROJECT_DIR$/HospitalSystem/WebRoot/WEB-INF/doctor" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -777,13 +662,12 @@
       <listeners />
     </configuration>
     <configuration name="tomcat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.231" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/hospital-web/" />
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="hospital-web:war exploded">
+        <artifact name="hospital-admin:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/hospital-web" />
+            <option name="CONTEXT_PATH" value="/" />
           </settings>
         </artifact>
         <artifact name="hospital-survey:war exploded">
@@ -857,7 +741,6 @@
       <method>
         <option name="BuildArtifacts" enabled="true">
           <artifact name="hospital-survey:war exploded" />
-          <artifact name="hospital-web:war exploded" />
           <artifact name="hospital-wechat:war exploded" />
         </option>
       </method>
@@ -884,7 +767,17 @@
       <workItem from="1512993332589" duration="2499000" />
       <workItem from="1513086063968" duration="5633000" />
       <workItem from="1513164883584" duration="10439000" />
-      <workItem from="1513251263658" duration="13361000" />
+      <workItem from="1513251263658" duration="13727000" />
+      <workItem from="1513296062669" duration="1086000" />
+      <workItem from="1513346207262" duration="5832000" />
+      <workItem from="1513418298874" duration="7053000" />
+      <workItem from="1513426143537" duration="4845000" />
+      <workItem from="1513430996244" duration="2159000" />
+      <workItem from="1513433160483" duration="22000" />
+      <workItem from="1513433186182" duration="3237000" />
+      <workItem from="1513436429254" duration="3549000" />
+      <workItem from="1513473553259" duration="4017000" />
+      <workItem from="1513478003839" duration="4673000" />
     </task>
     <task id="LOCAL-00001" summary="add sample survey, best suitable for cellphone view.">
       <created>1512825534960</created>
@@ -900,11 +793,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513175201285</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Re-org the whole project into modules, this is step 2.">
+      <created>1513266636510</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1513266636510</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92669000" />
+    <option name="totallyTimeSpent" value="129508000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -921,29 +821,28 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19382322" sideWeight="0.50625" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20833333" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32822758" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09010417" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="5.2083336E-4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994652" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973261" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29925454" sideWeight="0.49375" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33013844" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32694355" sideWeight="0.49791667" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29818955" sideWeight="0.49375" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3258786" sideWeight="0.49791667" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32822758" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2736954" sideWeight="0.49375" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24895833" sideWeight="0.53809524" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18489583" sideWeight="0.46190476" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25561497" sideWeight="0.5057851" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15729167" sideWeight="0.4718417" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16149732" sideWeight="0.5281583" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -951,6 +850,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -966,7 +866,9 @@
     <MESSAGE value="add sample survey, best suitable for cellphone view." />
     <MESSAGE value="Re-org the whole project, will divide the project into modules, this is step 1, adding Maven control." />
     <MESSAGE value="Re-org the whole project into modules, this is step 1, adding Maven control." />
-    <option name="LAST_COMMIT_MESSAGE" value="Re-org the whole project into modules, this is step 1, adding Maven control." />
+    <MESSAGE value="Re-org the whole project into modules, this is step 2." />
+    <MESSAGE value="Re-org the whole project into modules, this is step 3:&#10;1. rename hospital-web with hospital-admin.&#10;2. add log4j support, to have more debug info.&#10;3. remove hospital-config module, since it's actually belongs to hospital-admin.&#10;Re-org finished." />
+    <option name="LAST_COMMIT_MESSAGE" value="Re-org the whole project into modules, this is step 3:&#10;1. rename hospital-web with hospital-admin.&#10;2. add log4j support, to have more debug info.&#10;3. remove hospital-config module, since it's actually belongs to hospital-admin.&#10;Re-org finished." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1020,67 +922,67 @@
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyAction.java</url>
           <line>137</line>
           <properties />
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyAction.java</url>
           <line>177</line>
           <properties />
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyAction.java</url>
           <line>113</line>
           <properties />
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyAction.java</url>
           <line>92</line>
           <properties />
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>125</line>
           <properties />
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>146</line>
           <properties />
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>166</line>
           <properties />
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>299</line>
           <properties />
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>319</line>
           <properties />
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>340</line>
           <properties />
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>354</line>
           <properties />
           <option name="timeStamp" value="47" />
@@ -1140,19 +1042,19 @@
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>284</line>
           <properties />
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
           <line>54</line>
           <properties />
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
           <line>173</line>
           <properties />
           <option name="timeStamp" value="62" />
@@ -1188,25 +1090,25 @@
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp</url>
           <line>105</line>
           <properties />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
           <line>135</line>
           <properties />
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
           <line>137</line>
           <properties />
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
           <line>140</line>
           <properties />
           <option name="timeStamp" value="100" />
@@ -1278,31 +1180,31 @@
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
           <line>104</line>
           <properties />
           <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp</url>
           <line>273</line>
           <properties />
           <option name="timeStamp" value="125" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
           <line>92</line>
           <properties />
           <option name="timeStamp" value="128" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
           <line>128</line>
           <properties />
           <option name="timeStamp" value="129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java</url>
           <line>78</line>
           <properties />
           <option name="timeStamp" value="130" />
@@ -1326,19 +1228,19 @@
           <option name="timeStamp" value="145" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>240</line>
           <properties />
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>256</line>
           <properties />
           <option name="timeStamp" value="149" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>191</line>
           <properties />
           <option name="timeStamp" value="154" />
@@ -1350,7 +1252,7 @@
           <option name="timeStamp" value="155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/SurveyManageAction.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java</url>
           <line>233</line>
           <properties />
           <option name="timeStamp" value="157" />
@@ -1368,16 +1270,22 @@
           <option name="timeStamp" value="161" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/interceptor/PatientTypeInterceptor.java</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/interceptor/PatientTypeInterceptor.java</url>
           <line>29</line>
           <properties />
           <option name="timeStamp" value="168" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/webapp/doctor/survey_index.jsp</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/survey_index.jsp</url>
           <line>30</line>
           <properties />
           <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DoctorLoginAction.java</url>
+          <line>42</line>
+          <properties />
+          <option name="timeStamp" value="173" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/HospitalSystem/src/com/cc/library/dao/impl/AuthorizationDaoImpl.java</url>
@@ -1404,253 +1312,144 @@
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/webapp/js/getRetrieveInfo.js</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getRetrieveInfo.js</url>
           <line>24</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/webapp/js/getSurveyInfo.js</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getSurveyInfo.js</url>
           <line>19</line>
           <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/webapp/js/addQuestion.js</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addQuestion.js</url>
           <line>17</line>
           <option name="timeStamp" value="132" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/webapp/js/addQuestion.js</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addQuestion.js</url>
           <line>66</line>
           <option name="timeStamp" value="133" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/webapp/js/addQuestion.js</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addQuestion.js</url>
           <line>76</line>
           <option name="timeStamp" value="135" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/hospital-web/src/main/webapp/js/addQuestion.js</url>
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addQuestion.js</url>
           <line>101</line>
           <option name="timeStamp" value="136" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/doctorLogin.js</url>
+          <line>3</line>
+          <properties />
+          <option name="timeStamp" value="175" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/doctorLogin.js</url>
+          <line>12</line>
+          <properties />
+          <option name="timeStamp" value="176" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/doctorLogin.js</url>
+          <line>50</line>
+          <properties />
+          <option name="timeStamp" value="177" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="173" />
+      <option name="time" value="178" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/wechat/service/UserGroupMgr.java">
+    <entry file="file://$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/PatientType.hbm.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/DoctorDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2412">
-          <caret line="149" column="4" lean-forward="false" selection-start-line="149" selection-start-column="4" selection-end-line="149" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/DeliveryDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="234">
+          <caret line="13" column="4" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext-quartz.xml">
+    <entry file="file://$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/Doctor.hbm.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="486">
+          <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/DoctorService.java">
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/dao/impl/RetrieveDaoImpl.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/dao/AuthorizationDao.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/dao/impl/AnswerDaoImpl.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/dao/impl/QuestionDaoImpl.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/dao/impl/ForfeitDaoImpl.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/dao/impl/AuthorizationDaoImpl.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/dao/AnswerDao.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/dao/impl/SurveyTypeDaoImpl.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/dao/impl/SurveyDaoImpl.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/dao/impl/PatientTypeDaoImpl.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/Choice.hbm.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1026">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Survey.hbm.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="40" lean-forward="false" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/wechat/service/MyX509TrustManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/wechat/service/AccessTokenMgr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-service/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="35" lean-forward="false" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-dao/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+        <state relative-caret-position="162">
+          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hospital-model/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="38" lean-forward="false" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+        <state relative-caret-position="522">
+          <caret line="29" column="9" lean-forward="false" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/applicationContext.xml">
+    <entry file="file://$PROJECT_DIR$/hospital-admin/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-290">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="354">
+          <caret line="25" column="42" lean-forward="false" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HospitalSystem/HospitalSystem.iml">
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/domain/PatientType.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/domain/Survey.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/domain/Question.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/domain/PageBean.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/domain/Doctor.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/domain/Authorization.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/domain/DeliveryInfo.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/domain/RetrieveInfo.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/domain/SurveyType.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/domain/Patient.java" />
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/hibernate/hibernate.cfg.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="103" lean-forward="false" selection-start-line="18" selection-start-column="103" selection-end-line="18" selection-end-column="103" />
+        <state relative-caret-position="342">
+          <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/DeliveryInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="42" column="19" lean-forward="false" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
-          <folding>
-            <element signature="e#817#818#0" expanded="false" />
-            <element signature="e#841#842#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/log4j.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-survey/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-survey/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-wechat/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/util/WeixinUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-wechat/src/main/java/util/Md5Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-wechat/src/main/java/util/CheckUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/AnswerDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/AuthorizationDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/ChoiceServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/Answer.hbm.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <caret line="11" column="62" lean-forward="false" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/util/WeixinUtil.java">
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-db.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="2" lean-forward="false" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-config/src/main/java/spring/applicationContext.xml">
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1658,210 +1457,191 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-dao/src/main/java/hibernate/hibernate.cfg.xml">
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/css/bootstrap.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/css/bootstrap-theme.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/bootstrap.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="36" lean-forward="false" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/jQuery/jquery-3.1.1.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="1" column="29964" lean-forward="false" selection-start-line="1" selection-start-column="29964" selection-end-line="1" selection-end-column="29964" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/ajax-lib/ajaxutils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="74" column="4" lean-forward="false" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js">
+      <provider selected="true" editor-type-id="httpFileEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/target/classes/com/hospital/action/DoctorLoginAction.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-378">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#1818#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/target/classes/struts2/struts-doctor-login.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="11" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/target/hospital-admin/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-wechat/target/hospital-wechat/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/target/hospital-admin/WEB-INF/classes/struts2/struts-doctor-login.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-delivery.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="11" lean-forward="false" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.struts2.graph.fileEditor.Struts2GraphFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-authorization.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.struts2.graph.fileEditor.Struts2GraphFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="14" lean-forward="false" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/struts.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.struts2.graph.fileEditor.Struts2GraphFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/doctorLogin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DoctorLoginAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/doctorLogin.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-doctor-login.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="9" lean-forward="false" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.struts2.graph.fileEditor.Struts2GraphFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/patient.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-common/src/main/java/com/hospital/util/CheckUtils.java">
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/login.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-150">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-common/src/main/java/com/hospital/util/Md5Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/AnswerDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/ForfeitDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding>
-            <marker date="1513165154134" expanded="true" signature="882:1015" ph="SELECT f.del... ForfeitInfo" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Answer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-618">
-          <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Authorization.hbm.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-114">
-          <caret line="16" column="7" lean-forward="false" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/AnswerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/PatientService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-survey/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/action/AuthorizationAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/quartz/CheckDeliveryInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/java/com/hospital/web/filter/DoctorFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="67" column="1" lean-forward="false" selection-start-line="67" selection-start-column="1" selection-end-line="67" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/patient.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-234">
-          <caret line="26" column="6" lean-forward="false" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/js/addDoctor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-324">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/doctor/doctor.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-756">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/src/main/webapp/login.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="23" column="14" lean-forward="false" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-config/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="9" lean-forward="false" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-common/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HospitalSystem/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="676">
-          <caret line="130" column="20" lean-forward="false" selection-start-line="130" selection-start-column="20" selection-end-line="130" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-web/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="396">
+          <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1872,7 +1652,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>hospital-survey:war</last-edited>
+          <last-edited>hospital-admin:war exploded</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1885,7 +1665,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Spring (hospital-web)|Spring</last-edited>
+          <last-edited>Spring (hospital-dao)|Spring</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1920,7 +1700,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>hospital-web</last-edited>
+          <last-edited>hospital-dao</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1932,7 +1712,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: org.slf4j:slf4j-api:1.5.8</last-edited>
+          <last-edited>Maven: org.springframework:spring-jdbc:2.5.5</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

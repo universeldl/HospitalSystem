@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HospitalSystem/HospitalSystem.iml" filepath="$PROJECT_DIR$/HospitalSystem/HospitalSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HospitalSystem.iml" filepath="$PROJECT_DIR$/HospitalSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hospital-admin/hospital-admin.iml" filepath="$PROJECT_DIR$/hospital-admin/hospital-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/hospital-common/hospital-common.iml" filepath="$PROJECT_DIR$/hospital-common/hospital-common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hospital-config/hospital-config.iml" filepath="$PROJECT_DIR$/hospital-config/hospital-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/hospital-dao/hospital-dao.iml" filepath="$PROJECT_DIR$/hospital-dao/hospital-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/hospital-model/hospital-model.iml" filepath="$PROJECT_DIR$/hospital-model/hospital-model.iml" />
       <module fileurl="file://$PROJECT_DIR$/hospital-service/hospital-service.iml" filepath="$PROJECT_DIR$/hospital-service/hospital-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/hospital-survey/hospital-survey.iml" filepath="$PROJECT_DIR$/hospital-survey/hospital-survey.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hospital-web/hospital-web.iml" filepath="$PROJECT_DIR$/hospital-web/hospital-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/hospital-wechat/hospital-wechat.iml" filepath="$PROJECT_DIR$/hospital-wechat/hospital-wechat.iml" />
     </modules>
   </component>
