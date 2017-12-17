@@ -16,12 +16,6 @@
     <dependencies>
         <dependency>
             <groupId>com.hospital</groupId>
-            <artifactId>hospital-config</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.hospital</groupId>
             <artifactId>hospital-common</artifactId>
             <version>${project.version}</version>
         </dependency>
