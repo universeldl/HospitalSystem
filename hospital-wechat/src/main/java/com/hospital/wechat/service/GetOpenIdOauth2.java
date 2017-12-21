@@ -12,8 +12,12 @@ public class GetOpenIdOauth2 {
         try {
             String requestURL = oauth2_url.replace("APPID", mgr.getAppId()).replace("SECRET", mgr.getAppSecret()).replace("CODE", code);
             JSONObject js_object = WeixinUtil.HttpsRequest(requestURL, "GET", null);
-            String open_id = js_object.getString("openid");
-            return open_id;
+            if (js_object.containsKey("openid")) {
+                String open_id = js_object.getString("openid");
+                return open_id;
+            } else {
+                return null;
+            }
         } catch (Exception e){
             e.printStackTrace();
             return null;
