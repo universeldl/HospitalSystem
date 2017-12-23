@@ -10,8 +10,14 @@ public class AccessTokenMgrHXTS extends AccessTokenMgr{
     public AccessTokenMgrHXTS(){
     }
 
-    final static String AppId = "";
-    final static String AppSecret = "";
+    // secret for huxitianshi
+    //final static String AppId = "";
+    //final static String AppSecret = "";
+
+    // for test wechat id
+    final static String AppId = "wxf7622c6c9856841c";
+    final static String AppSecret = "d4624c36b6795d1d99dcf0547af5443d";
+
 
     static AccessTokenMgrHXTS m_instance = new AccessTokenMgrHXTS();
 
@@ -40,12 +46,18 @@ public class AccessTokenMgrHXTS extends AccessTokenMgr{
                 String requestUrl = access_token_url.replace("APPID", AppId).replace("APPSECRET", AppSecret);
                 JSONObject jsonObject = WeixinUtil.HttpsRequest(requestUrl, "GET", null);
                 if( jsonObject != null ){
-                    //请求成功
-                    System.out.println("return token =" + jsonObject.toString());
-                    m_AccessToken = jsonObject.getString("access_token");
-                    m_TokenTime = new Date().getTime();
-                    m_expiresIn = jsonObject.getLong("expires_in")*1000;
-                }else{
+                    if (jsonObject.containsKey("errcode")) {
+                        System.out.println("error = " + jsonObject.toString());
+                        m_AccessToken = null;
+                        m_TokenTime = 0;
+                    } else {
+                        //请求成功
+                        System.out.println("return token =" + jsonObject.toString());
+                        m_AccessToken = jsonObject.getString("access_token");
+                        m_TokenTime = new Date().getTime();
+                        m_expiresIn = jsonObject.getLong("expires_in") * 1000;
+                    }
+                } else{
                     m_AccessToken = null;
                     m_TokenTime = 0;
                 }
