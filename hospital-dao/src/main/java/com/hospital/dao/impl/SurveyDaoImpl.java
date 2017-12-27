@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.hospital.domain.Question;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate5.HibernateCallback;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.hospital.dao.SurveyDao;
 import com.hospital.domain.Survey;
@@ -31,7 +31,7 @@ public class SurveyDaoImpl extends HibernateDaoSupport implements SurveyDao{
         return (List) this.getHibernateTemplate().execute(new HibernateCallback(){
             //重写其doInHibernate方法返回一个object对象，
             public Object doInHibernate(Session session)
-                    throws HibernateException, SQLException {
+                    throws HibernateException{
                 //创建query对象
                 Query query=session.createQuery(hql);
                 //返回其执行了分布方法的list
@@ -54,10 +54,10 @@ public class SurveyDaoImpl extends HibernateDaoSupport implements SurveyDao{
 		List surveyList = null;
 		try {
 			String sql = "SELECT count(*) FROM Survey";
-			List list = this.getSession().createQuery(sql).list();
+			List list = this.getSessionFactory().openSession().createQuery(sql).list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
-			this.getSession().close();
+			this.getSessionFactory().openSession().close();
 			//不支持limit分页
 			String hql= "from Survey";
 			//分页查询
@@ -169,10 +169,10 @@ public class SurveyDaoImpl extends HibernateDaoSupport implements SurveyDao{
 		}
 		try{
 			
-			List list = this.getSession().createQuery(sb_sql.toString()).list();
+			List list = this.getSessionFactory().openSession().createQuery(sb_sql.toString()).list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
-			this.getSession().close();
+			this.getSessionFactory().openSession().close();
 			
 			
 			List<Survey> surveyList = doSplitPage(sb.toString(),pageCode,pageSize);

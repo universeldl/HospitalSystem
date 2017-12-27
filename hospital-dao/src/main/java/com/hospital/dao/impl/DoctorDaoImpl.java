@@ -4,10 +4,10 @@ import com.hospital.dao.DoctorDao;
 import com.hospital.domain.Doctor;
 import com.hospital.domain.PageBean;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate5.HibernateCallback;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -92,10 +92,10 @@ public class DoctorDaoImpl extends HibernateDaoSupport implements DoctorDao{
 		List doctorList = null;
 		try {
 			String sql = "SELECT count(*) FROM Doctor a where a.state=1";
-			List list = this.getSession().createQuery(sql).list();
+			List list = this.getSessionFactory().getCurrentSession().createQuery(sql).list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
-			this.getSession().close();
+			//this.getSessionFactory().getCurrentSession().close();
 			
 			//不支持limit分页
 			String hql= "from Doctor a where a.state=1";
@@ -126,7 +126,7 @@ public class DoctorDaoImpl extends HibernateDaoSupport implements DoctorDao{
         return (List) this.getHibernateTemplate().execute(new HibernateCallback(){
             //重写其doInHibernate方法返回一个object对象，
             public Object doInHibernate(Session session)
-                    throws HibernateException, SQLException {
+                    throws HibernateException{
                 //创建query对象
                 Query query=session.createQuery(hql);
                 //返回其执行了分布方法的list
@@ -165,10 +165,10 @@ public class DoctorDaoImpl extends HibernateDaoSupport implements DoctorDao{
 		}
 		try{
 			
-			List list = this.getSession().createQuery(sb_sql.toString()).list();
+			List list = this.getSessionFactory().getCurrentSession().createQuery(sb_sql.toString()).list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
-			this.getSession().close();
+			//this.getSessionFactory().getCurrentSession().close();
 			
 			
 			List<Doctor> doctorList = doSplitPage(sb.toString(),pageCode,pageSize);

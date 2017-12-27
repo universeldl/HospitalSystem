@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate5.HibernateCallback;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.hospital.dao.ForfeitDao;
 import com.hospital.domain.Doctor;
@@ -28,7 +28,7 @@ public class ForfeitDaoImpl extends HibernateDaoSupport implements ForfeitDao{
 		String hql = "SELECT f.deliveryId,f.forfeit,f.isPay,f.aid FROM ForfeitInfo  f,deliveryInfo  b where  b.deliveryId = f.deliveryId and b.patientId =?";
 		List list = null;
 		try{
-			Session session = this.getSession();
+			Session session = this.getSessionFactory().getCurrentSession();
 			SQLQuery createSQLQuery = session.createSQLQuery(hql);
 			createSQLQuery.setInteger(0, patient.getPatientId());
 			list = createSQLQuery.list();
@@ -88,7 +88,7 @@ public class ForfeitDaoImpl extends HibernateDaoSupport implements ForfeitDao{
         return (List) this.getHibernateTemplate().execute(new HibernateCallback(){
             //重写其doInHibernate方法返回一个object对象，
             public Object doInHibernate(Session session)
-                    throws HibernateException, SQLException {
+                    throws HibernateException{
                 //创建query对象
                 Query query=session.createQuery(hql);
                 //返回其执行了分布方法的list
@@ -111,10 +111,10 @@ public class ForfeitDaoImpl extends HibernateDaoSupport implements ForfeitDao{
 		List forfeitInfoList = null;
 		try {
 			String sql = "SELECT count(*) FROM ForfeitInfo";
-			List list = this.getSession().createQuery(sql).list();
+			List list = this.getSessionFactory().getCurrentSession().createQuery(sql).list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
-			this.getSession().close();
+			//this.getSessionFactory().getCurrentSession().close();
 			
 			//不支持limit分页
 			String hql= "from ForfeitInfo";

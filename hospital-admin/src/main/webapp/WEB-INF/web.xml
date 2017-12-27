@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" 
-	xmlns="http://java.sun.com/xml/ns/javaee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  <display-name></display-name>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+        version="3.1">
 
-  <context-param>
-    <param-name>log4jConfigLocation</param-name>
-    <param-value>classpath:log4j.properties</param-value>
+	<!-- log4j2设置 -->
+	<context-param>
+    <param-name>log4jConfiguration</param-name>
+    <param-value>classpath:log4j2.xml</param-value>
   </context-param>
   <context-param>
     <param-name>log4jRefreshInterval</param-name>
     <param-value>6000</param-value>
   </context-param>
-  <listener>
-    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-  </listener>
-
 
 <!-- 整合Spring -->
   <listener>
@@ -31,7 +27,7 @@
 	<!-- 配置Spring的OpenSessionInViewFilter,以解决懒加载异常 -->
 	<filter>
 		<filter-name>OpenSessionInViewFilter</filter-name>
-		<filter-class> org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<filter-class> org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>OpenSessionInViewFilter</filter-name>

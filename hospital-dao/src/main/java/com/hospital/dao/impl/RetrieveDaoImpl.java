@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
+import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate5.HibernateCallback;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.hospital.dao.RetrieveDao;
 import com.hospital.domain.Doctor;
@@ -37,7 +37,7 @@ public class RetrieveDaoImpl extends HibernateDaoSupport implements RetrieveDao{
         return (List) this.getHibernateTemplate().execute(new HibernateCallback(){
             //重写其doInHibernate方法返回一个object对象，
             public Object doInHibernate(Session session)
-                    throws HibernateException, SQLException {
+                    throws HibernateException{
                 //创建query对象
                 Query query=session.createQuery(hql);
                 //返回其执行了分布方法的list
@@ -74,10 +74,10 @@ public class RetrieveDaoImpl extends HibernateDaoSupport implements RetrieveDao{
 		List retrieveInfoList = null;
 		try {
 			String sql = "SELECT count(*) FROM RetrieveInfo";
-			List list = this.getSession().createQuery(sql).list();
+			List list = this.getSessionFactory().getCurrentSession().createQuery(sql).list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
-			this.getSession().close();
+			//this.getSessionFactory().getCurrentSession().close();
 			
 			//不支持limit分页
 			String hql= "from RetrieveInfo";
@@ -145,11 +145,11 @@ public class RetrieveDaoImpl extends HibernateDaoSupport implements RetrieveDao{
 		}
 		
 		try {
-			SQLQuery createSQLQuery1 = this.getSession().createSQLQuery(sb_sql.toString());
+			NativeQuery createSQLQuery1 = this.getSessionFactory().getCurrentSession().createNativeQuery(sb_sql.toString());
 			List list = createSQLQuery1.list();
 			int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
 			pb.setTotalRecord(totalRecord);	//设置总记录数
-			this.getSession().close();
+			//this.getSessionFactory().getCurrentSession().close();
 			
 			//不支持limit分页
 			//分页查询
@@ -176,9 +176,9 @@ public class RetrieveDaoImpl extends HibernateDaoSupport implements RetrieveDao{
         return (List) this.getHibernateTemplate().execute(new HibernateCallback(){
             //重写其doInHibernate方法返回一个object对象，
             public Object doInHibernate(Session session)
-                    throws HibernateException, SQLException {
+                    throws HibernateException{
                 //创建query对象
-            	SQLQuery query=session.createSQLQuery(hql);
+            	NativeQuery query=session.createNativeQuery(hql);
                 //返回其执行了分布方法的list
                 return query.setFirstResult((pageCode-1)*pageSize).setMaxResults(pageSize).list();
                  

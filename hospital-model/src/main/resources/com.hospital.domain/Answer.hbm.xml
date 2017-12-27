@@ -25,7 +25,7 @@
             <column name="aid"/>
         </property> -->
 
-        <many-to-one name="question" class="com.hospital.domain.Question" column="questionId" unique="true"></many-to-one> <!-- 唯一外键关联到Question -->
+        <many-to-one name="question" class="com.hospital.domain.Question" lazy="false" column="questionId" unique="true"></many-to-one> <!-- 唯一外键关联到Question -->
 
 		<many-to-one name="retrieveInfo" class="com.hospital.domain.RetrieveInfo"  lazy="false" >
 			<column name="deliveryId"></column>

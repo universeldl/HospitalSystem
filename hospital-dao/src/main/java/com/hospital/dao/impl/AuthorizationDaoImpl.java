@@ -2,7 +2,7 @@ package com.hospital.dao.impl;
 
 import java.util.List;
 
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.hospital.dao.AuthorizationDao;
 import com.hospital.domain.Doctor;
