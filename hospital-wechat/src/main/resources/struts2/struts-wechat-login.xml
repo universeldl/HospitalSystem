@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+  <package name="wechatLogin" extends="struts-default" namespace="/">
+  	<action name="wechatLoginAction_*" method="{1}" class="wechatLoginAction">
+	  <result name="succeed" type="redirect">/index.jsp</result>
+	  <result name="failed" type="redirect" >/patient.jsp</result>
+  	</action>
+  </package>
+</struts>
