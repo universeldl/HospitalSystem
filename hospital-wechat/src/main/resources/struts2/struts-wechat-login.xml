@@ -5,8 +5,9 @@
 <struts>
   <package name="wechatLogin" extends="struts-default" namespace="/">
   	<action name="wechatLoginAction_*" method="{1}" class="wechatLoginAction">
-	  <result name="succeed" type="redirect">/index.jsp</result>
-	  <result name="failed" type="redirect" >/patient.jsp</result>
+	  <result name="success" type="redirect">patient.jsp</result>
+	  <result name="none" type="redirect">index.bak.jsp</result>
+	  <result name="error" type="redirect" >patient.jsp</result>
   	</action>
   </package>
 </struts>

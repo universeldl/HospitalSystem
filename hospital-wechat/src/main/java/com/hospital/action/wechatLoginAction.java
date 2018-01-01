@@ -7,13 +7,17 @@ import com.hospital.wechat.service.GetOpenIdOauth2;
 import com.opensymphony.xwork2.ActionSupport;
 import com.hospital.domain.Patient;
 import org.apache.struts2.ServletActionContext;
-import javax.servlet.http.HttpServletRequest;
-import com.opensymphony.xwork2.ActionContext;
 
 /**
  * Created by QQQ on 2017/12/23.
  */
 public class wechatLoginAction extends ActionSupport {
+
+    String code;
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     private PatientService patientService;
 
@@ -22,13 +26,12 @@ public class wechatLoginAction extends ActionSupport {
     }
 
     public String login() {
-        System.out.println("login called");
-        AccessTokenMgr mgr = AccessTokenMgrHXTS.getInstance();
-        ActionContext context=ActionContext.getContext();
-        HttpServletRequest request = (HttpServletRequest)context.get(ServletActionContext.HTTP_REQUEST);
-        String code = request.getParameter("code");
+        System.out.println("login called; code = " + code);
 
-        if (code == null) {
+        AccessTokenMgr mgr = AccessTokenMgrHXTS.getInstance();
+
+        if (code != null) {
+            System.out.println("get code " + code);
             String open_id = GetOpenIdOauth2.getOpenId(code, mgr);
             if (open_id != null) {
                 Patient patient = new Patient();
@@ -36,19 +39,16 @@ public class wechatLoginAction extends ActionSupport {
                 Patient new_patient = patientService.getPatientByOpenID(patient);
                 if (new_patient == null) {
                     System.out.println("new paient not found");
-                    return "failed";
+                    return NONE;
                 } else {
                     System.out.println("new patient found");
                     ServletActionContext.getContext().getSession().put("patient", new_patient);
-                    return "succeed";
+                    return SUCCESS;
                 }
             } else {
-                return "failed";
+                return ERROR;
             }
-        } else {
-
         }
-        return "failed";
+        return ERROR;
     }
-
 }
