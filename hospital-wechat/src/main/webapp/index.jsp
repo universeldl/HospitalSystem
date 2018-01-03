@@ -16,7 +16,7 @@
     function redirect() {
         var code = GetQueryString("code")
         if (code == null) {
-            window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf7622c6c9856841c&redirect_uri=http%3a%2f%2fc3c63cc3.ngrok.io%2fhospital-wechat%2f&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
+            window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf7622c6c9856841c&redirect_uri=http%3a%2f%2f5c3c3db5.ngrok.io%2fhospital-wechat%2f&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
         } else {
             var action_url = "wechatLoginAction_login.action?code=";
             action_url = action_url + code;
