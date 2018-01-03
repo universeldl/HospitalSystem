@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+  <package name="surveyManage" extends="struts-default" namespace="/doctor">
+
+          <interceptors>
+            <interceptor name="surveyInterceptor" class="com.hospital.action.interceptor.SurveyInterceptor" />
+
+            <interceptor-stack name="surveyStack">
+                <interceptor-ref name="defaultStack"/>
+
+                <interceptor-ref name="surveyInterceptor"/>
+
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="surveyStack" />
+
+  	<action name="surveyManageAction_*" method="{1}" class="surveyManageAction">
+  		<result name="success">/WEB-INF/doctor/surveyManage.jsp</result>
+  		<result name="nopass" type="redirect">/error/nopass.jsp</result>
+  	</action>
+  </package>
+
+
+
+</struts>

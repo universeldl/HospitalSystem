@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.hospital.domain.Answer" table="Answer">
+        <id name="answerId" type="java.lang.Integer">
+            <column name="answerId" default="0"/>
+        </id>
+
+  <!--      <property name="choiceId" type="java.lang.Integer">
+            <column name="choiceId"/>
+        </property>
+        <property name="questionId" type="java.lang.Integer">
+            <column name="questionId"/>
+        </property>
+        <property name="surveyId" type="java.lang.Integer">
+            <column name="surveyId"/>
+        </property>
+        <property name="choiceContent" type="java.lang.String">
+            <column name="choiceContent"/>
+        </property>
+ -       <property name="aid" type="java.lang.Integer">
+            <column name="aid"/>
+        </property> -->
+
+        <many-to-one name="question" class="com.hospital.domain.Question" lazy="false" column="questionId" unique="true"></many-to-one> <!-- 唯一外键关联到Question -->
+
+		<many-to-one name="retrieveInfo" class="com.hospital.domain.RetrieveInfo"  lazy="false" >
+			<column name="deliveryId"></column>
+		</many-to-one>
+
+		<many-to-one name="patient" class="com.hospital.domain.Patient"  lazy="false" >
+			<column name="patientId"></column>
+		</many-to-one>
+
+		<many-to-one name="survey" class="com.hospital.domain.Survey"  lazy="false" >
+			<column name="surveyId"></column>
+		</many-to-one>
+
+		<many-to-one name="doctor" class="com.hospital.domain.Doctor" lazy="false" >
+			<column name="aid"></column>
+		</many-to-one>
+
+		<set name="choices"  lazy="false" inverse="true">
+			<key>
+				<column name="answerId" ></column>
+			</key>
+			<one-to-many class="com.hospital.domain.Choice"/>
+		</set>
+
+    </class>
+</hibernate-mapping>

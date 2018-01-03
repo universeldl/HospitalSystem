@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+ 
+ <bean id="retrieveDao" class="com.hospital.dao.impl.RetrieveDaoImpl">
+ 		<property name="sessionFactory">
+ 			<ref bean="sessionFactory"/>
+ 		</property>
+ 	</bean>
+ 	
+ 	<bean id="retrieveService" class="com.hospital.service.impl.RetrieveServiceImpl">
+ 		<property name="retrieveDao">
+ 			<ref bean="retrieveDao"/>
+ 		</property>
+ 		<property name="surveyDao">
+ 			<ref bean="surveyDao"/>
+ 		</property>
+ 		<property name="deliveryDao">
+ 			<ref bean="deliveryDao"/>
+ 		</property>
+ 	</bean>
+ 	
+ 
+ 
+ 	<bean id="retrieveManageAction" class="com.hospital.action.RetrieveManageAction" scope="prototype">
+ 		<property name="retrieveService">
+ 			<ref bean="retrieveService"/>
+ 		</property>
+ 	</bean>
+ 	
+ </beans>

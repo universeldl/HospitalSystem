@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="hibernate:hibernate.cfg.xml/Hibernate" uuid="98421e12-5e31-4abd-852f-37fec75456dc">
+    <data-source name="sessionFactory/Hibernate" uuid="03822888-2251-4344-bd40-0a1d8c6dfd7f">
+      <database-info product="MySQL" version="5.7.16-0ubuntu0.16.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.44 ( Revision: b3cda4f864902ffdde495b9df93937c3e20009be )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <user-name>root</user-name>
+      <introspection-schemas>*:HospitalSurvey</introspection-schemas>
+    </data-source>
+    <data-source name="hibernate:hibernate.cfg.xml/Hibernate" uuid="1e5f44cb-69ee-4365-b3e9-d56adc998eca">
       <database-info product="MySQL" version="5.7.16-0ubuntu0.16.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.44 ( Revision: b3cda4f864902ffdde495b9df93937c3e20009be )">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
