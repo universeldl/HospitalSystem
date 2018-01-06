@@ -33,12 +33,14 @@ public class wechatLoginAction extends ActionSupport {
         if (code != null) {
             System.out.println("get code " + code);
             String open_id = GetOpenIdOauth2.getOpenId(code, mgr);
+            System.out.println("openid = " + open_id);
             if (open_id != null) {
                 Patient patient = new Patient();
                 patient.setOpenID(open_id);
                 Patient new_patient = patientService.getPatientByOpenID(patient);
                 if (new_patient == null) {
                     System.out.println("new paient not found");
+                    ServletActionContext.getContext().getSession().put("patient", patient);
                     return NONE;
                 } else {
                     System.out.println("new patient found");
@@ -50,5 +52,9 @@ public class wechatLoginAction extends ActionSupport {
             }
         }
         return ERROR;
+    }
+
+    public String getAppId() {
+        return AccessTokenMgrHXTS.getInstance().getAppId();
     }
 }

@@ -66,12 +66,38 @@ h1{
 
 }
 input.name {
-	width: 100%;
+	width: 86.5%;
 	padding: 12px 10px 12px 45px;
 	border: none;
 	outline: none;
 	border-radius: 3px;
 	background: rgb(255, 255, 255) url("../img/register/user.png") no-repeat 10px 10px;
+	font-size: 17px;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	letter-spacing: 1px;
+	margin-bottom: 30px;
+}
+
+input.hospital{
+	width: 86.5%;
+	padding: 12px 10px 12px 45px;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	background: rgb(255, 255, 255) url("../img/register/doctor.png") no-repeat 10px 10px;
+	font-size: 17px;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	letter-spacing: 1px;
+	margin-bottom: 30px;
+}
+
+input.doctor{
+	width: 86.5%;
+	padding: 12px 10px 12px 45px;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	background: rgb(255, 255, 255) url("../img/register/doctor.png") no-repeat 10px 10px;
 	font-size: 17px;
 	font-family: 'Yanone Kaffeesatz', sans-serif;
 	letter-spacing: 1px;
@@ -109,6 +135,18 @@ input.location {
 	outline: none;
 	border-radius: 3px;
 	background: rgb(255, 255, 255) url("../img/register/location.png") no-repeat 10px 10px;
+	font-size: 17px;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	letter-spacing: 1px;
+	margin-bottom:10px;
+}
+input.number{
+	width: 86.5%;
+	padding: 12px 10px 12px 45px;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	background: rgb(255, 255, 255) url("../img/register/phone.png") no-repeat 10px 10px;
 	font-size: 17px;
 	font-family: 'Yanone Kaffeesatz', sans-serif;
 	letter-spacing: 1px;
@@ -207,18 +245,6 @@ label {
 .recover{
 	margin-bottom:20px;
 }
-.recover input.number{
-	width: 86.5%;
-	padding: 12px 10px 12px 45px;
-	border: none;
-	outline: none;
-	border-radius: 3px;
-	background: rgb(255, 255, 255) url("../img/register/phone.png") no-repeat 10px 10px;
-	font-size: 17px;
-	font-family: 'Yanone Kaffeesatz', sans-serif;
-	margin-bottom:20px;
-	letter-spacing: 1px;
-}
 .recover input[type="submit"],.subscribe input[type="submit"]{
 	background-color:#014751;
 	color:#fff;
@@ -315,7 +341,7 @@ input.done:hover,input.no-thanks:hover{
 	 .register, .send-mail, .sign-in, .recover, .subscribe, .socialicons {
 		width: 81.5%;
 	}
-	input.name ,input.password ,input.email,input.location ,.recover input.number {
+	input.name ,input.doctor, input.hospital, input.password ,input.email,input.location ,input.number {
 		width: 84.5%;
 	}
 	.send-mail textarea {
@@ -326,7 +352,7 @@ input.done:hover,input.no-thanks:hover{
 	 .register, .send-mail, .sign-in, .recover, .subscribe, .socialicons {
 		width: 80.5%;
 	}
-	input.name ,input.password ,input.email,input.location ,.recover input.number {
+	input.name ,input.doctor, input.hospital, input.password ,input.email,input.location ,input.number {
 		width: 83.5%;
 	}
 	.send-mail textarea {
@@ -337,7 +363,7 @@ input.done:hover,input.no-thanks:hover{
 	.register, .send-mail, .sign-in, .recover, .subscribe, .socialicons {
 		width: 79.5%;
 	}
-	input.name ,input.password ,input.email,input.location ,.recover input.number {
+	input.name ,input.doctor, input.hospital, input.password ,input.email,input.location ,input.number {
 		width: 83%;
 	}
 	.send-mail textarea {
@@ -351,7 +377,7 @@ input.done:hover,input.no-thanks:hover{
 	.register, .send-mail, .sign-in, .recover, .subscribe, .socialicons {
 		width: 77.5%;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 80%;
 	}
 	.send-mail textarea {
@@ -363,7 +389,7 @@ input.done:hover,input.no-thanks:hover{
 	.register, .send-mail, .sign-in, .recover, .subscribe, .socialicons {
 		width: 76.5%;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 78.5%;
 	}
 	.send-mail textarea {
@@ -377,7 +403,7 @@ input.done:hover,input.no-thanks:hover{
 .register, .send-mail, .sign-in, .recover, .subscribe, .socialicons {
     width: 78.5%;
 }
-input.name, input.password, input.email, input.location, .recover input.number {
+input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
     width: 81%;
 }
 .send-mail textarea {
@@ -385,7 +411,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 }
 }
 @media (max-width: 966px){
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 80.5%;
 	}
 }
@@ -393,7 +419,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 	.register, .send-mail, .sign-in, .recover, .subscribe, .socialicons {
 		width: 76.5%;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 78.5%;
 	}
 	.send-mail textarea {
@@ -409,7 +435,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 		width: 80.5%;
 		padding:30px;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 77%;
 	}
 	.send-mail textarea {
@@ -424,7 +450,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 	.register, .send-mail, .sign-in, .recover, .subscribe, .socialicons {
 		width: 79.5%;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 76%;
 	}
 	.send-mail textarea {
@@ -445,7 +471,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 		padding:40px;
 		margin-bottom:40px;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 89.2%;
 	}
 	.send-mail textarea {
@@ -474,7 +500,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 		padding: 40px;
 		margin-bottom: 40px;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 84%;
 	}
 	.send-mail textarea {
@@ -485,7 +511,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 	}
 }
 @media (max-width: 640px){
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 83%;
 	}
 	
@@ -494,7 +520,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 	.register, .send-mail, .sign-in, .recover, .subscribe, .socialicons {
 		width: 79%;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 81%;
 	}
 	.send-mail textarea {
@@ -506,7 +532,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 	.register, .send-mail, .sign-in, .recover, .subscribe, .socialicons {
 		width: 78%;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 80%;
 	}
 	.socialicons ul li a {
@@ -526,7 +552,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 		width: 82%;
 		padding:30px;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
     width: 79%;
 }
 .send-mail textarea {
@@ -551,7 +577,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 	.container {
 		width: 89%;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 78%;
 	}
 	.register input[type="submit"].send-mail input[type="submit"] ,.sign-in input[type="submit"]{
@@ -609,7 +635,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 	.register, .send-mail, .sign-in, .recover, .subscribe, .socialicons {
 		padding: 20px;
 	}
-	input.name, input.password, input.email, input.location, .recover input.number {
+	input.name, input.doctor, input.hospital, input.password, input.email, input.location, input.number {
 		width: 74%;
 	}
 	.send-mail textarea {

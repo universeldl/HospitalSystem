@@ -11,8 +11,12 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
+    <bean id="captchaService" class="com.hospital.service.impl.CaptchaServiceImpl">
+    </bean>
 
- 	<import resource="applicationContext-wechat-login.xml"/>
-    <import resource="applicationContext-captcha.xml"/>
-    <import resource="applicationContext-db.xml"/>
+    <bean id="captchaAction" class="com.hospital.action.captchaAction" scope="prototype">
+        <property name="captchaService">
+            <ref bean="captchaService"/>
+        </property>
+ 	</bean>
  </beans>
