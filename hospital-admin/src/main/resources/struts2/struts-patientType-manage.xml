@@ -20,7 +20,7 @@
         <default-interceptor-ref name="patientTypeStack" />
   
   	<action name="patientTypeManageAction_*" method="{1}" class="patientTypeManageAction">
-  		<result name="success">/doctor/survey_index.jsp</result>
+  		<result name="success">/WEB-INF/doctor/patientTypeManage.jsp</result>
   		<result name="nopass" type="redirect">/error/nopass.jsp</result>
   	</action>
   </package>
