@@ -150,7 +150,7 @@
         <section class="content" style="background: rgb(255, 255, 255); height: 898px;">
             <!-- <h2>Hello World!</h2> -->
 
-            <div v-show="!showList" class="panel panel-default">
+            <div class="panel panel-default">
                 <div class="panel-heading">查询</div>
                 <form class="form-horizontal"
                       action="${pageContext.request.contextPath}/doctor/surveyManageAction_querySurvey.action"
@@ -189,7 +189,7 @@
                     </div>
                 </form>
             </div>
-            <div v-show="showList">
+            <div name="showList">
                 <div class="grid-btn">
                     <a class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal"><i
                             class="fa fa-plus"></i> 添加问卷</a>
@@ -197,10 +197,7 @@
                             class="fa fa-times"></i> 批量添加</a>
                     <a class="btn btn-primary" onclick="exportSurvey()"><i class="fa fa-share"></i> 导出</a>
                 </div>
-                <table id="jqGrid"></table>
-                <div id="jqGridPager"></div>
             </div>
-
 
             <div class="row">
                 <div class="col-lg-12">
