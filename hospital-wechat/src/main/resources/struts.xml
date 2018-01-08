@@ -16,4 +16,5 @@
 
 	<include file="struts2/struts-wechat-login.xml"></include>
 	<include file="struts2/struts-captcha.xml"></include>
+	<include file="struts2/struts-patient-register.xml"></include>
 </struts>

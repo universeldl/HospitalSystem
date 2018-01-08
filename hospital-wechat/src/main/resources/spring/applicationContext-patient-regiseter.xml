@@ -12,10 +12,24 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 
+    <bean id="doctorDao" class="com.hospital.dao.impl.DoctorDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
 
- 	<bean id="doctorInfoAction" class="com.hospital.action.DoctorInfoAction" scope="prototype">
- 		<property name="doctorService">
- 			<ref bean="doctorService"/>
- 		</property>
+    <bean id="doctorService" class="com.hospital.service.impl.DoctorServiceImpl">
+        <property name="doctorDao">
+            <ref bean="doctorDao"/>
+        </property>
+    </bean>
+
+    <bean id="patientRegisterAction" class="com.hospital.action.patientRegisterAction" scope="prototype">
+        <property name="patientService">
+            <ref bean="patientService"/>
+        </property>
+        <property name="doctorService">
+            <ref bean="doctorService"/>
+        </property>
  	</bean>
  </beans>

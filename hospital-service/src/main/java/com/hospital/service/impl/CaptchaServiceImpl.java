@@ -30,8 +30,8 @@ public class CaptchaServiceImpl implements CaptchaService{
             g.setColor(getRandColor(160, 200));
             int x1 = random.nextInt(width);
             int y1 = random.nextInt(height);
-            int x2 = random.nextInt(12);
-            int y2 = random.nextInt(12);
+            int x2 = random.nextInt(width);
+            int y2 = random.nextInt(width);
             g.drawLine(x1, y1, x2, y2);
         }
 
@@ -44,7 +44,7 @@ public class CaptchaServiceImpl implements CaptchaService{
             g.drawString(rand, 13*i+6, 16);
         }
         //存进session,用于验证
-        ActionContext.getContext().getSession().put("randomImg", sRand.toLowerCase());
+        ActionContext.getContext().getSession().put("captcha", sRand.toLowerCase());
         g.dispose();
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         ImageOutputStream imageOut;
