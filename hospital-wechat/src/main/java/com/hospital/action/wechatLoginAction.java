@@ -8,6 +8,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.hospital.domain.Patient;
 import org.apache.struts2.ServletActionContext;
 
+import java.io.PrintWriter;
+
 /**
  * Created by QQQ on 2017/12/23.
  */
@@ -55,6 +57,16 @@ public class wechatLoginAction extends ActionSupport {
     }
 
     public String getAppId() {
-        return AccessTokenMgrHXTS.getInstance().getAppId();
+        System.out.println("get app id called");
+        String app_id = AccessTokenMgrHXTS.getInstance().getAppId();
+        try {
+            PrintWriter pw = ServletActionContext.getResponse().getWriter();
+            pw.print(app_id);
+            pw.flush();
+            pw.close();
+        } catch(Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
     }
 }

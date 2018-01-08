@@ -1,7 +1,13 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 
 <html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="jQuery/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="ajax-lib/ajaxutils.js"></script>
+</head>
+
 
 <script type="text/javascript">
     function GetQueryString(name) {
@@ -16,7 +22,20 @@
     function redirect() {
         var code = GetQueryString("code")
         if (code == null) {
-            window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf7622c6c9856841c&redirect_uri=http%3a%2f%2f5c3c3db5.ngrok.io%2fhospital-wechat%2f&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
+            var postdata = "";
+            ajax(
+                {
+                    method:'POST',
+                    url:'wechatLoginAction_getAppId.action',
+                    params: postdata,
+                    callback:function(data) {
+                        var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=";
+                        url = url + data;
+                        url = url + "&redirect_uri=http%3a%2f%2f5c3c3db5.ngrok.io%2fhospital-wechat%2f&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
+                        window.location.href = url;
+                    }
+                }
+            );
         } else {
             var action_url = "wechatLoginAction_login.action?code=";
             action_url = action_url + code;

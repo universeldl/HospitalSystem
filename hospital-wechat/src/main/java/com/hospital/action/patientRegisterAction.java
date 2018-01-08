@@ -8,7 +8,6 @@ import com.hospital.service.DoctorService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
-import com.hospital.wechat.service.AccessTokenMgrHXTS;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
@@ -131,8 +130,5 @@ public class patientRegisterAction extends ActionSupport {
         return null;
     }
 
-    public String getAppId() {
-        System.out.println("calling getappid" + AccessTokenMgrHXTS.getInstance().getAppId());
-        return AccessTokenMgrHXTS.getInstance().getAppId();
-    }
+
 }
