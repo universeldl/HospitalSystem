@@ -2,14 +2,32 @@ drop database HospitalSurvey;
 create database HospitalSurvey DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use HospitalSurvey;
 
+# reserved table
+# now we store appid and secret in code
+# should store those info in db
+CREATE TABLE `wechatAccount` (
+  `aid` int(11) NOT NULL,
+  `appID` varchar(20) UNIQUE NOT NULL,
+  `appSecret` varchar(30) NOT NULL,
+  PRIMARY KEY (`aid`)
+);
+
+CREATE TABLE `hospital` (
+  `aid` int(11) NOT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`aid`)
+);
+
 CREATE TABLE `doctor` (
   `aid` int(11) NOT NULL,
   `username`  varchar(20) BINARY NOT NULL,
   `name` varchar(20) DEFAULT NULL,
   `pwd` varchar(64) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
+  `hospitalID` int(11) NOT NULL,
   `state` int(2) DEFAULT '1',
-  PRIMARY KEY (`aid`)
+  PRIMARY KEY (`aid`),
+  CONSTRAINT  FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`aid`)
 );
 
 CREATE TABLE `Authorization` (
@@ -40,9 +58,15 @@ CREATE TABLE `Patient` (
   `patientId` varchar(255) NOT NULL,
   `pwd` varchar(64) NOT NULL,
   `name` varchar(20) NOT NULL,
-  `openID` varchar(20) UNIQUE NOT NULL,
+  `appID` varchar(28) NOT NULL,
+  `openID` varchar(50) UNIQUE NOT NULL,
+  `uniqID` varchar(50) UNIQUE NOT NULL,
+  `outpatientID` varchar(50) UNIQUE DEFAULT NULL,  # 预留门诊号
+  `inpatientID` varchar(50) UNIQUE DEFAULT NULL,   # 预留住院号
+  `sex` ENUM("MALE", "FEMALE") DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
   `patientTypeId` int(11) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,
@@ -149,19 +173,42 @@ CREATE TABLE `ForfeitInfo` (
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`)
 );
 
+INSERT INTO wechatAccount VALUES(0, "huxitianshi", "appSecret");
+
+
+INSERT INTO hospital VALUES(0, "潮峻科技");
+INSERT INTO hospital VALUES(1, "上海儿童医学中心");
+INSERT INTO hospital VALUES(2, "金杨社区卫生服务中心");
+INSERT INTO hospital VALUES(3, "泥城社区卫生服务中心");
+INSERT INTO hospital VALUES(4, "高桥社区卫生服务中心");
+INSERT INTO hospital VALUES(5, "大团社区卫生服务中心");
+INSERT INTO hospital VALUES(6, "陆家嘴社区卫生服务中心");
+INSERT INTO hospital VALUES(7, "沪东社区卫生服务中心");
+INSERT INTO hospital VALUES(8, "北蔡社区卫生服务中心");
+INSERT INTO hospital VALUES(9, "合庆社区卫生服务中心");
+INSERT INTO hospital VALUES(10, "三林社区卫生服务中心");
+INSERT INTO hospital VALUES(12, "联洋社区卫生服务中心");
+INSERT INTO hospital VALUES(13, "塘桥社区卫生服务中心");
+INSERT INTO hospital VALUES(14, "惠南社区卫生服务中心");
+INSERT INTO hospital VALUES(15, "祝桥社区卫生服务中心");
+INSERT INTO hospital VALUES(16, "洋泾社区卫生服务中心");
+INSERT INTO hospital VALUES(17, "迎博社区卫生服务中心");
+INSERT INTO hospital VALUES(18, "潍坊社区卫生服务中心");
+
+
 INSERT INTO PatientType VALUES(1,"病人",10,30,1,2);
 INSERT INTO PatientType VALUES(2,"病人家属",10,30,1,2);
 
 INSERT INTO surveyType VALUES(1,"第一类");
 INSERT INTO surveyType VALUES(2,"2nd");
 
-INSERT INTO doctor VALUES(1,"admin","张三","admin","13547865412",1);
-INSERT INTO doctor VALUES(2,"d1","张一三","d1","13547865412",0);
-INSERT INTO doctor VALUES(5,"doctor","张二三","doctor","13547865412",1);
-INSERT INTO doctor VALUES(6,"lht","lht","lht","13547865412",1);
+INSERT INTO doctor VALUES(1,"admin","张三","admin","13547865412",1, 1);
+INSERT INTO doctor VALUES(2,"d1","张一三","d1","13547865412",1, 0);
+INSERT INTO doctor VALUES(5,"doctor","张二三","doctor","13547865412",1, 1);
+INSERT INTO doctor VALUES(6,"lht","lht","lht","13547865412",0, 1);
 
-INSERT INTO Patient VALUES(1,"123456","李四","p1","13567891234","123@abc.com","2017-06-25 00:00:00",1,2);
-INSERT INTO Patient VALUES(2,"123456","赵六","p2","13567891234","456@abc.com","2017-03-01 00:00:00",1,6);
+INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","MALE","13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,2);
+INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","FEMALE","13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,6);
 
 INSERT INTO Authorization VALUES(2,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(1,0,0,0,0,0,0,0,1);
