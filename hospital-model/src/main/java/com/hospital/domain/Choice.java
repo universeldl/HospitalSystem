@@ -5,22 +5,26 @@ import java.util.Set;
 
 public class Choice {
     private int choiceId;
-    private int questionId;
+    //private int questionId;
     private int answerId;
+    private int score;
     //private int surveyId;
     private String choiceContent;
     private int aid;
-    private Question question;
+    //private Question question;
     //private Answer answer;
 
     //public Answer getAnswer() { return answer; }
     //public void setAnswer(Answer answer) { this.answer = answer; }
 
-	public Question getQuestion() { return question; }
-	public void setQuestion(Question question) { this.question = question; }
+	//public Question getQuestion() { return question; }
+	//public void setQuestion(Question question) { this.question = question; }
 
 	public int getAnswerId() { return answerId; }
 	public void setAnswerId(int answerId) { this.answerId = answerId; }
+
+    public int getScore() { return score; }
+    public void setScore(int score) { this.score = score; }
 
     public int getChoiceId() {
         return choiceId;
@@ -29,12 +33,12 @@ public class Choice {
         this.choiceId = choiceId;
     }
 
-    public int getQuestionId() {
-        return questionId;
-    }
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
-    }
+    //public int getQuestionId() {
+    //    return questionId;
+    //}
+    //public void setQuestionId(int questionId) {
+    //    this.questionId = questionId;
+    //}
 
     //public int getSurveyId() {
     //    return surveyId;
@@ -61,12 +65,13 @@ public class Choice {
     public Choice() {
 	}
 
-    public Choice( int aid, /*int surveyId, */int questionId,  String choiceContent) {
+    public Choice( int aid, /*int surveyId, int questionId, */ String choiceContent, int score) {
 		super();
 		this.aid = aid;
 		//this.surveyId = surveyId;
-        this.questionId = questionId;
+        //this.questionId = questionId;
 		this.choiceContent = choiceContent;
+        this.score = score;
 	}
 
 

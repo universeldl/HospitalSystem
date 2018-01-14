@@ -240,9 +240,10 @@
                                     <button type="button" class="btn btn-danger btn-xs"
                                             onclick="deleteSurvey(<s:property value="#survey.surveyId"/>)">删除
                                     </button>
+                                    <input type="hidden" id="question_action"
+                                           value="${pageContext.request.contextPath}/doctor/surveyManageAction_questionManage.action">
                                     <button type="button" class="btn btn-success btn-xs"
-                                            onclick="addQuestion(<s:property value="#survey.surveyId"/>)"
-                                            data-toggle="modal" data-target="#addQuestionModal">新增
+                                            onclick="question(<s:property value="#survey.surveyId"/>)">试题
                                     </button>
                                     <button type="button" class="btn btn-primary btn-xs"
                                             onclick="checkSurvey(<s:property value="#survey.surveyId"/>)"
@@ -564,92 +565,6 @@
 
 </form>
 <!--------------------------------------浏览问卷的模态框------------------------>
-
-
-<!--------------------------------------增加问卷问题的模糊框------------------------>
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="addQuestionModal" tabindex="-1" role="dialog" aria-labelledby="addQuestionModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="addQuestionModalLabel">
-                        新增问卷问题
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <!---------------------表单-------------------->
-
-
-                    <button type="button" class="btn btn-default" onclick="choiceDisplay()" id="add1">选择题</button>
-                    <button type="button" class="btn btn-default" onclick="choiceHide()" id="add2">问答题</button>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">问题题目</label>
-                        <div class="col-sm-7">
-                            <textarea class="form-control" rows="3" id="addQuestionContent"
-                                      placeholder="请输入问题题目"></textarea>
-                            <label class="control-label" for="addQuestionContent" style="display: none;"></label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="inputOptionA">
-                        <label for="inputOptionA" class="col-sm-3 control-label">A. </label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="choiceOption1" placeholder="请输入选项内容">
-                            <label class="control-label" for="choiceOption1" style="display: none;"></label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="inputOptionB">
-                        <label for="inputOptionB" class="col-sm-3 control-label">B. </label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="choiceOption2" placeholder="请输入选项内容">
-                            <label class="control-label" for="choiceOption2" style="display: none;"></label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="inputOptionC">
-                        <label for="inputOptionC" class="col-sm-3 control-label">C. </label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="choiceOption3" placeholder="请输入选项内容">
-                            <label class="control-label" for="choiceOption3" style="display: none;"></label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="inputOptionD">
-                        <label for="inputOptionD" class="col-sm-3 control-label">D. </label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="choiceOption4" placeholder="请输入选项内容">
-                            <label class="control-label" for="choiceOption4" style="display: none;"></label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="inputOptionE">
-                        <label for="inputOptionE" class="col-sm-3 control-label">E. </label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="choiceOption5" placeholder="请输入选项内容">
-                            <label class="control-label" for="choiceOption5" style="display: none;"></label>
-                        </div>
-                    </div>
-                    <input type="submit" class="btn btn-success" id="add_qst" value="继续添加">
-
-
-                    <!---------------------表单-------------------->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary" id="add_Question">
-                        确认添加
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-</form>
-<!--------------------------------------增加问卷问题的模糊框------------------------>
 
 
 <!--------------------------------------添加的模糊框------------------------>

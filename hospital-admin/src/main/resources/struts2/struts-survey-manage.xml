@@ -20,6 +20,7 @@
 
   	<action name="surveyManageAction_*" method="{1}" class="surveyManageAction">
   		<result name="success">/WEB-INF/doctor/surveyManage.jsp</result>
+  		<result name="question">/WEB-INF/doctor/questionManage.jsp</result>
   		<result name="nopass" type="redirect">/error/nopass.jsp</result>
   	</action>
   </package>

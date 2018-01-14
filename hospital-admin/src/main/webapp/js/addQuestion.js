@@ -1,12 +1,12 @@
-var questionType = 1;
-var surveyId = 1;
+//var questionType = 1;
+//var surveyId = 1;
 
-function addQuestion(id){
-    surveyId = id;
+function addQuestion(sid){
+    surveyId = sid;
 }
 
 $(function () {
-	
+
 
   $('#add_Question').click(function () {
 
@@ -17,16 +17,18 @@ $(function () {
 
     var postdata;
     if ( questionType == 1) {
-      postdata = "questionType=1&questionContent="+$.trim($("#addQuestionContent").val())
-          +"&surveyId="+ surveyId
-          +"&choiceOption1="+ $.trim($("#choiceOption1").val())
-          +"&choiceOption2="+ $.trim($("#choiceOption2").val())
-          +"&choiceOption3="+ $.trim($("#choiceOption3").val())
-          +"&choiceOption4="+ $.trim($("#choiceOption4").val())
-          +"&choiceOption5="+ $.trim($("#choiceOption5").val());
+        postdata = "questionType=1&questionContent="+$.trim($("#addQuestionContent").val())
+          +"&surveyId="+ surveyId + "&" + $("#addForm").serialize();
+      //postdata = "questionType=1&questionContent="+$.trim($("#addQuestionContent").val())
+      //    +"&surveyId="+ surveyId
+      //    +"&choiceOption1="+ $.trim($("#choiceOption1").val())
+      //    +"&choiceOption2="+ $.trim($("#choiceOption2").val())
+      //    +"&choiceOption3="+ $.trim($("#choiceOption3").val())
+      //    +"&choiceOption4="+ $.trim($("#choiceOption4").val())
+      //    +"&choiceOption5="+ $.trim($("#choiceOption5").val());
     }
     else if ( questionType == 2) {
-        postdata = "questionTypeId=2&questionContent="+$.trim($("#addQuestionContent").val())
+      postdata = "questionType=2&surveyId="+ surveyId + "&questionContent="+ $.trim($("#addQuestionContent").val());
 	}
 
 	ajax(
@@ -65,22 +67,14 @@ $(function () {
 function choiceDisplay()
 {
     questionType = 1;
-    var options = new Array("inputOptionA", "inputOptionB", "inputOptionC", "inputOptionD", "inputOptionE");
-    for(var i=0;i<options.length;i++)
-      document.getElementById(options[i]).style.display="block";
+    document.getElementById("choicesBlock").style.display="block";
 }
-
-
 
 function choiceHide()
 {
     questionType = 2;
-    var options = new Array("inputOptionA", "inputOptionB", "inputOptionC", "inputOptionD", "inputOptionE");
-    for(var i=0;i<options.length;i++)
-        document.getElementById(options[i]).style.display="none";
+    document.getElementById("choicesBlock").style.display="none";
 }
-
-
 
 
 function unique(arr) {

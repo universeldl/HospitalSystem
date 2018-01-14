@@ -75,24 +75,6 @@ public class QuestionServiceImpl implements QuestionService{
 
 	@Override
 	public int deleteQuestion(Question question) {
-		//删除病人需要注意的点：如果该病人有尚未答卷的问卷或者尚未设置的延期,则不能删除
-		//得到该病人的分发集合
-		Question questionById = questionDao.getQuestionById(question);
-		Set<DeliveryInfo> deliveryInfos = null;
-		for (DeliveryInfo deliveryInfo : deliveryInfos) {
-			if(!(deliveryInfo.getState()==2 || deliveryInfo.getState()==5)){
-				return -1;//有尚未答卷的问卷
-			}
-			//得到该分发记录的提醒信息
-			ForfeitInfo forfeitInfo = new ForfeitInfo();
-			forfeitInfo.setDeliveryId(deliveryInfo.getDeliveryId());
-			ForfeitInfo forfeitInfoById = forfeitDao.getForfeitInfoById(forfeitInfo);
-			if(forfeitInfoById!=null){
-				if(forfeitInfoById.getIsPay()==0){
-					return -2;//尚未设置的延期
-				}
-			}
-		}
 		boolean deleteQuestion = questionDao.deleteQuestion(question);
 		if(deleteQuestion){
 			return 1;

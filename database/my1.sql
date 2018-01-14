@@ -157,6 +157,7 @@ CREATE TABLE `Choice` (
   `choiceId` int(11) NOT NULL AUTO_INCREMENT,
   `answerId` int(11) NOT NULL,
   `questionId` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
   `choiceContent` varchar(255) NOT NULL,
   `aid` int(11) NOT NULL,
   PRIMARY KEY (`choiceId`),
@@ -235,13 +236,13 @@ INSERT INTO Answer VALUES(3,1,2,1,1,"a5",6);
 INSERT INTO Answer VALUES(4,4,2,2,1,"a6",6);
 INSERT INTO Answer VALUES(5,5,2,2,2,"some text2",6);
 
-INSERT INTO Choice VALUES(1,1,1,"choice_1",6);
-INSERT INTO Choice VALUES(2,1,1,"choice_2",6);
-INSERT INTO Choice VALUES(3,2,3,"choice_3",6);
-INSERT INTO Choice VALUES(4,2,2,"choice_4",6);
-INSERT INTO Choice VALUES(5,3,2,"choice_5",6);
-INSERT INTO Choice VALUES(6,4,2,"choice_6",6);
-INSERT INTO Choice VALUES(7,5,3,"choice_7",6);
+INSERT INTO Choice VALUES(1,1,1,1,"choice_1",6);
+INSERT INTO Choice VALUES(2,1,1,2,"choice_2",6);
+INSERT INTO Choice VALUES(3,2,3,3,"choice_3",6);
+INSERT INTO Choice VALUES(4,2,2,4,"choice_4",6);
+INSERT INTO Choice VALUES(5,3,2,5,"choice_5",6);
+INSERT INTO Choice VALUES(6,4,2,6,"choice_6",6);
+INSERT INTO Choice VALUES(7,5,3,7,"choice_7",6);
 
 INSERT INTO RetrieveInfo VALUES(1,1,1,"2017-06-25 00:00:00",6);
 INSERT INTO RetrieveInfo VALUES(2,1,1,"2017-05-25 00:00:00",6);

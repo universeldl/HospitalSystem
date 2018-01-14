@@ -1,16 +1,15 @@
 package com.hospital.action;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
+import java.io.*;
+import java.util.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hospital.domain.*;
 import com.hospital.service.ChoiceService;
 import com.hospital.service.QuestionService;
+import com.opensymphony.xwork2.ActionContext;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -53,6 +52,7 @@ public class SurveyManageAction extends ActionSupport{
 	private int pageCode;
 
 
+    private Integer questionId;
 	private Integer questionType;
 	private String questionContent;
 	private String choiceOption1;
@@ -82,6 +82,11 @@ public class SurveyManageAction extends ActionSupport{
 	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+
+	public void setQuestionId(Integer questionId) {
+		this.questionId = questionId;
 	}
 
 
@@ -154,7 +159,30 @@ public class SurveyManageAction extends ActionSupport{
 		this.surveyId = surveyId;
 	}
 
-
+/**
+     * 封装接收客户端传过来的post数据
+     * @param ctx ActionContext的对象
+     * @return
+     */
+    public static String getRequestBody(ActionContext ctx){
+        try {
+            HttpServletRequest request = (HttpServletRequest)ctx.get(ServletActionContext.HTTP_REQUEST);
+            InputStream inputStream = request.getInputStream();
+            String strMessage = "";
+            Map<String, String[]> pMap = request.getParameterMap();
+            StringBuffer buff = new StringBuffer();
+            BufferedReader bufferReader = new BufferedReader(new InputStreamReader(inputStream,"utf-8"));
+            while((strMessage = bufferReader.readLine()) != null){
+                buff.append(strMessage);
+            }
+            bufferReader.close();
+            inputStream.close();
+            return buff.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 	/**
 	 * 得到问卷类型的集合
 	 * ajax请求该方法
@@ -230,30 +258,42 @@ public class SurveyManageAction extends ActionSupport{
 	 * @return
 	 */
 	public String addQuestion(){
-
-        Set<String> chos = new HashSet<>();
-        chos.add(choiceOption1);
-        chos.add(choiceOption2);
-        chos.add(choiceOption3);
-        chos.add(choiceOption4);
-        chos.add(choiceOption5);
         boolean b = true;
-
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         Question question = new Question(doctor.getAid(), surveyId, questionContent, questionType);
-        b = questionService.addQuestion(question);
 
-        for(String choiceOption : chos) {
-            if(!"".equals(choiceOption.trim())) {
-                Choice choice = new Choice(doctor.getAid(), question.getQuestionId(), choiceOption);
-                question.getChoices().add(choice);
-                //choice.setQuestionId(question.getQuestionId());
-                b = choiceService.addChoice(choice);
-                if(!b) break;//break whenever add failing
-                //TODO for robustness, we should remove the question and added choices if failed
+        List<String> choices=new ArrayList<>();
+        List<Integer> scores=new ArrayList<>();
+        ActionContext ctx = ActionContext.getContext();
+        HttpServletRequest request = (HttpServletRequest)ctx.get(ServletActionContext.HTTP_REQUEST);
+        Map<String, String[]> pMap = request.getParameterMap();
+        int idx = 0;
+        for (String[] value : pMap.values()) {
+            if(idx < 3) {
+                idx++;
+            }
+            else {
+                if(idx % 2 == 1) {
+                    choices.add(value[0]);
+                }
+                else {
+                    scores.add(Integer.parseInt(value[0]));
+                }
+                idx++;
             }
         }
 
+        for (int i = 0; i < choices.size(); i++) {
+            Choice choice = new Choice(doctor.getAid(), choices.get(i), scores.get(i));
+            question.getChoices().add(choice);
+            //choice.setQuestionId(question.getQuestionId());
+            b = choiceService.addChoice(choice);
+            if(!b) break;//break whenever add failing
+            //TODO for robustness, we should remove the question and added choices if failed
+        }
+
+
+		b = questionService.addQuestion(question);
 		int success = 0;
 		if(b){
 			success = 1;
@@ -269,6 +309,7 @@ public class SurveyManageAction extends ActionSupport{
 		return null;
 	}
 
+
 	/**
 	 * 得到指定问卷编号的问卷信息
 	 * ajax请求该方法
@@ -281,15 +322,15 @@ public class SurveyManageAction extends ActionSupport{
 		Survey survey = new Survey();
 		survey.setSurveyId(surveyId);
 		Survey newSurvey = surveyService.getSurveyById(survey);//得到问卷
-		
+
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
 		    public boolean apply(Object obj, String name, Object value) {
                 return obj instanceof Authorization || name.equals("authorization");
 		   }
 		});
-		
-		
+
+
 		JSONObject jsonObject = JSONObject.fromObject(newSurvey,jsonConfig);
 		try {
 			response.getWriter().print(jsonObject);
@@ -299,8 +340,117 @@ public class SurveyManageAction extends ActionSupport{
 		return null;
 	}
 
-	
-	
+
+	/**
+	 * 添加问题
+	 * @return
+	 */
+	public String getQuestion(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=utf-8");
+		Question question = new Question();
+		question.setQuestionId(questionId);
+		Question newQuestion = questionService.getQuestionById(question);//得到问题
+		//ActionContext actionContext = ActionContext.getContext();
+		//actionContext.put("currentQuestion", newQuestion);
+		//ServletActionContext.getRequest().setAttribute("currentQuestion", newQuestion);
+		//ServletActionContext.getContext().getSession().put("currentQuestion", newQuestion);
+
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+		    public boolean apply(Object obj, String name, Object value) {
+                return obj instanceof Authorization || name.equals("authorization");
+		   }
+		});
+		
+		
+		JSONObject jsonObject = JSONObject.fromObject(newQuestion,jsonConfig);
+		try {
+			response.getWriter().print(jsonObject);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
+
+
+
+	/**
+	 * 修改问题
+	 * @return
+	 */
+	public String updateQuestion(){
+        Set<String> chos = new HashSet<>();
+        chos.add(choiceOption1);
+        chos.add(choiceOption2);
+        chos.add(choiceOption3);
+        chos.add(choiceOption4);
+        chos.add(choiceOption5);
+
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        Question question = new Question();
+        question.setQuestionId(questionId);
+        Question updateQuestion = questionService.getQuestionById(question);//得到修改的问题信息
+        updateQuestion.setAid(doctor.getAid());
+        updateQuestion.setSurveyId(surveyId);
+        updateQuestion.setQuestionContent(questionContent);
+        updateQuestion.setQuestionType(questionType);
+
+        for(Choice choice : updateQuestion.getChoices()) {
+            choiceService.deleteChoice(choice);
+        }
+        Set<Choice> emptyChoices = new HashSet<>();
+        updateQuestion.setChoices(emptyChoices);
+
+        for(String choiceOption : chos) {
+            if(!"".equals(choiceOption.trim())) {
+                Choice choice = new Choice(doctor.getAid(), /*updateQuestion.getQuestionId(),*/ choiceOption, 1);
+                updateQuestion.getChoices().add(choice);
+                choiceService.addChoice(choice);
+            }
+        }
+
+        Question newQuestion = questionService.updateQuestionInfo(question);
+		int success = 0;
+		if(newQuestion!=null){
+			success = 1;
+		}else{
+			success = 0;
+		}
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		return null;
+	}
+
+
+
+	/**
+	 * 删除问题
+	 * @return
+	 */
+	public String deleteQuestion(){
+        Question question = new Question();
+        question.setQuestionId(questionId);
+        for(Choice choice : question.getChoices()) {
+            choiceService.deleteChoice(choice);
+        }
+		int success = questionService.deleteQuestion(question);
+
+		try {
+			ServletActionContext.getResponse().getWriter().print(success);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+
+		return null;
+	}
+
+
 	
 	/**
 	 * 修改问卷
@@ -436,5 +586,16 @@ public class SurveyManageAction extends ActionSupport{
 			throw new RuntimeException(e.getMessage());
 		}
 		return null;
+	}
+
+	public String questionManage(){
+		Survey survey = new Survey();
+		survey.setSurveyId(surveyId);
+		Survey newSurvey = surveyService.getSurveyById(survey);
+
+		ActionContext actionContext = ActionContext.getContext();
+		actionContext.put("survey", newSurvey);
+		ServletActionContext.getRequest().setAttribute("survey", newSurvey);
+		return "question";
 	}
 }

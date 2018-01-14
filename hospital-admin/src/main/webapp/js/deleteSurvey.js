@@ -31,6 +31,11 @@ $('#modal_info').on('hide.bs.modal',function() {//提示模糊框隐藏时候触
  });
 
 
+function question(id){
+	var question_action = $.trim($("#question_action").val()) +"?surveyId="+ id;
+
+	 window.location.href = question_action;
+}
 
 function showInfo(msg) {
     $("#div_info").text(msg);

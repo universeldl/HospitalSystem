@@ -7,12 +7,16 @@
     <class name="com.hospital.domain.Choice" table="Choice">
         <id name="choiceId" type="java.lang.Integer">
             <column name="choiceId"/>
+			<generator class="increment" />
         </id>
-        <property name="questionId" type="java.lang.Integer">
+   <!--     <property name="questionId" type="java.lang.Integer">
             <column name="questionId"/>
-        </property>
+        </property>-->
         <property name="answerId" type="java.lang.Integer">
             <column name="answerId"/>
+        </property>
+        <property name="score" type="java.lang.Integer">
+            <column name="score"/>
         </property>
     <!--    <property name="surveyId" type="java.lang.Integer">
             <column name="surveyId"/>
