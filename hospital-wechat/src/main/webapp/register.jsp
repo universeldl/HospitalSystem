@@ -15,7 +15,10 @@
 
 <body>
 
-    <img src="img/register/title.jpg" width="100%"  />
+
+
+
+
 
     <form>
 	<div class="container">
