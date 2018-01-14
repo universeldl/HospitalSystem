@@ -11,19 +11,78 @@ import java.util.Set;
  */
 public class Patient implements Serializable{
 
+
+	public enum Sex{
+		male,
+		femal
+	}
+
 	private Integer patientId;	//自动编号
 	private String name;	//真实名称
+	private String appID;   // patient属于哪个微信号
+	private String openID;	// 微信openid
+	private String uniqID;  // 微信uniqid
+	private String outpatientID; //门诊号
+	private String inpatientID;  //住院号
+	private Sex sex;
 	private String pwd;	//密码
 	private String phone;	//联系方式
 	private PatientType patientType;	//病人类型(病人或者病人家属)
     private String email;	//邮箱
     private Doctor doctor;	//操作医生
-    private String openID;	//用户名码
+
 	private Date createTime;	//创建时间
+	private Date birthday;	//出生日期
 	private Set<DeliveryInfo> deliveryInfos;	//该病人的分发信息
 
 
+	public void setAppID(String appID) {
+		this.appID = appID;
+	}
 
+	public String getAppID() {
+		return appID;
+	}
+
+	public void setUniqID(String uniqID) {
+		this.uniqID = uniqID;
+	}
+
+	public String getUniqID() {
+		return uniqID;
+	}
+
+	public void setOutpatientID(String outpatientID) {
+		this.outpatientID = outpatientID;
+	}
+
+	public String getOutpatientID() {
+		return outpatientID;
+	}
+
+	public void setInpatientID(String inpatientID) {
+		this.inpatientID = inpatientID;
+	}
+
+	public String getInpatientID() {
+		return inpatientID;
+	}
+
+	public void setSex(Sex sex) {
+		this.sex = sex;
+	}
+
+	public Sex getSex() {
+		return sex;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
 
 	public Integer getPatientId() {
 		return patientId;
