@@ -399,46 +399,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">选项A</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findOptionA" readonly="readonly">
-                            <label class="control-label" for="findOptionA" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">选项B</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findOptionB" readonly="readonly">
-                            <label class="control-label" for="findOptionB" style="display:none;"></label>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">选项C</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findOptionC" readonly="readonly">
-                            <label class="control-label" for="findOptionC" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">选项D</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findOptionD" readonly="readonly">
-                            <label class="control-label" for="findOptionD" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">选项E</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findOptionE" readonly="readonly">
-                            <label class="control-label" for="findOptionE" style="display:none;"></label>
-                        </div>
-                    </div>
+                    <div id="checkChoicesDiv"></div>
 
                 </div>
 

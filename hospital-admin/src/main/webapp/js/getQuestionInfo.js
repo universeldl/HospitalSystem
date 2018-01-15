@@ -15,6 +15,7 @@ function getQuestionInfo(id) {
             method: 'POST',
             url: 'doctor/surveyManageAction_getQuestion.action',
             params: "questionId=" + id,
+            async: false,
             type: "json",
             callback: function (data) {
                 $("#findQuestionContent").val(data.questionContent);
@@ -24,13 +25,17 @@ function getQuestionInfo(id) {
                     $("#findQuestionType").val("单选题");
                 else if(data.questionType == 3)
                     $("#findQuestionType").val("问答题");
-                let str = '';
+                var str = '';
                 for(let index in data.choices) {
                     str +='<div class="form-group">'
                         +'<label for="firstname" class="col-sm-3 control-label">选项:</label>'
-                        +'<div class="col-sm-7">'
+                        +'<div class="col-sm-5">'
                         +'<input type="text" class="form-control" id="findOptionA" value="' + data.choices[index].choiceContent + '" readonly="readonly">'
                         +'<label class="control-label" for="findOptionA" style="display:none;"></label>'
+                        +'</div>'
+                        +'<div class="col-sm-2">'
+                        +'<input type="text" class="form-control" id="scoreA" value="' + data.choices[index].score+ '" readonly="readonly">'
+                        +'<label class="control-label" for="scoreA" style="display:none;"></label>'
                         +'</div>'
                         +'</div>';
                 }
