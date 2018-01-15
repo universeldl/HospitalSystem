@@ -34,7 +34,7 @@ function getQuestionInfo(id) {
                         +'<label class="control-label" for="findOptionA" style="display:none;"></label>'
                         +'</div>'
                         +'<div class="col-sm-2">'
-                        +'<input type="text" class="form-control" id="scoreA" value="' + data.choices[index].score+ '" readonly="readonly">'
+                        +'<input type="text" class="form-control" id="scoreA" value="' + data.choices[index].score+ ' 分" readonly="readonly">'
                         +'<label class="control-label" for="scoreA" style="display:none;"></label>'
                         +'</div>'
                         +'</div>';
