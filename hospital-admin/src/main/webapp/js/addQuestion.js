@@ -19,13 +19,6 @@ $(function () {
     if ( questionType == 1) {
         postdata = "questionType=1&questionContent="+$.trim($("#addQuestionContent").val())
           +"&surveyId="+ surveyId + "&" + $("#addForm").serialize();
-      //postdata = "questionType=1&questionContent="+$.trim($("#addQuestionContent").val())
-      //    +"&surveyId="+ surveyId
-      //    +"&choiceOption1="+ $.trim($("#choiceOption1").val())
-      //    +"&choiceOption2="+ $.trim($("#choiceOption2").val())
-      //    +"&choiceOption3="+ $.trim($("#choiceOption3").val())
-      //    +"&choiceOption4="+ $.trim($("#choiceOption4").val())
-      //    +"&choiceOption5="+ $.trim($("#choiceOption5").val());
     }
     else if ( questionType == 2) {
       postdata = "questionType=2&surveyId="+ surveyId + "&questionContent="+ $.trim($("#addQuestionContent").val());
@@ -91,15 +84,11 @@ function unique(arr) {
 
 
 function validAddQuestion() {
+
     var flag = true;
+    var x = Array();
 
     var questionContent = $.trim($("#addQuestionContent").val());
-    var choiceOption1 = $.trim($("#choiceOption1").val());
-    var choiceOption2 = $.trim($("#choiceOption2").val());
-    var choiceOption3 = $.trim($("#choiceOption3").val());
-    var choiceOption4 = $.trim($("#choiceOption4").val());
-    var choiceOption5 = $.trim($("#choiceOption5").val());
-
     if (questionContent == "") {
         $('#addQuestionContent').parent().addClass("has-error");
         $('#addQuestionContent').next().text("请输入问题");
@@ -111,18 +100,46 @@ function validAddQuestion() {
         $("#addQuestionContent").next().hide();
     }
 
-    var x = Array(choiceOption1, choiceOption2, choiceOption3, choiceOption4, choiceOption5);
-    var y = unique(x);
-    if(y.length < 2) {
-    	$('#choiceOption1').parent().addClass("has-error");
-        $('#choiceOption1').next().text("每个问题至少需要有两个不重复的选项");
-        $("#choiceOption1").next().show();
-        flag = false;
-	}else {
-        $('#choiceOption1').parent().removeClass("has-error");
-        $('#choiceOption1').next().text("");
-        $("#choiceOption1").next().hide();
-    } 
+    $("#choicesBlock").find("div.col-sm-5").children(":text").each(function () {
+        var tmp = $(this).val();
+        if (tmp == "") {
+            $(this).parent().addClass("has-error");
+            $(this).next().text("选项不能为空");
+            $(this).next().show();
+            flag = false;
+        }
+        else if( x.includes(tmp) ) {
+            $(this).parent().addClass("has-error");
+            $(this).next().text("选项不能重复");
+            $(this).next().show();
+            flag = false;
+        }else {
+            x.push(tmp);
+            $(this).parent().removeClass("has-error");
+            $(this).next().text("");
+            $(this).next().hide();
+        }
+    });
+
+    $("#choicesBlock").find("div.col-sm-2").children(":text").each(function () {
+        var tmp = $(this).val();
+        if (tmp == "") {
+            $(this).parent().addClass("has-error");
+            $(this).next().text("分数不能为空");
+            $(this).next().show();
+            flag = false;
+        }
+        else if( isNaN(parseInt(tmp)) || parseInt(tmp)<0 || parseInt(tmp)>99) {
+            $(this).parent().addClass("has-error");
+            $(this).next().text("分数必须为0～99之间的正整数");
+            $(this).next().show();
+            flag = false;
+        }else {
+            $(this).parent().removeClass("has-error");
+            $(this).next().text("");
+            $(this).next().hide();
+        }
+    });
 
     return flag;
 }
