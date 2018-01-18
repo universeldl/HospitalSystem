@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by QQQ on 2017/12/23.
@@ -71,6 +72,7 @@ public class patientRegisterAction extends ActionSupport {
 
 
         Patient patient = (Patient) ServletActionContext.getContext().getSession().get("patient");
+        String appID = (String) ServletActionContext.getContext().getSession().get("appID");
 
         /* status : 1 add patient successfully, redirect to info page
          * status : -1 captcha error
@@ -91,26 +93,44 @@ public class patientRegisterAction extends ActionSupport {
                 System.out.println("captcha correct");
 
                 Doctor tmp_doctor = new Doctor();
-                tmp_doctor.setAid(1);
-                Doctor doctor = doctorService.getDoctorById(tmp_doctor);
+                // modify later
+                tmp_doctor.setUsername("lht");
+                Doctor doctor = doctorService.getDoctorByUserName(tmp_doctor);
                 if (doctor == null) {
                     status = -2;
                 } else {
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Date birthday_date;
+                    try {
+                        birthday_date = sdf.parse(birthday);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e.getMessage());
+                    }
+
                     PatientType type = new PatientType();
                     type.setPatientTypeId(typeID);
-
+                    patient.setAppID(appID);
+                    patient.setUniqID("na");
                     patient.setName(username);
-                    patient.setPwd(Md5Utils.md5("123456"));
+                    patient.setPwd(Md5Utils.md5("NA"));
                     patient.setPhone(tel);
                     patient.setDoctor(doctor);
                     patient.setCreateTime(new Date(System.currentTimeMillis()));
-
+                    patient.setBirthday(birthday_date);
+                    if (sex.toUpperCase().equals("MALE")) {
+                        patient.setSex(1);
+                    } else {
+                        patient.setSex(0);
+                    }
                     System.out.println("add patient ! " + username);
                     System.out.println("add patient ! " + patient.getOpenID());
 
                     if (patientService.addPatient(patient)) {
+                        System.out.println("add patient succeed");
                         status = 1;
                     } else {
+                        System.out.println("add patient failed");
                         status = -2;
                     }
                 }

@@ -25,7 +25,6 @@
 </context-param>
 
 <!-- 配置Spring的OpenSessionInViewFilter,以解决懒加载异常 -->
-    <!--
 <filter>
     <filter-name>OpenSessionInViewFilter</filter-name>
     <filter-class> org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>
@@ -34,7 +33,6 @@
     <filter-name>OpenSessionInViewFilter</filter-name>
     <url-pattern>*.action</url-pattern>
 </filter-mapping>
--->
 
 
 <!-- 错误404页面 -->

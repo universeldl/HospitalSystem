@@ -17,10 +17,9 @@
 
 
 
+<img src="img/register/title.jpg" width="100%"  />
 
-
-
-    <form>
+<form>
 	<div class="container">
 		<div class="weui-cells__title">注册</div>
 		<div class="weui-cells weui-cells_form">

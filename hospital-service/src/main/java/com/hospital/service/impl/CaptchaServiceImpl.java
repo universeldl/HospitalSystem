@@ -36,7 +36,7 @@ public class CaptchaServiceImpl implements CaptchaService{
         }
 
         String sRand = "";
-        int length = random.nextInt(6)%3+4;
+        int length = random.nextInt(2)+4;
         for(int i = 0; i <= length; i++) {
             String rand = getRandomChar();
             sRand += rand;

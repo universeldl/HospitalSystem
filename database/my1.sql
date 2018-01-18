@@ -56,17 +56,17 @@ CREATE TABLE `PatientType` (
 
 CREATE TABLE `Patient` (
   `patientId` varchar(255) NOT NULL,
-  `pwd` varchar(64) NOT NULL,
+  `pwd` varchar(64) DEFAULT NULL,
   `name` varchar(20) NOT NULL,
   `appID` varchar(28) NOT NULL,
   `openID` varchar(50) UNIQUE NOT NULL,
-  `uniqID` varchar(50) UNIQUE NOT NULL,
+  `uniqID` varchar(50) UNIQUE DEFAULT NULL,
   `outpatientID` varchar(50) UNIQUE DEFAULT NULL,  # 预留门诊号
   `inpatientID` varchar(50) UNIQUE DEFAULT NULL,   # 预留住院号
-  `sex` ENUM("MALE", "FEMALE") DEFAULT NULL,
+  `sex` varchar(1) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
+  `birthday` datetime NOT NULL,
   `createTime` datetime DEFAULT NULL,
   `patientTypeId` int(11) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,
@@ -208,8 +208,8 @@ INSERT INTO doctor VALUES(2,"d1","张一三","d1","13547865412",1, 0);
 INSERT INTO doctor VALUES(5,"doctor","张二三","doctor","13547865412",1, 1);
 INSERT INTO doctor VALUES(6,"lht","lht","lht","13547865412",0, 1);
 
-INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","MALE","13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,2);
-INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","FEMALE","13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,6);
+INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1","13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,2);
+INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0","13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,6);
 
 INSERT INTO Authorization VALUES(2,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(1,0,0,0,0,0,0,0,1);

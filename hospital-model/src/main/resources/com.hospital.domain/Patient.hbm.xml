@@ -10,25 +10,47 @@
 		<property name="pwd" type="java.lang.String">
 			<column name="pwd" />
 		</property>
-		
+
 		<property name="name" type="java.lang.String" >
 			<column name="name" />
 		</property>
-		
+
+		<property name="appID" type="java.lang.String">
+			<column name="appID" />
+		</property>
+
 		<property name="openID" type="java.lang.String">
 			<column name="openID" />
 		</property>
-		
-		
+
+		<property name="uniqID" type="java.lang.String">
+			<column name="uniqID" />
+		</property>
+
+		<property name="outpatientID" type="java.lang.String">
+			<column name="outpatientID" />
+		</property>
+
+		<property name="inpatientID" type="java.lang.String">
+			<column name="inpatientID" />
+		</property>
+
+
 		<property name="phone" type="java.lang.String" >
 			<column name="phone"  />
 		</property>
-		
+
+		<property name="sex" type="java.lang.Integer">
+			<column name="sex"/>
+		</property>
 		
 		<property name="email" type="java.lang.String"  >
 			<column name="email"  />
 		</property>
-			
+
+		<property name="birthday" type="java.util.Date" >
+			<column name="birthday"/>
+		</property>
 	
 		<property name="createTime" type="java.util.Date" >
 			<column name="createTime"/>

@@ -14,21 +14,71 @@ public class Patient implements Serializable{
 	private Integer patientId;	//自动编号
 	private String name;	//真实名称
 	private String pwd;	//密码
+	private String appID; //微信appID
+	private String openID;
+	private String uniqID;
+	private String outpatientID;
+	private String inpatientID;
 	private String phone;	//联系方式
 	private PatientType patientType;	//病人类型(病人或者病人家属)
     private String email;	//邮箱
     private Doctor doctor;	//操作医生
-    private String openID;	//用户名码
+
+	private Integer sex;
+
+	private Date birthday;
 	private Date createTime;	//创建时间
 	private Set<DeliveryInfo> deliveryInfos;	//该病人的分发信息
 
 
 
+	public String getAppID() {
+		return appID;
+	}
+	public void setAppID(String appID) {
+		this.appID = appID;
+	}
+
+	public String getUniqID() {
+		return uniqID;
+	}
+	public void setUniqID(String uniqID) {
+		this.uniqID = uniqID;
+	}
+
+	public String getOutpatientID() {
+		return outpatientID;
+	}
+	public void setOutpatientID(String outpatientID) {
+		this.outpatientID = outpatientID;
+	}
+
+	public String getInpatientID() {
+		return inpatientID;
+	}
+	public void setInpatientID(String inpatientID) {
+		this.inpatientID = inpatientID;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+
+		this.birthday = birthday;
+	}
+
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
 
 	public Integer getPatientId() {
 		return patientId;
 	}
-
 	public void setPatientId(Integer patientId) {
 		this.patientId = patientId;
 	}
@@ -36,7 +86,6 @@ public class Patient implements Serializable{
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -44,7 +93,6 @@ public class Patient implements Serializable{
 	public String getPwd() {
 		return pwd;
 	}
-
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
