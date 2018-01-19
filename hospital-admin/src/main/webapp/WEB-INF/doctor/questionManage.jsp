@@ -51,7 +51,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <style>
         /** 新增按钮 **/
-        #addVar {
+        .addVar, .addUpdateVar {
             margin: 0 0 0 52px;
             padding: 5px;
             display: inline-block;
@@ -62,7 +62,7 @@
         }
 
         /** 删除按钮 **/
-        .removeVar {
+        .removeVar, .removeUpdateVar  {
             margin: auto;
             padding: 5px;
             display: inline-block;
@@ -72,7 +72,7 @@
             border-radius: 4px;
         }
 
-        #addVar:hover, .removeVar:hover {
+        .addVar:hover, .addUpdateVar:hover, .removeVar:hover, .removeUpdateVar:hover {
             cursor: pointer;
         }
 
@@ -82,12 +82,33 @@
         }
     </style>
     <script>
-        var varCount = 3;
+        var varCount = 2;       //只增不减，不然很可能出错
+        var choiceCount = 2;    //实际数量，有增有减
 
         $(function () {
+     //       //新增
+     //       $('.addUpdateVar').on('click', function () {
+     //           varCount++;
+     //           choiceCount++;
+     //           $node = '<div class="form-group">'
+     //               + '<label for="choiceOption' + varCount + '" class="col-sm-3 control-label">选项: </label>'
+     //               + '<div class="col-sm-5">'
+     //               + '<input type="text" class="form-control" name="choiceOption' + varCount + '" id="choiceOption' + varCount + '" placeholder="请输入选项内容">'
+     //               + '<label class="control-label" for="choiceOption' + varCount + '" style="display: none;"></label>'
+     //               + '</div>'
+     //               + '<div class="col-sm-2">'
+     //               + '<input type="text" class="form-control" name="score' + varCount + '" id="score' + varCount + '" placeholder="分数">'
+     //               + '<label class="control-label" for="score' + varCount + '" style="display: none;"></label>'
+     //               + '</div>'
+     //               + '<p><span class="removeUpdateVar">删除</span></p>'
+     //               + '</div>';
+     //           //新表单项加到“新增”前面
+     //           $(this).parent().before($node);
+     //       });
             //新增
-            $('#addVar').on('click', function () {
+            $('.addVar').on('click', function () {
                 varCount++;
+                choiceCount++;
                 $node = '<div class="form-group">'
                     + '<label for="choiceOption' + varCount + '" class="col-sm-3 control-label">选项: </label>'
                     + '<div class="col-sm-5">'
@@ -98,7 +119,7 @@
                     + '<input type="text" class="form-control" name="score' + varCount + '" id="score' + varCount + '" placeholder="分数">'
                     + '<label class="control-label" for="score' + varCount + '" style="display: none;"></label>'
                     + '</div>'
-                    + '<button class="removeVar">删除</button>'
+                    + '<p><span class="removeVar">删除</span></p>'
                     + '</div>';
                 //新表单项加到“新增”前面
                 $(this).parent().before($node);
@@ -106,8 +127,22 @@
 
             //删除
             $('form').on('click', '.removeVar', function () {
-                $(this).parent().remove();
+                if(choiceCount <= 2) {
+                    alert("至少需要有两条选项!");
+                } else {
+                    $(this).parent().parent().remove();
+                    choiceCount--;
+                }
             });
+            //删除
+     //       $('form').on('click', '.removeUpdateVar', function () {
+     //           if(getUpdateCount() <= 2) {
+     //               alert("至少需要有两条选项!");
+     //           } else {
+     //               $(this).parent().parent().remove();
+     //               choiceCount--;
+     //           }
+     //       });
         });
     </script>
 </head>
@@ -245,8 +280,7 @@
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                             data-target="#updateModal" id="btn_update"
                                             onclick="updateQuestion(<s:property value="#request.survey.surveyId"/>,
-                                                <s:property
-                                                        value="#question.questionId"/>)">修改
+                                                <s:property value="#question.questionId"/>)">修改
                                     </button>
                                     <button type="button" class="btn btn-danger btn-xs"
                                             onclick="deleteQuestion(<s:property value="#question.questionId"/>)">删除
@@ -330,6 +364,7 @@
                                 <input type="text" class="form-control" name="score1" id="score1" placeholder="分数">
                                 <label class="control-label" for="score1" style="display: none;"></label>
                             </div>
+                            <p><span class="removeVar">删除</span></p>
                         </div>
                         <div class="form-group">
                             <label for="choiceOption2" class="col-sm-3 control-label">选项: </label>
@@ -342,8 +377,9 @@
                                 <input type="text" class="form-control" name="score2" id="score2" placeholder="分数">
                                 <label class="control-label" for="score2" style="display: none;"></label>
                             </div>
+                            <p><span class="removeVar">删除</span></p>
                         </div>
-                        <p><span id="addVar">新增一项</span></p>
+                        <p><span class="addVar">新增一项</span></p>
                     </div>
 
 
@@ -418,7 +454,7 @@
 
 <!-- 修改模态框（Modal） -->
 <!-------------------------------------------------------------->
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
+<form id="updateForm" class="form-horizontal">   <!--保证样式水平不混乱-->
     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -435,11 +471,17 @@
 
                     <!---------------------表单-------------------->
 
-                    <button type="button" class="btn btn-default" onclick="choiceDisplay()" id="update1">选择题</button>
-                    <button type="button" class="btn btn-default" onclick="choiceHide()" id="update2">问答题</button>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-pinterest" onclick="updateChoiceDisplay()" id="update1"><i
+                                class="fa fa-plus"></i> 选择题
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="updateChoiceHide()" id="update2"><i
+                                class="fa fa-plus"></i> 问答题
+                        </button>
+                    </div>
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">问题题目</label>
+                        <label for="updateQuestionContent" class="col-sm-3 control-label">问题题目</label>
                         <div class="col-sm-7">
                             <textarea class="form-control" rows="3" id="updateQuestionContent"
                                       placeholder="请输入问题题目"></textarea>
@@ -448,40 +490,9 @@
                     </div>
 
 
-                    <div class="form-group" id="updateOptionA">
-                        <label for="updateOptionA" class="col-sm-3 control-label">A. </label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateOption1" placeholder="请输入选项内容">
-                            <label class="control-label" for="updateOption1" style="display: none;"></label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="updateOptionB">
-                        <label for="updateOptionB" class="col-sm-3 control-label">B. </label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateOption2" placeholder="请输入选项内容">
-                            <label class="control-label" for="updateOption2" style="display: none;"></label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="updateOptionC">
-                        <label for="inputOptionC" class="col-sm-3 control-label">C. </label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateOption3" placeholder="请输入选项内容">
-                            <label class="control-label" for="choiceOption3" style="display: none;"></label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="updateOptionD">
-                        <label for="inputOptionD" class="col-sm-3 control-label">D. </label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateOption4" placeholder="请输入选项内容">
-                            <label class="control-label" for="choiceOption4" style="display: none;"></label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="updateOptionE">
-                        <label for="inputOptionE" class="col-sm-3 control-label">E. </label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateOption5" placeholder="请输入选项内容">
-                            <label class="control-label" for="choiceOption5" style="display: none;"></label>
-                        </div>
+                    <div id="updateChoicesBlock">
+                        <div id="updateChoicesDiv"></div>
+                        <p><span class="addVar">新增一项</span></p>
                     </div>
 
                     <!---------------------表单-------------------->

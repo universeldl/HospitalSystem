@@ -82,6 +82,13 @@ function unique(arr) {
 }
 
 
+function getAddCount() {
+    var addCount=0;
+    $("#choicesBlock").find("div.col-sm-5").children(":text").each(function () {
+        addCount++;
+    });
+    return addCount;
+}
 
 function validAddQuestion() {
 
