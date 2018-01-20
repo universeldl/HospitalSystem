@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
-	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+        "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
-  <package name="deliverySearch" extends="struts-default" namespace="/doctor">
-  
-  <interceptors>
-            <interceptor name="deliveryInterceptor" class="com.hospital.action.interceptor.DeliveryInterceptor" />
+    <package name="deliverySearch" extends="struts-default" namespace="/doctor">
+
+        <interceptors>
+            <interceptor name="deliveryInterceptor" class="com.hospital.action.interceptor.DeliveryInterceptor"/>
 
             <interceptor-stack name="deliveryStack">
                 <interceptor-ref name="defaultStack"/>
@@ -16,14 +16,13 @@
             </interceptor-stack>
         </interceptors>
 
-        <default-interceptor-ref name="deliveryStack" />
-        
-  	<action name="deliverySearchAction_*" method="{1}" class="deliverySearchAction">
-  		<result name="success">/WEB-INF/doctor/deliverySearch.jsp</result>
-  		<result name="nopass" type="redirect">/error/nopass.jsp</result>
-  	</action>
-  </package>
-  
+        <default-interceptor-ref name="deliveryStack"/>
 
-  
+        <action name="deliverySearchAction_*" method="{1}" class="deliverySearchAction">
+            <result name="success">/WEB-INF/doctor/deliverySearch.jsp</result>
+            <result name="nopass" type="redirect">/error/nopass.jsp</result>
+        </action>
+    </package>
+
+
 </struts>	

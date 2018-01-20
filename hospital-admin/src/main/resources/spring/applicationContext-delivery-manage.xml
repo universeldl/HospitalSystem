@@ -1,47 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:util="http://www.springframework.org/schema/util"
-    xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 
- <bean id="deliveryDao" class="com.hospital.dao.impl.DeliveryDaoImpl">
- 		<property name="sessionFactory">
- 			<ref bean="sessionFactory"/>
- 		</property>
- 	</bean>
- 	
- 	<bean id="deliveryService" class="com.hospital.service.impl.DeliveryServiceImpl">
- 		<property name="deliveryDao">
- 			<ref bean="deliveryDao"/>
- 		</property>
- 		<property name="surveyDao">
- 			<ref bean="surveyDao"/>
- 		</property>
- 		<property name="patientDao">
- 			<ref bean="patientDao"/>
- 		</property>
- 		<property name="forfeitDao">
- 			<ref bean="forfeitDao"/>
- 		</property>
- 		<property name="retrieveDao">
- 			<ref bean="retrieveDao"/>
- 		</property>
- 	</bean>
- 	
- 
- 
- 	<bean id="deliveryManageAction" class="com.hospital.action.DeliveryManageAction" scope="prototype">
- 		<property name="deliveryService">
- 			<ref bean="deliveryService"/>
- 		</property>
- 	</bean>
- 	
- </beans>
+    <bean id="deliveryDao" class="com.hospital.dao.impl.DeliveryDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="deliveryService" class="com.hospital.service.impl.DeliveryServiceImpl">
+        <property name="deliveryDao">
+            <ref bean="deliveryDao"/>
+        </property>
+        <property name="surveyDao">
+            <ref bean="surveyDao"/>
+        </property>
+        <property name="patientDao">
+            <ref bean="patientDao"/>
+        </property>
+        <property name="forfeitDao">
+            <ref bean="forfeitDao"/>
+        </property>
+        <property name="retrieveDao">
+            <ref bean="retrieveDao"/>
+        </property>
+    </bean>
+
+
+    <bean id="deliveryManageAction" class="com.hospital.action.DeliveryManageAction" scope="prototype">
+        <property name="deliveryService">
+            <ref bean="deliveryService"/>
+        </property>
+    </bean>
+
+</beans>

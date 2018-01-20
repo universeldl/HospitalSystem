@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.hospital.domain.Survey" table="survey" dynamic-insert="true" dynamic-update="true">
-		<id name="surveyId" type="java.lang.Integer" length="7">
-			<column name="surveyId" />
-			<generator class="increment" />
-		</id>
-		<property name="surveyName" type="java.lang.String" >
-			<column name="surveyName" />
-		</property>
-		
-		<property name="author" type="java.lang.String" >
-			<column name="author" />
-		</property>
-		
-		<property name="num" type="java.lang.Integer" >
-			<column name="num" />
-		</property>
+    <class name="com.hospital.domain.Survey" table="survey" dynamic-insert="true" dynamic-update="true">
+        <id name="surveyId" type="java.lang.Integer" length="7">
+            <column name="surveyId"/>
+            <generator class="increment"/>
+        </id>
+        <property name="surveyName" type="java.lang.String">
+            <column name="surveyName"/>
+        </property>
 
-		<property name="currentNum" type="java.lang.Integer" >
-			<column name="currentNum" />
-		</property>
-		
-		<property name="department" type="java.lang.String">
-			<column name="department" />
-		</property>
+        <property name="author" type="java.lang.String">
+            <column name="author"/>
+        </property>
 
-		<property name="description" type="java.lang.String" >
-			<column name="description" />
-		</property>
+        <property name="num" type="java.lang.Integer">
+            <column name="num"/>
+        </property>
 
-		<property name="putdate" type="java.util.Date">
-			<column name="putdate" />
-		</property>
-		
+        <property name="currentNum" type="java.lang.Integer">
+            <column name="currentNum"/>
+        </property>
 
-		<set name="questions"  lazy="false" inverse="true">
-			<key>
-				<column name="surveyId" ></column>
-			</key>
-			<one-to-many class="com.hospital.domain.Question"/>
-		</set>
+        <property name="department" type="java.lang.String">
+            <column name="department"/>
+        </property>
 
-		<set name="retrieveInfos"  lazy="false" inverse="true">
-			<key>
-				<column name="surveyId" ></column>
-			</key>
-			<one-to-many class="com.hospital.domain.RetrieveInfo"/>
-		</set>
+        <property name="description" type="java.lang.String">
+            <column name="description"/>
+        </property>
 
-		<many-to-one name="surveyType" class="com.hospital.domain.SurveyType"  lazy="false" >
-			<column name="typeId"></column>
-		</many-to-one>
-		
-		
-		<many-to-one name="doctor" class="com.hospital.domain.Doctor" lazy="false" >
-			<column name="aid"></column>
-		</many-to-one>
-		
-	</class>
+        <property name="putdate" type="java.util.Date">
+            <column name="putdate"/>
+        </property>
+
+
+        <set name="questions" lazy="false" inverse="true">
+            <key>
+                <column name="surveyId"></column>
+            </key>
+            <one-to-many class="com.hospital.domain.Question"/>
+        </set>
+
+        <set name="retrieveInfos" lazy="false" inverse="true">
+            <key>
+                <column name="surveyId"></column>
+            </key>
+            <one-to-many class="com.hospital.domain.RetrieveInfo"/>
+        </set>
+
+        <many-to-one name="surveyType" class="com.hospital.domain.SurveyType" lazy="false">
+            <column name="typeId"></column>
+        </many-to-one>
+
+
+        <many-to-one name="doctor" class="com.hospital.domain.Doctor" lazy="false">
+            <column name="aid"></column>
+        </many-to-one>
+
+    </class>
 </hibernate-mapping>

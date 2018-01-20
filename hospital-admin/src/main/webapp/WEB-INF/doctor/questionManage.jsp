@@ -62,7 +62,7 @@
         }
 
         /** 删除按钮 **/
-        .removeVar, .removeUpdateVar  {
+        .removeVar, .removeUpdateVar {
             margin: auto;
             padding: 5px;
             display: inline-block;
@@ -127,7 +127,7 @@
 
             //删除
             $('form').on('click', '.removeVar', function () {
-                if(getAddCount() <= 2) {
+                if (getAddCount() <= 2) {
                     alert("至少需要有两条选项!");
                 } else {
                     $(this).parent().parent().remove();
@@ -136,7 +136,7 @@
             });
             //删除
             $('form').on('click', '.removeUpdateVar', function () {
-                if(getUpdateCount() <= 2) {
+                if (getUpdateCount() <= 2) {
                     alert("至少需要有两条选项!");
                 } else {
                     $(this).parent().parent().remove();
@@ -239,7 +239,7 @@
                     <button type="button" class="btn btn-primary" data-toggle="modal"
                             data-target="#addQuestionModal" id="btn_add"
                             onclick="addQuestion(<s:property value="#request.survey.surveyId"/>)"><i
-                            class="fa fa-plus"></i> 添加新问题<s:property value="#request.survey.surveyId"/>
+                            class="fa fa-plus"></i> 添加新问题
                     </button>
                 </div>
             </div>

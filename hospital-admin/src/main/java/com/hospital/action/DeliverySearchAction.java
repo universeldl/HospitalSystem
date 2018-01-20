@@ -9,75 +9,73 @@ import com.hospital.service.RetrieveService;
 import com.hospital.service.DeliveryService;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class DeliverySearchAction extends ActionSupport{
-	
-	private RetrieveService retrieveService;
+public class DeliverySearchAction extends ActionSupport {
 
-	public void setRetrieveService(RetrieveService retrieveService) {
-		this.retrieveService = retrieveService;
-	}
+    private RetrieveService retrieveService;
 
-
-	private int pageCode;
-	private String openID;
-	private int deliveryId;
-	
-	
-	
-	
-	public void setDeliveryId(int deliveryId) {
-		this.deliveryId = deliveryId;
-	}
+    public void setRetrieveService(RetrieveService retrieveService) {
+        this.retrieveService = retrieveService;
+    }
 
 
-	public void setOpenID(String openID) {
-		this.openID = openID;
-	}
+    private int pageCode;
+    private String openID;
+    private int deliveryId;
 
 
-	public void setPageCode(int pageCode) {
-		this.pageCode = pageCode;
-	}
+    public void setDeliveryId(int deliveryId) {
+        this.deliveryId = deliveryId;
+    }
 
 
-	public String findRetrieveInfoByPage(){
-		
-		//获取页面传递过来的当前页码数
-		if(pageCode==0){
-			pageCode = 1;
-		}
-		//给pageSize,每页的记录数赋值
-		int pageSize = 5;
-		
-		PageBean<RetrieveInfo> pb = retrieveService.findRetrieveInfoByPage(pageCode,pageSize);
-		if(pb!=null){
-			pb.setUrl("findRetrieveInfoByPage.action?");
-		}
-		//存入request域中
-		ServletActionContext.getRequest().setAttribute("pb", pb);
-		return  "success";
-	}
-	
-	
-	public String queryDeliverySearchInfo(){
-		//获取页面传递过来的当前页码数
-		if(pageCode==0){
-			pageCode = 1;
-		}
-		//给pageSize,每页的记录数赋值
-		int pageSize = 5;
-		PageBean<RetrieveInfo> pb = null;
-		if("".equals(openID.trim()) && deliveryId==0){
-			pb = retrieveService.findRetrieveInfoByPage(pageCode,pageSize);
-		}else{
-			pb = retrieveService.queryRetrieveInfo(openID,deliveryId,pageCode,pageSize);
-		}
-		if(pb!=null){
-			pb.setUrl("queryDeliverySearchInfo.action?openID="+openID+"&deliveryId="+deliveryId+"&");
-		}
+    public void setOpenID(String openID) {
+        this.openID = openID;
+    }
 
-		ServletActionContext.getRequest().setAttribute("pb", pb);
-		return "success";
-	}
+
+    public void setPageCode(int pageCode) {
+        this.pageCode = pageCode;
+    }
+
+
+    public String findRetrieveInfoByPage() {
+
+        //获取页面传递过来的当前页码数
+        if (pageCode == 0) {
+            pageCode = 1;
+        }
+        //给pageSize,每页的记录数赋值
+        int pageSize = 5;
+
+        PageBean<RetrieveInfo> pb = retrieveService.findRetrieveInfoByPage(pageCode, pageSize);
+        if (pb != null) {
+            pb.setUrl("findRetrieveInfoByPage.action?");
+        }
+        //存入request域中
+        ServletActionContext.getRequest().setAttribute("pb", pb);
+        return "success";
+    }
+
+
+    public String queryDeliverySearchInfo() {
+        //获取页面传递过来的当前页码数
+        if (pageCode == 0) {
+            pageCode = 1;
+        }
+        //给pageSize,每页的记录数赋值
+        int pageSize = 5;
+        PageBean<RetrieveInfo> pb = null;
+        if ("".equals(openID.trim()) && deliveryId == 0) {
+            pb = retrieveService.findRetrieveInfoByPage(pageCode, pageSize);
+        } else {
+            pb = retrieveService.queryRetrieveInfo(openID, deliveryId, pageCode, pageSize);
+        }
+        if (pb != null) {
+            pb.setUrl("queryDeliverySearchInfo.action?openID=" + openID + "&deliveryId=" + deliveryId + "&");
+        }
+
+        ServletActionContext.getRequest().setAttribute("pb", pb);
+        return "success";
+    }
 
 }

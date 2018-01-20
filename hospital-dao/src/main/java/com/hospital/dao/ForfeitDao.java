@@ -8,17 +8,16 @@ import com.hospital.domain.Patient;
 
 public interface ForfeitDao {
 
-	List<ForfeitInfo> getForfeitByPatient(Patient patient);
+    List<ForfeitInfo> getForfeitByPatient(Patient patient);
 
-	boolean addForfeitInfo(ForfeitInfo forfeitInfo);
+    boolean addForfeitInfo(ForfeitInfo forfeitInfo);
 
-	PageBean<ForfeitInfo> findForfeitInfoByPage(int pageCode,
+    PageBean<ForfeitInfo> findForfeitInfoByPage(int pageCode,
                                                 int pageSize);
 
 
+    ForfeitInfo getForfeitInfoById(ForfeitInfo forfeitInfo);
 
-	ForfeitInfo getForfeitInfoById(ForfeitInfo forfeitInfo);
-
-	ForfeitInfo updateForfeitInfo(ForfeitInfo forfeitInfoById);
+    ForfeitInfo updateForfeitInfo(ForfeitInfo forfeitInfoById);
 
 }

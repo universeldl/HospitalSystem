@@ -55,7 +55,9 @@
         <span class="logo-lg"><b>呼吸天使问卷管理系统</b></span></a>
         <nav role="navigation" class="navbar navbar-static-top"><a href="#" data-toggle="offcanvas" role="button"
                                                                    class="sidebar-toggle"><span class="sr-only">Toggle navigation</span></a>
-            <div style="float: left; color: rgb(255, 255, 255); padding: 15px 10px;">欢迎您， <s:property value="#session.doctor.name"/>医生 </div>
+            <div style="float: left; color: rgb(255, 255, 255); padding: 15px 10px;">欢迎您， <s:property
+                    value="#session.doctor.name"/>医生
+            </div>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li><a href="#updateinfo" data-toggle="modal"><i class="fa fa-user"></i> 个人资料</a></li>
@@ -73,35 +75,49 @@
                 <li class="active"><a href="javascript:;"><i class="fa fa-file-text"></i><span>问卷管理</span><i
                         class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu menu-open" style="display: block;">
-                        <li><a href="${pageContext.request.contextPath}/doctor/surveyManageAction_findSurveyByPage.action"><i class="fa fa-list-ol"></i> 问卷列表</a></li>
-                        <li><a href="${pageContext.request.contextPath}/doctor/surveyTypeManageAction_findSurveyTypeByPage.action"><i class="fa fa-files-o"></i> 问卷分类</a></li>
-                        <li><a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i class="fa fa-send-o"></i> 问卷分发</a></li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/doctor/surveyManageAction_findSurveyByPage.action"><i
+                                    class="fa fa-list-ol"></i> 问卷列表</a></li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/doctor/surveyTypeManageAction_findSurveyTypeByPage.action"><i
+                                    class="fa fa-files-o"></i> 问卷分类</a></li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
+                                    class="fa fa-send-o"></i> 问卷分发</a></li>
                     </ul>
                 </li>
                 <li class="active"><a href="javascript:;"><i class="fa fa-file-text-o"></i><span>答卷管理</span><i
                         class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu menu-open" style="display: block;">
-                        <li><a href="${pageContext.request.contextPath}/doctor/retrieveManageAction_findRetrieveInfoByPage.action"><i class="fa fa-list"></i> 答卷列表</a></li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/doctor/retrieveManageAction_findRetrieveInfoByPage.action"><i
+                                    class="fa fa-list"></i> 答卷列表</a></li>
                     </ul>
                 </li>
                 <li class="active"><a href="javascript:;"><i class="fa fa-wheelchair"></i><span>病人管理</span><i
                         class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu menu-open" style="display: block;">
-                        <li><a href="${pageContext.request.contextPath}/doctor/patientManageAction_findPatientByPage.action"><i class="fa fa-medkit"></i> 病人列表</a></li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/doctor/patientManageAction_findPatientByPage.action"><i
+                                    class="fa fa-medkit"></i> 病人列表</a></li>
                     </ul>
                 </li>
                 <s:if test="#session.doctor.authorization.superSet==1"><!-- 对超级医生和普通医生进行权限区分 -->
                 <li class="active"><a href="javascript:;"><i class="fa fa-user-md"></i><span>医生管理</span><i
                         class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu menu-open" style="display: block;">
-                        <li><a href="${pageContext.request.contextPath}/doctor/doctorManageAction_findDoctorByPage.action"><i class="fa fa-stethoscope"></i> 医生列表</a></li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/doctor/doctorManageAction_findDoctorByPage.action"><i
+                                    class="fa fa-stethoscope"></i> 医生列表</a></li>
                     </ul>
                 </li>
                 </s:if>
                 <li class="active"><a href="javascript:;"><i class="fa fa-cog"></i><span>系统设置</span><i
                         class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu menu-open" style="display: block;">
-                        <li><a href="${pageContext.request.contextPath}/doctor/patientTypeManageAction_getAllPatientType.action"><i class="fa fa-wrench"></i> 配置管理</a></li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/doctor/patientTypeManageAction_getAllPatientType.action"><i
+                                    class="fa fa-wrench"></i> 配置管理</a></li>
                     </ul>
                 </li>
             </ul>

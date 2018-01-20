@@ -7,26 +7,26 @@ import net.sf.json.JSONObject;
 
 public interface QuestionService {
 
-	Question getQuestion(Question question);
+    Question getQuestion(Question question);
 
-	Question updateQuestionInfo(Question question);
+    Question updateQuestionInfo(Question question);
 
-	boolean addQuestion(Question question);
+    boolean addQuestion(Question question);
 
-	PageBean<Question> findQuestionByPage(int pageCode, int pageSize);
+    PageBean<Question> findQuestionByPage(int pageCode, int pageSize);
 
-	Question getQuestionById(Question question);
+    Question getQuestionById(Question question);
 
-	int deleteQuestion(Question question);
+    int deleteQuestion(Question question);
 
-	PageBean<Question> queryQuestion(Question question, int pageCode, int pageSize);
+    PageBean<Question> queryQuestion(Question question, int pageCode, int pageSize);
 
-	Question getQuestionByopenID(Question question);
+    Question getQuestionByopenID(Question question);
 
-	Question getQuestionByOpenID(Question question);
+    Question getQuestionByOpenID(Question question);
 
-	JSONObject batchAddQuestion(String fileName, Doctor doctor);
+    JSONObject batchAddQuestion(String fileName, Doctor doctor);
 
-	String exportQuestion();
+    String exportQuestion();
 
 }

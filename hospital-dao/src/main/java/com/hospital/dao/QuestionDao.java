@@ -7,25 +7,25 @@ import java.util.List;
 
 public interface QuestionDao {
 
-	
-	Question getQuestion(Question question);
 
-	Question updateQuestionInfo(Question question);
+    Question getQuestion(Question question);
 
-	boolean addQuestion(Question question);
+    Question updateQuestionInfo(Question question);
 
-	PageBean<Question> findQuestionByPage(int pageCode, int pageSize);
+    boolean addQuestion(Question question);
 
-	Question getQuestionById(Question question);
+    PageBean<Question> findQuestionByPage(int pageCode, int pageSize);
 
-	boolean deleteQuestion(Question question);
+    Question getQuestionById(Question question);
 
-	PageBean<Question> queryQuestion(Question question, int pageCode, int pageSize);
+    boolean deleteQuestion(Question question);
 
-	Question getQuestionByopenID(Question question);
+    PageBean<Question> queryQuestion(Question question, int pageCode, int pageSize);
 
-	int batchAddQuestion(List<Question> questions, List<Question> failQuestions);
+    Question getQuestionByopenID(Question question);
 
-	List<Question> findAllQuestions();
+    int batchAddQuestion(List<Question> questions, List<Question> failQuestions);
+
+    List<Question> findAllQuestions();
 
 }

@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:util="http://www.springframework.org/schema/util"
-    xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
- 
- <bean id="surveyDao" class="com.hospital.dao.impl.SurveyDaoImpl">
- 		<property name="sessionFactory">
- 			<ref bean="sessionFactory"/>
- 		</property>
- 	</bean>
- 	
- 	<bean id="surveyService" class="com.hospital.service.impl.SurveyServiceImpl">
- 		<property name="surveyDao">
- 			<ref bean="surveyDao"/>
- 		</property>
- 		<property name="deliveryDao">
- 			<ref bean="deliveryDao"/>
- 		</property>
- 		<property name="forfeitDao">
- 			<ref bean="forfeitDao"/>
- 		</property>
- 		<property name="surveyTypeDao">
- 			<ref bean="surveyTypeDao"/>
- 		</property>
- 	</bean>
- 
- 		
- 	<bean id="surveyManageAction" class="com.hospital.action.SurveyManageAction" scope="prototype">
- 		<property name="surveyService">
- 			<ref bean="surveyService"/>
- 		</property>
- 		<property name="surveyTypeService">
- 			<ref bean="surveyTypeService"/>
- 		</property>
- 		<property name="questionService">
- 			<ref bean="questionService"/>
- 		</property>
- 		<property name="choiceService">
- 			<ref bean="choiceService"/>
- 		</property>
- 	</bean>
- </beans>
+
+    <bean id="surveyDao" class="com.hospital.dao.impl.SurveyDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="surveyService" class="com.hospital.service.impl.SurveyServiceImpl">
+        <property name="surveyDao">
+            <ref bean="surveyDao"/>
+        </property>
+        <property name="deliveryDao">
+            <ref bean="deliveryDao"/>
+        </property>
+        <property name="forfeitDao">
+            <ref bean="forfeitDao"/>
+        </property>
+        <property name="surveyTypeDao">
+            <ref bean="surveyTypeDao"/>
+        </property>
+    </bean>
+
+
+    <bean id="surveyManageAction" class="com.hospital.action.SurveyManageAction" scope="prototype">
+        <property name="surveyService">
+            <ref bean="surveyService"/>
+        </property>
+        <property name="surveyTypeService">
+            <ref bean="surveyTypeService"/>
+        </property>
+        <property name="questionService">
+            <ref bean="questionService"/>
+        </property>
+        <property name="choiceService">
+            <ref bean="choiceService"/>
+        </property>
+    </bean>
+</beans>

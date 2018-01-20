@@ -8,6 +8,7 @@ import com.hospital.service.DoctorService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
+
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -27,37 +28,47 @@ public class patientRegisterAction extends ActionSupport {
     int typeID;
     PatientService patientService;
     DoctorService doctorService;
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public void setTel(String tel) {
         this.tel = tel;
     }
+
     public void setSex(String sex) {
         this.sex = sex;
     }
+
     public void setHospital(String hospital) {
         this.hospital = hospital;
     }
+
     public void setDoctor(String doctor) {
         this.doctor = doctor;
     }
+
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
+
     public void setCaptcha(String captcha) {
         this.captcha = captcha;
     }
+
     public void setPatientType(String typeID) {
         try {
             this.typeID = Integer.parseInt(typeID);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
     }
+
     public void setPatientService(PatientService patientService) {
         this.patientService = patientService;
     }
+
     public void setDoctorService(DoctorService doctorService) {
         this.doctorService = doctorService;
     }
@@ -144,7 +155,7 @@ public class patientRegisterAction extends ActionSupport {
         HttpServletResponse response = ServletActionContext.getResponse();
         try {
             response.getWriter().print(status);
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
         return null;

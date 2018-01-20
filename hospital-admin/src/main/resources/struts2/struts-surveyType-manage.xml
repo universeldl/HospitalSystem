@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
-	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+        "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
-  <package name="surveyTypeManage" extends="struts-default" namespace="/doctor">
- 	 <interceptors>
-            <interceptor name="surveyTypeInterceptor" class="com.hospital.action.interceptor.SurveyTypeInterceptor" />
+    <package name="surveyTypeManage" extends="struts-default" namespace="/doctor">
+        <interceptors>
+            <interceptor name="surveyTypeInterceptor" class="com.hospital.action.interceptor.SurveyTypeInterceptor"/>
 
             <interceptor-stack name="surveyTypeStack">
                 <interceptor-ref name="defaultStack"/>
@@ -15,14 +15,13 @@
             </interceptor-stack>
         </interceptors>
 
-        <default-interceptor-ref name="surveyTypeStack" />
+        <default-interceptor-ref name="surveyTypeStack"/>
 
-  	<action name="surveyTypeManageAction_*" method="{1}" class="surveyTypeManageAction">
-  		<result name="success">/WEB-INF/doctor/surveyTypeManage.jsp</result>
-  		<result name="nopass" type="redirect">/error/nopass.jsp</result>
-  	</action>
-  </package>
-
+        <action name="surveyTypeManageAction_*" method="{1}" class="surveyTypeManageAction">
+            <result name="success">/WEB-INF/doctor/surveyTypeManage.jsp</result>
+            <result name="nopass" type="redirect">/error/nopass.jsp</result>
+        </action>
+    </package>
 
 
 </struts>

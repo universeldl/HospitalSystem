@@ -23,128 +23,126 @@ import com.hospital.dao.DeliveryDao;
 import com.hospital.dao.ForfeitDao;
 import com.hospital.service.SurveyService;
 
-public class SurveyServiceImpl implements SurveyService{
+public class SurveyServiceImpl implements SurveyService {
 
-	private SurveyDao surveyDao;
+    private SurveyDao surveyDao;
 
-	private SurveyTypeDao surveyTypeDao;
-	private DeliveryDao deliveryDao;
-	private ForfeitDao forfeitDao;
+    private SurveyTypeDao surveyTypeDao;
+    private DeliveryDao deliveryDao;
+    private ForfeitDao forfeitDao;
 
-	public void setDeliveryDao(DeliveryDao deliveryDao) {
-		this.deliveryDao = deliveryDao;
-	}
-
-
-	/**
-	 * @param surveyTypeDao the surveyTypeDao to set
-	 */
-	public void setSurveyTypeDao(SurveyTypeDao surveyTypeDao) {
-		this.surveyTypeDao = surveyTypeDao;
-	}
-
-	public void setForfeitDao(ForfeitDao forfeitDao) {
-		this.forfeitDao = forfeitDao;
-	}
-
-	public void setSurveyDao(SurveyDao surveyDao) {
-		this.surveyDao = surveyDao;
-	}
-
-	@Override
-	public PageBean<Survey> findSurveyByPage(int pageCode, int pageSize) {
-		// TODO Auto-generated method stub
-		return surveyDao.findSurveyByPage(pageCode,pageSize);
-	}
-
-	@Override
-	public boolean addSurvey(Survey survey) {
-		// TODO Auto-generated method stub
-		return surveyDao.addSurvey(survey);
-	}
-
-	@Override
-	public boolean addQuestion(Question question) {
-		// TODO Auto-generated method stub
-		return surveyDao.addQuestion(question);
-	}
-
-	@Override
-	public Survey getSurveyById(Survey survey) {
-		// TODO Auto-generated method stub
-		return surveyDao.getSurveyById(survey);
-	}
-
-	@Override
-	public Survey updateSurveyInfo(Survey updateSurvey) {
-		// TODO Auto-generated method stub
-		return surveyDao.updateSurveyInfo(updateSurvey);
-	}
-
-	@Override
-	public PageBean<Survey> querySurvey(Survey survey, int pageCode, int pageSize) {
-		// TODO Auto-generated method stub
-		return surveyDao.querySurvey(survey,pageCode,pageSize);
-	}
-
-	@Override
-	public int deleteSurvey(Survey survey) {
-		// TODO Auto-generated method stub
-		//删除问卷需要注意的事项：如果该答卷有尚未答卷的记录或者尚未设置的延期记录,则不能删除
-		//得到该答卷的分发记录
-		List<DeliveryInfo> deliveryInfos = deliveryDao.getDeliveryInfoBySurvey(survey);
-		for (DeliveryInfo deliveryInfo : deliveryInfos) {
-			if(!(deliveryInfo.getState()==2 || deliveryInfo.getState()==5)){
-				return -1;//该答卷还在分发中,无法删除
-			}
-			//得到该分发记录的提醒信息
-			ForfeitInfo forfeitInfo = new ForfeitInfo();
-			forfeitInfo.setDeliveryId(deliveryInfo.getDeliveryId());
-			ForfeitInfo forfeitInfoById = forfeitDao.getForfeitInfoById(forfeitInfo);
-			if(forfeitInfoById!=null){
-				if(forfeitInfoById.getIsPay()==0){
-					return -2;//尚未设置的延期
-				}
-			}
-		}
-		boolean deleteSurvey = surveyDao.deleteSurvey(survey);
-		if(deleteSurvey){
-			return 1;
-		}
-		return 0;
-	}
+    public void setDeliveryDao(DeliveryDao deliveryDao) {
+        this.deliveryDao = deliveryDao;
+    }
 
 
+    /**
+     * @param surveyTypeDao the surveyTypeDao to set
+     */
+    public void setSurveyTypeDao(SurveyTypeDao surveyTypeDao) {
+        this.surveyTypeDao = surveyTypeDao;
+    }
+
+    public void setForfeitDao(ForfeitDao forfeitDao) {
+        this.forfeitDao = forfeitDao;
+    }
+
+    public void setSurveyDao(SurveyDao surveyDao) {
+        this.surveyDao = surveyDao;
+    }
+
+    @Override
+    public PageBean<Survey> findSurveyByPage(int pageCode, int pageSize) {
+        // TODO Auto-generated method stub
+        return surveyDao.findSurveyByPage(pageCode, pageSize);
+    }
+
+    @Override
+    public boolean addSurvey(Survey survey) {
+        // TODO Auto-generated method stub
+        return surveyDao.addSurvey(survey);
+    }
+
+    @Override
+    public boolean addQuestion(Question question) {
+        // TODO Auto-generated method stub
+        return surveyDao.addQuestion(question);
+    }
+
+    @Override
+    public Survey getSurveyById(Survey survey) {
+        // TODO Auto-generated method stub
+        return surveyDao.getSurveyById(survey);
+    }
+
+    @Override
+    public Survey updateSurveyInfo(Survey updateSurvey) {
+        // TODO Auto-generated method stub
+        return surveyDao.updateSurveyInfo(updateSurvey);
+    }
+
+    @Override
+    public PageBean<Survey> querySurvey(Survey survey, int pageCode, int pageSize) {
+        // TODO Auto-generated method stub
+        return surveyDao.querySurvey(survey, pageCode, pageSize);
+    }
+
+    @Override
+    public int deleteSurvey(Survey survey) {
+        // TODO Auto-generated method stub
+        //删除问卷需要注意的事项：如果该答卷有尚未答卷的记录或者尚未设置的延期记录,则不能删除
+        //得到该答卷的分发记录
+        List<DeliveryInfo> deliveryInfos = deliveryDao.getDeliveryInfoBySurvey(survey);
+        for (DeliveryInfo deliveryInfo : deliveryInfos) {
+            if (!(deliveryInfo.getState() == 2 || deliveryInfo.getState() == 5)) {
+                return -1;//该答卷还在分发中,无法删除
+            }
+            //得到该分发记录的提醒信息
+            ForfeitInfo forfeitInfo = new ForfeitInfo();
+            forfeitInfo.setDeliveryId(deliveryInfo.getDeliveryId());
+            ForfeitInfo forfeitInfoById = forfeitDao.getForfeitInfoById(forfeitInfo);
+            if (forfeitInfoById != null) {
+                if (forfeitInfoById.getIsPay() == 0) {
+                    return -2;//尚未设置的延期
+                }
+            }
+        }
+        boolean deleteSurvey = surveyDao.deleteSurvey(survey);
+        if (deleteSurvey) {
+            return 1;
+        }
+        return 0;
+    }
 
 
-	@Override
-	public JSONObject batchAddSurvey(String fileName, Doctor doctor) {
-		List<Survey> surveys = new ArrayList<Survey>();
-		List<Survey> failSurveys = new ArrayList<Survey>();
-		String str[] = new String[]{"问卷编号","问卷类型","问卷名称","作者名称","科室","价格","数量","描述"};
-		// TODO Auto-generated method stub
-		String realPath = ServletActionContext.getServletContext().getRealPath(fileName);
-		 //创建workbook
+    @Override
+    public JSONObject batchAddSurvey(String fileName, Doctor doctor) {
+        List<Survey> surveys = new ArrayList<Survey>();
+        List<Survey> failSurveys = new ArrayList<Survey>();
+        String str[] = new String[]{"问卷编号", "问卷类型", "问卷名称", "作者名称", "科室", "价格", "数量", "描述"};
+        // TODO Auto-generated method stub
+        String realPath = ServletActionContext.getServletContext().getRealPath(fileName);
+        //创建workbook
         try {
-			Workbook workbook = Workbook.getWorkbook(new File(realPath));
-			//获取第一个工作表sheet
+            Workbook workbook = Workbook.getWorkbook(new File(realPath));
+            //获取第一个工作表sheet
             Sheet sheet = workbook.getSheet(0);
 
-            if(sheet.getColumns()!=8 ){
-            	JSONObject jsonObject = new JSONObject();
-            	jsonObject.put("error","请下载模板,填入数据上传" );
-            	jsonObject.put("state","-1" );
-            	return jsonObject;
-            }else{
-            	  //获取数据
+            if (sheet.getColumns() != 8) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("error", "请下载模板,填入数据上传");
+                jsonObject.put("state", "-1");
+                return jsonObject;
+            } else {
+                //获取数据
 
                 for (int j = 0; j < sheet.getColumns(); j++) {
-                    Cell cell = sheet.getCell(j,0);
-                    if(!cell.getContents().equals(str[j])){
-                    	JSONObject jsonObject = new JSONObject();
-                    	jsonObject.put("error","请下载模板,填入数据上传" );
-                    	jsonObject.put("state","-1" );
-                    	return jsonObject;
+                    Cell cell = sheet.getCell(j, 0);
+                    if (!cell.getContents().equals(str[j])) {
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("error", "请下载模板,填入数据上传");
+                        jsonObject.put("state", "-1");
+                        return jsonObject;
                     }
                 }
 
@@ -157,16 +155,15 @@ public class SurveyServiceImpl implements SurveyService{
             for (int i = 1; i < sheet.getRows(); i++) {
 
 
-
-                String type = sheet.getCell(0,i).getContents().trim();
-                String surveyName = sheet.getCell(1,i).getContents().trim();
-                String author = sheet.getCell(2,i).getContents().trim();
-                String publish = sheet.getCell(3,i).getContents().trim();
-                String num = sheet.getCell(4,i).getContents().trim();
-                String description = sheet.getCell(5,i).getContents().trim();
-                if("".equals(type) && "".equals(surveyName) && "".equals(author) && "".equals(publish) && "".equals(num) && "".equals(description)){
-                	//说明这条数据是空的
-                	continue;
+                String type = sheet.getCell(0, i).getContents().trim();
+                String surveyName = sheet.getCell(1, i).getContents().trim();
+                String author = sheet.getCell(2, i).getContents().trim();
+                String publish = sheet.getCell(3, i).getContents().trim();
+                String num = sheet.getCell(4, i).getContents().trim();
+                String description = sheet.getCell(5, i).getContents().trim();
+                if ("".equals(type) && "".equals(surveyName) && "".equals(author) && "".equals(publish) && "".equals(num) && "".equals(description)) {
+                    //说明这条数据是空的
+                    continue;
                 }
 
                 Survey survey = new Survey();
@@ -179,37 +176,37 @@ public class SurveyServiceImpl implements SurveyService{
                 survey.setSurveyType(surveyType);
 
                 try {
-                    if(Integer.parseInt(num)<=0){
-                    	//说明不是正整数
-                    	survey.setNum(-1);
-                    	failSurveys.add(survey);
-                    	continue ;
+                    if (Integer.parseInt(num) <= 0) {
+                        //说明不是正整数
+                        survey.setNum(-1);
+                        failSurveys.add(survey);
+                        continue;
                     }
                     survey.setNum(Integer.parseInt(num));
                     survey.setCurrentNum(Integer.parseInt(num));
                 } catch (NumberFormatException e) {
                     //说明不是整数
-                	survey.setNum(-1);
-                	failSurveys.add(survey);
-                	continue ;
+                    survey.setNum(-1);
+                    failSurveys.add(survey);
+                    continue;
                 }
 
 
-            	if("".equals(surveyName) || "".equals(type)){
-	        		//要是前2列有一列没有数据，说明这条数据是非法的
-            		//保存这条非法数据
-            		failSurveys.add(survey);
-	        		continue;
-            	}
+                if ("".equals(surveyName) || "".equals(type)) {
+                    //要是前2列有一列没有数据，说明这条数据是非法的
+                    //保存这条非法数据
+                    failSurveys.add(survey);
+                    continue;
+                }
 
                 //需要根据类型名称找到对应的病人类型
                 SurveyType typeByName = surveyTypeDao.getSurveyTypeByName(surveyType);
-                if(typeByName==null){
-                	//找不到这个类型，就说明这条数据非法,跳出循环
-                	//保存这条非法数据
-                	surveyType.setTypeName(surveyType.getTypeName() + "(没有该类型)");
-            		failSurveys.add(survey);
-                	continue;
+                if (typeByName == null) {
+                    //找不到这个类型，就说明这条数据非法,跳出循环
+                    //保存这条非法数据
+                    surveyType.setTypeName(surveyType.getTypeName() + "(没有该类型)");
+                    failSurveys.add(survey);
+                    continue;
                 }
 
                 survey.setSurveyType(typeByName);
@@ -219,40 +216,41 @@ public class SurveyServiceImpl implements SurveyService{
                 surveys.add(survey);
             }
             workbook.close();
-            int success = surveyDao.batchAddSurvey(surveys,failSurveys);
+            int success = surveyDao.batchAddSurvey(surveys, failSurveys);
 
             JSONObject jsonObject = new JSONObject();
-            if(failSurveys.size() != 0){
-            	 //把不成功的导出成excel文件
+            if (failSurveys.size() != 0) {
+                //把不成功的导出成excel文件
                 String exportExcel = exportExcel(failSurveys);
                 jsonObject.put("state", "2");
-                jsonObject.put("message","成功" + success + "条,失败" + failSurveys.size() + "条");
+                jsonObject.put("message", "成功" + success + "条,失败" + failSurveys.size() + "条");
                 jsonObject.put("failPath", "doctor/FileDownloadAction.action?fileName=" + exportExcel);
                 return jsonObject;
-            }else{
-            	 jsonObject.put("state", "1");
-                 jsonObject.put("message","成功" + success + "条,失败" + failSurveys.size() + "条");
-                 return jsonObject;
+            } else {
+                jsonObject.put("state", "1");
+                jsonObject.put("message", "成功" + success + "条,失败" + failSurveys.size() + "条");
+                return jsonObject;
             }
 
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+        } catch (Throwable e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
-	/**
-	 * 导出excel文件
-	 * @param failSurveys
-	 * @return 返回文件路径
-	 */
-	public String exportExcel(List<Survey> failSurveys){
-		//用数组存储表头
-        String[] title = {"问卷类型","问卷名称","作者名称","科室","数量","描述"};
+    /**
+     * 导出excel文件
+     *
+     * @param failSurveys
+     * @return 返回文件路径
+     */
+    public String exportExcel(List<Survey> failSurveys) {
+        //用数组存储表头
+        String[] title = {"问卷类型", "问卷名称", "作者名称", "科室", "数量", "描述"};
         String path = ServletActionContext.getServletContext().getRealPath("/download");
-        String fileName = +System.currentTimeMillis()+"_failSurveys.xls";
+        String fileName = +System.currentTimeMillis() + "_failSurveys.xls";
         //创建Excel文件
         File file = new File(path, fileName);
         try {
@@ -264,33 +262,33 @@ public class SurveyServiceImpl implements SurveyService{
             Label label = null;
 
             //第一行设置列名
-            for(int i = 0; i<title.length; i++){
+            for (int i = 0; i < title.length; i++) {
                 label = new Label(i, 0, title[i]);
                 sheet.addCell(label);
             }
 
             //追加数据
-            for(int i = 1; i<=failSurveys.size(); i++){
-                label = new Label(0, i, failSurveys.get(i-1).getSurveyType().getTypeName());
+            for (int i = 1; i <= failSurveys.size(); i++) {
+                label = new Label(0, i, failSurveys.get(i - 1).getSurveyType().getTypeName());
                 sheet.addCell(label);
-                label = new Label(1, i, failSurveys.get(i-1).getSurveyName());
+                label = new Label(1, i, failSurveys.get(i - 1).getSurveyName());
                 sheet.addCell(label);
-                label = new Label(2, i, failSurveys.get(i-1).getAuthor());
+                label = new Label(2, i, failSurveys.get(i - 1).getAuthor());
                 sheet.addCell(label);
-                label = new Label(3, i, failSurveys.get(i-1).getDepartment());
+                label = new Label(3, i, failSurveys.get(i - 1).getDepartment());
                 sheet.addCell(label);
 
-                if(failSurveys.get(i-1).getNum()==null){
-                	label = new Label(4, i, "数据错误");
+                if (failSurveys.get(i - 1).getNum() == null) {
+                    label = new Label(4, i, "数据错误");
                     sheet.addCell(label);
-                }else if(failSurveys.get(i-1).getNum().equals(-1)){
-                	 label = new Label(4, i, "数据错误");
-                     sheet.addCell(label);
-                }else{
-               	 label = new Label(4, i, failSurveys.get(i-1).getNum().toString());
-                 sheet.addCell(label);
+                } else if (failSurveys.get(i - 1).getNum().equals(-1)) {
+                    label = new Label(4, i, "数据错误");
+                    sheet.addCell(label);
+                } else {
+                    label = new Label(4, i, failSurveys.get(i - 1).getNum().toString());
+                    sheet.addCell(label);
                 }
-                label = new Label(5, i, failSurveys.get(i-1).getDescription());
+                label = new Label(5, i, failSurveys.get(i - 1).getDescription());
                 sheet.addCell(label);
             }
             //写入数据
@@ -302,33 +300,29 @@ public class SurveyServiceImpl implements SurveyService{
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-		return fileName;
-	}
+        return fileName;
+    }
 
 
+    @Override
+    public String exportSurvey() {
+        List<Survey> findAllSurveys = surveyDao.findAllSurveys();
+        String exportSurveyExcel = exportSurveyExcel(findAllSurveys);
+        return "doctor/FileDownloadAction.action?fileName=" + exportSurveyExcel;
+    }
 
 
-
-	@Override
-	public String exportSurvey() {
-		List<Survey> findAllSurveys = surveyDao.findAllSurveys();
-		String exportSurveyExcel = exportSurveyExcel(findAllSurveys);
-		return "doctor/FileDownloadAction.action?fileName=" + exportSurveyExcel;
-	}
-
-
-
-
-	/**
-	 * 导出所有的问卷excel文件
-	 * @param  surveys
-	 * @return 返回文件路径
-	 */
-	public String exportSurveyExcel(List<Survey> surveys){
-		//用数组存储表头
-        String[] title = {"问卷类型","问卷名称","作者名称","科室","数量","总回收数","生成时间","操作医生","描述"};
+    /**
+     * 导出所有的问卷excel文件
+     *
+     * @param surveys
+     * @return 返回文件路径
+     */
+    public String exportSurveyExcel(List<Survey> surveys) {
+        //用数组存储表头
+        String[] title = {"问卷类型", "问卷名称", "作者名称", "科室", "数量", "总回收数", "生成时间", "操作医生", "描述"};
         String path = ServletActionContext.getServletContext().getRealPath("/download");
-        String fileName = +System.currentTimeMillis()+"_allSurveys.xls";
+        String fileName = +System.currentTimeMillis() + "_allSurveys.xls";
         //创建Excel文件
         File file = new File(path, fileName);
         try {
@@ -340,30 +334,30 @@ public class SurveyServiceImpl implements SurveyService{
             Label label = null;
 
             //第一行设置列名
-            for(int i = 0; i<title.length; i++){
+            for (int i = 0; i < title.length; i++) {
                 label = new Label(i, 0, title[i]);
                 sheet.addCell(label);
             }
 
             //追加数据
-            for(int i = 1; i<=surveys.size(); i++){
-                label = new Label(0, i, surveys.get(i-1).getSurveyType().getTypeName());
+            for (int i = 1; i <= surveys.size(); i++) {
+                label = new Label(0, i, surveys.get(i - 1).getSurveyType().getTypeName());
                 sheet.addCell(label);
-                label = new Label(1, i, surveys.get(i-1).getSurveyName());
+                label = new Label(1, i, surveys.get(i - 1).getSurveyName());
                 sheet.addCell(label);
-                label = new Label(2, i, surveys.get(i-1).getAuthor());
+                label = new Label(2, i, surveys.get(i - 1).getAuthor());
                 sheet.addCell(label);
-                label = new Label(3, i, surveys.get(i-1).getDepartment());
+                label = new Label(3, i, surveys.get(i - 1).getDepartment());
                 sheet.addCell(label);
-                label = new Label(4, i, surveys.get(i-1).getNum().toString());
+                label = new Label(4, i, surveys.get(i - 1).getNum().toString());
                 sheet.addCell(label);
-                label = new Label(5, i, surveys.get(i-1).getCurrentNum().toString());
+                label = new Label(5, i, surveys.get(i - 1).getCurrentNum().toString());
                 sheet.addCell(label);
-                label = new Label(6, i, surveys.get(i-1).getPutdate().toLocaleString());
+                label = new Label(6, i, surveys.get(i - 1).getPutdate().toLocaleString());
                 sheet.addCell(label);
-                label = new Label(7, i, surveys.get(i-1).getDoctor().getName());
+                label = new Label(7, i, surveys.get(i - 1).getDoctor().getName());
                 sheet.addCell(label);
-                label = new Label(8, i, surveys.get(i-1).getDescription());
+                label = new Label(8, i, surveys.get(i - 1).getDescription());
                 sheet.addCell(label);
 
             }
@@ -376,7 +370,7 @@ public class SurveyServiceImpl implements SurveyService{
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-		return fileName;
-	}
+        return fileName;
+    }
 
 }

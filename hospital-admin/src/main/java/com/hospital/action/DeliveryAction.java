@@ -20,89 +20,89 @@ import com.hospital.service.RetrieveService;
 import com.hospital.service.DeliveryService;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class DeliveryAction extends ActionSupport{
-	
-	private RetrieveService retrieveService;
+public class DeliveryAction extends ActionSupport {
 
-	public void setRetrieveService(RetrieveService retrieveService) {
-		this.retrieveService = retrieveService;
-	}
+    private RetrieveService retrieveService;
 
-
-	private int pageCode;
-	private int deliveryId;
-
-	
-	public void setDeliveryId(int deliveryId) {
-		this.deliveryId = deliveryId;
-	}
-
-	public void setPageCode(int pageCode) {
-		this.pageCode = pageCode;
-	}
+    public void setRetrieveService(RetrieveService retrieveService) {
+        this.retrieveService = retrieveService;
+    }
 
 
-	public String findMyDeliveryInfoByPage(){
-		Patient patient = (Patient) ServletActionContext.getContext().getSession().get("patient");
-		//获取页面传递过来的当前页码数
-		if(pageCode==0){
-			pageCode = 1;
-		}
-		//给pageSize,每页的记录数赋值
-		int pageSize = 5;
-		PageBean<RetrieveInfo> pb = null;
-		pb = retrieveService.findMyDeliveryInfoByPage(patient,pageCode,pageSize);
-		if(pb!=null){
-			pb.setUrl("findMyDeliveryInfoByPage.action?");
-		}
-		ServletActionContext.getRequest().setAttribute("pb", pb);
-		return "success";
-	}
-	
-	
-	public String queryDeliverySearchInfo(){
-		//获取页面传递过来的当前页码数
-		if(pageCode==0){
-			pageCode = 1;
-		}
-		//给pageSize,每页的记录数赋值
-		int pageSize = 5;
-		PageBean<RetrieveInfo> pb = null;
-		Patient patient = (Patient) ServletActionContext.getContext().getSession().get("patient");
-		if(deliveryId==0){
-			retrieveService.findMyDeliveryInfoByPage(patient,pageCode,pageSize);
-		}else{
-			pb = retrieveService.queryRetrieveInfo(patient.getOpenID(),deliveryId,pageCode,pageSize);
-		}
-		if(pb!=null){
-			pb.setUrl("queryDeliverySearchInfo.action?deliveryId="+deliveryId+"&");
-		}
+    private int pageCode;
+    private int deliveryId;
 
-		ServletActionContext.getRequest().setAttribute("pb", pb);
-		return "success";
-	}
-	
-	public String  getRetrieveInfoById(){
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json;charset=utf-8");
-		RetrieveInfo retrieveInfo = new RetrieveInfo();
-		retrieveInfo.setDeliveryId(deliveryId);
-		RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
-		JsonConfig jsonConfig = new JsonConfig();
-		jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
-		    public boolean apply(Object obj, String name, Object value) {
+
+    public void setDeliveryId(int deliveryId) {
+        this.deliveryId = deliveryId;
+    }
+
+    public void setPageCode(int pageCode) {
+        this.pageCode = pageCode;
+    }
+
+
+    public String findMyDeliveryInfoByPage() {
+        Patient patient = (Patient) ServletActionContext.getContext().getSession().get("patient");
+        //获取页面传递过来的当前页码数
+        if (pageCode == 0) {
+            pageCode = 1;
+        }
+        //给pageSize,每页的记录数赋值
+        int pageSize = 5;
+        PageBean<RetrieveInfo> pb = null;
+        pb = retrieveService.findMyDeliveryInfoByPage(patient, pageCode, pageSize);
+        if (pb != null) {
+            pb.setUrl("findMyDeliveryInfoByPage.action?");
+        }
+        ServletActionContext.getRequest().setAttribute("pb", pb);
+        return "success";
+    }
+
+
+    public String queryDeliverySearchInfo() {
+        //获取页面传递过来的当前页码数
+        if (pageCode == 0) {
+            pageCode = 1;
+        }
+        //给pageSize,每页的记录数赋值
+        int pageSize = 5;
+        PageBean<RetrieveInfo> pb = null;
+        Patient patient = (Patient) ServletActionContext.getContext().getSession().get("patient");
+        if (deliveryId == 0) {
+            retrieveService.findMyDeliveryInfoByPage(patient, pageCode, pageSize);
+        } else {
+            pb = retrieveService.queryRetrieveInfo(patient.getOpenID(), deliveryId, pageCode, pageSize);
+        }
+        if (pb != null) {
+            pb.setUrl("queryDeliverySearchInfo.action?deliveryId=" + deliveryId + "&");
+        }
+
+        ServletActionContext.getRequest().setAttribute("pb", pb);
+        return "success";
+    }
+
+    public String getRetrieveInfoById() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+        RetrieveInfo retrieveInfo = new RetrieveInfo();
+        retrieveInfo.setDeliveryId(deliveryId);
+        RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+            public boolean apply(Object obj, String name, Object value) {
                 return obj instanceof Authorization || name.equals("authorization") || obj instanceof Set || name.equals("deliveryInfos");
-		   }
-		});
-		
-		
-		JSONObject jsonObject = JSONObject.fromObject(newRetrieveInfo,jsonConfig);
-		try {
-			response.getWriter().print(jsonObject);
-		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage());
-		}
-		return null;
-	}
+            }
+        });
+
+
+        JSONObject jsonObject = JSONObject.fromObject(newRetrieveInfo, jsonConfig);
+        try {
+            response.getWriter().print(jsonObject);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
 
 }

@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="utf-8"%>
+<%@ page language="java" pageEncoding="utf-8" %>
 
 <html>
 <head>
@@ -25,10 +25,10 @@
             var postdata = "";
             ajax(
                 {
-                    method:'POST',
-                    url:'wechatLoginAction_getAppId.action',
+                    method: 'POST',
+                    url: 'wechatLoginAction_getAppId.action',
                     params: postdata,
-                    callback:function(data) {
+                    callback: function (data) {
                         var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=";
                         url = url + data;
                         url = url + "&redirect_uri=http%3a%2f%2fab60eb22.ngrok.io%2fhospital-wechat%2f&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
@@ -39,7 +39,7 @@
         } else {
             var action_url = "wechatLoginAction_login.action?code=";
             action_url = action_url + code;
-            window.location.href=action_url;
+            window.location.href = action_url;
         }
     }
 </script>

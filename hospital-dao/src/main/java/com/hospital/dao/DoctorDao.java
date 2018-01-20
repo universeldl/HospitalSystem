@@ -7,19 +7,19 @@ import java.util.List;
 
 public interface DoctorDao {
 
-	Doctor getDoctorByUserName(Doctor doctor);
+    Doctor getDoctorByUserName(Doctor doctor);
 
-	Doctor updateDoctorInfo(Doctor doctor);
+    Doctor updateDoctorInfo(Doctor doctor);
 
-	List<Doctor> getAllDoctors();
+    List<Doctor> getAllDoctors();
 
-	boolean addDoctor(Doctor doctor);
+    boolean addDoctor(Doctor doctor);
 
-	Doctor getDoctorById(Doctor doctor);
+    Doctor getDoctorById(Doctor doctor);
 
-	PageBean<Doctor> findDoctorByPage(int pageCode, int pageSize);
+    PageBean<Doctor> findDoctorByPage(int pageCode, int pageSize);
 
-	PageBean<Doctor> queryDoctor(Doctor doctor, int pageCode, int pageSize);
+    PageBean<Doctor> queryDoctor(Doctor doctor, int pageCode, int pageSize);
 
-	boolean deleteDoctor(Doctor doctor);
+    boolean deleteDoctor(Doctor doctor);
 }

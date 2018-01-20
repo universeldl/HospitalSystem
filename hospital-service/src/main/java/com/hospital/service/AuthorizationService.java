@@ -4,10 +4,10 @@ import com.hospital.domain.Authorization;
 
 public interface AuthorizationService {
 
-	
-	boolean addAuthorization(Authorization authorization);
 
-	Authorization getAuthorizationByaid(Authorization authorization);
+    boolean addAuthorization(Authorization authorization);
 
-	Authorization updateAuthorization(Authorization authorization);
+    Authorization getAuthorizationByaid(Authorization authorization);
+
+    Authorization updateAuthorization(Authorization authorization);
 }

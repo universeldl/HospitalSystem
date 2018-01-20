@@ -1,11 +1,10 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="/struts-tags"   prefix="s"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 
 <%@ page import="com.alibaba.fastjson.JSONObject" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="com.hospital.wechat.service.*" %>
-
 
 
 <html>

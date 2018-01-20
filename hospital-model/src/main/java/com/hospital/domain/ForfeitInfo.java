@@ -4,60 +4,60 @@ import java.io.Serializable;
 
 /**
  * 提醒信息类
- * @author c
  *
+ * @author c
  */
-public class ForfeitInfo implements Serializable{
-	
-	private Integer deliveryId;	//分发编号
-	private DeliveryInfo deliveryInfo;
-	private Doctor doctor;	//操作员
-	private Double forfeit;	//提醒金额
-	private int isPay;	//是否已经支付提醒
+public class ForfeitInfo implements Serializable {
 
-	public Integer getDeliveryId() {
-		return deliveryId;
-	}
+    private Integer deliveryId;    //分发编号
+    private DeliveryInfo deliveryInfo;
+    private Doctor doctor;    //操作员
+    private Double forfeit;    //提醒金额
+    private int isPay;    //是否已经支付提醒
 
-	public void setDeliveryId(Integer deliveryId) {
-		this.deliveryId = deliveryId;
-	}
+    public Integer getDeliveryId() {
+        return deliveryId;
+    }
 
-	public DeliveryInfo getDeliveryInfo() {
-		return deliveryInfo;
-	}
+    public void setDeliveryId(Integer deliveryId) {
+        this.deliveryId = deliveryId;
+    }
 
-	public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
-		this.deliveryInfo = deliveryInfo;
-	}
+    public DeliveryInfo getDeliveryInfo() {
+        return deliveryInfo;
+    }
 
-	public Doctor getDoctor() {
-		return doctor;
-	}
+    public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
+        this.deliveryInfo = deliveryInfo;
+    }
 
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
-	}
+    public Doctor getDoctor() {
+        return doctor;
+    }
 
-	public Double getForfeit() {
-		return forfeit;
-	}
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
 
-	public void setForfeit(Double forfeit) {
-		this.forfeit = forfeit;
-	}
+    public Double getForfeit() {
+        return forfeit;
+    }
 
-	public int getIsPay() {
-		return isPay;
-	}
+    public void setForfeit(Double forfeit) {
+        this.forfeit = forfeit;
+    }
 
-	public void setIsPay(int isPay) {
-		this.isPay = isPay;
-	}
+    public int getIsPay() {
+        return isPay;
+    }
 
-	public ForfeitInfo() {
-		
-	}
+    public void setIsPay(int isPay) {
+        this.isPay = isPay;
+    }
 
-	
+    public ForfeitInfo() {
+
+    }
+
+
 }

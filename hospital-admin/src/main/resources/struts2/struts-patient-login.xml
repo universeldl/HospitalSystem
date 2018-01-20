@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
-	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+        "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
-  <package name="patientLogin" extends="struts-default" >
-  	<action name="patientLoginAction_*" method="{1}" class="patientLoginAction">
-  		<result name="logout" type="redirect">patient.jsp</result>
-  	</action>
-  </package>
+    <package name="patientLogin" extends="struts-default">
+        <action name="patientLoginAction_*" method="{1}" class="patientLoginAction">
+            <result name="logout" type="redirect">patient.jsp</result>
+        </action>
+    </package>
 </struts>	

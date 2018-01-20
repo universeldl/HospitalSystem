@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.hospital.domain.Authorization" dynamic-insert="true" dynamic-update="true">
-		<id name="aid" type="java.lang.Integer">
-			<column name="aid" />
-			<generator class="foreign" >
-			  <param name="property">doctor</param>
-            </generator>  
-		</id>
-		
-		<property name="surveySet" type="java.lang.Integer">
-			<column name="surveySet" default="0" />
-		</property>
-		
-		
-		<property name="patientSet" type="java.lang.Integer">
-			<column name="patientSet" default="0" />
-		</property>
-		
-		<property name="deliverySet" type="java.lang.Integer">
-			<column name="deliverySet" default="0" />
-		</property>
-	
-	
-		<property name="typeSet" type="java.lang.Integer">
-			<column name="typeSet" default="0" />
-		</property>
-		
-		
-		<property name="retrieveSet" type="java.lang.Integer">
-			<column name="retrieveSet" default="0" />
-		</property>
+    <class name="com.hospital.domain.Authorization" dynamic-insert="true" dynamic-update="true">
+        <id name="aid" type="java.lang.Integer">
+            <column name="aid"/>
+            <generator class="foreign">
+                <param name="property">doctor</param>
+            </generator>
+        </id>
 
-		<property name="forfeitSet" type="java.lang.Integer">
-			<column name="forfeitSet" default="0" />
-		</property>
+        <property name="surveySet" type="java.lang.Integer">
+            <column name="surveySet" default="0"/>
+        </property>
 
-		<property name="sysSet" type="java.lang.Integer">
-			<column name="sysSet" default="0" />
-		</property>
-		
-		<property name="superSet" type="java.lang.Integer">
-			<column name="superSet" default="0" />
-		</property>
-		
-		 <one-to-one name="doctor" constrained="true"></one-to-one>
-		
-	</class>
+
+        <property name="patientSet" type="java.lang.Integer">
+            <column name="patientSet" default="0"/>
+        </property>
+
+        <property name="deliverySet" type="java.lang.Integer">
+            <column name="deliverySet" default="0"/>
+        </property>
+
+
+        <property name="typeSet" type="java.lang.Integer">
+            <column name="typeSet" default="0"/>
+        </property>
+
+
+        <property name="retrieveSet" type="java.lang.Integer">
+            <column name="retrieveSet" default="0"/>
+        </property>
+
+        <property name="forfeitSet" type="java.lang.Integer">
+            <column name="forfeitSet" default="0"/>
+        </property>
+
+        <property name="sysSet" type="java.lang.Integer">
+            <column name="sysSet" default="0"/>
+        </property>
+
+        <property name="superSet" type="java.lang.Integer">
+            <column name="superSet" default="0"/>
+        </property>
+
+        <one-to-one name="doctor" constrained="true"></one-to-one>
+
+    </class>
 </hibernate-mapping>

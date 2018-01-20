@@ -2,7 +2,7 @@ let questionType = 1;
 let surveyId = 1;
 let questionId = 1;
 
-function updateQuestion(sid, qid){
+function updateQuestion(sid, qid) {
     surveyId = sid;
     questionId = qid;
 
@@ -15,15 +15,15 @@ function updateQuestion(sid, qid){
             type: "json",
             callback: function (data) {
                 $("#updateQuestionContent").val(data.questionContent);
-                if(data.questionType == 1) {
+                if (data.questionType == 1) {
                     updateChoiceDisplay();
                     //disableTextButton();
                 }
-                else if(data.questionType == 2) {
+                else if (data.questionType == 2) {
                     updateChoiceDisplay();
                     //disableTextButton();
                 }
-                else if(data.questionType == 3) {
+                else if (data.questionType == 3) {
                     updateChoiceHide();
                     //disableChoiceButton();
                 }
@@ -32,16 +32,16 @@ function updateQuestion(sid, qid){
                     $(this).outerHTML = '';
                     $(this).remove();
                 });
-                for(let index in data.choices) {
+                for (let index in data.choices) {
                     choiceCount++;
-                    str +='<div class="form-group">'
+                    str += '<div class="form-group">'
                         + '<label for="choiceOption' + index + '" class="col-sm-3 control-label">选项: </label>'
                         + '<div class="col-sm-5">'
                         + '<input type="text" class="form-control" name="choiceOption' + index + '" id="choiceOption' + index + '" value="' + data.choices[index].choiceContent + '">'
                         + '<label class="control-label" for="choiceOption' + index + '" style="display: none;"></label>'
                         + '</div>'
                         + '<div class="col-sm-2">'
-                        + '<input type="text" class="form-control" name="score' + index + '" id="score' + index + '" value="' + data.choices[index].score+ '">'
+                        + '<input type="text" class="form-control" name="score' + index + '" id="score' + index + '" value="' + data.choices[index].score + '">'
                         + '<label class="control-label" for="score' + index + '" style="display: none;"></label>'
                         + '</div>'
                         + '<p><span class="removeUpdateVar">删除</span></p>'
@@ -57,80 +57,75 @@ function updateQuestion(sid, qid){
 $(function () {
 
 
-  $('#update_Question').click(function () {
+    $('#update_Question').click(function () {
 
 
- 	if (!validUpdateQuestion()) {
-        return;
-    }
+        if (!validUpdateQuestion()) {
+            return;
+        }
 
-    var postdata;
-    if ( questionType == 1) {
-        postdata = "questionType=1&questionContent="+$.trim($("#updateQuestionContent").val())
-          +"&surveyId="+ surveyId + "&questionId="+ questionId + "&" + $("#updateForm").serialize();
-    }
-    else if ( questionType == 2) {
-        postdata = "questionType=2&surveyId="+ surveyId + "&questionId="+ questionId + "&questionContent="+ $.trim($("#updateQuestionContent").val());
-	}
+        var postdata;
+        if (questionType == 1) {
+            postdata = "questionType=1&questionContent=" + $.trim($("#updateQuestionContent").val())
+                + "&surveyId=" + surveyId + "&questionId=" + questionId + "&" + $("#updateForm").serialize();
+        }
+        else if (questionType == 2) {
+            postdata = "questionType=2&surveyId=" + surveyId + "&questionId=" + questionId + "&questionContent=" + $.trim($("#updateQuestionContent").val());
+        }
 
-	ajax(
-    		  {
-			  	method:'POST',
-	    		url:'doctor/surveyManageAction_updateQuestion.action',
-				params: postdata,
-	    		callback:function(data) {
-					if (data == 1) {
-						$("#updateQuestionModal").modal("hide");//关闭模糊框
-						showInfo("更新成功");
+        ajax(
+            {
+                method: 'POST',
+                url: 'doctor/surveyManageAction_updateQuestion.action',
+                params: postdata,
+                callback: function (data) {
+                    if (data == 1) {
+                        $("#updateQuestionModal").modal("hide");//关闭模糊框
+                        showInfo("更新成功");
 
-	                }else {
-						$("#updateQuestionModal").modal("hide");//关闭模糊框
-						showInfo("更新失败");
-					}
+                    } else {
+                        $("#updateQuestionModal").modal("hide");//关闭模糊框
+                        showInfo("更新失败");
+                    }
 
-				}
-			}
-
-    	);
-
-
-	});
+                }
+            }
+        );
 
 
-	$('#modal_info').on('hide.bs.modal',function() {//提示模糊框隐藏时候触发
-       	location.reload();  	//刷新当前页面
+    });
+
+
+    $('#modal_info').on('hide.bs.modal', function () {//提示模糊框隐藏时候触发
+        location.reload();  	//刷新当前页面
     });
 
 
 });
 
 
-function updateChoiceDisplay()
-{
+function updateChoiceDisplay() {
     questionType = 1;
-    document.getElementById("updateChoicesBlock").style.display="block";
+    document.getElementById("updateChoicesBlock").style.display = "block";
 }
 
-function updateChoiceHide()
-{
+function updateChoiceHide() {
     questionType = 2;
-    document.getElementById("updateChoicesBlock").style.display="none";
+    document.getElementById("updateChoicesBlock").style.display = "none";
 }
 
-function disableChoiceButton()
-{
-    document.getElementById("update1").attr("disabled",true);
-    document.getElementById("update2").attr("disabled",false);
+function disableChoiceButton() {
+    document.getElementById("update1").attr("disabled", true);
+    document.getElementById("update2").attr("disabled", false);
 }
 
-function disableTextButton()
-{
-    document.getElementById("update1").attr("disabled",false);
-    document.getElementById("update2").attr("disabled",true);
+function disableTextButton() {
+    document.getElementById("update1").attr("disabled", false);
+    document.getElementById("update2").attr("disabled", true);
 }
 
 function getUpdateCount() {
-    var updateCount=0;
+    var updateCount = 0;
     $("#updateChoicesBlock").find("div.col-sm-5").children(":text").each(function () {
         updateCount++;
     });
@@ -148,7 +143,7 @@ function validUpdateQuestion() {
         $('#updateQuestionContent').next().text("请输入问题");
         $("#updateQuestionContent").next().show();
         flag = false;
-    }else {
+    } else {
         $('#updateQuestionContent').parent().removeClass("has-error");
         $('#updateQuestionContent').next().text("");
         $("#updateQuestionContent").next().hide();
@@ -162,12 +157,12 @@ function validUpdateQuestion() {
             $(this).next().show();
             flag = false;
         }
-        else if( x.includes(tmp) ) {
+        else if (x.includes(tmp)) {
             $(this).parent().addClass("has-error");
             $(this).next().text("选项不能重复");
             $(this).next().show();
             flag = false;
-        }else {
+        } else {
             x.push(tmp);
             $(this).parent().removeClass("has-error");
             $(this).next().text("");
@@ -183,12 +178,12 @@ function validUpdateQuestion() {
             $(this).next().show();
             flag = false;
         }
-        else if( isNaN(parseInt(tmp)) || parseInt(tmp)<0 || parseInt(tmp)>99) {
+        else if (isNaN(parseInt(tmp)) || parseInt(tmp) < 0 || parseInt(tmp) > 99) {
             $(this).parent().addClass("has-error");
             $(this).next().text("分数必须为0～99之间的正整数");
             $(this).next().show();
             flag = false;
-        }else {
+        } else {
             $(this).parent().removeClass("has-error");
             $(this).next().text("");
             $(this).next().hide();

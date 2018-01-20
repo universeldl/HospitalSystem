@@ -7,25 +7,25 @@ import java.util.List;
 
 public interface ChoiceDao {
 
-	
-	Choice getChoice(Choice choice);
 
-	Choice updateChoiceInfo(Choice choice);
+    Choice getChoice(Choice choice);
 
-	boolean addChoice(Choice choice);
+    Choice updateChoiceInfo(Choice choice);
 
-	PageBean<Choice> findChoiceByPage(int pageCode, int pageSize);
+    boolean addChoice(Choice choice);
 
-	Choice getChoiceById(Choice choice);
+    PageBean<Choice> findChoiceByPage(int pageCode, int pageSize);
 
-	boolean deleteChoice(Choice choice);
+    Choice getChoiceById(Choice choice);
 
-	PageBean<Choice> queryChoice(Choice choice, int pageCode, int pageSize);
+    boolean deleteChoice(Choice choice);
 
-	Choice getChoiceByopenID(Choice choice);
+    PageBean<Choice> queryChoice(Choice choice, int pageCode, int pageSize);
 
-	int batchAddChoice(List<Choice> choices, List<Choice> failChoices);
+    Choice getChoiceByopenID(Choice choice);
 
-	List<Choice> findAllChoices();
+    int batchAddChoice(List<Choice> choices, List<Choice> failChoices);
+
+    List<Choice> findAllChoices();
 
 }

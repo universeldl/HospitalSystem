@@ -16,17 +16,23 @@ public class Question {
     private int questionType;
     private int aid;
     //private Survey survey;
-	private Set<Choice> choices = new HashSet<>();
+    private Set<Choice> choices = new HashSet<>();
 
-    public Set<Choice> getChoices() {  return choices;  }
-    public void setChoices(Set<Choice> choices) {  this.choices = choices;  }
+    public Set<Choice> getChoices() {
+        return choices;
+    }
 
-	//public Survey getSurvey() { return survey; }
-	//public void setSurvey(Survey survey) { this.survey = survey; }
+    public void setChoices(Set<Choice> choices) {
+        this.choices = choices;
+    }
+
+    //public Survey getSurvey() { return survey; }
+    //public void setSurvey(Survey survey) { this.survey = survey; }
 
     public int getQuestionId() {
         return questionId;
     }
+
     public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
@@ -34,6 +40,7 @@ public class Question {
     public int getSurveyId() {
         return surveyId;
     }
+
     public void setSurveyId(int surveyId) {
         this.surveyId = surveyId;
     }
@@ -41,6 +48,7 @@ public class Question {
     public String getQuestionContent() {
         return questionContent;
     }
+
     public void setQuestionContent(String questionContent) {
         this.questionContent = questionContent;
     }
@@ -48,6 +56,7 @@ public class Question {
     public int getQuestionType() {
         return questionType;
     }
+
     public void setQuestionType(int questionType) {
         this.questionType = questionType;
     }
@@ -55,21 +64,22 @@ public class Question {
     public int getAid() {
         return aid;
     }
+
     public void setAid(int aid) {
         this.aid = aid;
     }
 
-	public Question() {
+    public Question() {
 
-	}
+    }
 
-    public Question( int aid, int surveyId, String questionContent, int questionType) {
-		super();
-		this.aid = aid;
+    public Question(int aid, int surveyId, String questionContent, int questionType) {
+        super();
+        this.aid = aid;
         this.surveyId = surveyId;
-		this.questionContent = questionContent;
-		this.questionType = questionType;
-	}
+        this.questionContent = questionContent;
+        this.questionType = questionType;
+    }
 
 /*    @Override
     public boolean equals(Object o) {

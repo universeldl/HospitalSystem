@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:util="http://www.springframework.org/schema/util"
-    xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
- 	
- 	<bean id="authorizationDao" class="com.hospital.dao.impl.AuthorizationDaoImpl">
- 		<property name="sessionFactory">
- 			<ref bean="sessionFactory"/>
- 		</property>
- 	</bean>
- 	
- 	<bean id="authorizationService" class="com.hospital.service.impl.AuthorizationServiceImpl">
- 		<property name="authorizationDao">
- 			<ref bean="authorizationDao"/>
- 		</property>
- 	</bean>
- 	
- 	<bean id="authorizationAction" class="com.hospital.action.AuthorizationAction" scope="prototype">
- 		<property name="authorizationService">
- 			<ref bean="authorizationService"/>
- 		</property>
- 	</bean>
- </beans>
+
+    <bean id="authorizationDao" class="com.hospital.dao.impl.AuthorizationDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="authorizationService" class="com.hospital.service.impl.AuthorizationServiceImpl">
+        <property name="authorizationDao">
+            <ref bean="authorizationDao"/>
+        </property>
+    </bean>
+
+    <bean id="authorizationAction" class="com.hospital.action.AuthorizationAction" scope="prototype">
+        <property name="authorizationService">
+            <ref bean="authorizationService"/>
+        </property>
+    </bean>
+</beans>

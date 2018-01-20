@@ -12,46 +12,67 @@ public class Answer {
     //private int choiceId;
     //private int questionId;
     //private int surveyId;
-	private Survey survey;	//分发问卷
-	private Patient patient;	//分发病人
-	private Doctor doctor;	//操作员
+    private Survey survey;    //分发问卷
+    private Patient patient;    //分发病人
+    private Doctor doctor;    //操作员
     //private String choiceContent;
     //private int aid;
-	private RetrieveInfo retrieveInfo;
+    private RetrieveInfo retrieveInfo;
     private Question question;
-	private Set<Choice> choices = new HashSet<>();
+    private Set<Choice> choices = new HashSet<>();
 
-    public Set<Choice> getChoices() {  return choices;  }
-    public void setChoices(Set<Choice> choices) {  this.choices = choices;  }
+    public Set<Choice> getChoices() {
+        return choices;
+    }
 
-	public Question getQuestion() { return question; }
-	public void setQuestion(Question question) { this.question = question; }
+    public void setChoices(Set<Choice> choices) {
+        this.choices = choices;
+    }
 
-	public Survey getSurvey() {
-		return survey;
-	}
-	public void setSurvey(Survey survey) { this.survey = survey; }
+    public Question getQuestion() {
+        return question;
+    }
 
-	public Patient getPatient() {
-		return patient;
-	}
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 
-	public Doctor getDoctor() {
-		return doctor;
-	}
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
-	}
+    public Survey getSurvey() {
+        return survey;
+    }
 
-	public RetrieveInfo getRetrieveInfo() { return retrieveInfo; }
-	public void setRetrieveInfo(RetrieveInfo retrieveInfo) { this.retrieveInfo = retrieveInfo; }
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public RetrieveInfo getRetrieveInfo() {
+        return retrieveInfo;
+    }
+
+    public void setRetrieveInfo(RetrieveInfo retrieveInfo) {
+        this.retrieveInfo = retrieveInfo;
+    }
 
     public int getAnswerId() {
         return answerId;
     }
+
     public void setAnswerId(int answerId) {
         this.answerId = answerId;
     }

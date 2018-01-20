@@ -8,25 +8,25 @@ import com.hospital.domain.PatientType;
 
 public interface PatientDao {
 
-	
-	Patient getPatient(Patient patient);
 
-	Patient updatePatientInfo(Patient patient);
+    Patient getPatient(Patient patient);
 
-	boolean addPatient(Patient patient);
+    Patient updatePatientInfo(Patient patient);
 
-	PageBean<Patient> findPatientByPage(int pageCode, int pageSize);
+    boolean addPatient(Patient patient);
 
-	Patient getPatientById(Patient patient);
+    PageBean<Patient> findPatientByPage(int pageCode, int pageSize);
 
-	boolean deletePatient(Patient patient);
+    Patient getPatientById(Patient patient);
 
-	PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize);
+    boolean deletePatient(Patient patient);
 
-	Patient getPatientByopenID(Patient patient);
+    PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize);
 
-	int batchAddPatient(List<Patient> patients, List<Patient> failPatients);
+    Patient getPatientByopenID(Patient patient);
 
-	List<Patient> findAllPatients();
+    int batchAddPatient(List<Patient> patients, List<Patient> failPatients);
+
+    List<Patient> findAllPatients();
 
 }

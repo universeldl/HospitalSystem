@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
-	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+        "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
-  <package name="doctorInfo" extends="struts-default" namespace="/doctor">
-  	<action name="doctorInfoAction_*" method="{1}" class="doctorInfoAction"> <!-- liaoht: method={1}, 这里{1}即代指name中的第一个通配符'*'，依次类推. -->
+    <package name="doctorInfo" extends="struts-default" namespace="/doctor">
+        <action name="doctorInfoAction_*" method="{1}"
+                class="doctorInfoAction"> <!-- liaoht: method={1}, 这里{1}即代指name中的第一个通配符'*'，依次类推. -->
 
-  	</action>
-  </package>
-
+        </action>
+    </package>
 
 
 </struts>

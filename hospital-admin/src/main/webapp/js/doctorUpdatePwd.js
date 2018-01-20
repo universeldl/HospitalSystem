@@ -3,51 +3,49 @@
  * @param {Object} '#update_doctorPwd'
  */
 $(function () {
-	
-	
+
+
     $('#update_doctorPwd').click(function () {
 
-    	
-    	 if (!validUpdateDoctorPwd()) {
-    	        return;
-    	    }
-    	
-	var postdata = "oldPwd="+$.trim($("#oldPwd").val())+"&newPwd="+ $.trim($("#newPwd").val())+"&confirmPwd="+ $.trim($("#confirmPwd").val());
-	ajax(
-    		  {
-			  	method:'POST',
-	    		url:'doctor/doctorInfoAction_doctorPwd.action',
-				params: postdata,
-	    		callback:function(data) {
-					if (data == 1) {
-						$("#updatepwd").modal("hide");//关闭模糊框		
-						showInfo("修改成功");	
 
-	                    
-	                }else if (data == 0) {
-	                    showInfo("确认密码不一致");
-	                }else if(data == -1){
-						 showInfo("原密码错误");
-					}else{
-						 showInfo("修改失败");
-					}
-					
-								
-				}
-			}
-			   
-    	);
-			
-		
-	});
-	
-	$('#modal_info').on('hide.bs.modal',function() {//提示模糊框隐藏时候触发
-       		 location.reload();  	//刷新当前页面
-    	});
-	
+        if (!validUpdateDoctorPwd()) {
+            return;
+        }
+
+        var postdata = "oldPwd=" + $.trim($("#oldPwd").val()) + "&newPwd=" + $.trim($("#newPwd").val()) + "&confirmPwd=" + $.trim($("#confirmPwd").val());
+        ajax(
+            {
+                method: 'POST',
+                url: 'doctor/doctorInfoAction_doctorPwd.action',
+                params: postdata,
+                callback: function (data) {
+                    if (data == 1) {
+                        $("#updatepwd").modal("hide");//关闭模糊框
+                        showInfo("修改成功");
+
+
+                    } else if (data == 0) {
+                        showInfo("确认密码不一致");
+                    } else if (data == -1) {
+                        showInfo("原密码错误");
+                    } else {
+                        showInfo("修改失败");
+                    }
+
+
+                }
+            }
+        );
+
+
+    });
+
+    $('#modal_info').on('hide.bs.modal', function () {//提示模糊框隐藏时候触发
+        location.reload();  	//刷新当前页面
+    });
+
 
 });
-
 
 
 function validUpdateDoctorPwd() {
@@ -60,7 +58,7 @@ function validUpdateDoctorPwd() {
         $('#oldPwd').next().text("请输入密码");
         $("#oldPwd").next().show();
         flag = false;
-    } else if (oldPwd.length<3 || oldPwd.length > 15) {
+    } else if (oldPwd.length < 3 || oldPwd.length > 15) {
         $("#oldPwd").parent().addClass("has-error");
         $("#oldPwd").next().text("密码长度必须在3~15之间");
         $("#oldPwd").next().show();
@@ -70,15 +68,15 @@ function validUpdateDoctorPwd() {
         $('#oldPwd').next().text("");
         $("#oldPwd").next().hide();
     }
-	
-    
+
+
     var newPwd = $.trim($("#newPwd").val());
     if (newPwd == "") {
         $('#newPwd').parent().addClass("has-error");
         $('#newPwd').next().text("请输入新密码");
         $("#newPwd").next().show();
         flag = false;
-    } else if (newPwd.length<3 || newPwd.length > 15) {
+    } else if (newPwd.length < 3 || newPwd.length > 15) {
         $("#newPwd").parent().addClass("has-error");
         $("#newPwd").next().text("新密码长度必须在3~15之间");
         $("#newPwd").next().show();
@@ -88,20 +86,20 @@ function validUpdateDoctorPwd() {
         $('#newPwd').next().text("");
         $("#newPwd").next().hide();
     }
-    
-    
+
+
     var confirmPwd = $.trim($("#confirmPwd").val());
     if (confirmPwd == "") {
         $('#confirmPwd').parent().addClass("has-error");
         $('#confirmPwd').next().text("请输入密码");
         $("#confirmPwd").next().show();
         flag = false;
-    } else if (confirmPwd.length<3 || confirmPwd.length > 15) {
+    } else if (confirmPwd.length < 3 || confirmPwd.length > 15) {
         $("#confirmPwd").parent().addClass("has-error");
         $("#confirmPwd").next().text("密码长度必须在3~15之间");
         $("#confirmPwd").next().show();
         flag = false;
-    }else if (confirmPwd!=newPwd) {
+    } else if (confirmPwd != newPwd) {
         $("#confirmPwd").parent().addClass("has-error");
         $("#confirmPwd").next().text("确认密码不一致");
         $("#confirmPwd").next().show();
@@ -111,9 +109,8 @@ function validUpdateDoctorPwd() {
         $('#confirmPwd').next().text("");
         $("#confirmPwd").next().hide();
     }
-	
 
-	
+
     return flag;
 }
 

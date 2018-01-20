@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
-	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+        "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
-  <package name="patientManage" extends="struts-default" namespace="/doctor">
-  
-  	 <interceptors>
-            <interceptor name="patientInterceptor" class="com.hospital.action.interceptor.PatientInterceptor" />
+    <package name="patientManage" extends="struts-default" namespace="/doctor">
+
+        <interceptors>
+            <interceptor name="patientInterceptor" class="com.hospital.action.interceptor.PatientInterceptor"/>
 
             <interceptor-stack name="patientStack">
                 <interceptor-ref name="defaultStack"/>
@@ -16,14 +16,13 @@
             </interceptor-stack>
         </interceptors>
 
-        <default-interceptor-ref name="patientStack" />
-  
-  	<action name="patientManageAction_*" method="{1}" class="patientManageAction">
-  		<result name="success">/WEB-INF/doctor/patientManage.jsp</result>
-  		<result name="nopass" type="redirect">/error/nopass.jsp</result>
-  	</action>
-  </package>
-  
+        <default-interceptor-ref name="patientStack"/>
 
-  
+        <action name="patientManageAction_*" method="{1}" class="patientManageAction">
+            <result name="success">/WEB-INF/doctor/patientManage.jsp</result>
+            <result name="nopass" type="redirect">/error/nopass.jsp</result>
+        </action>
+    </package>
+
+
 </struts>	

@@ -20,11 +20,11 @@ public class captchaAction extends ActionSupport {
         this.inputStream = inputStream;
     }
 
-    public void setCaptchaService(CaptchaService captchaService){
+    public void setCaptchaService(CaptchaService captchaService) {
         this.captchaService = captchaService;
     }
 
-    public String getCaptchaImg(){
+    public String getCaptchaImg() {
         System.out.println("call getCaptcha");
         InputStream inputStream = this.captchaService.getCaptchaImg();
         ServletActionContext.getContext().put("inputStream", inputStream);

@@ -44,27 +44,27 @@ public class TemplateMessageMgr {
         }
     }
 
-    static public JSONObject getAllTemplate(AccessTokenMgr mgr){
-        try{
+    static public JSONObject getAllTemplate(AccessTokenMgr mgr) {
+        try {
             String token = mgr.getAccessToken();
 
             String requestUrl = get_template_list_url.replace("ACCESS_TOKEN", token);
             JSONObject template_list = WeixinUtil.HttpsRequest(requestUrl, "GET", "");
             if (template_list != null) {
-                System.out.println("return = "+template_list.toString());
+                System.out.println("return = " + template_list.toString());
                 return template_list;
             } else {
                 System.out.println("get template list failed!");
                 return null;
             }
-        }catch(Exception e ){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    static public boolean sendTemplateMessage(JSONObject data, String openid, String redirect_url, String template_id, AccessTokenMgr mgr){
-        try{
+    static public boolean sendTemplateMessage(JSONObject data, String openid, String redirect_url, String template_id, AccessTokenMgr mgr) {
+        try {
 
             JSONObject f1 = new JSONObject();
             f1.put("touser", openid);
@@ -72,20 +72,20 @@ public class TemplateMessageMgr {
             f1.put("url", redirect_url);
             f1.put("data", data);
 
-            System.out.println("post f ="+f1.toString());
+            System.out.println("post f =" + f1.toString());
 
             String token = mgr.getAccessToken();
 
             String requestUrl = send_template_url.replace("ACCESS_TOKEN", token);
             JSONObject jsonObject = WeixinUtil.HttpsRequest(requestUrl, "POST", f1.toString());
             if (jsonObject != null) {
-                System.out.println("return = "+jsonObject.toString());
+                System.out.println("return = " + jsonObject.toString());
                 return true;
             } else {
                 System.out.println("Cannot find openids");
                 return false;
             }
-        }catch(Exception e ){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

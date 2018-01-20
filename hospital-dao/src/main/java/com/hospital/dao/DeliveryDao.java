@@ -9,19 +9,19 @@ import com.hospital.domain.Patient;
 
 public interface DeliveryDao {
 
-	PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize);
+    PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize);
 
-	DeliveryInfo getDeliveryInfoById(DeliveryInfo info);
+    DeliveryInfo getDeliveryInfoById(DeliveryInfo info);
 
-	int addDelivery(DeliveryInfo info);
+    int addDelivery(DeliveryInfo info);
 
-	List<DeliveryInfo> getNoRetrieveDeliveryInfoByPatient(Patient patient);
+    List<DeliveryInfo> getNoRetrieveDeliveryInfoByPatient(Patient patient);
 
-	DeliveryInfo updateDeliveryInfo(DeliveryInfo deliveryInfoById);
+    DeliveryInfo updateDeliveryInfo(DeliveryInfo deliveryInfoById);
 
 
-	List<DeliveryInfo> getDeliveryInfoByNoRetrieveState();
+    List<DeliveryInfo> getDeliveryInfoByNoRetrieveState();
 
-	List<DeliveryInfo> getDeliveryInfoBySurvey(Survey survey);
+    List<DeliveryInfo> getDeliveryInfoBySurvey(Survey survey);
 
 }

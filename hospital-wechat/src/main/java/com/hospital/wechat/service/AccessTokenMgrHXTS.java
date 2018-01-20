@@ -1,13 +1,15 @@
 package com.hospital.wechat.service;
 
 import java.util.Date;
+
 import com.hospital.util.WeixinUtil;
 import com.alibaba.fastjson.*;
+
 /**
  * Created by QQQ on 2017/12/11.
  */
-public class AccessTokenMgrHXTS extends AccessTokenMgr{
-    public AccessTokenMgrHXTS(){
+public class AccessTokenMgrHXTS extends AccessTokenMgr {
+    public AccessTokenMgrHXTS() {
     }
 
     // secret for huxitianshi
@@ -21,7 +23,7 @@ public class AccessTokenMgrHXTS extends AccessTokenMgr{
 
     static AccessTokenMgrHXTS m_instance = new AccessTokenMgrHXTS();
 
-    public static synchronized AccessTokenMgrHXTS getInstance(){
+    public static synchronized AccessTokenMgrHXTS getInstance() {
         return m_instance;
     }
 
@@ -38,14 +40,14 @@ public class AccessTokenMgrHXTS extends AccessTokenMgr{
         return AppId;
     }
 
-    public synchronized String getAccessToken(){
-        long currentTime= new Date().getTime();
-        if( m_AccessToken == null || ( currentTime - m_TokenTime ) > m_expiresIn ){
+    public synchronized String getAccessToken() {
+        long currentTime = new Date().getTime();
+        if (m_AccessToken == null || (currentTime - m_TokenTime) > m_expiresIn) {
             //重新取得凭证
             try {
                 String requestUrl = access_token_url.replace("APPID", AppId).replace("APPSECRET", AppSecret);
                 JSONObject jsonObject = WeixinUtil.HttpsRequest(requestUrl, "GET", null);
-                if( jsonObject != null ){
+                if (jsonObject != null) {
                     if (jsonObject.containsKey("errcode")) {
                         System.out.println("error = " + jsonObject.toString());
                         m_AccessToken = null;
@@ -57,11 +59,11 @@ public class AccessTokenMgrHXTS extends AccessTokenMgr{
                         m_TokenTime = new Date().getTime();
                         m_expiresIn = jsonObject.getLong("expires_in") * 1000;
                     }
-                } else{
+                } else {
                     m_AccessToken = null;
                     m_TokenTime = 0;
                 }
-            } catch(Exception e ) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 m_AccessToken = null;
             }

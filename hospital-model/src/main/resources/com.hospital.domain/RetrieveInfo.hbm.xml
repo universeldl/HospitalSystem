@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.hospital.domain.RetrieveInfo" dynamic-insert="true" dynamic-update="true">
-		<id name="deliveryId" type="java.lang.Integer" >
-			<column name="deliveryId" />
-			<generator class="foreign">
-				 <param name="property">deliveryInfo</param>
+    <class name="com.hospital.domain.RetrieveInfo" dynamic-insert="true" dynamic-update="true">
+        <id name="deliveryId" type="java.lang.Integer">
+            <column name="deliveryId"/>
+            <generator class="foreign">
+                <param name="property">deliveryInfo</param>
             </generator>
-		</id>
+        </id>
 
-<!--        <property name="choiceId">
-            <column name="choiceId" sql-type="int(11)"/>
+        <!--        <property name="choiceId">
+                    <column name="choiceId" sql-type="int(11)"/>
+                </property>
+                <property name="questionId">
+                    <column name="questionId" sql-type="int(11)"/>
+                </property>
+                <property name="choiceContent" type="java.lang.String">
+                    <column name="choiceContent" />
+                </property>-->
+
+        <many-to-one name="patient" class="com.hospital.domain.Patient" lazy="false">
+            <column name="patientId"></column>
+        </many-to-one>
+
+        <many-to-one name="survey" class="com.hospital.domain.Survey" lazy="false">
+            <column name="surveyId"></column>
+        </many-to-one>
+
+        <property name="retrieveDate" type="java.util.Date">
+            <column name="retrieveDate"/>
         </property>
-        <property name="questionId">
-            <column name="questionId" sql-type="int(11)"/>
-        </property>
-        <property name="choiceContent" type="java.lang.String">
-            <column name="choiceContent" />
-        </property>-->
 
-		<many-to-one name="patient" class="com.hospital.domain.Patient"  lazy="false" >
-			<column name="patientId"></column>
-		</many-to-one>
+        <one-to-one name="deliveryInfo" constrained="true" lazy="false"></one-to-one>
 
-		<many-to-one name="survey" class="com.hospital.domain.Survey"  lazy="false" >
-			<column name="surveyId"></column>
-		</many-to-one>
+        <many-to-one name="doctor" class="com.hospital.domain.Doctor" lazy="false">
+            <column name="aid"></column>
+        </many-to-one>
 
-		<property name="retrieveDate" type="java.util.Date">
-			<column name="retrieveDate" />
-		</property>
+        <set name="answers" lazy="false" inverse="true">
+            <key>
+                <column name="deliveryId"></column>
+            </key>
+            <one-to-many class="com.hospital.domain.Answer"/>
+        </set>
 
- 		<one-to-one name="deliveryInfo" constrained="true" lazy="false"></one-to-one>
-
- 		<many-to-one name="doctor" class="com.hospital.domain.Doctor" lazy="false" >
-			<column name="aid"></column>
-		</many-to-one>
-
-		<set name="answers"  lazy="false" inverse="true">
-			<key>
-				<column name="deliveryId" ></column>
-			</key>
-			<one-to-many class="com.hospital.domain.Answer"/>
-		</set>
-
-	</class>
+    </class>
 </hibernate-mapping>
 

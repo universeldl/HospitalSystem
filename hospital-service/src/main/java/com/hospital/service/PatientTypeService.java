@@ -7,16 +7,13 @@ import com.hospital.domain.PatientType;
 
 public interface PatientTypeService {
 
-	List<PatientType> getAllPatientType();
+    List<PatientType> getAllPatientType();
 
-	PatientType getTypeById(PatientType patientType);
+    PatientType getTypeById(PatientType patientType);
 
-	PatientType updatePatientType(PatientType updatePatientType);
+    PatientType updatePatientType(PatientType updatePatientType);
 
-	boolean addPatientType(PatientType patientType);
-	
-	
-	
-	
+    boolean addPatientType(PatientType patientType);
+
 
 }

@@ -1,26 +1,26 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.hospital.domain.Choice" table="Choice">
         <id name="choiceId" type="java.lang.Integer">
             <column name="choiceId"/>
-			<generator class="increment" />
+            <generator class="increment"/>
         </id>
-   <!--     <property name="questionId" type="java.lang.Integer">
-            <column name="questionId"/>
-        </property>-->
+        <!--     <property name="questionId" type="java.lang.Integer">
+                 <column name="questionId"/>
+             </property>-->
         <property name="answerId" type="java.lang.Integer">
             <column name="answerId"/>
         </property>
         <property name="score" type="java.lang.Integer">
             <column name="score"/>
         </property>
-    <!--    <property name="surveyId" type="java.lang.Integer">
-            <column name="surveyId"/>
-        </property>-->
+        <!--    <property name="surveyId" type="java.lang.Integer">
+                <column name="surveyId"/>
+            </property>-->
         <property name="choiceContent" type="java.lang.String">
             <column name="choiceContent"/>
         </property>
@@ -28,13 +28,13 @@
             <column name="aid"/>
         </property>
 
-  <!--      <many-to-one name="answer" class="com.hospital.domain.Answer">
-            <column name="answerId"/>
-        </many-to-one>
+        <!--      <many-to-one name="answer" class="com.hospital.domain.Answer">
+                  <column name="answerId"/>
+              </many-to-one>
 
-        <many-to-one name="question" class="com.hospital.domain.Question">
-            <column name="questionId"/>
-        </many-to-one>-->
+              <many-to-one name="question" class="com.hospital.domain.Question">
+                  <column name="questionId"/>
+              </many-to-one>-->
 
     </class>
 </hibernate-mapping>

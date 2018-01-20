@@ -2,6 +2,7 @@ package com.hospital.wechat.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hospital.util.WeixinUtil;
+
 /**
  * Created by QQQ on 2017/12/11.
  */
@@ -18,7 +19,7 @@ public class GetOpenIdOauth2 {
             } else {
                 return null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

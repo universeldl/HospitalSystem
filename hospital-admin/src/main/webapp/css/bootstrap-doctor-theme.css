@@ -12,30 +12,34 @@ html.bootstrap-doctor-vertical-centered {
     min-width: 100%;
     width: 100%;
 }
-html.bootstrap-doctor-vertical-centered body{
+
+html.bootstrap-doctor-vertical-centered body {
     height: 100%;
     margin: 0;
     padding: 0;
     width: 100%;
 }
-html.bootstrap-doctor-vertical-centered .container{
+
+html.bootstrap-doctor-vertical-centered .container {
     display: table;
     height: 100%;
     padding: 0;
     width: 100%;
 }
-html.bootstrap-doctor-vertical-centered .container .row{
+
+html.bootstrap-doctor-vertical-centered .container .row {
     display: table-cell;
     height: 100%;
     vertical-align: middle;
 }
 
 /** Body **/
-body{
+body {
     background-color: #fff;
     padding-top: 70px; /* Required, because main menu / navbar has "navbar-fixed-top" class and is sticked to the top */
 }
-body.bootstrap-doctor-with-small-navbar{
+
+body.bootstrap-doctor-with-small-navbar {
     padding-top: 95px;
 }
 
@@ -45,92 +49,109 @@ body.bootstrap-doctor-with-small-navbar{
 }
 
 /** Forms */
-.form-group label.control-label{
+.form-group label.control-label {
     line-height: normal;
 }
-.form-group label{
+
+.form-group label {
     line-height: 25px;
 }
-.form-group input[type="checkbox"]{
+
+.form-group input[type="checkbox"] {
     margin-top: 9px;
 }
 
 /** Title of container for lists, some content etc. **/
-.bootstrap-doctor-box-title{
+.bootstrap-doctor-box-title {
     display: inline;
 }
 
 /** Box above and below the title of content */
 .bootstrap-doctor-above-content-title,
-.bootstrap-doctor-below-content-title{
+.bootstrap-doctor-below-content-title {
     margin-bottom: 10px;
 }
+
 .bootstrap-doctor-above-content-title .above-content-title,
-.bootstrap-doctor-below-content-title .below-content-title{
+.bootstrap-doctor-below-content-title .below-content-title {
     display: inline-block;
     margin-left: 10px;
 }
+
 .bootstrap-doctor-above-content-title .above-content-title:first-of-type,
-.bootstrap-doctor-below-content-title .below-content-title:first-of-type{
+.bootstrap-doctor-below-content-title .below-content-title:first-of-type {
     margin-left: 0;
 }
+
 .bootstrap-doctor-above-content-title .above-content-title .name,
-.bootstrap-doctor-below-content-title .below-content-title .name{
+.bootstrap-doctor-below-content-title .below-content-title .name {
     color: #5e5e5e;
     font-weight: bold;
 }
+
 .bootstrap-doctor-above-content-title .above-content-title .value,
-.bootstrap-doctor-below-content-title .below-content-title .value{
+.bootstrap-doctor-below-content-title .below-content-title .value {
 }
 
 /** Title of the content */
-.bootstrap-doctor-content-title{
+.bootstrap-doctor-content-title {
     margin-bottom: 10px;
 }
+
 .bootstrap-doctor-content-title h1,
-.bootstrap-doctor-content-title h2{
+.bootstrap-doctor-content-title h2 {
     display: inline-block;
     margin-bottom: 5px;
     margin-top: 0;
 }
+
 .bootstrap-doctor-content-title .action,
-.bootstrap-doctor-content-title-h1 .action{
+.bootstrap-doctor-content-title-h1 .action {
     float: right;
     margin-left: 10px;
     position: relative;
     top: 5px;
 }
-.bootstrap-doctor-content-title-h2 .action{
+
+.bootstrap-doctor-content-title-h2 .action {
     top: 0;
 }
-.bootstrap-doctor-content-title .action:last-child{
+
+.bootstrap-doctor-content-title .action:last-child {
     margin-left: 0;
 }
-.bootstrap-doctor-content-title .action.action-shifted{
+
+.bootstrap-doctor-content-title .action.action-shifted {
     margin-left: 20px;
 }
-.bootstrap-doctor-content-title .action.btn{
+
+.bootstrap-doctor-content-title .action.btn {
     padding-left: 0;
     padding-right: 0;
 }
-.bootstrap-doctor-content-title-buttons{
+
+.bootstrap-doctor-content-title-buttons {
     float: right;
 }
-.bootstrap-doctor-content-title.bootstrap-doctor-content-subtitle{
+
+.bootstrap-doctor-content-title.bootstrap-doctor-content-subtitle {
     margin-top: 25px;
 }
-.bootstrap-doctor-content-title.bootstrap-doctor-content-subtitle .action{
+
+.bootstrap-doctor-content-title.bootstrap-doctor-content-subtitle .action {
     top: 2px;
 }
-.bootstrap-doctor-content-title.bootstrap-doctor-content-title-with-above-content{
+
+.bootstrap-doctor-content-title.bootstrap-doctor-content-title-with-above-content {
     margin-top: 5px;
 }
-.bootstrap-doctor-content-title.bootstrap-doctor-content-title-with-below-content{
+
+.bootstrap-doctor-content-title.bootstrap-doctor-content-title-with-below-content {
     margin-bottom: 5px;
 }
 
 /** Button which is an action */
-.btn.action:active{
+.btn.action:active {
     box-shadow: none;
 }
 
@@ -145,44 +166,47 @@ body.bootstrap-doctor-with-small-navbar{
 }
 
 /** Buttons placed into the Actions column */
-table > tbody > tr > td.actions{
+table > tbody > tr > td.actions {
     padding-bottom: 5px;
     padding-top: 5px;
 }
-table > tbody > tr > td.actions .btn{
+
+table > tbody > tr > td.actions .btn {
     font-size: 13px;
 }
 
 /** The main panel **/
-.bootstrap-doctor-main-panel{
+.bootstrap-doctor-main-panel {
     margin-bottom: 0;
 }
 
 /** Content of the panel **/
-.bootstrap-doctor-panel-content{
+.bootstrap-doctor-panel-content {
     padding: 15px;
 }
-.bootstrap-doctor-panel-content table{
+
+.bootstrap-doctor-panel-content table {
     margin-bottom: 0;
 }
-.bootstrap-doctor-panel-content dl{
+
+.bootstrap-doctor-panel-content dl {
     margin-bottom: 0;
     margin-top: 0;
 }
 
 /** Panel with no-table content **/
 .bootstrap-doctor-no-table-panel,
-.bootstrap-doctor-no-table-panel-content{
+.bootstrap-doctor-no-table-panel-content {
     float: left;
     width: 100%;
 }
 
 /** Left, the first, column **/
-.bootstrap-doctor-col-left{
+.bootstrap-doctor-col-left {
 }
 
 /** Horizontal navbars */
-.bootstrap-doctor-navbar-sm{
+.bootstrap-doctor-navbar-sm {
     background-image: none;
     border: 0;
     box-shadow: initial;
@@ -190,27 +214,34 @@ table > tbody > tr > td.actions .btn{
     min-height: 26px;
     z-index: 1030;
 }
-.bootstrap-doctor-navbar-sm .navbar-collapse .navbar-nav:first-child{
+
+.bootstrap-doctor-navbar-sm .navbar-collapse .navbar-nav:first-child {
     margin-left: 0;
 }
-.bootstrap-doctor-navbar-sm .navbar-collapse .navbar-nav:first-child > li:first-child > a{
+
+.bootstrap-doctor-navbar-sm .navbar-collapse .navbar-nav:first-child > li:first-child > a {
     padding-left: 0;
 }
-.bootstrap-doctor-navbar-sm .navbar-collapse .navbar-nav:last-child{
+
+.bootstrap-doctor-navbar-sm .navbar-collapse .navbar-nav:last-child {
     margin-right: 0;
 }
-.bootstrap-doctor-navbar-sm .navbar-collapse .navbar-nav:last-child > li:last-child > a{
+
+.bootstrap-doctor-navbar-sm .navbar-collapse .navbar-nav:last-child > li:last-child > a {
     padding-right: 0;
 }
+
 .bootstrap-doctor-navbar-sm .navbar-collapse .navbar-nav li.text,
-.bootstrap-doctor-navbar-sm .navbar-collapse .navbar-nav li a{
+.bootstrap-doctor-navbar-sm .navbar-collapse .navbar-nav li a {
     font-size: 13px;
     padding: 3px 8px;
 }
-.bootstrap-doctor-navbar-under-small{
+
+.bootstrap-doctor-navbar-under-small {
     /*top: 25px;*/
     z-index: 1020;
 }
+
 .bootstrap-doctor-navbar .navbar-nav > li > a:focus,
 .bootstrap-doctor-navbar .navbar-nav > li > a:hover {
     background-color: #e7e7e7;
@@ -226,38 +257,43 @@ table > tbody > tr > td.actions .btn{
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
-    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
-    box-shadow: 0 1px 4px rgba(0,0,0,.065);
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
 }
+
 .bootstrap-doctor-navbar-side > li > a {
     display: block;
-    width: 190px\9;
+    width: 190px \9;
     margin: 0 0 -1px;
     padding: 8px 14px;
     border: 1px solid #e5e5e5;
 }
+
 .bootstrap-doctor-navbar-side > .active > a,
-.bootstrap-doctor-navbar-side .active a:hover{
+.bootstrap-doctor-navbar-side .active a:hover {
     background-color: #1e7ae3;
     color: #fff;
 }
+
 .bootstrap-doctor-navbar-side > .active > a {
     position: relative;
     z-index: 2;
     padding: 9px 15px;
     border-bottom: 0;
     border-top: 0;
-    text-shadow: 0 1px 0 rgba(0,0,0,.15);
-    -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
-    -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
-    box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .15);
+    -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1), inset -1px 0 0 rgba(0, 0, 0, .1);
+    -moz-box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1), inset -1px 0 0 rgba(0, 0, 0, .1);
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1), inset -1px 0 0 rgba(0, 0, 0, .1);
 }
+
 .bootstrap-doctor-col-left > .bootstrap-doctor-navbar-side {
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
 }
+
 .bootstrap-doctor-col-left > .bootstrap-doctor-navbar-side > li:first-child > a {
     -webkit-border-top-left-radius: 6px;
     -webkit-border-top-right-radius: 6px;
@@ -266,6 +302,7 @@ table > tbody > tr > td.actions .btn{
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
 }
+
 .bootstrap-doctor-col-left > .bootstrap-doctor-navbar-side > li:last-child > a {
     -webkit-border-bottom-right-radius: 6px;
     -webkit-border-bottom-left-radius: 6px;
@@ -274,7 +311,8 @@ table > tbody > tr > td.actions .btn{
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
 }
-.bootstrap-doctor-col-left > .bootstrap-doctor-navbar-side > li .bootstrap-doctor-navbar-side li a{
+
+.bootstrap-doctor-col-left > .bootstrap-doctor-navbar-side > li .bootstrap-doctor-navbar-side li a {
     padding-left: 20px;
 }
 
@@ -285,19 +323,24 @@ table > tbody > tr > td.actions .btn{
     margin-right: -6px;
     opacity: .25;
 }
+
 .bootstrap-doctor-navbar-side > li > a:hover {
     background-color: #f5f5f5;
 }
+
 .bootstrap-doctor-navbar-side a:hover .glyphicon {
     opacity: .5;
 }
+
 .bootstrap-doctor-navbar-side .active .glyphicon,
 .bootstrap-doctor-navbar-side .active a:hover .glyphicon {
     opacity: 1;
 }
+
 .bootstrap-doctor-navbar-side.affix {
     top: 40px;
 }
+
 .bootstrap-doctor-navbar-side.affix-bottom {
     position: absolute;
     top: auto;
@@ -305,12 +348,12 @@ table > tbody > tr > td.actions .btn{
 }
 
 /** Thin navbar, e.g. for the breadcrumbs **/
-.bootstrap-doctor-navbar-thin{
+.bootstrap-doctor-navbar-thin {
     min-height: 0;
 }
 
 /** Breadcrumbs **/
-.bootstrap-doctor-breadcrumb{
+.bootstrap-doctor-breadcrumb {
     background: none;
     margin: 8px 15px;
     padding: 0;
@@ -330,86 +373,94 @@ table > tbody > tr > td.actions .btn{
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff8f8f8', GradientType=0);
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
-.bootstrap-doctor-tabs{
+
+.bootstrap-doctor-tabs {
     margin-bottom: 20px;
 }
 
 /** Alert **/
-.bootstrap-doctor-alert{
+.bootstrap-doctor-alert {
     padding: 10px 15px;
 }
-.bootstrap-doctor-alert h4{
+
+.bootstrap-doctor-alert h4 {
     margin-bottom: 3px;
 }
 
 /** Progress bars */
-.progress-with-value{
+.progress-with-value {
     position: relative;
 }
-.progress-with-value span.value-container{
+
+.progress-with-value span.value-container {
     color: #fff;
     left: 50%;
     position: absolute;
 }
-.progress-with-value span.value{
+
+.progress-with-value span.value {
     line-height: 21px;
     margin-left: -50%;
     text-shadow: 0 0 2px #111, 0 0 0.2em #111;
 }
-.progress-bar-inline{
+
+.progress-bar-inline {
     display: inline-block;
     vertical-align: middle;
 }
-.progress-bar-inline .progress{
+
+.progress-bar-inline .progress {
     margin-bottom: 0;
     margin-top: -3px;
 }
 
 /** Labels */
-.bootstrap-doctor-label-thin{
+.bootstrap-doctor-label-thin {
     font-weight: normal;
     padding-top: 0.3em;
 }
 
 /** Skip padding of elements on the edge **/
-.bootstrap-doctor-no-edges-padding > div:first-child{
+.bootstrap-doctor-no-edges-padding > div:first-child {
     padding-left: 0;
 }
-.bootstrap-doctor-no-edges-padding > div:last-child{
+
+.bootstrap-doctor-no-edges-padding > div:last-child {
     padding-right: 0;
 }
 
 /** Light, small paddings **/
-.bootstrap-doctor-light-padding-bottom{
+.bootstrap-doctor-light-padding-bottom {
     padding-bottom: 10px;
 }
-.bootstrap-doctor-light-padding-top{
+
+.bootstrap-doctor-light-padding-top {
     padding-top: 10px;
 }
 
 /** Footer **/
-.navbar-footer{
+.navbar-footer {
     background-color: #F8F8F8;
     margin-top: 15px;
 }
-.navbar-footer footer p{
+
+.navbar-footer footer p {
     margin-bottom: 15px;
     margin-top: 15px;
 }
 
-
 /** Bootstrap 3 Typeahead plugin **/
-.typeahead{
+.typeahead {
     z-index: 1051;
 }
 
 /** Disabling padding **/
-.bootstrap-doctor-without-padding{
+.bootstrap-doctor-without-padding {
     padding: 0;
 }
 
 /** Login form **/
-.bootstrap-doctor-login-form{
+.bootstrap-doctor-login-form {
     max-width: 400px;
     padding: 30px;
     margin: 0 auto;
@@ -419,30 +470,36 @@ table > tbody > tr > td.actions .btn{
     -moz-border-radius: 5px;
     border-radius: 5px;
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-.bootstrap-doctor-login-form h1{
+
+.bootstrap-doctor-login-form h1 {
     font-size: 36px;
     margin-bottom: 25px;
     margin-top: 0;
 }
-.bootstrap-doctor-login-form .form-group{
+
+.bootstrap-doctor-login-form .form-group {
     margin-bottom: 20px;
 }
-.bootstrap-doctor-login-form label{
+
+.bootstrap-doctor-login-form label {
     font-size: 15px;
 }
+
 .bootstrap-doctor-login-form input[type="text"],
-.bootstrap-doctor-login-form input[type="password"]{
+.bootstrap-doctor-login-form input[type="password"] {
     font-size: 16px;
     height: auto;
     padding: 7px 9px;
 }
-.bootstrap-doctor-login-form input[type="checkbox"]{
+
+.bootstrap-doctor-login-form input[type="checkbox"] {
     margin-right: 5px;
 }
-.bootstrap-doctor-login-form button{
+
+.bootstrap-doctor-login-form button {
     border-radius: 6px;
     font-size: 18px;
     line-height: 1.33;
@@ -450,31 +507,37 @@ table > tbody > tr > td.actions .btn{
 }
 
 /** Miscellaneous styles */
-.bootstrap-doctor-currency-value{
+.bootstrap-doctor-currency-value {
     text-align: right;
 }
-.left{
+
+.left {
     float: left;
 }
-.right{
+
+.right {
     float: right;
 }
-.bootstrap-doctor-retrieve-to-parent{
+
+.bootstrap-doctor-retrieve-to-parent {
     padding: 10px;
     text-align: center;
 }
-.bootstrap-doctor-retrieve-to-parent .text{
+
+.bootstrap-doctor-retrieve-to-parent .text {
 }
-.bootstrap-doctor-retrieve-to-parent .action{
+
+.bootstrap-doctor-retrieve-to-parent .action {
     margin-left: 5px;
 }
 
 /** Page header */
 .page-header,
-.page-header h1{
+.page-header h1 {
     margin-top: 0;
 }
-.page-header h1{
+
+.page-header h1 {
     margin-bottom: 0;
 }
 
@@ -482,20 +545,23 @@ table > tbody > tr > td.actions .btn{
 .modal .modal-footer {
     margin-top: 0px;
 }
-.modal .modal-body #modal-communiques{
+
+.modal .modal-body #modal-communiques {
     padding-left: 15px;
     padding-right: 15px;
 }
-.modal .modal-body .form-group:last-of-type{
+
+.modal .modal-body .form-group:last-of-type {
     margin-bottom: 0;
 }
+
 .modal .modal-body textarea {
     resize: none;
     /*height: 83px;*/
 }
 
 /** Panel - without data */
-.panel .panel-body .no-data{
+.panel .panel-body .no-data {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     background-color: #f5f5f5;

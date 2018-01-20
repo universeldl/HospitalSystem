@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
-	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+        "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
-  <package name="retrieveManage" extends="struts-default" namespace="/doctor">
-  
-  	<interceptors>
-            <interceptor name="retrieveInterceptor" class="com.hospital.action.interceptor.RetrieveInterceptor" />
+    <package name="retrieveManage" extends="struts-default" namespace="/doctor">
+
+        <interceptors>
+            <interceptor name="retrieveInterceptor" class="com.hospital.action.interceptor.RetrieveInterceptor"/>
 
             <interceptor-stack name="retrieveStack">
                 <interceptor-ref name="defaultStack"/>
@@ -16,14 +16,13 @@
             </interceptor-stack>
         </interceptors>
 
-        <default-interceptor-ref name="retrieveStack" />
-  
-  	<action name="retrieveManageAction_*" method="{1}" class="retrieveManageAction">
-  		<result name="success">/WEB-INF/doctor/retrieveManage.jsp</result>
-  		<result name="nopass" type="redirect">/error/nopass.jsp</result>
-  	</action>
-  </package>
-  
+        <default-interceptor-ref name="retrieveStack"/>
 
-  
+        <action name="retrieveManageAction_*" method="{1}" class="retrieveManageAction">
+            <result name="success">/WEB-INF/doctor/retrieveManage.jsp</result>
+            <result name="nopass" type="redirect">/error/nopass.jsp</result>
+        </action>
+    </package>
+
+
 </struts>	

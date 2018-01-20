@@ -7,15 +7,15 @@ import com.hospital.domain.Patient;
 
 public interface ForfeitService {
 
-	PageBean<ForfeitInfo> findForfeitInfoByPage(int pageCode, int pageSize);
+    PageBean<ForfeitInfo> findForfeitInfoByPage(int pageCode, int pageSize);
 
-	PageBean<ForfeitInfo> queryForfeitInfo(String openID, int deliveryId, int pageCode, int pageSize);
+    PageBean<ForfeitInfo> queryForfeitInfo(String openID, int deliveryId, int pageCode, int pageSize);
 
-	ForfeitInfo getForfeitInfoById(ForfeitInfo forfeitInfo);
+    ForfeitInfo getForfeitInfoById(ForfeitInfo forfeitInfo);
 
-	int payForfeit(ForfeitInfo forfeitInfo);
+    int payForfeit(ForfeitInfo forfeitInfo);
 
-	PageBean<ForfeitInfo> findMyForfeitInfoByPage(Patient patient, int pageCode, int pageSize);
+    PageBean<ForfeitInfo> findMyForfeitInfoByPage(Patient patient, int pageCode, int pageSize);
 
 }
  

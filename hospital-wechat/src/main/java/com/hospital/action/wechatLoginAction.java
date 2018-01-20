@@ -65,7 +65,7 @@ public class wechatLoginAction extends ActionSupport {
             pw.print(app_id);
             pw.flush();
             pw.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
         return null;

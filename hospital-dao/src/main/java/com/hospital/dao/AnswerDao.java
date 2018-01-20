@@ -7,25 +7,25 @@ import java.util.List;
 
 public interface AnswerDao {
 
-	
-	Answer getAnswer(Answer answer);
 
-	Answer updateAnswerInfo(Answer answer);
+    Answer getAnswer(Answer answer);
 
-	boolean addAnswer(Answer answer);
+    Answer updateAnswerInfo(Answer answer);
 
-	PageBean<Answer> findAnswerByPage(int pageCode, int pageSize);
+    boolean addAnswer(Answer answer);
 
-	Answer getAnswerById(Answer answer);
+    PageBean<Answer> findAnswerByPage(int pageCode, int pageSize);
 
-	boolean deleteAnswer(Answer answer);
+    Answer getAnswerById(Answer answer);
 
-	PageBean<Answer> queryAnswer(Answer answer, int pageCode, int pageSize);
+    boolean deleteAnswer(Answer answer);
 
-	Answer getAnswerByopenID(Answer answer);
+    PageBean<Answer> queryAnswer(Answer answer, int pageCode, int pageSize);
 
-	int batchAddAnswer(List<Answer> answers, List<Answer> failAnswers);
+    Answer getAnswerByopenID(Answer answer);
 
-	List<Answer> findAllAnswers();
+    int batchAddAnswer(List<Answer> answers, List<Answer> failAnswers);
+
+    List<Answer> findAllAnswers();
 
 }

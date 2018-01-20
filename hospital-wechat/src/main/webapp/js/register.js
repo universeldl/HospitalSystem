@@ -4,20 +4,20 @@ function registerSubmit() {
     }
     showLoadingToast("提交中...");
 
-    var postdata = "username="+$.trim($("#username").val());
-    postdata = postdata +"&tel="+ $.trim($("#tel").val());
-    postdata = postdata +"&sex="+ $.trim($("#sex option:selected").val());
-    postdata = postdata +"&hospital="+ $.trim($("#hospital option:selected").val());
-    postdata = postdata +"&doctor="+ $.trim($("#doctor option:selected").val());
-    postdata = postdata +"&birthday="+ $.trim($("#birthday").val());
-    postdata = postdata +"&captcha="+ $.trim($("#captchaIN").val());
-    postdata = postdata +"&typeID=1";
+    var postdata = "username=" + $.trim($("#username").val());
+    postdata = postdata + "&tel=" + $.trim($("#tel").val());
+    postdata = postdata + "&sex=" + $.trim($("#sex option:selected").val());
+    postdata = postdata + "&hospital=" + $.trim($("#hospital option:selected").val());
+    postdata = postdata + "&doctor=" + $.trim($("#doctor option:selected").val());
+    postdata = postdata + "&birthday=" + $.trim($("#birthday").val());
+    postdata = postdata + "&captcha=" + $.trim($("#captchaIN").val());
+    postdata = postdata + "&typeID=1";
     ajax(
         {
-            method:'POST',
-            url:'patientRegisterAction_register.action',
+            method: 'POST',
+            url: 'patientRegisterAction_register.action',
             params: postdata,
-            callback:function(data) {
+            callback: function (data) {
                 hideLoadingToast();
 
                 if (data == 1) {
@@ -34,17 +34,16 @@ function registerSubmit() {
                 }
             }
         }
-
     );
 
 }
 
 function validLogin() {
-    var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+    var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
     if ($('#username').val().length == 0) {
         $('#username').focus();
         return false;
-    }else if(!reg.test($.trim($('#username').val()))){
+    } else if (!reg.test($.trim($('#username').val()))) {
         showDialog2("姓名必须为中文", "确定");
         $('#username').focus();
         return false;
@@ -53,7 +52,7 @@ function validLogin() {
     if ($('#tel').val().length == 0) {
         $('#tel').focus();
         return false;
-    }else if(!(/^1[34578]\d{9}$/.test($.trim($('#tel').val())))){
+    } else if (!(/^1[34578]\d{9}$/.test($.trim($('#tel').val())))) {
         showDialog2("电话号码有误", "确定");
         $('#tel').focus();
         return false;
@@ -96,8 +95,8 @@ function checkLength(str1, str2, str3) {
 
 function reloadCaptchaImg() {
     var timenow = new Date().getTime();
-    var verify=document.getElementById('CAPTCHAIMG');
-    verify.setAttribute('src','captchaAction_getCaptchaImg.action?d='+timenow);
+    var verify = document.getElementById('CAPTCHAIMG');
+    verify.setAttribute('src', 'captchaAction_getCaptchaImg.action?d=' + timenow);
 
 }
 
@@ -107,7 +106,7 @@ function showDialog2(str1, str2) {
     $("#dialog2Str2").html(str2);
     $dialog.fadeIn(200);
 
-    $dialog.on('click', '.weui-dialog__btn', function(){
+    $dialog.on('click', '.weui-dialog__btn', function () {
         $(this).parents('.js_dialog').fadeOut(200);
     });
 }
