@@ -19,12 +19,24 @@ function getQuestionInfo(id) {
             type: "json",
             callback: function (data) {
                 $("#findQuestionContent").val(data.questionContent);
+
+                if (data.textChoice == 1)
+                    $("#findTextChoice").val("是");
+                else if (data.textChoice == 0)
+                    $("#findTextChoice").val("否");
+
                 if (data.questionType == 1)
                     $("#findQuestionType").val("多选题");
                 else if (data.questionType == 2)
                     $("#findQuestionType").val("单选题");
                 else if (data.questionType == 3)
                     $("#findQuestionType").val("问答题");
+
+                if (data.questionType == 3) {
+                    $("#checkTextChoice").outerHTML = '';
+                    $("#checkTextChoice").remove();
+                }
+
                 var str = '';
                 for (let index in data.choices) {
                     str += '<div class="form-group">'

@@ -13,6 +13,8 @@ public class Question {
     private int questionId;
     private int surveyId;
     private String questionContent;
+    private int textChoice;
+    private String textChoiceContent;
     private int questionType;
     private int aid;
     //private Survey survey;
@@ -45,12 +47,28 @@ public class Question {
         this.surveyId = surveyId;
     }
 
+    public int getTextChoice() {
+        return textChoice;
+    }
+
+    public void setTextChoice(int textChoice) {
+        this.textChoice = textChoice;
+    }
+
     public String getQuestionContent() {
         return questionContent;
     }
 
     public void setQuestionContent(String questionContent) {
         this.questionContent = questionContent;
+    }
+
+    public String getTextChoiceContent() {
+        return textChoiceContent;
+    }
+
+    public void setTextChoiceContent(String textChoiceContent) {
+        this.textChoiceContent = textChoiceContent;
     }
 
     public int getQuestionType() {
@@ -73,12 +91,13 @@ public class Question {
 
     }
 
-    public Question(int aid, int surveyId, String questionContent, int questionType) {
+    public Question(int aid, int surveyId, String questionContent, int questionType, int textChoice) {
         super();
         this.aid = aid;
         this.surveyId = surveyId;
         this.questionContent = questionContent;
         this.questionType = questionType;
+        this.textChoice = textChoice;
     }
 
 /*    @Override

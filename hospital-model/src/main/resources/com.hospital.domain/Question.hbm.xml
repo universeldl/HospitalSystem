@@ -12,6 +12,12 @@
         <property name="surveyId" type="java.lang.Integer">
             <column name="surveyId"/>
         </property>
+        <property name="textChoice" type="java.lang.Integer">
+            <column name="textChoice"/>
+        </property>
+        <property name="textChoiceContent" type="java.lang.String">
+            <column name="textChoiceContent"/>
+        </property>
         <property name="questionContent" type="java.lang.String">
             <column name="questionContent"/>
         </property>

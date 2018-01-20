@@ -1,6 +1,7 @@
 let questionType = 1;
 let surveyId = 1;
 let questionId = 1;
+let updateTextChoice = 0;
 
 function updateQuestion(sid, qid) {
     surveyId = sid;
@@ -15,6 +16,14 @@ function updateQuestion(sid, qid) {
             type: "json",
             callback: function (data) {
                 $("#updateQuestionContent").val(data.questionContent);
+
+                if (data.textChoice == 1) {
+                    document.getElementById("updateTextChoice").checked = true;
+                }
+                else if (data.textChoice == 0) {
+                    document.getElementById("updateTextChoice").checked = false;
+                }
+
                 if (data.questionType == 1) {
                     updateMultiChoiceDisplay();
                 }
@@ -24,6 +33,7 @@ function updateQuestion(sid, qid) {
                 else if (data.questionType == 3) {
                     updateTextDisplay();
                 }
+
                 var str = '';
                 $("#updateChoicesDiv").nextUntil("p").each(function () {//clean first
                     $(this).outerHTML = '';
@@ -56,6 +66,11 @@ $(function () {
 
     $('#update_Question').click(function () {
 
+        if (document.getElementById("updateTextChoice").checked) {
+            updateTextChoice = 1;
+        } else {
+            updateTextChoice = 0;
+        }
 
         if (!validUpdateQuestion()) {
             return;
@@ -64,14 +79,14 @@ $(function () {
         var postdata;
         if (questionType == 1) {
             postdata = "questionType=1&questionContent=" + $.trim($("#updateQuestionContent").val())
-                + "&surveyId=" + surveyId + "&questionId=" + questionId + "&" + $("#updateForm").serialize();
+                + "&surveyId=" + surveyId + "&textChoice=" + updateTextChoice + "&questionId=" + questionId + "&" + $("#updateForm").serialize();
         }
         if (questionType == 2) {
             postdata = "questionType=2&questionContent=" + $.trim($("#updateQuestionContent").val())
-                + "&surveyId=" + surveyId + "&questionId=" + questionId + "&" + $("#updateForm").serialize();
+                + "&surveyId=" + surveyId + "&textChoice=" + updateTextChoice + "&questionId=" + questionId + "&" + $("#updateForm").serialize();
         }
         else if (questionType == 3) {
-            postdata = "questionType=3&surveyId=" + surveyId + "&questionId=" + questionId + "&questionContent=" + $.trim($("#updateQuestionContent").val());
+            postdata = "questionType=3&surveyId=" + surveyId + "&questionId=" + questionId + "&textChoice=0" + "&questionContent=" + $.trim($("#updateQuestionContent").val());
         }
 
         ajax(

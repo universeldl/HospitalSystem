@@ -354,8 +354,13 @@
                             <label class="control-label" for="addQuestionContent" style="display: none;"></label>
                         </div>
                     </div>
-
                     <div id="choicesBlock">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="textChoice" class="col-sm-3 control-label">
+                                添加一个可供病人自由回答的选项
+                            </label>
+                        </div>
                         <div class="form-group">
                             <label for="choiceOption1" class="col-sm-3 control-label">选项: </label>
                             <div class="col-sm-5">
@@ -438,6 +443,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group" id="checkTextChoice">
+                        <label for="firstname" class="col-sm-3 control-label">含有自由回答选项</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findTextChoice" readonly="readonly">
+                            <label class="control-label" for="findTextChoice" style="display:none;"></label>
+                        </div>
+                    </div>
+
                     <div id="checkChoicesDiv"></div>
 
                 </div>
@@ -475,10 +488,12 @@
                     <!---------------------表单-------------------->
 
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary" onclick="updateMultiChoiceDisplay()" id="update1"><i
-                                class="fa fa-plus"></i> 多选题
+                        <button type="button" class="btn btn-primary" onclick="updateMultiChoiceDisplay()" id="update1">
+                            <i
+                                    class="fa fa-plus"></i> 多选题
                         </button>
-                        <button type="button" class="btn btn-pinterest" onclick="updateSingleChoiceDisplay()" id="update2"><i
+                        <button type="button" class="btn btn-pinterest" onclick="updateSingleChoiceDisplay()"
+                                id="update2"><i
                                 class="fa fa-plus"></i> 单选题
                         </button>
                         <button type="button" class="btn btn-pinterest" onclick="updateTextDisplay()" id="update3"><i
@@ -496,6 +511,12 @@
 
 
                     <div id="updateChoicesBlock">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="updateTextChoice" class="col-sm-3 control-label">
+                                添加一个可供病人自由回答的选项
+                            </label>
+                        </div>
                         <div id="updateChoicesDiv"></div>
                         <p><span class="addUpdateVar">新增一项</span></p>
                     </div>

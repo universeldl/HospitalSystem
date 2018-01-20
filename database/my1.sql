@@ -100,6 +100,8 @@ CREATE TABLE `survey` (
 CREATE TABLE `Question` (
   `questionId` int(11) NOT NULL AUTO_INCREMENT,
   `surveyId` int(11) NOT NULL,
+  `textChoice` int(1) DEFAULT 0,
+  `textChoiceContent` varchar(255) DEFAULT NULL,
   `questionContent` varchar(255) NOT NULL,
   `questionType` int(3) NOT NULL, /*1-'multi_choice', 2-'single_choice',3-'text'*/
   `aid` int(11) NOT NULL,
@@ -226,9 +228,10 @@ INSERT INTO deliveryInfo VALUES(4,"2017-04-15 00:00:00","2017-06-04 00:00:00",0,
 INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,1,6);
 INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,1,6);
 
-INSERT INTO Question VALUES(1,1,"第一个问题",2,6);
-INSERT INTO Question VALUES(2,1,"2nd question",2,6);
-INSERT INTO Question VALUES(3,1,"text question",2,6);
+INSERT INTO Question VALUES(1,1,0,"","第一个问题",1,6);
+INSERT INTO Question VALUES(2,1,0,"","2nd question",2,6);
+INSERT INTO Question VALUES(3,1,0,"","text question",1,6);
+INSERT INTO Question VALUES(4,2,0,"","text question",1,6);
 
 INSERT INTO Answer VALUES(1,1,1,1,1,"a2",6);
 INSERT INTO Answer VALUES(2,1,3,1,1,"some text1",6);

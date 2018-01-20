@@ -53,6 +53,7 @@ public class SurveyManageAction extends ActionSupport {
 
 
     private Integer questionId;
+    private Integer textChoice;
     private Integer questionType;
     private String questionContent;
 
@@ -82,6 +83,11 @@ public class SurveyManageAction extends ActionSupport {
 
     public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
+    }
+
+
+    public void setTextChoice(Integer textChoice) {
+        this.textChoice = textChoice;
     }
 
 
@@ -235,7 +241,7 @@ public class SurveyManageAction extends ActionSupport {
     public String addQuestion() {
         boolean b = true;
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
-        Question question = new Question(doctor.getAid(), surveyId, questionContent, questionType);
+        Question question = new Question(doctor.getAid(), surveyId, questionContent, questionType, textChoice);
 
         if(questionType == 1 || questionType ==2) {  //is a selection question
             List<String> choices = new ArrayList<>();
@@ -245,10 +251,10 @@ public class SurveyManageAction extends ActionSupport {
             Map<String, String[]> pMap = request.getParameterMap();
             int idx = 0;
             for (String[] value : pMap.values()) {
-                if (idx < 3) {
+                if (idx < 4) {
                     idx++;
                 } else {
-                    if (idx % 2 == 1) {
+                    if (idx % 2 == 0) {
                         choices.add(value[0]);
                     } else {
                         scores.add(Integer.parseInt(value[0]));
@@ -361,6 +367,7 @@ public class SurveyManageAction extends ActionSupport {
         Question updateQuestion = questionService.getQuestionById(question);
         updateQuestion.setQuestionContent(questionContent);
         updateQuestion.setQuestionType(questionType);
+        updateQuestion.setTextChoice(textChoice);
         updateQuestion.setSurveyId(surveyId);
 
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
@@ -378,10 +385,10 @@ public class SurveyManageAction extends ActionSupport {
             Map<String, String[]> pMap = request.getParameterMap();
             int idx = 0;
             for (String[] value : pMap.values()) {
-                if (idx < 4) {
+                if (idx < 5) {
                     idx++;
                 } else {
-                    if (idx % 2 == 0) {
+                    if (idx % 2 == 1) {
                         choices.add(value[0]);
                     } else {
                         scores.add(Integer.parseInt(value[0]));

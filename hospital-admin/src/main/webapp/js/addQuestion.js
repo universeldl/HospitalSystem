@@ -1,5 +1,4 @@
-//var questionType = 1;
-//var surveyId = 1;
+var textChoice = 0; //if there's a text choice in the question
 
 function addQuestion(sid) {
     surveyId = sid;
@@ -10,6 +9,11 @@ $(function () {
 
     $('#add_Question').click(function () {
 
+        if (document.getElementById("textChoice").checked) {
+            textChoice = 1;
+        } else {
+            textChoice = 0;
+        }
 
         if (!validAddQuestion()) {
             return;
@@ -18,14 +22,14 @@ $(function () {
         var postdata;
         if (questionType == 1) {
             postdata = "questionType=1&questionContent=" + $.trim($("#addQuestionContent").val())
-                + "&surveyId=" + surveyId + "&" + $("#addForm").serialize();
+                + "&surveyId=" + surveyId + "&textChoice=" + textChoice + "&" + $("#addForm").serialize();
         }
         if (questionType == 2) {
             postdata = "questionType=2&questionContent=" + $.trim($("#addQuestionContent").val())
-                + "&surveyId=" + surveyId + "&" + $("#addForm").serialize();
+                + "&surveyId=" + surveyId + "&textChoice=" + textChoice + "&" + $("#addForm").serialize();
         }
         else if (questionType == 3) {
-            postdata = "questionType=3&surveyId=" + surveyId + "&questionContent=" + $.trim($("#addQuestionContent").val());
+            postdata = "questionType=3&surveyId=" + surveyId + "&textChoice=0" + "&questionContent=" + $.trim($("#addQuestionContent").val());
         }
 
         ajax(
@@ -129,7 +133,7 @@ function validAddQuestion() {
         $("#addQuestionContent").next().hide();
     }
 
-    if(questionType == 1 || questionType ==2) {  //is a selection question
+    if (questionType == 1 || questionType == 2) {  //is a selection question
         $("#choicesBlock").find("div.col-sm-5").children(":text").each(function () {
             var tmp = $(this).val();
             if (tmp == "") {
