@@ -86,25 +86,25 @@
         var choiceCount = 2;    //实际数量，有增有减
 
         $(function () {
-     //       //新增
-     //       $('.addUpdateVar').on('click', function () {
-     //           varCount++;
-     //           choiceCount++;
-     //           $node = '<div class="form-group">'
-     //               + '<label for="choiceOption' + varCount + '" class="col-sm-3 control-label">选项: </label>'
-     //               + '<div class="col-sm-5">'
-     //               + '<input type="text" class="form-control" name="choiceOption' + varCount + '" id="choiceOption' + varCount + '" placeholder="请输入选项内容">'
-     //               + '<label class="control-label" for="choiceOption' + varCount + '" style="display: none;"></label>'
-     //               + '</div>'
-     //               + '<div class="col-sm-2">'
-     //               + '<input type="text" class="form-control" name="score' + varCount + '" id="score' + varCount + '" placeholder="分数">'
-     //               + '<label class="control-label" for="score' + varCount + '" style="display: none;"></label>'
-     //               + '</div>'
-     //               + '<p><span class="removeUpdateVar">删除</span></p>'
-     //               + '</div>';
-     //           //新表单项加到“新增”前面
-     //           $(this).parent().before($node);
-     //       });
+            //新增
+            $('.addUpdateVar').on('click', function () {
+                varCount++;
+                choiceCount++;
+                $node = '<div class="form-group">'
+                    + '<label for="choiceOption' + varCount + '" class="col-sm-3 control-label">选项: </label>'
+                    + '<div class="col-sm-5">'
+                    + '<input type="text" class="form-control" name="choiceOption' + varCount + '" id="choiceOption' + varCount + '" placeholder="请输入选项内容">'
+                    + '<label class="control-label" for="choiceOption' + varCount + '" style="display: none;"></label>'
+                    + '</div>'
+                    + '<div class="col-sm-2">'
+                    + '<input type="text" class="form-control" name="score' + varCount + '" id="score' + varCount + '" placeholder="分数">'
+                    + '<label class="control-label" for="score' + varCount + '" style="display: none;"></label>'
+                    + '</div>'
+                    + '<p><span class="removeUpdateVar">删除</span></p>'
+                    + '</div>';
+                //新表单项加到“新增”前面
+                $(this).parent().before($node);
+            });
             //新增
             $('.addVar').on('click', function () {
                 varCount++;
@@ -127,7 +127,7 @@
 
             //删除
             $('form').on('click', '.removeVar', function () {
-                if(choiceCount <= 2) {
+                if(getAddCount() <= 2) {
                     alert("至少需要有两条选项!");
                 } else {
                     $(this).parent().parent().remove();
@@ -135,14 +135,14 @@
                 }
             });
             //删除
-     //       $('form').on('click', '.removeUpdateVar', function () {
-     //           if(getUpdateCount() <= 2) {
-     //               alert("至少需要有两条选项!");
-     //           } else {
-     //               $(this).parent().parent().remove();
-     //               choiceCount--;
-     //           }
-     //       });
+            $('form').on('click', '.removeUpdateVar', function () {
+                if(getUpdateCount() <= 2) {
+                    alert("至少需要有两条选项!");
+                } else {
+                    $(this).parent().parent().remove();
+                    choiceCount--;
+                }
+            });
         });
     </script>
 </head>
@@ -483,8 +483,7 @@
                     <div class="form-group">
                         <label for="updateQuestionContent" class="col-sm-3 control-label">问题题目</label>
                         <div class="col-sm-7">
-                            <textarea class="form-control" rows="3" id="updateQuestionContent"
-                                      placeholder="请输入问题题目"></textarea>
+                            <textarea class="form-control" rows="3" id="updateQuestionContent"></textarea>
                             <label class="control-label" for="updateQuestionContent" style="display: none;"></label>
                         </div>
                     </div>
@@ -492,7 +491,7 @@
 
                     <div id="updateChoicesBlock">
                         <div id="updateChoicesDiv"></div>
-                        <p><span class="addVar">新增一项</span></p>
+                        <p><span class="addUpdateVar">新增一项</span></p>
                     </div>
 
                     <!---------------------表单-------------------->
@@ -501,7 +500,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="updateQuestion">
+                    <button type="button" class="btn btn-primary" id="update_Question">
                         修改
                     </button>
                 </div>

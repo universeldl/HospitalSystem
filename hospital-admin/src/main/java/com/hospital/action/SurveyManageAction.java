@@ -380,39 +380,51 @@ public class SurveyManageAction extends ActionSupport{
 	 * @return
 	 */
 	public String updateQuestion(){
-        Set<String> chos = new HashSet<>();
-        chos.add(choiceOption1);
-        chos.add(choiceOption2);
-        chos.add(choiceOption3);
-        chos.add(choiceOption4);
-        chos.add(choiceOption5);
+		Question question = new Question();
+		question.setQuestionId(questionId);
+		Question updateQuestion = questionService.getQuestionById(question);
+		updateQuestion.setQuestionContent(questionContent);
+        updateQuestion.setQuestionType(questionType);
+        updateQuestion.setSurveyId(surveyId);
 
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
-        Question question = new Question();
-        question.setQuestionId(questionId);
-        Question updateQuestion = questionService.getQuestionById(question);//得到修改的问题信息
-        updateQuestion.setAid(doctor.getAid());
-        updateQuestion.setSurveyId(surveyId);
-        updateQuestion.setQuestionContent(questionContent);
-        updateQuestion.setQuestionType(questionType);
 
-        for(Choice choice : updateQuestion.getChoices()) {
-            choiceService.deleteChoice(choice);
-        }
-        Set<Choice> emptyChoices = new HashSet<>();
-        updateQuestion.setChoices(emptyChoices);
-
-        for(String choiceOption : chos) {
-            if(!"".equals(choiceOption.trim())) {
-                Choice choice = new Choice(doctor.getAid(), /*updateQuestion.getQuestionId(),*/ choiceOption, 1);
-                updateQuestion.getChoices().add(choice);
-                choiceService.addChoice(choice);
+        List<String> choices=new ArrayList<>();
+        List<Integer> scores=new ArrayList<>();
+        ActionContext ctx = ActionContext.getContext();
+        HttpServletRequest request = (HttpServletRequest)ctx.get(ServletActionContext.HTTP_REQUEST);
+        Map<String, String[]> pMap = request.getParameterMap();
+        int idx = 0;
+        for (String[] value : pMap.values()) {
+            if(idx < 4) {
+                idx++;
+            }
+            else {
+                if(idx % 2 == 0) {
+                    choices.add(value[0]);
+                }
+                else {
+                    scores.add(Integer.parseInt(value[0]));
+                }
+                idx++;
             }
         }
 
-        Question newQuestion = questionService.updateQuestionInfo(question);
+        for(Choice choice : updateQuestion.getChoices()) {  //clean existing choices in db
+            choiceService.deleteChoice(choice);
+        }
+        updateQuestion.getChoices().clear();    //clean existing choices in question
+
+        for (int i = 0; i < choices.size(); i++) {  //add new choices to db and question
+            Choice choice = new Choice(doctor.getAid(), choices.get(i), scores.get(i));
+            updateQuestion.getChoices().add(choice);
+            //choice.setQuestionId(updateQuestion.getQuestionId());
+            choiceService.addChoice(choice);
+        }
+
+		Question newQuestion = questionService.updateQuestionInfo(updateQuestion);  //update question
 		int success = 0;
-		if(newQuestion!=null){
+		if(newQuestion != null){
 			success = 1;
 		}else{
 			success = 0;

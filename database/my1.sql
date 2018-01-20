@@ -155,8 +155,8 @@ CREATE TABLE `Answer` (
 
 CREATE TABLE `Choice` (
   `choiceId` int(11) NOT NULL AUTO_INCREMENT,
-  `answerId` int(11) NOT NULL,
-  `questionId` int(11) NOT NULL,
+  `answerId` int(11) NOT NULL DEFAULT 0,
+  `questionId` int(11) NOT NULL DEFAULT 0,
   `score` int(11) NOT NULL,
   `choiceContent` varchar(255) NOT NULL,
   `aid` int(11) NOT NULL,

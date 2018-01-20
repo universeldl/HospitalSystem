@@ -14,7 +14,7 @@ function updateQuestion(sid, qid){
             async: false,
             type: "json",
             callback: function (data) {
-                $("#findQuestionContent").val(data.questionContent);
+                $("#updateQuestionContent").val(data.questionContent);
                 if(data.questionType == 1) {
                     updateChoiceDisplay();
                     //disableTextButton();
@@ -28,7 +28,10 @@ function updateQuestion(sid, qid){
                     //disableChoiceButton();
                 }
                 var str = '';
-                document.getElementById("updateChoicesDiv").innerHTML = str;//clean first
+                $("#updateChoicesDiv").nextUntil("p").each(function () {//clean first
+                    $(this).outerHTML = '';
+                    $(this).remove();
+                });
                 for(let index in data.choices) {
                     choiceCount++;
                     str +='<div class="form-group">'
@@ -41,7 +44,7 @@ function updateQuestion(sid, qid){
                         + '<input type="text" class="form-control" name="score' + index + '" id="score' + index + '" value="' + data.choices[index].score+ '">'
                         + '<label class="control-label" for="score' + index + '" style="display: none;"></label>'
                         + '</div>'
-                        + '<p><span class="removeVar">删除</span></p>'
+                        + '<p><span class="removeUpdateVar">删除</span></p>'
                         + '</div>';
                 }
                 document.getElementById("updateChoicesDiv").innerHTML = str;//then set
@@ -64,10 +67,10 @@ $(function () {
     var postdata;
     if ( questionType == 1) {
         postdata = "questionType=1&questionContent="+$.trim($("#updateQuestionContent").val())
-          +"&surveyId="+ surveyId + "&" + $("#updateForm").serialize();
+          +"&surveyId="+ surveyId + "&questionId="+ questionId + "&" + $("#updateForm").serialize();
     }
     else if ( questionType == 2) {
-        postdata = "questionType=2&surveyId="+ surveyId + "&questionContent="+ $.trim($("#updateQuestionContent").val());
+        postdata = "questionType=2&surveyId="+ surveyId + "&questionId="+ questionId + "&questionContent="+ $.trim($("#updateQuestionContent").val());
 	}
 
 	ajax(
@@ -78,11 +81,11 @@ $(function () {
 	    		callback:function(data) {
 					if (data == 1) {
 						$("#updateQuestionModal").modal("hide");//关闭模糊框
-						showInfo("添加成功");
+						showInfo("更新成功");
 
 	                }else {
 						$("#updateQuestionModal").modal("hide");//关闭模糊框
-						showInfo("添加失败");
+						showInfo("更新失败");
 					}
 
 				}
