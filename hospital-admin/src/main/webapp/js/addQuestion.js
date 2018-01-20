@@ -20,8 +20,12 @@ $(function () {
             postdata = "questionType=1&questionContent=" + $.trim($("#addQuestionContent").val())
                 + "&surveyId=" + surveyId + "&" + $("#addForm").serialize();
         }
-        else if (questionType == 2) {
-            postdata = "questionType=2&surveyId=" + surveyId + "&questionContent=" + $.trim($("#addQuestionContent").val());
+        if (questionType == 2) {
+            postdata = "questionType=2&questionContent=" + $.trim($("#addQuestionContent").val())
+                + "&surveyId=" + surveyId + "&" + $("#addForm").serialize();
+        }
+        else if (questionType == 3) {
+            postdata = "questionType=3&surveyId=" + surveyId + "&questionContent=" + $.trim($("#addQuestionContent").val());
         }
 
         ajax(
@@ -55,16 +59,38 @@ $(function () {
 });
 
 
-function choiceDisplay() {
+function addMultiChoiceDisplay() {
     questionType = 1;
     document.getElementById("choicesBlock").style.display = "block";
+    $("#add1").removeClass();
+    $("#add1").addClass("btn btn-primary");
+    $("#add2").removeClass();
+    $("#add2").addClass("btn btn-pinterest");
+    $("#add3").removeClass();
+    $("#add3").addClass("btn btn-pinterest");
 }
 
-function choiceHide() {
+function addSingleChoiceDisplay() {
     questionType = 2;
-    document.getElementById("choicesBlock").style.display = "none";
+    document.getElementById("choicesBlock").style.display = "block";
+    $("#add1").removeClass();
+    $("#add1").addClass("btn btn-pinterest");
+    $("#add2").removeClass();
+    $("#add2").addClass("btn btn-primary");
+    $("#add3").removeClass();
+    $("#add3").addClass("btn btn-pinterest");
 }
 
+function addTextDisplay() {
+    questionType = 3;
+    document.getElementById("choicesBlock").style.display = "none";
+    $("#add1").removeClass();
+    $("#add1").addClass("btn btn-pinterest");
+    $("#add2").removeClass();
+    $("#add2").addClass("btn btn-pinterest");
+    $("#add3").removeClass();
+    $("#add3").addClass("btn btn-primary");
+}
 
 function unique(arr) {
     var result = [], hash = {};
@@ -103,46 +129,48 @@ function validAddQuestion() {
         $("#addQuestionContent").next().hide();
     }
 
-    $("#choicesBlock").find("div.col-sm-5").children(":text").each(function () {
-        var tmp = $(this).val();
-        if (tmp == "") {
-            $(this).parent().addClass("has-error");
-            $(this).next().text("选项不能为空");
-            $(this).next().show();
-            flag = false;
-        }
-        else if (x.includes(tmp)) {
-            $(this).parent().addClass("has-error");
-            $(this).next().text("选项不能重复");
-            $(this).next().show();
-            flag = false;
-        } else {
-            x.push(tmp);
-            $(this).parent().removeClass("has-error");
-            $(this).next().text("");
-            $(this).next().hide();
-        }
-    });
+    if(questionType == 1 || questionType ==2) {  //is a selection question
+        $("#choicesBlock").find("div.col-sm-5").children(":text").each(function () {
+            var tmp = $(this).val();
+            if (tmp == "") {
+                $(this).parent().addClass("has-error");
+                $(this).next().text("选项不能为空");
+                $(this).next().show();
+                flag = false;
+            }
+            else if (x.includes(tmp)) {
+                $(this).parent().addClass("has-error");
+                $(this).next().text("选项不能重复");
+                $(this).next().show();
+                flag = false;
+            } else {
+                x.push(tmp);
+                $(this).parent().removeClass("has-error");
+                $(this).next().text("");
+                $(this).next().hide();
+            }
+        });
 
-    $("#choicesBlock").find("div.col-sm-2").children(":text").each(function () {
-        var tmp = $(this).val();
-        if (tmp == "") {
-            $(this).parent().addClass("has-error");
-            $(this).next().text("分数不能为空");
-            $(this).next().show();
-            flag = false;
-        }
-        else if (isNaN(parseInt(tmp)) || parseInt(tmp) < 0 || parseInt(tmp) > 99) {
-            $(this).parent().addClass("has-error");
-            $(this).next().text("分数必须为0～99之间的正整数");
-            $(this).next().show();
-            flag = false;
-        } else {
-            $(this).parent().removeClass("has-error");
-            $(this).next().text("");
-            $(this).next().hide();
-        }
-    });
+        $("#choicesBlock").find("div.col-sm-2").children(":text").each(function () {
+            var tmp = $(this).val();
+            if (tmp == "") {
+                $(this).parent().addClass("has-error");
+                $(this).next().text("分数不能为空");
+                $(this).next().show();
+                flag = false;
+            }
+            else if (isNaN(parseInt(tmp)) || parseInt(tmp) < 0 || parseInt(tmp) > 99) {
+                $(this).parent().addClass("has-error");
+                $(this).next().text("分数必须为0～99之间的正整数");
+                $(this).next().show();
+                flag = false;
+            } else {
+                $(this).parent().removeClass("has-error");
+                $(this).next().text("");
+                $(this).next().hide();
+            }
+        });
+    }
 
     return flag;
 }

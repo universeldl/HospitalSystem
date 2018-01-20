@@ -335,10 +335,13 @@
 
 
                     <div class="form-group">
-                        <button type="button" class="btn btn-pinterest" onclick="choiceDisplay()" id="add1"><i
-                                class="fa fa-plus"></i> 选择题
+                        <button type="button" class="btn btn-primary" onclick="addMultiChoiceDisplay()" id="add1"><i
+                                class="fa fa-plus"></i> 多选题
                         </button>
-                        <button type="button" class="btn btn-primary" onclick="choiceHide()" id="add2"><i
+                        <button type="button" class="btn btn-pinterest" onclick="addSingleChoiceDisplay()" id="add2"><i
+                                class="fa fa-plus"></i> 单选题
+                        </button>
+                        <button type="button" class="btn btn-pinterest" onclick="addTextDisplay()" id="add3"><i
                                 class="fa fa-plus"></i> 问答题
                         </button>
                     </div>
@@ -472,10 +475,13 @@
                     <!---------------------表单-------------------->
 
                     <div class="form-group">
-                        <button type="button" class="btn btn-pinterest" onclick="updateChoiceDisplay()" id="update1"><i
-                                class="fa fa-plus"></i> 选择题
+                        <button type="button" class="btn btn-primary" onclick="updateMultiChoiceDisplay()" id="update1"><i
+                                class="fa fa-plus"></i> 多选题
                         </button>
-                        <button type="button" class="btn btn-primary" onclick="updateChoiceHide()" id="update2"><i
+                        <button type="button" class="btn btn-pinterest" onclick="updateSingleChoiceDisplay()" id="update2"><i
+                                class="fa fa-plus"></i> 单选题
+                        </button>
+                        <button type="button" class="btn btn-pinterest" onclick="updateTextDisplay()" id="update3"><i
                                 class="fa fa-plus"></i> 问答题
                         </button>
                     </div>
