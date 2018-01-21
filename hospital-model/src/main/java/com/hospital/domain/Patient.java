@@ -170,7 +170,7 @@ public class Patient implements Serializable {
 
     public Patient(String name, String pwd, String phone,
                    PatientType patientType, String email, Doctor doctor, String openID,
-                   Date createTime) {
+                   Date createTime, Integer sex) {
         super();
         this.name = name;
         this.pwd = pwd;
@@ -180,6 +180,7 @@ public class Patient implements Serializable {
         this.doctor = doctor;
         this.openID = openID;
         this.createTime = createTime;
+        this.sex = sex;
     }
 
 

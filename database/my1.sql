@@ -58,7 +58,7 @@ CREATE TABLE `Patient` (
   `patientId` varchar(255) NOT NULL,
   `pwd` varchar(64) DEFAULT NULL,
   `name` varchar(20) NOT NULL,
-  `appID` varchar(28) NOT NULL,
+  `appID` varchar(28) DEFAULT NULL,
   `openID` varchar(50) UNIQUE NOT NULL,
   `uniqID` varchar(50) UNIQUE DEFAULT NULL,
   `outpatientID` varchar(50) UNIQUE DEFAULT NULL,  # 预留门诊号
@@ -66,7 +66,7 @@ CREATE TABLE `Patient` (
   `sex` varchar(1) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
-  `birthday` datetime NOT NULL,
+  `birthday` datetime DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
   `patientTypeId` int(11) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,
