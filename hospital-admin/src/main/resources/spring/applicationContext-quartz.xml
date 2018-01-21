@@ -64,7 +64,7 @@
         </property>
 
         <property name="cronExpression">
-            <value>*/30 * * * * ?</value><!-- 每间隔30秒执行一次 -->
+            <value>0 */10 * * * ?</value><!-- 每间隔10分钟执行一次 -->
         </property>
     </bean>
 

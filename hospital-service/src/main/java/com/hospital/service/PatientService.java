@@ -6,11 +6,14 @@ import net.sf.json.JSONObject;
 import com.hospital.domain.Doctor;
 import com.hospital.domain.PageBean;
 import com.hospital.domain.Patient;
+import com.hospital.domain.Doctor;
 import com.hospital.domain.PatientType;
 
 public interface PatientService {
 
     Patient getPatient(Patient patient);
+
+    List<Patient> getPatientsByDoctor(Doctor doctor);
 
     Patient updatePatientInfo(Patient patient);
 

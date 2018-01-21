@@ -3,6 +3,7 @@ package com.hospital.action;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Set;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -135,7 +136,7 @@ public class PatientManageAction extends ActionSupport {
             pageCode = 1;
         }
         //给pageSize,每页的记录数赋值
-        int pageSize = 5;
+        int pageSize = 10;
         PageBean<Patient> pb = patientService.findPatientByPage(pageCode, pageSize);
         if (pb != null) {
             pb.setUrl("findPatientByPage.action?");
@@ -145,6 +146,39 @@ public class PatientManageAction extends ActionSupport {
         return "success";
     }
 
+
+    /**
+     * 得到指定的病人
+     *
+     * @return
+     */
+    public String getSummary() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+
+        Integer male=0, female = 0;
+        //得到当前医生
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        List<Patient> allPatients = patientService.getPatientsByDoctor(doctor);
+
+        for(Patient p: allPatients) {
+            if(p.getSex() ==1)
+                male++;
+            else
+                female++;
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("male", male);
+        jsonObject.put("female", female);
+
+        try {
+            response.getWriter().print(jsonObject);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
 
     /**
      * 得到指定的病人

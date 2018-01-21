@@ -3,6 +3,7 @@ package com.hospital.dao.impl;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.hospital.domain.Doctor;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -15,6 +16,18 @@ import com.hospital.domain.Patient;
 import com.hospital.domain.PatientType;
 
 public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
+
+    @Override
+    public List<Patient> getPatientsByDoctor(Doctor doctor) {
+
+        String hql = "from Patient r where r.doctor.aid=?";
+        List list = this.getHibernateTemplate().find(hql, doctor.getAid());
+        if (list != null && list.size() > 0) {
+            return list;
+        }
+        return null;
+
+    }
 
     @Override
     public Patient getPatient(Patient patient) {
