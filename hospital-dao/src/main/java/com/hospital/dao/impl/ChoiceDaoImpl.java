@@ -4,12 +4,11 @@ import com.hospital.dao.ChoiceDao;
 import com.hospital.domain.Choice;
 import com.hospital.domain.PageBean;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ChoiceDaoImpl extends HibernateDaoSupport implements ChoiceDao {

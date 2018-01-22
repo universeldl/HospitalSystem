@@ -1,24 +1,19 @@
 package com.hospital.action;
 
-import java.io.IOException;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.hospital.domain.Authorization;
+import com.hospital.domain.PageBean;
+import com.hospital.domain.Patient;
+import com.hospital.domain.RetrieveInfo;
+import com.hospital.service.RetrieveService;
+import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.PropertyFilter;
-
 import org.apache.struts2.ServletActionContext;
 
-import com.hospital.domain.Authorization;
-import com.hospital.domain.RetrieveInfo;
-import com.hospital.domain.DeliveryInfo;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
-import com.hospital.service.RetrieveService;
-import com.hospital.service.DeliveryService;
-import com.opensymphony.xwork2.ActionSupport;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Set;
 
 public class DeliveryAction extends ActionSupport {
 

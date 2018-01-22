@@ -1,25 +1,28 @@
 package com.hospital.action;
 
-import java.io.*;
-import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.hospital.domain.*;
 import com.hospital.service.ChoiceService;
 import com.hospital.service.QuestionService;
+import com.hospital.service.SurveyService;
+import com.hospital.service.SurveyTypeService;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.PropertyFilter;
-
 import org.apache.struts2.ServletActionContext;
 
-import com.hospital.service.SurveyService;
-import com.hospital.service.SurveyTypeService;
-import com.opensymphony.xwork2.ActionSupport;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public class SurveyManageAction extends ActionSupport {

@@ -1,10 +1,10 @@
 package com.hospital.service.impl;
 
-import java.util.List;
-
 import com.hospital.dao.PatientTypeDao;
 import com.hospital.domain.PatientType;
 import com.hospital.service.PatientTypeService;
+
+import java.util.List;
 
 public class PatientTypeServiceImpl implements PatientTypeService {
 

@@ -1,6 +1,5 @@
 package com.hospital.service;
 
-import com.hospital.domain.RetrieveInfo;
 import com.hospital.domain.ForfeitInfo;
 import com.hospital.domain.PageBean;
 import com.hospital.domain.Patient;

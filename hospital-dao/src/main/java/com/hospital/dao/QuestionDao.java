@@ -1,7 +1,7 @@
 package com.hospital.dao;
 
-import com.hospital.domain.Question;
 import com.hospital.domain.PageBean;
+import com.hospital.domain.Question;
 
 import java.util.List;
 

@@ -1,39 +1,26 @@
 package com.hospital.service.impl;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
+import com.hospital.dao.ForfeitDao;
+import com.hospital.dao.PatientDao;
+import com.hospital.dao.PatientTypeDao;
+import com.hospital.domain.*;
+import com.hospital.service.PatientService;
+import com.hospital.util.CheckUtils;
+import com.hospital.util.Md5Utils;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
-
-
 import net.sf.json.JSONObject;
-
 import org.apache.struts2.ServletActionContext;
 
-import antlr.Utils;
-
-import com.hospital.dao.ForfeitDao;
-import com.hospital.dao.PatientDao;
-import com.hospital.dao.PatientTypeDao;
-import com.hospital.domain.Doctor;
-import com.hospital.domain.DeliveryInfo;
-import com.hospital.domain.ForfeitInfo;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
-import com.hospital.domain.PatientType;
-import com.hospital.service.PatientService;
-import com.hospital.util.CheckUtils;
-import com.hospital.util.Md5Utils;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 
 public class PatientServiceImpl implements PatientService {

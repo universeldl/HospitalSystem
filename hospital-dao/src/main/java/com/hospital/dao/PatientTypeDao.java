@@ -1,8 +1,8 @@
 package com.hospital.dao;
 
-import java.util.List;
-
 import com.hospital.domain.PatientType;
+
+import java.util.List;
 
 public interface PatientTypeDao {
 

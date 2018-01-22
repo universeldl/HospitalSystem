@@ -1,26 +1,19 @@
 package com.hospital.action;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.Set;
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.util.PropertyFilter;
-
-import org.apache.struts2.ServletActionContext;
-
-import com.hospital.domain.Doctor;
-import com.hospital.domain.Authorization;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
-import com.hospital.domain.PatientType;
+import com.hospital.domain.*;
 import com.hospital.service.PatientService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 public class PatientManageAction extends ActionSupport {
 

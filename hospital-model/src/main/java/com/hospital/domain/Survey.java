@@ -2,8 +2,8 @@ package com.hospital.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 问卷信息类

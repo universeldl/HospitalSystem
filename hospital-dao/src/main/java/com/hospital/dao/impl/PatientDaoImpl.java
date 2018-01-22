@@ -1,19 +1,16 @@
 package com.hospital.dao.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-
+import com.hospital.dao.PatientDao;
 import com.hospital.domain.Doctor;
+import com.hospital.domain.PageBean;
+import com.hospital.domain.Patient;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
-import com.hospital.dao.PatientDao;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
-import com.hospital.domain.PatientType;
+import java.util.List;
 
 public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
 

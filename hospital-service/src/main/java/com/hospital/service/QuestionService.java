@@ -1,8 +1,8 @@
 package com.hospital.service;
 
-import com.hospital.domain.Question;
 import com.hospital.domain.Doctor;
 import com.hospital.domain.PageBean;
+import com.hospital.domain.Question;
 import net.sf.json.JSONObject;
 
 public interface QuestionService {

@@ -1,8 +1,10 @@
 package com.hospital.service.impl;
 
-import com.hospital.dao.QuestionDao;
 import com.hospital.dao.ForfeitDao;
-import com.hospital.domain.*;
+import com.hospital.dao.QuestionDao;
+import com.hospital.domain.Doctor;
+import com.hospital.domain.PageBean;
+import com.hospital.domain.Question;
 import com.hospital.service.QuestionService;
 import jxl.Cell;
 import jxl.Sheet;
@@ -16,7 +18,6 @@ import org.apache.struts2.ServletActionContext;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 public class QuestionServiceImpl implements QuestionService {

@@ -1,10 +1,10 @@
 package com.hospital.dao;
 
-import java.util.List;
-
 import com.hospital.domain.ForfeitInfo;
 import com.hospital.domain.PageBean;
 import com.hospital.domain.Patient;
+
+import java.util.List;
 
 public interface ForfeitDao {
 

@@ -1,11 +1,11 @@
 package com.hospital.dao;
 
-import java.util.List;
-
-import com.hospital.domain.Survey;
 import com.hospital.domain.DeliveryInfo;
 import com.hospital.domain.PageBean;
 import com.hospital.domain.Patient;
+import com.hospital.domain.Survey;
+
+import java.util.List;
 
 public interface DeliveryDao {
 

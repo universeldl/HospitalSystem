@@ -1,14 +1,12 @@
 package com.hospital.action;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
-
 import net.sf.json.JSONObject;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 
 public class FileUploadAction {
 

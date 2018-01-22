@@ -2,7 +2,9 @@ package com.hospital.service.impl;
 
 import com.hospital.dao.ChoiceDao;
 import com.hospital.dao.ForfeitDao;
-import com.hospital.domain.*;
+import com.hospital.domain.Choice;
+import com.hospital.domain.Doctor;
+import com.hospital.domain.PageBean;
 import com.hospital.service.ChoiceService;
 import jxl.Cell;
 import jxl.Sheet;
@@ -16,7 +18,6 @@ import org.apache.struts2.ServletActionContext;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 public class ChoiceServiceImpl implements ChoiceService {

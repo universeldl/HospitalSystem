@@ -1,13 +1,11 @@
 package com.hospital.service;
 
-import java.util.List;
-
-import net.sf.json.JSONObject;
 import com.hospital.domain.Doctor;
 import com.hospital.domain.PageBean;
 import com.hospital.domain.Patient;
-import com.hospital.domain.Doctor;
-import com.hospital.domain.PatientType;
+import net.sf.json.JSONObject;
+
+import java.util.List;
 
 public interface PatientService {
 

@@ -1,13 +1,10 @@
 package com.hospital.dao;
 
-import java.util.List;
-import java.util.Set;
-
-import com.hospital.domain.RetrieveInfo;
-import com.hospital.domain.DeliveryInfo;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
 import com.hospital.domain.Answer;
+import com.hospital.domain.PageBean;
+import com.hospital.domain.RetrieveInfo;
+
+import java.util.Set;
 
 
 public interface RetrieveDao {

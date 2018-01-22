@@ -1,9 +1,9 @@
 package com.hospital.service;
 
-import java.util.List;
-
-import com.hospital.domain.SurveyType;
 import com.hospital.domain.PageBean;
+import com.hospital.domain.SurveyType;
+
+import java.util.List;
 
 public interface SurveyTypeService {
 

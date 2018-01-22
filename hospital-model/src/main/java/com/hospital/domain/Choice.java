@@ -1,8 +1,5 @@
 package com.hospital.domain;
 
-import javax.persistence.*;
-import java.util.Set;
-
 public class Choice {
     private int choiceId;
     //private int questionId;

@@ -1,12 +1,10 @@
 package com.hospital.dao.impl;
 
-import java.util.List;
-
+import com.hospital.dao.PatientTypeDao;
+import com.hospital.domain.PatientType;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
-import com.hospital.dao.PatientTypeDao;
-
-import com.hospital.domain.PatientType;
+import java.util.List;
 
 public class PatientTypeDaoImpl extends HibernateDaoSupport implements PatientTypeDao {
 

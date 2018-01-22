@@ -1,17 +1,17 @@
 package com.hospital.action;
 
-import com.hospital.domain.Patient;
 import com.hospital.domain.Doctor;
+import com.hospital.domain.Patient;
 import com.hospital.domain.PatientType;
-import com.hospital.service.PatientService;
 import com.hospital.service.DoctorService;
+import com.hospital.service.PatientService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by QQQ on 2017/12/23.

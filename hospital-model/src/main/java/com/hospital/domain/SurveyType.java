@@ -1,7 +1,6 @@
 package com.hospital.domain;
 
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * 问卷类型类

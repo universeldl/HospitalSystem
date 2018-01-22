@@ -1,13 +1,11 @@
 package com.hospital.service.impl;
 
-import java.util.List;
-import java.util.Set;
-
 import com.hospital.dao.SurveyTypeDao;
-import com.hospital.domain.Survey;
-import com.hospital.domain.SurveyType;
 import com.hospital.domain.PageBean;
+import com.hospital.domain.SurveyType;
 import com.hospital.service.SurveyTypeService;
+
+import java.util.List;
 
 public class SurveyTypeServiceImpl implements SurveyTypeService {
 

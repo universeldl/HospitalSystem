@@ -1,19 +1,16 @@
 package com.hospital.dao.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-
+import com.hospital.dao.SurveyDao;
+import com.hospital.domain.PageBean;
 import com.hospital.domain.Question;
+import com.hospital.domain.Survey;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
-import com.hospital.dao.SurveyDao;
-import com.hospital.domain.Survey;
-import com.hospital.domain.SurveyType;
-import com.hospital.domain.PageBean;
+import java.util.List;
 
 public class SurveyDaoImpl extends HibernateDaoSupport implements SurveyDao {
 

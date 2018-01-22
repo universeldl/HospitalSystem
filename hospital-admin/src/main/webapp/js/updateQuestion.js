@@ -12,7 +12,6 @@ function updateQuestion(sid, qid) {
             method: 'POST',
             url: 'doctor/surveyManageAction_getQuestion.action',
             params: "questionId=" + qid,
-            async: false,
             type: "json",
             callback: function (data) {
                 $("#updateQuestionContent").val(data.questionContent);

@@ -1,23 +1,19 @@
 package com.hospital.action;
 
-import java.io.IOException;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.util.PropertyFilter;
-
-import org.apache.struts2.ServletActionContext;
-
-import com.hospital.domain.Doctor;
 import com.hospital.domain.Authorization;
-import com.hospital.domain.RetrieveInfo;
+import com.hospital.domain.Doctor;
 import com.hospital.domain.ForfeitInfo;
 import com.hospital.domain.PageBean;
 import com.hospital.service.ForfeitService;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Set;
 
 public class ForfeitManageAction extends ActionSupport {
 

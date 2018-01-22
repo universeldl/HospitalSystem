@@ -15,7 +15,6 @@ function getQuestionInfo(id) {
             method: 'POST',
             url: 'doctor/surveyManageAction_getQuestion.action',
             params: "questionId=" + id,
-            async: false,
             type: "json",
             callback: function (data) {
                 $("#findQuestionContent").val(data.questionContent);

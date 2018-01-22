@@ -1,11 +1,11 @@
 package com.hospital.action;
 
+import com.hospital.domain.Patient;
 import com.hospital.service.PatientService;
 import com.hospital.wechat.service.AccessTokenMgr;
 import com.hospital.wechat.service.AccessTokenMgrHXTS;
 import com.hospital.wechat.service.GetOpenIdOauth2;
 import com.opensymphony.xwork2.ActionSupport;
-import com.hospital.domain.Patient;
 import org.apache.struts2.ServletActionContext;
 
 import java.io.PrintWriter;

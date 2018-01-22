@@ -1,15 +1,13 @@
 package com.hospital.action;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts2.ServletActionContext;
-
 import com.hospital.domain.Patient;
 import com.hospital.service.PatientService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 @SuppressWarnings("serial")

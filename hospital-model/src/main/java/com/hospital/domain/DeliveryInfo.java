@@ -2,7 +2,6 @@ package com.hospital.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 /**
  * 分发信息类

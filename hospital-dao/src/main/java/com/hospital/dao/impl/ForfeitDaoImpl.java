@@ -1,24 +1,16 @@
 package com.hospital.dao.impl;
 
-import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.hospital.dao.ForfeitDao;
+import com.hospital.domain.*;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
-import com.hospital.dao.ForfeitDao;
-import com.hospital.domain.Doctor;
-import com.hospital.domain.RetrieveInfo;
-import com.hospital.domain.DeliveryInfo;
-import com.hospital.domain.ForfeitInfo;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ForfeitDaoImpl extends HibernateDaoSupport implements ForfeitDao {
 

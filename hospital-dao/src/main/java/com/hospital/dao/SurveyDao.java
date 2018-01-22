@@ -1,11 +1,10 @@
 package com.hospital.dao;
 
-import java.util.List;
-
+import com.hospital.domain.PageBean;
 import com.hospital.domain.Question;
 import com.hospital.domain.Survey;
-import com.hospital.domain.SurveyType;
-import com.hospital.domain.PageBean;
+
+import java.util.List;
 
 public interface SurveyDao {
 

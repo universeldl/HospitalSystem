@@ -1,8 +1,9 @@
 package com.hospital.service;
 
-import java.util.List;
-
-import com.hospital.domain.*;
+import com.hospital.domain.Doctor;
+import com.hospital.domain.PageBean;
+import com.hospital.domain.Question;
+import com.hospital.domain.Survey;
 import net.sf.json.JSONObject;
 
 public interface SurveyService {

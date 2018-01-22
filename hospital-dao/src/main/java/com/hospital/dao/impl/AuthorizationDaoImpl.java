@@ -1,12 +1,10 @@
 package com.hospital.dao.impl;
 
-import java.util.List;
-
+import com.hospital.dao.AuthorizationDao;
+import com.hospital.domain.Authorization;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
-import com.hospital.dao.AuthorizationDao;
-import com.hospital.domain.Doctor;
-import com.hospital.domain.Authorization;
+import java.util.List;
 
 public class AuthorizationDaoImpl extends HibernateDaoSupport implements AuthorizationDao {
 

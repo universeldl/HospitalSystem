@@ -1,10 +1,9 @@
 package com.hospital.action;
 
-import java.io.InputStream;
-
+import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.ActionSupport;
+import java.io.InputStream;
 
 public class FileDownloadAction extends ActionSupport {
 

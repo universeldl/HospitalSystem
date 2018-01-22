@@ -1,9 +1,9 @@
 package com.hospital.service;
 
-import com.hospital.domain.RetrieveInfo;
+import com.hospital.domain.Answer;
 import com.hospital.domain.PageBean;
 import com.hospital.domain.Patient;
-import com.hospital.domain.Answer;
+import com.hospital.domain.RetrieveInfo;
 
 import java.util.Set;
 

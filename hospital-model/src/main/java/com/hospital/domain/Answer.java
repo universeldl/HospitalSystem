@@ -1,11 +1,7 @@
 package com.hospital.domain;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Answer {
     private int answerId;

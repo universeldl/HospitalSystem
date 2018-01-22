@@ -1,11 +1,10 @@
 package com.hospital.dao;
 
-import java.util.List;
-
 import com.hospital.domain.Doctor;
 import com.hospital.domain.PageBean;
 import com.hospital.domain.Patient;
-import com.hospital.domain.PatientType;
+
+import java.util.List;
 
 public interface PatientDao {
 

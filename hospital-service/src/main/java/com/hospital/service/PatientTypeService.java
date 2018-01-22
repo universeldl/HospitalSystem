@@ -1,9 +1,8 @@
 package com.hospital.service;
 
-import java.util.List;
-
-import com.hospital.dao.PatientTypeDao;
 import com.hospital.domain.PatientType;
+
+import java.util.List;
 
 public interface PatientTypeService {
 

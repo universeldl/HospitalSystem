@@ -1,13 +1,12 @@
 package com.hospital.action.interceptor;
 
-import java.util.Map;
-
-import org.apache.struts2.ServletActionContext;
-
-import com.hospital.domain.Doctor;
 import com.hospital.domain.Authorization;
+import com.hospital.domain.Doctor;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
+import org.apache.struts2.ServletActionContext;
+
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public class DeliveryInterceptor implements Interceptor {

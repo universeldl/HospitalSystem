@@ -1,10 +1,10 @@
 package com.hospital.action;
 
-import com.hospital.domain.Doctor;
 import com.hospital.domain.Authorization;
+import com.hospital.domain.Doctor;
 import com.hospital.domain.PageBean;
-import com.hospital.service.DoctorService;
 import com.hospital.service.AuthorizationService;
+import com.hospital.service.DoctorService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONObject;

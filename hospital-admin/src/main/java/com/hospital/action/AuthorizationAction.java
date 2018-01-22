@@ -1,19 +1,16 @@
 package com.hospital.action;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.hospital.domain.Authorization;
+import com.hospital.domain.Doctor;
+import com.hospital.service.AuthorizationService;
+import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.PropertyFilter;
-
 import org.apache.struts2.ServletActionContext;
 
-import com.hospital.domain.Doctor;
-import com.hospital.domain.Authorization;
-import com.hospital.service.AuthorizationService;
-import com.opensymphony.xwork2.ActionSupport;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class AuthorizationAction extends ActionSupport {
 

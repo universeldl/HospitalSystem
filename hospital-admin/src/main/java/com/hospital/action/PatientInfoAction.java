@@ -1,14 +1,13 @@
 package com.hospital.action;
 
-import java.io.IOException;
-import java.util.Map;
-
-import org.apache.struts2.ServletActionContext;
-
 import com.hospital.domain.Patient;
 import com.hospital.service.PatientService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
+
+import java.io.IOException;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public class PatientInfoAction extends ActionSupport {

@@ -1,26 +1,19 @@
 package com.hospital.dao.impl;
 
-import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
+import com.hospital.dao.RetrieveDao;
+import com.hospital.domain.Answer;
+import com.hospital.domain.PageBean;
+import com.hospital.domain.RetrieveInfo;
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
-import com.hospital.dao.RetrieveDao;
-import com.hospital.domain.Doctor;
-import com.hospital.domain.RetrieveInfo;
-import com.hospital.domain.Survey;
-import com.hospital.domain.DeliveryInfo;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
-import com.hospital.domain.Answer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class RetrieveDaoImpl extends HibernateDaoSupport implements RetrieveDao {
 

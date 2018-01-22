@@ -1,13 +1,9 @@
 package com.hospital.quartz;
 
-import java.util.Date;
-
+import com.hospital.service.DeliveryService;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-
-import com.hospital.service.DeliveryService;
-import com.hospital.service.impl.DeliveryServiceImpl;
 
 /**
  * 定时任务

@@ -1,11 +1,9 @@
 package com.hospital.service.impl;
 
-import com.hospital.dao.ForfeitDao;
 import com.hospital.dao.AnswerDao;
+import com.hospital.dao.ForfeitDao;
 import com.hospital.domain.*;
 import com.hospital.service.AnswerService;
-import com.hospital.util.CheckUtils;
-import com.hospital.util.Md5Utils;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -17,7 +15,6 @@ import org.apache.struts2.ServletActionContext;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 

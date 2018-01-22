@@ -1,22 +1,18 @@
 package com.hospital.action;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
-
-import javax.servlet.http.HttpServletResponse;
-
 import com.hospital.domain.*;
+import com.hospital.service.RetrieveService;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.PropertyFilter;
-
 import org.apache.struts2.ServletActionContext;
 
-import com.hospital.service.RetrieveService;
-import com.opensymphony.xwork2.ActionSupport;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RetrieveManageAction extends ActionSupport {
 

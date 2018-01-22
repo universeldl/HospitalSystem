@@ -1,5 +1,7 @@
 package com.hospital.util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.hospital.wechat.service.AccessTokenMgr;
 import com.hospital.wechat.service.MyX509TrustManager;
 
@@ -11,8 +13,6 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.SecureRandom;
-
-import com.alibaba.fastjson.*;
 
 /**
  * Created by QQQ on 2017/12/10.

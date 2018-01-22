@@ -4,7 +4,6 @@ function getSummary() {
         {
             method: 'POST',
             url: 'doctor/patientManageAction_getSummary.action',
-            async: false,
             type: "json",
             callback: function (data) {
                 // 基于准备好的dom，初始化echarts实例

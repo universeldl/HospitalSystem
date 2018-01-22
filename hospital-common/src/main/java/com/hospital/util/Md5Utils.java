@@ -1,9 +1,9 @@
 package com.hospital.util;
 
+import sun.misc.BASE64Encoder;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import sun.misc.BASE64Encoder;
 
 public class Md5Utils {
 

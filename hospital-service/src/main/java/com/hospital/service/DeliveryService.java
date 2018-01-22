@@ -1,10 +1,7 @@
 package com.hospital.service;
 
-import java.util.List;
-
 import com.hospital.domain.DeliveryInfo;
 import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
 
 public interface DeliveryService {
 
