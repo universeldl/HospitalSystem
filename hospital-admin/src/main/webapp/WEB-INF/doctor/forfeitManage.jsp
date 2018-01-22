@@ -114,7 +114,7 @@
         <div class="col-md-10">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default bootstrap-doctor-no-table-panel">
+                    <div class="panel panel-info bootstrap-doctor-no-table-panel">
                         <div class="panel-heading">
                             <div class="text-muted bootstrap-doctor-box-title">提醒查询</div>
                         </div>

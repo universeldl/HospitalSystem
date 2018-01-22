@@ -15,6 +15,9 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-doctor-theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-doctor-theme.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -44,13 +47,10 @@
     <script src="${pageContext.request.contextPath}/js/updateAuthorization.js"></script>
     <!-- add specific js in here -->
 
-    <script src="${pageContext.request.contextPath}/js/vue.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/router.js"></script>
     <script src="${pageContext.request.contextPath}/js/jquery.slimscroll.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/fastclick.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/app.js"></script>
     <script src="${pageContext.request.contextPath}/plugins/layer/layer.js"></script>
-    <script src="${pageContext.request.contextPath}/js/index.js"></script>
 
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </head>
@@ -142,7 +142,7 @@
         <section class="content" style="background: rgb(255, 255, 255); height: 898px;">
             <!-- <h2>Hello World!</h2> -->
 
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">查询</div>
                 <form class="form-horizontal"
                       action="${pageContext.request.contextPath}/doctor/doctorManageAction_queryDoctor.action"
@@ -428,6 +428,87 @@
                     </button>
                     <button type="button" class="btn btn-primary" id="updateDoctor">
                         修改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+<!-------------------------------------------------------------->
+
+
+<!-- 权限模态框（Modal） -->
+<form class="form-horizontal">   <!--保证样式水平不混乱-->
+    <div class="modal fade" id="powerModal" tabindex="-1" role="dialog" aria-labelledby="powerModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="powerModalLabel">
+                        设置医生权限
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <!---------------------表单-------------------->
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">问卷分类管理权限</label>
+                        <div class="col-sm-7">
+                            <input type="hidden" id="aid">
+                            <input type="checkbox" name="power" id="typeSet" value="typeSet">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">问卷管理权限</label>
+                        <div class="col-sm-7">
+                            <input type="checkbox" name="power" id="surveySet" value="surveySet">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">病人管理权限</label>
+                        <div class="col-sm-7">
+                            <input type="checkbox" name="power" id="patientSet" value="patientSet">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">分发管理权限</label>
+                        <div class="col-sm-7">
+                            <input type="checkbox" name="power" id="deliverySet" value="deliverySet">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">答卷管理权限</label>
+                        <div class="col-sm-7">
+                            <input type="checkbox" name="power" id="retrieveSet" value="retrieveSet">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">逾期管理权限</label>
+                        <div class="col-sm-7">
+                            <input type="checkbox" name="power" id="forfeitSet" value="forfeitSet">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">系统设置权限</label>
+                        <div class="col-sm-7">
+                            <input type="checkbox" name="power" id="sysSet" value="sysSet">
+                        </div>
+                    </div>
+
+
+                    <!---------------------表单-------------------->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="setPower()">
+                        设置
                     </button>
                 </div>
             </div><!-- /.modal-content -->

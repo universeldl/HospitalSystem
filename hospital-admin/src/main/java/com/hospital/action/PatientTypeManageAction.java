@@ -28,7 +28,7 @@ public class PatientTypeManageAction extends ActionSupport {
     private Integer resendDays;
 
 
-    public void setRenewDays(Integer resendDays) {
+    public void setResendDays(Integer resendDays) {
         this.resendDays = resendDays;
     }
 

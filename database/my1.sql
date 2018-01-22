@@ -24,7 +24,7 @@ CREATE TABLE `doctor` (
   `name` varchar(20) DEFAULT NULL,
   `pwd` varchar(64) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
-  `hospitalID` int(11) NOT NULL,
+  `hospitalID` int(11) DEFAULT NULL,
   `state` int(2) DEFAULT '1',
   PRIMARY KEY (`aid`),
   CONSTRAINT  FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`aid`)

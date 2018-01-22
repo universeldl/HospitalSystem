@@ -150,7 +150,7 @@
         <section class="content" style="background: rgb(255, 255, 255); height: 898px;">
             <!-- <h2>Hello World!</h2> -->
 
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">查询</div>
                 <form class="form-horizontal"
                       action="${pageContext.request.contextPath}/doctor/surveyManageAction_querySurvey.action"

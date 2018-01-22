@@ -15,6 +15,9 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-doctor-theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-doctor-theme.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -38,6 +41,7 @@
     <script src="${pageContext.request.contextPath}/js/doctorUpdatePwd.js"></script>
 
     <!-- add specific js in here -->
+    <script src="${pageContext.request.contextPath}/js/addPatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/updatePatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/deletePatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/getAllPatientTypes.js"></script>
@@ -51,13 +55,10 @@
     <script src="${pageContext.request.contextPath}/js/echarts.js"></script>
     <!-- add specific js in here -->
 
-    <script src="${pageContext.request.contextPath}/js/vue.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/router.js"></script>
     <script src="${pageContext.request.contextPath}/js/jquery.slimscroll.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/fastclick.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/app.js"></script>
     <script src="${pageContext.request.contextPath}/plugins/layer/layer.js"></script>
-    <script src="${pageContext.request.contextPath}/js/index.js"></script>
 
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </head>
@@ -149,7 +150,7 @@
         <section class="content" style="background: rgb(255, 255, 255); height: 898px;">
             <!-- <h2>Hello World!</h2> -->
 
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">查询</div>
                 <form class="form-horizontal"
                       action="${pageContext.request.contextPath}/doctor/patientManageAction_queryPatient.action"

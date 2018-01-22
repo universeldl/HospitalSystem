@@ -139,22 +139,24 @@
             <div class="col-md-10">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="panel panel-default">
+                        <div class="panel panel-info">
                             <div class="panel-heading">
                                 <div class="text-muted bootstrap-doctor-box-title">问卷管理</div>
                             </div>
                             <div class="bootstrap-doctor-panel-content">
                                 <ul>
-                                    <li>根据问卷编号、问卷名称查询问卷基本信息</li>
+                                    <li>根据问卷编号、问卷名称等查询问卷</li>
                                     <li>添加、修改、删除问卷</li>
+                                    <li>添加、修改、删除问卷中的所有问题</li>
+                                    <li>设置问卷分发周期</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="panel panel-default">
+                        <div class="panel panel-info">
                             <div class="panel-heading">
-                                <div class="text-muted bootstrap-doctor-box-title">问卷分类管理</div>
+                                <div class="text-muted bootstrap-doctor-box-title">问卷分类</div>
                             </div>
                             <div class="bootstrap-doctor-panel-content">
                                 <ul>
@@ -167,48 +169,19 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="text-muted bootstrap-doctor-box-title">问卷分发</div>
-                            </div>
-                            <div class="bootstrap-doctor-panel-content">
-                                <ul>
-                                    <li>根据用户名、问卷编号分发问卷</li>
-                                    <li>展示此用户名的分发信息</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
+                        <div class="panel panel-info">
                             <div class="panel-heading">
                                 <div class="text-muted bootstrap-doctor-box-title">答卷管理</div>
                             </div>
                             <div class="bootstrap-doctor-panel-content">
                                 <ul>
-                                    <li>根据用户名、问卷编号答卷问卷</li>
-                                    <li>展示此用户名的分发信息</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="text-muted bootstrap-doctor-box-title">分发查询</div>
-                            </div>
-                            <div class="bootstrap-doctor-panel-content">
-                                <ul>
-                                    <li>展示所有病人的问卷分发信息</li>
-                                    <li>可根据问卷编号、问卷名称、用户名、姓名进行查询</li>
+                                    <li>根据用户名、问卷相应信息查询答卷</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="panel panel-default">
+                        <div class="panel panel-info">
                             <div class="panel-heading">
                                 <div class="text-muted bootstrap-doctor-box-title">病人管理</div>
                             </div>
@@ -226,25 +199,27 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="panel panel-default">
+                        <div class="panel panel-info">
                             <div class="panel-heading">
-                                <div class="text-muted bootstrap-doctor-box-title">逾期处理</div>
+                                <div class="text-muted bootstrap-doctor-box-title">医生管理</div>
                             </div>
                             <div class="bootstrap-doctor-panel-content">
                                 <ul>
-                                    <li>逾期处理</li>
+                                    <li>根据用户名、姓名查询医生基本信息</li>
+                                    <li>添加、修改、删除医生信息</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="panel panel-default">
+                        <div class="panel panel-info">
                             <div class="panel-heading">
                                 <div class="text-muted bootstrap-doctor-box-title">系统设置</div>
                             </div>
                             <div class="bootstrap-doctor-panel-content">
                                 <ul>
-                                    <li>系统设置</li>
+                                    <li>病人分类设置</li>
+                                    <li>其它系统设置</li>
                                 </ul>
                             </div>
                         </div>
