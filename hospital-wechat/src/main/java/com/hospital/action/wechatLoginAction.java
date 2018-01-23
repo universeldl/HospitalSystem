@@ -2,14 +2,15 @@ package com.hospital.action;
 
 import com.hospital.domain.Patient;
 import com.hospital.service.PatientService;
+import com.hospital.domain.Hospital;
+import com.hospital.service.HospitalService;
 import com.hospital.wechat.service.AccessTokenMgr;
 import com.hospital.wechat.service.AccessTokenMgrHXTS;
 import com.hospital.wechat.service.GetOpenIdOauth2;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
-
 import java.io.PrintWriter;
-
+import java.util.List;
 /**
  * Created by QQQ on 2017/12/23.
  */
@@ -27,11 +28,22 @@ public class wechatLoginAction extends ActionSupport {
         this.patientService = patientService;
     }
 
+    private HospitalService hospitalService;
+
+    public void setHospitalService(HospitalService hospitalService) {
+        this.hospitalService = hospitalService;
+    }
+
     public String login() {
         System.out.println("login called; code = " + code);
 
         AccessTokenMgr mgr = AccessTokenMgrHXTS.getInstance();
         ServletActionContext.getContext().getSession().put("appID", mgr.getAppId());
+
+        List<Hospital> hospitalList = hospitalService.getAllHospitals();
+        //System.out.println("hospitallist = " + hospitalList.toString());
+        ServletActionContext.getRequest().setAttribute("hl", hospitalList);
+
         if (code != null) {
             System.out.println("get code " + code);
             String open_id = GetOpenIdOauth2.getOpenId(code, mgr);

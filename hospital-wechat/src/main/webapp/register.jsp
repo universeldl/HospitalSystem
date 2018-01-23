@@ -54,12 +54,11 @@
                 <div class="weui-cell__bd">
                     <select class="weui-select" id="hospital">
                         <option disabled selected value></option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
+                        <s:if test="#request.hl!=null"><!-- 判断是否已经登录 -->
+                            <s:iterator value="#request.hl" var="hospital">
+                                <option value=<s:property value="#hospital.aid"/> > <s:property value="#hospital.name"/> </option>
+                            </s:iterator>
+                        </s:if>
                     </select>
                 </div>
             </div>
@@ -112,7 +111,11 @@
     </div>
 </form>
 
+<!--
 <div class="weui-footer weui-footer_fixed-bottom">
+-->
+
+<div class="weui-footer">
     <p class="weui-footer__text">Copyright &copy; 2017-2018 呼吸天使</p>
 </div>
 

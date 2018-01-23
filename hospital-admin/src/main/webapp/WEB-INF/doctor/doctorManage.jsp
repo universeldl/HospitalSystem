@@ -182,6 +182,7 @@
                             <th>医生用户名</th>
                             <th>医生姓名</th>
                             <th>联系号码</th>
+                            <th>所属医院</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -194,6 +195,7 @@
                                 <td><s:property value="#doctor.username"/></td>
                                 <td><s:property value="#doctor.name"/></td>
                                 <td><s:property value="#doctor.phone"/></td>
+                                <td><s:property value="#doctor.hospital.name"/></td>
                                 <td>
                                     <s:if test="#doctor.authorization.superSet!=1">
                                         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
@@ -217,6 +219,7 @@
                         </s:if>
                         <s:else>
                             <tbody>
+                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>

@@ -33,6 +33,10 @@
 
         <one-to-one name="authorization" cascade="save-update"></one-to-one>
 
+        <many-to-one name="hospital" class="com.hospital.domain.Hospital" lazy="false">
+            <column name="hospitalID"></column>
+        </many-to-one>
+
 
     </class>
 </hibernate-mapping>

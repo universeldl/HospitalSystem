@@ -6,7 +6,7 @@
     <package name="wechatLogin" extends="struts-default" namespace="/">
         <action name="wechatLoginAction_*" method="{1}" class="wechatLoginAction">
             <result name="success" type="redirect">patient.jsp</result>
-            <result name="none" type="redirect">register.jsp</result>
+            <result name="none">register.jsp</result>
             <result name="error" type="redirect">error.jsp</result>
         </action>
     </package>

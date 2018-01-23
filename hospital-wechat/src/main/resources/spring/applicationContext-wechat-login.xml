@@ -33,9 +33,27 @@
         </property>
     </bean>
 
+
+    <bean id="hospitalDao" class="com.hospital.dao.impl.HospitalDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+
+    <bean id="hospitalService" class="com.hospital.service.impl.HospitalServiceImpl">
+        <property name="hospitalDao">
+            <ref bean="hospitalDao"/>
+        </property>
+    </bean>
+
     <bean id="wechatLoginAction" class="com.hospital.action.wechatLoginAction" scope="prototype">
         <property name="patientService">
             <ref bean="patientService"/>
         </property>
+        <property name="hospitalService">
+            <ref bean="hospitalService"/>
+        </property>
     </bean>
+
 </beans>

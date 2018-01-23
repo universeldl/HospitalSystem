@@ -15,6 +15,7 @@ public class Doctor implements Serializable {
     private String phone;    //联系方式
     private Authorization authorization;//权限
     private Integer state;    //删除状态
+    private Hospital hospital;
 
     public Integer getAid() {
         return aid;
@@ -69,8 +70,14 @@ public class Doctor implements Serializable {
     }
 
     public void setState(Integer state) {
+
+
         this.state = state;
     }
+
+    public Hospital getHospital() { return hospital; }
+
+    public void setHospital(Hospital hospital) { this.hospital = hospital; }
 
     public Doctor() {
 
