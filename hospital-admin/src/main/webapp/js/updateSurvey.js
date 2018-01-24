@@ -8,8 +8,9 @@ $(function () {
             return;
         }
 
-        var postdata = "surveyId=" + $.trim($("#updateSurveyId").val()) + "&surveyName=" + $.trim($("#updateSurveyName").val()) + "&surveyTypeId=" + $.trim($("#updateSurveyType").val())
-            + "&author=" + $.trim($("#updateAuthor").val()) + "&department=" + $.trim($("#updateDepartment").val()) + "&description=" + $.trim($("#updateDescription").val());
+        var postdata = "surveyName=" + $.trim($("#updateSurveyName").val()) + "&surveyTypeId=" + $.trim($("#updateSurveyType").val())
+            + "&frequency=" + $.trim($("#updateFrequency").val()) + "&author=" + $.trim($("#updateAuthor").val())
+            + "&department=" + $.trim($("#updateDepartment").val()) + "&description=" + $.trim($("#updateDescription").val());
         ajax(
             {
                 method: 'POST',
@@ -98,6 +99,18 @@ function validUpdateSurvey() {
         $("#updateSurveyName").next().hide();
     }
 
+
+    var surveyFreq = $.trim($("#updateFrequency").val());
+    if (surveyFreq == -1) {
+        $('#updateFrequency').parent().addClass("has-error");
+        $('#updateFrequency').next().text("请选择分发周期");
+        $("#updateFrequency").next().show();
+        flag = false;
+    } else {
+        $('#updateFrequency').parent().removeClass("has-error");
+        $('#updateFrequency').next().text("");
+        $("#updateFrequency").next().hide();
+    }
 
     var surveyType = $.trim($("#updateSurveyType").val());
     if (surveyType == -1) {

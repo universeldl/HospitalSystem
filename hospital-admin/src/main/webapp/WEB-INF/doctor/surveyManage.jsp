@@ -245,10 +245,6 @@
                                     <button type="button" class="btn btn-success btn-xs"
                                             onclick="question(<s:property value="#survey.surveyId"/>)">试题
                                     </button>
-                                    <button type="button" class="btn btn-primary btn-xs"
-                                            onclick="checkSurvey(<s:property value="#survey.surveyId"/>)"
-                                            data-toggle="modal" data-target="#checkSurvey">浏览
-                                    </button>
                                 </td>
                                 </tbody>
                             </s:iterator>
@@ -463,6 +459,14 @@
 
 
                     <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">分发周期</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findFrequency" readonly="readonly">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">总分发数</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="findNum" readonly="readonly">
@@ -622,6 +626,21 @@
 
 
                     <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">分发周期</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="addFrequency">
+                                <option value="-1">请选择</option>
+                                <option value="1">1个月</option>
+                                <option value="2">2个月</option>
+                                <option value="3">3个月</option>
+                                <option value="4">6个月</option>
+                                <option value="5">12个月</option>
+                            </select>
+                            <label class="control-label" for="addFrequency" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">总分发数</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="addNum" placeholder="请输入问卷总分发数">
@@ -692,6 +711,21 @@
                                 <option value="-1">请选择</option>
                             </select>
                             <label class="control-label" for="updateSurveyType" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">分发周期</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="updateFrequency">
+                                <option value="-1">请选择</option>
+                                <option value="1">1个月</option>
+                                <option value="2">2个月</option>
+                                <option value="3">3个月</option>
+                                <option value="4">6个月</option>
+                                <option value="5">12个月</option>
+                            </select>
+                            <label class="control-label" for="updateFrequency" style="display: none;"></label>
                         </div>
                     </div>
 

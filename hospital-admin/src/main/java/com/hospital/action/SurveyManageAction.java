@@ -66,6 +66,7 @@ public class SurveyManageAction extends ActionSupport {
     }
 
     private Integer surveyTypeId;    //问卷类型
+    private Integer frequency;    //分发周期
     private String surveyName;    //问卷名称
     private String author;    //作者名称
     private String department;    //科室
@@ -106,6 +107,11 @@ public class SurveyManageAction extends ActionSupport {
 
     public void setSurveyTypeId(Integer surveyTypeID) {
         this.surveyTypeId = surveyTypeID;
+    }
+
+
+    public void setFrequency(Integer frequency) {
+        this.frequency = frequency;
     }
 
 
@@ -218,7 +224,7 @@ public class SurveyManageAction extends ActionSupport {
         surveyType.setTypeId(surveyTypeId);
         Date putdate = new Date(System.currentTimeMillis());//得到当前时间,作为生成时间
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");//得到操作医生
-        Survey survey = new Survey(surveyType, surveyName, author, department, putdate, num, num, description, doctor);//设置问卷
+        Survey survey = new Survey(surveyType, surveyName, author, department, putdate, num, num, description, doctor, frequency);//设置问卷
         boolean b = surveyService.addSurvey(survey);//添加问卷.返回是否成功添加
         int success = 0;
         if (b) {
@@ -464,6 +470,7 @@ public class SurveyManageAction extends ActionSupport {
         type.setTypeId(surveyTypeId);
         updateSurvey.setSurveyType(type);//设置问卷类型
         updateSurvey.setDescription(description);
+        updateSurvey.setFrequency(frequency);
         updateSurvey.setDepartment(department);
         Survey newSurvey = surveyService.updateSurveyInfo(updateSurvey);//修改问卷信息对象
         int success = 0;

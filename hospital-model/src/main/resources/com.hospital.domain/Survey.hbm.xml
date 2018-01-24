@@ -19,6 +19,10 @@
             <column name="num"/>
         </property>
 
+        <property name="frequency" type="java.lang.Integer">
+            <column name="frequency"/>
+        </property>
+
         <property name="currentNum" type="java.lang.Integer">
             <column name="currentNum"/>
         </property>
