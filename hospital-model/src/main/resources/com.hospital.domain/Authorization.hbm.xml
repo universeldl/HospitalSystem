@@ -45,7 +45,7 @@
             <column name="superSet" default="0"/>
         </property>
 
-        <one-to-one name="doctor" constrained="true"></one-to-one>
+        <one-to-one name="doctor" lazy="false" constrained="true"></one-to-one>
 
     </class>
 </hibernate-mapping>
