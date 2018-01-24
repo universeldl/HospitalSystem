@@ -40,33 +40,33 @@ public class CreatePatients extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext arg0)
             throws JobExecutionException {
-        boolean createPatients = true;
-        //得到当前时间
-        Date createTime = new Date(System.currentTimeMillis());
-        Doctor tmpDoctor = new Doctor();
-        tmpDoctor.setAid(6);
-        Doctor doctor = doctorService.getDoctorById(tmpDoctor);
-        //得到当前病人类型
-        PatientType type = new PatientType();
-        type.setPatientTypeId(1);
-        Patient patient = new Patient("testPatient", Md5Utils.md5("123456"), "12312312312", type,
-                "testEmail@123.com", doctor, RandomStringUtils.randomAlphanumeric(10), createTime,
-                Integer.valueOf(RandomStringUtils.random(1, "01")));//1位随机数:1或者0
+        //boolean createPatients = true;
+        ////得到当前时间
+        //Date createTime = new Date(System.currentTimeMillis());
+        //Doctor tmpDoctor = new Doctor();
+        //tmpDoctor.setAid(6);
+        //Doctor doctor = doctorService.getDoctorById(tmpDoctor);
+        ////得到当前病人类型
+        //PatientType type = new PatientType();
+        //type.setPatientTypeId(1);
+        //Patient patient = new Patient("testPatient", Md5Utils.md5("123456"), "12312312312", type,
+        //        "testEmail@123.com", doctor, RandomStringUtils.randomAlphanumeric(10), createTime,
+        //        Integer.valueOf(RandomStringUtils.random(1, "01")));//1位随机数:1或者0
 
-        Patient oldPatient = patientService.getPatientByopenID(patient);//检查是否已经存在该openID的病人
-        int success = 0;
-        if (oldPatient != null) {
-            success = -1;//已存在该id
-        } else {
-            try {
-                //createPatients = patientService.addPatient(patient);
-            } catch (Throwable e) {
-                // TODO: handle exception
-                e.printStackTrace();
-            }
-        }
-        if (!createPatients) {
-            System.err.println("定时生成病人信息出现了错误!!!");
-        }
+        //Patient oldPatient = patientService.getPatientByopenID(patient);//检查是否已经存在该openID的病人
+        //int success = 0;
+        //if (oldPatient != null) {
+        //    success = -1;//已存在该id
+        //} else {
+        //    try {
+        //        createPatients = patientService.addPatient(patient);
+        //    } catch (Throwable e) {
+        //        // TODO: handle exception
+        //        e.printStackTrace();
+        //    }
+        //}
+        //if (!createPatients) {
+        //    System.err.println("定时生成病人信息出现了错误!!!");
+        //}
     }
 }
