@@ -59,7 +59,7 @@ public class CreatePatients extends QuartzJobBean {
             success = -1;//已存在该id
         } else {
             try {
-                createPatients = patientService.addPatient(patient);
+                //createPatients = patientService.addPatient(patient);
             } catch (Throwable e) {
                 // TODO: handle exception
                 e.printStackTrace();
