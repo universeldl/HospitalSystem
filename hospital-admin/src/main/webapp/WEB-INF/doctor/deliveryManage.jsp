@@ -87,9 +87,17 @@
                         <li>
                             <a href="${pageContext.request.contextPath}/doctor/surveyTypeManageAction_findSurveyTypeByPage.action"><i
                                     class="fa fa-files-o"></i> 问卷分类</a></li>
+                    </ul>
+                </li>
+                <li class="active"><a href="javascript:;"><i class="fa fa-files-o"></i><span>随访管理</span><i
+                        class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu menu-open" style="display: block;">
                         <li>
                             <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
-                                    class="fa fa-send-o"></i> 问卷分发</a></li>
+                                    class="fa fa-list"></i> 随访设置</a></li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/doctor/deliverySearchAction_findRetrieveInfoByPage.action"><i
+                                    class="fa fa-send-o"></i> 随访信息</a></li>
                     </ul>
                 </li>
                 <li class="active"><a href="javascript:;"><i class="fa fa-file-text-o"></i><span>答卷管理</span><i
@@ -155,54 +163,10 @@
 <!-- ./wrapper -->
 
 
-<!--------------------------------------添加的模糊框------------------------>
+<!--------------------------------------查看的模糊框------------------------>
 <form class="form-horizontal">   <!--保证样式水平不混乱-->
     <!-- 模态框（Modal） -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        添加问卷分类
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <!---------------------表单-------------------->
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">问卷分类名称</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addSurveyTypeName" placeholder="请输入问卷分类名称">
-                            <label class="control-label" for="addSurveyTypeName" style="display: none;"></label>
-                        </div>
-                    </div>
-
-                    <!---------------------表单-------------------->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary" id="addSurveyType">
-                        添加
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-</form>
-<!--------------------------------------添加的模糊框------------------------>
-
-
-<!-- 修改模态框（Modal） -->
-<!-------------------------------------------------------------->
-
-<!-- 修改模态框（Modal） -->
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+    <div class="modal fade" id="findRetrieveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -210,32 +174,89 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="updateModalLabel">
-                        修改问卷分类信息
+                    <h4 class="modal-title" id="myModalLabel">
+                        查看答卷信息
                     </h4>
                 </div>
                 <div class="modal-body">
 
                     <!---------------------表单-------------------->
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">分发编号</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="deliveryId" readonly="readonly">
+
+                        </div>
+                    </div>
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">问卷分类名称</label>
+                        <label for="firstname" class="col-sm-3 control-label">分发问卷名称</label>
                         <div class="col-sm-7">
-                            <input type="hidden" id="updateSurveyTypeId">
-                            <input type="text" class="form-control" id="updateSurveyTypeName" placeholder="请输入问卷分类名称">
-                            <label class="control-label" for="updateSurveyTypeName" style="display: none;"></label>
+                            <input type="text" class="form-control" id="surveyName" readonly="readonly">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">分发问卷类型</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="surveyType" readonly="readonly">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">病人用户名</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="openID" readonly="readonly">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">病人名称</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="patientName" readonly="readonly">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">病人类型</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="patientType" readonly="readonly">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">逾期天数</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="overday" readonly="readonly">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">操作医生</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="doctor" readonly="readonly">
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">答卷状态</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="state" readonly="readonly">
+
                         </div>
                     </div>
 
 
                     <!---------------------表单-------------------->
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary" id="updateSurveyType">
-                        修改
                     </button>
                 </div>
             </div><!-- /.modal-content -->
@@ -243,7 +264,7 @@
     </div>
 
 </form>
-<!-------------------------------------------------------------->
+<!--------------------------------------查看的模糊框------------------------>
 
 
 <!------------------------------修改密码模糊框-------------------------------->

@@ -87,9 +87,17 @@
                         <li>
                             <a href="${pageContext.request.contextPath}/doctor/surveyTypeManageAction_findSurveyTypeByPage.action"><i
                                     class="fa fa-files-o"></i> 问卷分类</a></li>
+                    </ul>
+                </li>
+                <li class="active"><a href="javascript:;"><i class="fa fa-files-o"></i><span>随访管理</span><i
+                        class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu menu-open" style="display: block;">
                         <li>
                             <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
-                                    class="fa fa-send-o"></i> 问卷分发</a></li>
+                                    class="fa fa-list"></i> 随访设置</a></li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/doctor/deliverySearchAction_findRetrieveInfoByPage.action"><i
+                                    class="fa fa-send-o"></i> 随访信息</a></li>
                     </ul>
                 </li>
                 <li class="active"><a href="javascript:;"><i class="fa fa-file-text-o"></i><span>答卷管理</span><i
