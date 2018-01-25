@@ -5,6 +5,7 @@ import com.hospital.dao.HospitalDao;
 import com.hospital.domain.Hospital;
 import com.hospital.domain.PageBean;
 import com.hospital.service.HospitalService;
+import net.sf.json.JSON;
 
 import java.util.List;
 
@@ -25,7 +26,11 @@ public class HospitalServiceImpl implements HospitalService {
     public List<Hospital> getAllHospitals() {
         return hospitalDao.getAllHospitals();
     }
+    @Override
 
+    public List<Hospital> getAllVisibleHospitals() {
+        return hospitalDao.getAllVisibleHospitals();
+    }
     @Override
     public boolean addHospital(Hospital hospital) {
         return hospitalDao.addHospital(hospital);

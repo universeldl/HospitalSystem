@@ -2,7 +2,10 @@ package com.hospital.dao.impl;
 
 import com.hospital.dao.DoctorDao;
 import com.hospital.domain.Doctor;
+import com.hospital.domain.Hospital;
 import com.hospital.domain.PageBean;
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -197,4 +200,18 @@ public class DoctorDaoImpl extends HibernateDaoSupport implements DoctorDao {
         return b;
     }
 
+    @Override
+    public List<Doctor> findDoctorByHospital(Hospital hospital) {
+        System.out.println("doctordaoimpl finddoctor begin, hospitalid = " + hospital.getAid());
+        String hql = "from Doctor r where r.hospital.aid=? and r.state=1";
+        List<Doctor> list = null;
+        try {
+            list = (List<Doctor>) this.getHibernateTemplate().find(hql, hospital.getAid());
+            System.out.println("findDoctorByHospital list = " + list.toString());
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+        return list;
+    }
 }

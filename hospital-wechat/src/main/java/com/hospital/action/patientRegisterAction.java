@@ -1,17 +1,24 @@
 package com.hospital.action;
 
 import com.hospital.domain.Doctor;
+import com.hospital.domain.Hospital;
 import com.hospital.domain.Patient;
 import com.hospital.domain.PatientType;
 import com.hospital.service.DoctorService;
+import com.hospital.service.HospitalService;
 import com.hospital.service.PatientService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.*;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by QQQ on 2017/12/23.
@@ -21,13 +28,14 @@ public class patientRegisterAction extends ActionSupport {
     String username;
     String tel;
     String sex;
-    String hospital;
-    String doctor;
+    String hospitalID;
+    String doctorID;
     String birthday;
     String captcha;
     int typeID;
     PatientService patientService;
     DoctorService doctorService;
+    HospitalService hospitalService;
 
     public void setUsername(String username) {
         this.username = username;
@@ -41,12 +49,12 @@ public class patientRegisterAction extends ActionSupport {
         this.sex = sex;
     }
 
-    public void setHospital(String hospital) {
-        this.hospital = hospital;
+    public void setHospitalID(String hospitalID) {
+        this.hospitalID = hospitalID;
     }
 
-    public void setDoctor(String doctor) {
-        this.doctor = doctor;
+    public void setDoctorID(String doctorID) {
+        this.doctorID = doctorID;
     }
 
     public void setBirthday(String birthday) {
@@ -73,6 +81,34 @@ public class patientRegisterAction extends ActionSupport {
         this.doctorService = doctorService;
     }
 
+    public String findDoctorsByHospital() {
+        if (hospitalID!=null) {
+            System.out.println("find doctor from hospital id = " + hospitalID);
+            Hospital tmpHospital = new Hospital();
+            tmpHospital.setAid(Integer.valueOf(hospitalID));
+            List<Doctor> list = doctorService.findDoctorByHospital(tmpHospital);
+            JSONArray jsonArray = new JSONArray();
+
+            for(int i = 0; i < list.size(); i++) {
+                Doctor doctor = list.get(i);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", doctor.getAid().toString());
+                jsonObject.put("name", doctor.getName());
+                jsonArray.add(jsonObject);
+            }
+            System.out.println("json doctors = " + jsonArray.toString());
+            try {
+                HttpServletResponse response = ServletActionContext.getResponse();
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().print(jsonArray.toString());
+            } catch (IOException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+
     public String register() {
         System.out.println("calling patientRegisterAction_register.action");
         String ref_captcha = ServletActionContext.getContext().getSession().get("captcha").toString();
@@ -81,6 +117,7 @@ public class patientRegisterAction extends ActionSupport {
         captcha = captcha.toLowerCase();
         System.out.println("est captcha = " + captcha);
 
+        System.out.println("hospitalID = " + hospitalID);
 
         Patient patient = (Patient) ServletActionContext.getContext().getSession().get("patient");
         String appID = (String) ServletActionContext.getContext().getSession().get("appID");
@@ -105,8 +142,8 @@ public class patientRegisterAction extends ActionSupport {
 
                 Doctor tmp_doctor = new Doctor();
                 // modify later
-                tmp_doctor.setUsername("lht");
-                Doctor doctor = doctorService.getDoctorByUserName(tmp_doctor);
+                tmp_doctor.setAid(Integer.valueOf(doctorID));
+                Doctor doctor = doctorService.getDoctorById(tmp_doctor);
                 if (doctor == null) {
                     status = -2;
                 } else {

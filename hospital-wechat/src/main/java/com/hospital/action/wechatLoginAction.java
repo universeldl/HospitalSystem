@@ -40,14 +40,18 @@ public class wechatLoginAction extends ActionSupport {
         AccessTokenMgr mgr = AccessTokenMgrHXTS.getInstance();
         ServletActionContext.getContext().getSession().put("appID", mgr.getAppId());
 
-        List<Hospital> hospitalList = hospitalService.getAllHospitals();
-        //System.out.println("hospitallist = " + hospitalList.toString());
+        List<Hospital> hospitalList = hospitalService.getAllVisibleHospitals();
+        System.out.println("hospitallist = " + hospitalList.toString());
         ServletActionContext.getRequest().setAttribute("hl", hospitalList);
 
         if (code != null) {
             System.out.println("get code " + code);
             String open_id = GetOpenIdOauth2.getOpenId(code, mgr);
             System.out.println("openid = " + open_id);
+
+            // testing
+            open_id = "test1234";
+
             if (open_id != null) {
                 Patient patient = new Patient();
                 patient.setOpenID(open_id);

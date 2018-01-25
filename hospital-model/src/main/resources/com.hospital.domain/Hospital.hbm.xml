@@ -8,6 +8,10 @@
             <generator class="increment"/>
         </id>
 
+        <property name="visible" type="java.lang.Boolean">
+            <column name="visible"/>
+        </property>
+
         <property name="name" type="java.lang.String">
             <column name="name"/>
         </property>

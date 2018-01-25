@@ -2,12 +2,13 @@ package com.hospital.dao.impl;
 
 import com.hospital.dao.HospitalDao;
 import com.hospital.domain.Hospital;
+import net.sf.json.JSON;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import java.util.List;
 
 
-public class HospitalDaoImpl extends HibernateDaoSupport implements HospitalDao{
+public class HospitalDaoImpl extends HibernateDaoSupport implements HospitalDao {
 
     @Override
     public Hospital getHospitalByID(Hospital hospital) {
@@ -25,6 +26,19 @@ public class HospitalDaoImpl extends HibernateDaoSupport implements HospitalDao{
         List<Hospital> list = null;
         try {
             list = (List<Hospital>) this.getHibernateTemplate().find(hql);
+        } catch (Throwable e1) {
+            e1.printStackTrace();
+            throw new RuntimeException(e1.getMessage());
+        }
+        return list;
+    }
+
+    @Override
+    public List<Hospital> getAllVisibleHospitals() {
+        String hql = "from Hospital a where a.visible=?";
+        List<Hospital> list = null;
+        try {
+            list = (List<Hospital>) this.getHibernateTemplate().find(hql, true);
         } catch (Throwable e1) {
             e1.printStackTrace();
             throw new RuntimeException(e1.getMessage());
@@ -61,6 +75,4 @@ public class HospitalDaoImpl extends HibernateDaoSupport implements HospitalDao{
         }
         return b;
     }
-
-
 }

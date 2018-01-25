@@ -3,8 +3,10 @@ package com.hospital.service.impl;
 
 import com.hospital.dao.DoctorDao;
 import com.hospital.domain.Doctor;
+import com.hospital.domain.Hospital;
 import com.hospital.domain.PageBean;
 import com.hospital.service.DoctorService;
+import net.sf.json.JSON;
 
 import java.util.List;
 
@@ -58,4 +60,8 @@ public class DoctorServiceImpl implements DoctorService {
 
     }
 
+    @Override
+    public List<Doctor> findDoctorByHospital(Hospital hospital) {
+        return doctorDao.findDoctorByHospital(hospital);
+    }
 }

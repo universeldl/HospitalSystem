@@ -1,7 +1,9 @@
 package com.hospital.dao;
 
 import com.hospital.domain.Doctor;
+import com.hospital.domain.Hospital;
 import com.hospital.domain.PageBean;
+import net.sf.json.JSON;
 
 import java.util.List;
 
@@ -22,4 +24,6 @@ public interface DoctorDao {
     PageBean<Doctor> queryDoctor(Doctor doctor, int pageCode, int pageSize);
 
     boolean deleteDoctor(Doctor doctor);
+
+    List<Doctor> findDoctorByHospital(Hospital hospital);
 }

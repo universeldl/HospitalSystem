@@ -2,7 +2,8 @@ package com.hospital.service;
 
 import com.hospital.domain.Doctor;
 import com.hospital.domain.PageBean;
-
+import net.sf.json.JSON;
+import com.hospital.domain.Hospital;
 import java.util.List;
 
 
@@ -64,4 +65,5 @@ public interface DoctorService {
      */
     boolean deleteDoctor(Doctor doctor);
 
+    List<Doctor> findDoctorByHospital(Hospital hospital);
 }

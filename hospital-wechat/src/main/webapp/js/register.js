@@ -7,8 +7,8 @@ function registerSubmit() {
     var postdata = "username=" + $.trim($("#username").val());
     postdata = postdata + "&tel=" + $.trim($("#tel").val());
     postdata = postdata + "&sex=" + $.trim($("#sex option:selected").val());
-    postdata = postdata + "&hospital=" + $.trim($("#hospital option:selected").val());
-    postdata = postdata + "&doctor=" + $.trim($("#doctor option:selected").val());
+    postdata = postdata + "&hospitalID=" + $.trim($("#hospital option:selected").val());
+    postdata = postdata + "&doctorID=" + $.trim($("#doctorlist option:selected").val());
     postdata = postdata + "&birthday=" + $.trim($("#birthday").val());
     postdata = postdata + "&captcha=" + $.trim($("#captchaIN").val());
     postdata = postdata + "&typeID=1";
@@ -52,9 +52,8 @@ function validLogin() {
     if ($('#tel').val().length == 0) {
         $('#tel').focus();
         return false;
-    } else if (!(/^1[34578]\d{9}$/.test($.trim($('#tel').val())))) {
+    } else if (!(/^1\d{10}$/.test($.trim($('#tel').val())))) {
         showDialog2("电话号码有误", "确定");
-        $('#tel').focus();
         return false;
     }
 
@@ -67,7 +66,7 @@ function validLogin() {
         showDialog2("请选择首诊医院", "确定");
         return false;
     }
-    if ($('#doctor option:selected').val().length == 0) {
+    if ($('#doctorlist option:selected').val().length == 0) {
         showDialog2("请选择首诊医生", "确定");
         return false;
     }
@@ -98,6 +97,26 @@ function reloadCaptchaImg() {
     var verify = document.getElementById('CAPTCHAIMG');
     verify.setAttribute('src', 'captchaAction_getCaptchaImg.action?d=' + timenow);
 
+}
+
+function loadDoctors() {
+    var postdata = "hospitalID=";
+    postdata = postdata + $('#hospital option:selected').val();
+    ajax(
+        {
+            method: 'POST',
+            url: 'patientRegisterAction_findDoctorsByHospital.action',
+            type: "json",
+            scriptCharset: 'utf-8',
+            params: postdata,
+            callback: function (data) {
+                $('#doctorlist').html("");
+                for(var i = 0; i < data.length; i++) {
+                    $("#doctorlist").append("<option value='"+data[i].id+"' >"+data[i].name+"</option>");
+                }
+            }
+        }
+    );
 }
 
 function showDialog2(str1, str2) {
@@ -134,3 +153,4 @@ function showLoadingToast(str) {
 function hideLoadingToast() {
     $('#loadingToast').fadeOut(100);
 }
+

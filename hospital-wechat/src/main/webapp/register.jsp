@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
 
     <link rel="stylesheet" href="css/weui.css"/>
-    <script src="js/register.js"></script>
     <script src="jQuery/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="ajax-lib/ajaxutils.js"></script>
+    <script src="js/register.js"></script>
 </head>
 
 <body>
@@ -52,9 +52,9 @@
                     <label for="hospital" class="weui-label">首诊医院</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <select class="weui-select" id="hospital">
+                    <select class="weui-select" id="hospital" onchange="loadDoctors()">
                         <option disabled selected value></option>
-                        <s:if test="#request.hl!=null"><!-- 判断是否已经登录 -->
+                        <s:if test="#request.hl!=null">
                             <s:iterator value="#request.hl" var="hospital">
                                 <option value=<s:property value="#hospital.aid"/> > <s:property value="#hospital.name"/> </option>
                             </s:iterator>
@@ -64,17 +64,11 @@
             </div>
             <div class="weui-cell weui-cell_select weui-cell_select-after">
                 <div class="weui-cell__hd">
-                    <label for="doctor" class="weui-label">首诊医生</label>
+                    <label for="doctorlist" class="weui-label">首诊医生</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <select class="weui-select" id="doctor">
+                    <select class="weui-select" id="doctorlist">
                         <option disabled selected value></option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
                     </select>
                 </div>
             </div>

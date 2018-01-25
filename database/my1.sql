@@ -14,6 +14,7 @@ CREATE TABLE `wechatAccount` (
 
 CREATE TABLE `hospital` (
   `aid` int(11) NOT NULL,
+  `visible` BOOLEAN NOT NULL,
   `name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`aid`)
 );
@@ -180,24 +181,24 @@ CREATE TABLE `ForfeitInfo` (
 INSERT INTO wechatAccount VALUES(0, "huxitianshi", "appSecret");
 
 
-INSERT INTO hospital VALUES(0, "潮峻科技");
-INSERT INTO hospital VALUES(1, "上海儿童医学中心");
-INSERT INTO hospital VALUES(2, "金杨社区卫生服务中心");
-INSERT INTO hospital VALUES(3, "泥城社区卫生服务中心");
-INSERT INTO hospital VALUES(4, "高桥社区卫生服务中心");
-INSERT INTO hospital VALUES(5, "大团社区卫生服务中心");
-INSERT INTO hospital VALUES(6, "陆家嘴社区卫生服务中心");
-INSERT INTO hospital VALUES(7, "沪东社区卫生服务中心");
-INSERT INTO hospital VALUES(8, "北蔡社区卫生服务中心");
-INSERT INTO hospital VALUES(9, "合庆社区卫生服务中心");
-INSERT INTO hospital VALUES(10, "三林社区卫生服务中心");
-INSERT INTO hospital VALUES(12, "联洋社区卫生服务中心");
-INSERT INTO hospital VALUES(13, "塘桥社区卫生服务中心");
-INSERT INTO hospital VALUES(14, "惠南社区卫生服务中心");
-INSERT INTO hospital VALUES(15, "祝桥社区卫生服务中心");
-INSERT INTO hospital VALUES(16, "洋泾社区卫生服务中心");
-INSERT INTO hospital VALUES(17, "迎博社区卫生服务中心");
-INSERT INTO hospital VALUES(18, "潍坊社区卫生服务中心");
+INSERT INTO hospital VALUES(0, FALSE, "潮峻科技");
+INSERT INTO hospital VALUES(1,  TRUE, "上海儿童医学中心");
+INSERT INTO hospital VALUES(2,  TRUE, "金杨社区卫生服务中心");
+INSERT INTO hospital VALUES(3,  TRUE, "泥城社区卫生服务中心");
+INSERT INTO hospital VALUES(4,  TRUE, "高桥社区卫生服务中心");
+INSERT INTO hospital VALUES(5,  TRUE, "大团社区卫生服务中心");
+INSERT INTO hospital VALUES(6,  TRUE, "陆家嘴社区卫生服务中心");
+INSERT INTO hospital VALUES(7,  TRUE, "沪东社区卫生服务中心");
+INSERT INTO hospital VALUES(8,  TRUE, "北蔡社区卫生服务中心");
+INSERT INTO hospital VALUES(9,  TRUE, "合庆社区卫生服务中心");
+INSERT INTO hospital VALUES(10, TRUE,  "三林社区卫生服务中心");
+INSERT INTO hospital VALUES(12, TRUE,  "联洋社区卫生服务中心");
+INSERT INTO hospital VALUES(13, TRUE,  "塘桥社区卫生服务中心");
+INSERT INTO hospital VALUES(14, TRUE,  "惠南社区卫生服务中心");
+INSERT INTO hospital VALUES(15, TRUE,  "祝桥社区卫生服务中心");
+INSERT INTO hospital VALUES(16, TRUE,  "洋泾社区卫生服务中心");
+INSERT INTO hospital VALUES(17, TRUE,  "迎博社区卫生服务中心");
+INSERT INTO hospital VALUES(18, TRUE,  "潍坊社区卫生服务中心");
 
 
 INSERT INTO PatientType VALUES(1,"病人",10,30,1,2);
@@ -207,9 +208,16 @@ INSERT INTO surveyType VALUES(1,"第一类");
 INSERT INTO surveyType VALUES(2,"2nd");
 
 INSERT INTO doctor VALUES(1,"admin","张三","admin","13547865412",1, 1);
-INSERT INTO doctor VALUES(2,"d1","张一三","d1","13547865412",1, 0);
-INSERT INTO doctor VALUES(5,"doctor","张二三","doctor","13547865412",1, 1);
-INSERT INTO doctor VALUES(6,"lht","lht","lht","13547865412",0, 1);
+INSERT INTO doctor VALUES(2,"admin1","张三1","admin","13547865412",1, 1);
+INSERT INTO doctor VALUES(3,"d1","张一三","d1","13547865412",1, 0);
+INSERT INTO doctor VALUES(4,"doctor1","张三2","doctor","13547865412",2, 1);
+INSERT INTO doctor VALUES(5,"doctor2","张三3","doctor","13547865412",3, 1);
+INSERT INTO doctor VALUES(6,"doctor3","张三4","doctor","13547865412",4, 1);
+INSERT INTO doctor VALUES(7,"doctor4","张三5","doctor","13547865412",5, 1);
+INSERT INTO doctor VALUES(8,"doctor5","张三6","doctor","13547865412",6, 1);
+INSERT INTO doctor VALUES(9,"doctor6","张三7","doctor","13547865412",7, 1);
+INSERT INTO doctor VALUES(10,"doctor7","张三8","doctor","13547865412",8, 1);
+INSERT INTO doctor VALUES(11,"lht","lht","lht","13547865412",0, 1);
 
 INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1","13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,2);
 INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0","13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,6);

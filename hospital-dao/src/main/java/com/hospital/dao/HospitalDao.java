@@ -2,6 +2,7 @@ package com.hospital.dao;
 
 import com.hospital.domain.Hospital;
 import com.hospital.domain.PageBean;
+import net.sf.json.JSON;
 
 import java.util.List;
 
@@ -11,8 +12,9 @@ public interface HospitalDao {
 
     List<Hospital> getAllHospitals();
 
+    List<Hospital> getAllVisibleHospitals();
+
     boolean addHospital(Hospital hospital);
 
     boolean deleteHospital(Hospital hospital);
-
 }
