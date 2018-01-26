@@ -212,12 +212,12 @@ INSERT INTO doctor VALUES(2,"admin1","张三1","admin","13547865412",1, 1);
 INSERT INTO doctor VALUES(3,"d1","张一三","d1","13547865412",1, 0);
 INSERT INTO doctor VALUES(4,"doctor1","张三2","doctor","13547865412",2, 1);
 INSERT INTO doctor VALUES(5,"doctor2","张三3","doctor","13547865412",3, 1);
-INSERT INTO doctor VALUES(6,"doctor3","张三4","doctor","13547865412",4, 1);
+INSERT INTO doctor VALUES(11,"doctor3","张三4","doctor","13547865412",4, 1);
 INSERT INTO doctor VALUES(7,"doctor4","张三5","doctor","13547865412",5, 1);
 INSERT INTO doctor VALUES(8,"doctor5","张三6","doctor","13547865412",6, 1);
 INSERT INTO doctor VALUES(9,"doctor6","张三7","doctor","13547865412",7, 1);
 INSERT INTO doctor VALUES(10,"doctor7","张三8","doctor","13547865412",8, 1);
-INSERT INTO doctor VALUES(11,"lht","lht","lht","13547865412",0, 1);
+INSERT INTO doctor VALUES(6,"lht","lht","lht","13547865412",0, 1);
 
 INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1","13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,2);
 INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0","13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,6);
