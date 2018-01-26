@@ -120,11 +120,11 @@ public class RetrieveDaoImpl extends HibernateDaoSupport implements RetrieveDao 
         List<Integer> integers = new ArrayList<Integer>();
         StringBuilder sb = new StringBuilder();
         StringBuilder sb_sql = new StringBuilder();
-        String sql = "select count(*) from RetrieveInfo ba ,DeliveryInfo bo,Survey bk,Patient r "
-                + "where ba.deliveryId=bo.deliveryId and Bk.surveyId=Bo.surveyId and bo.patientId=r.patientId ";
+        String sql = "select count(*) from RetrieveInfo ba ,deliveryInfo bo,survey bk,Patient r "
+                + "where ba.deliveryId=bo.deliveryId and bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
         //不支持limit分页
-        String hql = "select ba.deliveryId from RetrieveInfo ba ,DeliveryInfo bo,Survey bk,Patient r "
-                + "where ba.deliveryId=bo.deliveryId and Bk.surveyId=Bo.surveyId and bo.patientId=r.patientId ";
+        String hql = "select ba.deliveryId from RetrieveInfo ba ,deliveryInfo bo,survey bk,Patient r "
+                + "where ba.deliveryId=bo.deliveryId and bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
         sb.append(hql);
         sb_sql.append(sql);
         if (!"".equals(openID.trim())) {
