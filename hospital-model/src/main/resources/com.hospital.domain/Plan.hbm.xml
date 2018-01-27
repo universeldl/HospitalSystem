@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.hospital.domain.Plan" dynamic-insert="true" dynamic-update="true">
+        <id name="planId" type="java.lang.Integer">
+            <column name="planId"/>
+            <generator class="increment"/>
+        </id>
+
+        <property name="beginAge" type="java.lang.Integer">
+            <column name="beginAge"/>
+        </property>
+
+        <property name="endAge" type="java.lang.Integer">
+            <column name="endAge"/>
+        </property>
+
+        <property name="active" type="java.lang.Integer">
+            <column name="active"/>
+        </property>
+
+        <property name="sex" type="java.lang.Integer">
+            <column name="sex"/>
+        </property>
+
+        <set name="surveys" table="plan_survey" lazy="false">
+            <key column="planId"></key>
+            <many-to-many class="com.hospital.domain.Survey" column="surveyId"></many-to-many>
+        </set>
+
+        <many-to-one name="patientType" class="com.hospital.domain.PatientType" lazy="false">
+            <column name="patientTypeId"></column>
+        </many-to-one>
+
+
+        <many-to-one name="doctor" class="com.hospital.domain.Doctor" lazy="false">
+            <column name="aid"></column>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

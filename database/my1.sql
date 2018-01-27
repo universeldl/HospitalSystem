@@ -76,6 +76,19 @@ CREATE TABLE `Patient` (
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`)
 );
 
+CREATE TABLE `Plan` (
+  `planId` int(11) NOT NULL,
+  `beginAge` int(2) DEFAULT 0,
+  `endAge` int(2) NOT NULL,
+  `active` int(1) DEFAULT 1,
+  `sex` varchar(1) DEFAULT 1,/*1-男，0-女*/
+  `patientTypeId` int(11) DEFAULT NULL,
+  `aid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`planId`),
+  CONSTRAINT  FOREIGN KEY (`patientTypeId`) REFERENCES `PatientType` (`patientTypeId`) ON DELETE SET NULL,
+  CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`)
+);
+
 CREATE TABLE `surveyType` (
   `typeId` int(11) NOT NULL,
   `typeName` varchar(20) NOT NULL,
@@ -98,6 +111,14 @@ CREATE TABLE `survey` (
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`),
   CONSTRAINT  FOREIGN KEY (`typeId`) REFERENCES `surveyType` (`typeId`) ON DELETE SET NULL
 ) ;
+
+CREATE TABLE `plan_survey` ( /*plan与survey的ManyToMany中间表*/
+  `planId` int(11) NOT NULL,
+  `surveyId` int(11) NOT NULL,
+  PRIMARY KEY (planId, surveyId),
+  CONSTRAINT  FOREIGN KEY (`planId`) REFERENCES `Plan` (`planId`) ON DELETE CASCADE,
+  CONSTRAINT  FOREIGN KEY (`surveyId`) REFERENCES `survey` (`surveyId`) ON DELETE CASCADE
+);
 
 CREATE TABLE `Question` (
   `questionId` int(11) NOT NULL AUTO_INCREMENT,
@@ -201,8 +222,8 @@ INSERT INTO hospital VALUES(17, TRUE,  "迎博社区卫生服务中心");
 INSERT INTO hospital VALUES(18, TRUE,  "潍坊社区卫生服务中心");
 
 
-INSERT INTO PatientType VALUES(1,"病人",10,30,1,2);
-INSERT INTO PatientType VALUES(2,"病人家属",10,30,1,2);
+INSERT INTO PatientType VALUES(1,"哮喘",10,30,1,2);
+INSERT INTO PatientType VALUES(2,"咳嗽",10,30,1,2);
 
 INSERT INTO surveyType VALUES(1,"第一类");
 INSERT INTO surveyType VALUES(2,"2nd");
@@ -262,3 +283,9 @@ INSERT INTO RetrieveInfo VALUES(3,2,1,"2017-05-25 00:00:00",6);
 INSERT INTO RetrieveInfo VALUES(4,2,1,"2017-06-25 00:00:00",6);
 INSERT INTO RetrieveInfo VALUES(5,2,2,"2017-06-25 00:00:00",6);
 
+INSERT INTO Plan VALUES(1, 0, 2, 1, 1, 1, 6);
+INSERT INTO Plan VALUES(2, 2, 5, 1, 0, 1, 6);
+
+INSERT INTO plan_survey VALUES(1, 1);
+INSERT INTO plan_survey VALUES(1, 2);
+INSERT INTO plan_survey VALUES(2, 1);

@@ -23,6 +23,7 @@
     <import resource="applicationContext-patient-info.xml"/>
     <import resource="applicationContext-doctor-manage.xml"/>
     <import resource="applicationContext-patient-manage.xml"/>
+    <import resource="applicationContext-plan-manage.xml"/>
     <import resource="applicationContext-patientType-manage.xml"/>
     <import resource="applicationContext-surveyType-manage.xml"/>
     <import resource="applicationContext-survey-manage.xml"/>

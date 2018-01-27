@@ -21,6 +21,7 @@
     <include file="struts2/struts-patient-info.xml"></include>
     <include file="struts2/struts-doctor-manage.xml"></include>
     <include file="struts2/struts-patient-manage.xml"></include>
+    <include file="struts2/struts-plan-manage.xml"></include>
     <include file="struts2/struts-patientType-manage.xml"></include>
     <include file="struts2/struts-surveyType-manage.xml"></include>
     <include file="struts2/struts-survey-manage.xml"></include>
