@@ -10,87 +10,26 @@
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <html lang="zh-CN" class="ax-vertical-centered">
 <head>
-  <title>问卷名称</title>
-  <meta charset="UTF-8">
+    <title>问卷名称</title>
+    <meta charset="UTF-8">
     <!--
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
   -->
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-  <link rel="stylesheet" href="./css/weui.css"/>
-  <link rel="stylesheet" href="./css/example.css"/>
-</head>
-<body ontouchstart>
-<!--
-<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
--->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="./css/weui.css"/>
+    <link rel="stylesheet" href="./css/example.css"/>
+    <script src="./js/zepto.min.js"></script>
+    <script src="./js/example.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var winH = $(window).height();
+            var categorySpace = 10;
 
-<div class="container" id="container"></div>
-
-<script type="text/html" id="tpl_home">
-    <div class="page">
-        <div class="page__hd">
-          <h1 class="page__title">
-              home page
-          </h1>
-          <p class="page__desc">home page</p>
-        </div>
-        <div class="page__bd page__bd_spacing">
-          <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id="page2">page2</a>
-          <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id="page3">page3</a>
-          <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id="page4">page4</a>
-        </div>
-    </div>
-</script>
-
-<script type="text/html" id="tpl_page2">
-    <div class="page">
-        <div class="page__hd">
-            <h1 class="page__title">page2</h1>
-            <p class="page__desc">按钮</p>
-        </div>
-        <div class="page__bd page__bd_spacing">
-            <a href="javascript:home();" class="weui-btn weui-btn_primary js_item">上一页面</a>
-            <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id=''>下个页面</a>
-        </div>
-    </div>
-</script>
-
-<script type="text/html" id="tpl_page3">
-  <div class="page">
-    <div class="page__hd">
-      <h1 class="page__title">page3</h1>
-      <p class="page__desc">按钮</p>
-    </div>
-    <div class="page__bd page__bd_spacing">
-      <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id="page2">上一页面</a>
-      <a href="javascript:;" class="weui-btn weui-btn_primary">下一页面</a>
-    </div>
-  </div>
-</script>
-
-<script type="text/html" id="tpl_page4">
-    <div class="page">
-        <div class="page__hd">
-            <h1 class="page__title">page3</h1>
-            <p class="page__desc">按钮</p>
-        </div>
-        <div class="page__bd page__bd_spacing">
-            <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id="page2">上一页面</a>
-            <a href="javascript:;" class="weui-btn weui-btn_primary">下一页面</a>
-        </div>
-    </div>
-</script>
-<script src="./js/zepto.min.js"></script>
-<script src="./js/example.js"></script>
-<script type="text/javascript">
-    $(function(){
-        var winH = $(window).height();
-        var categorySpace = 10;
-
-        $('.js_item').on('click', function(){
-            alert();
-            var id = $(this).data('id');
-            window.pageManager.go(id);
+            $('.js_item').on('click', function () {
+                alert();
+                var id = $(this).data('id');
+                window.pageManager.go(id);
+            });
         });
         /*
         $('.js_category').on('click', function(){
@@ -126,8 +65,69 @@
             }
         });
         */
-    });
+    </script>
+    <script type="text/html" id="tpl_page2">
+        <div class="page">
+            <div class="page__hd">
+                <h1 class="page__title">page2</h1>
+                <p class="page__desc">按钮</p>
+            </div>
+            <div class="page__bd page__bd_spacing">
+                <a href="javascript:home();" class="weui-btn weui-btn_primary js_item">上一页面</a>
+                <a href="#page3" class="weui-btn weui-btn_primary js_item">下个页面</a>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/html" id="tpl_page3">
+        <div class="page">
+            <div class="page__hd">
+                <h1 class="page__title">page3</h1>
+                <p class="page__desc">按钮</p>
+            </div>
+            <div class="page__bd page__bd_spacing">
+                <a href="#page2" class="weui-btn weui-btn_primary js_item">上一页面</a>
+                <a href="#page4" class="weui-btn weui-btn_primary">下一页面</a>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/html" id="tpl_page4">
+        <div class="page">
+            <div class="page__hd">
+                <h1 class="page__title">page3</h1>
+                <p class="page__desc">按钮</p>
+            </div>
+            <div class="page__bd page__bd_spacing">
+                <a href="#page3" class="weui-btn weui-btn_primary js_item">上一页面</a>
+                <a href="javascript:;" class="weui-btn weui-btn_primary">下一页面</a>
+            </div>
+        </div>
+    </script>
+</head>
+<body ontouchstart>
+<!--
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+-->
+
+<div class="container" id="container"></div>
+
+<script type="text/html" id="tpl_home">
+    <div class="page">
+        <div class="page__hd">
+            <h1 class="page__title">
+                home page
+            </h1>
+            <p class="page__desc">home page</p>
+        </div>
+        <div class="page__bd page__bd_spacing">
+            <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id="page2">page2</a>
+            <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id="page3">page3</a>
+            <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id="page4">page4</a>
+        </div>
+    </div>
 </script>
+
 
 </body>
 </html>
