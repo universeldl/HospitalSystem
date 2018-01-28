@@ -74,7 +74,12 @@ function validLogin() {
         showDialog2("请填写宝宝出生日期", "确定");
         return false;
     } else {
-        // check correctness of birthday
+        var birthday = new Date(($("#birthday").val()).replace(/-/g,"/"));
+        var curDate = new Date();
+        if (birthday >= curDate) {
+            showDialog2("请填写正确的出生日期", "确定");
+        }
+        return false;
     }
 
     if ($('#captchaIN').val().length == 0) {
