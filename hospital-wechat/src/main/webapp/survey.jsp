@@ -12,103 +12,11 @@
 <head>
     <title>问卷名称</title>
     <meta charset="UTF-8">
-    <!--
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
-  -->
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <link rel="stylesheet" href="./css/weui.css"/>
     <link rel="stylesheet" href="./css/example.css"/>
-    <script src="./js/zepto.min.js"></script>
-    <script src="./js/example.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var winH = $(window).height();
-            var categorySpace = 10;
-
-            $('.js_item').on('click', function () {
-                alert();
-                var id = $(this).data('id');
-                window.pageManager.go(id);
-            });
-        });
-        /*
-        $('.js_category').on('click', function(){
-            var $this = $(this),
-                    $inner = $this.next('.js_categoryInner'),
-                    $page = $this.parents('.page'),
-                    $parent = $(this).parent('li');
-            var innerH = $inner.data('height');
-            bear = $page;
-
-            if(!innerH){
-                $inner.css('height', 'auto');
-                innerH = $inner.height();
-                $inner.removeAttr('style');
-                $inner.data('height', innerH);
-            }
-
-            if($parent.hasClass('js_show')){
-                $parent.removeClass('js_show');
-            }else{
-                $parent.siblings().removeClass('js_show');
-
-                $parent.addClass('js_show');
-                if(this.offsetTop + this.offsetHeight + innerH > $page.scrollTop() + winH){
-                    var scrollTop = this.offsetTop + this.offsetHeight + innerH - winH + categorySpace;
-
-                    if(scrollTop > this.offsetTop){
-                        scrollTop = this.offsetTop - categorySpace;
-                    }
-
-                    $page.scrollTop(scrollTop);
-                }
-            }
-        });
-        */
-    </script>
-    <script type="text/html" id="tpl_page2">
-        <div class="page">
-            <div class="page__hd">
-                <h1 class="page__title">page2</h1>
-                <p class="page__desc">按钮</p>
-            </div>
-            <div class="page__bd page__bd_spacing">
-                <a href="javascript:home();" class="weui-btn weui-btn_primary js_item">上一页面</a>
-                <a href="#page3" class="weui-btn weui-btn_primary js_item">下个页面</a>
-            </div>
-        </div>
-    </script>
-
-    <script type="text/html" id="tpl_page3">
-        <div class="page">
-            <div class="page__hd">
-                <h1 class="page__title">page3</h1>
-                <p class="page__desc">按钮</p>
-            </div>
-            <div class="page__bd page__bd_spacing">
-                <a href="#page2" class="weui-btn weui-btn_primary js_item">上一页面</a>
-                <a href="#page4" class="weui-btn weui-btn_primary">下一页面</a>
-            </div>
-        </div>
-    </script>
-
-    <script type="text/html" id="tpl_page4">
-        <div class="page">
-            <div class="page__hd">
-                <h1 class="page__title">page3</h1>
-                <p class="page__desc">按钮</p>
-            </div>
-            <div class="page__bd page__bd_spacing">
-                <a href="#page3" class="weui-btn weui-btn_primary js_item">上一页面</a>
-                <a href="javascript:;" class="weui-btn weui-btn_primary">下一页面</a>
-            </div>
-        </div>
-    </script>
 </head>
 <body ontouchstart>
-<!--
-<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
--->
 
 <div class="container" id="container"></div>
 
@@ -121,13 +29,107 @@
             <p class="page__desc">home page</p>
         </div>
         <div class="page__bd page__bd_spacing">
-            <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id="page2">page2</a>
-            <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id="page3">page3</a>
-            <a href="javascript:;" class="weui-btn weui-btn_primary js_item" data-id="page4">page4</a>
+            <a href="javascript:jump('page1');" class="weui-btn weui-btn_primary">page1</a>
         </div>
     </div>
 </script>
 
+<script type="text/html" id="tpl_page1">
+    <div class="page">
+        <div class="page__hd">
+            <h1 class="page__title">Question1</h1>
+            <div class="weui-cells__title">question description1</div>
+            <div class="weui-cells weui-cells_radio">
+                <label class="weui-cell weui-check__label" for="x11">
+                    <div class="weui-cell__bd">
+                        <p>cell standard</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <input type="radio" class="weui-check" name="radio1" id="x11"/>
+                        <span class="weui-icon-checked"></span>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" for="x12">
+                    <div class="weui-cell__bd">
+                        <p>cell standard</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <input type="radio" name="radio1" class="weui-check" id="x12" checked="checked"/>
+                        <span class="weui-icon-checked"></span>
+                    </div>
+                </label>
+            </div>
+
+
+        </div>
+        <div class="page__bd page__bd_spacing">
+            <a href="javascript:jump('page2');" class="weui-btn weui-btn_primary">page2</a>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="tpl_page2">
+    <div class="page">
+        <div class="page__hd">
+            <h1 class="page__title">Question2</h1>
+            <div class="weui-cells__title">question description2</div>
+            <div class="weui-cells weui-cells_radio">
+                <label class="weui-cell weui-check__label" for="x21">
+                    <div class="weui-cell__bd">
+                        <p>cell standard</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <input type="radio" class="weui-check" name="radio2" id="X21"/>
+                        <span class="weui-icon-checked"></span>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" for="x22">
+                    <div class="weui-cell__bd">
+                        <p>cell standard</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <input type="radio" name="radio2" class="weui-check" id="x22" checked="checked"/>
+                        <span class="weui-icon-checked"></span>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class="page__bd page__bd_spacing">
+            <a href="javascript:jump('page1');" class="weui-btn weui-btn_primary">page1</a>
+            <a href="javascript:jump('page3');" class="weui-btn weui-btn_primary">page3</a>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/html" id="tpl_page3">
+    <div class="page">
+        <div class="page__hd">
+            <h1 class="page__title">page3</h1>
+            <p class="page__desc">按钮</p>
+        </div>
+        <div class="page__bd page__bd_spacing">
+            <a href="javascript:jump('page2');" class="weui-btn weui-btn_primary">page2</a>
+            <a href="javascript:jump('page4');" class="weui-btn weui-btn_primary">page4</a>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="tpl_page4">
+    <div class="page">
+        <div class="page__hd">
+            <h1 class="page__title">page4</h1>
+            <p class="page__desc">按钮</p>
+        </div>
+        <div class="page__bd page__bd_spacing">
+            <a href="javascript:jump('page3');" class="weui-btn weui-btn_primary">page3</a>
+            <a href="javascript:" class="weui-btn weui-btn_primary">submit</a>
+        </div>
+    </div>
+</script>
+
+<script src="./js/zepto.min.js"></script>
+<script src="./js/survey.js"></script>
 
 </body>
 </html>
