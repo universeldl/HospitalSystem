@@ -40,6 +40,7 @@
     <!-- add specific js in here -->
     <script src="${pageContext.request.contextPath}/js/updatePlan.js"></script>
     <script src="${pageContext.request.contextPath}/js/addPlan.js"></script>
+    <script src="${pageContext.request.contextPath}/js/deletePlan.js"></script>
     <!-- add specific js in here -->
 
     <script src="${pageContext.request.contextPath}/js/vue.min.js"></script>
@@ -163,6 +164,7 @@
                             <th>病人性别</th>
                             <th>年龄范围最小值</th>
                             <th>年龄范围最大值</th>
+                            <th>随访问卷</th>
                             <th>随访激活状态</th>
                             <th>操作</th>
                         </tr>
@@ -174,14 +176,39 @@
                             <s:iterator value="#request.plans" var="plan">
                                 <tbody>
                                 <td><s:property value="#plan.patientType.patientTypeName"/></td>
-                                <td><s:property value="#plan.sex"/></td>
+                                <td>
+                                    <s:if test="#plan.sex == 1">
+                                        男
+                                    </s:if>
+                                    <s:elseif test="#plan.sex == 2">
+                                        女
+                                    </s:elseif>
+                                    <s:elseif test="#plan.sex == 3">
+                                        不限
+                                    </s:elseif>
+                                </td>
                                 <td><s:property value="#plan.beginAge"/></td>
                                 <td><s:property value="#plan.endAge"/></td>
-                                <td><s:property value="#plan.active"/></td>
+                                <td>
+                                    <s:iterator value="#plan.surveys" var="survey">
+                                        <p><s:property value="#survey.surveyName"/></p>
+                                    </s:iterator>
+                                </td>
+                                <td>
+                                    <s:if test="#plan.active == 1">
+                                        激活
+                                    </s:if>
+                                    <s:elseif test="#plan.active == 0">
+                                        未激活
+                                    </s:elseif>
+                                </td>
                                 <td>
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                             data-target="#updateModal" onclick="updatePlan(<s:property
                                             value="#plan.planId"/>)">修改
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs"
+                                            onclick="deletePlan(<s:property value="#plan.planId"/>)">删除
                                     </button>
                                 </td>
                                 </tbody>
@@ -189,6 +216,7 @@
                         </s:if>
                         <s:else>
                             <tbody>
+                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
@@ -217,7 +245,7 @@
 
 
 <!--------------------------------------添加的模糊框------------------------>
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
+<form class="form-horizontal" id="addForm">   <!--保证样式水平不混乱-->
     <!-- 模态框（Modal） -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -255,7 +283,8 @@
                             <select class="form-control" id="addSex">
                                 <option value="-1">请选择</option>
                                 <option value="1">男</option>
-                                <option value="0">女</option>
+                                <option value="2">女</option>
+                                <option value="3">不限</option>
                             </select>
                             <label class="control-label" for="addSex" style="display: none;"></label>
                         </div>
@@ -268,6 +297,15 @@
                                 <option value="-1">请选择</option>
                             </select>
                             <label class="control-label" for="addpatientType" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="addSurveys" class="col-sm-3 control-label">问卷（可多选）</label>
+                        <div class="col-sm-7">
+                            <select multiple="" class="form-control" name="addSurveys" id="addSurveys">
+                            </select>
+                            <label class="control-label" for="addSurveys" style="display: none;"></label>
                         </div>
                     </div>
 
@@ -289,7 +327,7 @@
 
 
 <!-- 修改模态框（Modal） -->
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
+<form class="form-horizontal" id="updateForm">   <!--保证样式水平不混乱-->
     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -328,7 +366,8 @@
                             <select class="form-control" id="updateSex">
                                 <option value="-1">请选择</option>
                                 <option value="1">男</option>
-                                <option value="0">女</option>
+                                <option value="2">女</option>
+                                <option value="3">不限</option>
                             </select>
                             <label class="control-label" for="updateSex" style="display: none;"></label>
                         </div>
@@ -344,6 +383,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="updateSurveys" class="col-sm-3 control-label">问卷（可多选）</label>
+                        <div class="col-sm-7">
+                            <select multiple="" class="form-control" name="updateSurveys" id="updateSurveys">
+                            </select>
+                            <label class="control-label" for="updateSurveys" style="display: none;"></label>
+                        </div>
+                    </div>
 
                     <!---------------------表单-------------------->
 

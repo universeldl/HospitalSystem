@@ -111,6 +111,12 @@ public class SurveyServiceImpl implements SurveyService {
         return 0;
     }
 
+    @Override
+    public List<Survey> findAllSurveys() {
+        // TODO Auto-generated method stub
+        return surveyDao.findAllSurveys();
+    }
+
 
     @Override
     public JSONObject batchAddSurvey(String fileName, Doctor doctor) {

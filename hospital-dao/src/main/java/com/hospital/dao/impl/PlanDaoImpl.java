@@ -60,4 +60,18 @@ public class PlanDaoImpl extends HibernateDaoSupport implements PlanDao {
         return b;
     }
 
+    @Override
+    public boolean deletePlan(Plan plan) {
+        boolean b = true;
+        try {
+            this.getHibernateTemplate().clear();
+            this.getHibernateTemplate().delete(plan);
+            this.getHibernateTemplate().flush();
+        } catch (Throwable e1) {
+            b = false;
+            e1.printStackTrace();
+            throw new RuntimeException(e1.getMessage());
+        }
+        return b;
+    }
 }

@@ -36,4 +36,9 @@ public class PlanServiceImpl implements PlanService {
         return planDao.addPlan(plan);
     }
 
+    @Override
+    public boolean deletePlan(Plan plan) {
+        return planDao.deletePlan(plan);
+    }
+
 }

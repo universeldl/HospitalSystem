@@ -81,7 +81,7 @@ CREATE TABLE `Plan` (
   `beginAge` int(2) DEFAULT 0,
   `endAge` int(2) NOT NULL,
   `active` int(1) DEFAULT 1,
-  `sex` varchar(1) DEFAULT 1,/*1-男，0-女*/
+  `sex` varchar(1) DEFAULT 1,/*1-男，2-女, 3-不限*/
   `patientTypeId` int(11) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,
   PRIMARY KEY (`planId`),
@@ -284,7 +284,8 @@ INSERT INTO RetrieveInfo VALUES(4,2,1,"2017-06-25 00:00:00",6);
 INSERT INTO RetrieveInfo VALUES(5,2,2,"2017-06-25 00:00:00",6);
 
 INSERT INTO Plan VALUES(1, 0, 2, 1, 1, 1, 6);
-INSERT INTO Plan VALUES(2, 2, 5, 1, 0, 1, 6);
+INSERT INTO Plan VALUES(2, 2, 5, 1, 2, 1, 6);
+INSERT INTO Plan VALUES(3, 6, 9, 1, 3, 1, 6);
 
 INSERT INTO plan_survey VALUES(1, 1);
 INSERT INTO plan_survey VALUES(1, 2);

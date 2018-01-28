@@ -1,24 +1,37 @@
 package com.hospital.action;
 
+import com.hospital.domain.Doctor;
 import com.hospital.domain.PatientType;
 import com.hospital.domain.Plan;
+import com.hospital.domain.Survey;
 import com.hospital.service.PlanService;
+import com.hospital.service.SurveyService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PlanManageAction extends ActionSupport {
 
     public PlanService planService;
+    public SurveyService surveyService;
 
     public void setPlanService(PlanService planService) {
         this.planService = planService;
+    }
+
+    public void setSurveyService(SurveyService surveyService) {
+        this.surveyService = surveyService;
     }
 
     private Integer beginAge;
@@ -26,7 +39,7 @@ public class PlanManageAction extends ActionSupport {
     private Integer active;
     private Integer sex;
     private Integer patientType;
-    private Integer id;
+    private Integer planId;
 
 
     public void setBeginAge(Integer beginAge) {
@@ -49,8 +62,8 @@ public class PlanManageAction extends ActionSupport {
     }
 
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPlanId(Integer planId) {
+        this.planId = planId;
     }
 
 
@@ -77,9 +90,13 @@ public class PlanManageAction extends ActionSupport {
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
         Plan plan = new Plan();
-        plan.setPlanId(id);
+        plan.setPlanId(planId);
         Plan newPlan = planService.getPlanById(plan);
-        JSONObject jsonObject = JSONObject.fromObject(newPlan);
+
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+
+        JSONObject jsonObject = JSONObject.fromObject(newPlan, jsonConfig);
         try {
             response.getWriter().print(jsonObject);
         } catch (IOException e) {
@@ -91,7 +108,7 @@ public class PlanManageAction extends ActionSupport {
 
     public String updatePlan() {
         Plan plan = new Plan();
-        plan.setPlanId(id);
+        plan.setPlanId(planId);
         Plan updatePlan = planService.getPlanById(plan);
         updatePlan.setBeginAge(beginAge);
         updatePlan.setEndAge(endAge);
@@ -100,6 +117,30 @@ public class PlanManageAction extends ActionSupport {
         PatientType type = new PatientType();
         type.setPatientTypeId(patientType);
         updatePlan.setPatientType(type);
+
+        updatePlan.getSurveys().clear();
+        List<Integer> surveyIds = new ArrayList<>();
+        ActionContext ctx = ActionContext.getContext();
+        HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+        Map<String, String[]> pMap = request.getParameterMap();
+        int idx = 0;
+        for (String[] value : pMap.values()) {
+            if (idx < 6) {
+                idx++;
+            } else {
+                for (String v : value) {
+                    surveyIds.add(Integer.parseInt(v));
+                }
+                idx++;
+            }
+        }
+        for (int i = 0; i < surveyIds.size(); i++) {
+            Survey survey = new Survey();
+            survey.setSurveyId(surveyIds.get(i));
+            Survey addSurvey = surveyService.getSurveyById(survey);//得到问卷
+            updatePlan.getSurveys().add(addSurvey);
+        }
+
         Plan newPlan = planService.updatePlan(updatePlan);
         int success = 0;
         if (newPlan != null) {
@@ -117,15 +158,37 @@ public class PlanManageAction extends ActionSupport {
 
 
     public String addPlan() {
-        Plan plan = new Plan();
-        plan.setBeginAge(beginAge);
-        plan.setEndAge(endAge);
-        plan.setActive(active);
-        plan.setSex(sex);
+        boolean b = false;
+        //得到当前医生
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        //得到当前病人类型
         PatientType type = new PatientType();
         type.setPatientTypeId(patientType);
-        plan.setPatientType(type);
-        boolean b = planService.addPlan(plan);
+        Plan plan = new Plan(beginAge, endAge, sex, active, type, doctor);
+
+        List<Integer> surveyIds = new ArrayList<>();
+        ActionContext ctx = ActionContext.getContext();
+        HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+        Map<String, String[]> pMap = request.getParameterMap();
+        int idx = 0;
+        for (String[] value : pMap.values()) {
+            if (idx < 5) {
+                idx++;
+            } else {
+                for (String v : value) {
+                    surveyIds.add(Integer.parseInt(v));
+                }
+                idx++;
+            }
+        }
+        for (int i = 0; i < surveyIds.size(); i++) {
+            Survey survey = new Survey();
+            survey.setSurveyId(surveyIds.get(i));
+            Survey addSurvey = surveyService.getSurveyById(survey);//得到问卷
+            b = plan.getSurveys().add(addSurvey);
+            if (!b) break;//break whenever add failing
+        }
+        b = planService.addPlan(plan);
         int success = 0;
         if (b) {
             success = 1;
@@ -154,5 +217,29 @@ public class PlanManageAction extends ActionSupport {
         return null;
     }
 
+
+    /**
+     * 删除随访计划
+     *
+     * @return
+     */
+    public String deletePlan() {
+        Plan plan = new Plan();
+        plan.setPlanId(planId);
+        boolean deletePlan = planService.deletePlan(plan);
+        int success = 0;
+        if (deletePlan) {
+            success = 1;
+            //由于是转发并且js页面刷新,所以无需重查
+        }
+        try {
+            ServletActionContext.getResponse().getWriter().print(success);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e.getMessage());
+        }
+
+        return null;
+    }
 
 }

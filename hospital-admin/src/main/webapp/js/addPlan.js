@@ -16,6 +16,26 @@ window.onload = new function () {
             }
         }
     );
+    ajax(
+        {
+            url: "doctor/surveyManageAction_findAllSurveys.action",
+            type: "json",
+            callback: function (data) {
+                // 循环遍历每个问卷，每个名称生成一个option对象，添加到<select>中
+                for (var index in data) {
+                    var op = document.createElement("option");//创建一个指名名称元素
+                    op.value = data[index].surveyId;//设置op的实际值为当前的问卷编号
+                    var textNode = document.createTextNode(data[index].surveyName);//创建文本节点
+                    op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
+                    var att = document.createAttribute("name");
+                    att.value = "addSurveyName";// + index;
+                    op.setAttributeNode(att);
+
+                    document.getElementById("addSurveys").appendChild(op);
+                }
+            }
+        }
+    );
 };
 
 /**
@@ -31,8 +51,8 @@ $(function () {
             return;
         }
 
-        var postdata = "beginAge=" + $.trim($("#addBeginAge").val()) + "&patientType=" + $.trim($("#addPatientType").val())
-            + "&endAge=" + $.trim($("#addEndAge").val()) + "&sex=" + $.trim($("#addSex").val());
+        var postdata = "active=1&beginAge=" + $.trim($("#addBeginAge").val()) + "&patientType=" + $.trim($("#addpatientType").val())
+            + "&endAge=" + $.trim($("#addEndAge").val()) + "&sex=" + $.trim($("#addSex").val()) + "&" + $("#addForm").serialize();
         ajax(
             {
                 method: 'POST',
@@ -100,7 +120,7 @@ function validAddPlan() {
         $('#addEndAge').next().show();
         flag = false;
     }
-    else if ( parseInt(endAge) <  parseInt(beginAge) ) {
+    else if (parseInt(endAge) < parseInt(beginAge)) {
         $('#addEndAge').parent().addClass("has-error");
         $('#addEndAge').next().text("年龄上限不能低于年龄下限");
         $('#addEndAge').next().show();
@@ -133,6 +153,22 @@ function validAddPlan() {
         $('#addpatientType').parent().removeClass("has-error");
         $('#addpatientType').next().text("");
         $("#addpatientType").next().hide();
+    }
+
+    var numSurvey = 0;
+    $("#addSurveys option:selected").each(function(){
+        numSurvey++;
+    });
+
+    if (numSurvey == 0) {
+        $("#addSurveys").parent().addClass("has-error");
+        $("#addSurveys").next().text("至少需要选择一份问卷");
+        $("#addSurveys").next().show();
+        flag = false;
+    } else {
+        $("#addSurveys").parent().removeClass("has-error");
+        $("#addSurveys").next().text("");
+        $("#addSurveys").next().hide();
     }
 
     return flag;

@@ -15,9 +15,10 @@ $(function () {
             return;
         }
 
-        var postdata = "planId=" + planId + "beginAge=" + $.trim($("#updateBeginAge").val())
+        var postdata = "active=1&planId=" + planId + "&beginAge=" + $.trim($("#updateBeginAge").val())
             + "&patientType=" + $.trim($("#updatePatientType").val())
-            + "&endAge=" + $.trim($("#updateEndAge").val()) + "&sex=" + $.trim($("#updateSex").val());
+            + "&endAge=" + $.trim($("#updateEndAge").val()) + "&sex=" + $.trim($("#updateSex").val())
+            + "&" + $("#updateForm").serialize();
 
         ajax(
             {
@@ -72,6 +73,23 @@ function updatePlan(id) {
                 }
                 ajax(
                     {
+                        url: "doctor/surveyManageAction_findAllSurveys.action",
+                        type: "json",
+                        callback: function (data) {
+                            // 循环遍历每个问卷，每个名称生成一个option对象，添加到<select>中
+                            for (var index in data) {
+                                var op = document.createElement("option");//创建一个指名名称元素
+                                op.value = data[index].surveyId;//设置op的实际值为当前的问卷编号
+                                var textNode = document.createTextNode(data[index].surveyName);//创建文本节点
+                                op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
+
+                                document.getElementById("updateSurveys").appendChild(op);
+                            }
+                        }
+                    }
+                );
+                ajax(
+                    {
                         method: 'POST',
                         url: 'doctor/planManageAction_getPlan.action',
                         params: "planId=" + id,
@@ -123,7 +141,7 @@ function validUpdatePlan() {
         $('#updateEndAge').next().show();
         flag = false;
     }
-    else if ( parseInt(endAge) <  parseInt(beginAge) ) {
+    else if (parseInt(endAge) < parseInt(beginAge)) {
         $('#updateEndAge').parent().addClass("has-error");
         $('#updateEndAge').next().text("年龄上限不能低于年龄下限");
         $('#updateEndAge').next().show();
@@ -156,6 +174,22 @@ function validUpdatePlan() {
         $('#updatepatientType').parent().removeClass("has-error");
         $('#updatepatientType').next().text("");
         $("#updatepatientType").next().hide();
+    }
+
+    var numSurvey = 0;
+    $("#updateSurveys option:selected").each(function(){
+        numSurvey++;
+    });
+
+    if (numSurvey == 0) {
+        $("#updateSurveys").parent().addClass("has-error");
+        $("#updateSurveys").next().text("至少需要选择一份问卷");
+        $("#updateSurveys").next().show();
+        flag = false;
+    } else {
+        $("#updateSurveys").parent().removeClass("has-error");
+        $("#updateSurveys").next().text("");
+        $("#updateSurveys").next().hide();
     }
 
     return flag;

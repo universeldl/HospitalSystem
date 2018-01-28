@@ -29,5 +29,8 @@
         <property name="planService">
             <ref bean="planService"/>
         </property>
+        <property name="surveyService">
+            <ref bean="surveyService"/>
+        </property>
     </bean>
 </beans>

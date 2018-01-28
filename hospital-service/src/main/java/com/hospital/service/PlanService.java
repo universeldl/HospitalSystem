@@ -14,5 +14,6 @@ public interface PlanService {
 
     boolean addPlan(Plan plan);
 
+    boolean deletePlan(Plan plan);
 
 }

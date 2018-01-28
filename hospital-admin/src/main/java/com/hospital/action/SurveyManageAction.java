@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
@@ -193,6 +194,30 @@ public class SurveyManageAction extends ActionSupport {
     }
 
     /**
+     * 得到问卷的集合
+     * ajax请求该方法
+     * 返回问卷集合的json对象
+     *
+     * @return
+     */
+    public String findAllSurveys() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+        List<Survey> allSurveys = surveyService.findAllSurveys();
+
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+
+        String json = JSONArray.fromObject(allSurveys, jsonConfig).toString();//List------->JSONArray
+        try {
+            response.getWriter().print(json);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
+    /**
      * 根据页码查询问卷
      *
      * @return
@@ -252,7 +277,7 @@ public class SurveyManageAction extends ActionSupport {
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         Question question = new Question(doctor.getAid(), surveyId, questionContent, questionType, textChoice);
 
-        if(questionType == 1 || questionType ==2) {  //is a selection question
+        if (questionType == 1 || questionType == 2) {  //is a selection question
             List<String> choices = new ArrayList<>();
             List<Integer> scores = new ArrayList<>();
             ActionContext ctx = ActionContext.getContext();
@@ -386,7 +411,7 @@ public class SurveyManageAction extends ActionSupport {
         }
         updateQuestion.getChoices().clear();    //clean existing choices in question
 
-        if(questionType == 1 || questionType ==2) {  //is a selection question
+        if (questionType == 1 || questionType == 2) {  //is a selection question
             List<String> choices = new ArrayList<>();
             List<Integer> scores = new ArrayList<>();
             ActionContext ctx = ActionContext.getContext();
