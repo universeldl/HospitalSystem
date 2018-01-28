@@ -217,10 +217,6 @@ $(function () {
         setPageManager();
 
         window.pageManager = pageManager;
-        window.home = function(){
-            location.hash = '';
-        };
-
         window.jump = function(to) {
             alert(to);
             window.pageManager.go(to);
