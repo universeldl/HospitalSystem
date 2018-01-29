@@ -22,7 +22,7 @@ function registerSubmit() {
 
                 if (data == 1) {
                     // 注册成功
-                    window.location.href = "helloworld.jsp";
+                    window.location.href = "http://projecthope.flzhan.com/text478.html";
                 } else if (data == -1) {
                     $('captchaIN').focus();
                     reloadCaptchaImg();
@@ -78,8 +78,8 @@ function validLogin() {
         var curDate = new Date();
         if (birthday >= curDate) {
             showDialog2("请填写正确的出生日期", "确定");
+            return false;
         }
-        return false;
     }
 
     if ($('#captchaIN').val().length == 0) {

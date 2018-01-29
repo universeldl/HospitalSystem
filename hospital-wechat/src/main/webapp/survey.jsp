@@ -23,16 +23,61 @@
 <script type="text/html" id="tpl_home">
     <div class="page">
         <div class="page__hd">
-            <h1 class="page__title">
-                home page
-            </h1>
-            <p class="page__desc">home page</p>
-        </div>
-        <div class="page__bd page__bd_spacing">
-            <a href="javascript:jump('page1');" class="weui-btn weui-btn_primary">page1</a>
+            <s:if test="#request.survey!=null">
+                <h1 class="page__title">
+                    <s:property value="#request.survey.surveyName" />
+                </h1>
+                <p class="page__desc">
+                    <s:property value="#request.survey.description" />
+                </p>
+            </s:if>
+            <s:if test="#request.questions.size>0">
+                <div class="page__bd page__bd_spacing">
+                    <a href="javascript:jump('question1');" class="weui-btn weui-btn_primary">start!</a>
+                </div>
+            </s:if>
         </div>
     </div>
 </script>
+
+<s:if test="#request.questions.size>0">
+    <s:iterator value="#request.questions" id="question" status="index">
+        <script type="text/html" id='tpl_question<s:property value="#index.index+1" />' >
+            <div class="page">
+                <div class="page__hd">
+                    <h1 class="page__title">问题<s:property value="#index.index+1"/>
+                        （<s:property value="#index.index+1" />/<s:property value="#request.questions.size" />)
+                    </h1>
+                    <div class="weui-cells__title"><s:property value="#question.questionContent" /></div>
+
+                    <br/>
+
+                    <div class="page__bd page__bd_spacing">
+                        <div class="weui-flex">
+                            <div class="weui-flex__item">
+                                <s:if test="#index.index>0">
+                                    <a href="javascript:jump('question<s:property value="#index.index"/>');" class="weui-btn weui-btn_primary">上一题</a>
+
+                                </s:if>
+                            </div>
+                            <div class="weui-flex__item">
+                            </div>
+                            <div class="weui-flex__item">
+                                <s:if test="#index.index+1<#request.questions.size">
+                                    <a href="javascript:jump('question<s:property value="#index.index+2"/>');" class="weui-btn weui-btn_primary">下一题</a>
+                                </s:if>
+                                <s:else>
+                                    <a href="javascript:submit();" class="weui-btn weui-btn_primary">提 交</a>
+                                </s:else>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </s:iterator>
+</s:if>
+
 
 <script type="text/html" id="tpl_page1">
     <div class="page">
@@ -121,9 +166,11 @@
                     </div>
                 </div>
             </div>
+
+            <br/>
+
             <h1 class="page__title">Question12</h1>
             <div class="weui-cells__title">question description12</div>
-            <div class="weui-cells__title">文本域</div>
             <div class="weui-cells weui-cells_form">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">

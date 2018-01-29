@@ -194,6 +194,7 @@ $(function () {
         pages.home.url = '#';
 
         for (var page in pages) {
+            //alert("pushpage" + page)
             pageManager.push(pages[page]);
         }
         pageManager

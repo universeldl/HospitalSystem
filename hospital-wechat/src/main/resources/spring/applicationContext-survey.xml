@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="surveyDao" class="com.hospital.dao.impl.SurveyDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="surveyTypeDao" class="com.hospital.dao.impl.SurveyTypeDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="deliveryDao" class="com.hospital.dao.impl.DeliveryDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="surveyService" class="com.hospital.service.impl.SurveyServiceImpl">
+        <property name="surveyDao">
+            <ref bean="surveyDao"/>
+        </property>
+        <property name="deliveryDao">
+            <ref bean="deliveryDao"/>
+        </property>
+        <property name="forfeitDao">
+            <ref bean="forfeitDao"/>
+        </property>
+        <property name="surveyTypeDao">
+            <ref bean="surveyTypeDao"/>
+        </property>
+    </bean>
+
+    <bean id="surveyAction" class="com.hospital.action.surveyAction" scope="prototype">
+        <property name="patientService">
+            <ref bean="patientService"/>
+        </property>
+
+        <property name="surveyService">
+            <ref bean="surveyService" />
+        </property>
+        
+        <property name="questionService">
+            <ref bean="questionService" />
+        </property>
+    </bean>
+</beans>
