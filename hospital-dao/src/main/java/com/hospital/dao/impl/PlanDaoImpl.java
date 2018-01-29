@@ -31,6 +31,16 @@ public class PlanDaoImpl extends HibernateDaoSupport implements PlanDao {
     }
 
     @Override
+    public Plan getPlan(Plan plan) {
+        String hql = "from Plan r where r.beginAge<=? and r.endAge>? and r.sex=? and r.patientType.patientTypeId=?";
+        List list = this.getHibernateTemplate().find(hql, plan.getBeginAge(), plan.getEndAge(), plan.getSex(), plan.getPatientType().getPatientTypeId());
+        if (list != null && list.size() > 0) {
+            return (Plan) list.get(0);
+        }
+        return null;
+    }
+
+    @Override
     public Plan updatePlan(Plan updatePlan) {
         Plan newPlan = null;
         try {

@@ -2,7 +2,9 @@ package com.hospital.action;
 
 import com.hospital.domain.*;
 import com.hospital.service.PatientService;
+import com.hospital.service.PlanService;
 import com.hospital.util.Md5Utils;
+import com.hospital.util.AgeUtils;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -18,7 +20,11 @@ import java.util.Set;
 public class PatientManageAction extends ActionSupport {
 
     private PatientService patientService;
+    private PlanService planService;
 
+    public void setPlanService(PlanService planService) {
+        this.planService = planService;
+    }
 
     public void setPatientService(PatientService patientService) {
         this.patientService = patientService;
@@ -29,6 +35,7 @@ public class PatientManageAction extends ActionSupport {
     private String name;
     private String phone;
     private Integer patientType;
+    private Integer sex;
     private int pageCode;
     private String openID;
     private String email;
@@ -56,6 +63,11 @@ public class PatientManageAction extends ActionSupport {
 
     public void setPageCode(int pageCode) {
         this.pageCode = pageCode;
+    }
+
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 
 
@@ -92,7 +104,26 @@ public class PatientManageAction extends ActionSupport {
         //得到当前病人类型
         PatientType type = new PatientType();
         type.setPatientTypeId(patientType);
-        Patient patient = new Patient(name, Md5Utils.md5("123456"), phone, type, email, doctor, openID, createTime, 1);
+
+
+
+        //TODO hard code for now, will change after finishing front-end
+        sex = 2;  //be careful about sex, Patient.sex is not compatible with Plan.sex
+        int age = 0;
+        String dateOfBirth = "2016-1-28";
+        age = AgeUtils.getAgeFromBirthTime(dateOfBirth);
+
+        Plan plan = new Plan();
+        plan.setBeginAge(age);
+        plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
+        plan.setSex(sex);
+        plan.setPatientType(type);
+        Plan newPlan = planService.getPlan(plan);
+        //TODO hard code for now, will change after finishing front-end
+
+
+
+        Patient patient = new Patient(name, Md5Utils.md5("123456"), phone, type, email, doctor, openID, createTime, sex, newPlan);
         //TODO the "sex" for patient should be varied rather than hard-coded.
 
         Patient oldPatient = patientService.getPatientByopenID(patient);//检查是否已经存在该openID的病人
@@ -100,8 +131,6 @@ public class PatientManageAction extends ActionSupport {
         if (oldPatient != null) {
             success = -1;//已存在该id
         } else {
-
-
             boolean b = patientService.addPatient(patient);
             if (b) {
                 success = 1;

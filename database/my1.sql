@@ -55,6 +55,19 @@ CREATE TABLE `PatientType` (
   PRIMARY KEY (`patientTypeId`)
 );
 
+CREATE TABLE `Plan` (
+  `planId` int(11) NOT NULL,
+  `beginAge` int(2) DEFAULT 0,
+  `endAge` int(2) NOT NULL,
+  `active` int(1) DEFAULT 1,
+  `sex` varchar(1) DEFAULT 1,/*1-男，2-女, 3-不限*/
+  `patientTypeId` int(11) DEFAULT NULL,
+  `aid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`planId`),
+  CONSTRAINT  FOREIGN KEY (`patientTypeId`) REFERENCES `PatientType` (`patientTypeId`) ON DELETE SET NULL,
+  CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`)
+);
+
 CREATE TABLE `Patient` (
   `patientId` varchar(255) NOT NULL,
   `pwd` varchar(64) DEFAULT NULL,
@@ -70,22 +83,11 @@ CREATE TABLE `Patient` (
   `birthday` datetime DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
   `patientTypeId` int(11) DEFAULT NULL,
+  `planId` int(11) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,
   PRIMARY KEY (`patientId`),
   CONSTRAINT  FOREIGN KEY (`patientTypeId`) REFERENCES `PatientType` (`patientTypeId`) ON DELETE SET NULL,
-  CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`)
-);
-
-CREATE TABLE `Plan` (
-  `planId` int(11) NOT NULL,
-  `beginAge` int(2) DEFAULT 0,
-  `endAge` int(2) NOT NULL,
-  `active` int(1) DEFAULT 1,
-  `sex` varchar(1) DEFAULT 1,/*1-男，2-女, 3-不限*/
-  `patientTypeId` int(11) DEFAULT NULL,
-  `aid` int(11) DEFAULT NULL,
-  PRIMARY KEY (`planId`),
-  CONSTRAINT  FOREIGN KEY (`patientTypeId`) REFERENCES `PatientType` (`patientTypeId`) ON DELETE SET NULL,
+  CONSTRAINT  FOREIGN KEY (`planId`) REFERENCES `Plan` (`planId`) ON DELETE SET NULL,
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`)
 );
 
@@ -240,8 +242,12 @@ INSERT INTO doctor VALUES(9,"doctor6","张三7","doctor","13547865412",7, 1);
 INSERT INTO doctor VALUES(10,"doctor7","张三8","doctor","13547865412",8, 1);
 INSERT INTO doctor VALUES(6,"lht","lht","lht","13547865412",0, 1);
 
-INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1","13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,2);
-INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0","13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,6);
+INSERT INTO Plan VALUES(1, 0, 2, 1, 1, 1, 6);
+INSERT INTO Plan VALUES(2, 2, 5, 1, 2, 1, 6);
+INSERT INTO Plan VALUES(3, 6, 9, 1, 3, 1, 6);
+
+INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1","13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,1,2);
+INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0","13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,6);
 
 INSERT INTO Authorization VALUES(2,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(1,0,0,0,0,0,0,0,1);
@@ -282,10 +288,6 @@ INSERT INTO RetrieveInfo VALUES(2,1,1,"2017-05-25 00:00:00",6);
 INSERT INTO RetrieveInfo VALUES(3,2,1,"2017-05-25 00:00:00",6);
 INSERT INTO RetrieveInfo VALUES(4,2,1,"2017-06-25 00:00:00",6);
 INSERT INTO RetrieveInfo VALUES(5,2,2,"2017-06-25 00:00:00",6);
-
-INSERT INTO Plan VALUES(1, 0, 2, 1, 1, 1, 6);
-INSERT INTO Plan VALUES(2, 2, 5, 1, 2, 1, 6);
-INSERT INTO Plan VALUES(3, 6, 9, 1, 3, 1, 6);
 
 INSERT INTO plan_survey VALUES(1, 1);
 INSERT INTO plan_survey VALUES(1, 2);

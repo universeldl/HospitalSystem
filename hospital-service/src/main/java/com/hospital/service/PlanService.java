@@ -8,6 +8,8 @@ public interface PlanService {
 
     List<Plan> getAllPlan();
 
+    Plan getPlan(Plan plan);
+
     Plan getPlanById(Plan plan);
 
     Plan updatePlan(Plan updatePlan);

@@ -20,6 +20,7 @@ public class Plan implements Serializable {
     private PatientType patientType;
     private Doctor doctor;    //操作医生
     private Set<Survey> surveys = new HashSet<>();
+    private Set<Patient> patients = new HashSet<>();
 
 
     public Integer getPlanId() {
@@ -76,6 +77,14 @@ public class Plan implements Serializable {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+    }
+
+    public Set<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(Set<Patient> patients) {
+        this.patients = patients;
     }
 
     public Set<Survey> getSurveys() {

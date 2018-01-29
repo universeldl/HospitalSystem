@@ -21,6 +21,7 @@ public class Patient implements Serializable {
     private String inpatientID;
     private String phone;    //联系方式
     private PatientType patientType;    //病人类型(病人或者病人家属)
+    private Plan plan;    //随访计划
     private String email;    //邮箱
     private Doctor doctor;    //操作医生
 
@@ -112,6 +113,14 @@ public class Patient implements Serializable {
         this.phone = phone;
     }
 
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
+
     public PatientType getPatientType() {
         return patientType;
     }
@@ -170,7 +179,7 @@ public class Patient implements Serializable {
 
     public Patient(String name, String pwd, String phone,
                    PatientType patientType, String email, Doctor doctor, String openID,
-                   Date createTime, Integer sex) {
+                   Date createTime, Integer sex, Plan plan) {
         super();
         this.name = name;
         this.pwd = pwd;
@@ -181,6 +190,7 @@ public class Patient implements Serializable {
         this.openID = openID;
         this.createTime = createTime;
         this.sex = sex;
+        this.plan = plan;
     }
 
 

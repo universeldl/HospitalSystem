@@ -25,6 +25,11 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
+    public Plan getPlan(Plan plan) {
+        return planDao.getPlan(plan);
+    }
+
+    @Override
     public Plan updatePlan(Plan updatePlan) {
         // TODO Auto-generated method stub
         return planDao.updatePlan(updatePlan);

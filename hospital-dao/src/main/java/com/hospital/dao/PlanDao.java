@@ -10,6 +10,8 @@ public interface PlanDao {
 
     Plan getPlanById(Plan plan);
 
+    Plan getPlan(Plan plan);
+
     Plan updatePlan(Plan updatePlan);
 
     boolean addPlan(Plan plan);

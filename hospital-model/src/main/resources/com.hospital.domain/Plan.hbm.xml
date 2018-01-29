@@ -29,6 +29,14 @@
             <many-to-many class="com.hospital.domain.Survey" column="surveyId"></many-to-many>
         </set>
 
+        <set name="patients" lazy="false" inverse="true">
+            <key>
+                <column name="planId"></column>
+            </key>
+
+            <one-to-many class="com.hospital.domain.Patient"/>
+        </set>
+
         <many-to-one name="patientType" class="com.hospital.domain.PatientType" lazy="false">
             <column name="patientTypeId"></column>
         </many-to-one>

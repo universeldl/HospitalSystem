@@ -16,5 +16,8 @@
         <property name="patientService">
             <ref bean="patientService"/>
         </property>
+        <property name="planService">
+            <ref bean="planService"/>
+        </property>
     </bean>
 </beans>

@@ -68,6 +68,10 @@
         </set>
 
 
+        <many-to-one name="plan" class="com.hospital.domain.Plan" lazy="false">
+            <column name="planId"></column>
+        </many-to-one>
+
         <many-to-one name="patientType" class="com.hospital.domain.PatientType" lazy="false">
             <column name="patientTypeId"></column>
         </many-to-one>
