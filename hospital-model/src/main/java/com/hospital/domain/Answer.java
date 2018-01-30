@@ -11,7 +11,7 @@ public class Answer {
     private Survey survey;    //分发问卷
     private Patient patient;    //分发病人
     private Doctor doctor;    //操作员
-    //private String choiceContent;
+    private String textChoiceContent;
     //private int aid;
     private RetrieveInfo retrieveInfo;
     private Question question;
@@ -93,9 +93,12 @@ public class Answer {
     public void setSurveyId(int surveyId) {
         this.surveyId = surveyId;
     }
-    public String getChoiceContent() { return choiceContent; }
-    public void setChoiceContent(String choiceContent) { this.choiceContent = choiceContent; }
+    */
 
+    public String getTextChoiceContent() { return textChoiceContent; }
+    public void setTextChoiceContent(String textChoiceContent) { this.textChoiceContent = textChoiceContent; }
+
+/*
     public int getAid() {
         return aid;
     }

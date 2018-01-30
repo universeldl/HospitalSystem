@@ -8,7 +8,6 @@ public class Question {
     private int surveyId;
     private String questionContent;
     private int textChoice;
-    private String textChoiceContent;
     private int questionType;
     private int aid;
     //private Survey survey;
@@ -57,6 +56,7 @@ public class Question {
         this.questionContent = questionContent;
     }
 
+    /*
     public String getTextChoiceContent() {
         return textChoiceContent;
     }
@@ -65,6 +65,7 @@ public class Question {
         this.textChoiceContent = textChoiceContent;
     }
 
+*/
     public int getQuestionType() {
         return questionType;
     }
