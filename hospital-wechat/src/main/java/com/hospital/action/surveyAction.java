@@ -1,9 +1,6 @@
 package com.hospital.action;
 
-import com.hospital.domain.Hospital;
-import com.hospital.domain.Patient;
-import com.hospital.domain.Question;
-import com.hospital.domain.Survey;
+import com.hospital.domain.*;
 import com.hospital.service.*;
 import com.hospital.wechat.service.AccessTokenMgr;
 import com.hospital.wechat.service.AccessTokenMgrHXTS;
@@ -68,13 +65,18 @@ public class surveyAction extends ActionSupport {
             System.out.println("Survey not found");
             return ERROR;
         }
-
-        Set<Question> questions = survey.getQuestions();
-        List<Question> questionList = new ArrayList<Question>(questions);
-        ServletActionContext.getRequest().setAttribute("questions", questionList);
         ServletActionContext.getRequest().setAttribute("survey", survey);
 
+        List<Question> questions = survey.getSortedQuestions();
+        ServletActionContext.getRequest().setAttribute("questions", questions);
 
+        /*
+        List<Choice> choices = new ArrayList<>();
+        for(Question question : questions) {
+            choices.addAll(question.getSortedChoices());
+        }
+        ServletActionContext.getRequest().setAttribute("choice", choices);
+        */
 
         return SUCCESS;
     }

@@ -1,9 +1,7 @@
 package com.hospital.domain;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 问卷信息类
@@ -132,6 +130,17 @@ public class Survey implements Serializable {
     public Survey() {
 
 
+    }
+
+    public List<Question> getSortedQuestions() {
+        List<Question> sortedQuestions = new ArrayList<Question>(questions);
+        Collections.sort(sortedQuestions, new Comparator<Question>() {
+            @Override
+            public int compare(Question o1, Question o2) {
+                return Integer.compare(o1.getQuestionId(), o2.getQuestionId());
+            }
+        });
+        return sortedQuestions;
     }
 
     public Survey(SurveyType surveyType, String surveyName, String author,

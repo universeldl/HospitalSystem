@@ -1,7 +1,6 @@
 package com.hospital.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Question {
     private int questionId;
@@ -12,6 +11,7 @@ public class Question {
     private int aid;
     //private Survey survey;
     private Set<Choice> choices = new HashSet<>();
+    private List<Choice> sortedChoices;
 
     public Set<Choice> getChoices() {
         return choices;
@@ -86,6 +86,16 @@ public class Question {
 
     }
 
+    public List<Choice> getSortedChoices() {
+        sortedChoices = new ArrayList<>(choices);
+        Collections.sort(sortedChoices, new Comparator<Choice>() {
+            @Override
+            public int compare(Choice o1, Choice o2) {
+                return Integer.compare(o1.getChoiceId(), o2.getChoiceId());
+            }
+        });
+        return sortedChoices;
+    }
     public Question(int aid, int surveyId, String questionContent, int questionType, int textChoice) {
         super();
         this.aid = aid;

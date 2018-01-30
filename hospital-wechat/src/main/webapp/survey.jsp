@@ -31,6 +31,7 @@
                     <s:property value="#request.survey.description" />
                 </p>
             </s:if>
+            <br/>
             <s:if test="#request.questions.size>0">
                 <div class="page__bd page__bd_spacing">
                     <a href="javascript:jump('question1');" class="weui-btn weui-btn_primary">start!</a>
@@ -41,30 +42,108 @@
 </script>
 
 <s:if test="#request.questions.size>0">
-    <s:iterator value="#request.questions" id="question" status="index">
-        <script type="text/html" id='tpl_question<s:property value="#index.index+1" />' >
+    <s:iterator value="#request.questions" id="question" status="qindex">
+        <script type="text/html" id='tpl_question<s:property value="#qindex.index+1" />' >
             <div class="page">
                 <div class="page__hd">
-                    <h1 class="page__title">问题<s:property value="#index.index+1"/>
-                        （<s:property value="#index.index+1" />/<s:property value="#request.questions.size" />)
+                    <h1 class="page__title">问题<s:property value="#qindex.index+1"/>
+                        （<s:property value="#qindex.index+1" />/<s:property value="#request.questions.size" />)
                     </h1>
-                    <div class="weui-cells__title"><s:property value="#question.questionContent" /></div>
+
+                    <br/>
+
+                    <h3><s:property value="#question.questionContent" /></h3>
+
+                    <!--多选题-->
+                    <s:if test="#question.questionType==1">
+                        <s:if test="#question.choices.size > 0">
+                            <div class="weui-cells weui-cells_checkbox">
+                            <s:iterator id="choice" value="#question.sortedChoices" status="cindex">
+                                    <label class="weui-cell weui-check__label"
+                                           for='q<s:property value="#qindex.index+1"/>c<s:property value="#cindex.index" />'>
+                                        <div class="weui-cell__hd">
+                                            <input type="checkbox" class="weui-check" name="checkbox1"
+                                                   id='q<s:property value="#qindex.index+1"/>c<s:property value="#cindex.index" />' />
+                                            <i class="weui-icon-checked"></i>
+                                        </div>
+                                        <div class="weui-cell__bd">
+                                            <p><s:property value="#choice.choiceContent" /></p>
+                                        </div>
+                                    </label>
+                            </s:iterator>
+                            </div>
+                        </s:if>
+                        <s:if test="#question.textChoice==1" >
+                            <div class="weui-cells__title">其他</div>
+                            <div class="weui-cells weui-cells_form">
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                        <div class="weui-textarea-counter"><span>0</span>/200</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </s:if>
+                    </s:if>
+
+                    <!--单选题-->
+                    <s:elseif test="#question.questionType==2">
+                        <s:if test="#question.choices.size > 0">
+                            <div class="weui-cells weui-cells_radio">
+                                <s:iterator id="choice" value="#question.sortedChoices" status="cindex">
+                                    <label class="weui-cell weui-check__label"
+                                           for='q<s:property value="#qindex.index+1"/>c<s:property value="#cindex.index" />'>
+                                        <div class="weui-cell__bd">
+                                            <p><s:property value="#choice.choiceContent" /></p>
+                                        </div>
+                                        <div class="weui-cell__ft">
+                                            <input type="radio" class="weui-check" name="radio1"
+                                                   id='q<s:property value="#qindex.index+1"/>c<s:property value="#cindex.index" />'/>
+                                            <span class="weui-icon-checked"></span>
+                                        </div>
+                                    </label>
+                                </s:iterator>
+                            </div>
+                        </s:if>
+                        <s:if test="#question.textChoice==1" >
+                            <div class="weui-cells__title">其他</div>
+                            <div class="weui-cells weui-cells_form">
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                        <div class="weui-textarea-counter"><span>0</span>/200</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </s:if>
+                    </s:elseif>
+                    <!--问答题-->
+                    <s:else>
+                        <div class="weui-cells weui-cells_form">
+                            <div class="weui-cell">
+                                <div class="weui-cell__bd">
+                                    <textarea class="weui-textarea" placeholder="请输入文本" rows="3" id='q<s:property value="#qindex.index+1"/>c0'></textarea>
+                                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                                </div>
+                            </div>
+                        </div>
+                    </s:else>
 
                     <br/>
 
                     <div class="page__bd page__bd_spacing">
                         <div class="weui-flex">
                             <div class="weui-flex__item">
-                                <s:if test="#index.index>0">
-                                    <a href="javascript:jump('question<s:property value="#index.index"/>');" class="weui-btn weui-btn_primary">上一题</a>
+                                <s:if test="#qindex.index>0">
+                                    <a href="javascript:jump('question<s:property value="#qindex.index"/>');" class="weui-btn weui-btn_primary">上一题</a>
 
                                 </s:if>
                             </div>
                             <div class="weui-flex__item">
                             </div>
                             <div class="weui-flex__item">
-                                <s:if test="#index.index+1<#request.questions.size">
-                                    <a href="javascript:jump('question<s:property value="#index.index+2"/>');" class="weui-btn weui-btn_primary">下一题</a>
+                                <s:if test="#qindex.index+1<#request.questions.size">
+                                    <a href="javascript:jump('question<s:property value="#qindex.index+2"/>');" class="weui-btn weui-btn_primary">下一题</a>
                                 </s:if>
                                 <s:else>
                                     <a href="javascript:submit();" class="weui-btn weui-btn_primary">提 交</a>
