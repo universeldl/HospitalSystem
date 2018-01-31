@@ -484,7 +484,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">分发管理权限</label>
+                        <label for="firstname" class="col-sm-3 control-label">随访计划管理权限</label>
                         <div class="col-sm-7">
                             <input type="checkbox" name="power" id="deliverySet" value="deliverySet">
                         </div>
@@ -495,12 +495,12 @@
                             <input type="checkbox" name="power" id="retrieveSet" value="retrieveSet">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">逾期管理权限</label>
                         <div class="col-sm-7">
                             <input type="checkbox" name="power" id="forfeitSet" value="forfeitSet">
                         </div>
-                    </div>
+                    </div>-->
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">系统设置权限</label>
                         <div class="col-sm-7">
