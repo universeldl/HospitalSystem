@@ -21,6 +21,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/all-skins.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -50,6 +51,7 @@
     <script src="${pageContext.request.contextPath}/js/batchAddPatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/exportPatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/echarts.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <!-- add specific js in here -->
 
     <script src="${pageContext.request.contextPath}/js/jquery.slimscroll.min.js"></script>
@@ -58,6 +60,15 @@
     <script src="${pageContext.request.contextPath}/plugins/layer/layer.js"></script>
 
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="jqueryui/style.css">
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
 </head>
 
 <body class="skin-blue sidebar-mini">
@@ -206,7 +217,9 @@
                         <tr>
                             <th>病人用户名</th>
                             <th>病人姓名</th>
+                            <th>病人性别</th>
                             <th>病人类型</th>
+                            <th>随访计划</th>
                             <th>联系号码</th>
                             <th>创建时间</th>
                             <th>操作</th>
@@ -220,7 +233,16 @@
                                 <tbody>
                                 <td><s:property value="#patient.openID"/></td>
                                 <td><s:property value="#patient.name"/></td>
+                                <td>
+                                    <s:if test="#patient.sex == 1">
+                                        男
+                                    </s:if>
+                                    <s:elseif test="#patient.sex == 0">
+                                        女
+                                    </s:elseif>
+                                </td>
                                 <td><s:property value="#patient.patientType.patientTypeName"/></td>
+                                <td><s:property value="#patient.plan.planId"/></td>
                                 <td><s:property value="#patient.phone"/></td>
                                 <td><s:date name="#patient.createTime" format="yyyy-MM-dd"/></td>
                                 <td>
@@ -371,6 +393,12 @@
 
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">病人性别</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findSex" readonly="readonly">
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">病人类型</label>
@@ -380,6 +408,12 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">随访计划</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findPlan" readonly="readonly">
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">联系号码</label>
@@ -516,7 +550,7 @@
 
 
 <!--------------------------------------添加的模糊框------------------------>
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
+<form class="form-horizontal" id="addForm">   <!--保证样式水平不混乱-->
     <!-- 模态框（Modal） -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -549,6 +583,26 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="datepicker" class="col-sm-3 control-label">出生日期</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="datepicker" id="datepicker"
+                                   placeholder="请输入病人出生日期">
+                            <label class="control-label" for="datepicker" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="addPatientSex" class="col-sm-3 control-label">性别</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="addPatientSex">
+                                <option value="-1">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                            <label class="control-label" for="addPatientSex" style="display: none;"></label>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">联系电话</label>

@@ -17,12 +17,12 @@ window.onload = new function () {
         }
     );
 };
+
 /**
  * ajax提交添加病人的信息
  * @param {Object} '#addPatient'
  */
 $(function () {
-
 
     $('#addPatient').click(function () {
 
@@ -30,7 +30,9 @@ $(function () {
             return;
         }
 
-        var postdata = "openID=" + $.trim($("#addOpenID").val()) + "&name=" + $.trim($("#addName").val()) + "&phone=" + $.trim($("#addPhone").val()) + "&patientType=" + $.trim($("#addpatientType").val())
+        var postdata = "openID=" + $.trim($("#addOpenID").val()) + "&name=" + $.trim($("#addName").val())
+            + "&phone=" + $.trim($("#addPhone").val()) + "&sex=" + $.trim($("#addPatientSex").val())
+            + "&patientType=" + $.trim($("#addpatientType").val()) + "&birthday=" + $.trim($("#datepicker").val())
             + "&email=" + $.trim($("#addEmail").val());
         ajax(
             {
@@ -64,9 +66,20 @@ $(function () {
 
 });
 
-
 function validAddPatient() {
     var flag = true;
+
+    var birthday = $.trim($("#datepicker").val());
+    if (birthday == "") {
+        $('#datepicker').parent().addClass("has-error");
+        $('#datepicker').next().text("请选择病人出生日期");
+        $("#datepicker").next().show();
+        flag = false;
+    } else {
+        $('#datepicker').parent().removeClass("has-error");
+        $('#datepicker').next().text("");
+        $("#datepicker").next().hide();
+    }
 
     var openID = $.trim($("#addOpenID").val());
     if (openID == "") {
@@ -80,6 +93,17 @@ function validAddPatient() {
         $("#addOpenID").next().hide();
     }
 
+    var sex = $.trim($("#addPatientSex").val());
+    if (sex == -1) {
+        $('#addPatientSex').parent().addClass("has-error");
+        $('#addPatientSex').next().text("请选择病人性别");
+        $("#addPatientSex").next().show();
+        flag = false;
+    } else {
+        $('#addPatientSex').parent().removeClass("has-error");
+        $('#addPatientSex').next().text("");
+        $("#addPatientSex").next().hide();
+    }
 
     var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
     var name = $.trim($("#addName").val());
@@ -157,5 +181,4 @@ function showInfo(msg) {
     $("#div_info").text(msg);
     $("#modal_info").modal('show');
 }
-
 

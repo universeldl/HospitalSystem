@@ -8,13 +8,13 @@ import java.util.Date;
  * Created by qing on 2017/3/28.
  */
 public class AgeUtils {
-    // 根据年月日计算年龄,birthTimeString:"1994-11-14"
+    // 根据年月日计算年龄,birthTimeString:"11/14/1994"
     public static int getAgeFromBirthTime(String birthTimeString) {
         // 先截取到字符串中的年、月、日
-        String strs[] = birthTimeString.trim().split("-");
-        int selectYear = Integer.parseInt(strs[0]);
-        int selectMonth = Integer.parseInt(strs[1]);
-        int selectDay = Integer.parseInt(strs[2]);
+        String strs[] = birthTimeString.trim().split("/");
+        int selectYear = Integer.parseInt(strs[2]);
+        int selectMonth = Integer.parseInt(strs[0]);
+        int selectDay = Integer.parseInt(strs[1]);
         // 得到当前时间的年、月、日
         Calendar cal = Calendar.getInstance();
         int yearNow = cal.get(Calendar.YEAR);
@@ -58,7 +58,7 @@ public class AgeUtils {
     // 根据时间戳计算年龄
     public static int getAgeFromBirthTime(long birthTimeLong) {
         Date date = new Date(birthTimeLong * 1000l);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
         String birthTimeString = format.format(date);
         return getAgeFromBirthTime(birthTimeString);
     }

@@ -8,6 +8,7 @@ import com.hospital.util.AgeUtils;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
@@ -39,6 +40,7 @@ public class PatientManageAction extends ActionSupport {
     private int pageCode;
     private String openID;
     private String email;
+    private String birthday;
 
     private String fileName;
 
@@ -53,6 +55,11 @@ public class PatientManageAction extends ActionSupport {
 
     public void setOpenID(String openID) {
         this.openID = openID;
+    }
+
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
 
@@ -105,23 +112,20 @@ public class PatientManageAction extends ActionSupport {
         PatientType type = new PatientType();
         type.setPatientTypeId(patientType);
 
-
-
-        //TODO hard code for now, will change after finishing front-end
-        sex = 2;  //be careful about sex, Patient.sex is not compatible with Plan.sex
         int age = 0;
-        String dateOfBirth = "2016-1-28";
-        age = AgeUtils.getAgeFromBirthTime(dateOfBirth);
+        age = AgeUtils.getAgeFromBirthTime(birthday);
 
         Plan plan = new Plan();
         plan.setBeginAge(age);
         plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
-        plan.setSex(sex);
+        if(sex == 0) {
+            plan.setSex(2);  //be careful about sex, Patient.sex is not compatible with Plan.sex
+        }
+        else if(sex == 1) {
+            plan.setSex(1);
+        }
         plan.setPatientType(type);
         Plan newPlan = planService.getPlan(plan);
-        //TODO hard code for now, will change after finishing front-end
-
-
 
         Patient patient = new Patient(name, Md5Utils.md5("123456"), phone, type, email, doctor, openID, createTime, sex, newPlan);
         //TODO the "sex" for patient should be varied rather than hard-coded.
@@ -222,6 +226,7 @@ public class PatientManageAction extends ActionSupport {
             }
         });
 
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
         JSONObject jsonObject = JSONObject.fromObject(newPatient, jsonConfig);
         try {
