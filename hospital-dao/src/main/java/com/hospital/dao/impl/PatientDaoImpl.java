@@ -47,6 +47,22 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
 //		return newPatient;
     }
 
+    @Override
+    public Integer[] getAdditionsForLast12Months() {
+        Integer[] additions = new Integer[12];
+
+        String hql = "from Patient r where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =?";
+        try {
+            for(int i=11; i>=0; i--) {
+                List list = this.getHibernateTemplate().find(hql, i);
+                additions[11-i] = list.size();
+            }
+        } catch (Throwable e1) {
+            e1.printStackTrace();
+            throw new RuntimeException(e1.getMessage());
+        }
+        return additions;
+    }
 
     @Override
     public Patient updatePatientInfo(Patient patient) {

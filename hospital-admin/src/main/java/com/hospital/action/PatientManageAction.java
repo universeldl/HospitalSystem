@@ -12,11 +12,17 @@ import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+import static com.hospital.util.TimeUtils.getLast12Months;
+import static com.hospital.util.CalculateUtils.getMax;
 
 public class PatientManageAction extends ActionSupport {
 
@@ -118,10 +124,9 @@ public class PatientManageAction extends ActionSupport {
         Plan plan = new Plan();
         plan.setBeginAge(age);
         plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
-        if(sex == 0) {
+        if (sex == 0) {
             plan.setSex(2);  //be careful about sex, Patient.sex is not compatible with Plan.sex
-        }
-        else if(sex == 1) {
+        } else if (sex == 1) {
             plan.setSex(1);
         }
         plan.setPatientType(type);
@@ -182,13 +187,34 @@ public class PatientManageAction extends ActionSupport {
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
 
-        Integer male=0, female = 0;
+        //get Legends for Figure2
+        SimpleDateFormat simdf = new SimpleDateFormat("yyyy-MM");
+        Calendar cal = Calendar.getInstance();
+        String[] legends = getLast12Months(simdf.format(cal.getTime()));
+
+        //get additions numbers for each month in last 12 months
+        Integer[] additions = patientService.getAdditionsForLast12Months();
+
+        //calculate total numbers for each month in last 12 months
+        Integer[] total = new Integer[12];
+        total[11] = patientService.findAllPatients().size();
+        for(int s=11; s>0; s--) {
+            total[s-1] = total[s] - additions[s];
+        }
+
+        //calculate units and add-on's for additions and total
+        Integer units1 = (getMax(additions)/100 + 1)*100;
+        Integer addon1 = units1/5;
+        Integer units2 = (total[11]/100 + 1)*100;
+        Integer addon2 = units2/5;
+
+        Integer male = 0, female = 0;
         //得到当前医生
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         List<Patient> allPatients = patientService.getPatientsByDoctor(doctor);
 
-        for(Patient p: allPatients) {
-            if(p.getSex() ==1)
+        for (Patient p : allPatients) {
+            if (p.getSex() == 1)
                 male++;
             else
                 female++;
@@ -197,6 +223,13 @@ public class PatientManageAction extends ActionSupport {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("male", male);
         jsonObject.put("female", female);
+        jsonObject.put("legends", legends);
+        jsonObject.put("additions", additions);
+        jsonObject.put("total", total);
+        jsonObject.put("units1", units1);
+        jsonObject.put("addon1", addon1);
+        jsonObject.put("units2", units2);
+        jsonObject.put("addon2", addon2);
 
         try {
             response.getWriter().print(jsonObject);

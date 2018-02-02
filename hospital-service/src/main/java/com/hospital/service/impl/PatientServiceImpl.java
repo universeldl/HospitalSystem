@@ -56,6 +56,16 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public Integer[] getAdditionsForLast12Months() {
+        return patientDao.getAdditionsForLast12Months();
+    }
+
+    @Override
+    public List<Patient> findAllPatients() {
+        return patientDao.findAllPatients();
+    }
+
+    @Override
     public List<Patient> getPatientsByDoctor(Doctor doctor) {
         return patientDao.getPatientsByDoctor(doctor);
     }

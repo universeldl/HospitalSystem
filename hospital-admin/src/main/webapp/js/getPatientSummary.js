@@ -68,7 +68,7 @@ function getSummary() {
                     xAxis: [
                         {
                             type: 'category',
-                            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                            data: data.legends,
                             axisPointer: {
                                 type: 'shadow'
                             }
@@ -79,8 +79,8 @@ function getSummary() {
                             type: 'value',
                             name: '新增人数',
                             min: 0,
-                            max: 250,
-                            interval: 50,
+                            max: data.units1,
+                            interval: data.addon1,
                             axisLabel: {
                                 formatter: '{value} 人'
                             }
@@ -89,8 +89,8 @@ function getSummary() {
                             type: 'value',
                             name: '总人数',
                             min: 0,
-                            max: 1500,
-                            interval: 300,
+                            max: data.units2,
+                            interval: data.addon2,
                             axisLabel: {
                                 formatter: '{value} 人'
                             }
@@ -100,13 +100,13 @@ function getSummary() {
                         {
                             name: '新增患者人数',
                             type: 'bar',
-                            data: [20, 49, 70, 232, 25, 76, 135, 162, 33, 200, 64, 33]
+                            data: data.additions
                         },
                         {
                             name: '患者总人数',
                             type: 'line',
                             yAxisIndex: 1,
-                            data: [20, 69, 159, 391, 414, 490, 625, 787, 820, 1020, 1084, 1117]
+                            data: data.total
                         }
                     ]
                 });
