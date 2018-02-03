@@ -6,6 +6,7 @@ import com.hospital.dao.PatientTypeDao;
 import com.hospital.domain.*;
 import com.hospital.service.PatientService;
 import com.hospital.util.CheckUtils;
+import com.hospital.util.DateUtils;
 import com.hospital.util.Md5Utils;
 import jxl.Cell;
 import jxl.Sheet;
@@ -17,10 +18,8 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 public class PatientServiceImpl implements PatientService {
@@ -279,9 +278,12 @@ public class PatientServiceImpl implements PatientService {
      */
     public String exportExcel(List<Patient> failPatients, String name) {
         //用数组存储表头
-        String[] title = {"用户名码", "姓名", "病人类型", "邮箱", "联系方式"};
+        String[] title = {"用户名", "姓名", "性别", "病人类型", "邮箱", "联系方式"};
         String path = ServletActionContext.getServletContext().getRealPath("/download");
-        String fileName = +System.currentTimeMillis() + "_" + name;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        Calendar cal = Calendar.getInstance();
+        String time = simpleDateFormat.format(cal.getTime());
+        String fileName = time + "_" + name;
         //创建Excel文件
         File file = new File(path, fileName);
         try {
@@ -304,11 +306,21 @@ public class PatientServiceImpl implements PatientService {
                 sheet.addCell(label);
                 label = new Label(1, i, failPatients.get(i - 1).getName());
                 sheet.addCell(label);
-                label = new Label(2, i, failPatients.get(i - 1).getPatientType().getPatientTypeName());
+                int sex = failPatients.get(i - 1).getSex();
+                String addSex;
+                if(sex == 1)
+                    addSex = "男";
+                else if(sex == 2)
+                    addSex = "女";
+                else
+                    addSex = "不详";
+                label = new Label(2, i, addSex);
                 sheet.addCell(label);
-                label = new Label(3, i, failPatients.get(i - 1).getEmail());
+                label = new Label(3, i, failPatients.get(i - 1).getPatientType().getPatientTypeName());
                 sheet.addCell(label);
-                label = new Label(4, i, failPatients.get(i - 1).getPhone());
+                label = new Label(4, i, failPatients.get(i - 1).getEmail());
+                sheet.addCell(label);
+                label = new Label(5, i, failPatients.get(i - 1).getPhone());
                 sheet.addCell(label);
             }
             //写入数据

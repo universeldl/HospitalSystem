@@ -16,7 +16,9 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -253,7 +255,10 @@ public class SurveyServiceImpl implements SurveyService {
         //用数组存储表头
         String[] title = {"问卷类型", "问卷名称", "作者名称", "科室", "数量", "描述"};
         String path = ServletActionContext.getServletContext().getRealPath("/download");
-        String fileName = +System.currentTimeMillis() + "_failSurveys.xls";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        Calendar cal = Calendar.getInstance();
+        String time = simpleDateFormat.format(cal.getTime());
+        String fileName = time + "_failSurveys.xls";
         //创建Excel文件
         File file = new File(path, fileName);
         try {
