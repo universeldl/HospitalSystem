@@ -467,9 +467,17 @@
 
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">分发周期</label>
+                        <label for="firstname" class="col-sm-3 control-label">随访周期</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="findFrequency" readonly="readonly">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">随访次数</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findTimes" readonly="readonly">
 
                         </div>
                     </div>
@@ -634,7 +642,7 @@
 
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">分发周期</label>
+                        <label for="firstname" class="col-sm-3 control-label">随访周期</label>
                         <div class="col-sm-7">
                             <select class="form-control" id="addFrequency">
                                 <option value="-1">请选择</option>
@@ -649,10 +657,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">总分发数</label>
+                        <label for="firstname" class="col-sm-3 control-label">随访次数</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addNum" placeholder="请输入问卷总分发数">
-                            <label class="control-label" for="addNum" style="display: none;"></label>
+                            <input type="text" class="form-control" id="addTimes" placeholder="请输入问卷随访次数">
+                            <label class="control-label" for="addTimes" style="display: none;"></label>
                         </div>
                     </div>
 
@@ -723,7 +731,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">分发周期</label>
+                        <label for="firstname" class="col-sm-3 control-label">随访周期</label>
                         <div class="col-sm-7">
                             <select class="form-control" id="updateFrequency">
                                 <option value="-1">请选择</option>
@@ -734,6 +742,14 @@
                                 <option value="5">12个月</option>
                             </select>
                             <label class="control-label" for="updateFrequency" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">随访次数</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateTimes" placeholder="请输入问卷随访次数">
+                            <label class="control-label" for="updateTimes" style="display: none;"></label>
                         </div>
                     </div>
 

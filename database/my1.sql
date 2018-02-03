@@ -101,13 +101,14 @@ CREATE TABLE `survey` (
   `surveyId` int(11) NOT NULL,
   `surveyName` varchar(20) NOT NULL,
   `author` varchar(20) DEFAULT  NULL,
-  `num` int(11) NOT NULL,
-  `currentNum` int(5) NOT NULL,
+  `num` int(5) DEFAULT 0,
+  `currentNum` int(5) DEFAULT 0,
   `department` varchar(20) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `putdate` datetime DEFAULT NULL,
   `typeId` int(11) DEFAULT NULL,
   `frequency` int(2) DEFAULT 0,
+  `times` int(2) DEFAULT 0,
   `aid` int(11) DEFAULT NULL,
   PRIMARY KEY (`surveyId`),
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`),
@@ -254,8 +255,8 @@ INSERT INTO Authorization VALUES(1,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(5,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(6,1,1,1,1,1,1,1,1);
 
-INSERT INTO survey VALUES(1,"survey1","admin",10,2,"a1","aaa","2017-06-25 00:00:00",1,1,2);
-INSERT INTO survey VALUES(2,"survey2","doctor2",10,2,"a2","baa","2017-06-25 00:00:00",1,1,6);
+INSERT INTO survey VALUES(1,"survey1","admin",10,2,"a1","aaa","2017-06-25 00:00:00",1,1,2,2);
+INSERT INTO survey VALUES(2,"survey2","doctor2",10,2,"a2","baa","2017-06-25 00:00:00",1,1,3,6);
 
 INSERT INTO deliveryInfo VALUES(1,"2017-01-15 00:00:00","2017-03-04 00:00:00",0,0,1,1,1,6);
 INSERT INTO deliveryInfo VALUES(2,"2017-02-15 00:00:00","2017-04-04 00:00:00",0,0,1,1,1,6);

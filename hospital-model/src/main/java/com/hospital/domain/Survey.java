@@ -19,7 +19,8 @@ public class Survey implements Serializable {
     private Integer currentNum;    //总回收数
     private String description;    //简介
     private Doctor doctor;    //操作医生
-    private Integer frequency;    //分发频率
+    private Integer frequency;    //随访频率
+    private Integer times;    //随访次数
     private Set<Question> questions = new HashSet<>();
     private Set<RetrieveInfo> retrieveInfos = new HashSet<>();
 
@@ -29,6 +30,14 @@ public class Survey implements Serializable {
 
     public void setSurveyId(Integer surveyId) {
         this.surveyId = surveyId;
+    }
+
+    public Integer getTimes() {
+        return times;
+    }
+
+    public void setTimes(Integer times) {
+        this.times = times;
     }
 
     public Integer getFrequency() {
@@ -144,19 +153,18 @@ public class Survey implements Serializable {
     }
 
     public Survey(SurveyType surveyType, String surveyName, String author,
-                  String department, Date putdate, Integer num, Integer currentNum,
-                  String description, Doctor doctor, Integer frequency) {
+                  String department, Date putdate, String description,
+                  Doctor doctor, Integer frequency, Integer times) {
         super();
         this.surveyType = surveyType;
         this.surveyName = surveyName;
         this.author = author;
         this.department = department;
         this.putdate = putdate;
-        this.num = num;
-        this.currentNum = currentNum;
         this.description = description;
         this.doctor = doctor;
         this.frequency = frequency;
+        this.times = times;
     }
 
     public Survey(SurveyType surveyType, String surveyName, String author,

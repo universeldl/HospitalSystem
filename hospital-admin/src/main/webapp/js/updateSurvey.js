@@ -1,16 +1,17 @@
+let surveyId = 0;
+
 $(function () {
 
-
     $('#updateSurvey').click(function () {
-
 
         if (!validUpdateSurvey()) {
             return;
         }
 
-        var postdata = "surveyName=" + $.trim($("#updateSurveyName").val()) + "&surveyTypeId=" + $.trim($("#updateSurveyType").val())
+        var postdata = "surveyId=" + surveyId + "&surveyName=" + $.trim($("#updateSurveyName").val()) + "&surveyTypeId=" + $.trim($("#updateSurveyType").val())
             + "&frequency=" + $.trim($("#updateFrequency").val()) + "&author=" + $.trim($("#updateAuthor").val())
-            + "&department=" + $.trim($("#updateDepartment").val()) + "&description=" + $.trim($("#updateDescription").val());
+            + "&times=" + $.trim($("#updateTimes").val()) + "&department=" + $.trim($("#updateDepartment").val())
+            + "&description=" + $.trim($("#updateDescription").val());
         ajax(
             {
                 method: 'POST',
@@ -43,6 +44,7 @@ $(function () {
 
 
 function updateSurvey(id) {
+    surveyId = id;
     $("#updateSurveyType option[value!=-1]").remove();//移除先前的选项
     ajax(
         {
@@ -72,6 +74,7 @@ function updateSurvey(id) {
                             $("#updateAuthor").val(data.author);
                             $("#updateDepartment").val(data.department);
                             $("#updateDescription").val(data.description);
+                            $("#updateTimes").val(data.times);
 
                         }
                     }
@@ -147,6 +150,23 @@ function validUpdateSurvey() {
         $('#updateDepartment').parent().removeClass("has-error");
         $('#updateDepartment').next().text("");
         $("#updateDepartment").next().hide();
+    }
+
+    var times = $.trim($("#updateTimes").val());
+    if (times == "") {
+        $('#updateTimes').parent().addClass("has-error");
+        $('#updateTimes').next().text("请输入随访次数");
+        $("#updateTimes").next().show();
+        flag = false;
+    } else if (times <= 0 || times != parseInt(times)) {
+        $('#updateTimes').parent().addClass("has-error");
+        $('#updateTimes').next().text("随访次数必须为正整数");
+        $("#updateTimes").next().show();
+        flag = false;
+    } else {
+        $('#updateTimes').parent().removeClass("has-error");
+        $('#updateTimes').next().text("");
+        $("#updateTimes").next().hide();
     }
 
     return flag;

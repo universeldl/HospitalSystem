@@ -23,6 +23,10 @@
             <column name="frequency"/>
         </property>
 
+        <property name="times" type="java.lang.Integer">
+            <column name="times"/>
+        </property>
+
         <property name="currentNum" type="java.lang.Integer">
             <column name="currentNum"/>
         </property>

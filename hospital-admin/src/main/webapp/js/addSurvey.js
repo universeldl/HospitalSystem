@@ -10,8 +10,8 @@ $(function () {
 
         var postdata = "surveyName=" + $.trim($("#addSurveyName").val()) + "&author=" + $.trim($("#addAuthor").val())
             + "&frequency=" + $.trim($("#addFrequency").val()) + "&department=" + $.trim($("#addDepartment").val())
-            + "&num=" + $.trim($("#addNum").val()) + "&description="
-            + $.trim($("#addDescription").val()) + "&surveyTypeId=" + $.trim($("#addSurveyType").val());
+            + "&description=" + $.trim($("#addDescription").val())
+            + "&times=" + $.trim($("#addTimes").val()) + "&surveyTypeId=" + $.trim($("#addSurveyType").val());
 
         ajax(
             {
@@ -130,23 +130,23 @@ function validAddSurvey() {
         $("#addDepartment").next().hide();
     }
 
-    var num = $.trim($("#addNum").val());
-    if (num == "") {
-        $('#addNum').parent().addClass("has-error");
-        $('#addNum').next().text("请输入总分发数");
-        $("#addNum").next().show();
+
+    var times = $.trim($("#addTimes").val());
+    if (times == "") {
+        $('#addTimes').parent().addClass("has-error");
+        $('#addTimes').next().text("请输入随访次数");
+        $("#addTimes").next().show();
         flag = false;
-    } else if (num <= 0 || num != parseInt(num)) {
-        $('#addNum').parent().addClass("has-error");
-        $('#addNum').next().text("数量必须为正整数");
-        $("#addNum").next().show();
+    } else if (times <= 0 || times != parseInt(times)) {
+        $('#addTimes').parent().addClass("has-error");
+        $('#addTimes').next().text("随访次数必须为正整数");
+        $("#addTimes").next().show();
         flag = false;
     } else {
-        $('#addNum').parent().removeClass("has-error");
-        $('#addNum').next().text("");
-        $("#addNum").next().hide();
+        $('#addTimes').parent().removeClass("has-error");
+        $('#addTimes').next().text("");
+        $("#addTimes").next().hide();
     }
-
 
     return flag;
 }

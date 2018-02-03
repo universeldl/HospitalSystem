@@ -26,6 +26,7 @@ function getSurveyInfo(id) {
                 $("#findNum").val(data.num);
                 $("#findDoctor").val(data.doctor.name);
                 $("#findCurrentNum").val(data.currentNum);
+                $("#findTimes").val(data.times);
                 if (data.frequency == 1)
                     $("#findFrequency").val("1个月");
                 else if (data.frequency == 2)
