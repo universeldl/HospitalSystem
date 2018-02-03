@@ -67,6 +67,13 @@
             <one-to-many class="com.hospital.domain.DeliveryInfo"/>
         </set>
 
+        <set name="retrieveInfos" lazy="false" inverse="true">
+            <key>
+                <column name="patientId"></column>
+            </key>
+
+            <one-to-many class="com.hospital.domain.RetrieveInfo"/>
+        </set>
 
         <many-to-one name="plan" class="com.hospital.domain.Plan" lazy="false">
             <column name="planId"></column>

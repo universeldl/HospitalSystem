@@ -11,9 +11,7 @@ import com.hospital.util.Md5Utils;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
+import jxl.write.*;
 import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 
@@ -308,9 +306,9 @@ public class PatientServiceImpl implements PatientService {
                 sheet.addCell(label);
                 int sex = failPatients.get(i - 1).getSex();
                 String addSex;
-                if(sex == 1)
+                if (sex == 1)
                     addSex = "男";
-                else if(sex == 2)
+                else if (sex == 2)
                     addSex = "女";
                 else
                     addSex = "不详";
@@ -336,10 +334,131 @@ public class PatientServiceImpl implements PatientService {
     }
 
 
+    /**
+     * 导出单个病人资料及答卷情况到excel文件
+     *
+     * @param patient
+     * @return 返回文件路径
+     */
+    public String exportOnePatient(Patient patient, String name) {
+
+        String path = ServletActionContext.getServletContext().getRealPath("/download");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        Calendar cal = Calendar.getInstance();
+        String time = simpleDateFormat.format(cal.getTime());
+        String fileName = time + "_" + name;
+        //创建Excel文件
+        File file = new File(path, fileName);
+
+        try {
+            file.createNewFile();
+            //创建工作簿
+            WritableWorkbook workbook = Workbook.createWorkbook(file);
+            WritableSheet sheet = workbook.createSheet("sheet1", 0);
+
+            Label label = null;
+
+            int row = 0; //row, from 0 to the end
+
+            label = new Label(0, row, "用户名");
+            sheet.addCell(label);
+            label = new Label(1, row, patient.getOpenID());
+            sheet.addCell(label);
+            row++;
+
+            label = new Label(0, row, "姓名");
+            sheet.addCell(label);
+            label = new Label(1, row, patient.getName());
+            sheet.addCell(label);
+            row++;
+
+            int sex = patient.getSex();
+            String addSex;
+            if (sex == 1)
+                addSex = "男";
+            else if (sex == 2)
+                addSex = "女";
+            else
+                addSex = "不详";
+            label = new Label(0, row, "性别");
+            sheet.addCell(label);
+            label = new Label(1, row, addSex);
+            sheet.addCell(label);
+            row++;
+
+            label = new Label(0, row, "病人类型");
+            sheet.addCell(label);
+            label = new Label(1, row, patient.getPatientType().getPatientTypeName());
+            sheet.addCell(label);
+            row++;
+
+            label = new Label(0, row, "邮箱");
+            sheet.addCell(label);
+            label = new Label(1, row, patient.getEmail());
+            sheet.addCell(label);
+            row++;
+
+            label = new Label(0, row, "联系方式");
+            sheet.addCell(label);
+            label = new Label(1, row, patient.getPhone());
+            sheet.addCell(label);
+            row++;
+
+
+            //开始写所有随访答卷内容
+            for (RetrieveInfo retrieveInfo : patient.getRetrieveInfos()) {
+                row++;
+                //构造表头
+                sheet.mergeCells(0, row, 1, row);//添加合并单元格，第一个参数是起始列，第二个参数是起始行，第三个参数是终止列，第四个参数是终止行
+                WritableFont bold = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);//设置字体种类和黑体显示,字体为Arial,字号大小为10,采用黑体显示
+                WritableCellFormat titleFormate = new WritableCellFormat(bold);//生成一个单元格样式控制对象
+                titleFormate.setAlignment(jxl.format.Alignment.CENTRE);//单元格中的内容水平方向居中
+                titleFormate.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);//单元格的内容垂直方向居中
+                Label surveyTitle = new Label(0, row, retrieveInfo.getSurvey().getSurveyName(), titleFormate);
+                sheet.setRowView(0, 600, false);//设置第一行的高度
+                sheet.addCell(surveyTitle);
+                row++;
+
+                //构造答卷列表
+                for (Answer answer : retrieveInfo.getAnswers()) {
+                    label = new Label(0, row, answer.getQuestion().getQuestionContent());
+                    sheet.addCell(label);
+                    int col = 1;
+                    for(Choice choice : answer.getChoices()) {
+                        label = new Label(col, row, choice.getChoiceContent());
+                        sheet.addCell(label);
+                        col++;
+                    }
+                    row++;
+                }
+            }
+            //结束写所有随访答卷内容
+
+
+            //写入数据
+            workbook.write();
+
+            workbook.close();
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return fileName;
+    }
+
+
     @Override
     public String exportPatient() {
         List<Patient> findAllPatients = patientDao.findAllPatients();
         String exportPatientExcel = exportExcel(findAllPatients, "allPatients.xls");
+        return "doctor/FileDownloadAction.action?fileName=" + exportPatientExcel;
+    }
+
+
+    @Override
+    public String exportSinglePatient(Patient patient) {
+        String exportPatientExcel = exportOnePatient(patient, "patient.xls");
         return "doctor/FileDownloadAction.action?fileName=" + exportPatientExcel;
     }
 

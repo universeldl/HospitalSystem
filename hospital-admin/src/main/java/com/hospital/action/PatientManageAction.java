@@ -378,5 +378,18 @@ public class PatientManageAction extends ActionSupport {
         return null;
     }
 
+    public String exportSinglePatient() {
+        Patient patient = new Patient();
+        patient.setPatientId(patientId);
+        Patient exportPatient = patientService.getPatientById(patient);//查出需要导出的病人对象;
+        HttpServletResponse response = ServletActionContext.getResponse();
+        String filePath = patientService.exportSinglePatient(exportPatient);
+        try {
+            response.getWriter().print(filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
 
 }

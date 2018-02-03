@@ -29,7 +29,8 @@ public class Patient implements Serializable {
 
     private Date birthday;
     private Date createTime;    //创建时间
-    private Set<DeliveryInfo> deliveryInfos;    //该病人的分发信息
+    private Set<DeliveryInfo> deliveryInfos;    //该病人的随访问卷分发信息
+    private Set<RetrieveInfo> retrieveInfos;    //该病人的答卷信息
 
 
     public String getAppID() {
@@ -169,6 +170,14 @@ public class Patient implements Serializable {
 
     public void setDeliveryInfos(Set<DeliveryInfo> deliveryInfos) {
         this.deliveryInfos = deliveryInfos;
+    }
+
+    public Set<RetrieveInfo> getRetrieveInfos() {
+        return retrieveInfos;
+    }
+
+    public void setRetrieveInfos(Set<RetrieveInfo> retrieveInfos) {
+        this.retrieveInfos = retrieveInfos;
     }
 
 

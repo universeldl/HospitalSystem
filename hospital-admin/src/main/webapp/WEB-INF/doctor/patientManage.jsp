@@ -257,6 +257,9 @@
                                     <button type="button" class="btn btn-danger btn-xs"
                                             onclick="deletePatient(<s:property value="#patient.patientId"/>)">删除
                                     </button>
+                                    <button type="button" class="btn btn-success btn-xs"
+                                            onclick="exportSinglePatient(<s:property value="#patient.patientId"/>)">导出
+                                    </button>
 
                                 </td>
                                 </tbody>
