@@ -384,8 +384,11 @@ public class PatientManageAction extends ActionSupport {
         Patient exportPatient = patientService.getPatientById(patient);//查出需要导出的病人对象;
         HttpServletResponse response = ServletActionContext.getResponse();
         String filePath = patientService.exportSinglePatient(exportPatient);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("filePath", filePath);
+
         try {
-            response.getWriter().print(filePath);
+            response.getWriter().print(jsonObject);
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }

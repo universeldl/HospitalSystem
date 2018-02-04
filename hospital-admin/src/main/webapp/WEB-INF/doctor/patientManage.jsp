@@ -50,6 +50,7 @@
 
     <script src="${pageContext.request.contextPath}/js/batchAddPatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/exportPatient.js"></script>
+    <script src="${pageContext.request.contextPath}/js/exportSinglePatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/echarts.js"></script>
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <!-- add specific js in here -->
