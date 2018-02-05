@@ -22,6 +22,7 @@
         </property>
     </bean>
 
+    <!--
     <bean id="surveyService" class="com.hospital.service.impl.SurveyServiceImpl">
         <property name="surveyDao">
             <ref bean="surveyDao"/>
@@ -36,8 +37,47 @@
             <ref bean="surveyTypeDao"/>
         </property>
     </bean>
+    -->
+
+    <bean id="retrieveDao" class="com.hospital.dao.impl.RetrieveDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+
+    <bean id="retrieveService" class="com.hospital.service.impl.RetrieveServiceImpl">
+        <property name="retrieveDao">
+            <ref bean="retrieveDao"/>
+        </property>
+        <property name="surveyDao">
+            <ref bean="surveyDao"/>
+        </property>
+        <property name="deliveryDao">
+            <ref bean="deliveryDao"/>
+        </property>
+    </bean>
+
+    <bean id="deliveryService" class="com.hospital.service.impl.DeliveryServiceImpl">
+        <property name="deliveryDao">
+            <ref bean="deliveryDao"/>
+        </property>
+        <property name="surveyDao">
+            <ref bean="surveyDao"/>
+        </property>
+        <property name="patientDao">
+            <ref bean="patientDao"/>
+        </property>
+        <property name="forfeitDao">
+            <ref bean="forfeitDao"/>
+        </property>
+        <property name="retrieveDao">
+            <ref bean="retrieveDao"/>
+        </property>
+    </bean>
 
     <bean id="surveyAction" class="com.hospital.action.surveyAction" scope="prototype">
+        <!--
         <property name="patientService">
             <ref bean="patientService"/>
         </property>
@@ -45,9 +85,18 @@
         <property name="surveyService">
             <ref bean="surveyService" />
         </property>
-        
+
         <property name="questionService">
             <ref bean="questionService" />
+        </property>
+        -->
+
+        <property name="deliveryService">
+            <ref bean="deliveryService" />
+        </property>
+
+        <property name="retrieveService">
+            <ref bean="retrieveService" />
         </property>
     </bean>
 </beans>

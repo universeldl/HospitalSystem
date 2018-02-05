@@ -15,6 +15,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <link rel="stylesheet" href="./css/weui.css"/>
     <link rel="stylesheet" href="./css/example.css"/>
+
+    <style type="text/css">
+        body {background-image:url(./img/register/bg.jpeg);}
+    </style>
 </head>
 <body ontouchstart>
 
@@ -34,7 +38,7 @@
             <br/>
             <s:if test="#request.questions.size>0">
                 <div class="page__bd page__bd_spacing">
-                    <a href="javascript:jump('question1');" class="weui-btn weui-btn_primary">start!</a>
+                    <a href="javascript:jump('question1');" class="weui-btn weui-btn_primary">开始填写问卷</a>
                 </div>
             </s:if>
         </div>

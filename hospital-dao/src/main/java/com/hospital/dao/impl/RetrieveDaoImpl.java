@@ -210,5 +210,15 @@ public class RetrieveDaoImpl extends HibernateDaoSupport implements RetrieveDao 
         return b;
     }
 
+    @Override
+    public RetrieveInfo getRetrieveInfoByDeliveryID(Integer deliveryID) {
+        String hql = "from RetrieveInfo b where b.deliveryInfo.deliveryId=?";
+        List list = this.getHibernateTemplate().find(hql, deliveryID);
+        if (list != null && list.size() > 0) {
+            RetrieveInfo r = (RetrieveInfo) list.get(0);
+            return r;
+        }
+        return null;
+    }
 
 }

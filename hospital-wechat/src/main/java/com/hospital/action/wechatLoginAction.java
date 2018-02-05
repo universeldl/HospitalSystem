@@ -50,7 +50,7 @@ public class wechatLoginAction extends ActionSupport {
             System.out.println("openid = " + open_id);
 
             // testing
-            open_id = "test1234";
+            // open_id = "test1234";
 
             if (open_id != null) {
                 Patient patient = new Patient();

@@ -146,5 +146,11 @@ public class RetrieveServiceImpl implements RetrieveService {
         return queryRetrieveInfo(openID, deliveryId, pageCode, pageSize);
     }
 
+    @Override
+    public RetrieveInfo getRetrieveInfoByDeliveryID(Integer deliveryID) {
+        System.out.println("test1");
+        return retrieveDao.getRetrieveInfoByDeliveryID(deliveryID);
+    }
+
 
 }

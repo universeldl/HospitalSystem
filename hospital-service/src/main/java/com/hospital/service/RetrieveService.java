@@ -22,4 +22,5 @@ public interface RetrieveService {
     PageBean<RetrieveInfo> findMyDeliveryInfoByPage(Patient patient,
                                                     int pageCode, int pageSize);
 
+    RetrieveInfo getRetrieveInfoByDeliveryID(Integer deliveryID);
 }

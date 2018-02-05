@@ -23,5 +23,6 @@ public interface RetrieveDao {
 
     boolean deleteRetrieveInfo(RetrieveInfo retrieveInfo);
 
+    RetrieveInfo getRetrieveInfoByDeliveryID(Integer deliveryID);
 
 }

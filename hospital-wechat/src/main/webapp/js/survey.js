@@ -219,9 +219,16 @@ $(function () {
 
         window.pageManager = pageManager;
         window.jump = function(to) {
-            alert(to);
+            //alert(to);
             window.pageManager.go(to);
         };
     }
     init();
 });
+
+
+function submit() {
+    if (!isValidAnswer()) {
+        return;
+    }
+}
