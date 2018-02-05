@@ -48,7 +48,7 @@
 <s:if test="#request.questions.size>0">
     <s:iterator value="#request.questions" id="question" status="qindex">
         <script type="text/html" id='tpl_question<s:property value="#qindex.index+1" />' >
-            <div class="page">
+            <div class="page" id='tpl_question<s:property value="#qindex.index+1" />' >
                 <div class="page__hd">
                     <h1 class="page__title">问题<s:property value="#qindex.index+1"/>
                         （<s:property value="#qindex.index+1" />/<s:property value="#request.questions.size" />)
@@ -161,8 +161,37 @@
         </script>
     </s:iterator>
 </s:if>
+
+<script src="./jQuery/jquery-3.1.1.min.js"></script>
 <script src="./js/zepto.min.js"></script>
 <script src="./js/survey.js"></script>
+
+
+<!--BEGIN toast-->
+<div id="toast" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+        <p class="weui-toast__content" id="toastStr">toastStr</p>
+    </div>
+</div>
+<!--end toast-->
+
+
+<!--BEGIN dialog2-->
+<div id="dialogs">
+    <div class="js_dialog" id="iosDialog2" style="display: none;">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog">
+            <div class="weui-dialog__bd" id="dialog2Str1">dialog2Str1</div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary"
+                   id="dialog2Str2">dialog2Str2</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--END dialog2-->
 
 </body>
 </html>

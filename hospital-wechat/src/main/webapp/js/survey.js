@@ -231,4 +231,71 @@ function submit() {
     if (!isValidAnswer()) {
         return;
     }
+
+
+
+    alert("submit");
+}
+
+function isValidAnswer() {
+
+    // check all checkbox sections
+    if (!isValidCheckBoxes()) {
+        return false;
+    }
+
+
+}
+
+function isValidCheckBoxes() {
+    //var list = document.getElementsByClassName('weui-cells weui-cells_checkbox');
+
+    var list = {}, list = $('div[class="weui-cells weui-cells_checkbox"]');
+    var i;
+    for (i = 0; i < list.length; i++) {
+        var inputs = list[i].getElementsByClassName('weui-check');
+        var j;
+        var checked = false;
+        for (j = 0; j < inputs.length; j++) {
+            if (inputs[j].type == 'checkbox') {
+                if (inputs[j].checked == true) {
+                    checked = true;
+                    break;
+                }
+            }
+        }
+        if (!checked) {
+            showDialog2("请完成所有问题", "确定");
+            var pageid = $(list[i]).parents(".page")
+                .map(function() {
+                    return this.id;
+                })
+                .get();
+            var to = pageid.toString().replace(/tpl_/, '')
+            window.pageManager.go(to);
+            return false;
+        }
+    }
+}
+
+function showToast(str) {
+    var $toast = $('#toast');
+    if ($toast.css('display') != 'none') return;
+    $("#toastStr").html(str);
+    $toast.fadeIn(100);
+    setTimeout(function () {
+        $toast.fadeOut(100);
+    }, 2000);
+
+}
+
+function showDialog2(str1, str2) {
+    var $dialog = $('#iosDialog2');
+    $("#dialog2Str1").html(str1);
+    $("#dialog2Str2").html(str2);
+    $dialog.fadeIn(200);
+
+    $dialog.on('click', '.weui-dialog__btn', function () {
+        $(this).parents('.js_dialog').fadeOut(200);
+    });
 }
