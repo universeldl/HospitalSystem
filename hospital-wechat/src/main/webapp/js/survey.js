@@ -222,61 +222,70 @@ $(function () {
             //alert(to);
             window.pageManager.go(to);
         };
+        window.checkAndJump = function(to) {
+
+            /*
+            var div = document.getElementById('tpl_question' + to);
+            var inputs = div.getElementsByTagName("input");
+            var all_empty = true;
+            for (var i = 0; i < inputs.length; i++) {
+                if(inputs[i].checked) {
+                    all_empty = false;
+                }
+            }
+            if (inputs.length > 0 && all_empty) {
+                showDialog2("请先完成问题", "确定");
+                return;
+            }
+
+
+            var text = div.getElementsByTagName("textarea");
+            if (inputs.length == 0 && text[0].value == '') {
+                showDialog2("请先完成问题", "确定");
+                return;
+            }
+            */
+            if (!isValid(to)) {
+                showDialog2("请先完成问题", "确定");
+                return;
+            }
+
+            var id = parseInt(to) + 1;
+            window.pageManager.go('question' + id);
+
+        };
     }
     init();
 });
 
-
-function submit() {
-    if (!isValidAnswer()) {
-        return;
+function isValid(to) {
+    var div = document.getElementById('tpl_question' + to);
+    var inputs = div.getElementsByTagName("input");
+    var all_empty = true;
+    for (var i = 0; i < inputs.length; i++) {
+        if(inputs[i].checked) {
+            all_empty = false;
+        }
     }
-
-
-
-    alert("submit");
-}
-
-function isValidAnswer() {
-
-    // check all checkbox sections
-    if (!isValidCheckBoxes()) {
+    if (inputs.length > 0 && all_empty) {
         return false;
     }
 
-
-}
-
-function isValidCheckBoxes() {
-    //var list = document.getElementsByClassName('weui-cells weui-cells_checkbox');
-
-    var list = {}, list = $('div[class="weui-cells weui-cells_checkbox"]');
-    var i;
-    for (i = 0; i < list.length; i++) {
-        var inputs = list[i].getElementsByClassName('weui-check');
-        var j;
-        var checked = false;
-        for (j = 0; j < inputs.length; j++) {
-            if (inputs[j].type == 'checkbox') {
-                if (inputs[j].checked == true) {
-                    checked = true;
-                    break;
-                }
-            }
-        }
-        if (!checked) {
-            showDialog2("请完成所有问题", "确定");
-            var pageid = $(list[i]).parents(".page")
-                .map(function() {
-                    return this.id;
-                })
-                .get();
-            var to = pageid.toString().replace(/tpl_/, '')
-            window.pageManager.go(to);
-            return false;
-        }
+    var text = div.getElementsByTagName("textarea");
+    if (inputs.length == 0 && text[0].value == '') {
+        return false;
     }
+    return true;
 }
+
+function submit(to) {
+    if (!isValid(to)) {
+        showDialog2("请先完成问题", "确定");
+        return;
+    }
+    alert("submit");
+}
+
 
 function showToast(str) {
     var $toast = $('#toast');

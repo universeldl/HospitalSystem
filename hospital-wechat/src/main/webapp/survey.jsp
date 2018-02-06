@@ -127,7 +127,7 @@
                         <div class="weui-cells weui-cells_form">
                             <div class="weui-cell">
                                 <div class="weui-cell__bd">
-                                    <textarea class="weui-textarea" placeholder="请输入文本" rows="3" id='q<s:property value="#qindex.index+1"/>c0'></textarea>
+                                    <textarea class="weui-textarea" placeholder="请输入文本" rows="3" id='q<s:property value="#qindex.index+1"/>c0' required></textarea>
                                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                                 </div>
                             </div>
@@ -148,10 +148,10 @@
                             </div>
                             <div class="weui-flex__item">
                                 <s:if test="#qindex.index+1<#request.questions.size">
-                                    <a href="javascript:jump('question<s:property value="#qindex.index+2"/>');" class="weui-btn weui-btn_primary">下一题</a>
+                                    <a href="javascript:checkAndJump('<s:property value="#qindex.index+1"/>');" class="weui-btn weui-btn_primary">下一题</a>
                                 </s:if>
                                 <s:else>
-                                    <a href="javascript:submit();" class="weui-btn weui-btn_primary">提 交</a>
+                                    <a href="javascript:submit('<s:property value="#qindex.index+1"/>');" class="weui-btn weui-btn_primary">提 交</a>
                                 </s:else>
                             </div>
                         </div>
