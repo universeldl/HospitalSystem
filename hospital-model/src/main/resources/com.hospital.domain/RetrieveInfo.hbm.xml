@@ -38,7 +38,7 @@
             <column name="aid"></column>
         </many-to-one>
 
-        <set name="answers" lazy="false" inverse="true">
+        <set name="answers" lazy="false" inverse="true" order-by="answerId asc">
             <key>
                 <column name="deliveryId"></column>
             </key>

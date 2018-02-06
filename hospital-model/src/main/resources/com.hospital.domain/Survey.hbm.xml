@@ -44,7 +44,7 @@
         </property>
 
 
-        <set name="questions" lazy="false" inverse="true">
+        <set name="questions" lazy="false" inverse="true" order-by="questionId asc">
             <key>
                 <column name="surveyId"></column>
             </key>

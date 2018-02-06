@@ -24,7 +24,7 @@
             <column name="sex"/>
         </property>
 
-        <set name="surveys" table="plan_survey" lazy="false">
+        <set name="surveys" table="plan_survey" lazy="false" order-by="surveyId asc">
             <key column="planId"></key>
             <many-to-many class="com.hospital.domain.Survey" column="surveyId"></many-to-many>
         </set>
