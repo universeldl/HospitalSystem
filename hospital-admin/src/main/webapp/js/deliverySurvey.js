@@ -3,8 +3,7 @@ $(function () {
 
     $('#btn_delivery').click(function () {
 
-        var postdata = "openID=" + $.trim($("#deliveryPatientOpenID").val())
-    ) + "&pwd=" + $.trim($("#pwd").val());
+        var postdata = "openID=" + $.trim($("#deliveryPatientOpenID").val()) + "&pwd=" + $.trim($("#pwd").val());
     ajax(
         {
             method: 'POST',

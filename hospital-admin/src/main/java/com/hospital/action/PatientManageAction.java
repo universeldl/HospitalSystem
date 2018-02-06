@@ -133,7 +133,6 @@ public class PatientManageAction extends ActionSupport {
         Plan newPlan = planService.getPlan(plan);
 
         Patient patient = new Patient(name, Md5Utils.md5("123456"), phone, type, email, doctor, openID, createTime, sex, newPlan);
-        //TODO the "sex" for patient should be varied rather than hard-coded.
 
         Patient oldPatient = patientService.getPatientByopenID(patient);//检查是否已经存在该openID的病人
         int success = 0;
@@ -142,6 +141,7 @@ public class PatientManageAction extends ActionSupport {
         } else {
             boolean b = patientService.addPatient(patient);
             if (b) {
+                //TODO 大神，添加完病人就要发送第一份随访(从上面的newPlan中取得)，请加入微信端发送code并删除此行
                 success = 1;
             }
         }

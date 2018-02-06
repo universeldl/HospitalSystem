@@ -5,9 +5,8 @@ import com.hospital.domain.*;
 import com.hospital.service.DeliveryService;
 import com.hospital.util.Md5Utils;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class DeliveryServiceImpl implements DeliveryService {
 
@@ -161,6 +160,58 @@ public class DeliveryServiceImpl implements DeliveryService {
 
 
         return state;
+    }
+
+
+    @Override
+    public boolean checkAndDoDelivery() {
+        List<Patient> patients = patientDao.findAllPatients();
+        for (Patient patient : patients) {
+            //get sorted surveys, sort to make sure that the survey we are going to send is always in a order
+            Set<Survey> surveys = patient.getPlan().getSurveys();
+
+            //get all deliveryInfos of this patient
+            Set<DeliveryInfo> deliveryInfos = patient.getDeliveryInfos();
+
+            //do check and send
+            for (Survey survey : surveys) {
+                int num = 0;
+                for (DeliveryInfo deliveryInfo : deliveryInfos) {
+                    if (deliveryInfo.getSurvey().getSurveyId() == survey.getSurveyId()) {
+                        if (deliveryInfo.getState() != 4) {//not resent ones
+                            num++;
+                        }
+                    }
+                }
+                if (num < survey.getTimes()) {//if not reach the times
+                    //check if it's the right day, if so, do the delivery
+                    try {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(patient.getCreateTime());
+                        calendar.add(Calendar.MONTH, num);
+                        Date endDate = calendar.getTime();
+                        if (System.currentTimeMillis() < endDate.getTime()) {//Now it's the time to deliver the survey~~
+
+                            //TODO 大神，加入微信发送code并删除此行
+
+                            //add new DeliveryInfo after sending survey to Patient
+                            DeliveryInfo deliveryInfo = new DeliveryInfo();
+                            deliveryInfo.setSurvey(survey);
+                            int addDelivery = deliveryDao.addDelivery(deliveryInfo);//返回1成功添加,返回0添加失败
+                            if(addDelivery == 1) {// added successfully
+                                break;//each patient only send once, or patients will receive all the remaining surveys
+                            }
+                            else {
+                                return false;
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     @Override
