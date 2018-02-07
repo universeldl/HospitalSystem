@@ -140,18 +140,20 @@ public class RetrieveManageAction extends ActionSupport {
             pb.setUrl("queryRetrieveInfo.action?openID=" + openID + "&deliveryId=" + deliveryId + "&");
         }
 
-        RetrieveInfo retrieveInfo = new RetrieveInfo();
-        retrieveInfo.setDeliveryId(deliveryId);
-        RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
+        if(deliveryId != 0) {
+            RetrieveInfo retrieveInfo = new RetrieveInfo();
+            retrieveInfo.setDeliveryId(deliveryId);
+            RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
 
-        Answer answer = new Answer();
-        Set<Answer> answers = new HashSet<>();
-        answers.add(answer);
-        newRetrieveInfo.setAnswers(answers);
-        myAnswers = newRetrieveInfo.getAnswers();
-        ActionContext actionContext = ActionContext.getContext();
-        actionContext.put("myAnswers", myAnswers);
-        ServletActionContext.getRequest().setAttribute("myAnswers", myAnswers);
+            Answer answer = new Answer();
+            Set<Answer> answers = new HashSet<>();
+            answers.add(answer);
+            newRetrieveInfo.setAnswers(answers);
+            myAnswers = newRetrieveInfo.getAnswers();
+            ActionContext actionContext = ActionContext.getContext();
+            actionContext.put("myAnswers", myAnswers);
+            ServletActionContext.getRequest().setAttribute("myAnswers", myAnswers);
+        }
 
         ServletActionContext.getRequest().setAttribute("pb", pb);
         return "success";

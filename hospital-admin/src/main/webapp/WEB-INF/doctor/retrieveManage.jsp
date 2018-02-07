@@ -152,7 +152,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">查询</div>
                 <form class="form-horizontal"
-                      action="${pageContext.request.contextPath}/doctor/surveyTypeManageAction_querySurveyType.action"
+                      action="${pageContext.request.contextPath}/doctor/retrieveManageAction_queryRetrieveInfo.action"
                       method="post">
                     <div class="form-group">
                         <div class="col-sm-2 control-label">分发编号</div>
@@ -180,7 +180,7 @@
                     <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>问卷编号</th>
+                            <th>答卷编号</th>
                             <th>问卷名称</th>
                             <th>病人用户名</th>
                             <th>病人名称</th>
@@ -204,15 +204,15 @@
                                 <td>
                                     <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
                                             data-target="#findRetrieveModal"
-                                            onclick="getRetrieveInfoById(<s:property value="#retrieve.deliveryId"/>)">详细
+                                            onclick="getRetrieveInfoById(<s:property value="#retrieve.deliveryId"/>)">查看
                                     </button>
-                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
+                                    <!--<button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                             data-target="#findAnswerSheetModal"
                                             onclick="getAnswerBySurveyId(<s:property value="#retrieve.surveyId"/>)">查看答卷
                                     </button>
                                     <button type="button" class="btn btn-success btn-xs"
                                             onclick="retrieveSurvey(<s:property value="#retrieve.deliveryId"/>)">答卷
-                                    </button>
+                                    </button>-->
                                 </td>
                                 </tbody>
                             </s:iterator>

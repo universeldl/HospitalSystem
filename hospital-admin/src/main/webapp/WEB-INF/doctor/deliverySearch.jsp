@@ -177,7 +177,7 @@
                     <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>问卷编号</th>
+                            <th>分发编号</th>
                             <th>问卷名称</th>
                             <th>病人用户名</th>
                             <th>病人名称</th>
