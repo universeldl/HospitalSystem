@@ -177,7 +177,8 @@ public class DeliveryServiceImpl implements DeliveryService {
             for (Survey survey : surveys) {
                 int num = 0;
                 for (DeliveryInfo deliveryInfo : deliveryInfos) {
-                    if (deliveryInfo.getSurvey().getSurveyId() == survey.getSurveyId()) {
+                    if (deliveryInfo.getSurvey().getSurveyId() == survey.getSurveyId()
+                        && deliveryInfo.getPatient().getPatientId() == patient.getPatientId()) {
                         if (deliveryInfo.getState() != 4) {//not resent ones
                             num++;
                         }
@@ -197,6 +198,7 @@ public class DeliveryServiceImpl implements DeliveryService {
                             //add new DeliveryInfo after sending survey to Patient
                             DeliveryInfo deliveryInfo = new DeliveryInfo();
                             deliveryInfo.setSurvey(survey);
+                            deliveryInfo.setPatient(patient);
                             int addDelivery = deliveryDao.addDelivery(deliveryInfo);//返回1成功添加,返回0添加失败
                             if(addDelivery == 1) {// added successfully
                                 break;//each patient only send once, or patients will receive all the remaining surveys
