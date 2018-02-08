@@ -195,8 +195,8 @@
                 <div class="grid-btn">
                     <a class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal"><i
                             class="fa fa-plus"></i> 添加问卷</a>
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#batchAddModal"><i
-                            class="fa fa-times"></i> 批量添加</a>
+                    <!--<a class="btn btn-primary" data-toggle="modal" data-target="#batchAddModal"><i
+                            class="fa fa-times"></i> 批量添加</a>-->
                     <a class="btn btn-primary" onclick="exportSurvey()"><i class="fa fa-share"></i> 导出</a>
                 </div>
             </div>

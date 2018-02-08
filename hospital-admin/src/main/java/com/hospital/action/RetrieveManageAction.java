@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
@@ -106,6 +107,7 @@ public class RetrieveManageAction extends ActionSupport {
         ServletActionContext.getRequest().setAttribute("myAnswers", myAnswers);
 
         JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
                 return obj instanceof Authorization || name.equals("authorization") || obj instanceof Set || name.equals("deliveryInfos");

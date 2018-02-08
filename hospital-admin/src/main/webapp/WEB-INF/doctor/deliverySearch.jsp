@@ -200,9 +200,9 @@
                                             onclick="getRetrieveInfoById(<s:property
                                                     value="#retrieve.deliveryId"/>)">查看
                                     </button>
-                                    <button type="button" class="btn btn-success btn-xs"
+                                    <!--<button type="button" class="btn btn-success btn-xs"
                                             onclick="resendSurvey(<s:property value="#retrieve.deliveryId"/>)">重发
-                                    </button>
+                                    </button>-->
                                 </td>
                                 </tbody>
                             </s:iterator>
