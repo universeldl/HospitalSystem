@@ -26,9 +26,9 @@
     <script src="${pageContext.request.contextPath}/js/resendSurvey.js"></script>
 </head>
 
+    <script src="${pageContext.request.contextPath}/js/app.js"></script>
 
-<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 
 <body class="bootstrap-doctor-with-small-navbar">

@@ -43,13 +43,7 @@
     <script src="${pageContext.request.contextPath}/js/deletePlan.js"></script>
     <!-- add specific js in here -->
 
-    <script src="${pageContext.request.contextPath}/js/vue.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/router.js"></script>
-    <script src="${pageContext.request.contextPath}/js/jquery.slimscroll.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/fastclick.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/app.js"></script>
-    <script src="${pageContext.request.contextPath}/plugins/layer/layer.js"></script>
-    <script src="${pageContext.request.contextPath}/js/index.js"></script>
 
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </head>
