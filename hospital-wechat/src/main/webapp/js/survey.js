@@ -224,27 +224,6 @@ $(function () {
         };
         window.checkAndJump = function(to) {
 
-            /*
-            var div = document.getElementById('tpl_question' + to);
-            var inputs = div.getElementsByTagName("input");
-            var all_empty = true;
-            for (var i = 0; i < inputs.length; i++) {
-                if(inputs[i].checked) {
-                    all_empty = false;
-                }
-            }
-            if (inputs.length > 0 && all_empty) {
-                showDialog2("请先完成问题", "确定");
-                return;
-            }
-
-
-            var text = div.getElementsByTagName("textarea");
-            if (inputs.length == 0 && text[0].value == '') {
-                showDialog2("请先完成问题", "确定");
-                return;
-            }
-            */
             if (!isValid(to)) {
                 showDialog2("请先完成问题", "确定");
                 return;
@@ -283,7 +262,26 @@ function submit(to) {
         showDialog2("请先完成问题", "确定");
         return;
     }
-    alert("submit");
+
+    var postdata = "deliveryID" + document.getElementById("deliveryID").value;
+    postdata = postdata + "&" + $("#addForm").serialize();
+    alert(postdata);
+    $.ajax(
+        {
+            method: 'POST',
+            url: 'surveyAction_retrieveAnswer.action',
+            params: postdata,
+            callback: function (data) {
+                alert(data);
+                if (data == 1) {
+                    alert("1");
+                } else {
+                    alert("2");
+                }
+
+            }
+        }
+    );
 }
 
 

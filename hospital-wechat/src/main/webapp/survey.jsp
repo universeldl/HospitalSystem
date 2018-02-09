@@ -41,10 +41,17 @@
                     <a href="javascript:jump('question1');" class="weui-btn weui-btn_primary">开始填写问卷</a>
                 </div>
             </s:if>
+
+            <s:if test="#request.deliveryID!=null" >
+                <input type="hidden" value="<%=request.getAttribute("deliveryID")%>" id="deliveryID"/>
+            </s:if>
+
+
         </div>
     </div>
 </script>
 
+<form id="addForm">
 <s:if test="#request.questions.size>0">
     <s:iterator value="#request.questions" id="question" status="qindex">
         <script type="text/html" id='tpl_question<s:property value="#qindex.index+1" />' >
@@ -83,7 +90,7 @@
                             <div class="weui-cells weui-cells_form">
                                 <div class="weui-cell">
                                     <div class="weui-cell__bd">
-                                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3" id='q<s:property value="#qindex.index+1"/>text'></textarea>
                                         <div class="weui-textarea-counter"><span>0</span>/200</div>
                                     </div>
                                 </div>
@@ -102,7 +109,8 @@
                                             <p><s:property value="#choice.choiceContent" /></p>
                                         </div>
                                         <div class="weui-cell__ft">
-                                            <input type="radio" class="weui-check" name="radio1"
+                                            <input type="radio" class="weui-check"
+                                                   name='radio<s:property value="#qindex.index+1"/>'
                                                    id='q<s:property value="#qindex.index+1"/>c<s:property value="#cindex.index" />'/>
                                             <span class="weui-icon-checked"></span>
                                         </div>
@@ -115,7 +123,7 @@
                             <div class="weui-cells weui-cells_form">
                                 <div class="weui-cell">
                                     <div class="weui-cell__bd">
-                                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3" id='q<s:property value="#qindex.index+1"/>text'></textarea>
                                         <div class="weui-textarea-counter"><span>0</span>/200</div>
                                     </div>
                                 </div>
@@ -161,6 +169,7 @@
         </script>
     </s:iterator>
 </s:if>
+</form>
 
 <script src="./jQuery/jquery-3.1.1.min.js"></script>
 <script src="./js/zepto.min.js"></script>

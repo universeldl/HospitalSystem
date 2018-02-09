@@ -68,6 +68,7 @@ public class surveyAction extends ActionSupport {
         } else {
             System.out.println("deliveryID = " + deliveryID);
         }
+        ServletActionContext.getRequest().setAttribute("deliveryID", deliveryID);
 
         AccessTokenMgr mgr = AccessTokenMgrHXTS.getInstance();
         String open_id = GetOpenIdOauth2.getOpenId(code, mgr);
@@ -125,5 +126,12 @@ public class surveyAction extends ActionSupport {
         System.out.println("redirect to jsp");
         return SUCCESS;
     }
+
+    public String retrieveAnswer() {
+
+
+        return SUCCESS;
+    }
+
 
 }
