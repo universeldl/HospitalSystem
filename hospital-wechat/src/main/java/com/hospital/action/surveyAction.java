@@ -5,14 +5,13 @@ import com.hospital.service.*;
 import com.hospital.wechat.service.AccessTokenMgr;
 import com.hospital.wechat.service.AccessTokenMgrHXTS;
 import com.hospital.wechat.service.GetOpenIdOauth2;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by QQQ on 2017/12/23.
@@ -104,14 +103,11 @@ public class surveyAction extends ActionSupport {
             //return ERROR;
         }
 
-        System.out.println("redirect to jsp1");
-
         RetrieveInfo retrieveInfo = retrieveService.getRetrieveInfoByDeliveryID(deliveryInfo.getDeliveryId());
         if (retrieveInfo != null) {
             System.out.println("already has retrieveinfo for this delivery");
             //return ERROR;
         }
-        System.out.println("redirect to jsp2");
 
         Survey survey = deliveryInfo.getSurvey();
         if (survey == null) {
@@ -119,7 +115,6 @@ public class surveyAction extends ActionSupport {
             //return ERROR;
         }
 
-        System.out.println("redirect to jsp3");
         ServletActionContext.getRequest().setAttribute("survey", survey);
         List<Question> questions = survey.getSortedQuestions();
         ServletActionContext.getRequest().setAttribute("questions", questions);
@@ -128,7 +123,23 @@ public class surveyAction extends ActionSupport {
     }
 
     public String retrieveAnswer() {
+        System.out.println("retrieveAnswer called!");
+        System.out.println("deliveryID = " + deliveryID);
 
+        if (deliveryID == null) {
+            return ERROR;
+        }
+
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
+                .get(ServletActionContext.HTTP_REQUEST);
+        Map<String, String[]> pMap = request.getParameterMap();
+        for (Map.Entry<String, String[]> entry : pMap.entrySet()) {
+            System.out.println("key = " + entry.getKey());
+            String[] value = entry.getValue();
+            for (int i = 0; i < value.length; i++) {
+                System.out.println("\tvalue= " + entry.getValue()[i]);
+            }
+        }
 
         return SUCCESS;
     }

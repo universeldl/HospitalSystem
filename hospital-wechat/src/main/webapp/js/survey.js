@@ -246,12 +246,11 @@ function isValid(to) {
             all_empty = false;
         }
     }
-    if (inputs.length > 0 && all_empty) {
-        return false;
-    }
 
     var text = div.getElementsByTagName("textarea");
-    if (inputs.length == 0 && text[0].value == '') {
+    if (inputs.length > 0 && all_empty && text[0].value == '') {
+        return false;
+    } else if (inputs.length == 0 && text[0].value == '') {
         return false;
     }
     return true;
@@ -263,16 +262,25 @@ function submit(to) {
         return;
     }
 
-    var postdata = "deliveryID" + document.getElementById("deliveryID").value;
-    postdata = postdata + "&" + $("#addForm").serialize();
+    var postdata = "deliveryID=" + $.trim($("#deliveryID").val()) + "&";
+    //var checkList = new Array();
+    $("input").each(function(){
+        if ($(this).is(':checked')) {
+            //checkList.push($(this).attr("id"));
+            postdata = postdata + $(this).attr("name") + "=" + $(this).val() + "&"
+        }
+    });
+    $("textarea").each(function(){
+        postdata = postdata + $(this).attr("id") + "=" + $(this).val() + "&";
+    });
+
     alert(postdata);
-    $.ajax(
+    ajax(
         {
             method: 'POST',
             url: 'surveyAction_retrieveAnswer.action',
             params: postdata,
             callback: function (data) {
-                alert(data);
                 if (data == 1) {
                     alert("1");
                 } else {
@@ -305,4 +313,12 @@ function showDialog2(str1, str2) {
     $dialog.on('click', '.weui-dialog__btn', function () {
         $(this).parents('.js_dialog').fadeOut(200);
     });
+}
+
+function enableTexterea(id) {
+    $("#"+id).attr("disabled",false);
+}
+function disableTexterea(id) {
+    $("#"+id).val("");
+    $("#"+id).attr("disabled",true);
 }
