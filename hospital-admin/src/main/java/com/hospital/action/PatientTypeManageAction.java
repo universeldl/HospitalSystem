@@ -21,16 +21,8 @@ public class PatientTypeManageAction extends ActionSupport {
     }
 
     private Integer id;
-    private Integer maxNum;
     private Integer bday;
-    private Double penalty;
     private String patientTypeName;
-    private Integer resendDays;
-
-
-    public void setResendDays(Integer resendDays) {
-        this.resendDays = resendDays;
-    }
 
 
     public void setPatientTypeName(String patientTypeName) {
@@ -38,18 +30,8 @@ public class PatientTypeManageAction extends ActionSupport {
     }
 
 
-    public void setMaxNum(Integer maxNum) {
-        this.maxNum = maxNum;
-    }
-
-
     public void setBday(Integer bday) {
         this.bday = bday;
-    }
-
-
-    public void setPenalty(Double penalty) {
-        this.penalty = penalty;
     }
 
 
@@ -93,10 +75,7 @@ public class PatientTypeManageAction extends ActionSupport {
         patientType.setPatientTypeId(id);
         PatientType updatePatientType = patientTypeService.getTypeById(patientType);
         updatePatientType.setPatientTypeName(patientTypeName);
-        updatePatientType.setMaxNum(maxNum);
         updatePatientType.setBday(bday);
-        updatePatientType.setPenalty(penalty);
-        updatePatientType.setResendDays(resendDays);
         PatientType newPatientType = patientTypeService.updatePatientType(updatePatientType);
         int success = 0;
         if (newPatientType != null) {
@@ -116,10 +95,7 @@ public class PatientTypeManageAction extends ActionSupport {
     public String addPatientType() {
         PatientType patientType = new PatientType();
         patientType.setPatientTypeName(patientTypeName);
-        patientType.setPenalty(penalty);
-        patientType.setMaxNum(maxNum);
         patientType.setBday(bday);
-        patientType.setResendDays(resendDays);
         boolean b = patientTypeService.addPatientType(patientType);
         int success = 0;
         if (b) {

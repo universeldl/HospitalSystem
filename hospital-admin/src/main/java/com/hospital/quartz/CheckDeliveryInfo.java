@@ -25,16 +25,16 @@ public class CheckDeliveryInfo extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext arg0)
             throws JobExecutionException {
-        boolean checkDeliveryInfo = true;
-        try {
-            checkDeliveryInfo = deliveryService.checkDeliveryInfo();// 检查是不是要重发
-        } catch (Throwable e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
-        if (!checkDeliveryInfo) {
-            System.err.println("定时检查分发表逾期出现了错误!!!");
-        }
+    //    boolean checkDeliveryInfo = true;
+    //    try {
+    //        checkDeliveryInfo = deliveryService.checkDeliveryInfo();// 检查是不是要重发
+    //    } catch (Throwable e) {
+    //        // TODO: handle exception
+    //        e.printStackTrace();
+    //    }
+    //    if (!checkDeliveryInfo) {
+    //        System.err.println("定时检查分发表逾期出现了错误!!!");
+    //    }
 
     }
 

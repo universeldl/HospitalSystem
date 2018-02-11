@@ -1,6 +1,7 @@
 package com.hospital.action;
 
 import com.hospital.domain.*;
+import com.hospital.service.DeliveryService;
 import com.hospital.service.RetrieveService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -18,9 +19,14 @@ import java.util.Set;
 public class RetrieveManageAction extends ActionSupport {
 
     private RetrieveService retrieveService;
+    private DeliveryService deliveryService;
 
     public void setRetrieveService(RetrieveService retrieveService) {
         this.retrieveService = retrieveService;
+    }
+
+    public void setDeliveryService(DeliveryService deliveryService) {
+        this.deliveryService = deliveryService;
     }
 
     private int pageCode;
@@ -162,25 +168,16 @@ public class RetrieveManageAction extends ActionSupport {
     }
 
     public String retrieveSurvey() {
-        //答卷的步骤
-        /*
-         * 1. 获得操作的分发编号
-         * 2. 获得当前的医生
-         * 3. 获得分发的问卷
-         * 		3.1 问卷的总回收数增加
-         * 4. 获取当前时间
-         * 5. 设置操作医生
-         * 6. 设置答卷时间
-         * 7. 设置答卷的状态
-         * 8. 设置分发的状态
-         */
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         RetrieveInfo retrieveInfo = new RetrieveInfo();
         retrieveInfo.setDeliveryId(deliveryId);
         retrieveInfo.setDoctor(doctor);
         DeliveryInfo deliveryInfo = new DeliveryInfo();
         deliveryInfo.setDeliveryId(deliveryId);
-        retrieveInfo.setDeliveryInfo(deliveryInfo);
+        DeliveryInfo deliveryInfo1 = deliveryService.getDeliveryInfoById(deliveryInfo);
+        retrieveInfo.setDeliveryInfo(deliveryInfo1);
+
+        //TODO 大神，加入微信获取retrieveInfo中所有answer的code并setAnswer,删除此行
 
         int success = retrieveService.addRetrieveInfo(retrieveInfo);
         HttpServletResponse response = ServletActionContext.getResponse();

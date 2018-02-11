@@ -16,18 +16,9 @@ public class DeliveryInfo implements Serializable {
     private Date deliveryDate;    //分发日期
     private Doctor doctor;    //操作员
     private Date endDate;    //截止日期
-    private Double penalty;    //几日提醒
     private Integer overday;    //逾期天数
-    private Integer state; //状态 (未答卷=0,逾期未答卷=1,答卷=2,重发未答卷=3,重发逾期未答卷=4,重发答卷=5)
+    private Integer state; //状态 (已简化为： 未答卷=0,已答卷=-1,重发未答卷>0[次数])
 
-
-    public Double getPenalty() {
-        return penalty;
-    }
-
-    public void setPenalty(Double penalty) {
-        this.penalty = penalty;
-    }
 
     public Integer getOverday() {
         return overday;

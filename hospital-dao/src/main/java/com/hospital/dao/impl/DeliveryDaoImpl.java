@@ -102,7 +102,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
 
     @Override
     public List<DeliveryInfo> getNoRetrieveDeliveryInfoByPatient(Patient patient) {
-        String hql = "from DeliveryInfo b where b.state=0 or b.state=1 or b.state=3 or b.state=4 and b.patient.patientId=? ";
+        String hql = "from DeliveryInfo b where b.state>=0 and b.patient.patientId=? ";
         List list = null;
         try {
             list = this.getHibernateTemplate().find(hql, patient.getPatientId());
@@ -132,7 +132,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
 
     @Override
     public List<DeliveryInfo> getDeliveryInfoByNoRetrieveState() {
-        String hql = "from DeliveryInfo b where b.state=0 or b.state=1 or b.state=3 or b.state=4";
+        String hql = "from DeliveryInfo b where b.state>=0";
         List<DeliveryInfo> list = null;
         try {
             list = (List<DeliveryInfo>) this.getHibernateTemplate().find(hql);

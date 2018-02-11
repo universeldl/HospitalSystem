@@ -48,10 +48,7 @@ CREATE TABLE `Authorization` (
 CREATE TABLE `PatientType` (
   `patientTypeId` int(11) NOT NULL,
   `patientTypeName` varchar(255) NOT NULL,
-  `maxNum` int(5) NOT NULL,
   `bday` int(5) NOT NULL,
-  `penalty` double NOT NULL,
-  `resendDays` int(5) NOT NULL,
   PRIMARY KEY (`patientTypeId`)
 );
 
@@ -143,7 +140,6 @@ CREATE TABLE `deliveryInfo` (
   `state` int(2) DEFAULT '0',
   `patientId` varchar(255) DEFAULT NULL,
   `surveyId` int(11) DEFAULT NULL,
-  `penalty` double NOT NULL,
   `aid` int(11) DEFAULT NULL,
   PRIMARY KEY (`deliveryId`),
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`),
@@ -225,8 +221,8 @@ INSERT INTO hospital VALUES(17, TRUE,  "迎博社区卫生服务中心");
 INSERT INTO hospital VALUES(18, TRUE,  "潍坊社区卫生服务中心");
 
 
-INSERT INTO PatientType VALUES(1,"哮喘",10,30,1,2);
-INSERT INTO PatientType VALUES(2,"咳嗽",10,30,1,2);
+INSERT INTO PatientType VALUES(1,"哮喘",3);
+INSERT INTO PatientType VALUES(2,"咳嗽",3);
 
 INSERT INTO surveyType VALUES(1,"第一类");
 INSERT INTO surveyType VALUES(2,"2nd");
@@ -259,13 +255,13 @@ INSERT INTO Authorization VALUES(6,1,1,1,1,1,1,1,1);
 INSERT INTO survey VALUES(1,"survey1","admin",10,2,"a1","aaa","2017-06-25 00:00:00",1,1,2,2);
 INSERT INTO survey VALUES(2,"survey2","doctor2",10,2,"a2","baa","2017-06-25 00:00:00",1,1,3,6);
 
-INSERT INTO deliveryInfo VALUES(1,"2017-01-15 00:00:00","2017-03-04 00:00:00",0,0,1,1,1,6);
-INSERT INTO deliveryInfo VALUES(2,"2017-02-15 00:00:00","2017-04-04 00:00:00",0,0,1,1,1,6);
-INSERT INTO deliveryInfo VALUES(3,"2017-03-15 00:00:00","2017-05-04 00:00:00",0,0,1,1,1,6);
-INSERT INTO deliveryInfo VALUES(4,"2017-04-15 00:00:00","2017-06-04 00:00:00",0,0,1,2,1,6);
-INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,1,6);
-INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,1,6);
-INSERT INTO deliveryInfo VALUES(7,"2018-02-02 00:00:00","2018-02-04 00:00:00",30,1,3,2,1,6);
+INSERT INTO deliveryInfo VALUES(1,"2017-01-15 00:00:00","2017-03-04 00:00:00",0,0,1,1,6);
+INSERT INTO deliveryInfo VALUES(2,"2017-02-15 00:00:00","2017-04-04 00:00:00",0,0,1,1,6);
+INSERT INTO deliveryInfo VALUES(3,"2017-03-15 00:00:00","2017-05-04 00:00:00",0,0,1,1,6);
+INSERT INTO deliveryInfo VALUES(4,"2017-04-15 00:00:00","2017-06-04 00:00:00",0,0,1,2,6);
+INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,6);
+INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,6);
+INSERT INTO deliveryInfo VALUES(7,"2018-02-02 00:00:00","2018-02-04 00:00:00",30,1,3,2,6);
 
 INSERT INTO Question VALUES(1,1,0,"第一个问题",1,6);
 INSERT INTO Question VALUES(2,1,0,"2nd question",2,6);

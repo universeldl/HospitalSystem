@@ -35,6 +35,9 @@
         <property name="retrieveService">
             <ref bean="retrieveService"/>
         </property>
+        <property name="deliveryService">
+            <ref bean="deliveryService"/>
+        </property>
     </bean>
 
 </beans>

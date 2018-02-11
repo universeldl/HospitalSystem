@@ -12,22 +12,8 @@
             <column name="patientTypeName"/>
         </property>
 
-        <property name="maxNum" type="java.lang.Integer">
-            <column name="maxNum"/>
-        </property>
-
         <property name="bday" type="java.lang.Integer">
             <column name="bday"/>
-        </property>
-
-
-        <property name="penalty" type="java.lang.Double">
-            <column name="penalty"/>
-        </property>
-
-
-        <property name="resendDays" type="java.lang.Integer">
-            <column name="resendDays"/>
         </property>
 
 

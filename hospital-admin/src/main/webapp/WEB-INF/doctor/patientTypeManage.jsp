@@ -151,10 +151,7 @@
                         <thead>
                         <tr>
                             <th>病人类型</th>
-                            <th>最大分发数量</th>
-                            <th>可分发天数</th>
-                            <th>逾期几日重发</th>
-                            <th>可重发天数</th>
+                            <th>允许填卷天数</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -165,10 +162,7 @@
                             <s:iterator value="#request.patientTypes" var="patientType">
                                 <tbody>
                                 <td><s:property value="#patientType.patientTypeName"/></td>
-                                <td><s:property value="#patientType.maxNum"/></td>
                                 <td><s:property value="#patientType.bday"/></td>
-                                <td><s:property value="#patientType.penalty"/></td>
-                                <td><s:property value="#patientType.resendDays"/></td>
                                 <td>
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                             data-target="#updateModal" onclick="updatePatientType(<s:property
@@ -180,9 +174,6 @@
                         </s:if>
                         <s:else>
                             <tbody>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
@@ -234,14 +225,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">最大问卷数量</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addMaxNum" placeholder="请输入最大问卷数量">
-                            <label class="control-label" for="addMaxNum" style="display: none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">允许填卷天数</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="addBday" placeholder="请输入允许填卷天数">
@@ -249,21 +232,6 @@
                         </div>
                     </div>
 
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">逾期几日重发</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addPenalty" placeholder="请输入几日提醒">
-                            <label class="control-label" for="addPenalty" style="display: none;"></label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">重发天数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addresendDays" placeholder="请输入逾期几日重发">
-                            <label class="control-label" for="addresendDays" style="display: none;"></label>
-                        </div>
-                    </div>
                     <!---------------------表单-------------------->
                 </div>
                 <div class="modal-footer">
@@ -309,35 +277,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">最大分发数量</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="maxNum" placeholder="请输入最大分发数量">
-                            <label class="control-label" for="maxNum" style="display: none;"></label>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">最大分发天数</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="bday" placeholder="请输入最大分发天数">
                             <label class="control-label" for="bday" style="display: none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">逾期几日重发</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="penalty" placeholder="请输入逾期几日重发">
-                            <label class="control-label" for="penalty" style="display: none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">重发天数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="resendDays" placeholder="请输入重发天数">
-                            <label class="control-label" for="resendDays" style="display: none;"></label>
                         </div>
                     </div>
 

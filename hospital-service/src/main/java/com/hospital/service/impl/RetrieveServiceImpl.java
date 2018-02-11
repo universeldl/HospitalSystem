@@ -72,67 +72,26 @@ public class RetrieveServiceImpl implements RetrieveService {
 
     @Override
     public int addRetrieveInfo(RetrieveInfo retrieveInfo) {
-        //答卷的步骤
-        /*
-         * 1. 获得操作的分发编号
-         *
-         * 2. 获得当前的医生
-         *
-         * 3. 获得分发的问卷
-         * 		3.1 问卷的总回收数增加
-         *
-         *
-         * 4. 获取当前时间
-         *
-         * 5. 设置操作医生
-         *
-         * 6. 设置答卷时间
-         *
-         *
-         * 7. 设置分发的状态
-         * 		7.1 如果当前分发不属于重发，则设置为答卷
-         * 		7.2 如果当前分发属于重发,则设置为重发答卷
-         *
-         * 8. 查看该分发记录有逾期提醒未设置的记录
-         * 		8.1 如果有，返回状态码2,提示病人去答卷
-         *		8.2 如果没有,则结束
-         *
-         *
-         *
-         */
-        DeliveryInfo deliveryInfoById = deliveryDao.getDeliveryInfoById(retrieveInfo.getDeliveryInfo());//获得操作的分发编号
-        if (deliveryInfoById.getState() == 2 || deliveryInfoById.getState() == 5) {//如果已经答卷了。
+        DeliveryInfo deliveryInfo = retrieveInfo.getDeliveryInfo();
+        if (deliveryInfo.getState() == -1) {//如果已经答卷了。
             return -1;//已经答卷
         }
-        Survey survey = deliveryInfoById.getSurvey();
-        Survey surveyById = surveyDao.getSurveyById(survey);//获得分发的问卷
-        surveyById.setCurrentNum(surveyById.getCurrentNum() + 1);
-        Survey b = surveyDao.updateSurveyInfo(surveyById);// 问卷的总回收数增加
+        Survey survey = deliveryInfo.getSurvey();
+        survey.setCurrentNum(survey.getCurrentNum() + 1);
+        Survey b = surveyDao.updateSurveyInfo(survey);// 问卷的总回收数增加
         Date retrieveDate = new Date(System.currentTimeMillis());//获取当前时间
-        RetrieveInfo retrieveInfoById = retrieveDao.getRetrieveInfoById(retrieveInfo);
-        retrieveInfoById.setDoctor(retrieveInfo.getDoctor());//设置医生
-        retrieveInfoById.setRetrieveDate(retrieveDate);//设置答卷时间
-        int state = deliveryInfoById.getState();
-        RetrieveInfo ba = null;
+        retrieveInfo.setRetrieveDate(retrieveDate);//设置答卷时间
+        int ba = 0;
         if (b != null) {
-            ba = retrieveDao.updateRetrieveInfo(retrieveInfoById);//修改答卷记录
+            ba = retrieveDao.addRetrieve(retrieveInfo);
         }
-        if (deliveryInfoById.getState() == 0 || deliveryInfoById.getState() == 1) {
-            deliveryInfoById.setState(2);//设置分发的状态
-        }
-        if (deliveryInfoById.getState() == 3 || deliveryInfoById.getState() == 4) {
-            deliveryInfoById.setState(5);//设置分发的状态
-        }
+        deliveryInfo.setState(-1);//设置分发的状态为已答卷
         DeliveryInfo bi = null;
-        if (ba != null) {
-            bi = deliveryDao.updateDeliveryInfo(deliveryInfoById);
+        if (ba != -1) {
+            bi = deliveryDao.updateDeliveryInfo(deliveryInfo);
         }
         if (bi != null) {
-            if (state == 1 || state == 4) {
-                return 2;//提示病人去答卷
-            } else {
-                return 1;
-            }
+            return 1;
         }
         return 0;
     }

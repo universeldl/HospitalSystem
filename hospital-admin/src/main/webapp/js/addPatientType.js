@@ -8,8 +8,7 @@ $(function () {
             return;
         }
 
-        var postdata = "patientTypeName=" + $.trim($("#addType").val()) + "&maxNum=" + $.trim($("#addMaxNum").val()) + "&bday=" + $.trim($("#addBday").val())
-            + "&penalty=" + $.trim($("#addPenalty").val()) + "&resendDays=" + $.trim($("#addresendDays").val());
+        var postdata = "patientTypeName=" + $.trim($("#addType").val()) + "&bday=" + $.trim($("#addBday").val());
         ajax(
             {
                 method: 'POST',
@@ -43,7 +42,6 @@ $(function () {
 function validAddPatientType() {
     var flag = true;
 
-
     var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
     var typeName = $.trim($("#addType").val());
     if (typeName == "") {
@@ -62,24 +60,6 @@ function validAddPatientType() {
         $("#addType").next().hide();
     }
 
-    var maxNum = $.trim($("#addMaxNum").val());
-    if (maxNum == "") {
-        $('#addMaxNum').parent().addClass("has-error");
-        $('#addMaxNum').next().text("请输入最大分发数量");
-        $("#addMaxNum").next().show();
-        flag = false;
-    } else if (maxNum <= 0 || maxNum != parseInt(maxNum)) {
-        $('#addMaxNum').parent().addClass("has-error");
-        $('#addMaxNum').next().text("最大分发数量必须为正整数");
-        $("#addMaxNum").next().show();
-        flag = false;
-    } else {
-        $('#addMaxNum').parent().removeClass("has-error");
-        $('#addMaxNum').next().text("");
-        $("#addMaxNum").next().hide();
-    }
-
-
     var bday = $.trim($("#addBday").val());
     if (bday == "") {
         $('#addBday').parent().addClass("has-error");
@@ -96,43 +76,6 @@ function validAddPatientType() {
         $('#addBday').next().text("");
         $("#addBday").next().hide();
     }
-
-
-    var penalty = $.trim($("#addPenalty").val());
-    if (penalty == "") {
-        $('#addPenalty').parent().addClass("has-error");
-        $('#addPenalty').next().text("请输入逾期几日重发");
-        $("#addPenalty").next().show();
-        flag = false;
-    } else if (penalty <= 0 || penalty != parseInt(penalty)) {
-        $('#addPenalty').parent().addClass("has-error");
-        $('#addPenalty').next().text("逾期几日重发必须为正整数");
-        $("#addPenalty").next().show();
-        flag = false;
-    } else {
-        $('#addPenalty').parent().removeClass("has-error");
-        $('#addPenalty').next().text("");
-        $("#addPenalty").next().hide();
-    }
-
-
-    var resendDays = $.trim($("#addresendDays").val());
-    if (resendDays == "") {
-        $('#addresendDays').parent().addClass("has-error");
-        $('#addresendDays').next().text("请输入重发天数");
-        $("#addresendDays").next().show();
-        flag = false;
-    } else if (resendDays <= 0 || resendDays != parseInt(resendDays)) {
-        $('#addresendDays').parent().addClass("has-error");
-        $('#addresendDays').next().text("重发天数必须为正整数");
-        $("#addresendDays").next().show();
-        flag = false;
-    } else {
-        $('#addresendDays').parent().removeClass("has-error");
-        $('#addresendDays').next().text("");
-        $("#addresendDays").next().hide();
-    }
-
 
     return flag;
 }
