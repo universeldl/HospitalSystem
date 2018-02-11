@@ -31,7 +31,7 @@
                     callback: function (data) {
                         var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=";
                         url = url + data;
-                        url = url + "&redirect_uri=http%3a%2f%2fab60eb22.ngrok.io%2fhospital-wechat%2f&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
+                        url = url + "&redirect_uri=http%3a%2f%2f9643942f.ngrok.io%2fhospital-wechat%2f&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
                         window.location.href = url;
                     }
                 }

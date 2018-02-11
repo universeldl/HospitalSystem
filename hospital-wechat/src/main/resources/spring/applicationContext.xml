@@ -8,6 +8,8 @@
     <import resource="applicationContext-patient-regiseter.xml"/>
     <import resource="applicationContext-captcha.xml"/>
     <import resource="applicationContext-db.xml"/>
+    <import resource="applicationContext-choice.xml"/>
+    <import resource="applicationContext-answer.xml"/>
     <import resource="applicationContext-survey.xml"/>
     <import resource="applicationContext-question.xml"/>
 </beans>

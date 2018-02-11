@@ -19,6 +19,12 @@
     <style type="text/css">
         .page {background-image:url(./img/survey/bg.jpg);background-size: cover;}
     </style>
+
+
+    <script src="./ajax-lib/ajaxutils.js"></script>
+    <script src="./jQuery/jquery-3.1.1.min.js"></script>
+    <script src="./js/zepto.min.js"></script>
+    <script src="./js/survey.js"></script>
 </head>
 <body ontouchstart>
 
@@ -41,6 +47,12 @@
                     <a href="javascript:jump('question1');" class="weui-btn weui-btn_primary">开始填写问卷</a>
                 </div>
             </s:if>
+
+            <s:if test="#request.deliveryID!=null" >
+                <input type="hidden" value="<%=request.getAttribute("deliveryID")%>" id="deliveryID"/>
+            </s:if>
+
+
         </div>
     </div>
 </script>
@@ -64,11 +76,12 @@
                             <div class="weui-cells weui-cells_checkbox">
                             <s:iterator id="choice" value="#question.sortedChoices" status="cindex">
                                     <label class="weui-cell weui-check__label"
-                                           for='q<s:property value="#qindex.index+1"/>c<s:property value="#cindex.index" />'>
+                                           for='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'>
                                         <div class="weui-cell__hd">
                                             <input type="checkbox" class="weui-check"
-                                                   name='q<s:property value="#qindex.index+1"/>c<s:property value="#cindex.index" />'
-                                                   id='q<s:property value="#qindex.index+1"/>c<s:property value="#cindex.index" />' />
+                                                   name='question<s:property value="#question.questionId"/>'
+                                                   id='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'
+                                                   value='<s:property value="#choice.choiceId" />' />
                                             <i class="weui-icon-checked"></i>
                                         </div>
                                         <div class="weui-cell__bd">
@@ -83,7 +96,8 @@
                             <div class="weui-cells weui-cells_form">
                                 <div class="weui-cell">
                                     <div class="weui-cell__bd">
-                                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3"
+                                                  id='textquestion<s:property value="#question.questionId"/>'></textarea>
                                         <div class="weui-textarea-counter"><span>0</span>/200</div>
                                     </div>
                                 </div>
@@ -97,13 +111,21 @@
                             <div class="weui-cells weui-cells_radio">
                                 <s:iterator id="choice" value="#question.sortedChoices" status="cindex">
                                     <label class="weui-cell weui-check__label"
-                                           for='q<s:property value="#qindex.index+1"/>c<s:property value="#cindex.index" />'>
+                                            for='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'>
                                         <div class="weui-cell__bd">
                                             <p><s:property value="#choice.choiceContent" /></p>
                                         </div>
                                         <div class="weui-cell__ft">
-                                            <input type="radio" class="weui-check" name="radio1"
-                                                   id='q<s:property value="#qindex.index+1"/>c<s:property value="#cindex.index" />'/>
+                                            <input type="radio" class="weui-check"
+                                                   name='question<s:property value="#question.questionId"/>'
+                                                   id='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'
+                                                   <s:if test='#cindex.index+1==#question.choices.size'>
+                                                       onclick=enableTexterea('textquestion<s:property value="#question.questionId"/>');
+                                                   </s:if>
+                                                   <s:else>
+                                                       onclick=disableTexterea('textquestion<s:property value="#question.questionId"/>');
+                                                   </s:else>
+                                                   value='<s:property value="#choice.choiceId" />'/>
                                             <span class="weui-icon-checked"></span>
                                         </div>
                                     </label>
@@ -115,7 +137,9 @@
                             <div class="weui-cells weui-cells_form">
                                 <div class="weui-cell">
                                     <div class="weui-cell__bd">
-                                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                                        <textarea class="weui-textarea" placeholder="请输入文本" rows="3"
+                                                  id='textquestion<s:property value="#question.questionId"/>'
+                                                  disabled="disabled"></textarea>
                                         <div class="weui-textarea-counter"><span>0</span>/200</div>
                                     </div>
                                 </div>
@@ -127,7 +151,8 @@
                         <div class="weui-cells weui-cells_form">
                             <div class="weui-cell">
                                 <div class="weui-cell__bd">
-                                    <textarea class="weui-textarea" placeholder="请输入文本" rows="3" id='q<s:property value="#qindex.index+1"/>c0' required></textarea>
+                                    <textarea class="weui-textarea" placeholder="请输入文本" rows="3"
+                                              id='textquestion<s:property value="#qindex.index"/>'></textarea>
                                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                                 </div>
                             </div>
@@ -162,9 +187,7 @@
     </s:iterator>
 </s:if>
 
-<script src="./jQuery/jquery-3.1.1.min.js"></script>
-<script src="./js/zepto.min.js"></script>
-<script src="./js/survey.js"></script>
+
 
 
 <!--BEGIN toast-->
@@ -176,6 +199,18 @@
     </div>
 </div>
 <!--end toast-->
+
+
+<!-- loading toast -->
+<div id="loadingToast" style="display:none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-loading weui-icon_toast"></i>
+        <p class="weui-toast__content" id="loadToastStr">loadToastStr</p>
+    </div>
+</div>
+</div>
+<!-- end loading toast -->
 
 
 <!--BEGIN dialog2-->

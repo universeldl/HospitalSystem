@@ -2,7 +2,12 @@ package com.hospital.wechat.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.hospital.domain.DeliveryInfo;
+import com.hospital.domain.Patient;
+import com.hospital.domain.Survey;
 import com.hospital.util.WeixinUtil;
+
+import java.util.Date;
 
 /**
  * Created by QQQ on 2017/12/11.
@@ -12,6 +17,49 @@ public class TemplateMessageMgr {
 
     // get all template ids for current wechat
     final static String get_template_list_url = "https://api.weixin.qq.com/cgi-bin/template/get_all_private_template?access_token=ACCESS_TOKEN";
+
+    static String survey_template_id = null;
+
+    static public boolean sendSurveyTemplateByDeliveryInfo(DeliveryInfo deliveryInfo) {
+
+        JSONObject d1 = new JSONObject();
+        JSONObject d2 = new JSONObject();
+        JSONObject d3 = new JSONObject();
+        JSONObject d4 = new JSONObject();
+        JSONObject d5 = new JSONObject();
+        JSONObject data = new JSONObject();
+
+        d1.put("value","上海儿童医学中心呼吸科随访问卷");
+        d1.put("color","#173177");
+
+        Patient patient = deliveryInfo.getPatient();
+        d2.put("value",patient.getName());
+        d2.put("color","#173177");
+
+        Date date = deliveryInfo.getDeliveryDate();
+        d3.put("value", date.toString());
+        d3.put("color","#173177");
+
+        Survey survey = deliveryInfo.getSurvey();
+        d4.put("value", survey.getSurveyName());
+        d4.put("color","#173177");
+
+        d5.put("value","请点击详情开始随访。");
+        d5.put("color","#173177");
+
+        data.put("first",    d1);
+        data.put("keyword1", d2);
+        data.put("keyword2", d3);
+        data.put("keyword3", d4);
+        data.put("remark", d5);
+
+        JSONObject json = new JSONObject();
+        AccessTokenMgr mgr = AccessTokenService.getAccessTokenByID(patient.getAppID());
+
+        String url = "localhost:8080/hospital-wechat/doSurvey.jsp?deliveryID=" + deliveryInfo.getDeliveryId();
+
+        return sendSurveyTemplate(json, patient.getOpenID(), url, mgr);
+    }
 
     static public boolean sendSurveyTemplate(JSONObject data, String openid, String redirect_url, AccessTokenMgr mgr) {
         try {
@@ -29,20 +77,21 @@ public class TemplateMessageMgr {
     }
 
     static public String getSurveyTemplateId(AccessTokenMgr mgr) {
-        try {
-            JSONObject templates = getAllTemplate(mgr);
-            JSONArray template_list = templates.getJSONArray("template_list");
-            for (int i = 0; i < template_list.size(); i++) {
-                JSONObject template = template_list.getJSONObject(i);
-                if (template.getString("title").equals("随访提醒")) {
-                    return template.getString("template_id");
+        if (survey_template_id == null) {
+            try {
+                JSONObject templates = getAllTemplate(mgr);
+                JSONArray template_list = templates.getJSONArray("template_list");
+                for (int i = 0; i < template_list.size(); i++) {
+                    JSONObject template = template_list.getJSONObject(i);
+                    if (template.getString("title").equals("随访提醒")) {
+                        survey_template_id = template.getString("template_id");
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            return null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
         }
+        return survey_template_id;
     }
 
     static public JSONObject getAllTemplate(AccessTokenMgr mgr) {
