@@ -171,7 +171,7 @@ CREATE TABLE `Answer` (
   `surveyId` int(11) NOT NULL,
   `patientId` varchar(255) NOT NULL,
   `textChoiceContent` varchar(255) DEFAULT NULL,
-  `choiceContent` varchar(255) NOT NULL,
+  #`choiceContent` varchar(255) NOT NULL,
   `aid` int(11) NOT NULL,
   PRIMARY KEY (`answerId`),
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`),
@@ -272,11 +272,11 @@ INSERT INTO Question VALUES(2,1,0,"2nd question",2,6);
 INSERT INTO Question VALUES(3,1,0,"text question",1,6);
 INSERT INTO Question VALUES(4,2,0,"text question",1,6);
 
-INSERT INTO Answer VALUES(1,1,1,1,1,"","a2",6);
-INSERT INTO Answer VALUES(2,1,3,1,1,"","some text1",6);
-INSERT INTO Answer VALUES(3,1,2,1,1,"","a5",6);
-INSERT INTO Answer VALUES(4,4,2,2,1,"","a6",6);
-INSERT INTO Answer VALUES(5,5,2,2,2,"","some text2",6);
+INSERT INTO Answer VALUES(1,1,1,1,1,"",6);
+INSERT INTO Answer VALUES(2,1,3,1,1,"",6);
+INSERT INTO Answer VALUES(3,1,2,1,1,"",6);
+INSERT INTO Answer VALUES(4,4,2,2,1,"",6);
+INSERT INTO Answer VALUES(5,5,2,2,2,"",6);
 
 INSERT INTO Choice VALUES(1,1,1,1,"choice_1",6);
 INSERT INTO Choice VALUES(2,1,1,2,"choice_2",6);

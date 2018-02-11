@@ -90,6 +90,16 @@
             <ref bean="questionService" />
         </property>
         -->
+        <property name="choiceService">
+            <ref bean="choiceService"/>
+        </property>
+
+        <property name="questionService">
+            <ref bean="questionService"/>
+        </property>
+        <property name="answerService">
+            <ref bean="answerService"/>
+        </property>
 
         <property name="deliveryService">
             <ref bean="deliveryService" />

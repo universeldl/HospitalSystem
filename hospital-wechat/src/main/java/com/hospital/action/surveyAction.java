@@ -10,7 +10,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.PrintWriter;
 import java.util.*;
 
 /**
@@ -44,6 +43,11 @@ public class surveyAction extends ActionSupport {
     }
     */
 
+    private QuestionService questionService;
+    public void setQuestionService(QuestionService questionService) {
+        this.questionService = questionService;
+    }
+
     private DeliveryService deliveryService;
     public void setDeliveryService(DeliveryService deliveryService) {
         this.deliveryService = deliveryService;
@@ -52,6 +56,16 @@ public class surveyAction extends ActionSupport {
     private RetrieveService retrieveService;
     public void setRetrieveService(RetrieveService retrieveService) {
         this.retrieveService = retrieveService;
+    }
+
+    private AnswerService answerService;
+    public void setAnswerService(AnswerService answerService) {
+        this.answerService = answerService;
+    }
+
+    private ChoiceService choiceService;
+    public void setChoiceService(ChoiceService choiceService) {
+        this.choiceService = choiceService;
     }
 
     public String doSurvey() {
@@ -130,19 +144,78 @@ public class surveyAction extends ActionSupport {
             return ERROR;
         }
 
+        DeliveryInfo tmpDelevery = new DeliveryInfo();
+        tmpDelevery.setDeliveryId(Integer.valueOf(deliveryID));
+        DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmpDelevery);
+        Date retrieveDate = new Date();
+        Survey survey = deliveryInfo.getSurvey();
+        Patient patient = deliveryInfo.getPatient();
+        Doctor doctor = deliveryInfo.getDoctor();
+
+        RetrieveInfo retrieveInfo = new RetrieveInfo();
+        retrieveInfo.setDeliveryId(Integer.valueOf(deliveryID));
+        retrieveInfo.setDeliveryInfo(deliveryInfo);
+        retrieveInfo.setRetrieveDate(retrieveDate);
+        retrieveInfo.setSurvey(survey);
+        retrieveInfo.setPatient(patient);
+        retrieveInfo.setDoctor(doctor);
+
+        Set<Answer> answers = new HashSet<Answer>();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
                 .get(ServletActionContext.HTTP_REQUEST);
         Map<String, String[]> pMap = request.getParameterMap();
         for (Map.Entry<String, String[]> entry : pMap.entrySet()) {
-            System.out.println("key = " + entry.getKey());
-            String[] value = entry.getValue();
-            for (int i = 0; i < value.length; i++) {
-                System.out.println("\tvalue= " + entry.getValue()[i]);
+            String key = entry.getKey();
+            int questionid = -1;
+            if (key.startsWith("question")) {
+                questionid = Integer.valueOf(key.substring(8));
+                Question tmpQuestion = new Question();
+                tmpQuestion.setQuestionId(questionid);
+                Question question = questionService.getQuestionById(tmpQuestion);
+
+                String[] value = entry.getValue();
+                Set<Choice> choiceset = new HashSet<Choice>();
+                for (int i = 0; i < value.length; i++) {
+                    int choidId = Integer.valueOf(entry.getValue()[i]);
+                    System.out.println("\tchoice id = " + choidId);
+                    Choice tmpChoice = new Choice();
+                    tmpChoice.setChoiceId(Integer.valueOf(choidId));
+                    Choice choice = choiceService.getChoiceById(tmpChoice);
+                    if (choice != null) {
+                        System.out.println("choice found");
+                        choiceset.add(choice);
+                        System.out.println("choice add to choiceset");
+                    } else {
+                        System.out.println("choice not found");
+                    }
+                }
+
+                Answer answer = new Answer();
+                answer.setSurvey(survey);
+                answer.setPatient(patient);
+                answer.setDoctor(doctor);
+                answer.setRetrieveInfo(retrieveInfo);
+                answer.setQuestion(question);
+                answer.setChoices(choiceset);
+                if (pMap.containsKey("textquestion"+questionid)) {
+                    answer.setTextChoiceContent(pMap.get("textquestion"+questionid)[0]);
+                }
+                if (answerService.addAnswer(answer)) {
+                    answers.add(answer);
+                }
+            } else {
+                continue;
             }
+
+            System.out.println("question id = " + questionid);
         }
+
+        retrieveInfo.setAnswers(answers);
+        System.out.println("add answers to retrieve info");
+
+        //Integer i = retrieveService.addRetrieveInfo(retrieveInfo);
+        //System.out.println("add retrieve info = " + i.toString());
 
         return SUCCESS;
     }
-
-
 }

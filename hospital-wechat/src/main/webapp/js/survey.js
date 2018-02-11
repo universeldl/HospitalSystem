@@ -248,9 +248,16 @@ function isValid(to) {
     }
 
     var text = div.getElementsByTagName("textarea");
-    if (inputs.length > 0 && all_empty && text[0].value == '') {
-        return false;
-    } else if (inputs.length == 0 && text[0].value == '') {
+
+    if (inputs.length > 0 && all_empty) {
+        if (text.length > 0) {
+            if (text[0].value == "") {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else if (inputs.length == 0 && text[0].value == "") {
         return false;
     }
     return true;
@@ -262,11 +269,11 @@ function submit(to) {
         return;
     }
 
+    showLoadingToast("提交答案...");
+
     var postdata = "deliveryID=" + $.trim($("#deliveryID").val()) + "&";
-    //var checkList = new Array();
     $("input").each(function(){
         if ($(this).is(':checked')) {
-            //checkList.push($(this).attr("id"));
             postdata = postdata + $(this).attr("name") + "=" + $(this).val() + "&"
         }
     });
@@ -274,22 +281,31 @@ function submit(to) {
         postdata = postdata + $(this).attr("id") + "=" + $(this).val() + "&";
     });
 
-    alert(postdata);
     ajax(
         {
             method: 'POST',
             url: 'surveyAction_retrieveAnswer.action',
             params: postdata,
             callback: function (data) {
+                hideLoadingToast();
                 if (data == 1) {
                     alert("1");
                 } else {
+
                     alert("2");
                 }
-
             }
         }
     );
+}
+
+function showLoadingToast(str) {
+    var $loadingToast = $('#loadingToast');
+    if ($loadingToast.css('display') != 'none') {
+        return;
+    }
+    $("#loadToastStr").html(str);
+    $loadingToast.fadeIn(100);
 }
 
 
@@ -321,4 +337,8 @@ function enableTexterea(id) {
 function disableTexterea(id) {
     $("#"+id).val("");
     $("#"+id).attr("disabled",true);
+}
+
+function hideLoadingToast() {
+    $('#loadingToast').fadeOut(100);
 }
