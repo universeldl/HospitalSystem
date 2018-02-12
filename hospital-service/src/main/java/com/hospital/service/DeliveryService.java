@@ -23,5 +23,6 @@ public interface DeliveryService {
 
     int resendSurvey(DeliveryInfo deliveryInfo);
 
+    boolean sendTemplateMessage(DeliveryInfo deliveryInfo);
 
 }

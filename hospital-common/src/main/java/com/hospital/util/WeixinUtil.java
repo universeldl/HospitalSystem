@@ -2,8 +2,8 @@ package com.hospital.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.hospital.wechat.service.AccessTokenMgr;
-import com.hospital.wechat.service.MyX509TrustManager;
+import com.hospital.util.AccessTokenMgr;
+import com.hospital.util.MyX509TrustManager;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;

@@ -1,24 +1,19 @@
 package com.hospital.action;
 
-import com.hospital.domain.Doctor;
-import com.hospital.domain.Hospital;
-import com.hospital.domain.Patient;
-import com.hospital.domain.PatientType;
-import com.hospital.service.DoctorService;
-import com.hospital.service.HospitalService;
-import com.hospital.service.PatientService;
+import com.hospital.domain.*;
+import com.hospital.service.*;
+import com.hospital.util.AgeUtils;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.*;
 import org.apache.struts2.ServletActionContext;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by QQQ on 2017/12/23.
@@ -35,7 +30,9 @@ public class patientRegisterAction extends ActionSupport {
     int typeID;
     PatientService patientService;
     DoctorService doctorService;
-    HospitalService hospitalService;
+    PlanService planService;
+    SurveyService surveyService;
+    DeliveryService deliveryService;
 
     public void setUsername(String username) {
         this.username = username;
@@ -73,13 +70,23 @@ public class patientRegisterAction extends ActionSupport {
         }
     }
 
+    public void setPlanService(PlanService planService) {
+        this.planService = planService;
+    }
     public void setPatientService(PatientService patientService) {
         this.patientService = patientService;
     }
-
     public void setDoctorService(DoctorService doctorService) {
         this.doctorService = doctorService;
     }
+    public void setSurveyService(SurveyService surveyService) {
+        this.surveyService = surveyService;
+    }
+    public void setDeliveryService(DeliveryService deliveryService) {
+        this.deliveryService = deliveryService;
+    }
+
+
 
     public String findDoctorsByHospital() {
         if (hospitalID!=null) {
@@ -180,6 +187,30 @@ public class patientRegisterAction extends ActionSupport {
                     } else {
                         System.out.println("add patient failed");
                         status = -2;
+                    }
+
+                    int age = 0;
+                    age = AgeUtils.getAgeFromBirthTime(birthday);
+                    Plan plan = new Plan();
+                    plan.setBeginAge(age);
+                    plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
+                    if (sex.toUpperCase().equals("MALE")) {
+                        plan.setSex(2);  //be careful about sex, Patient.sex is not compatible with Plan.sex
+                    } else if (sex.toUpperCase().equals("FEMALE")) {
+                        plan.setSex(1);
+                    }
+                    plan.setPatientType(type);
+                    Plan newPlan = planService.getPlan(plan);
+                    Set<Survey> surveySet = newPlan.getSurveys();
+
+                    for (Survey survey : surveySet) {
+                        DeliveryInfo deliveryInfo = new DeliveryInfo();
+                        deliveryInfo.setPatient(patient);
+                        deliveryInfo.setSurvey(survey);
+                        deliveryInfo.setDoctor(doctor);
+                        deliveryInfo.setDeliveryDate(new Date(System.currentTimeMillis()));
+                        deliveryInfo.setState(0);
+                        deliveryService.sendTemplateMessage(deliveryInfo);
                     }
                 }
             } else {

@@ -23,5 +23,11 @@
         <property name="doctorService">
             <ref bean="doctorService"/>
         </property>
+        <property name="planService">
+            <ref bean="planService"/>
+        </property>
+        <property name="deliveryService">
+            <ref bean="deliveryService"/>
+        </property>
     </bean>
 </beans>

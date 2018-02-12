@@ -1,9 +1,13 @@
 package com.hospital.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hospital.dao.*;
 import com.hospital.domain.*;
 import com.hospital.service.DeliveryService;
+import com.hospital.util.AccessTokenMgr;
+import com.hospital.util.AccessTokenService;
 import com.hospital.util.Md5Utils;
+import com.hospital.util.TemplateMessageMgr;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -128,6 +132,7 @@ public class DeliveryServiceImpl implements DeliveryService {
                             deliveryInfo.setState(num + 1);
                             int addDelivery = addDelivery(deliveryInfo);//返回1成功添加,返回0添加失败
                             if (addDelivery == 1) {// added successfully
+                                sendTemplateMessage(deliveryInfo);
                                 survey.setNum(survey.getNum() + 1);
                                 surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
                                 break;//each patient only send once, or patients will receive all the remaining surveys
@@ -142,6 +147,47 @@ public class DeliveryServiceImpl implements DeliveryService {
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean sendTemplateMessage(DeliveryInfo deliveryInfo) {
+        JSONObject d1 = new JSONObject();
+        JSONObject d2 = new JSONObject();
+        JSONObject d3 = new JSONObject();
+        JSONObject d4 = new JSONObject();
+        JSONObject d5 = new JSONObject();
+        JSONObject data = new JSONObject();
+
+        d1.put("value","上海儿童医学中心呼吸科随访问卷");
+        d1.put("color", "#173177");
+
+        Patient patient = deliveryInfo.getPatient();
+        d2.put("value",patient.getName());
+        d2.put("color", "#173177");
+
+        Date date = deliveryInfo.getDeliveryDate();
+        d3.put("value", date.toString());
+        d3.put("color", "#173177");
+
+        Survey survey = deliveryInfo.getSurvey();
+        d4.put("value", survey.getSurveyName());
+        d4.put("color","#173177");
+
+        d5.put("value","请点击详情开始随访。");
+        d5.put("color","#173177");
+
+        data.put("first",    d1);
+        data.put("keyword1", d2);
+        data.put("keyword2", d3);
+        data.put("keyword3", d4);
+        data.put("remark", d5);
+
+        JSONObject json = new JSONObject();
+        AccessTokenMgr mgr = AccessTokenService.getAccessTokenByID(patient.getAppID());
+
+        String url = "http://9643942f.ngrok.io/hospital-wechat/doSurvey.jsp?deliveryID=" + deliveryInfo.getDeliveryId();
+
+        return TemplateMessageMgr.sendSurveyTemplate(json, patient.getOpenID(), url, mgr);
     }
 
     @Override

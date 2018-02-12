@@ -1,4 +1,4 @@
-package com.hospital.wechat.service;
+package com.hospital.util;
 
 /**
  * Created by QQQ on 2018/2/11.

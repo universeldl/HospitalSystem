@@ -1,7 +1,6 @@
-package com.hospital.wechat.service;
+package com.hospital.util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hospital.util.WeixinUtil;
 
 import java.util.Date;
 

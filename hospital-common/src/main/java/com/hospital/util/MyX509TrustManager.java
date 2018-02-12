@@ -1,4 +1,4 @@
-package com.hospital.wechat.service;
+package com.hospital.util;
 
 import javax.net.ssl.X509TrustManager;
 import java.security.cert.CertificateException;

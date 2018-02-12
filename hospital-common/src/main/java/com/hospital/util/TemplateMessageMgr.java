@@ -1,10 +1,9 @@
-package com.hospital.wechat.service;
+package com.hospital.util;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.hospital.domain.DeliveryInfo;
-import com.hospital.domain.Patient;
-import com.hospital.domain.Survey;
+import com.hospital.util.AccessTokenMgr;
+import com.hospital.util.AccessTokenService;
 import com.hospital.util.WeixinUtil;
 
 import java.util.Date;
@@ -20,6 +19,7 @@ public class TemplateMessageMgr {
 
     static String survey_template_id = null;
 
+    /*
     static public boolean sendSurveyTemplateByDeliveryInfo(DeliveryInfo deliveryInfo) {
 
         JSONObject d1 = new JSONObject();
@@ -60,6 +60,7 @@ public class TemplateMessageMgr {
 
         return sendSurveyTemplate(json, patient.getOpenID(), url, mgr);
     }
+    */
 
     static public boolean sendSurveyTemplate(JSONObject data, String openid, String redirect_url, AccessTokenMgr mgr) {
         try {

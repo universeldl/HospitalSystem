@@ -2,14 +2,16 @@ package com.hospital.action;
 
 import com.hospital.domain.*;
 import com.hospital.service.*;
-import com.hospital.wechat.service.AccessTokenMgr;
-import com.hospital.wechat.service.AccessTokenMgrHXTS;
-import com.hospital.wechat.service.GetOpenIdOauth2;
+import com.hospital.util.AccessTokenMgr;
+import com.hospital.util.AccessTokenMgrHXTS;
+import com.hospital.util.GetOpenIdOauth2;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -111,7 +113,7 @@ public class surveyAction extends ActionSupport {
         }
 
         // check validate date
-        Date cur_date = new Date();
+        Date cur_date = new Date(System.currentTimeMillis());
         if (cur_date.after(deliveryInfo.getEndDate())) {
             System.out.println("overdue survey");
             //return ERROR;
@@ -147,7 +149,7 @@ public class surveyAction extends ActionSupport {
         DeliveryInfo tmpDelevery = new DeliveryInfo();
         tmpDelevery.setDeliveryId(Integer.valueOf(deliveryID));
         DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmpDelevery);
-        Date retrieveDate = new Date();
+        Date retrieveDate = new Date(System.currentTimeMillis());
         Survey survey = deliveryInfo.getSurvey();
         Patient patient = deliveryInfo.getPatient();
         Doctor doctor = deliveryInfo.getDoctor();
@@ -213,9 +215,14 @@ public class surveyAction extends ActionSupport {
         retrieveInfo.setAnswers(answers);
         System.out.println("add answers to retrieve info");
 
-        //Integer i = retrieveService.addRetrieveInfo(retrieveInfo);
-        //System.out.println("add retrieve info = " + i.toString());
+        Integer i = retrieveService.addRetrieveInfo(retrieveInfo);
 
-        return SUCCESS;
+        HttpServletResponse response = ServletActionContext.getResponse();
+        try {
+            response.getWriter().print(i);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
     }
 }

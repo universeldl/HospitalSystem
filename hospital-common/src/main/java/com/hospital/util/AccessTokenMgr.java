@@ -1,4 +1,4 @@
-package com.hospital.wechat.service;
+package com.hospital.util;
 
 public class AccessTokenMgr {
     public AccessTokenMgr() {

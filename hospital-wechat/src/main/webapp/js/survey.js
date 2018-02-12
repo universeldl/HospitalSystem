@@ -289,10 +289,12 @@ function submit(to) {
             callback: function (data) {
                 hideLoadingToast();
                 if (data == 1) {
-                    alert("1");
+                    showDialog2("提交成功", "确认");
+                    window.opener=null;
+                    window.open('','_self');
+                    window.close();
                 } else {
-
-                    alert("2");
+                    showDialog2("提交失败，请稍后再试", "确认");
                 }
             }
         }
