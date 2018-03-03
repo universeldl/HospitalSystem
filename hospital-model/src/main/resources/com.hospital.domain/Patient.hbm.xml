@@ -56,6 +56,9 @@
             <column name="createTime"/>
         </property>
 
+        <property name="oldPatient" type="boolean">
+            <column name="oldPatient"/>
+        </property>
 
         <!-- failed to lazily initialize a collection of role: com.hospital.domain.Patient.deliveryInfos,  no session or session was closed -->
         <!-- 解决方案改动 lazy="false" -->

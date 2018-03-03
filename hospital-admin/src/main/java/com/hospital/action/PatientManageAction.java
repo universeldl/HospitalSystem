@@ -47,7 +47,6 @@ public class PatientManageAction extends ActionSupport {
     private String openID;
     private String email;
     private String birthday;
-
     private String fileName;
 
 
@@ -132,7 +131,7 @@ public class PatientManageAction extends ActionSupport {
         plan.setPatientType(type);
         Plan newPlan = planService.getPlan(plan);
 
-        Patient patient = new Patient(name, Md5Utils.md5("123456"), phone, type, email, doctor, openID, createTime, sex, newPlan);
+        Patient patient = new Patient(name, Md5Utils.md5("123456"), phone, false, type, email, doctor, openID, createTime, sex, newPlan);
 
         Patient oldPatient = patientService.getPatientByopenID(patient);//检查是否已经存在该openID的病人
         int success = 0;

@@ -24,7 +24,7 @@ public class Patient implements Serializable {
     private Plan plan;    //随访计划
     private String email;    //邮箱
     private Doctor doctor;    //操作医生
-
+    private boolean oldPatient;
     private Integer sex;
 
     private Date birthday;
@@ -72,6 +72,14 @@ public class Patient implements Serializable {
     public void setBirthday(Date birthday) {
 
         this.birthday = birthday;
+    }
+
+    public void setOldPatient(boolean oldPatient) {
+        this.oldPatient = oldPatient;
+    }
+
+    public boolean isOldPatient() {
+        return oldPatient;
     }
 
     public Integer getSex() {
@@ -186,13 +194,14 @@ public class Patient implements Serializable {
 
     }
 
-    public Patient(String name, String pwd, String phone,
+    public Patient(String name, String pwd, String phone, boolean oldPatient,
                    PatientType patientType, String email, Doctor doctor, String openID,
                    Date createTime, Integer sex, Plan plan) {
         super();
         this.name = name;
         this.pwd = pwd;
         this.phone = phone;
+        this.oldPatient = oldPatient;
         this.patientType = patientType;
         this.email = email;
         this.doctor = doctor;

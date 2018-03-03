@@ -47,6 +47,12 @@
                     </select>
                 </div>
             </div>
+            <div class="weui-cell weui-cell_switch">
+                <div class="weui-cell__bd">是否既往病人（请咨询您的医生）</div>
+                <div class="weui-cell__ft">
+                    <input class="weui-switch" type="checkbox" id="oldPatient"/>
+                </div>
+            </div>
             <div class="weui-cell weui-cell_select weui-cell_select-after">
                 <div class="weui-cell__hd">
                     <label for="hospital" class="weui-label">首诊医院</label>
@@ -76,6 +82,13 @@
                 <div class="weui-cell__hd"><label for="birthday" class="weui-label">出生日期</label></div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" type="date" value="" id="birthday"/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">邀请码</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" pattern="[0-9]*"
+                           placeholder="请咨询您的医生" id="invitationCode"/>
                 </div>
             </div>
             <div class="weui-cell weui-cell_vcode">

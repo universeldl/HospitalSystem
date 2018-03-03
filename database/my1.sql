@@ -75,6 +75,7 @@ CREATE TABLE `Patient` (
   `outpatientID` varchar(50) UNIQUE DEFAULT NULL,  # 预留门诊号
   `inpatientID` varchar(50) UNIQUE DEFAULT NULL,   # 预留住院号
   `sex` varchar(1) NOT NULL,
+  `oldPatient` BOOLEAN NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
   `birthday` datetime DEFAULT NULL,
@@ -243,9 +244,9 @@ INSERT INTO Plan VALUES(1, 0, 2, 1, 1, 1, 6);
 INSERT INTO Plan VALUES(2, 2, 5, 1, 2, 1, 6);
 INSERT INTO Plan VALUES(3, 6, 9, 1, 3, 1, 6);
 
-INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1","13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,1,2);
-INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0","13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,6);
-INSERT INTO Patient VALUES(3,"123456","测试","appid","oaBonw30UBjZkLW5rf19h7KunM7s","na",NULL,NULL,"0","13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,6);
+INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1", true, "13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,1,2);
+INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0", true, "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,6);
+INSERT INTO Patient VALUES(3,"123456","测试","appid","oaBonw30UBjZkLW5rf19h7KunM7s","na",NULL,NULL,"0", false, "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,6);
 
 INSERT INTO Authorization VALUES(2,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(1,0,0,0,0,0,0,0,1);
