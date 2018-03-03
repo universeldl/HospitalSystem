@@ -50,6 +50,7 @@
 
     <script src="${pageContext.request.contextPath}/js/batchAddPatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/exportPatient.js"></script>
+    <script src="${pageContext.request.contextPath}/js/managePatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/exportSinglePatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/echarts.js"></script>
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
@@ -112,14 +113,6 @@
                         <li>
                             <a href="${pageContext.request.contextPath}/doctor/deliverySearchAction_findRetrieveInfoByPage.action"><i
                                     class="fa fa-send-o"></i> 随访信息</a></li>
-                    </ul>
-                </li>
-                <li class="active"><a href="javascript:;"><i class="fa fa-file-text-o"></i><span>答卷管理</span><i
-                        class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu menu-open" style="display: block;">
-                        <li>
-                            <a href="${pageContext.request.contextPath}/doctor/retrieveManageAction_findRetrieveInfoByPage.action"><i
-                                    class="fa fa-list"></i> 答卷列表</a></li>
                     </ul>
                 </li>
                 <li class="active"><a href="javascript:;"><i class="fa fa-wheelchair"></i><span>病人管理</span><i
@@ -256,6 +249,11 @@
                                     </button>
                                     <button type="button" class="btn btn-success btn-xs"
                                             onclick="exportSinglePatient(<s:property value="#patient.patientId"/>)">导出
+                                    </button>
+                                    <input type="hidden" id="patient_action"
+                                           value="${pageContext.request.contextPath}/doctor/retrieveManageAction_patientRetrieveManage.action">
+                                    <button type="button" class="btn btn-primary btn-xs"
+                                            onclick="managePatient(<s:property value="#patient.patientId"/>)">管理
                                     </button>
 
                                 </td>

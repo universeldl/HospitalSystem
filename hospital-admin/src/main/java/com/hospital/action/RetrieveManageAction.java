@@ -2,6 +2,7 @@ package com.hospital.action;
 
 import com.hospital.domain.*;
 import com.hospital.service.DeliveryService;
+import com.hospital.service.PatientService;
 import com.hospital.service.RetrieveService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -20,6 +21,7 @@ public class RetrieveManageAction extends ActionSupport {
 
     private RetrieveService retrieveService;
     private DeliveryService deliveryService;
+    private PatientService patientService;
 
     public void setRetrieveService(RetrieveService retrieveService) {
         this.retrieveService = retrieveService;
@@ -29,10 +31,15 @@ public class RetrieveManageAction extends ActionSupport {
         this.deliveryService = deliveryService;
     }
 
+    public void setPatientService(PatientService patientService) {
+        this.patientService = patientService;
+    }
+
     private int pageCode;
     private Set<Answer> myAnswers;
 
     private int deliveryId;
+    private int patientId;
     private int surveyId;
     private String openID;
 
@@ -50,6 +57,10 @@ public class RetrieveManageAction extends ActionSupport {
 
     public void setDeliveryId(int deliveryId) {
         this.deliveryId = deliveryId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public void setPageCode(int pageCode) {
@@ -187,6 +198,17 @@ public class RetrieveManageAction extends ActionSupport {
             throw new RuntimeException(e.getMessage());
         }
         return null;
+    }
+
+    public String patientRetrieveManage() {
+        Patient patient = new Patient();
+        patient.setPatientId(patientId);
+        Patient newPatient = patientService.getPatientById(patient);
+
+        ActionContext actionContext = ActionContext.getContext();
+        actionContext.put("patient", newPatient);
+        ServletActionContext.getRequest().setAttribute("patient", newPatient);
+        return "success";
     }
 
 

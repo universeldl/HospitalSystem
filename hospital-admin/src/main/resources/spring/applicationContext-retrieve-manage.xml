@@ -38,6 +38,9 @@
         <property name="deliveryService">
             <ref bean="deliveryService"/>
         </property>
+        <property name="patientService">
+            <ref bean="patientService"/>
+        </property>
     </bean>
 
 </beans>
