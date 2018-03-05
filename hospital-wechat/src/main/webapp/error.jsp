@@ -1,22 +1,22 @@
-<%@ page language="java" pageEncoding="utf-8" %>
+<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<html lang="zh-CN" class="ax-vertical-centered">
 
-<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src="jQuery/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="ajax-lib/ajaxutils.js"></script>
+    <title>错误</title>
+    <link rel="stylesheet" href="css/weui.css"/>
 </head>
 
+<body>
 
-<script type="text/javascript">
-    function redirect() {
-        window.location.href = "http://projecthope.flzhan.com/text488.html";
-    }
-</script>
+<h1 align="center">
+    <s:property value="errorMsg"/>
+</h1>
 
-<body onLoad="redirect()">
+<img src="img/error/error.png" width="100%"/>
 
 </body>
-
 </html>
+
+

@@ -293,6 +293,11 @@ function submit(to) {
                     window.opener=null;
                     window.open('','_self');
                     window.close();
+                } else if (data == -1) {
+                    showDialog2("问卷已经完成，不能重复提交答案", "确认");
+                    window.opener=null;
+                    window.open('','_self');
+                    window.close();
                 } else {
                     showDialog2("提交失败，请稍后再试", "确认");
                 }

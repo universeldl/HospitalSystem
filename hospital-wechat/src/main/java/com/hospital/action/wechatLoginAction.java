@@ -22,6 +22,16 @@ public class wechatLoginAction extends ActionSupport {
         this.code = code;
     }
 
+    private String errorMsg;
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    public String getErrorMsg(String errorMsg) {
+        return errorMsg;
+    }
+
     private PatientService patientService;
 
     public void setPatientService(PatientService patientService) {
@@ -50,7 +60,7 @@ public class wechatLoginAction extends ActionSupport {
             System.out.println("openid = " + open_id);
 
             // testing
-            // open_id = "test1234";
+            //open_id = "test12345";
 
             if (open_id != null) {
                 Patient patient = new Patient();
@@ -59,17 +69,16 @@ public class wechatLoginAction extends ActionSupport {
                 if (new_patient == null) {
                     System.out.println("new paient not found");
                     ServletActionContext.getContext().getSession().put("patient", patient);
-
                     return NONE;
                 } else {
-                    System.out.println("new patient found");
-                    ServletActionContext.getContext().getSession().put("patient", new_patient);
                     return SUCCESS;
                 }
             } else {
+                errorMsg = "用户名获取错误,请稍后再试";
                 return ERROR;
             }
         }
+        errorMsg = "无法获取用户名";
         return ERROR;
     }
 

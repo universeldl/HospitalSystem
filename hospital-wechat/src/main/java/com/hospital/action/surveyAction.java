@@ -28,6 +28,14 @@ public class surveyAction extends ActionSupport {
         this.deliveryID = deliveryID;
     }
 
+    private String errorMsg;
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
     /*
     private SurveyService surveyService;
     public void setSurveyService(SurveyService surveyService) {
@@ -74,11 +82,13 @@ public class surveyAction extends ActionSupport {
 
         if (code == null) {
             System.out.println("no code provided");
+            errorMsg = "获取用户失败";
             return ERROR;
         }
 
         if (deliveryID == null) {
             System.out.println("No deliveryID");
+            errorMsg = "发送ID错误";
             return ERROR;
         } else {
             System.out.println("deliveryID = " + deliveryID);
@@ -89,60 +99,58 @@ public class surveyAction extends ActionSupport {
         String open_id = GetOpenIdOauth2.getOpenId(code, mgr);
         System.out.println("openid = " + open_id);
 
+
         if (open_id == null) {
-            open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
+            errorMsg = "获取用户名失败，请稍后再试";
+            //return ERROR;
+            open_id = "oaBonw30UBjZkLW5r";
         }
+
 
         DeliveryInfo tmpDelevery = new DeliveryInfo();
         tmpDelevery.setDeliveryId(Integer.valueOf(deliveryID));
         DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmpDelevery);
 
-        System.out.println("deliveryInfo = " + deliveryInfo.toString());
-
         if (deliveryInfo == null) {
-            System.out.println("delivery info not found");
-            //return ERROR;
+            errorMsg = "问卷发送错误";
+            return ERROR;
         }
 
         // check patient
         Patient patient = deliveryInfo.getPatient();
         if (!patient.getOpenID().equals(open_id)) {
-            System.out.println("patient.getopenid = " + patient.getOpenID());
-            System.out.println("open id not match");
-            //return ERROR;
+            errorMsg = "用户名错误";
+            return ERROR;
         }
 
         // check validate date
         Date cur_date = new Date(System.currentTimeMillis());
         if (cur_date.after(deliveryInfo.getEndDate())) {
-            System.out.println("overdue survey");
-            //return ERROR;
+            errorMsg = "问卷已过期";
+            return ERROR;
         }
 
         RetrieveInfo retrieveInfo = retrieveService.getRetrieveInfoByDeliveryID(deliveryInfo.getDeliveryId());
         if (retrieveInfo != null) {
-            System.out.println("already has retrieveinfo for this delivery");
-            //return ERROR;
+            errorMsg = "问卷已经完成，无需重新作答";
+            return ERROR;
         }
 
         Survey survey = deliveryInfo.getSurvey();
         if (survey == null) {
-            System.out.println("Survey not found");
-            //return ERROR;
+            errorMsg = "没有找到问卷";
+            return ERROR;
         }
 
         ServletActionContext.getRequest().setAttribute("survey", survey);
         List<Question> questions = survey.getSortedQuestions();
         ServletActionContext.getRequest().setAttribute("questions", questions);
-        System.out.println("redirect to jsp");
         return SUCCESS;
     }
 
     public String retrieveAnswer() {
-        System.out.println("retrieveAnswer called!");
-        System.out.println("deliveryID = " + deliveryID);
-
         if (deliveryID == null) {
+            errorMsg = "没有找到问卷";
             return ERROR;
         }
 
@@ -179,12 +187,10 @@ public class surveyAction extends ActionSupport {
                 Set<Choice> choiceset = new HashSet<Choice>();
                 for (int i = 0; i < value.length; i++) {
                     int choidId = Integer.valueOf(entry.getValue()[i]);
-                    System.out.println("\tchoice id = " + choidId);
                     Choice tmpChoice = new Choice();
                     tmpChoice.setChoiceId(Integer.valueOf(choidId));
                     Choice choice = choiceService.getChoiceById(tmpChoice);
                     if (choice != null) {
-                        System.out.println("choice found");
                         choiceset.add(choice);
                         System.out.println("choice add to choiceset");
                     } else {
@@ -208,8 +214,6 @@ public class surveyAction extends ActionSupport {
             } else {
                 continue;
             }
-
-            System.out.println("question id = " + questionid);
         }
 
         retrieveInfo.setAnswers(answers);
