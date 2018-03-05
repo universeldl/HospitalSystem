@@ -15,7 +15,7 @@ public interface RetrieveDao {
 
     RetrieveInfo getRetrieveInfoById(RetrieveInfo retrieveInfo);
 
-    Set<Answer> getAnswerBySurveyId(RetrieveInfo retrieveInfo);
+    Set<Answer> getAnswerByDeliveryId(RetrieveInfo retrieveInfo);
 
     PageBean<Integer> getDeliveryIdList(String openID, int deliveryId, int pageCode, int pageSize);
 

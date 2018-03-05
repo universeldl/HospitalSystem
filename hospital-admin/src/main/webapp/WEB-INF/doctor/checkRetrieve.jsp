@@ -38,7 +38,6 @@
     <script src="${pageContext.request.contextPath}/js/doctorUpdatePwd.js"></script>
 
     <!-- add specific js in here -->
-    <script src="${pageContext.request.contextPath}/js/getRetrieve.js"></script>
     <script src="${pageContext.request.contextPath}/js/getRetrieveInfo.js"></script>
     <script src="${pageContext.request.contextPath}/js/getAnswerSheetInfo.js"></script>
     <script src="${pageContext.request.contextPath}/js/retrieveSurvey.js"></script>
@@ -136,64 +135,167 @@
         <section class="content" style="background: rgb(255, 255, 255); height: 898px;">
             <!-- <h2>Hello World!</h2> -->
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th>答卷编号</th>
-                            <th>问卷名称</th>
-                            <th>病人用户名</th>
-                            <th>病人名称</th>
-                            <th>答卷日期</th>
-                            <th>截止答卷日期</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
+            <!-- content -->
+            <div class="col-md-10">
+                <div class="row">
 
+                    <s:if test="#request.myAnswers!=null">
+                        <s:iterator value="#request.myAnswers" var="answer" status="answerIdx">
 
-                        <!---在此插入信息-->
-                        <s:if test="#request.patient.retrieveInfos!=null">
-                            <s:iterator value="#request.patient.retrieveInfos" var="retrieve">
-                                <tbody>
-                                <td><s:property value="#retrieve.deliveryId"/></td>
-                                <td><s:property value="#retrieve.deliveryInfo.survey.surveyName"/></td>
-                                <td><s:property value="#retrieve.patient.openID"/></td>
-                                <td><s:property value="#retrieve.patient.name"/></td>
-                                <td><s:date name="#retrieve.retrieveDate" format="yyyy-MM-dd"/></td>
-                                <td><s:date name="#retrieve.deliveryInfo.endDate" format="yyyy-MM-dd"/></td>
-                                <td>
-                                    <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
-                                            data-target="#findRetrieveModal"
-                                            onclick="getRetrieveInfoById(<s:property value="#retrieve.deliveryId"/>)">查看
-                                    </button>
-                                    <input type="hidden" id="check_retrieve"
-                                           value="${pageContext.request.contextPath}/doctor/retrieveManageAction_getAnswerByDeliveryId.action">
-                                    <button type="button" class="btn btn-warning btn-xs"
-                                            onclick="checkRetrieve(<s:property value="#retrieve.deliveryId"/>)">查看答卷
-                                    </button>
-                                    <!--
-                                    <button type="button" class="btn btn-success btn-xs"
-                                            onclick="retrieveSurvey(<s:property value="#retrieve.deliveryId"/>)">答卷
-                                    </button>
-                                    -->
-                                </td>
-                                </tbody>
-                            </s:iterator>
-                        </s:if>
-                        <s:else>
-                            <tbody>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
-                            </tbody>
-                        </s:else>
+                            <!--多选题-->
+                            <s:if test="#answer.question.questionType==1">
+                                <div class="col-md-12">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <div class="text-muted bootstrap-admin-box-title"><s:property
+                                                    value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(多选题)
+                                            </div>
+                                        </div>
+                                        <div class="bootstrap-admin-panel-content">
+                                            <s:iterator value="#answer.question.choices" var="choice"
+                                                        status="choiceIdx">
+                                                <ul>
+                                                    <s:set var="flag" value="true"></s:set>
+                                                    <s:iterator value="#answer.choices" var="cho">
+                                                        <s:if test="#cho.choiceId == #choice.choiceId">
+                                                            <s:set var="flag" value="false"></s:set>
+                                                        </s:if>
+                                                    </s:iterator>
+                                                    <s:if test="#flag == false">
+                                                        <div>
+                                                            <input type="checkbox"
+                                                                   name='question<s:property value="#question.questionId"/>'
+                                                                   id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
+                                                                   value='<s:property value="#choice.choiceId"/>'><s:property
+                                                                value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
+                                                        </div>
+                                                    </s:if>
+                                                    <s:else>
+                                                        <div>
+                                                            <input type="checkbox"
+                                                                   name='question<s:property value="#question.questionId"/>'
+                                                                   id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
+                                                                   value='<s:property value="#choice.choiceId"/>'
+                                                                   style="color:green;"><s:property
+                                                                value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
+                                                        </div>
+                                                    </s:else>
+                                                </ul>
+                                            </s:iterator>
+                                            <s:if test="#question.textChoice==1">
+                                                <ul>
+                                                    <div>
+                                                        <input type="checkbox"
+                                                               name='question<s:property value="#question.questionId"/>'
+                                                               id='textChoice<s:property value="#answer.question.choices.size+1" />'
+                                                        ><s:property value="#answer.question.choices.size+1"/>.
+                                                        自定义内容是：<s:property
+                                                            value="#answer.textChoiceContent"/>
+                                                    </div>
+                                                    <div>
+                                                <textarea class="form-control" rows="3"
+                                                          id="updateQuestionContent">内容：<s:property
+                                                        value="#answer.textChoiceContent"/></textarea>
 
-                    </table>
+                                                    </div>
+                                                </ul>
+                                            </s:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </s:if>
+                            <!--单选题-->
+                            <s:elseif test="#answer.question.questionType== 2">
+                                <div class="col-md-12">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <div class="text-muted bootstrap-admin-box-title"><s:property
+                                                    value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(单选题)
+                                            </div>
+                                        </div>
+                                        <div class="bootstrap-admin-panel-content">
+                                            <s:iterator value="#answer.question.choices" var="choice"
+                                                        status="choiceIdx">
+                                                <ul>
+                                                    <s:set var="flag" value="true"></s:set>
+                                                    <s:iterator value="#answer.choices" var="cho">
+                                                        <s:if test="#cho.choiceId == #choice.choiceId">
+                                                            <s:set var="flag" value="false"></s:set>
+                                                        </s:if>
+                                                    </s:iterator>
+                                                    <s:if test="#flag == false">
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio"
+                                                                       name='question<s:property value="#question.questionId"/>'
+                                                                       id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
+                                                                       value='<s:property value="#choice.choiceId"/>'><s:property
+                                                                    value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
+                                                            </label>
+                                                        </div>
+                                                    </s:if>
+                                                    <s:else>
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio"
+                                                                       name='question<s:property value="#question.questionId"/>'
+                                                                       id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
+                                                                       value='<s:property value="#choice.choiceId"/>'
+                                                                       style="color:green;"><s:property
+                                                                    value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
+                                                            </label>
+                                                        </div>
+                                                    </s:else>
+                                                </ul>
+                                            </s:iterator>
+                                            <s:if test="#question.textChoice==1">
+                                                <ul>
+                                                    <div>
+                                                        <input type="radio"
+                                                               name='question<s:property value="#question.questionId"/>'
+                                                               id='textChoice<s:property value="#answer.question.choices.size+1" />'
+                                                        ><s:property value="#answer.question.choices.size+1"/>.
+                                                        自定义内容是：<s:property
+                                                            value="#answer.textChoiceContent"/>
+                                                    </div>
+                                                    <div>
+                                                <textarea class="form-control" rows="3"
+                                                          id="updateQuestionContent4">内容：<s:property
+                                                        value="#answer.textChoiceContent"/></textarea>
+
+                                                    </div>
+                                                </ul>
+                                            </s:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </s:elseif>
+                            <!--问答题-->
+                            <s:elseif test="#answer.question.questionType== 3">
+                                <div class="col-md-12">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <div class="text-muted bootstrap-admin-box-title"><s:property
+                                                    value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(问答题)
+                                            </div>
+                                        </div>
+                                        <div class="bootstrap-admin-panel-content">
+                                            <div>
+                                                <textarea class="form-control" rows="3"
+                                                          id="updateQuestionContent3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </s:elseif>
+
+                        </s:iterator>
+                    </s:if>
+                    <!--
+                    <div class="col-md-12" align="center">
+                        <button type="button" class="btn btn-primary" onclick="assignment()">提交答卷</button>
+                    </div>
+                    -->
 
                 </div>
             </div>

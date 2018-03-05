@@ -81,29 +81,22 @@ public class RetrieveManageAction extends ActionSupport {
             pb.setUrl("findRetrieveInfoByPage.action?");
         }
         //存入request域中
-        RetrieveInfo retrieveInfo = new RetrieveInfo();
-        retrieveInfo.setDeliveryId(1);
-        RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
-        myAnswers = newRetrieveInfo.getAnswers();
-        ActionContext actionContext = ActionContext.getContext();
-        actionContext.put("myAnswers", myAnswers);
-        ServletActionContext.getRequest().setAttribute("myAnswers", myAnswers);
         ServletActionContext.getRequest().setAttribute("pb", pb);
         return "success";
     }
 
 
-    public String getAnswerBySurveyId() {
+    public String getAnswerByDeliveryId() {
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
         RetrieveInfo retrieveInfo = new RetrieveInfo();
-        retrieveInfo.setDeliveryId(surveyId);
-        myAnswers = retrieveService.getAnswerBySurveyId(retrieveInfo);
+        retrieveInfo.setDeliveryId(deliveryId);
+        myAnswers = retrieveService.getAnswerByDeliveryId(retrieveInfo);
 
         ActionContext actionContext = ActionContext.getContext();
         actionContext.put("myAnswers", myAnswers);
         ServletActionContext.getRequest().setAttribute("myAnswers", myAnswers);
-        return "success";
+        return "check";
     }
 
 
@@ -113,15 +106,6 @@ public class RetrieveManageAction extends ActionSupport {
         RetrieveInfo retrieveInfo = new RetrieveInfo();
         retrieveInfo.setDeliveryId(deliveryId);
         RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
-
-        Answer answer = new Answer();
-        Set<Answer> answers = new HashSet<>();
-        answers.add(answer);
-        newRetrieveInfo.setAnswers(answers);
-        myAnswers = newRetrieveInfo.getAnswers();
-        ActionContext actionContext = ActionContext.getContext();
-        actionContext.put("myAnswers", myAnswers);
-        ServletActionContext.getRequest().setAttribute("myAnswers", myAnswers);
 
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
@@ -163,15 +147,6 @@ public class RetrieveManageAction extends ActionSupport {
             RetrieveInfo retrieveInfo = new RetrieveInfo();
             retrieveInfo.setDeliveryId(deliveryId);
             RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
-
-            Answer answer = new Answer();
-            Set<Answer> answers = new HashSet<>();
-            answers.add(answer);
-            newRetrieveInfo.setAnswers(answers);
-            myAnswers = newRetrieveInfo.getAnswers();
-            ActionContext actionContext = ActionContext.getContext();
-            actionContext.put("myAnswers", myAnswers);
-            ServletActionContext.getRequest().setAttribute("myAnswers", myAnswers);
         }
 
         ServletActionContext.getRequest().setAttribute("pb", pb);

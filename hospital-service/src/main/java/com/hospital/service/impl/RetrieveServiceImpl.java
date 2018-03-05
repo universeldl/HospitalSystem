@@ -43,9 +43,9 @@ public class RetrieveServiceImpl implements RetrieveService {
     }
 
     @Override
-    public Set<Answer> getAnswerBySurveyId(RetrieveInfo retrieveInfo) {
+    public Set<Answer> getAnswerByDeliveryId(RetrieveInfo retrieveInfo) {
         // TODO Auto-generated method stub
-        return retrieveDao.getAnswerBySurveyId(retrieveInfo);
+        return retrieveDao.getAnswerByDeliveryId(retrieveInfo);
     }
 
     @Override

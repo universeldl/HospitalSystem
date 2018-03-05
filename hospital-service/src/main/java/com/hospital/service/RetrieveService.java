@@ -13,7 +13,7 @@ public interface RetrieveService {
 
     RetrieveInfo getRetrieveInfoById(RetrieveInfo retrieveInfo);
 
-    Set<Answer> getAnswerBySurveyId(RetrieveInfo retrieveInfo);
+    Set<Answer> getAnswerByDeliveryId(RetrieveInfo retrieveInfo);
 
     PageBean<RetrieveInfo> queryRetrieveInfo(String openID, int deliveryId, int pageCode, int pageSize);
 

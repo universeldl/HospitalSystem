@@ -253,7 +253,7 @@
                                     <input type="hidden" id="patient_action"
                                            value="${pageContext.request.contextPath}/doctor/retrieveManageAction_patientRetrieveManage.action">
                                     <button type="button" class="btn btn-primary btn-xs"
-                                            onclick="managePatient(<s:property value="#patient.patientId"/>)">管理
+                                            onclick="managePatient(<s:property value="#patient.patientId"/>)">答卷管理
                                     </button>
 
                                 </td>

@@ -20,6 +20,7 @@
 
         <action name="retrieveManageAction_*" method="{1}" class="retrieveManageAction">
             <result name="success">/WEB-INF/doctor/retrieveManage.jsp</result>
+            <result name="check">/WEB-INF/doctor/checkRetrieve.jsp</result>
             <result name="nopass" type="redirect">/error/nopass.jsp</result>
         </action>
     </package>

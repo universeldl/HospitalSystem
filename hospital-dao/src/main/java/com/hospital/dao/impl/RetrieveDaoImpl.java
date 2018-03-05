@@ -98,9 +98,9 @@ public class RetrieveDaoImpl extends HibernateDaoSupport implements RetrieveDao 
     }
 
     @Override
-    public Set<Answer> getAnswerBySurveyId(RetrieveInfo retrieveInfo) {
-        String hql = "from RetrieveInfo b where b.survey.surveyId=?";
-        List list = this.getHibernateTemplate().find(hql, retrieveInfo.getSurvey().getSurveyId());
+    public Set<Answer> getAnswerByDeliveryId(RetrieveInfo retrieveInfo) {
+        String hql = "from RetrieveInfo b where b.deliveryId=?";
+        List list = this.getHibernateTemplate().find(hql, retrieveInfo.getDeliveryId());
         if (list != null && list.size() > 0) {
             RetrieveInfo r = (RetrieveInfo) list.get(0);
             Set<Answer> answers = r.getAnswers();

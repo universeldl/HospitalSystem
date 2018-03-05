@@ -70,7 +70,7 @@
             <one-to-many class="com.hospital.domain.DeliveryInfo"/>
         </set>
 
-        <set name="retrieveInfos" lazy="false" inverse="true">
+        <set name="retrieveInfos" lazy="false" inverse="true" order-by="deliveryId asc">
             <key>
                 <column name="patientId"></column>
             </key>
