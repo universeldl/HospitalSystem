@@ -48,7 +48,7 @@ public class DoctorLoginAction extends ActionSupport {
         if (newDoctor == null) {
             //用户名不存在
             login = -1;
-        } else if (!Md5Utils.md5(newDoctor.getPwd()).equals(doctor.getPwd())) {
+        } else if (!newDoctor.getPwd().equals(doctor.getPwd())) {
             //密码不正确
             login = -2;
         } else {
