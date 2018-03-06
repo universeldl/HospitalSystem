@@ -158,8 +158,11 @@
                         <tr>
                             <th>病人类型</th>
                             <th>病人性别</th>
+                            <!--
                             <th>年龄范围最小值</th>
                             <th>年龄范围最大值</th>
+                            -->
+                            <th>病例类型</th>
                             <th>随访问卷</th>
                             <th>随访激活状态</th>
                             <th>操作</th>
@@ -183,8 +186,17 @@
                                         不限
                                     </s:elseif>
                                 </td>
-                                <td><s:property value="#plan.beginAge"/></td>
-                                <td><s:property value="#plan.endAge"/></td>
+                                <td>
+                                <s:if test="#plan.oldPatientOnly == 1">
+                                    仅既往病人
+                                </s:if>
+                                <s:elseif test="#plan.oldPatientOnly == 2">
+                                    仅新病人
+                                </s:elseif>
+                                <s:elseif test="#plan.oldPatientOnly == 3">
+                                    不限
+                                </s:elseif>
+                                </td>
                                 <td>
                                     <s:iterator value="#plan.surveys" var="survey">
                                         <p><s:property value="#survey.surveyName"/></p>
@@ -212,7 +224,6 @@
                         </s:if>
                         <s:else>
                             <tbody>
-                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
@@ -258,18 +269,15 @@
 
                     <!---------------------表单-------------------->
                     <div class="form-group">
-                        <label for="addBeginAge" class="col-sm-3 control-label">年龄范围最小值</label>
+                        <label for="addOldPatientOnly" class="col-sm-3 control-label">仅限既往病例</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addBeginAge" placeholder="请输入年龄范围最小值">
-                            <label class="control-label" for="addBeginAge" style="display: none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="addEndAge" class="col-sm-3 control-label">年龄范围最大值</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addEndAge" placeholder="请输入年龄范围最大值">
-                            <label class="control-label" for="addEndAge" style="display: none;"></label>
+                            <select class="form-control" id="addOldPatientOnly">
+                                <option value="-1">请选择</option>
+                                <option value="1">是</option>
+                                <option value="2">否</option>
+                                <option value="3">不限</option>
+                            </select>
+                            <label class="control-label" for="addOldPatientOnly" style="display: none;"></label>
                         </div>
                     </div>
 
@@ -339,22 +347,19 @@
                 <div class="modal-body">
 
                     <!---------------------表单-------------------->
-
                     <div class="form-group">
-                        <label for="updateBeginAge" class="col-sm-3 control-label">年龄范围最小值</label>
+                        <label for="updateOldPatientOnly" class="col-sm-3 control-label">仅限既往病例</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateBeginAge" placeholder="请输入年龄范围最小值">
-                            <label class="control-label" for="updateBeginAge" style="display: none;"></label>
+                            <select class="form-control" id="updateOldPatientOnly">
+                                <option value="-1">请选择</option>
+                                <option value="1">是</option>
+                                <option value="2">否</option>
+                                <option value="3">不限</option>
+                            </select>
+                            <label class="control-label" for="updateOldPatientOnly" style="display: none;"></label>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="updateEndAge" class="col-sm-3 control-label">年龄范围最大值</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateEndAge" placeholder="请输入年龄范围最大值">
-                            <label class="control-label" for="updateEndAge" style="display: none;"></label>
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <label for="updateSex" class="col-sm-3 control-label">性别</label>

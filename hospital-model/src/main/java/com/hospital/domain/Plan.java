@@ -12,10 +12,11 @@ import java.util.Set;
 public class Plan implements Serializable {
 
     private Integer planId;    //自动编号
-    private Integer beginAge;    //年龄区间下限
-    private Integer endAge;    //年龄区间上限
+    //private Integer beginAge;    //年龄区间下限
+    //private Integer endAge;    //年龄区间上限
     private Integer active;    //激活状态
     private Integer sex;    //性别
+    private Integer oldPatientOnly;
 
     private PatientType patientType;
     private Doctor doctor;    //操作医生
@@ -39,6 +40,7 @@ public class Plan implements Serializable {
         this.sex = sex;
     }
 
+    /*
     public Integer getBeginAge() {
         return beginAge;
     }
@@ -53,6 +55,15 @@ public class Plan implements Serializable {
 
     public void setEndAge(Integer endAge) {
         this.endAge = endAge;
+    }
+    */
+
+    public void setOldPatientOnly(Integer oldPatientOnly) {
+        this.oldPatientOnly = oldPatientOnly;
+    }
+
+    public Integer getOldPatientOnly() {
+        return oldPatientOnly;
     }
 
     public Integer getActive() {
@@ -99,11 +110,12 @@ public class Plan implements Serializable {
 
     }
 
-    public Plan(Integer beginAge, Integer endAge, Integer sex, Integer active,
+    public Plan(Integer oldPatientOnly, Integer sex, Integer active,
                 PatientType patientType, Doctor doctor) {
         super();
-        this.beginAge = beginAge;
-        this.endAge = endAge;
+        //this.beginAge = beginAge;
+        //this.endAge = endAge;
+        this.oldPatientOnly = oldPatientOnly;
         this.sex = sex;
         this.active = active;
         this.patientType = patientType;

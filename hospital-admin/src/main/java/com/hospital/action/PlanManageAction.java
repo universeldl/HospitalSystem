@@ -34,14 +34,15 @@ public class PlanManageAction extends ActionSupport {
         this.surveyService = surveyService;
     }
 
-    private Integer beginAge;
-    private Integer endAge;
+    //private Integer beginAge;
+    //private Integer endAge;
+    private Integer oldPatientOnly;
     private Integer active;
     private Integer sex;
     private Integer patientType;
     private Integer planId;
 
-
+    /*
     public void setBeginAge(Integer beginAge) {
         this.beginAge = beginAge;
     }
@@ -50,7 +51,11 @@ public class PlanManageAction extends ActionSupport {
     public void setEndAge(Integer endAge) {
         this.endAge = endAge;
     }
+    */
 
+    public void setOldPatientOnly(Integer oldPatientOnly) {
+        this.oldPatientOnly = oldPatientOnly;
+    }
 
     public void setActive(Integer active) {
         this.active = active;
@@ -107,11 +112,14 @@ public class PlanManageAction extends ActionSupport {
 
 
     public String updatePlan() {
+
+        System.out.println("update plan oldPatientOnly = " + oldPatientOnly);
         Plan plan = new Plan();
         plan.setPlanId(planId);
         Plan updatePlan = planService.getPlanById(plan);
-        updatePlan.setBeginAge(beginAge);
-        updatePlan.setEndAge(endAge);
+        //updatePlan.setBeginAge(beginAge);
+        //updatePlan.setEndAge(endAge);
+        updatePlan.setOldPatientOnly(oldPatientOnly);
         updatePlan.setActive(active);
         updatePlan.setSex(sex);
         PatientType type = new PatientType();
@@ -164,7 +172,8 @@ public class PlanManageAction extends ActionSupport {
         //得到当前病人类型
         PatientType type = new PatientType();
         type.setPatientTypeId(patientType);
-        Plan plan = new Plan(beginAge, endAge, sex, active, type, doctor);
+        //Plan plan = new Plan(beginAge, endAge, sex, active, type, doctor);
+        Plan plan = new Plan(oldPatientOnly, sex, active, type, doctor);
 
         List<Integer> surveyIds = new ArrayList<>();
         ActionContext ctx = ActionContext.getContext();

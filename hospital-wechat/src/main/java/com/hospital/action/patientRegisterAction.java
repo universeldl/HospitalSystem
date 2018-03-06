@@ -213,8 +213,15 @@ public class patientRegisterAction extends ActionSupport {
         age = AgeUtils.getAgeFromBirthTime(tmp_bd);
         System.out.println("Add plan finished age = " + age);
         Plan plan = new Plan();
-        plan.setBeginAge(age);
-        plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
+        //plan.setBeginAge(age);
+        //plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
+
+        if (oldPatient) {
+            plan.setOldPatientOnly(1);  //be careful about sex, Patient.sex is not compatible with Plan.sex
+        } else {
+            plan.setOldPatientOnly(2);
+        }
+
         System.out.println("Add plan finished 1.");
         if (sex.toUpperCase().equals("MALE")) {
             plan.setSex(2);  //be careful about sex, Patient.sex is not compatible with Plan.sex

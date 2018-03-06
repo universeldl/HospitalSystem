@@ -15,9 +15,10 @@ $(function () {
             return;
         }
 
-        var postdata = "active=1&planId=" + planId + "&beginAge=" + $.trim($("#updateBeginAge").val())
+        var postdata = "active=1&planId=" + planId
             + "&patientType=" + $.trim($("#updatePatientType").val())
-            + "&endAge=" + $.trim($("#updateEndAge").val()) + "&sex=" + $.trim($("#updateSex").val())
+            + "&oldPatientOnly=" + $.trim($("#updateOldPatientOnly").val())
+            + "&sex=" + $.trim($("#updateSex").val())
             + "&" + $("#updateForm").serialize();
 
         ajax(
@@ -57,6 +58,8 @@ $(function () {
 function updatePlan(id) {
     planId = id;
     $("#updatePatientType option[value!=-1]").remove();//移除先前的选项
+    $("#updateSurveys option[value!=-1]").remove();//移除先前的选项
+
     ajax(
         {
             url: "doctor/patientTypeManageAction_getAllPatientTypes.action",
@@ -95,8 +98,7 @@ function updatePlan(id) {
                         params: "planId=" + id,
                         type: "json",
                         callback: function (data) {
-                            $("#updateBeginAge").val(data.beginAge);
-                            $("#updateEndAge").val(data.endAge);
+                            $("#updateOldPatientOnly").val(data.oldPatientOnly);
                             $("#updatePatientType").val(data.patientType.patientTypeId);
                         }
                     }
@@ -110,46 +112,16 @@ function updatePlan(id) {
 function validUpdatePlan() {
     var flag = true;
 
-    var beginAge = $.trim($("#updateBeginAge").val());
-    if (beginAge == "") {
-        $('#updateBeginAge').parent().addClass("has-error");
-        $('#updateBeginAge').next().text("年龄下限不能为空");
-        $('#updateBeginAge').next().show();
-        flag = false;
-    }
-    else if (isNaN(parseInt(beginAge)) || parseInt(beginAge) < 0 || parseInt(beginAge) > 99) {
-        $('#updateBeginAge').parent().addClass("has-error");
-        $('#updateBeginAge').next().text("年龄下限必须为0～99之间的正整数");
-        $('#updateBeginAge').next().show();
+    var oldPatientOnly = $.trim($("updateOldPatientOnly").val());
+    if (oldPatientOnly == -1) {
+        $('#updateOldPatientOnly').parent().addClass("has-error");
+        $('#updateOldPatientOnly').next().text("请选择是否仅限既往病例");
+        $("#updateOldPatientOnly").next().show();
         flag = false;
     } else {
-        $('#updateBeginAge').parent().removeClass("has-error");
-        $('#updateBeginAge').next().text("");
-        $('#updateBeginAge').next().hide();
-    }
-
-    var endAge = $.trim($("#updateEndAge").val());
-    if (endAge == "") {
-        $('#updateEndAge').parent().addClass("has-error");
-        $('#updateEndAge').next().text("年龄上限不能为空");
-        $('#updateEndAge').next().show();
-        flag = false;
-    }
-    else if (isNaN(parseInt(endAge)) || parseInt(endAge) < 0 || parseInt(endAge) > 99) {
-        $('#updateEndAge').parent().addClass("has-error");
-        $('#updateEndAge').next().text("年龄上限必须为0～99之间的正整数");
-        $('#updateEndAge').next().show();
-        flag = false;
-    }
-    else if (parseInt(endAge) < parseInt(beginAge)) {
-        $('#updateEndAge').parent().addClass("has-error");
-        $('#updateEndAge').next().text("年龄上限不能低于年龄下限");
-        $('#updateEndAge').next().show();
-        flag = false;
-    } else {
-        $('#updateEndAge').parent().removeClass("has-error");
-        $('#updateEndAge').next().text("");
-        $('#updateEndAge').next().hide();
+        $('#updateOldPatientOnly').parent().removeClass("has-error");
+        $('#updateOldPatientOnly').next().text("");
+        $("#updateOldPatientOnly").next().hide();
     }
 
     var sex = $.trim($("#updateSex").val());

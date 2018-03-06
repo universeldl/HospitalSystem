@@ -51,8 +51,9 @@ $(function () {
             return;
         }
 
-        var postdata = "active=1&beginAge=" + $.trim($("#addBeginAge").val()) + "&patientType=" + $.trim($("#addpatientType").val())
-            + "&endAge=" + $.trim($("#addEndAge").val()) + "&sex=" + $.trim($("#addSex").val()) + "&" + $("#addForm").serialize();
+        var postdata = "active=1&patientType=" + $.trim($("#addpatientType").val())
+            + "&oldPatientOnly=" + $.trim($("#addOldPatientOnly").val())
+            + "&sex=" + $.trim($("#addSex").val()) + "&" + $("#addForm").serialize();
         ajax(
             {
                 method: 'POST',
@@ -89,46 +90,16 @@ $(function () {
 function validAddPlan() {
     var flag = true;
 
-    var beginAge = $.trim($("#addBeginAge").val());
-    if (beginAge == "") {
-        $('#addBeginAge').parent().addClass("has-error");
-        $('#addBeginAge').next().text("年龄下限不能为空");
-        $('#addBeginAge').next().show();
-        flag = false;
-    }
-    else if (isNaN(parseInt(beginAge)) || parseInt(beginAge) < 0 || parseInt(beginAge) > 99) {
-        $('#addBeginAge').parent().addClass("has-error");
-        $('#addBeginAge').next().text("年龄下限必须为0～99之间的正整数");
-        $('#addBeginAge').next().show();
+    var oldPatientOnly = $.trim($("#addOldPatientOnly").val());
+    if (sex == -1) {
+        $('#addOldPatientOnly').parent().addClass("has-error");
+        $('#addOldPatientOnly').next().text("请选择是否仅限既往病例");
+        $("#addOldPatientOnly").next().show();
         flag = false;
     } else {
-        $('#addBeginAge').parent().removeClass("has-error");
-        $('#addBeginAge').next().text("");
-        $('#addBeginAge').next().hide();
-    }
-
-    var endAge = $.trim($("#addEndAge").val());
-    if (endAge == "") {
-        $('#addEndAge').parent().addClass("has-error");
-        $('#addEndAge').next().text("年龄上限不能为空");
-        $('#addEndAge').next().show();
-        flag = false;
-    }
-    else if (isNaN(parseInt(endAge)) || parseInt(endAge) < 0 || parseInt(endAge) > 99) {
-        $('#addEndAge').parent().addClass("has-error");
-        $('#addEndAge').next().text("年龄上限必须为0～99之间的正整数");
-        $('#addEndAge').next().show();
-        flag = false;
-    }
-    else if (parseInt(endAge) < parseInt(beginAge)) {
-        $('#addEndAge').parent().addClass("has-error");
-        $('#addEndAge').next().text("年龄上限不能低于年龄下限");
-        $('#addEndAge').next().show();
-        flag = false;
-    } else {
-        $('#addEndAge').parent().removeClass("has-error");
-        $('#addEndAge').next().text("");
-        $('#addEndAge').next().hide();
+        $('#addOldPatientOnly').parent().removeClass("has-error");
+        $('#addOldPatientOnly').next().text("");
+        $("#addOldPatientOnly").next().hide();
     }
 
     var sex = $.trim($("#addSex").val());
