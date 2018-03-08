@@ -80,8 +80,8 @@ public class PatientServiceImpl implements PatientService {
 
 
     @Override
-    public PageBean<Patient> findPatientByPage(int pageCode, int pageSize) {
-        return patientDao.findPatientByPage(pageCode, pageSize);
+    public PageBean<Patient> findPatientByPage(int pageCode, int pageSize, Doctor doctor) {
+        return patientDao.findPatientByPage(pageCode, pageSize, doctor);
     }
 
 

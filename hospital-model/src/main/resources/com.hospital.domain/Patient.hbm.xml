@@ -44,6 +44,10 @@
             <column name="sex"/>
         </property>
 
+        <property name="addnDoctorId" type="java.lang.Integer">
+            <column name="addnDoctorId"/>
+        </property>
+
         <property name="email" type="java.lang.String">
             <column name="email"/>
         </property>

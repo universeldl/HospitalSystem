@@ -33,14 +33,14 @@ CREATE TABLE `doctor` (
 
 CREATE TABLE `Authorization` (
   `aid` int(11) NOT NULL,
-  `surveySet` int(2) DEFAULT '0',
-  `patientSet` int(2) DEFAULT '0',
-  `deliverySet` int(2) DEFAULT '0',
-  `typeSet` int(2) DEFAULT '0',
-  `retrieveSet` int(2) DEFAULT '0',
-  `forfeitSet` int(2) DEFAULT '0',
-  `sysSet` int(2) DEFAULT '0',
-  `superSet` int(2) DEFAULT '0',
+  `surveySet` int(2) DEFAULT 0,
+  `patientSet` int(2) DEFAULT 0,
+  `deliverySet` int(2) DEFAULT 0,
+  `typeSet` int(2) DEFAULT 0,
+  `retrieveSet` int(2) DEFAULT 0,
+  `forfeitSet` int(2) DEFAULT 0,
+  `sysSet` int(2) DEFAULT 0,
+  `superSet` int(2) DEFAULT 0,
   PRIMARY KEY (`aid`),
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`)
 );
@@ -85,6 +85,7 @@ CREATE TABLE `Patient` (
   `createTime` datetime DEFAULT NULL,
   `patientTypeId` int(11) DEFAULT NULL,
   `planId` int(11) DEFAULT NULL,
+  `addnDoctorId` int(11) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,
   PRIMARY KEY (`patientId`),
   CONSTRAINT  FOREIGN KEY (`patientTypeId`) REFERENCES `PatientType` (`patientTypeId`) ON DELETE SET NULL,
@@ -246,9 +247,9 @@ INSERT INTO Plan VALUES(1, 1, 1, 1, 1, 6);
 INSERT INTO Plan VALUES(2, 2, 1, 2, 1, 6);
 INSERT INTO Plan VALUES(3, 3, 1, 3, 1, 6);
 
-INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1", true, "13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,1,2);
-INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0", true, "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,6);
-INSERT INTO Patient VALUES(3,"123456","测试","appid","oaBonw30UBjZkLW5rf19h7KunM7s","na",NULL,NULL,"0", false, "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,6);
+INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1", true, "13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,1,0,2);
+INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0", true, "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,0,6);
+INSERT INTO Patient VALUES(3,"123456","测试","appid","oaBonw30UBjZkLW5rf19h7KunM7s","na",NULL,NULL,"0", false, "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
 
 INSERT INTO Authorization VALUES(2,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(1,0,0,0,0,0,0,0,1);

@@ -19,7 +19,7 @@ public interface PatientDao {
 
     boolean addPatient(Patient patient);
 
-    PageBean<Patient> findPatientByPage(int pageCode, int pageSize);
+    PageBean<Patient> findPatientByPage(int pageCode, int pageSize, Doctor doctor);
 
     Patient getPatientById(Patient patient);
 

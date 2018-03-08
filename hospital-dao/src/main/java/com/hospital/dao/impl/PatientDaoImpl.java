@@ -120,18 +120,47 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     }
 
 
+    /**
+     * @param hql传入的hql语句
+     * @param pageCode当前页
+     * @param pageSize每页显示大小
+     * @return
+     */
+    public List doSplitPage(final String hql, final int pageCode, final int pageSize, final int aid1, final int aid2) {
+        //调用模板的execute方法，参数是实现了HibernateCallback接口的匿名类，
+        return (List) this.getHibernateTemplate().execute(new HibernateCallback() {
+            //重写其doInHibernate方法返回一个object对象，
+            public Object doInHibernate(Session session)
+                    throws HibernateException {
+                //创建query对象
+                Query query = session.createQuery(hql);
+                query. setParameter("aid1", aid1);
+                query. setParameter("aid2", aid2);
+                //返回其执行了分布方法的list
+                return query.setFirstResult((pageCode - 1) * pageSize).setMaxResults(pageSize).list();
+
+            }
+
+        });
+
+    }
+
     @Override
-    public PageBean<Patient> findPatientByPage(int pageCode, int pageSize) {
+    public PageBean<Patient> findPatientByPage(int pageCode, int pageSize, Doctor doctor) {
         PageBean<Patient> pb = new PageBean<Patient>();    //pageBean对象，用于分页
         //根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
         pb.setPageCode(pageCode);//设置当前页码
         pb.setPageSize(pageSize);//设置页面记录数
         List patientList = null;
         try {
-            String sql = "SELECT count(*) FROM Patient";
-            List list = this.getSessionFactory().getCurrentSession().createQuery(sql).list();
-            int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
-
+            String sql = "from Patient";
+            int totalRecord =  0;
+            //如果是super，全选，否则做判断
+            if((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() == 1)) {
+                List list = this.getHibernateTemplate().find(sql);
+                if (list != null && list.size() > 0) {
+                    totalRecord = list.size();
+                }
             pb.setTotalRecord(totalRecord);    //设置总记录数
             //this.getSessionFactory().getCurrentSession().close();
 
@@ -139,6 +168,24 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
             String hql = "from Patient";
             //分页查询
             patientList = doSplitPage(hql, pageCode, pageSize);
+            }
+            else {
+                //p.aid或addnDoctorId有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+                String addSql = " r where (r.doctor.aid=? or r.addnDoctorId=?)";
+                sql += addSql;
+                List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
+                if (list != null && list.size() > 0) {
+                    totalRecord = list.size();
+                }
+            pb.setTotalRecord(totalRecord);    //设置总记录数
+            //this.getSessionFactory().getCurrentSession().close();
+
+            //不支持limit分页
+            String hql = "from Patient r where (r.doctor.aid=:aid1 or r.addnDoctorId=:aid2)";
+            //p.aid或addnDoctorId有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
+            //分页查询
+            patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
+            }
 
 
         } catch (Throwable e1) {
@@ -180,6 +227,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     }
 
 
+    //TODO auth of doctor
     @Override
     public PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize) {
         PageBean<Patient> pb = new PageBean<Patient>();    //pageBean对象，用于分页

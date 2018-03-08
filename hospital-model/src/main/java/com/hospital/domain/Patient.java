@@ -26,6 +26,7 @@ public class Patient implements Serializable {
     private Doctor doctor;    //操作医生
     private boolean oldPatient;
     private Integer sex;
+    private Integer addnDoctorId;
 
     private Date birthday;
     private Date createTime;    //创建时间
@@ -96,6 +97,14 @@ public class Patient implements Serializable {
 
     public void setPatientId(Integer patientId) {
         this.patientId = patientId;
+    }
+
+    public Integer getAddnDoctorId() {
+        return addnDoctorId;
+    }
+
+    public void setAddnDoctorId(Integer addnDoctorId) {
+        this.addnDoctorId = addnDoctorId;
     }
 
     public String getName() {
