@@ -47,6 +47,21 @@
                     </select>
                 </div>
             </div>
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="hospital" class="weui-label">疾病类型</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" id="patientType" >
+                        <option disabled selected value></option>
+                        <s:if test="#request.ptl!=null">
+                            <s:iterator value="#request.ptl" var="patientType">
+                                <option value='<s:property value="#patientType.patientTypeId"/>' > <s:property value="#patientType.patientTypeName"/> </option>
+                            </s:iterator>
+                        </s:if>
+                    </select>
+                </div>
+            </div>
             <div class="weui-cell weui-cell_switch">
                 <div class="weui-cell__bd">是否既往病人（请咨询您的医生）</div>
                 <div class="weui-cell__ft">

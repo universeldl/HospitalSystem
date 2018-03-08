@@ -54,6 +54,11 @@
         <property name="hospitalService">
             <ref bean="hospitalService"/>
         </property>
+        <property name="patientTypeService">
+            <ref bean="patientTypeService"/>
+        </property>
     </bean>
+
+
 
 </beans>

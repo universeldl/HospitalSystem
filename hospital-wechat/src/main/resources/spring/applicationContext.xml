@@ -6,6 +6,7 @@
 
     <import resource="applicationContext-wechat-login.xml"/>
     <import resource="applicationContext-patient-regiseter.xml"/>
+    <import resource="applicationContext-patientType.xml"/>
     <import resource="applicationContext-captcha.xml"/>
     <import resource="applicationContext-db.xml"/>
     <import resource="applicationContext-plan.xml"/>

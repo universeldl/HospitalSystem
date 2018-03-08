@@ -1,9 +1,11 @@
 package com.hospital.action;
 
 import com.hospital.domain.Patient;
+import com.hospital.domain.PatientType;
 import com.hospital.service.PatientService;
 import com.hospital.domain.Hospital;
 import com.hospital.service.HospitalService;
+import com.hospital.service.PatientTypeService;
 import com.hospital.util.AccessTokenMgr;
 import com.hospital.util.AccessTokenMgrHXTS;
 import com.hospital.util.GetOpenIdOauth2;
@@ -44,6 +46,12 @@ public class wechatLoginAction extends ActionSupport {
         this.hospitalService = hospitalService;
     }
 
+    private PatientTypeService patientTypeService;
+    public void setPatientTypeService(PatientTypeService patientTypeService) {
+        this.patientTypeService = patientTypeService;
+    }
+
+
     public String login() {
         System.out.println("login called; code = " + code);
 
@@ -53,6 +61,14 @@ public class wechatLoginAction extends ActionSupport {
         List<Hospital> hospitalList = hospitalService.getAllVisibleHospitals();
         System.out.println("hospitallist = " + hospitalList.toString());
         ServletActionContext.getRequest().setAttribute("hl", hospitalList);
+
+        if (patientTypeService == null) {
+            System.out.println("patient type = null");
+        }
+
+        List<PatientType> patientTypeList = patientTypeService.getAllPatientType();
+        ServletActionContext.getRequest().setAttribute("ptl", patientTypeList);
+
 
         if (code != null) {
             System.out.println("get code " + code);

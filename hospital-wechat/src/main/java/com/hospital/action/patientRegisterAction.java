@@ -22,12 +22,12 @@ public class patientRegisterAction extends ActionSupport {
     String tel;
     String sex;
     String hospitalID;
+    String typeID;
     String doctorID;
     String birthday;
     String captcha;
     String invitationCode;
     boolean oldPatient;
-    int typeID;
     PatientService patientService;
     DoctorService doctorService;
     PlanService planService;
@@ -74,12 +74,8 @@ public class patientRegisterAction extends ActionSupport {
         this.captcha = captcha;
     }
 
-    public void setPatientType(String typeID) {
-        try {
-            this.typeID = Integer.parseInt(typeID);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+    public void setTypeID(String typeID) {
+        this.typeID = typeID;
     }
 
     public void setPlanService(PlanService planService) {
@@ -129,6 +125,8 @@ public class patientRegisterAction extends ActionSupport {
 
 
     public String register() {
+        System.out.println("?typeID = " + typeID);
+
         String ref_captcha = ServletActionContext.getContext().getSession().get("captcha").toString();
         captcha = captcha.toLowerCase();
         Patient patient = (Patient) ServletActionContext.getContext().getSession().get("patient");
@@ -178,7 +176,8 @@ public class patientRegisterAction extends ActionSupport {
         }
 
         PatientType type = new PatientType();
-        type.setPatientTypeId(typeID);
+        patient.setPatientType(type);
+        type.setPatientTypeId(Integer.valueOf(typeID));
         patient.setAppID(appID);
         patient.setUniqID(patient.getOpenID());
         patient.setName(username);
@@ -193,10 +192,7 @@ public class patientRegisterAction extends ActionSupport {
         } else {
             patient.setSex(0);
         }
-        if (!patientService.addPatient(patient)) {
-            writeStatus(-3);
-            return null;
-        }
+
 
         System.out.println("Add patient finished. status = " + status);
 
@@ -251,7 +247,12 @@ public class patientRegisterAction extends ActionSupport {
             }
             System.out.println("send template message finished");
         } else {
-            System.out.println("new plan = null");
+            System.out.println("Warning : no plan added for patient " + patient.getName());
+        }
+
+        if (!patientService.addPatient(patient)) {
+            writeStatus(-3);
+            return null;
         }
 
         writeStatus(1);

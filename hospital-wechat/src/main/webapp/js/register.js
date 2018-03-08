@@ -7,13 +7,19 @@ function registerSubmit() {
     var postdata = "username=" + $.trim($("#username").val());
     postdata = postdata + "&tel=" + $.trim($("#tel").val());
     postdata = postdata + "&sex=" + $.trim($("#sex option:selected").val());
+    postdata = postdata + "&typeID=" + $.trim($("#patientType option:selected").val());
     postdata = postdata + "&hospitalID=" + $.trim($("#hospital option:selected").val());
     postdata = postdata + "&doctorID=" + $.trim($("#doctorlist option:selected").val());
     postdata = postdata + "&birthday=" + $.trim($("#birthday").val());
     postdata = postdata + "&captcha=" + $.trim($("#captchaIN").val());
     postdata = postdata + "&invitationCode=" + $.trim($("#invitationCode").val());
-    postdata = postdata + "&oldPatient=" + $.trim($("#oldPatient").val());
-    postdata = postdata + "&typeID=1";
+    //postdata = postdata + "&oldPatient=" + $.trim($("#oldPatient").val());
+    var oldPatient = document.getElementById("oldPatient");
+    if (oldPatient.checked) {
+        postdata = postdata + "&oldPatient=on";
+    } else {
+        postdata = postdata + "&oldPatient=off";
+    }
     ajax(
         {
             method: 'POST',
