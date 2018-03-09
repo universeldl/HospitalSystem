@@ -335,8 +335,8 @@ public class PatientManageAction extends ActionSupport {
         //给pageSize,每页的记录数赋值
         int pageSize = 5;
         PageBean<Patient> pb = null;
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         if ("".equals(openID.trim()) && "".equals(name.trim()) && patientType == -1) {
-            Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
             pb = patientService.findPatientByPage(pageCode, pageSize, doctor);
         } else {
             Patient patient = new Patient();
@@ -345,7 +345,7 @@ public class PatientManageAction extends ActionSupport {
             type.setPatientTypeId(patientType);
             patient.setPatientType(type);
             patient.setName(name);
-            pb = patientService.queryPatient(patient, pageCode, pageSize);
+            pb = patientService.queryPatient(patient, pageCode, pageSize, doctor);
         }
         if (pb != null) {
             pb.setUrl("queryPatient.action?openID=" + openID + "&name=" + name + "&patientType=" + patientType + "&");

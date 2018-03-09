@@ -27,7 +27,7 @@ public interface PatientService {
 
     int deletePatient(Patient patient);
 
-    PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize);
+    PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize, Doctor doctor);
 
     Patient getPatientByopenID(Patient patient);
 
