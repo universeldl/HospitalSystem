@@ -26,7 +26,7 @@ public class Patient implements Serializable {
     private Doctor doctor;    //操作医生
     private boolean oldPatient;
     private Integer sex;
-    private Integer addnDoctorId;
+    private Doctor addnDoctor;    //共享医生
 
     private Date birthday;
     private Date createTime;    //创建时间
@@ -99,14 +99,6 @@ public class Patient implements Serializable {
         this.patientId = patientId;
     }
 
-    public Integer getAddnDoctorId() {
-        return addnDoctorId;
-    }
-
-    public void setAddnDoctorId(Integer addnDoctorId) {
-        this.addnDoctorId = addnDoctorId;
-    }
-
     public String getName() {
         return name;
     }
@@ -164,6 +156,14 @@ public class Patient implements Serializable {
         this.doctor = doctor;
     }
 
+    public Doctor getAddnDoctor() {
+        return addnDoctor;
+    }
+
+    public void setAddnDoctor(Doctor addnDoctor) {
+        this.addnDoctor = addnDoctor;
+    }
+
     public String getOpenID() {
         return openID;
     }
@@ -204,8 +204,8 @@ public class Patient implements Serializable {
     }
 
     public Patient(String name, String pwd, String phone, boolean oldPatient,
-                   PatientType patientType, String email, Doctor doctor, String openID,
-                   Date createTime, Integer sex, Plan plan) {
+                   PatientType patientType, String email, Doctor doctor, Doctor addnDoctor,
+                   String openID, Date createTime, Integer sex, Plan plan) {
         super();
         this.name = name;
         this.pwd = pwd;
@@ -214,6 +214,7 @@ public class Patient implements Serializable {
         this.patientType = patientType;
         this.email = email;
         this.doctor = doctor;
+        this.addnDoctor = addnDoctor;
         this.openID = openID;
         this.createTime = createTime;
         this.sex = sex;

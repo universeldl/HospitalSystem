@@ -1,6 +1,7 @@
 package com.hospital.action;
 
 import com.hospital.domain.*;
+import com.hospital.service.DoctorService;
 import com.hospital.service.PatientService;
 import com.hospital.service.PlanService;
 import com.hospital.util.Md5Utils;
@@ -28,9 +29,14 @@ public class PatientManageAction extends ActionSupport {
 
     private PatientService patientService;
     private PlanService planService;
+    private DoctorService doctorService;
 
     public void setPlanService(PlanService planService) {
         this.planService = planService;
+    }
+
+    public void setDoctorService(DoctorService doctorService) {
+        this.doctorService = doctorService;
     }
 
     public void setPatientService(PatientService patientService) {
@@ -42,6 +48,7 @@ public class PatientManageAction extends ActionSupport {
     private String name;
     private String phone;
     private Integer patientType;
+    private Integer addnDoctorId;
     private Integer sex;
     private int pageCode;
     private String openID;
@@ -83,6 +90,11 @@ public class PatientManageAction extends ActionSupport {
     }
 
 
+    public void setAddnDoctorId(Integer addnDoctorId) {
+        this.addnDoctorId = addnDoctorId;
+    }
+
+
     public void setPatientId(Integer patientId) {
         this.patientId = patientId;
     }
@@ -109,10 +121,15 @@ public class PatientManageAction extends ActionSupport {
      * @return
      */
     public String addPatient() {
+        int success = 0;
         //得到当前时间
         Date createTime = new Date(System.currentTimeMillis());
         //得到当前医生
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        //得到共享医生
+        Doctor tmpDoc = new Doctor();
+        tmpDoc.setAid(addnDoctorId);
+        Doctor addnDoctor = doctorService.getDoctorById(tmpDoc);
         //得到当前病人类型
         PatientType type = new PatientType();
         type.setPatientTypeId(patientType);
@@ -132,12 +149,13 @@ public class PatientManageAction extends ActionSupport {
         plan.setPatientType(type);
         Plan newPlan = planService.getPlan(plan);
 
-        Patient patient = new Patient(name, Md5Utils.md5("123456"), phone, false, type, email, doctor, openID, createTime, sex, newPlan);
+        Patient patient = new Patient(name, Md5Utils.md5("123456"), phone, false, type, email, doctor, addnDoctor, openID, createTime, sex, newPlan);
 
         Patient oldPatient = patientService.getPatientByopenID(patient);//检查是否已经存在该openID的病人
-        int success = 0;
         if (oldPatient != null) {
             success = -1;//已存在该id
+        } else if (doctor.getAid() == addnDoctorId) {
+            success = -2;//共享医生与直属医生不能相同
         } else {
             boolean b = patientService.addPatient(patient);
             if (b) {
@@ -187,6 +205,8 @@ public class PatientManageAction extends ActionSupport {
     public String getSummary() {
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
+        //得到当前医生
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
 
         //get Legends for Figure2
         SimpleDateFormat simdf = new SimpleDateFormat("yyyy-MM");
@@ -194,24 +214,22 @@ public class PatientManageAction extends ActionSupport {
         String[] legends = getLast12Months(simdf.format(cal.getTime()));
 
         //get additions numbers for each month in last 12 months
-        Integer[] additions = patientService.getAdditionsForLast12Months();
+        Integer[] additions = patientService.getAdditionsForLast12Months(doctor);
 
         //calculate total numbers for each month in last 12 months
         Integer[] total = new Integer[12];
-        total[11] = patientService.findAllPatients().size();
-        for(int s=11; s>0; s--) {
-            total[s-1] = total[s] - additions[s];
+        total[11] = patientService.getPatientsByDoctor(doctor).size();
+        for (int s = 11; s > 0; s--) {
+            total[s - 1] = total[s] - additions[s];
         }
 
         //calculate units and add-on's for additions and total
-        Integer units1 = (getMax(additions)/100 + 1)*100;
-        Integer addon1 = units1/5;
-        Integer units2 = (total[11]/100 + 1)*100;
-        Integer addon2 = units2/5;
+        Integer units1 = (getMax(additions) / 100 + 1) * 100;
+        Integer addon1 = units1 / 5;
+        Integer units2 = (total[11] / 100 + 1) * 100;
+        Integer addon2 = units2 / 5;
 
         Integer male = 0, female = 0;
-        //得到当前医生
-        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         List<Patient> allPatients = patientService.getPatientsByDoctor(doctor);
 
         for (Patient p : allPatients) {
@@ -278,6 +296,8 @@ public class PatientManageAction extends ActionSupport {
      * @return
      */
     public String updatePatient() {
+        //得到当前医生
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         Patient patient = new Patient();
         patient.setPatientId(patientId);
         Patient updatePatient = patientService.getPatientById(patient);//查出需要修改的病人对象;
@@ -294,6 +314,8 @@ public class PatientManageAction extends ActionSupport {
         if (newPatient != null) {
             success = 1;
             //由于是转发并且js页面刷新,所以无需重查
+        } else if (doctor.getAid() == addnDoctorId) {
+            success = -2;//共享医生与直属医生不能相同
         }
         try {
             ServletActionContext.getResponse().getWriter().print(success);

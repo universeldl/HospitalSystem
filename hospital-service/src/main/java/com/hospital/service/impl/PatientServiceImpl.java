@@ -53,8 +53,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Integer[] getAdditionsForLast12Months() {
-        return patientDao.getAdditionsForLast12Months();
+    public Integer[] getAdditionsForLast12Months(Doctor doctor) {
+        return patientDao.getAdditionsForLast12Months(doctor);
     }
 
     @Override

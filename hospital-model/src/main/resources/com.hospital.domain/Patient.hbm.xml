@@ -44,10 +44,6 @@
             <column name="sex"/>
         </property>
 
-        <property name="addnDoctorId" type="java.lang.Integer">
-            <column name="addnDoctorId"/>
-        </property>
-
         <property name="email" type="java.lang.String">
             <column name="email"/>
         </property>
@@ -93,6 +89,10 @@
 
         <many-to-one name="doctor" class="com.hospital.domain.Doctor" lazy="false">
             <column name="aid"></column>
+        </many-to-one>
+
+        <many-to-one name="addnDoctor" class="com.hospital.domain.Doctor" lazy="false">
+            <column name="addnDoctorId"></column>
         </many-to-one>
 
     </class>

@@ -220,6 +220,8 @@
                             <th>病人性别</th>
                             <th>病人类型</th>
                             <th>随访计划</th>
+                            <th>直属医生</th>
+                            <th>共享医生</th>
                             <th>联系号码</th>
                             <th>创建时间</th>
                             <th>操作</th>
@@ -243,6 +245,15 @@
                                 </td>
                                 <td><s:property value="#patient.patientType.patientTypeName"/></td>
                                 <td><s:property value="#patient.plan.planId"/></td>
+                                <td><s:property value="#patient.doctor.name"/></td>
+                                <td>
+                                    <s:if test="#patient.addnDoctor != null">
+                                        <s:property value="#patient.addnDoctor.name"/>
+                                    </s:if>
+                                    <s:else>
+                                        无
+                                    </s:else>
+                                </td>
                                 <td><s:property value="#patient.phone"/></td>
                                 <td><s:date name="#patient.createTime" format="yyyy-MM-dd"/></td>
                                 <td>
@@ -443,13 +454,20 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">操作医生</label>
+                        <label for="firstname" class="col-sm-3 control-label">直属医生</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="findDoctor" readonly="readonly">
 
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">共享医生</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findAddnDoctor" readonly="readonly">
+
+                        </div>
+                    </div>
 
                     <!---------------------表单-------------------->
                 </div>
@@ -629,6 +647,7 @@
                             <label class="control-label" for="addEmail" style="display: none;"></label>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">病人类型</label>
                         <div class="col-sm-7">
@@ -636,6 +655,16 @@
                                 <option value="-1">请选择</option>
                             </select>
                             <label class="control-label" for="addpatientType" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">共享医生</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="addAddnDoctor">
+                                <option value="-1">请选择</option>
+                            </select>
+                            <label class="control-label" for="addAddnDoctor" style="display: none;"></label>
                         </div>
                     </div>
 
@@ -715,6 +744,17 @@
                                 <option value="-1">请选择</option>
                             </select>
                             <label class="control-label" for="updatePatientType" style="display: none;"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">共享医生</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="updateAddnDoctor">
+                                <option value="-1">请选择</option>
+                            </select>
+                            <label class="control-label" for="updateAddnDoctor" style="display: none;"></label>
                         </div>
                     </div>
 

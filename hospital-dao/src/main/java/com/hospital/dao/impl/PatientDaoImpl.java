@@ -17,8 +17,14 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     @Override
     public List<Patient> getPatientsByDoctor(Doctor doctor) {
 
-        String hql = "from Patient r where r.doctor.aid=?";
-        List list = this.getHibernateTemplate().find(hql, doctor.getAid());
+        String hql = "from Patient";
+        //如果不是super
+        if ((doctor.getAuthorization().getSuperSet() == null) ||
+                ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
+            //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+            hql = hql + " r where r.doctor.aid=" + doctor.getAid();
+        }
+        List list = this.getHibernateTemplate().find(hql);
         if (list != null && list.size() > 0) {
             return list;
         }
@@ -48,10 +54,16 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     }
 
     @Override
-    public Integer[] getAdditionsForLast12Months() {
+    public Integer[] getAdditionsForLast12Months(Doctor doctor) {
         Integer[] additions = new Integer[12];
 
         String hql = "from Patient r where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =?";
+        //如果不是super
+        if ((doctor.getAuthorization().getSuperSet() == null) ||
+                ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
+            //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+        }
         try {
             for (int i = 11; i >= 0; i--) {
                 List list = this.getHibernateTemplate().find(hql, i);
@@ -169,8 +181,8 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 //分页查询
                 patientList = doSplitPage(hql, pageCode, pageSize);
             } else {
-                //p.aid或addnDoctorId有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-                String addSql = " r where (r.doctor.aid=? or r.addnDoctorId=?)";
+                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+                String addSql = " r where (r.doctor.aid=? or r.addnDoctor.aid=?)";
                 sql += addSql;
                 List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
                 if (list != null && list.size() > 0) {
@@ -180,8 +192,8 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 //this.getSessionFactory().getCurrentSession().close();
 
                 //不支持limit分页
-                String hql = "from Patient r where (r.doctor.aid=:aid1 or r.addnDoctorId=:aid2)";
-                //p.aid或addnDoctorId有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
+                String hql = "from Patient r where (r.doctor.aid=:aid1 or r.addnDoctor.aid=:aid2)";
+                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
                 //分页查询
                 patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
             }
@@ -252,9 +264,9 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
-            //p.aid或addnDoctorId有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid() + ")";
-            sql = sql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid() + ")";
+            //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+            sql = sql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
         }
         try {
             int totalRecord = 0;

@@ -7,13 +7,16 @@ import com.hospital.service.AuthorizationService;
 import com.hospital.service.DoctorService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class DoctorManageAction extends ActionSupport {
@@ -248,5 +251,24 @@ public class DoctorManageAction extends ActionSupport {
 
         return null;
     }
+
+
+    public String getAllDoctors() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+        List<Doctor> allDoctors = doctorService.getAllDoctors();
+
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+
+        String json = JSONArray.fromObject(allDoctors, jsonConfig).toString();//List------->JSONArray
+        try {
+            response.getWriter().print(json);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
 
 }

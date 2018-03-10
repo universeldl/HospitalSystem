@@ -14,7 +14,7 @@ $(function () {
 
         var postdata = "patientId=" + $.trim($("#updatePatientID").val()) + "&patientType=" + $.trim($("#updatePatientType").val())
             + "&name=" + $.trim($("#updateName").val()) + "&phone=" + $.trim($("#updatePhone").val()) + "&email=" + $.trim($("#updateEmail").val())
-            + "&openID=" + $.trim($("#updateOpenID").val());
+            + "&openID=" + $.trim($("#updateOpenID").val()) + "&addnDoctorId=" + $.trim($("#updateAddnDoctor").val());
         ajax(
             {
                 method: 'POST',
@@ -51,6 +51,7 @@ $(function () {
  */
 function updatePatient(id) {
     $("#updatePatientType option[value!=-1]").remove();//移除先前的选项
+    $("#updateAddnDoctor option[value!=-1]").remove();//移除先前的选项
     ajax(
         {
             url: "doctor/patientTypeManageAction_getAllPatientTypes.action",
@@ -65,6 +66,23 @@ function updatePatient(id) {
 
                     document.getElementById("updatePatientType").appendChild(op);
                 }
+                ajax(
+                    {
+                        url: "doctor/doctorManageAction_getAllDoctors.action",
+                        type: "json",
+                        callback: function (data) {
+                            // 循环遍历每个医生，每个医生姓名生成一个option对象，添加到<select>中
+                            for (var index in data) {
+                                var op = document.createElement("option");//创建一个指名名称元素
+                                op.value = data[index].aid;//设置op的实际值为当前的医生aid
+                                var textNode = document.createTextNode(data[index].name);//创建文本节点--医生姓名
+                                op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
+
+                                document.getElementById("updateAddnDoctor").appendChild(op);
+                            }
+                        }
+                    }
+                );
                 ajax(
                     {
                         method: 'POST',
@@ -86,7 +104,6 @@ function updatePatient(id) {
 
         }
     );
-
 
 }
 
@@ -174,6 +191,20 @@ function validUpdatePatient() {
         $('#updatePatientType').next().text("");
         $("#updatePatientType").next().hide();
     }
+
+
+    var addnDoctor = $.trim($("#updateAddnDoctor").val());
+    if (addnDoctor == -1) {
+        $('#updateAddnDoctor').parent().addClass("has-error");
+        $('#updateAddnDoctor').next().text("请选择共享医生");
+        $("#updateAddnDoctor").next().show();
+        flag = false;
+    } else {
+        $('#updateAddnDoctor').parent().removeClass("has-error");
+        $('#updateAddnDoctor').next().text("");
+        $("#updateAddnDoctor").next().hide();
+    }
+
 
     return flag;
 }

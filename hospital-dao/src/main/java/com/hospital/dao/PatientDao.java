@@ -11,7 +11,7 @@ public interface PatientDao {
 
     List<Patient> getPatientsByDoctor(Doctor doctor);
 
-    Integer[] getAdditionsForLast12Months();
+    Integer[] getAdditionsForLast12Months(Doctor doctor);
 
     Patient getPatient(Patient patient);
 

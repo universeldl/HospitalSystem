@@ -14,6 +14,7 @@ function getPatientInfo(id) {
                 $("#findPlan").val(data.plan.planId);
                 $("#findPatientType").val(data.patientType.patientTypeName);
                 $("#findDoctor").val(data.doctor.name);
+                $("#findAddnDoctor").val(data.addnDoctor.name);
                 if (data.sex == 1)
                     $("#findSex").val("男");
                 else if (data.sex == 0)

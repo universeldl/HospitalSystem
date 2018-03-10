@@ -16,6 +16,23 @@ window.onload = new function () {
             }
         }
     );
+    ajax(
+        {
+            url: "doctor/doctorManageAction_getAllDoctors.action",
+            type: "json",
+            callback: function (data) {
+                // 循环遍历每个医生，每个医生姓名生成一个option对象，添加到<select>中
+                for (var index in data) {
+                    var op = document.createElement("option");//创建一个指名名称元素
+                    op.value = data[index].aid;//设置op的实际值为当前的医生aid
+                    var textNode = document.createTextNode(data[index].name);//创建文本节点--医生姓名
+                    op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
+
+                    document.getElementById("addAddnDoctor").appendChild(op);
+                }
+            }
+        }
+    );
 };
 
 /**
@@ -33,7 +50,7 @@ $(function () {
         var postdata = "openID=" + $.trim($("#addOpenID").val()) + "&name=" + $.trim($("#addName").val())
             + "&phone=" + $.trim($("#addPhone").val()) + "&sex=" + $.trim($("#addPatientSex").val())
             + "&patientType=" + $.trim($("#addpatientType").val()) + "&birthday=" + $.trim($("#datepicker").val())
-            + "&email=" + $.trim($("#addEmail").val());
+            + "&email=" + $.trim($("#addEmail").val())+ "&addnDoctorId=" + $.trim($("#addAddnDoctor").val());
         ajax(
             {
                 method: 'POST',
@@ -43,10 +60,12 @@ $(function () {
                     if (data == 1) {
                         $("#addModal").modal("hide");//关闭模糊框
                         showInfo("添加成功");
-
                     } else if (data == -1) {
                         $("#addModal").modal("hide");//关闭模糊框
-                        showInfo("该病人已存在");
+                        showInfo("添加失败, 该病人已存在");
+                    } else if (data == -2) {
+                        $("#addModal").modal("hide");//关闭模糊框
+                        showInfo("添加失败, 共享医生与直属医生不能相同");
                     } else {
                         $("#addModal").modal("hide");//关闭模糊框
                         showInfo("添加失败");
@@ -171,6 +190,19 @@ function validAddPatient() {
         $('#addpatientType').parent().removeClass("has-error");
         $('#addpatientType').next().text("");
         $("#addpatientType").next().hide();
+    }
+
+
+    var addnDoctor = $.trim($("#addAddnDoctor").val());
+    if (addnDoctor == -1) {
+        $('#addAddnDoctor').parent().addClass("has-error");
+        $('#addAddnDoctor').next().text("请选择共享医生");
+        $("#addAddnDoctor").next().show();
+        flag = false;
+    } else {
+        $('#addAddnDoctor').parent().removeClass("has-error");
+        $('#addAddnDoctor').next().text("");
+        $("#addAddnDoctor").next().hide();
     }
 
     return flag;
