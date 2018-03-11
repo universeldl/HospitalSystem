@@ -236,6 +236,7 @@ public class patientRegisterAction extends ActionSupport {
 
             int survey_id = 0;
             for (Survey survey : surveySet) {
+                if (!survey.isSendOnRegister()) continue;
                 System.out.println("provide survey id = " + survey_id);
                 DeliveryInfo deliveryInfo = new DeliveryInfo();
                 deliveryInfo.setPatient(patient);
@@ -243,6 +244,7 @@ public class patientRegisterAction extends ActionSupport {
                 deliveryInfo.setDoctor(doctor);
                 deliveryInfo.setDeliveryDate(new Date(System.currentTimeMillis()));
                 deliveryInfo.setState(0);
+                deliveryService.addDelivery(deliveryInfo);
                 deliveryService.sendTemplateMessage(deliveryInfo);
             }
             System.out.println("send template message finished");

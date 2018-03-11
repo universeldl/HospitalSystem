@@ -644,6 +644,17 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">用户注册时发送</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="addSendOnRegister">
+                                <option value="-1">请选择</option>
+                                <option value=true>是</option>
+                                <option value=false>否</option>
+                            </select>
+                            <label class="control-label" for="addSendOnRegister" style="display: none;"></label>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">随访周期</label>

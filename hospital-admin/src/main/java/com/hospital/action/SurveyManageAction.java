@@ -82,6 +82,10 @@ public class SurveyManageAction extends ActionSupport {
     /**
      * @param fileName the fileName to set
      */
+    public void setSendOnRegister(boolean sendOnRegister) {
+        this.sendOnRegister = sendOnRegister;
+    }
+
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
@@ -251,6 +255,7 @@ public class SurveyManageAction extends ActionSupport {
      * @return
      */
     public String addSurvey() {
+        System.out.println("add survey sendOnRegister = " + sendOnRegister);
         SurveyType surveyType = new SurveyType();
         surveyType.setTypeId(surveyTypeId);
         Date putdate = new Date(System.currentTimeMillis());//得到当前时间,作为生成时间
@@ -338,6 +343,8 @@ public class SurveyManageAction extends ActionSupport {
      * @return
      */
     public String getSurvey() {
+        System.out.println("getSurvey start");
+
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
         Survey survey = new Survey();
@@ -345,14 +352,19 @@ public class SurveyManageAction extends ActionSupport {
         Survey newSurvey = surveyService.getSurveyById(survey);//得到问卷
 
         JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
-                return obj instanceof Authorization || name.equals("authorization");
+                return obj instanceof Authorization || name.equals("authorization")
+                        || name.equals("questions") || name.equals("retrieveInfos");
             }
         });
 
+        System.out.println("getSurvey json start");
 
         JSONObject jsonObject = JSONObject.fromObject(newSurvey, jsonConfig);
+        System.out.println("getSurvey json = " + jsonObject.toString());
         try {
             response.getWriter().print(jsonObject);
         } catch (IOException e) {
@@ -492,6 +504,8 @@ public class SurveyManageAction extends ActionSupport {
      * @return
      */
     public String updateSurvey() {
+        System.out.println("update survey sendOnRegister = " + sendOnRegister);
+
         Survey survey = new Survey();
         survey.setSurveyId(surveyId);
         Survey updateSurvey = surveyService.getSurveyById(survey);//得到修改的问卷信息
