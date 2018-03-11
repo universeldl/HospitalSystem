@@ -11,6 +11,7 @@ $(function () {
         var postdata = "surveyId=" + surveyId + "&surveyName=" + $.trim($("#updateSurveyName").val()) + "&surveyTypeId=" + $.trim($("#updateSurveyType").val())
             + "&frequency=" + $.trim($("#updateFrequency").val()) + "&author=" + $.trim($("#updateAuthor").val())
             + "&times=" + $.trim($("#updateTimes").val()) + "&department=" + $.trim($("#updateDepartment").val())
+            + "&sendOnRegister=" + $.trim($("#updateSendOnRegister").val())
             + "&description=" + $.trim($("#updateDescription").val());
         ajax(
             {
@@ -102,6 +103,17 @@ function validUpdateSurvey() {
         $("#updateSurveyName").next().hide();
     }
 
+    var surveySendOnRegister = $.trim($("#updateSendOnRegister").val());
+    if (surveySendOnRegister == -1) {
+        $('#updateSendOnRegister').parent().addClass("has-error");
+        $('#updateSendOnRegister').next().text("请选择是否用户注册时立即发送问卷");
+        $("#updateSendOnRegister").next().show();
+        flag = false;
+    } else {
+        $('#updateSendOnRegister').parent().removeClass("has-error");
+        $('#updateSendOnRegister').next().text("");
+        $("#updateSendOnRegister").next().hide();
+    }
 
     var surveyFreq = $.trim($("#updateFrequency").val());
     if (surveyFreq == -1) {

@@ -21,8 +21,17 @@ public class Survey implements Serializable {
     private Doctor doctor;    //操作医生
     private Integer frequency;    //随访频率
     private Integer times;    //随访次数
+    private boolean sendOnRegister;
     private Set<Question> questions = new HashSet<>();
     private Set<RetrieveInfo> retrieveInfos = new HashSet<>();
+
+    public void setSendOnRegister(boolean sendOnRegister) {
+        this.sendOnRegister = sendOnRegister;
+    }
+
+    public boolean isSendOnRegister() {
+        return sendOnRegister;
+    }
 
     public Integer getSurveyId() {
         return surveyId;
@@ -154,7 +163,7 @@ public class Survey implements Serializable {
 
     public Survey(SurveyType surveyType, String surveyName, String author,
                   String department, Date putdate, String description,
-                  Doctor doctor, Integer frequency, Integer times) {
+                  Doctor doctor, Integer frequency, Integer times, boolean sendOnRegister) {
         super();
         this.surveyType = surveyType;
         this.surveyName = surveyName;
@@ -165,6 +174,7 @@ public class Survey implements Serializable {
         this.doctor = doctor;
         this.frequency = frequency;
         this.times = times;
+        this.sendOnRegister = sendOnRegister;
     }
 
     public Survey(SurveyType surveyType, String surveyName, String author,

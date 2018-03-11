@@ -124,7 +124,7 @@ public class SurveyServiceImpl implements SurveyService {
     public JSONObject batchAddSurvey(String fileName, Doctor doctor) {
         List<Survey> surveys = new ArrayList<Survey>();
         List<Survey> failSurveys = new ArrayList<Survey>();
-        String str[] = new String[]{"问卷编号", "问卷类型", "问卷名称", "作者名称", "科室", "价格", "数量", "描述"};
+        String str[] = new String[]{"问卷编号", "问卷类型", "问卷名称", "作者名称", "科室", "价格", "数量", "描述", "用户注册时发送"};
         // TODO Auto-generated method stub
         String realPath = ServletActionContext.getServletContext().getRealPath(fileName);
         //创建workbook
@@ -166,6 +166,8 @@ public class SurveyServiceImpl implements SurveyService {
                 String publish = sheet.getCell(3, i).getContents().trim();
                 String num = sheet.getCell(4, i).getContents().trim();
                 String description = sheet.getCell(5, i).getContents().trim();
+                String sendOnRegister = sheet.getCell(6, i).getContents().trim();
+
                 if ("".equals(type) && "".equals(surveyName) && "".equals(author) && "".equals(publish) && "".equals(num) && "".equals(description)) {
                     //说明这条数据是空的
                     continue;
@@ -196,6 +198,12 @@ public class SurveyServiceImpl implements SurveyService {
                     continue;
                 }
 
+
+                if (sendOnRegister.equals("是")) {
+                    survey.setSendOnRegister(true);
+                } else {
+                    survey.setSendOnRegister(false);
+                }
 
                 if ("".equals(surveyName) || "".equals(type)) {
                     //要是前2列有一列没有数据，说明这条数据是非法的
@@ -253,7 +261,7 @@ public class SurveyServiceImpl implements SurveyService {
      */
     public String exportExcel(List<Survey> failSurveys) {
         //用数组存储表头
-        String[] title = {"问卷类型", "问卷名称", "作者名称", "科室", "数量", "描述"};
+        String[] title = {"问卷类型", "问卷名称", "作者名称", "科室", "数量", "描述", "用户注册时发送"};
         String path = ServletActionContext.getServletContext().getRealPath("/download");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         Calendar cal = Calendar.getInstance();
@@ -298,6 +306,8 @@ public class SurveyServiceImpl implements SurveyService {
                 }
                 label = new Label(5, i, failSurveys.get(i - 1).getDescription());
                 sheet.addCell(label);
+                label = new Label(9, i, (failSurveys.get(i - 1).isSendOnRegister()?"是":"否"));
+                sheet.addCell(label);
             }
             //写入数据
             workbook.write();
@@ -328,7 +338,7 @@ public class SurveyServiceImpl implements SurveyService {
      */
     public String exportSurveyExcel(List<Survey> surveys) {
         //用数组存储表头
-        String[] title = {"问卷类型", "问卷名称", "作者名称", "科室", "数量", "总回收数", "生成时间", "操作医生", "描述"};
+        String[] title = {"问卷类型", "问卷名称", "作者名称", "科室", "数量", "总回收数", "生成时间", "操作医生", "描述", "用户注册时发送"};
         String path = ServletActionContext.getServletContext().getRealPath("/download");
         String fileName = +System.currentTimeMillis() + "_allSurveys.xls";
         //创建Excel文件
@@ -367,7 +377,8 @@ public class SurveyServiceImpl implements SurveyService {
                 sheet.addCell(label);
                 label = new Label(8, i, surveys.get(i - 1).getDescription());
                 sheet.addCell(label);
-
+                label = new Label(9, i, (surveys.get(i - 1).isSendOnRegister()?"是":"否"));
+                sheet.addCell(label);
             }
             //写入数据
             workbook.write();

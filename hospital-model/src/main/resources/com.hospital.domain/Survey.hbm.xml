@@ -43,6 +43,10 @@
             <column name="putdate"/>
         </property>
 
+        <property name="sendOnRegister" type="java.lang.Boolean">
+            <column name="sendOnRegister"/>
+        </property>
+
 
         <set name="questions" lazy="false" inverse="true" order-by="questionId asc">
             <key>
