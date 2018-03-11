@@ -49,6 +49,17 @@ public class RetrieveServiceImpl implements RetrieveService {
     }
 
     @Override
+    public RetrieveInfo updateRetrieveInfo(RetrieveInfo retrieveInfo) {
+        // TODO Auto-generated method stub
+        return retrieveDao.updateRetrieveInfo(retrieveInfo);
+    }
+
+    @Override
+    public boolean deleteRetrieveInfo(RetrieveInfo retrieveInfo) {
+        return retrieveDao.deleteRetrieveInfo(retrieveInfo);
+    }
+
+    @Override
     public PageBean<RetrieveInfo> queryRetrieveInfo(String openID, int deliveryId, int pageCode, int pageSize) {
         PageBean<RetrieveInfo> pageBean = new PageBean<RetrieveInfo>();
         pageBean.setPageCode(pageCode);

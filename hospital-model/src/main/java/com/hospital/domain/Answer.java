@@ -8,10 +8,12 @@ public class Answer {
     //private int choiceId;
     //private int questionId;
     //private int surveyId;
+    private int lastModified; //0-by patient, 1-by doctor, 2-by addnDoctor
     private Survey survey;    //分发问卷
     private Patient patient;    //分发病人
     private Doctor doctor;    //操作员
     private String textChoiceContent;
+    private int textChoice;
     //private int aid;
     private RetrieveInfo retrieveInfo;
     private Question question;
@@ -71,6 +73,22 @@ public class Answer {
 
     public void setAnswerId(int answerId) {
         this.answerId = answerId;
+    }
+
+    public int getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(int lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public int getTextChoice() {
+        return textChoice;
+    }
+
+    public void setTextChoice(int textChoice) {
+        this.textChoice = textChoice;
     }
 
 /*    public int getChoiceId() {

@@ -41,6 +41,12 @@
         <property name="patientService">
             <ref bean="patientService"/>
         </property>
+        <property name="answerService">
+            <ref bean="answerService"/>
+        </property>
+        <property name="choiceService">
+            <ref bean="choiceService"/>
+        </property>
     </bean>
 
 </beans>

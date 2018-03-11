@@ -38,6 +38,7 @@
     <script src="${pageContext.request.contextPath}/js/doctorUpdatePwd.js"></script>
 
     <!-- add specific js in here -->
+    <script src="${pageContext.request.contextPath}/js/updateAnswer.js"></script>
     <script src="${pageContext.request.contextPath}/js/getRetrieveInfo.js"></script>
     <script src="${pageContext.request.contextPath}/js/getAnswerSheetInfo.js"></script>
     <script src="${pageContext.request.contextPath}/js/retrieveSurvey.js"></script>
@@ -157,11 +158,26 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
-                                            <div class="text-muted bootstrap-admin-box-title"><s:property
-                                                    value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(多选题)
+                                            <div class="text-muted bootstrap-admin-box-title"
+                                                 <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
+                                                 <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
+                                                <s:property
+                                                        value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(多选题)
+                                                <s:if test="#answer.lastModified==1"> (最后修改人： 直属医生 <s:property
+                                                        value="#answer.patient.doctor.name"/>)</s:if>
+                                                <s:elseif test="#answer.lastModified==2"> (最后修改人： 共享医生 <s:property
+                                                        value="#answer.patient.addnDoctor.name"/>)</s:elseif>
+                                                <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
+                                                        data-target="#updateAnswerModal"
+                                                        style="float:right;color:white;"
+                                                        onclick="updateAnswerById(<s:property
+                                                                value="#answer.answerId"/>)">修改
+                                                </button>
                                             </div>
                                         </div>
-                                        <div class="bootstrap-admin-panel-content">
+                                        <div class="bootstrap-admin-panel-content"
+                                             <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
+                                             <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
                                             <s:iterator value="#answer.question.choices" var="choice"
                                                         status="choiceIdx">
                                                 <ul>
@@ -176,8 +192,10 @@
                                                             <input type="checkbox"
                                                                    name='question<s:property value="#question.questionId"/>'
                                                                    id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
-                                                                   value='<s:property value="#choice.choiceId"/>'><s:property
-                                                                value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
+                                                                   value='<s:property value="#choice.choiceId"/>'
+                                                                   checked="checked" disabled="disabled">
+                                                            <s:property
+                                                                    value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
                                                         </div>
                                                     </s:if>
                                                     <s:else>
@@ -186,26 +204,27 @@
                                                                    name='question<s:property value="#question.questionId"/>'
                                                                    id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
                                                                    value='<s:property value="#choice.choiceId"/>'
-                                                                   style="color:green;"><s:property
-                                                                value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
+                                                                   disabled="disabled">
+                                                            <s:property
+                                                                    value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
                                                         </div>
                                                     </s:else>
                                                 </ul>
                                             </s:iterator>
-                                            <s:if test="#question.textChoice==1">
+                                            <s:if test="#answer.question.textChoice==1">
                                                 <ul>
                                                     <div>
                                                         <input type="checkbox"
                                                                name='question<s:property value="#question.questionId"/>'
                                                                id='textChoice<s:property value="#answer.question.choices.size+1" />'
-                                                        ><s:property value="#answer.question.choices.size+1"/>.
-                                                        自定义内容是：<s:property
-                                                            value="#answer.textChoiceContent"/>
+                                                               disabled="disabled" <s:if test="#answer.textChoice==1"> checked="checked" </s:if> >
+                                                        <s:property value="#answer.question.choices.size+1"/>.
+                                                        其它：
                                                     </div>
                                                     <div>
-                                                <textarea class="form-control" rows="3"
-                                                          id="updateQuestionContent">内容：<s:property
-                                                        value="#answer.textChoiceContent"/></textarea>
+                                                    <textarea class="form-control" rows="3" id="updateQuestionContent"
+                                                              disabled="disabled"><s:property value="#answer.textChoiceContent"/>
+                                                    </textarea>
 
                                                     </div>
                                                 </ul>
@@ -219,11 +238,26 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
-                                            <div class="text-muted bootstrap-admin-box-title"><s:property
-                                                    value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(单选题)
+                                            <div class="text-muted bootstrap-admin-box-title"
+                                                 <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
+                                                 <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
+                                                <s:property
+                                                        value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(单选题)
+                                                <s:if test="#answer.lastModified==1"> (最后修改人： 直属医生 <s:property
+                                                        value="#answer.patient.doctor.name"/>)</s:if>
+                                                <s:elseif test="#answer.lastModified==2"> (最后修改人： 共享医生 <s:property
+                                                        value="#answer.patient.addnDoctor.name"/>)</s:elseif>
+                                                <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
+                                                        data-target="#updateAnswerModal"
+                                                        style="float:right;color:white;"
+                                                        onclick="updateAnswerById(<s:property
+                                                                value="#answer.answerId"/>)">修改
+                                                </button>
                                             </div>
                                         </div>
-                                        <div class="bootstrap-admin-panel-content">
+                                        <div class="bootstrap-admin-panel-content"
+                                             <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
+                                             <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
                                             <s:iterator value="#answer.question.choices" var="choice"
                                                         status="choiceIdx">
                                                 <ul>
@@ -239,8 +273,10 @@
                                                                 <input type="radio"
                                                                        name='question<s:property value="#question.questionId"/>'
                                                                        id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
-                                                                       value='<s:property value="#choice.choiceId"/>'><s:property
-                                                                    value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
+                                                                       value='<s:property value="#choice.choiceId"/>'
+                                                                       checked="checked" disabled="disabled">
+                                                                <s:property
+                                                                        value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
                                                             </label>
                                                         </div>
                                                     </s:if>
@@ -251,28 +287,28 @@
                                                                        name='question<s:property value="#question.questionId"/>'
                                                                        id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
                                                                        value='<s:property value="#choice.choiceId"/>'
-                                                                       style="color:green;"><s:property
-                                                                    value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
+                                                                       disabled="disabled">
+                                                                <s:property
+                                                                        value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
                                                             </label>
                                                         </div>
                                                     </s:else>
                                                 </ul>
                                             </s:iterator>
-                                            <s:if test="#question.textChoice==1">
+                                            <s:if test="#answer.question.textChoice==1">
                                                 <ul>
                                                     <div>
                                                         <input type="radio"
                                                                name='question<s:property value="#question.questionId"/>'
                                                                id='textChoice<s:property value="#answer.question.choices.size+1" />'
-                                                        ><s:property value="#answer.question.choices.size+1"/>.
-                                                        自定义内容是：<s:property
-                                                            value="#answer.textChoiceContent"/>
+                                                               disabled="disabled" <s:if test="#answer.textChoice==1"> checked="checked" </s:if> >
+                                                        <s:property value="#answer.question.choices.size+1"/>.
+                                                        其它：
                                                     </div>
                                                     <div>
-                                                <textarea class="form-control" rows="3"
-                                                          id="updateQuestionContent4">内容：<s:property
-                                                        value="#answer.textChoiceContent"/></textarea>
-
+                                                    <textarea class="form-control" rows="3" id="updateQuestionContent4"
+                                                              disabled="disabled"><s:property value="#answer.textChoiceContent"/>
+                                                    </textarea>
                                                     </div>
                                                 </ul>
                                             </s:if>
@@ -285,14 +321,29 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
-                                            <div class="text-muted bootstrap-admin-box-title"><s:property
-                                                    value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(问答题)
+                                            <div class="text-muted bootstrap-admin-box-title"
+                                                 <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
+                                                 <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
+                                                <s:property
+                                                        value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(问答题)
+                                                <s:if test="#answer.lastModified==1"> (最后修改人： 直属医生 <s:property
+                                                        value="#answer.patient.doctor.name"/>)</s:if>
+                                                <s:elseif test="#answer.lastModified==2"> (最后修改人： 共享医生 <s:property
+                                                        value="#answer.patient.addnDoctor.name"/>)</s:elseif>
+                                                <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
+                                                        data-target="#updateAnswerModal"
+                                                        style="float:right;color:white;"
+                                                        onclick="updateAnswerById(<s:property
+                                                                value="#answer.answerId"/>)">修改
+                                                </button>
                                             </div>
                                         </div>
-                                        <div class="bootstrap-admin-panel-content">
+                                        <div class="bootstrap-admin-panel-content"
+                                             <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
+                                             <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
                                             <div>
                                                 <textarea class="form-control" rows="3"
-                                                          id="updateQuestionContent3"></textarea>
+                                                          id="updateQuestionContent3" disabled="disabled"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -322,10 +373,9 @@
 <!-- ./wrapper -->
 
 
-<!--------------------------------------查看答卷的模糊框------------------------>
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="findAnswerSheetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<!--------------------------------------修改答案的模糊框------------------------>
+<form id="updateForm" class="form-horizontal">   <!--保证样式水平不混乱-->
+    <div class="modal fade" id="updateAnswerModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -333,54 +383,23 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        查看答卷信息
+                    <h4 class="modal-title" id="updateModalLabel">
+                        修改答案信息
                     </h4>
                 </div>
                 <div class="modal-body">
-
-                    <!---------------------表单-------------------->
-
-                    <% int i = 1; %>
-                    <s:iterator value="#request.myAnswers" var="answer">
-
-                        <div class="form-group">
-                            <label for="firstname" class="col-lg-3 control-label"></label>
-                            <div class="col-lg-7">
-                                <p class="text-left"><b><%=i%>. ${answer.question.questionContent}.</b></p>
-                            </div>
-                        </div>
-                        <s:iterator value="#answer.question.choices" var="choice">
-                            <div class="form-group">
-                                <label for="firstname" class="col-lg-3 control-label"></label>
-                                <div class="form-group" class="col-lg-7  col-lg-offset-3">
-                                    <label>
-                                        <ul>
-                                            <s:set var="flag" value="true"></s:set>
-                                            <s:iterator value="#answer.choices" var="cho">
-                                                <s:if test="#cho.choiceId == #choice.choiceId">
-                                                    <s:set var="flag" value="false"></s:set>
-                                                </s:if>
-                                            </s:iterator>
-                                            <s:if test="#flag == false">
-                                                <li>${choice.choiceContent}.</li>
-                                            </s:if>
-                                            <s:else>
-                                                <li style="color:green;">${choice.choiceContent}.</li>
-                                            </s:else>
-                                        </ul>
-                                    </label>
-                                </div>
-                            </div>
-                        </s:iterator>
-
-                        <% i++; %>
-                    </s:iterator>
-
-                    <!---------------------表单-------------------->
+                    <div class="form-group">
+                        <p id="updateAnsChos">请选择：</p>
+                        <ul>
+                            <div id="updateChoicesDiv"></div>
+                        </ul>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="update_answer">
+                        修改
                     </button>
                 </div>
             </div><!-- /.modal-content -->
@@ -388,111 +407,7 @@
     </div>
 
 </form>
-<!--------------------------------------查看答卷的模糊框------------------------>
-
-
-<!--------------------------------------查看详细的模糊框------------------------>
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="findRetrieveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        查看答卷信息
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <!---------------------表单-------------------->
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">分发编号</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="deliveryId" readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">分发问卷名称</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="surveyName" readonly="readonly">
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">分发问卷类型</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="surveyType" readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">病人用户名</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="openID" readonly="readonly">
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">病人名称</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="patientName" readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">病人类型</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="patientType" readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">逾期天数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="overday" readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">操作医生</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="doctor" readonly="readonly">
-
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">答卷状态</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="state" readonly="readonly">
-
-                        </div>
-                    </div>
-
-
-                    <!---------------------表单-------------------->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-</form>
-<!--------------------------------------查看详细的模糊框------------------------>
+<!-------------------------------------------------------------->
 
 
 <!------------------------------修改密码模糊框-------------------------------->

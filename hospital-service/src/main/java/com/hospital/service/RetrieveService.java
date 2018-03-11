@@ -15,6 +15,10 @@ public interface RetrieveService {
 
     Set<Answer> getAnswerByDeliveryId(RetrieveInfo retrieveInfo);
 
+    RetrieveInfo updateRetrieveInfo(RetrieveInfo retrieveInfo);
+
+    boolean deleteRetrieveInfo(RetrieveInfo retrieveInfo);
+
     PageBean<RetrieveInfo> queryRetrieveInfo(String openID, int deliveryId, int pageCode, int pageSize);
 
     int addRetrieveInfo(RetrieveInfo retrieveInfo);

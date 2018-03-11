@@ -1,9 +1,7 @@
 package com.hospital.action;
 
 import com.hospital.domain.*;
-import com.hospital.service.DeliveryService;
-import com.hospital.service.PatientService;
-import com.hospital.service.RetrieveService;
+import com.hospital.service.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONObject;
@@ -12,16 +10,18 @@ import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class RetrieveManageAction extends ActionSupport {
 
     private RetrieveService retrieveService;
     private DeliveryService deliveryService;
     private PatientService patientService;
+    private AnswerService answerService;
+    private ChoiceService choiceService;
 
     public void setRetrieveService(RetrieveService retrieveService) {
         this.retrieveService = retrieveService;
@@ -35,10 +35,19 @@ public class RetrieveManageAction extends ActionSupport {
         this.patientService = patientService;
     }
 
+    public void setAnswerService(AnswerService answerService) {
+        this.answerService = answerService;
+    }
+
+    public void setChoiceService(ChoiceService choiceService) {
+        this.choiceService = choiceService;
+    }
+
     private int pageCode;
     private Set<Answer> myAnswers;
 
     private int deliveryId;
+    private int answerId;
     private int patientId;
     private int surveyId;
     private String openID;
@@ -53,6 +62,10 @@ public class RetrieveManageAction extends ActionSupport {
 
     public void setSurveyId(int surveyId) {
         this.surveyId = surveyId;
+    }
+
+    public void setAnswerId(int answerId) {
+        this.answerId = answerId;
     }
 
     public void setDeliveryId(int deliveryId) {
@@ -83,6 +96,172 @@ public class RetrieveManageAction extends ActionSupport {
         //存入request域中
         ServletActionContext.getRequest().setAttribute("pb", pb);
         return "success";
+    }
+
+
+    /**
+     * 获取答案
+     *
+     * @return
+     */
+    public String getAnswerById() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+        Answer answer = new Answer();
+        answer.setAnswerId(answerId);
+        Answer newAnswer = answerService.getAnswerById(answer);
+
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+
+        JSONObject jsonObject = JSONObject.fromObject(newAnswer, jsonConfig);
+        try {
+            response.getWriter().print(jsonObject);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * 修改答案
+     *
+     * @return
+     */
+    public String updateAnswer() {
+        Answer answer = new Answer();
+        answer.setAnswerId(answerId);
+        Answer updateAnswer = answerService.getAnswerById(answer);
+
+        updateAnswer.getChoices().clear();    //clean existing choices in answer
+
+        List<Integer> choices = new ArrayList<>();
+        ActionContext ctx = ActionContext.getContext();
+        HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+        Map<String, String[]> pMap = request.getParameterMap();
+
+        if (updateAnswer.getQuestion().getQuestionType() == 1) {  //多选
+            int idx = 1;
+            if (pMap.size() == 2) {
+                for (String[] value : pMap.values()) {
+                    if (idx == 2) {
+                        for (int i = 0; i < value.length; i++) {
+                            choices.add(Integer.parseInt(value[i]));
+                        }
+                    }
+                    idx++;
+                }
+            } else if (pMap.size() == 3) {
+                boolean hasText = false;
+                for (String[] value : pMap.values()) {
+                    if (idx == 2) {
+                        if (value[value.length - 1].equals("99999")) {
+                            hasText = true;
+                            for (int i = 0; i < value.length - 1; i++) {
+                                choices.add(Integer.parseInt(value[i]));
+                            }
+                        } else {
+                            for (int i = 0; i < value.length; i++) {
+                                choices.add(Integer.parseInt(value[i]));
+                            }
+                        }
+                    } else if (idx == 3) {
+                        if (hasText) {
+                            updateAnswer.setTextChoice(1);
+                            updateAnswer.setTextChoiceContent(value[0]);
+                        } else {
+                            updateAnswer.setTextChoice(0);
+                            updateAnswer.setTextChoiceContent("");
+                        }
+                    }
+                    idx++;
+                }
+            }
+
+            for (int i = 0; i < choices.size(); i++) {  //add new choices to db and question
+                Choice choice = new Choice();
+                choice.setChoiceId(choices.get(i));
+                Choice cho = choiceService.getChoiceById(choice);
+                updateAnswer.getChoices().add(cho);
+            }
+
+        } else if (updateAnswer.getQuestion().getQuestionType() == 2) {  //单选
+            int idx = 1;
+            if (pMap.size() == 2) {
+                for (String[] value : pMap.values()) {
+                    if (idx == 2) {
+                        Choice choice = new Choice();
+                        choice.setChoiceId(Integer.parseInt(value[0]));
+                        Choice cho = choiceService.getChoiceById(choice);
+                        updateAnswer.getChoices().add(cho);
+                    }
+                    idx++;
+                }
+            } else if (pMap.size() == 3) {
+                boolean hasText = false;
+                for (String[] value : pMap.values()) {
+                    if (idx == 2) {
+                        if (value[0].equals("99999")) {
+                            hasText = true;
+                        } else {
+                            Choice choice = new Choice();
+                            choice.setChoiceId(Integer.parseInt(value[0]));
+                            Choice cho = choiceService.getChoiceById(choice);
+                            updateAnswer.getChoices().add(cho);
+                        }
+                    } else if (idx == 3) {
+                        if (hasText) {
+                            updateAnswer.setTextChoice(1);
+                            updateAnswer.setTextChoiceContent(value[0]);
+                        } else {
+                            updateAnswer.setTextChoice(0);
+                            updateAnswer.setTextChoiceContent("");
+                        }
+                    }
+                    idx++;
+                }
+            }
+
+        } else if (updateAnswer.getQuestion().getQuestionType() == 3) {  //问答
+            if (pMap.size() == 2) {
+                for (String[] value : pMap.values()) {
+                    updateAnswer.setTextChoice(1);
+                    updateAnswer.setTextChoiceContent(value[0]);
+                }
+            }
+        }
+
+        Answer newAnswer = answerService.updateAnswerInfo(updateAnswer);  //update question
+        RetrieveInfo ri = retrieveService.getRetrieveInfoById(newAnswer.getRetrieveInfo());
+        RetrieveInfo retrieveInfo = ri;
+        //Set<Answer> answers = retrieveInfo.getAnswers();
+        //Set<Answer> answerSet = answers;
+        //for(Answer ans : answerSet) {
+        //    if(ans.getAnswerId() == newAnswer.getAnswerId()) {
+        //        answerSet.remove(ans);
+        //        break;
+        //    }
+        //}
+        //answerSet.add(newAnswer);
+        ////retrieveService.deleteRetrieveInfo(ri);
+        ////int b = retrieveService.addRetrieveInfo(retrieveInfo);
+        //retrieveInfo.getAnswers().clear();
+        //retrieveInfo.setAnswers(answerSet);
+        RetrieveInfo RI = retrieveService.updateRetrieveInfo(retrieveInfo);
+
+        int success = 0;
+        if (newAnswer != null && RI!=null) {
+            success = 1;
+        } else {
+            success = 0;
+        }
+        try {
+            ServletActionContext.getResponse().getWriter().print(success);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
     }
 
 
@@ -143,7 +322,7 @@ public class RetrieveManageAction extends ActionSupport {
             pb.setUrl("queryRetrieveInfo.action?openID=" + openID + "&deliveryId=" + deliveryId + "&");
         }
 
-        if(deliveryId != 0) {
+        if (deliveryId != 0) {
             RetrieveInfo retrieveInfo = new RetrieveInfo();
             retrieveInfo.setDeliveryId(deliveryId);
             RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);

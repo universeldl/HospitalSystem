@@ -206,6 +206,7 @@ public class surveyAction extends ActionSupport {
                 answer.setQuestion(question);
                 answer.setChoices(choiceset);
                 if (pMap.containsKey("textquestion"+questionid)) {
+                    answer.setTextChoice(1);
                     answer.setTextChoiceContent(pMap.get("textquestion"+questionid)[0]);
                 }
                 if (answerService.addAnswer(answer)) {

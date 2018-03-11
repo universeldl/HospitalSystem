@@ -172,8 +172,10 @@ CREATE TABLE `Answer` (
   `questionId` int(11) NOT NULL,
   `surveyId` int(11) NOT NULL,
   `patientId` varchar(255) NOT NULL,
+  `textChoice` int(1) DEFAULT 0,
   `textChoiceContent` varchar(255) DEFAULT NULL,
   #`choiceContent` varchar(255) NOT NULL,
+  `lastModified` int(1) NOT NULL DEFAULT 0,/*0-by patient, 1-by doctor, 2-by addnDoctor*/
   `aid` int(11) NOT NULL,
   PRIMARY KEY (`answerId`),
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`),
@@ -268,16 +270,16 @@ INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,
 INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,6);
 INSERT INTO deliveryInfo VALUES(7,"2018-02-02 00:00:00","2018-02-04 00:00:00",30,1,3,2,6);
 
-INSERT INTO Question VALUES(1,1,0,"第一个问题",1,6);
-INSERT INTO Question VALUES(2,1,0,"2nd question",2,6);
-INSERT INTO Question VALUES(3,1,0,"text question",1,6);
-INSERT INTO Question VALUES(4,2,0,"text question",1,6);
+INSERT INTO Question VALUES(1,1,1,"第一个问题",1,6);
+INSERT INTO Question VALUES(2,1,1,"2nd question",2,6);
+INSERT INTO Question VALUES(3,1,1,"text question",1,6);
+INSERT INTO Question VALUES(4,2,1,"text question",1,6);
 
-INSERT INTO Answer VALUES(1,1,1,1,1,"",6);
-INSERT INTO Answer VALUES(2,1,3,1,1,"",6);
-INSERT INTO Answer VALUES(3,1,2,1,1,"",6);
-INSERT INTO Answer VALUES(4,4,2,2,1,"",6);
-INSERT INTO Answer VALUES(5,5,2,2,2,"",6);
+INSERT INTO Answer VALUES(1,1,1,1,1,0,"",0,6);
+INSERT INTO Answer VALUES(2,2,3,1,1,1,"some text",1,6);
+INSERT INTO Answer VALUES(3,3,2,1,1,1,"dfjkldfjskljdfklkdljfskldf",2,6);
+INSERT INTO Answer VALUES(4,4,2,2,1,0,"",2,6);
+INSERT INTO Answer VALUES(5,5,2,2,2,1,"sdfskljfalsdjfklsjkf haha",2,6);
 
 INSERT INTO Choice VALUES(1,1,1,1,"choice_1",6);
 INSERT INTO Choice VALUES(2,1,1,2,"choice_2",6);

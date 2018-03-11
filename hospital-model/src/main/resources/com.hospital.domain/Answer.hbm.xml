@@ -26,13 +26,21 @@
                   <column name="aid"/>
               </property> -->
 
+        <property name="textChoice" type="java.lang.Integer">
+            <column name="textChoice"/>
+        </property>
+
+        <property name="lastModified" type="java.lang.Integer">
+            <column name="lastModified" default="0"/>
+        </property>
+
         <property name="textChoiceContent" type="java.lang.String">
             <column name="textChoiceContent"/>
         </property>
         <many-to-one name="question" class="com.hospital.domain.Question" lazy="false" column="questionId"
                      unique="true"></many-to-one> <!-- 唯一外键关联到Question -->
 
-        <many-to-one name="retrieveInfo" class="com.hospital.domain.RetrieveInfo" lazy="false">
+        <many-to-one name="retrieveInfo" class="com.hospital.domain.RetrieveInfo" cascade="save-update" lazy="false">
             <column name="deliveryId"></column>
         </many-to-one>
 
@@ -48,7 +56,7 @@
             <column name="aid"></column>
         </many-to-one>
 
-        <set name="choices" lazy="false" inverse="true" order-by="choiceId asc">
+        <set name="choices" lazy="false" inverse="true" cascade="save-update" order-by="choiceId asc">
             <key>
                 <column name="answerId"></column>
             </key>
