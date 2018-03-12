@@ -11,7 +11,6 @@ function updateAnswerById(ansId) {
             params: "answerId=" + answerId,
             type: "json",
             callback: function (data) {
-                $("#updateQuestionContent").val(data.questionContent);
 
                 var str = '';
                 //$("#updateChoicesDiv").next().each(function () {//clean first

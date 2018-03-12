@@ -189,8 +189,8 @@ CREATE TABLE `Answer` (
 
 CREATE TABLE `Choice` (
   `choiceId` int(11) NOT NULL AUTO_INCREMENT,
-  `answerId` int(11) NOT NULL DEFAULT 0,
-  `questionId` int(11) NOT NULL DEFAULT 0,
+  `answerId` int(11) DEFAULT 0,
+  `questionId` int(11) DEFAULT 0,
   `score` int(11) NOT NULL,
   `choiceContent` varchar(255) NOT NULL,
   `aid` int(11) NOT NULL,
@@ -272,10 +272,10 @@ INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,
 INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,6);
 INSERT INTO deliveryInfo VALUES(7,"2018-02-02 00:00:00","2018-02-04 00:00:00",30,1,3,2,6);
 
-INSERT INTO Question VALUES(1,1,0,"第一个问题",1,6,0,3);
-INSERT INTO Question VALUES(2,1,0,"2nd question",2,6,3,5);
-INSERT INTO Question VALUES(3,1,0,"text question",1,6,-1,-1);
-INSERT INTO Question VALUES(4,2,0,"text question",1,6,-1,-1);
+INSERT INTO Question VALUES(1,1,1,"第一个问题",1,6,0,3);
+INSERT INTO Question VALUES(2,1,1,"2nd question",2,6,3,5);
+INSERT INTO Question VALUES(3,1,1,"text question",1,6,-1,-1);
+INSERT INTO Question VALUES(4,2,1,"text question",1,6,-1,-1);
 
 INSERT INTO Answer VALUES(1,1,1,1,1,0,"",0,6);
 INSERT INTO Answer VALUES(2,2,3,1,1,1,"some text",1,6);
@@ -285,7 +285,7 @@ INSERT INTO Answer VALUES(5,5,2,2,2,1,"sdfskljfalsdjfklsjkf haha",2,6);
 
 INSERT INTO Choice VALUES(1,1,1,1,"choice_1",6);
 INSERT INTO Choice VALUES(2,1,1,2,"choice_2",6);
-INSERT INTO Choice VALUES(3,2,3,3,"choice_3",6);
+INSERT INTO Choice VALUES(3,2,2,3,"choice_3",6);
 INSERT INTO Choice VALUES(4,2,2,4,"choice_4",6);
 INSERT INTO Choice VALUES(5,3,2,5,"choice_5",6);
 INSERT INTO Choice VALUES(6,4,2,6,"choice_6",6);

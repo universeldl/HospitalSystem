@@ -391,19 +391,9 @@ public class SurveyManageAction extends ActionSupport {
         Question question = new Question();
         question.setQuestionId(questionId);
         Question newQuestion = questionService.getQuestionById(question);//得到问题
-        //ActionContext actionContext = ActionContext.getContext();
-        //actionContext.put("currentQuestion", newQuestion);
-        //ServletActionContext.getRequest().setAttribute("currentQuestion", newQuestion);
-        //ServletActionContext.getContext().getSession().put("currentQuestion", newQuestion);
 
         JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
-            public boolean apply(Object obj, String name, Object value) {
-                return obj instanceof Authorization || name.equals("authorization");
-            }
-        });
-
-
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
         JSONObject jsonObject = JSONObject.fromObject(newQuestion, jsonConfig);
         try {
             response.getWriter().print(jsonObject);
@@ -432,6 +422,7 @@ public class SurveyManageAction extends ActionSupport {
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
 
         for (Choice choice : updateQuestion.getChoices()) {  //clean existing choices in db
+            choice.setQuestion(null);
             choiceService.deleteChoice(choice);
         }
         updateQuestion.getChoices().clear();    //clean existing choices in question
@@ -458,6 +449,7 @@ public class SurveyManageAction extends ActionSupport {
 
             for (int i = 0; i < choices.size(); i++) {  //add new choices to db and question
                 Choice choice = new Choice(doctor.getAid(), choices.get(i), scores.get(i));
+                choice.setQuestion(updateQuestion);
                 updateQuestion.getChoices().add(choice);
                 choiceService.addChoice(choice);
             }

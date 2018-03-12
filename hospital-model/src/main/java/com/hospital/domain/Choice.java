@@ -8,14 +8,14 @@ public class Choice {
     //private int surveyId;
     private String choiceContent;
     private int aid;
-    //private Question question;
+    private Question question;
     //private Answer answer;
 
     //public Answer getAnswer() { return answer; }
     //public void setAnswer(Answer answer) { this.answer = answer; }
 
-    //public Question getQuestion() { return question; }
-    //public void setQuestion(Question question) { this.question = question; }
+    public Question getQuestion() { return question; }
+    public void setQuestion(Question question) { this.question = question; }
 
     public int getAnswerId() {
         return answerId;

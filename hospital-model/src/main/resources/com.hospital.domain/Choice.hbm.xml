@@ -28,13 +28,13 @@
             <column name="aid"/>
         </property>
 
-        <!--      <many-to-one name="answer" class="com.hospital.domain.Answer">
-                  <column name="answerId"/>
-              </many-to-one>
+       <!-- <many-to-one name="answer" class="com.hospital.domain.Answer" cascade="save-update" lazy="false">
+            <column name="answerId"/>
+        </many-to-one>-->
 
-              <many-to-one name="question" class="com.hospital.domain.Question">
-                  <column name="questionId"/>
-              </many-to-one>-->
+        <many-to-one name="question" class="com.hospital.domain.Question" cascade="save-update" lazy="false">
+            <column name="questionId"/>
+        </many-to-one>
 
     </class>
 </hibernate-mapping>
