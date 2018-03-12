@@ -1,5 +1,6 @@
 package com.hospital.domain;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,7 +9,8 @@ public class Answer {
     //private int choiceId;
     //private int questionId;
     //private int surveyId;
-    private int lastModified; //0-by patient, 1-by doctor, 2-by addnDoctor
+    private int lastModified; //最后修改人，0-by patient, 1-by doctor, 2-by addnDoctor
+    private Date modifiedDate;//最后修改日期
     private Survey survey;    //分发问卷
     private Patient patient;    //分发病人
     private Doctor doctor;    //操作员
@@ -89,6 +91,14 @@ public class Answer {
 
     public void setTextChoice(int textChoice) {
         this.textChoice = textChoice;
+    }
+
+    public Date getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
 
 /*    public int getChoiceId() {

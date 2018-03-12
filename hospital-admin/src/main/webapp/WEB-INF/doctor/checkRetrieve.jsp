@@ -163,10 +163,12 @@
                                                  <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
                                                 <s:property
                                                         value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(多选题)
-                                                <s:if test="#answer.lastModified==1"> (最后修改人： 直属医生 <s:property
-                                                        value="#answer.patient.doctor.name"/>)</s:if>
-                                                <s:elseif test="#answer.lastModified==2"> (最后修改人： 共享医生 <s:property
-                                                        value="#answer.patient.addnDoctor.name"/>)</s:elseif>
+                                                <s:if test="#answer.lastModified==1">
+                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                </s:if>
+                                                <s:elseif test="#answer.lastModified==2">
+                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                </s:elseif>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                         data-target="#updateAnswerModal"
                                                         style="float:right;color:white;"
@@ -217,13 +219,15 @@
                                                         <input type="checkbox"
                                                                name='question<s:property value="#question.questionId"/>'
                                                                id='textChoice<s:property value="#answer.question.choices.size+1" />'
-                                                               disabled="disabled" <s:if test="#answer.textChoice==1"> checked="checked" </s:if> >
+                                                               disabled="disabled"
+                                                        <s:if test="#answer.textChoice==1"> checked="checked" </s:if> >
                                                         <s:property value="#answer.question.choices.size+1"/>.
                                                         其它：
                                                     </div>
                                                     <div>
                                                     <textarea class="form-control" rows="3" id="updateQuestionContent"
-                                                              disabled="disabled"><s:property value="#answer.textChoiceContent"/>
+                                                              disabled="disabled"><s:property
+                                                            value="#answer.textChoiceContent"/>
                                                     </textarea>
 
                                                     </div>
@@ -243,10 +247,12 @@
                                                  <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
                                                 <s:property
                                                         value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(单选题)
-                                                <s:if test="#answer.lastModified==1"> (最后修改人： 直属医生 <s:property
-                                                        value="#answer.patient.doctor.name"/>)</s:if>
-                                                <s:elseif test="#answer.lastModified==2"> (最后修改人： 共享医生 <s:property
-                                                        value="#answer.patient.addnDoctor.name"/>)</s:elseif>
+                                                <s:if test="#answer.lastModified==1">
+                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                </s:if>
+                                                <s:elseif test="#answer.lastModified==2">
+                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                </s:elseif>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                         data-target="#updateAnswerModal"
                                                         style="float:right;color:white;"
@@ -301,13 +307,15 @@
                                                         <input type="radio"
                                                                name='question<s:property value="#question.questionId"/>'
                                                                id='textChoice<s:property value="#answer.question.choices.size+1" />'
-                                                               disabled="disabled" <s:if test="#answer.textChoice==1"> checked="checked" </s:if> >
+                                                               disabled="disabled"
+                                                        <s:if test="#answer.textChoice==1"> checked="checked" </s:if> >
                                                         <s:property value="#answer.question.choices.size+1"/>.
                                                         其它：
                                                     </div>
                                                     <div>
                                                     <textarea class="form-control" rows="3" id="updateQuestionContent4"
-                                                              disabled="disabled"><s:property value="#answer.textChoiceContent"/>
+                                                              disabled="disabled"><s:property
+                                                            value="#answer.textChoiceContent"/>
                                                     </textarea>
                                                     </div>
                                                 </ul>
@@ -326,10 +334,12 @@
                                                  <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
                                                 <s:property
                                                         value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(问答题)
-                                                <s:if test="#answer.lastModified==1"> (最后修改人： 直属医生 <s:property
-                                                        value="#answer.patient.doctor.name"/>)</s:if>
-                                                <s:elseif test="#answer.lastModified==2"> (最后修改人： 共享医生 <s:property
-                                                        value="#answer.patient.addnDoctor.name"/>)</s:elseif>
+                                                <s:if test="#answer.lastModified==1">
+                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                </s:if>
+                                                <s:elseif test="#answer.lastModified==2">
+                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                </s:elseif>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                         data-target="#updateAnswerModal"
                                                         style="float:right;color:white;"

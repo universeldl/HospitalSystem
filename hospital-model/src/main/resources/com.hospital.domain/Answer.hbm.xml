@@ -26,6 +26,10 @@
                   <column name="aid"/>
               </property> -->
 
+        <property name="modifiedDate" type="java.util.Date">
+            <column name="modifiedDate"/>
+        </property>
+
         <property name="textChoice" type="java.lang.Integer">
             <column name="textChoice"/>
         </property>
@@ -56,11 +60,11 @@
             <column name="aid"></column>
         </many-to-one>
 
-        <set name="choices" lazy="false" cascade="save-update" order-by="choiceId asc">
+        <set name="choices" table="answer_choice" lazy="false" cascade="save-update" order-by="choiceId asc">
             <key>
                 <column name="answerId"></column>
             </key>
-            <one-to-many class="com.hospital.domain.Choice"/>
+            <many-to-many class="com.hospital.domain.Choice" column="choiceId"></many-to-many>
         </set>
 
     </class>

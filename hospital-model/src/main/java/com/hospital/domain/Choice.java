@@ -3,7 +3,7 @@ package com.hospital.domain;
 public class Choice {
     private int choiceId;
     //private int questionId;
-    private int answerId;
+    //private int answerId;
     private int score;
     //private int surveyId;
     private String choiceContent;
@@ -17,13 +17,9 @@ public class Choice {
     public Question getQuestion() { return question; }
     public void setQuestion(Question question) { this.question = question; }
 
-    public int getAnswerId() {
-        return answerId;
-    }
+    //public int getAnswerId() { return answerId; }
 
-    public void setAnswerId(int answerId) {
-        this.answerId = answerId;
-    }
+    //public void setAnswerId(int answerId) { this.answerId = answerId; }
 
     public int getScore() {
         return score;

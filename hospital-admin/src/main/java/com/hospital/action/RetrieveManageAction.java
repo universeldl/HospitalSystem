@@ -132,6 +132,8 @@ public class RetrieveManageAction extends ActionSupport {
         Answer answer = new Answer();
         answer.setAnswerId(answerId);
         Answer updateAnswer = answerService.getAnswerById(answer);
+        Date modifiedDate = new Date(System.currentTimeMillis());//得到当前时间作为最后修改时间
+        updateAnswer.setModifiedDate(modifiedDate);
 
         updateAnswer.getChoices().clear();    //clean existing choices in answer
 
@@ -232,21 +234,7 @@ public class RetrieveManageAction extends ActionSupport {
         }
 
         Answer newAnswer = answerService.updateAnswerInfo(updateAnswer);  //update question
-        RetrieveInfo ri = retrieveService.getRetrieveInfoById(newAnswer.getRetrieveInfo());
-        RetrieveInfo retrieveInfo = ri;
-        //Set<Answer> answers = retrieveInfo.getAnswers();
-        //Set<Answer> answerSet = answers;
-        //for(Answer ans : answerSet) {
-        //    if(ans.getAnswerId() == newAnswer.getAnswerId()) {
-        //        answerSet.remove(ans);
-        //        break;
-        //    }
-        //}
-        //answerSet.add(newAnswer);
-        ////retrieveService.deleteRetrieveInfo(ri);
-        ////int b = retrieveService.addRetrieveInfo(retrieveInfo);
-        //retrieveInfo.getAnswers().clear();
-        //retrieveInfo.setAnswers(answerSet);
+        RetrieveInfo retrieveInfo = retrieveService.getRetrieveInfoById(newAnswer.getRetrieveInfo());
         RetrieveInfo RI = retrieveService.updateRetrieveInfo(retrieveInfo);
 
         int success = 0;

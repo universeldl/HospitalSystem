@@ -178,6 +178,7 @@ CREATE TABLE `Answer` (
   `textChoiceContent` varchar(255) DEFAULT NULL,
   #`choiceContent` varchar(255) NOT NULL,
   `lastModified` int(1) NOT NULL DEFAULT 0,/*0-by patient, 1-by doctor, 2-by addnDoctor*/
+  `modifiedDate` datetime DEFAULT NULL,
   `aid` int(11) NOT NULL,
   PRIMARY KEY (`answerId`),
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`),
@@ -189,13 +190,20 @@ CREATE TABLE `Answer` (
 
 CREATE TABLE `Choice` (
   `choiceId` int(11) NOT NULL AUTO_INCREMENT,
-  `answerId` int(11) DEFAULT 0,
   `questionId` int(11) DEFAULT 0,
   `score` int(11) NOT NULL,
   `choiceContent` varchar(255) NOT NULL,
   `aid` int(11) NOT NULL,
   PRIMARY KEY (`choiceId`),
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`)
+);
+
+CREATE TABLE `answer_choice` ( /*answer与choice的ManyToMany中间表*/
+  `answerId` int(11) NOT NULL,
+  `choiceId` int(11) NOT NULL,
+  PRIMARY KEY (answerId, choiceId),
+  CONSTRAINT  FOREIGN KEY (`answerId`) REFERENCES `Answer` (`answerId`) ON DELETE CASCADE,
+  CONSTRAINT  FOREIGN KEY (`choiceId`) REFERENCES `Choice` (`choiceId`) ON DELETE CASCADE
 );
 
 CREATE TABLE `ForfeitInfo` (
@@ -277,19 +285,19 @@ INSERT INTO Question VALUES(2,1,1,"2nd question",2,6,3,5);
 INSERT INTO Question VALUES(3,1,1,"text question",1,6,-1,-1);
 INSERT INTO Question VALUES(4,2,1,"text question",1,6,-1,-1);
 
-INSERT INTO Answer VALUES(1,1,1,1,1,0,"",0,6);
-INSERT INTO Answer VALUES(2,2,3,1,1,1,"some text",1,6);
-INSERT INTO Answer VALUES(3,3,2,1,1,1,"dfjkldfjskljdfklkdljfskldf",2,6);
-INSERT INTO Answer VALUES(4,4,2,2,1,0,"",2,6);
-INSERT INTO Answer VALUES(5,5,2,2,2,1,"sdfskljfalsdjfklsjkf haha",2,6);
+INSERT INTO Answer VALUES(1,1,1,1,1,0,"",0,"2016-06-14 00:00:00",6);
+INSERT INTO Answer VALUES(2,2,2,1,1,1,"some text",1,"2016-06-14 00:00:00",6);
+INSERT INTO Answer VALUES(3,3,3,1,1,1,"dfjkldfjskljdfklkdljfskldf",2,"2017-02-04 00:00:00",6);
+INSERT INTO Answer VALUES(4,4,2,2,1,0,"",2,"2018-02-04 00:00:00",6);
+INSERT INTO Answer VALUES(5,5,2,2,2,1,"sdfskljfalsdjfklsjkf haha",2,"2017-06-04 00:00:00",6);
 
-INSERT INTO Choice VALUES(1,1,1,1,"choice_1",6);
-INSERT INTO Choice VALUES(2,1,1,2,"choice_2",6);
-INSERT INTO Choice VALUES(3,2,2,3,"choice_3",6);
-INSERT INTO Choice VALUES(4,2,2,4,"choice_4",6);
-INSERT INTO Choice VALUES(5,3,2,5,"choice_5",6);
-INSERT INTO Choice VALUES(6,4,2,6,"choice_6",6);
-INSERT INTO Choice VALUES(7,5,3,7,"choice_7",6);
+INSERT INTO Choice VALUES(1,1,1,"choice_1",6);
+INSERT INTO Choice VALUES(2,1,2,"choice_2",6);
+INSERT INTO Choice VALUES(3,2,3,"choice_3",6);
+INSERT INTO Choice VALUES(4,2,4,"choice_4",6);
+INSERT INTO Choice VALUES(5,2,5,"choice_5",6);
+INSERT INTO Choice VALUES(6,2,6,"choice_6",6);
+INSERT INTO Choice VALUES(7,3,7,"choice_7",6);
 
 INSERT INTO RetrieveInfo VALUES(1,1,1,"2017-06-25 00:00:00",6);
 INSERT INTO RetrieveInfo VALUES(2,1,1,"2017-05-25 00:00:00",6);
@@ -300,3 +308,9 @@ INSERT INTO RetrieveInfo VALUES(5,2,2,"2017-06-25 00:00:00",6);
 INSERT INTO plan_survey VALUES(1, 1);
 INSERT INTO plan_survey VALUES(1, 2);
 INSERT INTO plan_survey VALUES(2, 1);
+
+INSERT INTO answer_choice VALUES(1, 1);
+INSERT INTO answer_choice VALUES(1, 2);
+INSERT INTO answer_choice VALUES(2, 3);
+INSERT INTO answer_choice VALUES(2, 5);
+INSERT INTO answer_choice VALUES(3, 7);
