@@ -24,7 +24,12 @@
         <property name="aid" type="java.lang.Integer">
             <column name="aid"/>
         </property>
-
+        <property name="startAge" type="java.lang.Integer">
+            <column name="startAge"/>
+        </property>
+        <property name="endAge" type="java.lang.Integer">
+            <column name="endAge"/>
+        </property>
         <!--<many-to-one name="survey" class="com.hospital.domain.Survey" column="surveyId"></many-to-one>-->
 
         <set name="choices" lazy="false" order-by="choiceId asc"><!-- inverse="true">-->

@@ -20,18 +20,28 @@ $(function () {
         }
 
         var postdata;
-        if (questionType == 1) {
-            postdata = "questionType=1&questionContent=" + $.trim($("#addQuestionContent").val())
-                + "&surveyId=" + surveyId + "&textChoice=" + textChoice + "&" + $("#addForm").serialize();
-        }
-        if (questionType == 2) {
-            postdata = "questionType=2&questionContent=" + $.trim($("#addQuestionContent").val())
-                + "&surveyId=" + surveyId + "&textChoice=" + textChoice + "&" + $("#addForm").serialize();
+        if (questionType == 1 || questionType == 2) {
+            postdata = "questionType=" + questionType + "&questionContent=" + $.trim($("#addQuestionContent").val())
+                + "&surveyId=" + surveyId + "&textChoice=" + textChoice;
+            if ($.trim($("#addStartAge").val()) != "" &&  $.trim($("#addEndAge").val()) != "") {
+                postdata = postdata + "&startAge=" + $.trim($("#addStartAge").val())
+                    + "&endAge=" + $.trim($("#addEndAge").val());
+            } else {
+                postdata = postdata + "&startAge=-1&endAge=-1";
+            }
+            postdata = postdata + "&" + $("#addForm").serialize();
         }
         else if (questionType == 3) {
             postdata = "questionType=3&surveyId=" + surveyId + "&textChoice=0" + "&questionContent=" + $.trim($("#addQuestionContent").val());
+            if ($.trim($("#addStartAge").val()) != "" && $.trim($("#addEndAge").val()) != "") {
+                postdata = postdata + "&startAge=" + $.trim($("#addStartAge").val())
+                    + "&endAge=" + $.trim($("#addEndAge").val());
+            } else {
+                postdata = postdata + "&startAge=-1&endAge=-1";
+            }
         }
 
+        alert("add question" + postdata);
         ajax(
             {
                 method: 'POST',
@@ -131,6 +141,40 @@ function validAddQuestion() {
         $('#addQuestionContent').parent().removeClass("has-error");
         $('#addQuestionContent').next().text("");
         $("#addQuestionContent").next().hide();
+    }
+
+    var sAge = $.trim($("#addStartAge").val());
+    var eAge = $.trim($("#addEndAge").val());
+
+    if ((sAge == "" && eAge != "") ||
+        (sAge != "" && eAge == "")) {
+        $('#addStartAge').parent().addClass("has-error");
+        $('#addStartAge').next().text("请同时设置起始与结束年龄");
+        $("#addStartAge").next().show();
+        $('#addEndAge').parent().addClass("has-error");
+        $('#addEndAge').next().text("请同时设置起始与结束年龄");
+        $("#addEndAge").next().show();
+        flag = false;
+    } else if (sAge != "" && eAge != "") {
+        if (sAge < 0) {
+            $('#addStartAge').parent().addClass("has-error");
+            $('#addStartAge').next().text("起始年龄必须大于零");
+            $("#addStartAge").next().show();
+        }
+        if (eAge < 0) {
+            $('#addEndAge').parent().addClass("has-error");
+            $('#addEndAge').next().text("结束年龄必须大于零");
+            $("#addEndAge").next().show();
+        }
+        if (sAge > eAge) {
+            $('#addStartAge').parent().addClass("has-error");
+            $('#addStartAge').next().text("起始年龄必须小于或等于结束年龄");
+            $("#addStartAge").next().show();
+            $('#addEndAge').parent().addClass("has-error");
+            $('#addEndAge').next().text("起始年龄必须小于或等于结束年龄");
+            $("#addEndAge").next().show();
+            flag = false;
+        }
     }
 
     if (questionType == 1 || questionType == 2) {  //is a selection question

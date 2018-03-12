@@ -133,6 +133,8 @@ CREATE TABLE `Question` (
   `questionContent` varchar(255) NOT NULL,
   `questionType` int(3) NOT NULL, /*1-'multi_choice', 2-'single_choice',3-'text'*/
   `aid` int(11) NOT NULL,
+  `startAge` int(2) DEFAULT -1,
+  `endAge` int(2) DEFAULT -1,
   PRIMARY KEY (`questionId`),
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`),
   CONSTRAINT  FOREIGN KEY (`surveyId`) REFERENCES `survey` (`surveyId`) ON DELETE CASCADE
@@ -270,10 +272,10 @@ INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,
 INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,6);
 INSERT INTO deliveryInfo VALUES(7,"2018-02-02 00:00:00","2018-02-04 00:00:00",30,1,3,2,6);
 
-INSERT INTO Question VALUES(1,1,1,"第一个问题",1,6);
-INSERT INTO Question VALUES(2,1,1,"2nd question",2,6);
-INSERT INTO Question VALUES(3,1,1,"text question",1,6);
-INSERT INTO Question VALUES(4,2,1,"text question",1,6);
+INSERT INTO Question VALUES(1,1,0,"第一个问题",1,6,0,3);
+INSERT INTO Question VALUES(2,1,0,"2nd question",2,6,3,5);
+INSERT INTO Question VALUES(3,1,0,"text question",1,6,-1,-1);
+INSERT INTO Question VALUES(4,2,0,"text question",1,6,-1,-1);
 
 INSERT INTO Answer VALUES(1,1,1,1,1,0,"",0,6);
 INSERT INTO Answer VALUES(2,2,3,1,1,1,"some text",1,6);

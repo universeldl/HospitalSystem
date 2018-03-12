@@ -257,6 +257,8 @@
                         <tr>
                             <th>问题</th>
                             <th>类型</th>
+                            <th>起始年龄（含）</th>
+                            <th>结束年龄（含）</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -279,6 +281,22 @@
                                     </s:elseif>
                                 </td>
                                 <td>
+                                    <s:if test="#question.startAge==-1">
+                                        N/A
+                                    </s:if>
+                                    <s:else>
+                                        <s:property value="#question.startAge"/>
+                                    </s:else>
+                                </td>
+                                <td>
+                                    <s:if test="#question.endAge==-1">
+                                        N/A
+                                    </s:if>
+                                    <s:else>
+                                        <s:property value="#question.endAge"/>
+                                    </s:else>
+                                </td>
+                                <td>
                                     <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
                                             data-target="#findModal"
                                             onclick="getQuestionInfo(<s:property value="#question.questionId"/>)">查看
@@ -297,6 +315,8 @@
                         </s:if>
                         <s:else>
                             <tbody>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
@@ -360,6 +380,22 @@
                             <label class="control-label" for="addQuestionContent" style="display: none;"></label>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">起始年龄（含）</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addStartAge">
+                            <label class="control-label" for="addStartAge" style="display:none;"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">结束年龄（含）</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addEndAge">
+                            <label class="control-label" for="addEndAge" style="display:none;"></label>
+                        </div>
+                    </div>
+
                     <div id="choicesBlock">
                         <div class="form-group">
                             <label>
@@ -457,6 +493,21 @@
                         </div>
                     </div>
 
+                    <div class="form-group" id="checkStartAge">
+                        <label for="firstname" class="col-sm-3 control-label">起始年龄（含）</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findStartAge" readonly="readonly">
+                            <label class="control-label" for="findStartAge" style="display:none;"></label>
+                        </div>
+                    </div>
+                    <div class="form-group" id="checkEndAge">
+                        <label for="firstname" class="col-sm-3 control-label">结束年龄（含）</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findEndAge" readonly="readonly">
+                            <label class="control-label" for="findEndAge" style="display:none;"></label>
+                        </div>
+                    </div>
+
                     <div id="checkChoicesDiv"></div>
 
                 </div>
@@ -507,6 +558,8 @@
                         </button>
                     </div>
 
+
+
                     <div class="form-group">
                         <label for="updateQuestionContent" class="col-sm-3 control-label">问题题目</label>
                         <div class="col-sm-7">
@@ -515,6 +568,21 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="updateStartAge" class="col-sm-3 control-label">起始年龄（含）</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateStartAge"/>
+                            <label class="control-label" for="updateStartAge" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updateEndAge" class="col-sm-3 control-label">结束年龄（含）</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateEndAge"/>
+                            <label class="control-label" for="updateEndAge" style="display: none;"></label>
+                        </div>
+                    </div>
 
                     <div id="updateChoicesBlock">
                         <div class="form-group">

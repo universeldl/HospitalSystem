@@ -24,6 +24,16 @@ function getQuestionInfo(id) {
                 else if (data.textChoice == 0)
                     $("#findTextChoice").val("否");
 
+                if (data.startAge == -1)
+                    $("#findStartAge").val("N/A");
+                else
+                    $("#findStartAge").val(data.startAge);
+
+                if (data.endAge == -1)
+                    $("#findEndAge").val("N/A");
+                else
+                    $("#findEndAge").val(data.endAge);
+
                 if (data.questionType == 1)
                     $("#findQuestionType").val("多选题");
                 else if (data.questionType == 2)

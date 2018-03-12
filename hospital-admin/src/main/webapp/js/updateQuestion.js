@@ -23,6 +23,18 @@ function updateQuestion(sid, qid) {
                     document.getElementById("updateTextChoice").checked = false;
                 }
 
+                if (data.startAge == -1) {
+                    $("#updateStartAge").val("");
+                } else {
+                    $("#updateStartAge").val(data.startAge);
+                }
+
+                if (data.endAge == -1) {
+                    $("#updateEndAge").val("");
+                } else {
+                    $("#updateEndAge").val(data.endAge);
+                }
+
                 if (data.questionType == 1) {
                     updateMultiChoiceDisplay();
                 }
@@ -76,17 +88,35 @@ $(function () {
         }
 
         var postdata;
-        if (questionType == 1) {
-            postdata = "questionType=1&questionContent=" + $.trim($("#updateQuestionContent").val())
-                + "&surveyId=" + surveyId + "&textChoice=" + updateTextChoice + "&questionId=" + questionId + "&" + $("#updateForm").serialize();
+        if (questionType == 1 || questionType == 2) {
+            postdata = "questionType=" + questionType + "&questionContent=" + $.trim($("#updateQuestionContent").val())
+                + "&surveyId=" + surveyId + "&textChoice=" + updateTextChoice + "&questionId=" + questionId;
+            if ($.trim($("#updateStartAge").val()) != "" && $.trim($("#updateEndAge").val()) != "") {
+                postdata = postdata + "&startAge=" + $.trim($("#updateStartAge").val())
+                    + "&endAge=" + $.trim($("#updateEndAge").val());
+            } else {
+                postdata = postdata + "&startAge=-1&endAge=-1";
+            }
+            postdata = postdata + "&" + $("#updateForm").serialize();
         }
+        /*
         if (questionType == 2) {
             postdata = "questionType=2&questionContent=" + $.trim($("#updateQuestionContent").val())
                 + "&surveyId=" + surveyId + "&textChoice=" + updateTextChoice + "&questionId=" + questionId + "&" + $("#updateForm").serialize();
         }
+        */
         else if (questionType == 3) {
-            postdata = "questionType=3&surveyId=" + surveyId + "&questionId=" + questionId + "&textChoice=0" + "&questionContent=" + $.trim($("#updateQuestionContent").val());
+            postdata = "questionType=3&surveyId=" + surveyId + "&questionId=" + questionId + "&textChoice=0"
+                + "&questionContent=" + $.trim($("#updateQuestionContent").val());
+            if ($.trim($("#updateStartAge").val()) != "" && $.trim($("#updateEndAge").val()) != "") {
+                postdata = postdata + "&startAge=" + $.trim($("#updateStartAge").val())
+                    + "&endAge=" + $.trim($("#updateEndAge").val());
+            } else {
+                postdata = postdata + "&startAge=-1&endAge=-1";
+            }
         }
+
+        alert(postdata);
 
         ajax(
             {
@@ -175,6 +205,42 @@ function validUpdateQuestion() {
         $('#updateQuestionContent').parent().removeClass("has-error");
         $('#updateQuestionContent').next().text("");
         $("#updateQuestionContent").next().hide();
+    }
+
+    var sAge = $.trim($("#updateStartAge").val());
+    var eAge = $.trim($("#updateEndAge").val());
+
+    if ((sAge == "" && eAge != "") ||
+        (sAge != "" && eAge == "")) {
+        $('#updateStartAge').parent().addClass("has-error");
+        $('#updateStartAge').next().text("请同时设置起始与结束年龄");
+        $("#updateStartAge").next().show();
+        $('#updateEndAge').parent().addClass("has-error");
+        $('#updateEndAge').next().text("请同时设置起始与结束年龄");
+        $("#updateEndAge").next().show();
+        flag = false;
+    } else if (sAge != "" && eAge != "") {
+        if (sAge < 0) {
+            $('#updateStartAge').parent().addClass("has-error");
+            $('#updateStartAge').next().text("起始年龄必须大于零");
+            $("#updateStartAge").next().show();
+            flag = false;
+        }
+        if (eAge < 0) {
+            $('#updateEndAge').parent().addClass("has-error");
+            $('#updateEndAge').next().text("结束年龄必须大于零");
+            $("#updateEndAge").next().show();
+            flag = false;
+        }
+        if (sAge > eAge) {
+            $('#updateStartAge').parent().addClass("has-error");
+            $('#updateStartAge').next().text("起始年龄必须小于或等于结束年龄");
+            $("#updateStartAge").next().show();
+            $('#updateEndAge').parent().addClass("has-error");
+            $('#updateEndAge').next().text("起始年龄必须小于或等于结束年龄");
+            $("#updateEndAge").next().show();
+            flag = false;
+        }
     }
 
     if(questionType == 1 || questionType ==2) {  //is a selection question

@@ -60,7 +60,8 @@ public class SurveyManageAction extends ActionSupport {
     private Integer textChoice;
     private Integer questionType;
     private String questionContent;
-
+    private Integer startAge;
+    private Integer endAge;
 
     public void setPageCode(int pageCode) {
         this.pageCode = pageCode;
@@ -82,6 +83,14 @@ public class SurveyManageAction extends ActionSupport {
     /**
      * @param fileName the fileName to set
      */
+    public void setStartAge(Integer startAge) {
+        this.startAge = startAge;
+    }
+
+    public void setEndAge(Integer endAge) {
+        this.endAge = endAge;
+    }
+
     public void setSendOnRegister(boolean sendOnRegister) {
         this.sendOnRegister = sendOnRegister;
     }
@@ -255,7 +264,6 @@ public class SurveyManageAction extends ActionSupport {
      * @return
      */
     public String addSurvey() {
-        System.out.println("add survey sendOnRegister = " + sendOnRegister);
         SurveyType surveyType = new SurveyType();
         surveyType.setTypeId(surveyTypeId);
         Date putdate = new Date(System.currentTimeMillis());//得到当前时间,作为生成时间
@@ -286,7 +294,8 @@ public class SurveyManageAction extends ActionSupport {
     public String addQuestion() {
         boolean b = true;
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
-        Question question = new Question(doctor.getAid(), surveyId, questionContent, questionType, textChoice);
+
+        Question question = new Question(doctor.getAid(), surveyId, questionContent, questionType, textChoice, startAge, endAge);
 
         if (questionType == 1 || questionType == 2) {  //is a selection question
             List<String> choices = new ArrayList<>();
@@ -296,7 +305,7 @@ public class SurveyManageAction extends ActionSupport {
             Map<String, String[]> pMap = request.getParameterMap();
             int idx = 0;
             for (String[] value : pMap.values()) {
-                if (idx < 4) {
+                if (idx < 6) {
                     idx++;
                 } else {
                     if (idx % 2 == 0) {
@@ -343,7 +352,6 @@ public class SurveyManageAction extends ActionSupport {
      * @return
      */
     public String getSurvey() {
-        System.out.println("getSurvey start");
 
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
@@ -361,10 +369,8 @@ public class SurveyManageAction extends ActionSupport {
             }
         });
 
-        System.out.println("getSurvey json start");
 
         JSONObject jsonObject = JSONObject.fromObject(newSurvey, jsonConfig);
-        System.out.println("getSurvey json = " + jsonObject.toString());
         try {
             response.getWriter().print(jsonObject);
         } catch (IOException e) {
@@ -421,7 +427,8 @@ public class SurveyManageAction extends ActionSupport {
         updateQuestion.setQuestionType(questionType);
         updateQuestion.setTextChoice(textChoice);
         updateQuestion.setSurveyId(surveyId);
-
+        updateQuestion.setStartAge(startAge);
+        updateQuestion.setEndAge(endAge);
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
 
         for (Choice choice : updateQuestion.getChoices()) {  //clean existing choices in db
@@ -437,7 +444,7 @@ public class SurveyManageAction extends ActionSupport {
             Map<String, String[]> pMap = request.getParameterMap();
             int idx = 0;
             for (String[] value : pMap.values()) {
-                if (idx < 5) {
+                if (idx < 7) {
                     idx++;
                 } else {
                     if (idx % 2 == 1) {
@@ -452,7 +459,6 @@ public class SurveyManageAction extends ActionSupport {
             for (int i = 0; i < choices.size(); i++) {  //add new choices to db and question
                 Choice choice = new Choice(doctor.getAid(), choices.get(i), scores.get(i));
                 updateQuestion.getChoices().add(choice);
-                //choice.setQuestionId(updateQuestion.getQuestionId());
                 choiceService.addChoice(choice);
             }
         }
@@ -480,20 +486,19 @@ public class SurveyManageAction extends ActionSupport {
      * @return
      */
     public String deleteQuestion() {
-        Question question = new Question();
-        question.setQuestionId(questionId);
+        Question tmpQuestion = new Question();
+        tmpQuestion.setQuestionId(questionId);
+        Question question = questionService.getQuestionById(tmpQuestion);
         for (Choice choice : question.getChoices()) {
             choiceService.deleteChoice(choice);
         }
         int success = questionService.deleteQuestion(question);
-
         try {
             ServletActionContext.getResponse().getWriter().print(success);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException(e.getMessage());
         }
-
         return null;
     }
 
@@ -504,7 +509,6 @@ public class SurveyManageAction extends ActionSupport {
      * @return
      */
     public String updateSurvey() {
-        System.out.println("update survey sendOnRegister = " + sendOnRegister);
 
         Survey survey = new Survey();
         survey.setSurveyId(surveyId);

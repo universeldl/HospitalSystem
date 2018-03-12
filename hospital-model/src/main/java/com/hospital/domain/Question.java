@@ -9,9 +9,27 @@ public class Question {
     private int textChoice;
     private int questionType;
     private int aid;
+    private int startAge;
+    private int endAge;
     //private Survey survey;
     private Set<Choice> choices = new HashSet<>();
     private List<Choice> sortedChoices;
+
+    public void setStartAge(int startAge) {
+        this.startAge = startAge;
+    }
+
+    public int getStartAge() {
+        return startAge;
+    }
+
+    public void setEndAge(int endAge) {
+        this.endAge = endAge;
+    }
+
+    public int getEndAge() {
+        return endAge;
+    }
 
     public Set<Choice> getChoices() {
         return choices;
@@ -96,13 +114,15 @@ public class Question {
         });
         return sortedChoices;
     }
-    public Question(int aid, int surveyId, String questionContent, int questionType, int textChoice) {
+    public Question(int aid, int surveyId, String questionContent, int questionType, int textChoice, int startAge, int endAge) {
         super();
         this.aid = aid;
         this.surveyId = surveyId;
         this.questionContent = questionContent;
         this.questionType = questionType;
         this.textChoice = textChoice;
+        this.startAge = startAge;
+        this.endAge = endAge;
     }
 
 /*    @Override
