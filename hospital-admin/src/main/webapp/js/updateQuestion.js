@@ -116,7 +116,7 @@ $(function () {
             }
         }
 
-        alert(postdata);
+        //alert(postdata);
 
         ajax(
             {
@@ -210,6 +210,8 @@ function validUpdateQuestion() {
     var sAge = $.trim($("#updateStartAge").val());
     var eAge = $.trim($("#updateEndAge").val());
 
+    //var regPos = /^\d+$/;
+
     if ((sAge == "" && eAge != "") ||
         (sAge != "" && eAge == "")) {
         $('#updateStartAge').parent().addClass("has-error");
@@ -219,16 +221,26 @@ function validUpdateQuestion() {
         $('#updateEndAge').next().text("请同时设置起始与结束年龄");
         $("#updateEndAge").next().show();
         flag = false;
-    } else if (sAge != "" && eAge != "") {
+    } else if ((/^\d+$/.test(sAge)) && (/^\d+$/.test(eAge))) {
         if (sAge < 0) {
             $('#updateStartAge').parent().addClass("has-error");
             $('#updateStartAge').next().text("起始年龄必须大于零");
+            $("#updateStartAge").next().show();
+            flag = false;
+        } else if (sAge > 99) {
+            $('#updateStartAge').parent().addClass("has-error");
+            $('#updateStartAge').next().text("起始年龄不能超过99");
             $("#updateStartAge").next().show();
             flag = false;
         }
         if (eAge < 0) {
             $('#updateEndAge').parent().addClass("has-error");
             $('#updateEndAge').next().text("结束年龄必须大于零");
+            $("#updateEndAge").next().show();
+            flag = false;
+        } else if (eAge > 99) {
+            $('#updateEndAge').parent().addClass("has-error");
+            $('#updateEndAge').next().text("结束年龄不能超过99");
             $("#updateEndAge").next().show();
             flag = false;
         }
@@ -241,6 +253,16 @@ function validUpdateQuestion() {
             $("#updateEndAge").next().show();
             flag = false;
         }
+    } else if (!(/^\d+$/.test(sAge))){
+        $('#updateStartAge').parent().addClass("has-error");
+        $('#updateStartAge').next().text("起始年龄必须是正整数");
+        $("#updateStartAge").next().show();
+        flag = false;
+    } else if (!(/^\d+$/.test(eAge))) {
+        $('#updateEndAge').parent().addClass("has-error");
+        $('#updateEndAge').next().text("结束年龄必须是正整数");
+        $("#updateEndAge").next().show();
+        flag = false;
     }
 
     if(questionType == 1 || questionType ==2) {  //is a selection question

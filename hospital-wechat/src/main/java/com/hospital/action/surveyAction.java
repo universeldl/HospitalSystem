@@ -4,6 +4,7 @@ import com.hospital.domain.*;
 import com.hospital.service.*;
 import com.hospital.util.AccessTokenMgr;
 import com.hospital.util.AccessTokenMgrHXTS;
+import com.hospital.util.AgeUtils;
 import com.hospital.util.GetOpenIdOauth2;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -12,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -143,7 +145,21 @@ public class surveyAction extends ActionSupport {
         }
 
         ServletActionContext.getRequest().setAttribute("survey", survey);
-        List<Question> questions = survey.getSortedQuestions();
+        //List<Question> questions = survey.getSortedQuestions();
+        Set<Question> all_questions = survey.getQuestions();
+        List<Question> questions = new ArrayList<>();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String dateString = formatter.format(patient.getBirthday());
+
+        int age = AgeUtils.getAgeFromBirthTime(dateString);
+        for (Question question : all_questions) {
+            if (question.getStartAge() == -1 && question.getEndAge() == -1) {
+                questions.add(question);
+            } else if (question.getStartAge() <= age && question.getEndAge() >= age) {
+                questions.add(question);
+            }
+        }
+
         ServletActionContext.getRequest().setAttribute("questions", questions);
         return SUCCESS;
     }

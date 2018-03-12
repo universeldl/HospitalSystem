@@ -41,7 +41,7 @@ $(function () {
             }
         }
 
-        alert("add question" + postdata);
+        //alert("add question" + postdata);
         ajax(
             {
                 method: 'POST',
