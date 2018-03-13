@@ -15,7 +15,7 @@ public class CalendarUtils {
      */
     public static String getNowTime() {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat dft = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat dft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String lastMonth = dft.format(cal.getTime());
         return lastMonth;
     }

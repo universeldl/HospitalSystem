@@ -178,7 +178,7 @@ CREATE TABLE `Answer` (
   `textChoiceContent` varchar(255) DEFAULT NULL,
   #`choiceContent` varchar(255) NOT NULL,
   `lastModified` int(1) NOT NULL DEFAULT 0,/*0-by patient, 1-by doctor, 2-by addnDoctor*/
-  `modifiedDate` datetime DEFAULT NULL,
+  `modifiedDate` varchar(25) DEFAULT NULL,
   `aid` int(11) NOT NULL,
   PRIMARY KEY (`answerId`),
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`),
@@ -274,10 +274,10 @@ INSERT INTO survey VALUES(2,"survey2","doctor2",10,2,"a2","baa","2017-06-25 00:0
 
 INSERT INTO deliveryInfo VALUES(1,"2017-01-15 00:00:00","2017-03-04 00:00:00",0,0,1,1,6);
 INSERT INTO deliveryInfo VALUES(2,"2017-02-15 00:00:00","2017-04-04 00:00:00",0,0,1,1,6);
-INSERT INTO deliveryInfo VALUES(3,"2017-03-15 00:00:00","2017-05-04 00:00:00",0,0,1,1,6);
-INSERT INTO deliveryInfo VALUES(4,"2017-04-15 00:00:00","2017-06-04 00:00:00",0,0,1,2,6);
-INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,6);
-INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2017-07-04 00:00:00",0,0,1,2,6);
+INSERT INTO deliveryInfo VALUES(3,"2017-03-15 00:00:00","2017-05-04 00:00:00",0,0,2,1,6);
+INSERT INTO deliveryInfo VALUES(4,"2017-04-15 00:00:00","2017-06-04 00:00:00",0,0,2,1,6);
+INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,0,2,2,6);
+INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2017-07-04 00:00:00",0,0,2,2,6);
 INSERT INTO deliveryInfo VALUES(7,"2018-02-02 00:00:00","2018-02-04 00:00:00",30,1,3,2,6);
 
 INSERT INTO Question VALUES(1,1,1,"第一个问题",1,6,0,3);

@@ -10,7 +10,7 @@ public class Answer {
     //private int questionId;
     //private int surveyId;
     private int lastModified; //最后修改人，0-by patient, 1-by doctor, 2-by addnDoctor
-    private Date modifiedDate;//最后修改日期
+    private String modifiedDate;//最后修改日期
     private Survey survey;    //分发问卷
     private Patient patient;    //分发病人
     private Doctor doctor;    //操作员
@@ -93,11 +93,11 @@ public class Answer {
         this.textChoice = textChoice;
     }
 
-    public Date getModifiedDate() {
+    public String getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Date modifiedDate) {
+    public void setModifiedDate(String modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 

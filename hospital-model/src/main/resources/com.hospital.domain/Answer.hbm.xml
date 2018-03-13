@@ -26,7 +26,7 @@
                   <column name="aid"/>
               </property> -->
 
-        <property name="modifiedDate" type="java.util.Date">
+        <property name="modifiedDate" type="java.lang.String">
             <column name="modifiedDate"/>
         </property>
 

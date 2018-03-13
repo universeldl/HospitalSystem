@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
+import com.hospital.util.CalendarUtils;
 
 public class RetrieveManageAction extends ActionSupport {
 
@@ -132,8 +133,15 @@ public class RetrieveManageAction extends ActionSupport {
         Answer answer = new Answer();
         answer.setAnswerId(answerId);
         Answer updateAnswer = answerService.getAnswerById(answer);
-        Date modifiedDate = new Date(System.currentTimeMillis());//得到当前时间作为最后修改时间
+        String modifiedDate = CalendarUtils.getNowTime();//得到当前时间作为最后修改时间
         updateAnswer.setModifiedDate(modifiedDate);
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        if(updateAnswer.getPatient().getDoctor().getAid().equals(doctor.getAid())) {
+            updateAnswer.setLastModified(1);
+        }
+        else if(updateAnswer.getPatient().getAddnDoctor().getAid().equals(doctor.getAid())) {
+            updateAnswer.setLastModified(2);
+        }
 
         updateAnswer.getChoices().clear();    //clean existing choices in answer
 

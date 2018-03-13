@@ -164,10 +164,10 @@
                                                 <s:property
                                                         value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(多选题)
                                                 <s:if test="#answer.lastModified==1">
-                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:if>
                                                 <s:elseif test="#answer.lastModified==2">
-                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:elseif>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                         data-target="#updateAnswerModal"
@@ -248,10 +248,10 @@
                                                 <s:property
                                                         value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(单选题)
                                                 <s:if test="#answer.lastModified==1">
-                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:if>
                                                 <s:elseif test="#answer.lastModified==2">
-                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:elseif>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                         data-target="#updateAnswerModal"
@@ -335,10 +335,10 @@
                                                 <s:property
                                                         value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(问答题)
                                                 <s:if test="#answer.lastModified==1">
-                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:if>
                                                 <s:elseif test="#answer.lastModified==2">
-                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 20<s:property value="#answer.modifiedDate"/>)
+                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:elseif>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                         data-target="#updateAnswerModal"
