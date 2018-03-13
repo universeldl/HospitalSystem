@@ -3,11 +3,15 @@ package com.hospital.service;
 import com.hospital.domain.DeliveryInfo;
 import com.hospital.domain.PageBean;
 
+import java.util.List;
+
 public interface DeliveryService {
 
     PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize);
 
     DeliveryInfo getDeliveryInfoById(DeliveryInfo info);
+
+    List<DeliveryInfo> getUnansweredDeliveryInfos();
 
     /**
      * 返回分发状态码

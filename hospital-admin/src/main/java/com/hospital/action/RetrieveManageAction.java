@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
+
 import com.hospital.util.CalendarUtils;
 
 public class RetrieveManageAction extends ActionSupport {
@@ -100,6 +101,26 @@ public class RetrieveManageAction extends ActionSupport {
     }
 
 
+    public String addRetrieveInfo() {
+        RetrieveInfo retrieveInfo = retrieveService.getRetrieveInfoByDeliveryID(deliveryId);
+        int success = 0;
+        int b = retrieveService.addRetrieveInfo(retrieveInfo);
+        if (b != 1) {
+            success = 0;
+        } else {
+            success = 1;
+            //由于是转发并且js页面刷新,所以无需重查
+        }
+        try {
+            ServletActionContext.getResponse().getWriter().print(success);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
+
     /**
      * 获取答案
      *
@@ -136,10 +157,9 @@ public class RetrieveManageAction extends ActionSupport {
         String modifiedDate = CalendarUtils.getNowTime();//得到当前时间作为最后修改时间
         updateAnswer.setModifiedDate(modifiedDate);
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
-        if(updateAnswer.getPatient().getDoctor().getAid().equals(doctor.getAid())) {
+        if (updateAnswer.getPatient().getDoctor().getAid().equals(doctor.getAid())) {
             updateAnswer.setLastModified(1);
-        }
-        else if(updateAnswer.getPatient().getAddnDoctor().getAid().equals(doctor.getAid())) {
+        } else if (updateAnswer.getPatient().getAddnDoctor().getAid().equals(doctor.getAid())) {
             updateAnswer.setLastModified(2);
         }
 
@@ -246,7 +266,7 @@ public class RetrieveManageAction extends ActionSupport {
         RetrieveInfo RI = retrieveService.updateRetrieveInfo(retrieveInfo);
 
         int success = 0;
-        if (newAnswer != null && RI!=null) {
+        if (newAnswer != null && RI != null) {
             success = 1;
         } else {
             success = 0;

@@ -48,6 +48,12 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
+    public List<DeliveryInfo> getUnansweredDeliveryInfos() {
+        // TODO Auto-generated method stub
+        return deliveryDao.getUnansweredDeliveryInfos();
+    }
+
+    @Override
     public DeliveryInfo getDeliveryInfoById(DeliveryInfo info) {
         // TODO Auto-generated method stub
         return deliveryDao.getDeliveryInfoById(info);

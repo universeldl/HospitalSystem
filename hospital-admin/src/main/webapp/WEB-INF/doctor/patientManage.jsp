@@ -40,6 +40,7 @@
 
     <!-- add specific js in here -->
     <script src="${pageContext.request.contextPath}/js/addPatient.js"></script>
+    <script src="${pageContext.request.contextPath}/js/addRetrieve.js"></script>
     <script src="${pageContext.request.contextPath}/js/updatePatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/deletePatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/getAllPatientTypes.js"></script>
@@ -276,6 +277,10 @@
                                                value="${pageContext.request.contextPath}/doctor/retrieveManageAction_patientRetrieveManage.action">
                                         <button type="button" class="btn btn-primary btn-xs"
                                                 onclick="managePatient(<s:property value="#patient.patientId"/>)">答卷管理
+                                        </button>
+                                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
+                                                data-target="#addRetrieveModal"
+                                                onclick="addRetrieveFun()">添加答卷
                                         </button>
                                     </s:if>
 
@@ -775,6 +780,52 @@
 
 </form>
 <!-------------------------------------------------------------->
+
+
+<!--------------------------------------添加答卷的模糊框------------------------>
+<form class="form-horizontal">   <!--保证样式水平不混乱-->
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="addRetrieveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        添加新答卷
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <!---------------------表单-------------------->
+
+                    <div class="form-group">
+                        <label for="addRetrieveDelivery" class="col-sm-3 control-label">指定要回答的问卷</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="addRetrieveDelivery">
+                                <option value="-1">请选择</option>
+                            </select>
+                            <label class="control-label" for="addRetrieveDelivery" style="display: none;"></label>
+                        </div>
+                    </div>
+
+
+                    <!---------------------表单-------------------->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="addRetrieveSubmit">
+                        添加
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+<!--------------------------------------添加答卷的模糊框------------------------>
 
 
 <!------------------------------修改密码模糊框-------------------------------->

@@ -4,6 +4,7 @@ import com.hospital.domain.*;
 import com.hospital.service.DeliveryService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
@@ -12,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 public class DeliveryManageAction extends ActionSupport {
@@ -91,6 +93,21 @@ public class DeliveryManageAction extends ActionSupport {
         JSONObject jsonObject = JSONObject.fromObject(newInfo, jsonConfig);
         try {
             response.getWriter().print(jsonObject);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
+
+    public String getUnansweredDeliveryInfos() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+        List<DeliveryInfo> unanswered = deliveryService.getUnansweredDeliveryInfos();
+
+        String json = JSONArray.fromObject(unanswered).toString();//List------->JSONArray
+        try {
+            response.getWriter().print(json);
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }

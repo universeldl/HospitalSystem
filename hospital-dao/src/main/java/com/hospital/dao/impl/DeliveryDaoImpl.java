@@ -72,6 +72,14 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
 
 
     @Override
+    public List<DeliveryInfo> getUnansweredDeliveryInfos() {
+        String hql = "from DeliveryInfo b where b.state>-1";
+        List list = this.getHibernateTemplate().find(hql);
+        return list;
+    }
+
+
+    @Override
     public DeliveryInfo getDeliveryInfoById(DeliveryInfo info) {
         String hql = "from DeliveryInfo b where b.deliveryId=?";
         List list = this.getHibernateTemplate().find(hql, info.getDeliveryId());

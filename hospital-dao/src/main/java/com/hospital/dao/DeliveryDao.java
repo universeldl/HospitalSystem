@@ -15,6 +15,8 @@ public interface DeliveryDao {
 
     int addDelivery(DeliveryInfo info);
 
+    List<DeliveryInfo> getUnansweredDeliveryInfos();
+
     List<DeliveryInfo> getNoRetrieveDeliveryInfoByPatient(Patient patient);
 
     DeliveryInfo updateDeliveryInfo(DeliveryInfo deliveryInfoById);
