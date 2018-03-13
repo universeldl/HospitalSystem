@@ -308,7 +308,7 @@ public class PatientServiceImpl implements PatientService {
                 String addSex;
                 if (sex == 1)
                     addSex = "男";
-                else if (sex == 2)
+                else if (sex == 0)
                     addSex = "女";
                 else
                     addSex = "不详";
@@ -376,7 +376,7 @@ public class PatientServiceImpl implements PatientService {
             String addSex;
             if (sex == 1)
                 addSex = "男";
-            else if (sex == 2)
+            else if (sex == 0)
                 addSex = "女";
             else
                 addSex = "不详";
