@@ -237,8 +237,11 @@ public class surveyAction extends ActionSupport {
         System.out.println("add answers to retrieve info");
 
         Integer i = retrieveService.addRetrieveInfo(retrieveInfo);
-        survey.setCurrentNum(survey.getCurrentNum() + 1);//回收数+1
-        surveyService.updateSurveyInfo(survey);// 问卷的总发送数增加
+        Survey tmpSurvey = surveyService.getSurveyById(survey);
+        tmpSurvey.setCurrentNum(survey.getCurrentNum() + 1);//回收数+1
+        surveyService.updateSurveyInfo(tmpSurvey);
+        deliveryInfo.setState(-1);//回收,设置deliveryInfo为已答卷
+        deliveryService.updateDeliveryInfo(deliveryInfo);
 
         HttpServletResponse response = ServletActionContext.getResponse();
         try {

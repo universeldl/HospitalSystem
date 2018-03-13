@@ -90,6 +90,10 @@ public class DeliveryServiceImpl implements DeliveryService {
         return id;
     }
 
+    @Override
+    public DeliveryInfo updateDeliveryInfo(DeliveryInfo deliveryInfo) {
+        return deliveryDao.updateDeliveryInfo(deliveryInfo);
+    }
 
     @Override
     public boolean checkAndDoDelivery() {

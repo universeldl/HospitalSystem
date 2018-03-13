@@ -17,6 +17,8 @@ public interface DeliveryService {
      */
     int addDelivery(DeliveryInfo info);
 
+    DeliveryInfo updateDeliveryInfo(DeliveryInfo deliveryInfo);
+
     boolean checkAndDoDelivery();
 
     boolean checkDeliveryInfo();
