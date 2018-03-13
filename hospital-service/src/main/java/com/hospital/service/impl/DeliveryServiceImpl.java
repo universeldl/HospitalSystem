@@ -8,7 +8,10 @@ import com.hospital.util.AccessTokenMgr;
 import com.hospital.util.AccessTokenService;
 import com.hospital.util.Md5Utils;
 import com.hospital.util.TemplateMessageMgr;
+import com.opensymphony.xwork2.ActionContext;
+import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -19,6 +22,8 @@ public class DeliveryServiceImpl implements DeliveryService {
     private PatientDao patientDao;
     private ForfeitDao forfeitDao;
     private RetrieveDao retrieveDao;
+    final static String[] colors = {"#FF0000", "#E066FF", "#BC8F8F", "#698B22", "#173177"};
+    static int colorNum = 0;
 
 
     public void setRetrieveDao(RetrieveDao retrieveDao) {
@@ -169,22 +174,24 @@ public class DeliveryServiceImpl implements DeliveryService {
         JSONObject data = new JSONObject();
 
         d1.put("value","上海儿童医学中心呼吸科随访问卷");
-        d1.put("color", "#173177");
+        d1.put("color", colors[colorNum]);
 
         Patient patient = deliveryInfo.getPatient();
         d2.put("value",patient.getName());
-        d2.put("color", "#173177");
+        d2.put("color", colors[colorNum]);
 
         Date date = deliveryInfo.getDeliveryDate();
         d3.put("value", date.toString());
-        d3.put("color", "#173177");
+        d3.put("color", colors[colorNum]);
 
         Survey survey = deliveryInfo.getSurvey();
         d4.put("value", survey.getSurveyName());
-        d4.put("color","#173177");
+        d4.put("color", colors[colorNum]);
 
         d5.put("value","请点击详情开始随访。");
-        d5.put("color","#173177");
+        d5.put("color", colors[colorNum]);
+
+        colorNum = (colorNum>=4)?0:(colorNum+1);
 
         data.put("first",    d1);
         data.put("keyword1", d2);
@@ -195,7 +202,13 @@ public class DeliveryServiceImpl implements DeliveryService {
         JSONObject json = new JSONObject();
         AccessTokenMgr mgr = AccessTokenService.getAccessTokenByID(patient.getAppID());
 
-        String url = "http://9643942f.ngrok.io/hospital-wechat/doSurvey.jsp?deliveryID=" + deliveryInfo.getDeliveryId();
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
+                .get(ServletActionContext.HTTP_REQUEST);
+
+        StringBuffer url1 = request.getRequestURL();
+        String tempContextUrl1 = url1.delete(url1.length() - request.getRequestURI().length(), url1.length()).append("/").toString();
+
+        String url = tempContextUrl1 + "/hospital-wechat/doSurvey.jsp?deliveryID=" + deliveryInfo.getDeliveryId();
 
         return TemplateMessageMgr.sendSurveyTemplate(json, patient.getOpenID(), url, mgr);
     }

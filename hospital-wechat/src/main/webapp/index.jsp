@@ -19,6 +19,12 @@
         return null;
     }
 
+    function UrlEncode(str) {
+        str = (str + '').toString();
+        return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
+                replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
+    }
+
     function redirect() {
         var code = GetQueryString("code")
         if (code == null) {
@@ -31,7 +37,12 @@
                     callback: function (data) {
                         var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=";
                         url = url + data;
-                        url = url + "&redirect_uri=http%3a%2f%2f9643942f.ngrok.io%2fhospital-wechat%2f&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
+                        url = url + "&redirect_uri="
+                        re_url =  window.location.host;
+                        re_url = re_url + "/hospital-wechat/"
+                        var en_url = UrlEncode(re_url);
+                        url = url + en_url;
+                        url = url + "&response_type=code&scope=snsapi_base&state=test#wechat_redirect";
                         window.location.href = url;
                     }
                 }
