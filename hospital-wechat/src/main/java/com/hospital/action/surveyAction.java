@@ -38,12 +38,12 @@ public class surveyAction extends ActionSupport {
         return errorMsg;
     }
 
-    /*
     private SurveyService surveyService;
     public void setSurveyService(SurveyService surveyService) {
         this.surveyService = surveyService;
     }
 
+    /*
     private QuestionService questionService;
     public void setQuestionService(QuestionService questionService) {
         this.questionService = questionService;
@@ -237,6 +237,8 @@ public class surveyAction extends ActionSupport {
         System.out.println("add answers to retrieve info");
 
         Integer i = retrieveService.addRetrieveInfo(retrieveInfo);
+        survey.setCurrentNum(survey.getCurrentNum() + 1);//回收数+1
+        surveyService.updateSurveyInfo(survey);// 问卷的总发送数增加
 
         HttpServletResponse response = ServletActionContext.getResponse();
         try {

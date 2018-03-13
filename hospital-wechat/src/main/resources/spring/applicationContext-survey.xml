@@ -22,7 +22,6 @@
         </property>
     </bean>
 
-    <!--
     <bean id="surveyService" class="com.hospital.service.impl.SurveyServiceImpl">
         <property name="surveyDao">
             <ref bean="surveyDao"/>
@@ -37,7 +36,6 @@
             <ref bean="surveyTypeDao"/>
         </property>
     </bean>
-    -->
 
     <bean id="retrieveDao" class="com.hospital.dao.impl.RetrieveDaoImpl">
         <property name="sessionFactory">
@@ -81,11 +79,13 @@
         <property name="patientService">
             <ref bean="patientService"/>
         </property>
+        -->
 
         <property name="surveyService">
             <ref bean="surveyService" />
         </property>
 
+        <!--
         <property name="questionService">
             <ref bean="questionService" />
         </property>
