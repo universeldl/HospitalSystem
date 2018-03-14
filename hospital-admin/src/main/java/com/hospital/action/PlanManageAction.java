@@ -133,7 +133,7 @@ public class PlanManageAction extends ActionSupport {
         Map<String, String[]> pMap = request.getParameterMap();
         int idx = 0;
         for (String[] value : pMap.values()) {
-            if (idx < 6) {
+            if (idx < 5) {
                 idx++;
             } else {
                 for (String v : value) {
@@ -181,7 +181,7 @@ public class PlanManageAction extends ActionSupport {
         Map<String, String[]> pMap = request.getParameterMap();
         int idx = 0;
         for (String[] value : pMap.values()) {
-            if (idx < 5) {
+            if (idx < 4) {
                 idx++;
             } else {
                 for (String v : value) {

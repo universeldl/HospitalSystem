@@ -39,7 +39,7 @@
     <script src="${pageContext.request.contextPath}/js/doctorUpdatePwd.js"></script>
 
     <!-- add specific js in here -->
-    <script src="${pageContext.request.contextPath}/js/addPatient.js"></script>
+    <!-- <script src="${pageContext.request.contextPath}/js/addPatient.js"></script> -->
     <script src="${pageContext.request.contextPath}/js/addRetrieve.js"></script>
     <script src="${pageContext.request.contextPath}/js/updatePatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/deletePatient.js"></script>
@@ -203,9 +203,9 @@
                 <div class="grid-btn">
                     <a class="btn btn-primary" data-toggle="modal" data-target="#checkSummary" onclick="getSummary()"><i
                             class="fa fa-pie-chart"></i> 统计信息</a>
-                    <a class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal"><i
+                    <!--<a class="btn btn-primary" id="btn_add" data-toggle="modal" data-target="#addModal"><i
                             class="fa fa-plus"></i> 添加病人</a>
-                    <!--<a class="btn btn-primary" data-toggle="modal" data-target="#batchAddModal"><i
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#batchAddModal"><i
                             class="fa fa-times"></i> 批量添加</a>-->
                     <a class="btn btn-primary" onclick="exportPatient()"><i class="fa fa-share"></i> 导出</a>
                 </div>

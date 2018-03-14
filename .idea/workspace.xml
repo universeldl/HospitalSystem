@@ -7,9 +7,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08d425d6-fc1b-4a6c-b269-f9cdf463903f" name="Default" comment="">
+    <list default="true" id="08d425d6-fc1b-4a6c-b269-f9cdf463903f" name="Default" comment="Update redirect page when getting error.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PlanManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PlanManageAction.java" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/HospitalSystem/test/" />
@@ -72,31 +73,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="patientManage.jsp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="patientManage.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="119" column="126" lean-forward="false" selection-start-line="119" selection-start-column="126" selection-end-line="119" selection-end-column="126" />
+            <state relative-caret-position="540">
+              <caret line="285" column="0" lean-forward="false" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="patientTypeManage.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp">
+      <file leaf-file-name="updatePatient.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updatePatient.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="67" column="36" lean-forward="false" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="doctor.jsp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="253" column="41" lean-forward="false" selection-start-line="253" selection-start-column="41" selection-end-line="253" selection-end-column="41" />
+            <state relative-caret-position="54">
+              <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -105,22 +96,29 @@
       <file leaf-file-name="addRetrieve.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addRetrieve.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="41" column="8" lean-forward="false" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+            <state relative-caret-position="432">
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="updateQuestion.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updateQuestion.js">
+      <file leaf-file-name="Plan.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Plan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-              <folding>
-                <marker date="1520945967589" expanded="true" signature="2275:2289" ph="..." />
-                <marker date="1520945967589" expanded="true" signature="2636:2650" ph="..." />
-              </folding>
+            <state relative-caret-position="504">
+              <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlanManageAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PlanManageAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1670">
+              <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -133,26 +131,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="getDeliveryInfo.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getDeliveryInfo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DeliveryManageAction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DeliveryManageAction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -185,10 +163,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/PatientDao.java" />
-        <option value="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/PatientService.java" />
-        <option value="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/PatientDaoImpl.java" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getAllDoctors.js" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DoctorManageAction.java" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-patient-manage.xml" />
         <option value="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Patient.java" />
@@ -228,7 +202,6 @@
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/planManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp" />
@@ -236,6 +209,11 @@
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/error/nopass.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/error/400.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/error/500.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PlanManageAction.java" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp" />
       </list>
     </option>
   </component>
@@ -375,43 +353,7 @@
               <item name="hospital-admin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital" type="462c0819:PsiDirectoryNode" />
-              <item name="quartz" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HospitalSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HospitalSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="struts2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HospitalSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HospitalSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="doctor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
@@ -582,41 +524,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
               <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HospitalSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital-wechat" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HospitalSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital-wechat" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HospitalSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital-wechat" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HospitalSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital-wechat" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HospitalSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital-wechat" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="action" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -1278,21 +1185,7 @@
       <workItem from="1520862492639" duration="4161000" />
       <workItem from="1520957035935" duration="482000" />
       <workItem from="1520986818100" duration="341000" />
-      <workItem from="1521028641164" duration="5862000" />
-    </task>
-    <task id="LOCAL-00011" summary="Finish check questions.">
-      <created>1516024222696</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1516024222697</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Minor change.">
-      <created>1516024467859</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1516024467859</updated>
+      <workItem from="1521028641164" duration="7605000" />
     </task>
     <task id="LOCAL-00013" summary="Enhance validAddQuestion to have dynamic form checking.">
       <created>1516196978967</created>
@@ -1623,11 +1516,25 @@
       <option name="project" value="LOCAL" />
       <updated>1521034083545</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Update some info in index page.">
+      <created>1521034610063</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1521034610063</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Update redirect page when getting error.">
+      <created>1521034933083</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1521034933083</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="871457000" />
+    <option name="totallyTimeSpent" value="873200000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1722,8 +1629,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1. Finish &quot;line-bar&quot; charts summary with real data of Patients.&#10;2. Add some *Utils and *Test classes to hospital-common." />
-    <MESSAGE value="Refine export xls." />
     <MESSAGE value="Add &quot;times&quot; for Survey to store how many times the survey will be delivered." />
     <MESSAGE value="Add &quot;export&quot; feature for each Patient, will export all the retrieveInfos along with patient basic informations." />
     <MESSAGE value="Sort the sets with orders for some Entities." />
@@ -1747,7 +1652,9 @@
     <MESSAGE value="Fix a bug in export patients." />
     <MESSAGE value="Doctor can add RetrieveInfo now." />
     <MESSAGE value="Fix following bugs: 1.show deliveryInfo page with retrieveInfo.&#10;2. add retrieveInfo Modal can not show survey.&#10;3. sql update." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix following bugs: 1.show deliveryInfo page with retrieveInfo.&#10;2. add retrieveInfo Modal can not show survey.&#10;3. sql update." />
+    <MESSAGE value="Update some info in index page." />
+    <MESSAGE value="Update redirect page when getting error." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update redirect page when getting error." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2084,12 +1991,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PlanManageAction.java</url>
-          <line>94</line>
-          <properties />
-          <option name="timeStamp" value="387" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PlanManageAction.java</url>
           <line>116</line>
           <properties />
           <option name="timeStamp" value="389" />
@@ -2321,6 +2222,12 @@
           <line>118</line>
           <properties />
           <option name="timeStamp" value="593" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PlanManageAction.java</url>
+          <line>151</line>
+          <properties />
+          <option name="timeStamp" value="599" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/HospitalSystem/src/com/cc/library/dao/impl/AuthorizationDaoImpl.java</url>
@@ -2560,7 +2467,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="599" />
+      <option name="time" value="600" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2569,96 +2476,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-test/4.3.7.RELEASE/spring-test-4.3.7.RELEASE.jar!/org/springframework/mock/web/MockServletContext.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="209" column="23" lean-forward="false" selection-start-line="209" selection-start-column="23" selection-end-line="209" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/FileDownloadAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/PatientServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="435" column="0" lean-forward="true" selection-start-line="435" selection-start-column="0" selection-end-line="435" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PatientManageAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="395" column="48" lean-forward="true" selection-start-line="395" selection-start-column="48" selection-end-line="395" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getAllSurveyTypes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updateSurvey.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="46" column="26" lean-forward="false" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updateAnswer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/SurveyServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-556">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/SurveyTypeServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/SurveyTypeDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/SurveyTypeDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/DeliveryInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addSurvey.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
@@ -2749,14 +2566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addRetrieve.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="41" column="8" lean-forward="false" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
@@ -2774,14 +2583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/my1.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="281" column="0" lean-forward="true" selection-start-line="281" selection-start-column="0" selection-end-line="281" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://table:/5fc82742/1e5f44cb-69ee-4365-b3e9-d56adc998eca/HospitalSurvey.RetrieveInfo">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -2795,17 +2596,6 @@
           <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-delivery-search.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.struts2.graph.fileEditor.Struts2GraphFileEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java">
@@ -2941,14 +2731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="119" column="126" lean-forward="false" selection-start-line="119" selection-start-column="126" selection-end-line="119" selection-end-column="126" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/planManage.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1152">
@@ -2994,6 +2776,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-doctor-login.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.struts2.graph.fileEditor.Struts2GraphFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-delivery-search.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.struts2.graph.fileEditor.Struts2GraphFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-125">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/error/400.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="98" column="28" lean-forward="false" selection-start-line="98" selection-start-column="28" selection-end-line="98" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/error/500.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="104" column="65" lean-forward="false" selection-start-line="104" selection-start-column="65" selection-end-line="104" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/error/nopass.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="106" column="0" lean-forward="true" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/resources/struts2/struts-forfeit-manage.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="11" lean-forward="false" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.struts2.graph.fileEditor.Struts2GraphFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="774">
+          <caret line="289" column="0" lean-forward="true" selection-start-line="289" selection-start-column="0" selection-end-line="289" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -3002,10 +2857,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp">
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addRetrieve.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="253" column="41" lean-forward="false" selection-start-line="253" selection-start-column="41" selection-end-line="253" selection-end-column="41" />
+        <state relative-caret-position="432">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Plan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updatePlan.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addPlan.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="51" column="8" lean-forward="false" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/my1.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="281" column="0" lean-forward="false" selection-start-line="281" selection-start-column="0" selection-end-line="281" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addPatient.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="30" column="53" lean-forward="false" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updatePatient.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PlanManageAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1670">
+          <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="285" column="0" lean-forward="false" selection-start-line="285" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
           <folding />
         </state>
       </provider>
