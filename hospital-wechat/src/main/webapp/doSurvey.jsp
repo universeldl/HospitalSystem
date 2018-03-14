@@ -40,7 +40,7 @@
                         var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=";
                         url = url + data;
                         url = url + "&redirect_uri=";
-                        var re_url =  window.location.host;
+                        var re_url =  "https://" + window.location.host;
                         re_url = re_url + "/hospital-wechat/doSurvey.jsp?";
                         re_url += att;
                         var en_url = UrlEncode(re_url);
