@@ -6,6 +6,7 @@ function getPatientInfo(id) {
             url: 'doctor/patientManageAction_getPatient.action',
             params: "patientId=" + id,
             type: "json",
+            async: false,
             callback: function (data) {
                 $("#findOpenID").val(data.openID);
                 $("#findPatientName").val(data.name);
@@ -23,16 +24,3 @@ function getPatientInfo(id) {
         }
     );
 }
-				
-			
-				
-				
-		   
-	
-	
-			
-
-
-
-
-

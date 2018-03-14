@@ -16,6 +16,7 @@ function getRetrieveInfoById(id) {
             url: 'doctor/retrieveManageAction_getRetrieveInfoById.action',
             params: "deliveryId=" + id,
             type: "json",
+            async: false,
             callback: function (data) {
 
                 $("#deliveryId").val(data.deliveryId);
