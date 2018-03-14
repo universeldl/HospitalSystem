@@ -152,7 +152,6 @@
                                     <li>根据问卷编号、问卷名称等查询问卷</li>
                                     <li>添加、修改、删除问卷</li>
                                     <li>添加、修改、删除问卷中的所有问题</li>
-                                    <li>设置问卷分发周期</li>
                                 </ul>
                             </div>
                         </div>
@@ -175,11 +174,12 @@
                     <div class="col-md-6">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <div class="text-muted bootstrap-doctor-box-title">答卷管理</div>
+                                <div class="text-muted bootstrap-doctor-box-title">随访管理</div>
                             </div>
                             <div class="bootstrap-doctor-panel-content">
                                 <ul>
-                                    <li>根据用户名、问卷相应信息查询答卷</li>
+                                    <li>制定随访计划，修改、删除随访计划</li>
+                                    <li>查询已发送的随访问卷信息</li>
                                 </ul>
                             </div>
                         </div>
@@ -191,8 +191,8 @@
                             </div>
                             <div class="bootstrap-doctor-panel-content">
                                 <ul>
-                                    <li>根据用户名、姓名查询病人基本信息</li>
-                                    <li>添加、修改、删除病人信息</li>
+                                    <li>查询、添加、修改、删除病人信息</li>
+                                    <li>管理病人的随访答卷</li>
                                 </ul>
                             </div>
                         </div>
@@ -209,8 +209,8 @@
                             </div>
                             <div class="bootstrap-doctor-panel-content">
                                 <ul>
-                                    <li>根据用户名、姓名查询医生基本信息</li>
-                                    <li>添加、修改、删除医生信息</li>
+                                    <li>查询、添加、修改、删除医生信息</li>
+                                    <li>仅限超级医生可以管理医生</li>
                                 </ul>
                             </div>
                         </div>

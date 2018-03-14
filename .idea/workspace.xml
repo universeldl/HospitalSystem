@@ -7,30 +7,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08d425d6-fc1b-4a6c-b269-f9cdf463903f" name="Default" comment="Doctor can add RetrieveInfo now.">
+    <list default="true" id="08d425d6-fc1b-4a6c-b269-f9cdf463903f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/database/my1.sql" afterPath="$PROJECT_DIR$/database/my1.sql" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DeliveryManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DeliveryManageAction.java" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/planManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/planManage.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyManage.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp" />
       <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addRetrieve.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addRetrieve.js" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getDeliveryInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getDeliveryInfo.js" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getRetrieveInfo.js" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getRetrieveInfo.js" />
-      <change beforePath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/DeliveryDao.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/DeliveryDao.java" />
-      <change beforePath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/DeliveryDaoImpl.java" afterPath="$PROJECT_DIR$/hospital-dao/src/main/java/com/hospital/dao/impl/DeliveryDaoImpl.java" />
-      <change beforePath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/DeliveryService.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/DeliveryService.java" />
-      <change beforePath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/DeliveryServiceImpl.java" afterPath="$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/DeliveryServiceImpl.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/HospitalSystem/test/" />
@@ -103,11 +82,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="patientTypeManage.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="patientTypeManage.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="82" column="24" lean-forward="false" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
+            <state relative-caret-position="18">
+              <caret line="67" column="36" lean-forward="false" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="doctor.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="253" column="41" lean-forward="false" selection-start-line="253" selection-start-column="41" selection-end-line="253" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -236,7 +225,6 @@
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getDeliveryInfo.js" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/tmp.html" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp" />
@@ -247,6 +235,7 @@
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp" />
       </list>
     </option>
   </component>
@@ -1289,14 +1278,7 @@
       <workItem from="1520862492639" duration="4161000" />
       <workItem from="1520957035935" duration="482000" />
       <workItem from="1520986818100" duration="341000" />
-      <workItem from="1521028641164" duration="5195000" />
-    </task>
-    <task id="LOCAL-00010" summary="Enhance surveyManage pages &amp; functions.">
-      <created>1515935384199</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1515935384199</updated>
+      <workItem from="1521028641164" duration="5862000" />
     </task>
     <task id="LOCAL-00011" summary="Finish check questions.">
       <created>1516024222696</created>
@@ -1634,11 +1616,18 @@
       <option name="project" value="LOCAL" />
       <updated>1520957495391</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Fix following bugs: 1.show deliveryInfo page with retrieveInfo.&#10;2. add retrieveInfo Modal can not show survey.&#10;3. sql update.">
+      <created>1521034083544</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1521034083545</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="870790000" />
+    <option name="totallyTimeSpent" value="871457000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1733,7 +1722,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Front-end of automatically add Plan for Patients." />
     <MESSAGE value="1. Finish &quot;line-bar&quot; charts summary with real data of Patients.&#10;2. Add some *Utils and *Test classes to hospital-common." />
     <MESSAGE value="Refine export xls." />
     <MESSAGE value="Add &quot;times&quot; for Survey to store how many times the survey will be delivered." />
@@ -1758,7 +1746,8 @@
     <MESSAGE value="Set deliveryInfo.state to be -1(已答卷) when receive one retrieveInfo." />
     <MESSAGE value="Fix a bug in export patients." />
     <MESSAGE value="Doctor can add RetrieveInfo now." />
-    <option name="LAST_COMMIT_MESSAGE" value="Doctor can add RetrieveInfo now." />
+    <MESSAGE value="Fix following bugs: 1.show deliveryInfo page with retrieveInfo.&#10;2. add retrieveInfo Modal can not show survey.&#10;3. sql update." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix following bugs: 1.show deliveryInfo page with retrieveInfo.&#10;2. add retrieveInfo Modal can not show survey.&#10;3. sql update." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2874,14 +2863,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="91" column="95" lean-forward="false" selection-start-line="91" selection-start-column="95" selection-end-line="91" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
@@ -3015,8 +2996,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="82" column="24" lean-forward="false" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
+        <state relative-caret-position="18">
+          <caret line="67" column="36" lean-forward="false" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/doctor/doctor.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="253" column="41" lean-forward="false" selection-start-line="253" selection-start-column="41" selection-end-line="253" selection-end-column="41" />
           <folding />
         </state>
       </provider>
