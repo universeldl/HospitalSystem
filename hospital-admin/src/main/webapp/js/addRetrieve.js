@@ -1,26 +1,5 @@
 $(function () {
 
-    function addRetrieveFun() {
-        $("#addRetrieveDelivery option[value!=-1]").remove();//移除先前的选项
-        ajax(
-            {
-                url: "doctor/deliveryManageAction_getUnansweredDeliveryInfos.action",
-                type: "json",
-                callback: function (data) {
-                    // 循环遍历每个问卷分类，每个名称生成一个option对象，添加到<select>中
-                    for (var index in data) {
-                        var op = document.createElement("option");//创建一个指名名称元素
-                        op.value = data[index].deliveryId;//设置op的实际值为当前的问卷分类编号
-                        var textNode = document.createTextNode(data[index].survey.surveyName);//创建文本节点
-                        op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
-
-                        document.getElementById("addRetrieveDelivery").appendChild(op);
-                    }
-                }
-            }
-        );
-    }
-
     $('#addRetrieveSubmit').click(function () {
 
         if (!validAddRetrieve()) {
@@ -56,6 +35,29 @@ $(function () {
 
 });
 
+function addRetrieveFun(id) {
+    patientId = id;
+    $("#addRetrieveDelivery option[value!=-1]").remove();//移除先前的选项
+    ajax(
+        {
+            method: 'POST',
+            url: "doctor/deliveryManageAction_getUnansweredDeliveryInfos.action",
+            params: "patientId=" + patientId,
+            type: "json",
+            callback: function (data) {
+                // 循环遍历每个问卷分类，每个名称生成一个option对象，添加到<select>中
+                for (var index in data) {
+                    var op = document.createElement("option");//创建一个指名名称元素
+                    op.value = data[index].deliveryId;//设置op的实际值为当前的问卷分类编号
+                    var textNode = document.createTextNode(data[index].survey.surveyName);//创建文本节点
+                    op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
+
+                    document.getElementById("addRetrieveDelivery").appendChild(op);
+                }
+            }
+        }
+    );
+}
 
 function validAddRetrieve() {
     var flag = true;

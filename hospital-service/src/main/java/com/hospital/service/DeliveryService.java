@@ -2,6 +2,7 @@ package com.hospital.service;
 
 import com.hospital.domain.DeliveryInfo;
 import com.hospital.domain.PageBean;
+import com.hospital.domain.Patient;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface DeliveryService {
 
     DeliveryInfo getDeliveryInfoById(DeliveryInfo info);
 
-    List<DeliveryInfo> getUnansweredDeliveryInfos();
+    List<DeliveryInfo> getUnansweredDeliveryInfos(Integer patientId);
 
     /**
      * 返回分发状态码

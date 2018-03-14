@@ -96,7 +96,7 @@
                                 <a href="${pageContext.request.contextPath}/doctor/planManageAction_getAllPlan.action"><i
                                         class="fa fa-list"></i> 随访设置</a></li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/doctor/deliverySearchAction_findRetrieveInfoByPage.action"><i
+                                <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
                                         class="fa fa-send-o"></i> 随访信息</a></li>
                         </ul>
                     </li>
@@ -338,7 +338,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">病人名称</label>
+                        <label for="firstname" class="col-sm-3 control-label">病人姓名</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="patientName" readonly="readonly">
 
@@ -365,15 +365,6 @@
                         <label for="firstname" class="col-sm-3 control-label">操作医生</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="doctor" readonly="readonly">
-
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">答卷状态</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="state" readonly="readonly">
 
                         </div>
                     </div>

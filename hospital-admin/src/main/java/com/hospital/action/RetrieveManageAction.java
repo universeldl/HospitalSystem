@@ -102,7 +102,19 @@ public class RetrieveManageAction extends ActionSupport {
 
 
     public String addRetrieveInfo() {
-        RetrieveInfo retrieveInfo = retrieveService.getRetrieveInfoByDeliveryID(deliveryId);
+        RetrieveInfo retrieveInfo = new RetrieveInfo();
+
+        DeliveryInfo DI = new DeliveryInfo();
+        DI.setDeliveryId(deliveryId);
+        DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(DI);
+        retrieveInfo.setDeliveryInfo(deliveryInfo);
+        retrieveInfo.setSurvey(deliveryInfo.getSurvey());
+        retrieveInfo.setPatient(deliveryInfo.getPatient());
+        retrieveInfo.setDoctor(deliveryInfo.getDoctor());
+
+        Date retrieveDate = new Date(System.currentTimeMillis());//得到当前时间,作为生成时间
+        retrieveInfo.setRetrieveDate(retrieveDate);
+
         int success = 0;
         int b = retrieveService.addRetrieveInfo(retrieveInfo);
         if (b != 1) {

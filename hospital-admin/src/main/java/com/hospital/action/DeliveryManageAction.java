@@ -27,8 +27,11 @@ public class DeliveryManageAction extends ActionSupport {
 
     private int pageCode;
     private int deliveryId;
+    private int patientId;
     private String openID;
     private String pwd;
+
+    public void setPatientId(Integer patientId) {this.patientId = patientId;}
 
     public void setOpenID(String openID) {
         this.openID = openID;
@@ -103,9 +106,12 @@ public class DeliveryManageAction extends ActionSupport {
     public String getUnansweredDeliveryInfos() {
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
-        List<DeliveryInfo> unanswered = deliveryService.getUnansweredDeliveryInfos();
+        List<DeliveryInfo> unanswered = deliveryService.getUnansweredDeliveryInfos(patientId);
 
-        String json = JSONArray.fromObject(unanswered).toString();//List------->JSONArray
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+
+        String json = JSONArray.fromObject(unanswered, jsonConfig).toString();//List------->JSONArray
         try {
             response.getWriter().print(json);
         } catch (IOException e) {
