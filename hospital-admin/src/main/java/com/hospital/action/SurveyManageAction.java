@@ -328,7 +328,9 @@ public class SurveyManageAction extends ActionSupport {
             }
         }
 
-        //b = questionService.addQuestion(question);
+        if (questionType == 3) {
+            b = questionService.addQuestion(question);
+        }
         int success = 0;
         if (b) {
             success = 1;

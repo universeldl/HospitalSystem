@@ -4,3 +4,6 @@ out/
 *.iws
 *.iml
 HospitalSystem/WebRoot/WEB-INF/classes/
+
+*.class
+*/target/*
