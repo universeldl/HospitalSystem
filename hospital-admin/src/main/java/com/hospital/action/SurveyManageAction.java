@@ -321,13 +321,14 @@ public class SurveyManageAction extends ActionSupport {
                 Choice choice = new Choice(doctor.getAid(), choices.get(i), scores.get(i));
                 question.getChoices().add(choice);
                 //choice.setQuestionId(question.getQuestionId());
+                choice.setQuestion(question);
                 b = choiceService.addChoice(choice);
                 if (!b) break;//break whenever add failing
                 //TODO for robustness, we should remove the question and added choices if failed
             }
         }
 
-        b = questionService.addQuestion(question);
+        //b = questionService.addQuestion(question);
         int success = 0;
         if (b) {
             success = 1;
