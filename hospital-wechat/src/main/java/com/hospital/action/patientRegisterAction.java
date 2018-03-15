@@ -244,7 +244,8 @@ public class patientRegisterAction extends ActionSupport {
                 deliveryInfo.setDoctor(doctor);
                 deliveryInfo.setDeliveryDate(new Date(System.currentTimeMillis()));
                 deliveryInfo.setState(0);
-                deliveryService.addDelivery(deliveryInfo);
+                int deliveryId = deliveryService.addDelivery(deliveryInfo);
+                deliveryInfo.setDeliveryId(deliveryId);
                 deliveryService.sendTemplateMessage(deliveryInfo);
             }
             System.out.println("send template message finished");
