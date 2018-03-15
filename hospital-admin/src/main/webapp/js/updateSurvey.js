@@ -11,6 +11,7 @@ $(function () {
         var postdata = "surveyId=" + surveyId + "&surveyName=" + $.trim($("#updateSurveyName").val()) + "&surveyTypeId=" + $.trim($("#updateSurveyType").val())
             + "&frequency=" + $.trim($("#updateFrequency").val()) + "&author=" + $.trim($("#updateAuthor").val())
             + "&times=" + $.trim($("#updateTimes").val()) + "&department=" + $.trim($("#updateDepartment").val())
+            + "&bday=" + $.trim($("#updateBday").val())
             + "&sendOnRegister=" + $.trim($("#updateSendOnRegister").val())
             + "&description=" + $.trim($("#updateDescription").val());
         $('#loading').show();
@@ -80,6 +81,7 @@ function updateSurvey(id) {
                             $("#updateDepartment").val(data.department);
                             $("#updateDescription").val(data.description);
                             $("#updateTimes").val(data.times);
+                            $("#updateBday").val(data.bday);
 
                         }
                     }
@@ -183,6 +185,23 @@ function validUpdateSurvey() {
         $('#updateTimes').parent().removeClass("has-error");
         $('#updateTimes').next().text("");
         $("#updateTimes").next().hide();
+    }
+
+    var bday = $.trim($("#updateBday").val());
+    if (bday == "") {
+        $('#updateBday').parent().addClass("has-error");
+        $('#updateBday').next().text("请输入允许答卷最大天数");
+        $("#updateBday").next().show();
+        flag = false;
+    } else if (bday <= 0 || bday != parseInt(bday)) {
+        $('#updateBday').parent().addClass("has-error");
+        $('#updateBday').next().text("允许答卷最大天数必须为正整数");
+        $("#updateBday").next().show();
+        flag = false;
+    } else {
+        $('#updateBday').parent().removeClass("has-error");
+        $('#updateBday').next().text("");
+        $("#updateBday").next().hide();
     }
 
     return flag;

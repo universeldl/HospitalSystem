@@ -78,11 +78,20 @@ public class SurveyManageAction extends ActionSupport {
     private int surveyId;//问卷编号
     private boolean sendOnRegister;
     private String fileName;
-
+    private Integer bday;
 
     /**
      * @param fileName the fileName to set
      */
+
+    public void setBday(Integer bday) {
+        this.bday = bday;
+    }
+
+    public Integer getBday() {
+        return bday;
+    }
+
     public void setStartAge(Integer startAge) {
         this.startAge = startAge;
     }
@@ -268,7 +277,7 @@ public class SurveyManageAction extends ActionSupport {
         surveyType.setTypeId(surveyTypeId);
         Date putdate = new Date(System.currentTimeMillis());//得到当前时间,作为生成时间
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");//得到操作医生
-        Survey survey = new Survey(surveyType, surveyName, author, department, putdate, description, doctor, frequency, times, sendOnRegister);//设置问卷
+        Survey survey = new Survey(surveyType, surveyName, author, department, putdate, description, doctor, frequency, times, sendOnRegister, bday);//设置问卷
         boolean b = surveyService.addSurvey(survey);//添加问卷.返回是否成功添加
         int success = 0;
         if (b) {
@@ -515,6 +524,7 @@ public class SurveyManageAction extends ActionSupport {
         updateSurvey.setFrequency(frequency);
         updateSurvey.setDepartment(department);
         updateSurvey.setSendOnRegister(sendOnRegister);
+        updateSurvey.setBday(bday);
         Survey newSurvey = surveyService.updateSurveyInfo(updateSurvey);//修改问卷信息对象
         int success = 0;
         if (newSurvey != null) {

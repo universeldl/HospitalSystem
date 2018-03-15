@@ -154,7 +154,6 @@
                         <thead>
                         <tr>
                             <th>病人类型</th>
-                            <th>允许填卷天数</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -165,7 +164,6 @@
                             <s:iterator value="#request.patientTypes" var="patientType">
                                 <tbody>
                                 <td><s:property value="#patientType.patientTypeName"/></td>
-                                <td><s:property value="#patientType.bday"/></td>
                                 <td>
                                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                             data-target="#updateModal" onclick="updatePatientType(<s:property
@@ -177,7 +175,6 @@
                         </s:if>
                         <s:else>
                             <tbody>
-                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             </tbody>
@@ -227,13 +224,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">允许填卷天数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addBday" placeholder="请输入允许填卷天数">
-                            <label class="control-label" for="addBday" style="display: none;"></label>
-                        </div>
-                    </div>
 
                     <!---------------------表单-------------------->
                 </div>
@@ -279,13 +269,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">最大分发天数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="bday" placeholder="请输入最大分发天数">
-                            <label class="control-label" for="bday" style="display: none;"></label>
-                        </div>
-                    </div>
 
                     <!---------------------表单-------------------->
 

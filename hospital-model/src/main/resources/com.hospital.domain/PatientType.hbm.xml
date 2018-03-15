@@ -12,9 +12,7 @@
             <column name="patientTypeName"/>
         </property>
 
-        <property name="bday" type="java.lang.Integer">
-            <column name="bday"/>
-        </property>
+
 
 
     </class>

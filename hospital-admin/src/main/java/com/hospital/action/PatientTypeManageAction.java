@@ -21,7 +21,6 @@ public class PatientTypeManageAction extends ActionSupport {
     }
 
     private Integer id;
-    private Integer bday;
     private String patientTypeName;
 
 
@@ -30,9 +29,6 @@ public class PatientTypeManageAction extends ActionSupport {
     }
 
 
-    public void setBday(Integer bday) {
-        this.bday = bday;
-    }
 
 
     public void setId(Integer id) {
@@ -75,7 +71,6 @@ public class PatientTypeManageAction extends ActionSupport {
         patientType.setPatientTypeId(id);
         PatientType updatePatientType = patientTypeService.getTypeById(patientType);
         updatePatientType.setPatientTypeName(patientTypeName);
-        updatePatientType.setBday(bday);
         PatientType newPatientType = patientTypeService.updatePatientType(updatePatientType);
         int success = 0;
         if (newPatientType != null) {
@@ -95,7 +90,6 @@ public class PatientTypeManageAction extends ActionSupport {
     public String addPatientType() {
         PatientType patientType = new PatientType();
         patientType.setPatientTypeName(patientTypeName);
-        patientType.setBday(bday);
         boolean b = patientTypeService.addPatientType(patientType);
         int success = 0;
         if (b) {

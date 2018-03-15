@@ -12,7 +12,7 @@ $(function () {
             return;
         }
 
-        var postdata = "id=" + $.trim($("#patientTypeId").val()) + "&bday=" + $.trim($("#bday").val())
+        var postdata = "id=" + $.trim($("#patientTypeId").val())
             + "&patientTypeName=" + $.trim($("#patientTypeName").val());
         $('#loading').show();
         ajax(
@@ -58,7 +58,6 @@ function updatePatientType(id) {
                 $('#loading').hide();
                 $("#patientTypeId").val(data.patientTypeId);
                 $("#patientTypeName").val(data.patientTypeName);
-                $("#bday").val(data.bday);
             }
         }
     );
@@ -87,23 +86,6 @@ function validUpdatePatientType() {
         $('#patientTypeName').parent().removeClass("has-error");
         $('#patientTypeName').next().text("");
         $("#patientTypeName").next().hide();
-    }
-
-    var bday = $.trim($("#bday").val());
-    if (bday == "") {
-        $('#bday').parent().addClass("has-error");
-        $('#bday').next().text("请输入最大分发天数");
-        $("#bday").next().show();
-        flag = false;
-    } else if (bday <= 0 || bday != parseInt(bday)) {
-        $('#bday').parent().addClass("has-error");
-        $('#bday').next().text("最大分发天数必须为正整数");
-        $("#bday").next().show();
-        flag = false;
-    } else {
-        $('#bday').parent().removeClass("has-error");
-        $('#bday').next().text("");
-        $("#bday").next().hide();
     }
 
     return flag;

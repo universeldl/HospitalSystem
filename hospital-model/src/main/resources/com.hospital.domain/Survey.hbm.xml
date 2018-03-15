@@ -19,6 +19,10 @@
             <column name="num"/>
         </property>
 
+        <property name="bday" type="java.lang.Integer">
+            <column name="bday"/>
+        </property>
+
         <property name="frequency" type="java.lang.Integer">
             <column name="frequency"/>
         </property>

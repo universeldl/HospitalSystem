@@ -8,7 +8,7 @@ $(function () {
             return;
         }
 
-        var postdata = "patientTypeName=" + $.trim($("#addType").val()) + "&bday=" + $.trim($("#addBday").val());
+        var postdata = "patientTypeName=" + $.trim($("#addType").val());
         $('#loading').show();
         ajax(
             {
@@ -60,23 +60,6 @@ function validAddPatientType() {
         $('#addType').parent().removeClass("has-error");
         $('#addType').next().text("");
         $("#addType").next().hide();
-    }
-
-    var bday = $.trim($("#addBday").val());
-    if (bday == "") {
-        $('#addBday').parent().addClass("has-error");
-        $('#addBday').next().text("请输入最大分发天数");
-        $("#addBday").next().show();
-        flag = false;
-    } else if (bday <= 0 || bday != parseInt(bday)) {
-        $('#addBday').parent().addClass("has-error");
-        $('#addBday').next().text("最大分发天数必须为正整数");
-        $("#addBday").next().show();
-        flag = false;
-    } else {
-        $('#addBday').parent().removeClass("has-error");
-        $('#addBday').next().text("");
-        $("#addBday").next().hide();
     }
 
     return flag;

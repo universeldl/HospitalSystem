@@ -193,6 +193,12 @@ public class patientRegisterAction extends ActionSupport {
             patient.setSex(0);
         }
 
+        if (!patientService.addPatient(patient)) {
+            writeStatus(-3);
+            return null;
+        }
+
+        Patient newPatient = patientService.getPatientByopenID(patient);
 
         System.out.println("Add patient finished. status = " + status);
 
@@ -239,23 +245,25 @@ public class patientRegisterAction extends ActionSupport {
                 if (!survey.isSendOnRegister()) continue;
                 System.out.println("provide survey id = " + survey_id);
                 DeliveryInfo deliveryInfo = new DeliveryInfo();
-                deliveryInfo.setPatient(patient);
+                deliveryInfo.setPatient(newPatient);
                 deliveryInfo.setSurvey(survey);
                 deliveryInfo.setDoctor(doctor);
                 deliveryInfo.setDeliveryDate(new Date(System.currentTimeMillis()));
                 deliveryInfo.setState(0);
                 int deliveryId = deliveryService.addDelivery(deliveryInfo);
                 deliveryInfo.setDeliveryId(deliveryId);
-                deliveryService.sendTemplateMessage(deliveryInfo);
+
+                DeliveryInfo newDeliveryInfo = deliveryService.getDeliveryInfoById(deliveryInfo);
+                if (newDeliveryInfo != null) {
+                    deliveryService.sendTemplateMessage(newDeliveryInfo);
+                } else {
+                    writeStatus(-3);
+                    return null;
+                }
             }
             System.out.println("send template message finished");
         } else {
             System.out.println("Warning : no plan added for patient " + patient.getName());
-        }
-
-        if (!patientService.addPatient(patient)) {
-            writeStatus(-3);
-            return null;
         }
 
         writeStatus(1);

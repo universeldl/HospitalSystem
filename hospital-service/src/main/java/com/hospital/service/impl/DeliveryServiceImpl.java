@@ -75,7 +75,7 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
 
         //得到该病人的最长答卷天数，过期将不再接受该次答卷
-        int maxDay = patient.getPatientType().getBday();//允许填卷天数
+        int maxDay = info.getSurvey().getBday();//允许填卷天数
 
         //获得当前时间
         Date deliveryDate = new Date(System.currentTimeMillis());
@@ -134,7 +134,7 @@ public class DeliveryServiceImpl implements DeliveryService {
                         calendar.setTime(patient.getCreateTime());
                         calendar.add(Calendar.MONTH, num);
                         Date sendDate = calendar.getTime();
-                        calendar.add(Calendar.DAY_OF_MONTH, patient.getPatientType().getBday());
+                        calendar.add(Calendar.DAY_OF_MONTH, survey.getBday());
                         Date endDate = calendar.getTime();
                         if (System.currentTimeMillis() > sendDate.getTime() && System.currentTimeMillis() < endDate.getTime()) {//Now it's the time to deliver the survey~~
 
@@ -146,8 +146,11 @@ public class DeliveryServiceImpl implements DeliveryService {
                             deliveryInfo.setPatient(patient);
                             deliveryInfo.setState(num + 1);
                             int addDelivery = addDelivery(deliveryInfo);//返回1成功添加,返回0添加失败
-                            if (addDelivery == 1) {// added successfully
-                                sendTemplateMessage(deliveryInfo);
+                            //if (addDelivery == 1) {// added successfully
+                            deliveryInfo.setDeliveryId(addDelivery);
+                            DeliveryInfo newDeliveryInfo = getDeliveryInfoById(deliveryInfo);
+                            if (newDeliveryInfo != null) {
+                                sendTemplateMessage(newDeliveryInfo);
                                 survey.setNum(survey.getNum() + 1);
                                 surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
                                 break;//each patient only send once, or patients will receive all the remaining surveys
@@ -259,7 +262,7 @@ public class DeliveryServiceImpl implements DeliveryService {
             return -1;
         }
         //得到可重发的天数
-        Integer resendDays = deliveryInfoById.getPatient().getPatientType().getBday();
+        Integer resendDays = deliveryInfoById.getSurvey().getBday();
         //在当前记录的截止日期上叠加可重发天数
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(deliveryInfoById.getEndDate());

@@ -26,6 +26,7 @@ function getSurveyInfo(id) {
                 $("#findDepartment").val(data.department);
                 $("#findDescription").val(data.description);
                 $("#findNum").val(data.num);
+                $("#findBday").val(data.bday);
                 $("#findDoctor").val(data.doctor.name);
                 $("#findCurrentNum").val(data.currentNum);
                 $("#findTimes").val(data.times);

@@ -503,6 +503,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">允许答卷最大天数</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findBday" readonly="readonly">
+
+                        </div>
+                    </div>
+
 
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">操作医生</label>
@@ -673,6 +681,14 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">允许答卷最大天数</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addBday" placeholder="请输入允许答卷最大天数">
+                            <label class="control-label" for="addBday" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">随访次数</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="addTimes" placeholder="请输入问卷随访次数">
@@ -771,6 +787,14 @@
                                 <option value="5">12个月</option>
                             </select>
                             <label class="control-label" for="updateFrequency" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">允许答卷最大天数</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateBday" placeholder="请输入允许答卷最大天数">
+                            <label class="control-label" for="updateBday" style="display: none;"></label>
                         </div>
                     </div>
 

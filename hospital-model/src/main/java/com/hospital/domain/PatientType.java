@@ -6,7 +6,6 @@ public class PatientType implements Serializable {
 
     private Integer patientTypeId;
     private String patientTypeName;//病人类型名称
-    private Integer bday;    //允许填卷天数
 
     public Integer getPatientTypeId() {
         return patientTypeId;
@@ -22,14 +21,6 @@ public class PatientType implements Serializable {
 
     public void setPatientTypeName(String patientTypeName) {
         this.patientTypeName = patientTypeName;
-    }
-
-    public Integer getBday() {
-        return bday;
-    }
-
-    public void setBday(Integer bday) {
-        this.bday = bday;
     }
 
     public PatientType() {

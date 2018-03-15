@@ -24,6 +24,15 @@ public class Survey implements Serializable {
     private boolean sendOnRegister;
     private Set<Question> questions = new HashSet<>();
     private Set<RetrieveInfo> retrieveInfos = new HashSet<>();
+    private Integer bday;
+
+    public void setBday(Integer bday) {
+        this.bday = bday;
+    }
+
+    public Integer getBday() {
+        return bday;
+    }
 
     public void setSendOnRegister(boolean sendOnRegister) {
         this.sendOnRegister = sendOnRegister;
@@ -163,7 +172,7 @@ public class Survey implements Serializable {
 
     public Survey(SurveyType surveyType, String surveyName, String author,
                   String department, Date putdate, String description,
-                  Doctor doctor, Integer frequency, Integer times, boolean sendOnRegister) {
+                  Doctor doctor, Integer frequency, Integer times, boolean sendOnRegister, Integer bday) {
         super();
         this.surveyType = surveyType;
         this.surveyName = surveyName;
@@ -175,6 +184,7 @@ public class Survey implements Serializable {
         this.frequency = frequency;
         this.times = times;
         this.sendOnRegister = sendOnRegister;
+        this.bday = bday;
     }
 
     public Survey(SurveyType surveyType, String surveyName, String author,
