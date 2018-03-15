@@ -10,6 +10,7 @@ $(function () {
 
 
 function getDeliveryInfoById(id) {
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -18,6 +19,7 @@ function getDeliveryInfoById(id) {
             type: "json",
             callback: function (data) {
 
+                $('#loading').hide();
                 $("#deliveryId").val(data.deliveryId);
                 $("#surveyName").val(data.survey.surveyName);
                 $("#surveyType").val(data.survey.surveyType.typeName);

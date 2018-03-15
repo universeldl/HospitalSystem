@@ -10,6 +10,7 @@ $(function () {
 
 
 function getForfeitInfoById(id) {
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -18,6 +19,7 @@ function getForfeitInfoById(id) {
             type: "json",
             callback: function (data) {
 
+                $('#loading').hide();
                 $("#deliveryId").val(data.deliveryId);
                 $("#surveyName").val(data.deliveryInfo.survey.surveyName);
                 $("#surveyType").val(data.deliveryInfo.survey.surveyType.typeName);

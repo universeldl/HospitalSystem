@@ -8,12 +8,14 @@ $(function () {
 
 
         var postdata = "username=" + $.trim($("#username").val()) + "&pwd=" + $.trim($("#password").val());
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctorLoginAction_login.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         //医生
                         window.location.href = "doctor/doctor.jsp";

@@ -4,7 +4,6 @@
  */
 $(function () {
 
-
     $('#updatePatient').click(function () {
 
 
@@ -52,6 +51,7 @@ $(function () {
 function updatePatient(id) {
     $("#updatePatientType option[value!=-1]").remove();//移除先前的选项
     $("#updateAddnDoctor option[value!=-1]").remove();//移除先前的选项
+    $('#loading').show();
     ajax(
         {
             url: "doctor/patientTypeManageAction_getAllPatientTypes.action",
@@ -90,6 +90,7 @@ function updatePatient(id) {
                         params: "patientId=" + id,
                         type: "json",
                         callback: function (data) {
+                            $('#loading').hide();
                             $("#updatePatientID").val(data.patientId);
                             $("#updateOpenID").val(data.openID);
                             $("#updateName").val(data.name);

@@ -10,15 +10,16 @@ $(function () {
 
 
 function getRetrieveInfoById(id) {
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
             url: 'doctor/retrieveManageAction_getRetrieveInfoById.action',
             params: "deliveryId=" + id,
             type: "json",
-            async: false,
             callback: function (data) {
 
+                $('#loading').hide();
                 $("#deliveryId").val(data.deliveryId);
                 $("#surveyName").val(data.survey.surveyName);
                 $("#surveyType").val(data.survey.surveyType.typeName);

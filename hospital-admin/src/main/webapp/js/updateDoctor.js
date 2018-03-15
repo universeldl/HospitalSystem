@@ -13,12 +13,14 @@ $(function () {
         }
 
         var postdata = "id=" + $.trim($("#updateId").val()) + "&username=" + $.trim($("#updateUsername").val()) + "&name=" + $.trim($("#updateName").val()) + "&phone=" + $.trim($("#updatePhone").val());
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/doctorManageAction_updateDoctor.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#updateModal").modal("hide");//关闭模糊框
                         showInfo("修改成功");
@@ -48,6 +50,7 @@ $(function () {
  * @param {Object} username 需要修改的用户名
  */
 function updateDoctor(id) {
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -55,6 +58,7 @@ function updateDoctor(id) {
             params: "id=" + id,
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
                 $("#updateId").val(data.aid);
                 $("#updateUsername").val(data.username);
                 $("#updateName").val(data.name);

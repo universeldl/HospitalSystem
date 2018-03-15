@@ -4,6 +4,7 @@ let answerId = 1;
 function updateAnswerById(ansId) {
     answerId = ansId;
 
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -11,6 +12,7 @@ function updateAnswerById(ansId) {
             params: "answerId=" + answerId,
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
 
                 var str = '';
                 //$("#updateChoicesDiv").next().each(function () {//clean first
@@ -78,12 +80,14 @@ $(function () {
         var postdata;
         postdata = "answerId=" + answerId + "&" + $("#updateForm").serialize();
 
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/retrieveManageAction_updateAnswer.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#updateQuestionModal").modal("hide");//关闭模糊框
                         showInfo("更新成功");

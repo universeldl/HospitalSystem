@@ -11,12 +11,14 @@ $(function () {
 
 function retrieveSurvey(id) {
     var postdata = "deliveryId=" + id;
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
             url: 'doctor/retrieveManageAction_retrieveSurvey.action',
             params: postdata,
             callback: function (data) {
+                $('#loading').hide();
                 if (data == 1) {
                     showInfo("答卷成功");
 

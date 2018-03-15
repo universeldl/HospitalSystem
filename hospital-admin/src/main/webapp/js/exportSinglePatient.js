@@ -1,6 +1,7 @@
 function exportSinglePatient(id) {
     //获得basePath
     let basePath = $('#basePath').val();
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -8,6 +9,7 @@ function exportSinglePatient(id) {
             params: 'patientId=' + id,
             type: 'json',
             callback: function (data) {
+                $('#loading').hide();
                 showInfo("数据已导出：<a href='" + basePath + data.filePath + "'>点击下载</a>");
             }
         }

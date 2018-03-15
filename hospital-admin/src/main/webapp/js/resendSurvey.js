@@ -11,12 +11,14 @@ $(function () {
 
 function resendSurvey(id) {
     var postdata = "deliveryId=" + id;
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
             url: 'doctor/deliveryManageAction_resendSurvey.action',
             params: postdata,
             callback: function (data) {
+                $('#loading').hide();
                 if (data == 1) {
                     showInfo("重发成功");
                 } else if (data == -1) {

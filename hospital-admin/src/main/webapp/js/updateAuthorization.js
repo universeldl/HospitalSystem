@@ -9,12 +9,14 @@ function setPower() {
     } else {
         //设置该医生的权限
         var postdata = "id=" + $.trim($("#aid").val()) + "&power=" + power;
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/authorizationAction_addAuthorization.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#powerModal").modal("hide");//关闭模糊框		
                         //	showInfo("设置成功");	
@@ -39,7 +41,8 @@ function setPower() {
 function power(id) {
     //$('input[name="power"]').removeAttr("checked");
     //$('input[name=power]').attr("checked",null);
-    //$("[name='power']").removeAttr("checked");//取消全选 
+    //$("[name='power']").removeAttr("checked");//取消全选
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -47,6 +50,7 @@ function power(id) {
             params: "id=" + id,
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
                 $("#aid").val(data.aid);
                 //	$('input[name="power"]').removeAttr("checked");//取消全选
                 if (data.typeSet != 0) {

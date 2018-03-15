@@ -1,13 +1,14 @@
 function getPatientInfo(id) {
 
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
             url: 'doctor/patientManageAction_getPatient.action',
             params: "patientId=" + id,
             type: "json",
-            async: false,
             callback: function (data) {
+                $('#loading').hide();
                 $("#findOpenID").val(data.openID);
                 $("#findPatientName").val(data.name);
                 $("#findEmail").val(data.email);

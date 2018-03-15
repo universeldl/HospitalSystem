@@ -13,12 +13,14 @@ $(function () {
         }
 
         var postdata = "id=" + $.trim($("#updateSurveyTypeId").val()) + "&typeName=" + $.trim($("#updateSurveyTypeName").val());
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/surveyTypeManageAction_updateSurveyType.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#updateModal").modal("hide");//关闭模糊框		
                         showInfo("修改成功");
@@ -48,6 +50,7 @@ $(function () {
  * @param {Object} id 需要修改的问卷分类id
  */
 function updateSurveyType(id) {
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -55,6 +58,7 @@ function updateSurveyType(id) {
             params: "id=" + id,
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
                 $("#updateSurveyTypeId").val(data.typeId);
                 $("#updateSurveyTypeName").val(data.typeName);
 

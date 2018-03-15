@@ -42,12 +42,14 @@ $(function () {
         }
 
         //alert("add question" + postdata);
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/surveyManageAction_addQuestion.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#addQuestionModal").modal("hide");//关闭模糊框
                         showInfo("添加成功");

@@ -1,10 +1,12 @@
 function deleteDoctor(id) {
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
             url: 'doctor/doctorManageAction_deleteDoctor.action',
             params: "id=" + id,
             callback: function (data) {
+                $('#loading').hide();
                 if (data == 1) {
                     showInfo("删除成功");
                 }

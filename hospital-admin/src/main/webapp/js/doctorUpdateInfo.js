@@ -14,12 +14,14 @@ $(function () {
         }
 
         var postdata = "username=" + $.trim($("#username").val()) + "&name=" + $.trim($("#name").val()) + "&phone=" + $.trim($("#phone").val());
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/doctorInfoAction_doctorInfo.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#updateinfo").modal("hide");//关闭模糊框
                         showInfo("修改成功");

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-doctor-theme.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-doctor-theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/loading.css">
     <link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet" media="all">
     <script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
@@ -57,6 +58,9 @@
             </div>
         </div>
     </div>
+</div>
+<div id="loading" style="display: none;">
+    <img src="${pageContext.request.contextPath}/img/loading.gif">
 </div>
 </body>
 

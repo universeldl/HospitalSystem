@@ -3,13 +3,15 @@ $(function () {
 
     $('#btn_delivery').click(function () {
 
-        var postdata = "openID=" + $.trim($("#deliveryPatientOpenID").val()) + "&pwd=" + $.trim($("#pwd").val());
+    var postdata = "openID=" + $.trim($("#deliveryPatientOpenID").val()) + "&pwd=" + $.trim($("#pwd").val());
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
             url: 'doctor/deliveryManageAction_deliverySurvey.action',
             params: postdata,
             callback: function (data) {
+                $('#loading').hide();
                 if (data == 1) {
                     showInfo("分发成功");
 

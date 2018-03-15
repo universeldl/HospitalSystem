@@ -21,12 +21,14 @@ $(function () {
             + "&sex=" + $.trim($("#updateSex").val())
             + "&" + $("#updateForm").serialize();
 
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/planManageAction_updatePlan.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#updateModal").modal("hide");//关闭模糊框
                         showInfo("修改成功");
@@ -60,6 +62,7 @@ function updatePlan(id) {
     $("#updatePatientType option[value!=-1]").remove();//移除先前的选项
     $("#updateSurveys option[value!=-1]").remove();//移除先前的选项
 
+    $('#loading').show();
     ajax(
         {
             url: "doctor/patientTypeManageAction_getAllPatientTypes.action",
@@ -98,6 +101,7 @@ function updatePlan(id) {
                         params: "planId=" + id,
                         type: "json",
                         callback: function (data) {
+                            $('#loading').hide();
                             $("#updateOldPatientOnly").val(data.oldPatientOnly);
                             $("#updatePatientType").val(data.patientType.patientTypeId);
                         }

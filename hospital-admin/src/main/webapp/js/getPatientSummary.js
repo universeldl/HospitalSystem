@@ -1,11 +1,13 @@
 function getSummary() {
 
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
             url: 'doctor/patientManageAction_getSummary.action',
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
                 // 基于准备好的dom，初始化echarts实例
                 var myChart = echarts.init(document.getElementById('pie'));
                 myChart.setOption({

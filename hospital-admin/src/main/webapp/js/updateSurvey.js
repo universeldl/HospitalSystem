@@ -13,12 +13,14 @@ $(function () {
             + "&times=" + $.trim($("#updateTimes").val()) + "&department=" + $.trim($("#updateDepartment").val())
             + "&sendOnRegister=" + $.trim($("#updateSendOnRegister").val())
             + "&description=" + $.trim($("#updateDescription").val());
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/surveyManageAction_updateSurvey.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#updateModal").modal("hide");//关闭模糊框
                         showInfo("修改成功");
@@ -47,6 +49,7 @@ $(function () {
 function updateSurvey(id) {
     surveyId = id;
     $("#updateSurveyType option[value!=-1]").remove();//移除先前的选项
+    $('#loading').show();
     ajax(
         {
             url: "doctor/surveyManageAction_getAllSurveyTypes.action",
@@ -69,6 +72,7 @@ function updateSurvey(id) {
                         params: "surveyId=" + id,
                         type: "json",
                         callback: function (data) {
+                            $('#loading').hide();
                             $("#updateSurveyId").val(data.surveyId);
                             $("#updateSurveyName").val(data.surveyName);
                             $("#updateSurveyType").val(data.surveyType.typeId);

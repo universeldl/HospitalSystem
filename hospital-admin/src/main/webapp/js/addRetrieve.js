@@ -38,6 +38,7 @@ $(function () {
 function addRetrieveFun(id) {
     patientId = id;
     $("#addRetrieveDelivery option[value!=-1]").remove();//移除先前的选项
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -45,6 +46,7 @@ function addRetrieveFun(id) {
             params: "patientId=" + patientId,
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
                 // 循环遍历每个问卷分类，每个名称生成一个option对象，添加到<select>中
                 for (var index in data) {
                     var op = document.createElement("option");//创建一个指名名称元素

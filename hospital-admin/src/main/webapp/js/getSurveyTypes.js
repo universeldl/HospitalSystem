@@ -1,9 +1,11 @@
 window.onload = new function () {
+    $('#loading').show();
     ajax(
         {
             url: "surveyAction_getAllSurveyTypes.action",
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
                 // 循环遍历每个问卷分类，每个名称生成一个option对象，添加到<select>中
                 for (var index in data) {
                     var op = document.createElement("option");//创建一个指名名称元素

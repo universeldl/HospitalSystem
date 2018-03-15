@@ -11,12 +11,15 @@ $(function () {
             return;
         }
         var postdata = "username=" + $.trim($("#addUsername").val()) + "&name=" + $.trim($("#addName").val()) + "&phone=" + $.trim($("#addPhone").val());
+
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/doctorManageAction_addDoctor.action',
                 params: postdata,
                 callback: function (data) {
+                $('#loading').hide();
                     if (data == 1) {
                         $("#addModal").modal("hide");//关闭模糊框
                         showInfo("添加成功");

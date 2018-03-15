@@ -7,6 +7,7 @@ $(function () {
             return;
         }
         var postdata = "fileName=" + $.trim($("#excel").val());
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
@@ -14,6 +15,7 @@ $(function () {
                 type: "json",
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data.state == 2) {
                         //获得basePath
                         basePath = $('#basePath').val();

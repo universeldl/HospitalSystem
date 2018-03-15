@@ -11,6 +11,7 @@ $(function () {
 
 function getSurveyInfo(id) {
 
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -18,6 +19,7 @@ function getSurveyInfo(id) {
             params: "surveyId=" + id,
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
                 $("#findSurveyName").val(data.surveyName);
                 $("#findSurveyType").val(data.surveyType.typeName);
                 $("#findAuthor").val(data.author);

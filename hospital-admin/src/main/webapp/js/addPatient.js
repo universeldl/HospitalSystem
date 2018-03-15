@@ -1,4 +1,5 @@
 window.onload = new function () {
+    $('#loading').show();
     ajax(
         {
             url: "doctor/patientTypeManageAction_getAllPatientTypes.action",
@@ -21,6 +22,7 @@ window.onload = new function () {
             url: "doctor/doctorManageAction_getAllDoctors.action",
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
                 // 循环遍历每个医生，每个医生姓名生成一个option对象，添加到<select>中
                 for (var index in data) {
                     var op = document.createElement("option");//创建一个指名名称元素

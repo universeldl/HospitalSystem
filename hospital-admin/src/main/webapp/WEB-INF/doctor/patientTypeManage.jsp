@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/loading.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/all-skins.min.css">
@@ -453,6 +454,9 @@
     </div>
 </div>
 
+<div id="loading" style="display: none;">
+    <img src="${pageContext.request.contextPath}/img/loading.gif">
+</div>
 
 </body>
 </html>

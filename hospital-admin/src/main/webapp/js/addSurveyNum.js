@@ -14,12 +14,14 @@ $(function () {
             return;
         }
         var postdata = "surveyId=" + $.trim($("#addSurveyNumId").val()) + "&num=" + $.trim($("#addSurveyNum").val());
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/surveyManageAction_addSurveyNum.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#addNumModal").modal("hide");//关闭模糊框
                         showInfo("新增成功");

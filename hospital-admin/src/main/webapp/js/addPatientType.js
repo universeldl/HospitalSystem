@@ -9,12 +9,14 @@ $(function () {
         }
 
         var postdata = "patientTypeName=" + $.trim($("#addType").val()) + "&bday=" + $.trim($("#addBday").val());
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/patientTypeManageAction_addPatientType.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#addModal").modal("hide");//关闭模糊框		
                         showInfo("添加成功");

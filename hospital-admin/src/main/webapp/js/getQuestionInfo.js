@@ -10,6 +10,7 @@ $(function () {
 
 function getQuestionInfo(id) {
 
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -17,6 +18,7 @@ function getQuestionInfo(id) {
             params: "questionId=" + id,
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
                 $("#findQuestionContent").val(data.questionContent);
 
                 if (data.textChoice == 1)

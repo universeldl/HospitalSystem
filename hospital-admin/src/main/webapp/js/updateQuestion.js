@@ -7,6 +7,7 @@ function updateQuestion(sid, qid) {
     surveyId = sid;
     questionId = qid;
 
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -14,6 +15,7 @@ function updateQuestion(sid, qid) {
             params: "questionId=" + qid,
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
                 $("#updateQuestionContent").val(data.questionContent);
 
                 if (data.textChoice == 1) {
@@ -118,12 +120,14 @@ $(function () {
 
         //alert(postdata);
 
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/surveyManageAction_updateQuestion.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#updateQuestionModal").modal("hide");//关闭模糊框
                         showInfo("更新成功");

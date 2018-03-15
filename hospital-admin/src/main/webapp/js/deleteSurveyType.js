@@ -1,10 +1,12 @@
 function deleteSurveyType(id) {
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
             url: 'doctor/surveyTypeManageAction_deleteSurveyType.action',
             params: "id=" + id,
             callback: function (data) {
+                $('#loading').hide();
                 if (data == 1) {
                     showInfo("删除成功");
                 }

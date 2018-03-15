@@ -13,12 +13,14 @@ $(function () {
         }
 
         var postdata = "typeName=" + $.trim($("#addSurveyTypeName").val());
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/surveyTypeManageAction_addSurveyType.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#addModal").modal("hide");//关闭模糊框
                         showInfo("添加成功");

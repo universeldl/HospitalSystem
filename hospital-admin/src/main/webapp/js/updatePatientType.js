@@ -14,12 +14,14 @@ $(function () {
 
         var postdata = "id=" + $.trim($("#patientTypeId").val()) + "&bday=" + $.trim($("#bday").val())
             + "&patientTypeName=" + $.trim($("#patientTypeName").val());
+        $('#loading').show();
         ajax(
             {
                 method: 'POST',
                 url: 'doctor/patientTypeManageAction_updatePatientType.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#updateModal").modal("hide");//关闭模糊框		
                         showInfo("修改成功");
@@ -45,6 +47,7 @@ $(function () {
 
 
 function updatePatientType(id) {
+    $('#loading').show();
     ajax(
         {
             method: 'POST',
@@ -52,6 +55,7 @@ function updatePatientType(id) {
             params: "id=" + id,
             type: "json",
             callback: function (data) {
+                $('#loading').hide();
                 $("#patientTypeId").val(data.patientTypeId);
                 $("#patientTypeName").val(data.patientTypeName);
                 $("#bday").val(data.bday);
