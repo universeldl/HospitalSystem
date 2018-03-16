@@ -4,6 +4,7 @@ import com.hospital.domain.*;
 import com.hospital.service.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
@@ -145,10 +146,32 @@ public class RetrieveManageAction extends ActionSupport {
         answer.setAnswerId(answerId);
         Answer newAnswer = answerService.getAnswerById(answer);
 
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+        //generate JSON object manually to reduce ajax transfer size
+        JSONObject jsonObject = new JSONObject();
+        int questionType = newAnswer.getQuestion().getQuestionType();
+        int textChoice = newAnswer.getQuestion().getTextChoice();
+        String textChoiceContent = newAnswer.getTextChoiceContent();
+        jsonObject.put("questionType", questionType);
+        jsonObject.put("textChoice", textChoice);
+        jsonObject.put("textChoiceContent", textChoiceContent);
 
-        JSONObject jsonObject = JSONObject.fromObject(newAnswer, jsonConfig);
+        // 返回一个JSONArray对象
+        JSONArray jsonArray = new JSONArray();
+        int idx = 0;
+        for(Choice choice : newAnswer.getQuestion().getChoices()) {
+            JSONObject cho = new JSONObject();
+            cho.put("choiceId", choice.getChoiceId());
+            cho.put("choiceContent", choice.getChoiceContent());
+            jsonArray.add(idx, cho);
+            idx++;
+        }
+        jsonObject.put("choices", jsonArray);
+
+
+        //JsonConfig jsonConfig = new JsonConfig();
+        //jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+
+        //JSONObject jsonObject = JSONObject.fromObject(newAnswer, jsonConfig);
         try {
             response.getWriter().print(jsonObject);
         } catch (IOException e) {

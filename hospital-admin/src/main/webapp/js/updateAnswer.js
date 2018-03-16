@@ -20,41 +20,41 @@ function updateAnswerById(ansId) {
                 //    $(this).remove();
                 //});
 
-                if (data.question.questionType == 1) {//多选
+                if (data.questionType == 1) {//多选
                     questionType = 1;
                     str += '<div class="form-group">';
-                    for (let index in data.question.choices) {
+                    for (let index in data.choices) {
                         str += '<div>'
-                            + '<input type="checkbox" name="multiChoiceOption" id="multiChoiceOption"  value="' + data.question.choices[index].choiceId + '">' + data.question.choices[index].choiceContent
+                            + '<input type="checkbox" name="multiChoiceOption" id="multiChoiceOption"  value="' + data.choices[index].choiceId + '">' + data.choices[index].choiceContent
                             + '</div>';
                     }
-                    if (data.question.textChoice == 1) {
-                        //let sz = data.question.choices.size + 1;
+                    if (data.textChoice == 1) {
+                        //let sz = data.choices.size + 1;
                         str += '<input type="checkbox" name="multiChoiceOption" value="99999' + '">其它:'
                             + '<textarea class="form-control" rows="3" name="updateTextChoice" id="updateTextChoice">' + data.textChoiceContent + '</textarea>';
                     }
                     str += '</div>';
                 }
-                else if (data.question.questionType == 2) {//单选
+                else if (data.questionType == 2) {//单选
                     questionType = 2;
                     str += '<div class="form-group">';
-                    for (let index in data.question.choices) {
+                    for (let index in data.choices) {
                         str += '<div>'
-                            + '<input type="radio" name="singleChoiceOption" id="singleChoiceOption" value="' + data.question.choices[index].choiceId + '">' + data.question.choices[index].choiceContent
+                            + '<input type="radio" name="singleChoiceOption" id="singleChoiceOption" value="' + data.choices[index].choiceId + '">' + data.choices[index].choiceContent
                             + '</div>';
                     }
-                    if (data.question.textChoice == 1) {
-                        //let sz = data.question.choices.size + 1;
+                    if (data.textChoice == 1) {
+                        //let sz = data.choices.size + 1;
                         //str += '<input type="radio" name="singleChoiceOption" value="choiceOption' + sz + '">其它:'
                         str += '<input type="radio" name="singleChoiceOption" value="99999' + '">其它:'
                             + '<textarea class="form-control" rows="3" name="updateTextChoice" id="updateTextChoice">' + data.textChoiceContent + '</textarea>';
                     }
                     str += '</div>';
                 }
-                else if (data.question.questionType == 3) {//问答
+                else if (data.questionType == 3) {//问答
                     questionType = 3;
                     str += '<div class="form-group">';
-                    if (data.question.textChoice == 1) {
+                    if (data.textChoice == 1) {
                         str += '<p>答案:</p>'
                             + '<textarea class="form-control" rows="3" name="updateTextChoice" id="updateTextChoice">' + data.textChoiceContent + '</textarea>';
                     }
