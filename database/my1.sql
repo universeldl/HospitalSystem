@@ -53,10 +53,8 @@ CREATE TABLE `PatientType` (
 
 CREATE TABLE `Plan` (
   `planId` int(11) NOT NULL,
-  /*
   `beginAge` int(2) DEFAULT 0,
   `endAge` int(2) NOT NULL,
-  */
   `oldPatientOnly` int(1) DEFAULT NULL, /*1-仅限旧病例，2-仅限新病例，3-不限 */
   `active` int(1) DEFAULT 1,
   `sex` varchar(1) DEFAULT 1,/*1-男，2-女, 3-不限*/
@@ -238,8 +236,8 @@ INSERT INTO hospital VALUES(17, TRUE,  "迎博社区卫生服务中心");
 INSERT INTO hospital VALUES(18, TRUE,  "潍坊社区卫生服务中心");
 
 
-INSERT INTO PatientType VALUES(1,"哮喘",3);
-INSERT INTO PatientType VALUES(2,"咳嗽",3);
+INSERT INTO PatientType VALUES(1,"哮喘");
+INSERT INTO PatientType VALUES(2,"咳嗽");
 
 INSERT INTO surveyType VALUES(1,"第一类");
 INSERT INTO surveyType VALUES(2,"2nd");
@@ -256,9 +254,9 @@ INSERT INTO doctor VALUES(9,"doctor6","张三7","4QrcOUm6Wau+VuBX8g+IPg==","1354
 INSERT INTO doctor VALUES(10,"doctor7","张三8","4QrcOUm6Wau+VuBX8g+IPg==","13547865412",8, 1);
 INSERT INTO doctor VALUES(6,"lht","lht","3DOSGROTSOLR+Or8OgGwFQ==","13547865412",0, 1);
 
-INSERT INTO Plan VALUES(1, 1, 1, 1, 1, 6);
-INSERT INTO Plan VALUES(2, 2, 1, 2, 1, 6);
-INSERT INTO Plan VALUES(3, 3, 1, 3, 1, 6);
+INSERT INTO Plan VALUES(1, 0, 2, 1, 1, 1, 1, 6);
+INSERT INTO Plan VALUES(2, 2, 5, 2, 1, 2, 1, 6);
+INSERT INTO Plan VALUES(3, 6, 9, 3, 1, 3, 1, 6);
 
 INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1", true, "13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,1,3,2);
 INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0", true, "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
@@ -269,8 +267,8 @@ INSERT INTO Authorization VALUES(1,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(5,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(6,1,1,1,1,1,1,1,1);
 
-INSERT INTO survey VALUES(1,"survey1","admin",10,2,"a1","aaa","2017-06-25 00:00:00",1,1,2,2, TRUE);
-INSERT INTO survey VALUES(2,"survey2","doctor2",10,2,"a2","baa","2017-06-25 00:00:00",1,1,3,6, FALSE);
+INSERT INTO survey VALUES(1,"survey1","admin",10,30, 2,"a1","aaa","2017-06-25 00:00:00",1,1,2,2, TRUE);
+INSERT INTO survey VALUES(2,"survey2","doctor2",10,30, 2,"a2","baa","2017-06-25 00:00:00",1,1,3,6, FALSE);
 
 INSERT INTO deliveryInfo VALUES(1,"2017-01-15 00:00:00","2017-03-04 00:00:00",0,-1,1,1,6);
 INSERT INTO deliveryInfo VALUES(2,"2017-02-15 00:00:00","2017-04-04 00:00:00",0,0,1,1,6);

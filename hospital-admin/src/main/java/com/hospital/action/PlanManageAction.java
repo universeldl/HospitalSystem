@@ -34,24 +34,22 @@ public class PlanManageAction extends ActionSupport {
         this.surveyService = surveyService;
     }
 
-    //private Integer beginAge;
-    //private Integer endAge;
+    private Integer beginAge;
+    private Integer endAge;
     private Integer oldPatientOnly;
     private Integer active;
     private Integer sex;
     private Integer patientType;
     private Integer planId;
 
-    /*
+
     public void setBeginAge(Integer beginAge) {
         this.beginAge = beginAge;
     }
 
-
     public void setEndAge(Integer endAge) {
         this.endAge = endAge;
     }
-    */
 
     public void setOldPatientOnly(Integer oldPatientOnly) {
         this.oldPatientOnly = oldPatientOnly;
@@ -117,8 +115,8 @@ public class PlanManageAction extends ActionSupport {
         Plan plan = new Plan();
         plan.setPlanId(planId);
         Plan updatePlan = planService.getPlanById(plan);
-        //updatePlan.setBeginAge(beginAge);
-        //updatePlan.setEndAge(endAge);
+        updatePlan.setBeginAge(beginAge);
+        updatePlan.setEndAge(endAge);
         updatePlan.setOldPatientOnly(oldPatientOnly);
         updatePlan.setActive(active);
         updatePlan.setSex(sex);
@@ -133,7 +131,7 @@ public class PlanManageAction extends ActionSupport {
         Map<String, String[]> pMap = request.getParameterMap();
         int idx = 0;
         for (String[] value : pMap.values()) {
-            if (idx < 5) {
+            if (idx < 7) {
                 idx++;
             } else {
                 for (String v : value) {
@@ -172,8 +170,7 @@ public class PlanManageAction extends ActionSupport {
         //得到当前病人类型
         PatientType type = new PatientType();
         type.setPatientTypeId(patientType);
-        //Plan plan = new Plan(beginAge, endAge, sex, active, type, doctor);
-        Plan plan = new Plan(oldPatientOnly, sex, active, type, doctor);
+        Plan plan = new Plan(beginAge, endAge, oldPatientOnly, sex, active, type, doctor);
 
         List<Integer> surveyIds = new ArrayList<>();
         ActionContext ctx = ActionContext.getContext();
@@ -181,7 +178,7 @@ public class PlanManageAction extends ActionSupport {
         Map<String, String[]> pMap = request.getParameterMap();
         int idx = 0;
         for (String[] value : pMap.values()) {
-            if (idx < 4) {
+            if (idx < 6) {
                 idx++;
             } else {
                 for (String v : value) {

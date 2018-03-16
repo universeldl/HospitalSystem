@@ -8,7 +8,6 @@
             <generator class="increment"/>
         </id>
 
-        <!--
         <property name="beginAge" type="java.lang.Integer">
             <column name="beginAge"/>
         </property>
@@ -16,7 +15,6 @@
         <property name="endAge" type="java.lang.Integer">
             <column name="endAge"/>
         </property>
-        -->
 
         <property name="oldPatientOnly" type="java.lang.Integer">
             <column name="oldPatientOnly"/>

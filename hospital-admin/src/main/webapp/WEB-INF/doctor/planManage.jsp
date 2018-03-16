@@ -159,10 +159,8 @@
                         <tr>
                             <th>病人类型</th>
                             <th>病人性别</th>
-                            <!--
-                            <th>年龄范围最小值</th>
-                            <th>年龄范围最大值</th>
-                            -->
+                            <th>年龄范围最小值（含）</th>
+                            <th>年龄范围最大值（含）</th>
                             <th>病例类型</th>
                             <th>随访问卷</th>
                             <th>随访激活状态</th>
@@ -176,6 +174,7 @@
                             <s:iterator value="#request.plans" var="plan">
                                 <tbody>
                                 <td><s:property value="#plan.patientType.patientTypeName"/></td>
+
                                 <td>
                                     <s:if test="#plan.sex == 1">
                                         男
@@ -187,6 +186,8 @@
                                         不限
                                     </s:elseif>
                                 </td>
+                                <td><s:property value="#plan.beginAge"/></td>
+                                <td><s:property value="#plan.endAge"/></td>
                                 <td>
                                 <s:if test="#plan.oldPatientOnly == 1">
                                     仅既往病人
@@ -231,6 +232,8 @@
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
                             </tbody>
                         </s:else>
 
@@ -269,6 +272,24 @@
                 <div class="modal-body">
 
                     <!---------------------表单-------------------->
+
+                    <div class="form-group">
+                        <label for="addBeginAge" class="col-sm-3 control-label">年龄范围最小值（含）</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addBeginAge" placeholder="请输入年龄范围最小值">
+                            <label class="control-label" for="addBeginAge" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="addEndAge" class="col-sm-3 control-label">年龄范围最大值（含）</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addEndAge" placeholder="请输入年龄范围最大值">
+                            <label class="control-label" for="addEndAge" style="display: none;"></label>
+                        </div>
+                    </div>
+
+
                     <div class="form-group">
                         <label for="addOldPatientOnly" class="col-sm-3 control-label">仅限既往病例</label>
                         <div class="col-sm-7">
@@ -348,6 +369,24 @@
                 <div class="modal-body">
 
                     <!---------------------表单-------------------->
+
+                    <div class="form-group">
+                        <label for="updateBeginAge" class="col-sm-3 control-label">年龄范围最小值（含）</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateBeginAge" placeholder="请输入年龄范围最小值">
+                            <label class="control-label" for="updateBeginAge" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updateEndAge" class="col-sm-3 control-label">年龄范围最大值（含）</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateEndAge" placeholder="请输入年龄范围最大值">
+                            <label class="control-label" for="updateEndAge" style="display: none;"></label>
+                        </div>
+                    </div>
+
+
                     <div class="form-group">
                         <label for="updateOldPatientOnly" class="col-sm-3 control-label">仅限既往病例</label>
                         <div class="col-sm-7">

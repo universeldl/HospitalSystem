@@ -138,8 +138,8 @@ public class PatientManageAction extends ActionSupport {
         age = AgeUtils.getAgeFromBirthTime(birthday);
 
         Plan plan = new Plan();
-        //plan.setBeginAge(age);
-        //plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
+        plan.setBeginAge(age);
+        plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
         if (sex == 0) {
             plan.setSex(2);  //be careful about sex, Patient.sex is not compatible with Plan.sex
         } else if (sex == 1) {
