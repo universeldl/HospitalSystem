@@ -48,7 +48,6 @@ CREATE TABLE `Authorization` (
 CREATE TABLE `PatientType` (
   `patientTypeId` int(11) NOT NULL,
   `patientTypeName` varchar(255) NOT NULL,
-  `bday` int(5) NOT NULL,
   PRIMARY KEY (`patientTypeId`)
 );
 
@@ -104,6 +103,7 @@ CREATE TABLE `survey` (
   `surveyName` varchar(20) NOT NULL,
   `author` varchar(20) DEFAULT  NULL,
   `num` int(5) DEFAULT 0,
+  `bday` int(5) NOT NULL,
   `currentNum` int(5) DEFAULT 0,
   `department` varchar(20) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
