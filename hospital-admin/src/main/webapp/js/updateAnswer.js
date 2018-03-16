@@ -25,7 +25,7 @@ function updateAnswerById(ansId) {
                     str += '<div class="form-group">';
                     for (let index in data.choices) {
                         str += '<div>'
-                            + '<input type="checkbox" name="multiChoiceOption" id="multiChoiceOption"  value="' + data.choices[index].choiceId + '">' + data.choices[index].choiceContent
+                            + '<input type="checkbox" name="multiChoiceOption" id="multiChoiceOption' + data.choices[index].choiceId + '"  value="' + data.choices[index].choiceId + '">' + data.choices[index].choiceContent
                             + '</div>';
                     }
                     if (data.textChoice == 1) {
@@ -40,7 +40,7 @@ function updateAnswerById(ansId) {
                     str += '<div class="form-group">';
                     for (let index in data.choices) {
                         str += '<div>'
-                            + '<input type="radio" name="singleChoiceOption" id="singleChoiceOption" value="' + data.choices[index].choiceId + '">' + data.choices[index].choiceContent
+                            + '<input type="radio" name="singleChoiceOption" id="singleChoiceOption' + data.choices[index].choiceId + '" value="' + data.choices[index].choiceId + '">' + data.choices[index].choiceContent
                             + '</div>';
                     }
                     if (data.textChoice == 1) {
@@ -124,14 +124,8 @@ function validUpdateAnswer() {
             if(elm[ii].checked) checkedCount++;
         }
         if (checkedCount < 2) {
-            $('#multiChoiceOption').parent().addClass("has-error");
-            $('#multiChoiceOption').next().text("多选题至少选择两项答案");
-            $("#multiChoiceOption").next().show();
+            alert("多选题至少选择两项答案");
             flag = false;
-        } else {
-            $('#multiChoiceOption').parent().removeClass("has-error");
-            $('#multiChoiceOption').next().text("");
-            $("#multiChoiceOption").next().hide();
         }
     }
     if (questionType == 2) {//单选
@@ -141,14 +135,8 @@ function validUpdateAnswer() {
             if(elm[ii].checked) checkedCount++;
         }
         if (checkedCount != 1) {
-            $('#singleChoiceOption').parent().addClass("has-error");
-            $('#singleChoiceOption').next().text("请选择答案");
-            $("#singleChoiceOption").next().show();
+            alert("请选择答案");
             flag = false;
-        } else {
-            $('#singleChoiceOption').parent().removeClass("has-error");
-            $('#singleChoiceOption').next().text("");
-            $("#singleChoiceOption").next().hide();
         }
     }
 
