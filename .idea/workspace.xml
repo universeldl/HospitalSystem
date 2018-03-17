@@ -7,11 +7,277 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08d425d6-fc1b-4a6c-b269-f9cdf463903f" name="Default" comment="Only choose 1 choice is allowed now for multi-choice questions.">
-      <change beforePath="" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/echarts.common.min.js" />
+    <list default="true" id="08d425d6-fc1b-4a6c-b269-f9cdf463903f" name="Default" comment="Replace echarts.js with echarts.common.min.js to reduce size.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp" />
       <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/echarts.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/planManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/planManage.jsp" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyManage.jsp" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/jqgrid/grid.locale-cn.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/jqgrid/jquery.jqGrid.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/jqgrid/ui.jqgrid-bootstrap-ui.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/jqgrid/ui.jqgrid-bootstrap.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/jqgrid/ui.jqgrid.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layer/layer.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layer/mobile/layer.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layer/mobile/need/layer.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layer/skin/default/icon-ext.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layer/skin/default/icon.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layer/skin/default/layer.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layer/skin/default/loading-0.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layer/skin/default/loading-1.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layer/skin/default/loading-2.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layer/skin/moon/default.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layer/skin/moon/style.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/layui.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/code.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/_all.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/aero.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/aero.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/aero@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/blue.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/blue.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/blue@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/flat.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/flat.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/flat@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/green.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/green.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/green@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/grey.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/grey.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/grey@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/orange.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/orange.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/orange@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/pink.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/pink.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/pink@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/purple.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/purple.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/purple@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/red.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/red.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/red@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/yellow.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/yellow.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/flat/yellow@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/futurico/futurico.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/futurico/futurico.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/futurico/futurico@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/icheck.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/_all.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/aero.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/blue.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/green.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/grey.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/line.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/line.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/line@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/orange.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/pink.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/purple.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/red.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/line/yellow.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/_all.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/aero.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/aero.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/aero@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/blue.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/blue.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/blue@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/green.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/green.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/green@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/grey.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/grey.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/grey@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/minimal.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/minimal.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/minimal@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/orange.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/orange.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/orange@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/pink.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/pink.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/pink@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/purple.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/purple.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/purple@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/red.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/red.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/red@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/yellow.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/yellow.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/minimal/yellow@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/polaris/polaris.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/polaris/polaris.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/polaris/polaris@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/_all.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/aero.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/aero.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/aero@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/blue.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/blue.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/blue@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/green.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/green.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/green@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/grey.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/grey.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/grey@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/orange.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/orange.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/orange@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/pink.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/pink.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/pink@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/purple.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/purple.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/purple@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/red.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/red.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/red@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/square.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/square.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/square@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/yellow.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/yellow.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/icheck/square/yellow@2x.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/laydate/icon.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/laydate/laydate.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/layer/default/icon-ext.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/layer/default/icon.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/layer/default/layer.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/layer/default/loading-0.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/layer/default/loading-1.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/css/modules/layer/default/loading-2.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/font/iconfont.eot" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/font/iconfont.svg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/font/iconfont.ttf" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/font/iconfont.woff" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/0.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/1.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/10.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/11.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/12.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/13.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/14.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/15.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/16.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/17.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/18.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/19.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/2.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/20.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/21.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/22.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/23.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/24.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/25.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/26.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/27.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/28.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/29.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/3.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/30.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/31.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/32.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/33.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/34.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/35.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/36.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/37.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/38.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/39.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/4.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/40.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/41.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/42.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/43.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/44.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/45.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/46.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/47.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/48.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/49.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/5.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/50.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/51.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/52.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/53.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/54.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/55.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/56.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/57.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/58.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/59.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/6.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/60.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/61.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/62.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/63.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/64.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/65.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/66.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/67.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/68.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/69.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/7.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/70.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/71.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/8.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/images/face/9.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/dest/layui.all.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/dest/layui.mod.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/lib/jquery.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/code.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/element.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/flow.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/form.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/laydate.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/layedit.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/layer.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/laypage.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/laytpl.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/tree.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/upload.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/lay/modules/util.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/layui.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/modules/icheck.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/layui/modules/pjax.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/awesomeStyle/awesome.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/awesomeStyle/awesome.less" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/awesomeStyle/fa.less" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/awesomeStyle/img/loading.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/metroStyle/img/line_conn.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/metroStyle/img/loading.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/metroStyle/img/metro.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/metroStyle/img/metro.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/metroStyle/metroStyle.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/diy/1_close.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/diy/1_open.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/diy/2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/diy/3.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/diy/4.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/diy/5.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/diy/6.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/diy/7.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/diy/8.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/diy/9.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/line_conn.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/loading.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/zTreeStandard.gif" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/img/zTreeStandard.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/css/zTreeStyle/zTreeStyle.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/plugins/ztree/jquery.ztree.all.min.js" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/HospitalSystem/test/" />
@@ -74,22 +340,115 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="checkRetrieve.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp">
+      <file leaf-file-name="retrieveManage.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+            <state relative-caret-position="540">
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="patientManage.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="surveyManage.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyManage.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="surveyTypeManage.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="29" column="15" lean-forward="false" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
+              <folding>
+                <element signature="e#14102#14109#1#HTML" expanded="true" />
+                <element signature="e#15468#15475#1#HTML" expanded="true" />
+                <element signature="e#16782#16789#0#HTML" expanded="true" />
+                <element signature="e#18669#18676#0#HTML" expanded="true" />
+                <element signature="e#20623#20630#0#HTML" expanded="true" />
+                <element signature="e#23288#23295#0#HTML" expanded="true" />
+                <element signature="e#26013#26020#1#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="deliverySearch1.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch1.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="doctorManage.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forfeitManage.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/forfeitManage.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="patientManage.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="558">
+              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="patientTypeManage.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="planManage.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/planManage.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="questionManage.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding>
+                <marker date="1521270852361" expanded="true" signature="4331:4345" ph="..." />
+                <marker date="1521270852361" expanded="true" signature="4660:4674" ph="..." />
+                <marker date="1521270852361" expanded="true" signature="5501:5515" ph="..." />
+                <marker date="1521270852361" expanded="true" signature="5830:5844" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,15 +481,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deletePatient.js" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deletePlan.js" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deleteQuestion.js" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deleteSurvey.js" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deleteSurveyType.js" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addDoctor.js" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deliverySurvey.js" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addQuestion.js" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addPatientType.js" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addSurveyNum.js" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addSurveyType.js" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deleteDoctor.js" />
@@ -165,14 +515,23 @@
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updateSurveyType.js" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/doctorLogin.jsp" />
         <option value="$PROJECT_DIR$/hospital-common/src/main/java/com/hospital/util/CalendarUtils.java" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" />
         <option value="$PROJECT_DIR$/hospital-model/src/main/java/com/hospital/domain/Answer.java" />
         <option value="$PROJECT_DIR$/hospital-model/src/main/resources/com.hospital.domain/Answer.hbm.xml" />
         <option value="$PROJECT_DIR$/database/my1.sql" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/RetrieveManageAction.java" />
         <option value="$PROJECT_DIR$/database/my_dev.sql" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updateAnswer.js" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/planManage.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyManage.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp" />
       </list>
     </option>
   </component>
@@ -247,7 +606,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -313,15 +672,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HospitalSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HospitalSystem" type="b2602c69:ProjectViewProjectNode" />
@@ -489,7 +839,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -531,134 +881,6 @@
       <recent name="$PROJECT_DIR$/hospital-admin/src/main/resources/struts2" />
       <recent name="$PROJECT_DIR$/hospital-admin/src/main/resources/spring" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/database/my1.sql</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DoctorManageAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-doctor-manage.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addDoctor.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updateDoctor.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-admin/src/main/webapp/js/updateQuestion.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-common/src/main/java/com/hospital/util/AccessTokenMgr.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-common/src/main/java/com/hospital/util/TemplateMessageMgr.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-service/src/main/java/com/hospital/service/impl/DeliveryServiceImpl.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/action/captchaAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/action/patientRegisterAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/action/surveyAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-wechat/src/main/java/com/hospital/action/wechatLoginAction.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-wechat/src/main/webapp/survey.jsp</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-admin/src/main/resources/spring/applicationContext-hospital.xml</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-common/src/main/java/com/hospital/util/AccessTokenMgrHXTS.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/hospital-common/src/main/java/com/hospital/util/AccessTokenService.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -1164,14 +1386,8 @@
       <workItem from="1521115165575" duration="3735000" />
       <workItem from="1521118956250" duration="4129000" />
       <workItem from="1521201492482" duration="4368000" />
-      <workItem from="1521266522378" duration="3717000" />
-    </task>
-    <task id="LOCAL-00019" summary="Add quartz job to add one patient per 30s, this is for simulating patient number growing, which will be used for charts summary function.">
-      <created>1516527480331</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1516527480331</updated>
+      <workItem from="1521266522378" duration="4350000" />
+      <workItem from="1521270902922" duration="159000" />
     </task>
     <task id="LOCAL-00020" summary="Feed the summary chart with real patients data.">
       <created>1516540525682</created>
@@ -1509,11 +1725,18 @@
       <option name="project" value="LOCAL" />
       <updated>1521269762080</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Replace echarts.js with echarts.common.min.js to reduce size.">
+      <created>1521270286737</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1521270286737</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="894812000" />
+    <option name="totallyTimeSpent" value="895604000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1546,11 +1769,11 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.4882353" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32608697" sideWeight="0.49572194" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27173913" sideWeight="0.4893048" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27173913" sideWeight="0.4893048" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.49572194" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.49358287" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2053476" sideWeight="0.53989816" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2224599" sideWeight="0.46010187" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22513369" sideWeight="0.46010187" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16149732" sideWeight="0.5281583" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994652" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1608,7 +1831,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Code cleanup." />
     <MESSAGE value="1. refine PatientType Entity.&#10;2. refine DeliveryInfo Entity.&#10;3. refine some functions for DeliveryInfo and RetrieveInfo.&#10;4. update Survey.num when adding DeliveryInfo.&#10;5. update Survey.currentNum when adding RetrieveInfo.&#10;6. update quartz job with new function, and comment out the old one." />
     <MESSAGE value="Delete retrieveManage page, make it a sub-page under patientManage page." />
     <MESSAGE value="Add a new page to check and modify retrieve sheets." />
@@ -1633,7 +1855,8 @@
     <MESSAGE value="generate JSON object manually to reduce ajax transfer size, for getAnswerById()." />
     <MESSAGE value="1. lastModified Doctor will all be red colored.&#10;2. add my_dev.sql for dev testing." />
     <MESSAGE value="Only choose 1 choice is allowed now for multi-choice questions." />
-    <option name="LAST_COMMIT_MESSAGE" value="Only choose 1 choice is allowed now for multi-choice questions." />
+    <MESSAGE value="Replace echarts.js with echarts.common.min.js to reduce size." />
+    <option name="LAST_COMMIT_MESSAGE" value="Replace echarts.js with echarts.common.min.js to reduce size." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2454,87 +2677,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/exportPatient.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/exportSinglePatient.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/exportSurvey.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getAllPatientTypes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getAllSurveyTypes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/doctorLogin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="16" column="43" lean-forward="false" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getPatient.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="36" lean-forward="false" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getForfeitInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getPatientForfeitInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getPatientRetrieveInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getPatientSurveyInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/getQuestionInfo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-286">
@@ -2583,7 +2725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2680,7 +2821,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2707,26 +2847,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="64" column="31" lean-forward="false" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/DeliverySearchAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="37" column="43" lean-forward="false" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10440">
-          <caret line="580" column="0" lean-forward="false" selection-start-line="580" selection-start-column="0" selection-end-line="580" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2778,7 +2902,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5480">
           <caret line="313" column="0" lean-forward="true" selection-start-line="313" selection-start-column="0" selection-end-line="313" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2786,7 +2909,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
           <caret line="205" column="0" lean-forward="true" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2794,7 +2916,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2818,31 +2939,144 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="11" column="56" lean-forward="false" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp">
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/deleteDoctor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="261" column="0" lean-forward="false" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/addDoctor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/js/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+        <state relative-caret-position="378">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliveryManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch1.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/forfeitManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state relative-caret-position="558">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/planManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <marker date="1521270852361" expanded="true" signature="4331:4345" ph="..." />
+            <marker date="1521270852361" expanded="true" signature="4660:4674" ph="..." />
+            <marker date="1521270852361" expanded="true" signature="5501:5515" ph="..." />
+            <marker date="1521270852361" expanded="true" signature="5830:5844" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="29" column="15" lean-forward="false" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
+          <folding>
+            <element signature="e#14102#14109#1#HTML" expanded="true" />
+            <element signature="e#15468#15475#1#HTML" expanded="true" />
+            <element signature="e#16782#16789#0#HTML" expanded="true" />
+            <element signature="e#18669#18676#0#HTML" expanded="true" />
+            <element signature="e#20623#20630#0#HTML" expanded="true" />
+            <element signature="e#23288#23295#0#HTML" expanded="true" />
+            <element signature="e#26013#26020#1#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

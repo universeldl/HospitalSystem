@@ -27,8 +27,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/layer/skin/default/layer.css?v=3.0.11110"
-          id="layuicss-skinlayercss">
 
     <script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap-dropdown.min.js"></script>
