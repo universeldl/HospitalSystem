@@ -158,9 +158,9 @@
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
                                             <div class="text-muted bootstrap-admin-box-title"
-                                                 <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
+                                                 <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">style="color:red;"</s:if>>
                                                 <s:property value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(多选题)
-                                                <s:if test="#answer.lastModified!=''">
+                                                <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">
                                                     (最后修改人： <s:property value="#answer.lastModified"/>医生修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:if>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
@@ -172,7 +172,7 @@
                                             </div>
                                         </div>
                                         <div class="bootstrap-admin-panel-content"
-                                             <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
+                                             <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">style="color:red;"</s:if>>
                                             <s:iterator value="#answer.question.choices" var="choice"
                                                         status="choiceIdx">
                                                 <ul>
@@ -236,9 +236,9 @@
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
                                             <div class="text-muted bootstrap-admin-box-title"
-                                                 <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
+                                                 <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">style="color:red;"</s:if>>
                                                 <s:property value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(单选题)
-                                                <s:if test="#answer.lastModified!=''">
+                                                <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">
                                                     (最后修改人： <s:property value="#answer.lastModified"/>医生修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:if>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
@@ -250,7 +250,7 @@
                                             </div>
                                         </div>
                                         <div class="bootstrap-admin-panel-content"
-                                             <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
+                                             <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">style="color:red;"</s:if>>
                                             <s:iterator value="#answer.question.choices" var="choice"
                                                         status="choiceIdx">
                                                 <ul>
@@ -317,9 +317,9 @@
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
                                             <div class="text-muted bootstrap-admin-box-title"
-                                                 <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
+                                                 <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">style="color:red;"</s:if>>
                                                 <s:property value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(问答题)
-                                                <s:if test="#answer.lastModified!=''">
+                                                <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">
                                                     (最后修改人： <s:property value="#answer.lastModified"/>医生修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:if>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
@@ -331,7 +331,7 @@
                                             </div>
                                         </div>
                                         <div class="bootstrap-admin-panel-content"
-                                             <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
+                                             <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">style="color:red;"</s:if>>
                                             <div>
                                                 <textarea class="form-control" rows="3"
                                                           id="updateQuestionContent3" disabled="disabled"></textarea>
