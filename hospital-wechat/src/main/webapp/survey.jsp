@@ -119,21 +119,30 @@
                                             <input type="radio" class="weui-check"
                                                    name='question<s:property value="#question.questionId"/>'
                                                    id='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'
-                                                   <s:if test='#cindex.index+1==#question.choices.size'>
-                                                       onclick=enableTexterea('textquestion<s:property value="#question.questionId"/>');
-                                                   </s:if>
-                                                   <s:else>
-                                                       onclick=disableTexterea('textquestion<s:property value="#question.questionId"/>');
-                                                   </s:else>
+                                                   onclick=disableTexterea('textquestion<s:property value="#question.questionId"/>');
                                                    value='<s:property value="#choice.choiceId" />'/>
                                             <span class="weui-icon-checked"></span>
                                         </div>
                                     </label>
                                 </s:iterator>
+                                <s:if test="#question.textChoice==1">
+                                    <label class="weui-cell weui-check__label"
+                                           for='question<s:property value="#qindex.index"/>choiceother'>
+                                        <div class="weui-cell__bd">
+                                            <p>其他</p>
+                                        </div>
+                                        <div class="weui-cell__ft">
+                                            <input type="radio" class="weui-check"
+                                                   name='question<s:property value="#question.questionId"/>'
+                                                   id='question<s:property value="#qindex.index"/>choiceother'
+                                                   onclick=enableTexterea('textquestion<s:property value="#question.questionId"/>') />
+                                            <span class="weui-icon-checked"></span>
+                                        </div>
+                                    </label>
+                                </s:if>
                             </div>
                         </s:if>
                         <s:if test="#question.textChoice==1" >
-                            <div class="weui-cells__title">其他</div>
                             <div class="weui-cells weui-cells_form">
                                 <div class="weui-cell">
                                     <div class="weui-cell__bd">

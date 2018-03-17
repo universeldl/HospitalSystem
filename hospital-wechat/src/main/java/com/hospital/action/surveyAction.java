@@ -195,6 +195,8 @@ public class surveyAction extends ActionSupport {
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
                 .get(ServletActionContext.HTTP_REQUEST);
         Map<String, String[]> pMap = request.getParameterMap();
+        Set<Integer> processedQuestionId = new HashSet<Integer>();
+
         for (Map.Entry<String, String[]> entry : pMap.entrySet()) {
             String key = entry.getKey();
             int questionid = -1;
@@ -207,13 +209,15 @@ public class surveyAction extends ActionSupport {
                 String[] value = entry.getValue();
                 Set<Choice> choiceset = new HashSet<Choice>();
                 for (int i = 0; i < value.length; i++) {
+                    if (entry.getValue()[i].equals("on")) {
+                        continue;
+                    }
                     int choidId = Integer.valueOf(entry.getValue()[i]);
                     Choice tmpChoice = new Choice();
                     tmpChoice.setChoiceId(Integer.valueOf(choidId));
                     Choice choice = choiceService.getChoiceById(tmpChoice);
                     if (choice != null) {
                         choiceset.add(choice);
-                    } else {
                     }
                 }
 
@@ -227,7 +231,7 @@ public class surveyAction extends ActionSupport {
                 if (pMap.containsKey("textquestion"+questionid)) {
                     answer.setTextChoice(1);
                     answer.setTextChoiceContent(pMap.get("textquestion" + questionid)[0]);
-                    pMap.remove("textquestion"+questionid);
+                    processedQuestionId.add(questionid);
                 }
                 if (answerService.addAnswer(answer)) {
                     answers.add(answer);
@@ -243,6 +247,9 @@ public class surveyAction extends ActionSupport {
             int questionid = -1;
             if (key.startsWith("textquestion")) {
                 questionid = Integer.valueOf(key.substring(12));
+                if (processedQuestionId.contains(questionid)) {
+                    continue;
+                }
                 Question tmpQuestion = new Question();
                 tmpQuestion.setQuestionId(questionid);
                 Question question = questionService.getQuestionById(tmpQuestion);
@@ -252,6 +259,8 @@ public class surveyAction extends ActionSupport {
                 answer.setDoctor(doctor);
                 answer.setRetrieveInfo(newRetrieveInfo);
                 answer.setQuestion(question);
+                answer.setTextChoice(1);
+                answer.setTextChoiceContent(pMap.get("textquestion" + questionid)[0]);
                 if (answerService.addAnswer(answer)) {
                     answers.add(answer);
                 }

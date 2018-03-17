@@ -283,7 +283,7 @@ function submit(to) {
         }
     });
 
-    alert(postdata);
+    //alert(postdata);
 
     ajax(
         {
@@ -294,11 +294,11 @@ function submit(to) {
                 hideLoadingToast();
                 if (data == 1) {
                     var url =  "https://" + window.location.host;
-                    url = url + "/message.jsp?msg=恭喜您，答卷提交成功!";
+                    url = url + "/hospital-wechat/message.jsp?msg=恭喜您，答卷提交成功!";
                     window.location.href = url;
                 } else if (data == -1) {
                     var url =  "https://" + window.location.host;
-                    url = url + "/message.jsp?msg=问卷已经完成，不能重复提交答案!";
+                    url = url + "/hospital-wechat/message.jsp?msg=答卷出错...";
                     alert(url)
                     window.location.href = url;
                 } else {
