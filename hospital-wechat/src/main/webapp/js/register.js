@@ -30,7 +30,7 @@ function registerSubmit() {
 
                 if (data == 1) {
                     // 注册成功
-                    window.location.href = "http://projecthope.flzhan.com/text478.html";
+                    window.location.href = "message.jsp?msg=注册完成！";
                 } else if (data == -1) {
                     $('captchaIN').focus();
                     reloadCaptchaImg();

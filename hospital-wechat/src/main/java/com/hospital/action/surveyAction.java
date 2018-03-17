@@ -188,6 +188,9 @@ public class surveyAction extends ActionSupport {
         retrieveInfo.setPatient(patient);
         retrieveInfo.setDoctor(doctor);
 
+        retrieveService.addRetrieveInfo(retrieveInfo);
+        RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
+
         Set<Answer> answers = new HashSet<Answer>();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
                 .get(ServletActionContext.HTTP_REQUEST);
@@ -218,24 +221,47 @@ public class surveyAction extends ActionSupport {
                 answer.setSurvey(survey);
                 answer.setPatient(patient);
                 answer.setDoctor(doctor);
-                answer.setRetrieveInfo(retrieveInfo);
+                answer.setRetrieveInfo(newRetrieveInfo);
                 answer.setQuestion(question);
                 answer.setChoices(choiceset);
                 if (pMap.containsKey("textquestion"+questionid)) {
                     answer.setTextChoice(1);
-                    answer.setTextChoiceContent(pMap.get("textquestion"+questionid)[0]);
+                    answer.setTextChoiceContent(pMap.get("textquestion" + questionid)[0]);
+                    pMap.remove("textquestion"+questionid);
                 }
                 if (answerService.addAnswer(answer)) {
                     answers.add(answer);
                 }
             } else {
-                continue;
+                System.out.println("key " + key + " not processed");
             }
         }
 
-        retrieveInfo.setAnswers(answers);
+        // add answer for text quesiton
+        for (Map.Entry<String, String[]> entry : pMap.entrySet()) {
+            String key = entry.getKey();
+            int questionid = -1;
+            if (key.startsWith("textquestion")) {
+                questionid = Integer.valueOf(key.substring(12));
+                Question tmpQuestion = new Question();
+                tmpQuestion.setQuestionId(questionid);
+                Question question = questionService.getQuestionById(tmpQuestion);
+                Answer answer = new Answer();
+                answer.setSurvey(survey);
+                answer.setPatient(patient);
+                answer.setDoctor(doctor);
+                answer.setRetrieveInfo(newRetrieveInfo);
+                answer.setQuestion(question);
+                if (answerService.addAnswer(answer)) {
+                    answers.add(answer);
+                }
+            }
+        }
 
-        Integer i = retrieveService.addRetrieveInfo(retrieveInfo);
+        newRetrieveInfo.setAnswers(answers);
+
+        RetrieveInfo tmpRetrieveInfo = retrieveService.updateRetrieveInfo(newRetrieveInfo);
+        Integer i = (tmpRetrieveInfo==null)?-1:1;
         HttpServletResponse response = ServletActionContext.getResponse();
         try {
             response.getWriter().print(i);

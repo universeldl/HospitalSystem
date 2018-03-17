@@ -4,9 +4,11 @@
 <html lang="zh-CN" class="ax-vertical-centered">
 
 <head>
-    <title>错误</title>
+    <title>随访</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/weui.css"/>
+    <link rel="stylesheet" href="./css/example.css"/>
+
 </head>
 
 
@@ -25,6 +27,7 @@
 
 <div align="center">
     <font size="19" color="red">
+        ${param.msg}
         <s:property value="errorMsg"/>
     </font>
 </div>

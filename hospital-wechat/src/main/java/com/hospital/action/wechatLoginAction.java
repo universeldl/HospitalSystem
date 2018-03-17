@@ -29,7 +29,7 @@ public class wechatLoginAction extends ActionSupport {
         this.errorMsg = errorMsg;
     }
 
-    public String getErrorMsg(String errorMsg) {
+    public String getErrorMsg() {
         return errorMsg;
     }
 
@@ -59,9 +59,6 @@ public class wechatLoginAction extends ActionSupport {
         List<Hospital> hospitalList = hospitalService.getAllVisibleHospitals();
         ServletActionContext.getRequest().setAttribute("hl", hospitalList);
 
-        if (patientTypeService == null) {
-        }
-
         List<PatientType> patientTypeList = patientTypeService.getAllPatientType();
         ServletActionContext.getRequest().setAttribute("ptl", patientTypeList);
 
@@ -82,7 +79,8 @@ public class wechatLoginAction extends ActionSupport {
                     ServletActionContext.getContext().getSession().put("patient", patient);
                     return NONE;
                 } else {
-                    return SUCCESS;
+                    errorMsg ="本微信号已注册，请勿重复注册";
+                    return ERROR;
                 }
             } else {
                 errorMsg = "用户名获取错误,请稍后再试";

@@ -278,8 +278,12 @@ function submit(to) {
         }
     });
     $("textarea").each(function(){
-        postdata = postdata + $(this).attr("id") + "=" + $(this).val() + "&";
+        if ($(this).val() != "") {
+            postdata = postdata + $(this).attr("id") + "=" + $(this).val() + "&";
+        }
     });
+
+    alert(postdata);
 
     ajax(
         {
@@ -289,15 +293,14 @@ function submit(to) {
             callback: function (data) {
                 hideLoadingToast();
                 if (data == 1) {
-                    showDialog2("提交成功", "确认");
-                    window.opener=null;
-                    window.open('','_self');
-                    window.close();
+                    var url =  "https://" + window.location.host;
+                    url = url + "/message.jsp?msg=恭喜您，答卷提交成功!";
+                    window.location.href = url;
                 } else if (data == -1) {
-                    showDialog2("问卷已经完成，不能重复提交答案", "确认");
-                    window.opener=null;
-                    window.open('','_self');
-                    window.close();
+                    var url =  "https://" + window.location.host;
+                    url = url + "/message.jsp?msg=问卷已经完成，不能重复提交答案!";
+                    alert(url)
+                    window.location.href = url;
                 } else {
                     showDialog2("提交失败，请稍后再试", "确认");
                 }
