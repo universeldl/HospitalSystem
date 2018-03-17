@@ -11,16 +11,17 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
-
-    <bean id="doctorManageAction" class="com.hospital.action.DoctorManageAction" scope="prototype">
-        <property name="hospitalService">
-            <ref bean="hospitalService"/>
-        </property>
-        <property name="doctorService">
-            <ref bean="doctorService"/>
-        </property>
-        <property name="authorizationService">
-            <ref bean="authorizationService"/>
+    <bean id="hospitalDao" class="com.hospital.dao.impl.HospitalDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
         </property>
     </bean>
+
+
+    <bean id="hospitalService" class="com.hospital.service.impl.HospitalServiceImpl">
+        <property name="hospitalDao">
+            <ref bean="hospitalDao"/>
+        </property>
+    </bean>
+
 </beans>

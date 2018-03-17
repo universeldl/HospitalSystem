@@ -12,7 +12,10 @@ $(function () {
             return;
         }
 
-        var postdata = "id=" + $.trim($("#updateId").val()) + "&username=" + $.trim($("#updateUsername").val()) + "&name=" + $.trim($("#updateName").val()) + "&phone=" + $.trim($("#updatePhone").val());
+        var postdata = "id=" + $.trim($("#updateId").val()) + "&username=" + $.trim($("#updateUsername").val())
+            + "&name=" + $.trim($("#updateName").val())
+            + "&phone=" + $.trim($("#updatePhone").val())
+            + "&hospitalId=" + $.trim($("#updateHospital").val());
         $('#loading').show();
         ajax(
             {
@@ -51,23 +54,43 @@ $(function () {
  */
 function updateDoctor(id) {
     $('#loading').show();
+    $("#updateHospital option[value!=-1]").remove();//移除先前的选项
     ajax(
         {
-            method: 'POST',
-            url: 'doctor/doctorManageAction_getDoctor.action',
-            params: "id=" + id,
+            url: "doctorManageAction_getHospitals.action",
             type: "json",
             callback: function (data) {
                 $('#loading').hide();
-                $("#updateId").val(data.aid);
-                $("#updateUsername").val(data.username);
-                $("#updateName").val(data.name);
-                $("#updatePhone").val(data.phone);
-                $("#updatePwd").val(data.pwd);
+                // 循环遍历每个问卷分类，每个名称生成一个option对象，添加到<select>中
+                for (let index in data.hospitals) {
+                    var op = document.createElement("option");//创建一个指名名称元素
+                    op.value = data.hospitals[index].aid;//设置op的实际值为当前的问卷分类编号
+                    var textNode = document.createTextNode(data.hospitals[index].name);//创建文本节点
+                    op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
+                    document.getElementById("updateHospital").appendChild(op);
+                }
 
+                ajax(
+                    {
+                        method: 'POST',
+                        url: 'doctor/doctorManageAction_getDoctor.action',
+                        params: "id=" + id,
+                        type: "json",
+                        callback: function (data) {
+                            $('#loading').hide();
+                            $("#updateId").val(data.aid);
+                            $("#updateUsername").val(data.username);
+                            $("#updateName").val(data.name);
+                            $("#updatePhone").val(data.phone);
+                            $("#updatePwd").val(data.pwd);
+                        }
+                    }
+                );
             }
         }
     );
+
+
 
 
 }
@@ -130,7 +153,17 @@ function validUpdateDoctor() {
         $("#updatePhone").next().hide();
     }
 
-
+    var hospitalId = $.trim($("#updateHospital").val());
+    if (hospitalId == "-1") {
+        $('#updateHospital').parent().addClass("has-error");
+        $('#updateHospital').next().text("请选择所属医院");
+        $("#updateHospital").next().show();
+        flag = false;
+    } else {
+        $('#updateHospital').parent().removeClass("has-error");
+        $('#updateHospital').next().text("");
+        $("#updateHospital").next().hide();
+    }
     return flag;
 }
 

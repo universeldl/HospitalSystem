@@ -363,6 +363,18 @@
                             <label class="control-label" for="addPhone" style="display:none;"></label>
                         </div>
                     </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">所属医院</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="addHospital">
+                                <option value="-1">请选择</option>
+                            </select>
+                            <label class="control-label" for="addHospital" style="display: none;"></label>
+                        </div>
+                    </div>
+
                     <!---------------------表单-------------------->
                 </div>
                 <div class="modal-footer">
@@ -427,7 +439,15 @@
                         </div>
                     </div>
 
-
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">所属医院</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="updateHospital">
+                                <option value="-1">请选择</option>
+                            </select>
+                            <label class="control-label" for="updateHospital" style="display: none;"></label>
+                        </div>
+                    </div>
                     <!---------------------表单-------------------->
 
                 </div>

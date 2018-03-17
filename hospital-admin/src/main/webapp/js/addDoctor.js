@@ -10,7 +10,10 @@ $(function () {
         if (!validAddDoctor()) {
             return;
         }
-        var postdata = "username=" + $.trim($("#addUsername").val()) + "&name=" + $.trim($("#addName").val()) + "&phone=" + $.trim($("#addPhone").val());
+        var postdata = "username=" + $.trim($("#addUsername").val())
+            + "&name=" + $.trim($("#addName").val())
+            + "&phone=" + $.trim($("#addPhone").val())
+            + "&hospitalId=" + $.trim($("#addHospital").val());
 
         $('#loading').show();
         ajax(
@@ -43,6 +46,27 @@ $(function () {
         location.reload();  	//刷新当前页面
     });
 
+    $('#btn_add').click(function () {
+        $("#addHospital option[value!=-1]").remove();//移除先前的选项
+        $('#loading').show();
+        ajax(
+            {
+                url: "doctorManageAction_getHospitals.action",
+                type: "json",
+                callback: function (data) {
+                    $('#loading').hide();
+                    // 循环遍历每个问卷分类，每个名称生成一个option对象，添加到<select>中
+                    for (let index in data.hospitals) {
+                        var op = document.createElement("option");//创建一个指名名称元素
+                        op.value = data.hospitals[index].aid;//设置op的实际值为当前的问卷分类编号
+                        var textNode = document.createTextNode(data.hospitals[index].name);//创建文本节点
+                        op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
+                        document.getElementById("addHospital").appendChild(op);
+                    }
+                }
+            }
+        );
+    });
 
 });
 
@@ -104,7 +128,17 @@ function validAddDoctor() {
         $("#addPhone").next().hide();
     }
 
-
+    var hospitalId = $.trim($("#addHospital").val());
+    if (hospitalId == "-1") {
+        $('#addHospital').parent().addClass("has-error");
+        $('#addHospital').next().text("请选择所属医院");
+        $("#addHospital").next().show();
+        flag = false;
+    } else {
+        $('#addHospital').parent().removeClass("has-error");
+        $('#addHospital').next().text("");
+        $("#addHospital").next().hide();
+    }
     return flag;
 }
 

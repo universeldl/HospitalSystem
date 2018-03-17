@@ -2,9 +2,11 @@ package com.hospital.action;
 
 import com.hospital.domain.Authorization;
 import com.hospital.domain.Doctor;
+import com.hospital.domain.Hospital;
 import com.hospital.domain.PageBean;
 import com.hospital.service.AuthorizationService;
 import com.hospital.service.DoctorService;
+import com.hospital.service.HospitalService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
@@ -23,7 +25,11 @@ public class DoctorManageAction extends ActionSupport {
 
     private DoctorService doctorService;
     private AuthorizationService authorizationService;
+    private HospitalService hospitalService;
 
+    public void setHospitalService(HospitalService hospitalService) {
+        this.hospitalService = hospitalService;
+    }
 
     public void setAuthorizationService(AuthorizationService authorizationService) {
         this.authorizationService = authorizationService;
@@ -39,7 +45,7 @@ public class DoctorManageAction extends ActionSupport {
     private String name;
     private String phone;
     private String pwd;
-
+    private Integer hospitalId;
 
     private int pageCode;//当前页数
 
@@ -47,6 +53,9 @@ public class DoctorManageAction extends ActionSupport {
     private String doctorUserName;    //查询医生用户名
     private String doctorName;//查询医生姓名
 
+    public void setHospitalId(Integer hospitalId) {
+        this.hospitalId = hospitalId;
+    }
 
     public void setDoctorUserName(String doctorUserName) {
         this.doctorUserName = doctorUserName;
@@ -78,6 +87,35 @@ public class DoctorManageAction extends ActionSupport {
 
     public void setDoctorService(DoctorService doctorService) {
         this.doctorService = doctorService;
+    }
+
+
+    public String getHospitals() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+
+        List<Hospital> hospitals = hospitalService.getAllHospitals();
+
+        JSONArray jsonArray = new JSONArray();
+
+        int idx = 0;
+        for (Hospital hospital : hospitals) {
+            JSONObject h = new JSONObject();
+            h.put("aid", hospital.getAid());
+            h.put("name", hospital.getName());
+            jsonArray.add(idx, h);
+            idx++;
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("hospitals", jsonArray);
+
+        try {
+            response.getWriter().print(jsonObject);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
     }
 
 
@@ -121,14 +159,23 @@ public class DoctorManageAction extends ActionSupport {
         Doctor doctor = new Doctor();
         doctor.setAid(id);
         Doctor updateDoctor = doctorService.getDoctorById(doctor);//查出需要修改的医生对象
-        updateDoctor.setUsername(username);
-        updateDoctor.setName(name);
-        updateDoctor.setPhone(phone);
-        Doctor newDoctor = doctorService.updateDoctorInfo(updateDoctor);//修改该医生
+        Hospital hospital = new Hospital();
+        hospital.setAid(hospitalId);
+        Hospital hospitalByID = hospitalService.getHospitalByID(hospital);
         int success = 0;
-        if (newDoctor != null) {
-            success = 1;
-            //由于是转发并且js页面刷新,所以无需重查
+
+        if (hospitalByID == null) {
+            success = -1;
+        } else {
+            updateDoctor.setUsername(username);
+            updateDoctor.setName(name);
+            updateDoctor.setPhone(phone);
+            updateDoctor.setHospital(hospitalByID);
+            Doctor newDoctor = doctorService.updateDoctorInfo(updateDoctor);//修改该医生
+            if (newDoctor != null) {
+                success = 1;
+                //由于是转发并且js页面刷新,所以无需重查
+            }
         }
         try {
             ServletActionContext.getResponse().getWriter().print(success);
@@ -149,15 +196,22 @@ public class DoctorManageAction extends ActionSupport {
         Doctor doctor = new Doctor();
         doctor.setUsername(username);
         Doctor doctor2 = doctorService.getDoctorByUserName(doctor);//按照姓名查找医生，查看用户名是否已经存在
+        Hospital hospital = new Hospital();
+        hospital.setAid(hospitalId);
+        Hospital hospitalByID = hospitalService.getHospitalByID(hospital);
         int success = 0;
-        if (doctor2 != null) {
+        if (hospitalByID == null ) {
+            success = -1;//医院错误
+        } if (doctor2 != null) {
             success = -1;//已经存在该医生
         } else {
             doctor.setName(name);
             doctor.setPhone(phone);
             doctor.setPwd(Md5Utils.md5("123456"));
+            doctor.setHospital(hospitalByID);
             Authorization authorization = new Authorization();
             authorization.setDoctor(doctor);
+            authorization.setPatientSet(1);
             doctor.setAuthorization(authorization);//设置权限
             boolean b = doctorService.addDoctor(doctor);//添加医生,返回是否添加成功
             if (b) {
