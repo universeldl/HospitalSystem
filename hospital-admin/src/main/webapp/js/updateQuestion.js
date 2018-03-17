@@ -257,7 +257,9 @@ function validUpdateQuestion() {
             $("#updateEndAge").next().show();
             flag = false;
         }
-    } else if (!(/^\d+$/.test(sAge))){
+    }
+    /*
+    else if (!(/^\d+$/.test(sAge))){
         $('#updateStartAge').parent().addClass("has-error");
         $('#updateStartAge').next().text("起始年龄必须是正整数");
         $("#updateStartAge").next().show();
@@ -268,6 +270,7 @@ function validUpdateQuestion() {
         $("#updateEndAge").next().show();
         flag = false;
     }
+    */
 
     if(questionType == 1 || questionType ==2) {  //is a selection question
         $("#updateChoicesBlock").find("div.col-sm-5").children(":text").each(function () {
