@@ -123,8 +123,8 @@ function validUpdateAnswer() {
         for (ii = 0; ii < elm.length; ii++) {
             if(elm[ii].checked) checkedCount++;
         }
-        if (checkedCount < 2) {
-            alert("多选题至少选择两项答案");
+        if (checkedCount == 0) {
+            alert("请选择答案");
             flag = false;
         }
     }
