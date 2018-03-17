@@ -174,7 +174,9 @@
                         <tr>
                             <th>分发编号</th>
                             <th>问卷名称</th>
+                            <!--
                             <th>病人用户名</th>
+                            -->
                             <th>病人名称</th>
                             <th>分发日期</th>
                             <th>截止答卷日期</th>
@@ -189,7 +191,6 @@
                                 <tbody>
                                 <td><s:property value="#deliveryInfo.deliveryId"/></td>
                                 <td><s:property value="#deliveryInfo.survey.surveyName"/></td>
-                                <td><s:property value="#deliveryInfo.patient.openID"/></td>
                                 <td><s:property value="#deliveryInfo.patient.name"/></td>
                                 <td><s:date name="#deliveryInfo.deliveryDate" format="yyyy-MM-dd"/></td>
                                 <td><s:date name="#deliveryInfo.endDate" format="yyyy-MM-dd"/></td>
@@ -207,7 +208,6 @@
                         </s:if>
                         <s:else>
                             <tbody>
-                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>

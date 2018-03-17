@@ -210,6 +210,7 @@ public class surveyAction extends ActionSupport {
                 Set<Choice> choiceset = new HashSet<Choice>();
                 for (int i = 0; i < value.length; i++) {
                     if (entry.getValue()[i].equals("on")) {
+                        // skip choice for "其他"
                         continue;
                     }
                     int choidId = Integer.valueOf(entry.getValue()[i]);

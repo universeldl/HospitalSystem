@@ -214,7 +214,9 @@
                     <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
+                            <!--
                             <th>病人用户名</th>
+                            -->
                             <th>病人姓名</th>
                             <th>病人性别</th>
                             <th>病人类型</th>
@@ -232,7 +234,6 @@
                         <s:if test="#request.pb.beanList!=null">
                             <s:iterator value="#request.pb.beanList" var="patient">
                                 <tbody>
-                                <td><s:property value="#patient.openID"/></td>
                                 <td><s:property value="#patient.name"/></td>
                                 <td>
                                     <s:if test="#patient.sex == 1">
@@ -288,6 +289,9 @@
                         </s:if>
                         <s:else>
                             <tbody>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
