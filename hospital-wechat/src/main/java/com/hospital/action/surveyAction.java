@@ -99,9 +99,9 @@ public class surveyAction extends ActionSupport {
 
 
         if (open_id == null) {
-            errorMsg = "获取用户名失败，请稍后再试";
-            return ERROR;
-            //open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
+            //errorMsg = "获取用户名失败，请稍后再试";
+            //return ERROR;
+            open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
         }
 
 
@@ -261,6 +261,23 @@ public class surveyAction extends ActionSupport {
                 answer.setQuestion(question);
                 answer.setTextChoice(1);
                 answer.setTextChoiceContent(pMap.get("textquestion" + questionid)[0]);
+                if (answerService.addAnswer(answer)) {
+                    answers.add(answer);
+                }
+            }
+        }
+
+        // add empty answers for doctor only questons
+        Set<Question> all_questions = survey.getQuestions();
+        for (Question question : all_questions) {
+            if (question.getStartAge() == 99 && question.getEndAge() == 99) {
+                Answer answer = new Answer();
+                answer.setSurvey(survey);
+                answer.setPatient(patient);
+                answer.setDoctor(doctor);
+                answer.setRetrieveInfo(newRetrieveInfo);
+                answer.setQuestion(question);
+                answer.setTextChoice(1);
                 if (answerService.addAnswer(answer)) {
                     answers.add(answer);
                 }
