@@ -42,7 +42,6 @@
     <script src="${pageContext.request.contextPath}/js/addRetrieve.js"></script>
     <script src="${pageContext.request.contextPath}/js/updatePatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/deletePatient.js"></script>
-    <script src="${pageContext.request.contextPath}/js/getAllPatientTypes.js"></script>
     <script src="${pageContext.request.contextPath}/js/getPatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/getPatientSummary.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/jQuery/ajaxfileupload.js"></script>
@@ -981,4 +980,5 @@
 </div>
 
 </body>
+<script src="${pageContext.request.contextPath}/js/getAllPatientTypes.js"></script>
 </html>

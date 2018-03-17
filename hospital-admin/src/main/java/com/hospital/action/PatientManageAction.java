@@ -274,13 +274,21 @@ public class PatientManageAction extends ActionSupport {
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
                 //过滤掉集合
-                return obj instanceof Set || name.equals("deliveryInfos") || obj instanceof Authorization || name.equals("authorization");
+                return  name.equals("deliveryInfos") || name.equals("retrieveInfos") ||
+                        name.equals("doctor") || name.equals("addnDoctor") ||
+                        name.equals("plan") || name.equals("pwd");
             }
         });
 
         jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
         JSONObject jsonObject = JSONObject.fromObject(newPatient, jsonConfig);
+        int planId= newPatient.getPlan().getPlanId();
+        String doctorName = newPatient.getDoctor().getName();
+        String addnDoctorName = newPatient.getAddnDoctor().getName();
+        jsonObject.put("planId", planId);
+        jsonObject.put("doctorName", doctorName);
+        jsonObject.put("addnDoctorName", addnDoctorName);
         try {
             response.getWriter().print(jsonObject);
         } catch (IOException e) {

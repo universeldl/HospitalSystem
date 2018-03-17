@@ -136,8 +136,7 @@ public class DoctorManageAction extends ActionSupport {
 
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
-                //过滤掉Authorization中的doctor
-                return name.equals("doctor");
+                return name.equals("authorization") || name.equals("hospital") ;
             }
         });
 
@@ -313,7 +312,11 @@ public class DoctorManageAction extends ActionSupport {
         List<Doctor> allDoctors = doctorService.getAllDoctors();
 
         JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+        jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+            public boolean apply(Object obj, String name, Object value) {
+                return name.equals("authorization") || name.equals("hospital") ;
+            }
+        });
 
         String json = JSONArray.fromObject(allDoctors, jsonConfig).toString();//List------->JSONArray
         try {

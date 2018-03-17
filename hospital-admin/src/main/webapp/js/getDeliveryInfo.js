@@ -21,11 +21,11 @@ function getDeliveryInfoById(id) {
 
                 $('#loading').hide();
                 $("#deliveryId").val(data.deliveryId);
-                $("#surveyName").val(data.survey.surveyName);
-                $("#surveyType").val(data.survey.surveyType.typeName);
-                $("#openID").val(data.patient.openID);
-                $("#patientName").val(data.patient.name);
-                $("#patientType").val(data.patient.patientType.patientTypeName);
+                $("#surveyName").val(data.surveyName);
+                $("#surveyType").val(data.typeName);
+                $("#openID").val(data.openId);
+                $("#patientName").val(data.patientName);
+                $("#patientType").val(data.patientType);
                 $("#overday").val(data.overday);
                 if (data.state == -1) {
                     $("#state").val("已答卷");
@@ -34,7 +34,7 @@ function getDeliveryInfoById(id) {
                 } else if (data.state > 0) {
                     $("#state").val("重发未答卷");
                 }
-                $("#doctor").val(data.doctor.name);
+                $("#doctor").val(data.doctorName);
             }
         }
     );

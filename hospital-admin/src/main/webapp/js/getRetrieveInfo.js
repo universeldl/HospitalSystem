@@ -21,13 +21,13 @@ function getRetrieveInfoById(id) {
 
                 $('#loading').hide();
                 $("#deliveryId").val(data.deliveryId);
-                $("#surveyName").val(data.survey.surveyName);
-                $("#surveyType").val(data.survey.surveyType.typeName);
-                $("#openID").val(data.patient.openID);
-                $("#patientName").val(data.patient.name);
-                $("#patientType").val(data.patient.patientType.patientTypeName);
-                $("#overday").val(data.deliveryInfo.overday);
-                $("#doctor").val(data.doctor.name);
+                $("#surveyName").val(data.surveyName);
+                $("#surveyType").val(data.typeName);
+                $("#openID").val(data.openId);
+                $("#patientName").val(data.patientName);
+                $("#patientType").val(data.patientType);
+                $("#overday").val(data.overday);
+                $("#doctor").val(data.doctorName);
             }
         }
     );

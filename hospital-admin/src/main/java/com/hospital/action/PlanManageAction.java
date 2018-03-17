@@ -12,6 +12,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
+import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -97,7 +98,12 @@ public class PlanManageAction extends ActionSupport {
         Plan newPlan = planService.getPlanById(plan);
 
         JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+        jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+            public boolean apply(Object obj, String name, Object value) {
+                return name.equals("surveys") || name.equals("patients") || name.equals("doctor");
+            }
+        });
+        //jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
         JSONObject jsonObject = JSONObject.fromObject(newPlan, jsonConfig);
         try {

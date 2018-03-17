@@ -234,7 +234,11 @@ public class SurveyManageAction extends ActionSupport {
         List<Survey> allSurveys = surveyService.findAllSurveys();
 
         JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+        jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+            public boolean apply(Object obj, String name, Object value) {
+                return !name.equals("surveyId") && !name.equals("surveyName") ;
+            }
+        });
 
         String json = JSONArray.fromObject(allSurveys, jsonConfig).toString();//List------->JSONArray
         try {

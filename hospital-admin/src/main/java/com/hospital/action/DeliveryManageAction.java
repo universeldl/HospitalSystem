@@ -84,16 +84,36 @@ public class DeliveryManageAction extends ActionSupport {
         DeliveryInfo info = new DeliveryInfo();
         info.setDeliveryId(deliveryId);
         DeliveryInfo newInfo = deliveryService.getDeliveryInfoById(info);
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-        jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
-            public boolean apply(Object obj, String name, Object value) {
-                return obj instanceof Authorization || name.equals("authorization") || obj instanceof Set || name.equals("deliveryInfos");
-            }
-        });
+        //JsonConfig jsonConfig = new JsonConfig();
+        //jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+        //jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+        //    public boolean apply(Object obj, String name, Object value) {
+        //        return obj instanceof Authorization || name.equals("authorization") || obj instanceof Set || name.equals("deliveryInfos");
+        //    }
+        //});
 
+        JSONObject jsonObject = new JSONObject();
+        int deliveryId = newInfo.getDeliveryId();
+        String surveyName = newInfo.getSurvey().getSurveyName();
+        String typeName = newInfo.getSurvey().getSurveyType().getTypeName();
+        String openId = newInfo.getPatient().getOpenID();
+        String patientName = newInfo.getPatient().getName();
+        String patientType = newInfo.getPatient().getPatientType().getPatientTypeName();
+        int overday = newInfo.getOverday();
+        int state = newInfo.getState();
+        String doctorName = newInfo.getDoctor().getName();
 
-        JSONObject jsonObject = JSONObject.fromObject(newInfo, jsonConfig);
+        jsonObject.put("deliveryId", deliveryId);
+        jsonObject.put("surveyName", surveyName);
+        jsonObject.put("typeName", typeName);
+        jsonObject.put("openId", openId);
+        jsonObject.put("patientName", patientName);
+        jsonObject.put("patientType", patientType);
+        jsonObject.put("overday", overday);
+        jsonObject.put("state", state);
+        jsonObject.put("doctorName", doctorName);
+
+        //JSONObject jsonObject = JSONObject.fromObject(newInfo, jsonConfig);
         try {
             response.getWriter().print(jsonObject);
         } catch (IOException e) {
@@ -108,12 +128,21 @@ public class DeliveryManageAction extends ActionSupport {
         response.setContentType("application/json;charset=utf-8");
         List<DeliveryInfo> unanswered = deliveryService.getUnansweredDeliveryInfos(patientId);
 
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+        JSONArray jsonArray = new JSONArray();
+        int idx = 0;
+        for(DeliveryInfo deliveryInfo : unanswered) {
+            JSONObject di = new JSONObject();
+            di.put("deliveryId", deliveryInfo.getDeliveryId());
+            di.put("surveyName", deliveryInfo.getSurvey().getSurveyName());
+            jsonArray.add(idx, di);
+            idx++;
+        }
+        //JsonConfig jsonConfig = new JsonConfig();
+        //jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
-        String json = JSONArray.fromObject(unanswered, jsonConfig).toString();//List------->JSONArray
+        //String json = JSONArray.fromObject(unanswered, jsonConfig).toString();//List------->JSONArray
         try {
-            response.getWriter().print(json);
+            response.getWriter().print(jsonArray);
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }

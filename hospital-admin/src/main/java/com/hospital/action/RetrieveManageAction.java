@@ -333,16 +333,35 @@ public class RetrieveManageAction extends ActionSupport {
         retrieveInfo.setDeliveryId(deliveryId);
         RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
 
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-        jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
-            public boolean apply(Object obj, String name, Object value) {
-                return obj instanceof Authorization || name.equals("authorization") || obj instanceof Set || name.equals("deliveryInfos");
-            }
-        });
+        //JsonConfig jsonConfig = new JsonConfig();
+        //jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+        //jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+        //    public boolean apply(Object obj, String name, Object value) {
+        //        return obj instanceof Authorization || name.equals("authorization") || obj instanceof Set || name.equals("deliveryInfos");
+        //    }
+        //});
 
 
-        JSONObject jsonObject = JSONObject.fromObject(newRetrieveInfo, jsonConfig);
+        //JSONObject jsonObject = JSONObject.fromObject(newRetrieveInfo, jsonConfig);
+
+        JSONObject jsonObject = new JSONObject();
+        int deliveryId = newRetrieveInfo.getDeliveryId();
+        String surveyName = newRetrieveInfo.getSurvey().getSurveyName();
+        String typeName = newRetrieveInfo.getSurvey().getSurveyType().getTypeName();
+        String openId = newRetrieveInfo.getPatient().getOpenID();
+        String patientName = newRetrieveInfo.getPatient().getName();
+        String patientType = newRetrieveInfo.getPatient().getPatientType().getPatientTypeName();
+        int overday = newRetrieveInfo.getDeliveryInfo().getOverday();
+        String doctorName = newRetrieveInfo.getDoctor().getName();
+
+        jsonObject.put("deliveryId", deliveryId);
+        jsonObject.put("surveyName", surveyName);
+        jsonObject.put("typeName", typeName);
+        jsonObject.put("openId", openId);
+        jsonObject.put("patientName", patientName);
+        jsonObject.put("patientType", patientType);
+        jsonObject.put("overday", overday);
+        jsonObject.put("doctorName", doctorName);
         try {
             response.getWriter().print(jsonObject);
         } catch (IOException e) {
