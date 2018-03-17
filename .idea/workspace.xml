@@ -9,9 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="08d425d6-fc1b-4a6c-b269-f9cdf463903f" name="Default" comment="1. Fix a display bug for textQuestion.&#10;2. Set textChoice when adding/updating textQuestion.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/database/my_dev.sql" afterPath="$PROJECT_DIR$/database/my_dev.sql" />
-      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java" afterPath="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java" />
       <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" />
+      <change beforePath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp" afterPath="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/HospitalSystem/test/" />
@@ -104,22 +103,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="checkRetrieve.jsp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="checkRetrieve.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="227" column="37" lean-forward="false" selection-start-line="227" selection-start-column="37" selection-end-line="227" selection-end-column="37" />
-              <folding />
+            <state relative-caret-position="324">
+              <caret line="142" column="16" lean-forward="false" selection-start-line="142" selection-start-column="16" selection-end-line="142" selection-end-column="16" />
+              <folding>
+                <element signature="n#style#0;n#section#0;n#aside#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="my_dev.sql" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/database/my_dev.sql">
+      <file leaf-file-name="questionManage.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="300" column="0" lean-forward="false" selection-start-line="300" selection-start-column="0" selection-end-line="300" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="306">
+              <caret line="164" column="31" lean-forward="false" selection-start-line="164" selection-start-column="31" selection-end-line="164" selection-end-column="31" />
+              <folding>
+                <element signature="n#style#0;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1521293198289" expanded="true" signature="4331:4345" ph="..." />
+                <marker date="1521293198289" expanded="true" signature="4660:4674" ph="..." />
+                <marker date="1521293198289" expanded="true" signature="5501:5515" ph="..." />
+                <marker date="1521293198289" expanded="true" signature="5830:5844" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -195,7 +204,6 @@
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/doctorManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientTypeManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/planManage.jsp" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/retrieveManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp" />
@@ -211,8 +219,9 @@
         <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/patientManage.jsp" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/PlanManageAction.java" />
         <option value="$PROJECT_DIR$/hospital-admin/src/main/java/com/hospital/action/SurveyManageAction.java" />
-        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" />
         <option value="$PROJECT_DIR$/database/my_dev.sql" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp" />
+        <option value="$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp" />
       </list>
     </option>
   </component>
@@ -1104,14 +1113,7 @@
       <workItem from="1521201492482" duration="4368000" />
       <workItem from="1521266522378" duration="4350000" />
       <workItem from="1521270902922" duration="9201000" />
-      <workItem from="1521285144046" duration="6769000" />
-    </task>
-    <task id="LOCAL-00023" summary="Comment out quartz adding patients since it causes Hibernate session glitch.">
-      <created>1516801217233</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1516801217233</updated>
+      <workItem from="1521285144046" duration="8032000" />
     </task>
     <task id="LOCAL-00024" summary="Comment out CreatePatients quartz job.">
       <created>1516803562653</created>
@@ -1449,11 +1451,18 @@
       <option name="project" value="LOCAL" />
       <updated>1521286379219</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="1. Fix a display bug for textQuestion.&#10;2. Set textChoice when adding/updating textQuestion.">
+      <created>1521292493982</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1521292493982</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="911415000" />
+    <option name="totallyTimeSpent" value="912678000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1466,11 +1475,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="960" y="0" width="1922" height="1054" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27391306" sideWeight="0.51069516" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32717392" sideWeight="0.49786097" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0828877" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0828877" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14331551" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1547,7 +1557,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix a Doctor login bug." />
     <MESSAGE value="Hide some menus/pages if current doctor don't have corresponding permissions." />
     <MESSAGE value="Enhance Patient with additional doctor, both doctor and addnDoctor can see this patient. Front-end of adding additional doctor will be added later." />
     <MESSAGE value="Fix a bug for query patients." />
@@ -1572,7 +1581,8 @@
     <MESSAGE value="Remove unused css files to reduce size." />
     <MESSAGE value="1. Polish ajax data to reduce transfer size.&#10;2. fix a bug of getAllPatientTypes error." />
     <MESSAGE value="Fix a bug if lastModified is NULL." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix a bug if lastModified is NULL." />
+    <MESSAGE value="1. Fix a display bug for textQuestion.&#10;2. Set textChoice when adding/updating textQuestion." />
+    <option name="LAST_COMMIT_MESSAGE" value="1. Fix a display bug for textQuestion.&#10;2. Set textChoice when adding/updating textQuestion." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2393,22 +2403,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/surveyTypeManage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="e#14102#14109#1#HTML" expanded="false" />
-            <element signature="e#15468#15475#1#HTML" expanded="false" />
-            <element signature="e#16782#16789#0#HTML" expanded="false" />
-            <element signature="e#18669#18676#0#HTML" expanded="false" />
-            <element signature="e#20623#20630#0#HTML" expanded="false" />
-            <element signature="e#23288#23295#0#HTML" expanded="false" />
-            <element signature="e#26013#26020#1#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/deliverySearch1.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -2787,19 +2781,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="227" column="37" lean-forward="false" selection-start-line="227" selection-start-column="37" selection-end-line="227" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/my_dev.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="498">
           <caret line="300" column="0" lean-forward="false" selection-start-line="300" selection-start-column="0" selection-end-line="300" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/questionManage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="164" column="31" lean-forward="false" selection-start-line="164" selection-start-column="31" selection-end-line="164" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1521293198289" expanded="true" signature="4331:4345" ph="..." />
+            <marker date="1521293198289" expanded="true" signature="4660:4674" ph="..." />
+            <marker date="1521293198289" expanded="true" signature="5501:5515" ph="..." />
+            <marker date="1521293198289" expanded="true" signature="5830:5844" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hospital-admin/src/main/webapp/WEB-INF/doctor/checkRetrieve.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="142" column="16" lean-forward="false" selection-start-line="142" selection-start-column="16" selection-end-line="142" selection-end-column="16" />
+          <folding>
+            <element signature="n#style#0;n#section#0;n#aside#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
