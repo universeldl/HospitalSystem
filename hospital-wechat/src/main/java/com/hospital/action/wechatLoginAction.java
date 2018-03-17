@@ -7,7 +7,6 @@ import com.hospital.domain.Hospital;
 import com.hospital.service.HospitalService;
 import com.hospital.service.PatientTypeService;
 import com.hospital.util.AccessTokenMgr;
-import com.hospital.util.AccessTokenMgrHXTS;
 import com.hospital.util.GetOpenIdOauth2;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
@@ -53,17 +52,14 @@ public class wechatLoginAction extends ActionSupport {
 
 
     public String login() {
-        System.out.println("login called; code = " + code);
 
-        AccessTokenMgr mgr = AccessTokenMgrHXTS.getInstance();
+        AccessTokenMgr mgr = AccessTokenMgr.getInstance();
         ServletActionContext.getContext().getSession().put("appID", mgr.getAppId());
 
         List<Hospital> hospitalList = hospitalService.getAllVisibleHospitals();
-        System.out.println("hospitallist = " + hospitalList.toString());
         ServletActionContext.getRequest().setAttribute("hl", hospitalList);
 
         if (patientTypeService == null) {
-            System.out.println("patient type = null");
         }
 
         List<PatientType> patientTypeList = patientTypeService.getAllPatientType();
@@ -71,19 +67,18 @@ public class wechatLoginAction extends ActionSupport {
 
 
         if (code != null) {
-            System.out.println("get code " + code);
             String open_id = GetOpenIdOauth2.getOpenId(code, mgr);
-            System.out.println("openid = " + open_id);
 
             // testing
-            //open_id = "test12345";
+            //if(open_id == null) {
+            //    open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
+            //}
 
             if (open_id != null) {
                 Patient patient = new Patient();
                 patient.setOpenID(open_id);
                 Patient new_patient = patientService.getPatientByOpenID(patient);
                 if (new_patient == null) {
-                    System.out.println("new paient not found");
                     ServletActionContext.getContext().getSession().put("patient", patient);
                     return NONE;
                 } else {
@@ -99,8 +94,7 @@ public class wechatLoginAction extends ActionSupport {
     }
 
     public String getAppId() {
-        System.out.println("get app id called");
-        String app_id = AccessTokenMgrHXTS.getInstance().getAppId();
+        String app_id = AccessTokenMgr.getInstance().getAppId();
         try {
             PrintWriter pw = ServletActionContext.getResponse().getWriter();
             pw.print(app_id);

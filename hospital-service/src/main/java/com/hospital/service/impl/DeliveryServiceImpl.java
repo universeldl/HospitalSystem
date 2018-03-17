@@ -5,13 +5,13 @@ import com.hospital.dao.*;
 import com.hospital.domain.*;
 import com.hospital.service.DeliveryService;
 import com.hospital.util.AccessTokenMgr;
-import com.hospital.util.AccessTokenService;
 import com.hospital.util.Md5Utils;
 import com.hospital.util.TemplateMessageMgr;
 import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -176,22 +176,22 @@ public class DeliveryServiceImpl implements DeliveryService {
         JSONObject d5 = new JSONObject();
         JSONObject data = new JSONObject();
 
-        d1.put("value","上海儿童医学中心呼吸科随访问卷");
+        d1.put("value","上海儿童医学中心呼吸科随访问卷\n");
         d1.put("color", colors[colorNum]);
 
         Patient patient = deliveryInfo.getPatient();
         d2.put("value",patient.getName());
         d2.put("color", colors[colorNum]);
 
-        Date date = deliveryInfo.getDeliveryDate();
-        d3.put("value", date.toString());
+        String date = DateFormat.getDateTimeInstance().format(deliveryInfo.getDeliveryDate());
+        d3.put("value", date);
         d3.put("color", colors[colorNum]);
 
         Survey survey = deliveryInfo.getSurvey();
         d4.put("value", survey.getSurveyName());
         d4.put("color", colors[colorNum]);
 
-        d5.put("value","请点击详情开始随访。");
+        d5.put("value","\n请点击\"详情\"开始随访。");
         d5.put("color", colors[colorNum]);
 
         colorNum = (colorNum>=4)?0:(colorNum+1);
@@ -202,9 +202,7 @@ public class DeliveryServiceImpl implements DeliveryService {
         data.put("keyword3", d4);
         data.put("remark", d5);
 
-        JSONObject json = new JSONObject();
-        AccessTokenMgr mgr = AccessTokenService.getAccessTokenByID(patient.getAppID());
-
+        AccessTokenMgr mgr = AccessTokenMgr.getInstance();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
                 .get(ServletActionContext.HTTP_REQUEST);
 
@@ -213,7 +211,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
         String url = tempContextUrl1 + "/hospital-wechat/doSurvey.jsp?deliveryID=" + deliveryInfo.getDeliveryId();
 
-        return TemplateMessageMgr.sendSurveyTemplate(json, patient.getOpenID(), url, mgr);
+        return TemplateMessageMgr.sendSurveyTemplate(data, patient.getOpenID(), url, mgr);
     }
 
     @Override

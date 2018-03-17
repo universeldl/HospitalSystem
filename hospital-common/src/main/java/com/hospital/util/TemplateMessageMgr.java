@@ -2,11 +2,6 @@ package com.hospital.util;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.hospital.util.AccessTokenMgr;
-import com.hospital.util.AccessTokenService;
-import com.hospital.util.WeixinUtil;
-
-import java.util.Date;
 
 /**
  * Created by QQQ on 2017/12/11.

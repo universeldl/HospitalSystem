@@ -98,7 +98,6 @@ public class patientRegisterAction extends ActionSupport {
 
     public String findDoctorsByHospital() {
         if (hospitalID!=null) {
-            System.out.println("find doctor from hospital id = " + hospitalID);
             Hospital tmpHospital = new Hospital();
             tmpHospital.setAid(Integer.valueOf(hospitalID));
             List<Doctor> list = doctorService.findDoctorByHospital(tmpHospital);
@@ -111,7 +110,6 @@ public class patientRegisterAction extends ActionSupport {
                 jsonObject.put("name", doctor.getName());
                 jsonArray.add(jsonObject);
             }
-            //System.out.println("json doctors = " + jsonArray.toString());
             try {
                 HttpServletResponse response = ServletActionContext.getResponse();
                 response.setCharacterEncoding("UTF-8");
@@ -125,7 +123,6 @@ public class patientRegisterAction extends ActionSupport {
 
 
     public String register() {
-        System.out.println("?typeID = " + typeID);
 
         String ref_captcha = ServletActionContext.getContext().getSession().get("captcha").toString();
         captcha = captcha.toLowerCase();
@@ -200,10 +197,8 @@ public class patientRegisterAction extends ActionSupport {
 
         Patient newPatient = patientService.getPatientByopenID(patient);
 
-        System.out.println("Add patient finished. status = " + status);
 
         int age = 0;
-        System.out.println("Add plan finished birthday = " + birthday);
         String[] bd = birthday.split("-");
         if (bd.length != 3) {
             writeStatus(-3);
@@ -211,9 +206,7 @@ public class patientRegisterAction extends ActionSupport {
         }
 
         String tmp_bd = bd[1] + "/" + bd[2] + "/" + bd[0];
-        System.out.println("Add plan finished birthday = " + birthday);
         age = AgeUtils.getAgeFromBirthTime(tmp_bd);
-        System.out.println("Add plan finished age = " + age);
         Plan plan = new Plan();
         plan.setBeginAge(age);
         plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
@@ -224,26 +217,19 @@ public class patientRegisterAction extends ActionSupport {
             plan.setOldPatientOnly(2);
         }
 
-        System.out.println("Add plan finished 1.");
         if (sex.toUpperCase().equals("MALE")) {
             plan.setSex(2);  //be careful about sex, Patient.sex is not compatible with Plan.sex
         } else if (sex.toUpperCase().equals("FEMALE")) {
             plan.setSex(1);
         }
-        System.out.println("Add plan finished 2.");
         plan.setPatientType(type);
-        System.out.println("Add plan finished 3.");
         Plan newPlan = planService.getPlan(plan);
-        System.out.println("Add plan finished.");
 
         if (newPlan != null) {
             Set<Survey> surveySet = newPlan.getSurveys();
-            System.out.println("survey length = " + surveySet.size());
 
-            int survey_id = 0;
             for (Survey survey : surveySet) {
                 if (!survey.isSendOnRegister()) continue;
-                System.out.println("provide survey id = " + survey_id);
                 DeliveryInfo deliveryInfo = new DeliveryInfo();
                 deliveryInfo.setPatient(newPatient);
                 deliveryInfo.setSurvey(survey);
@@ -261,9 +247,7 @@ public class patientRegisterAction extends ActionSupport {
                     return null;
                 }
             }
-            System.out.println("send template message finished");
         } else {
-            System.out.println("Warning : no plan added for patient " + patient.getName());
         }
 
         writeStatus(1);

@@ -3,7 +3,6 @@ package com.hospital.action;
 import com.hospital.domain.*;
 import com.hospital.service.*;
 import com.hospital.util.AccessTokenMgr;
-import com.hospital.util.AccessTokenMgrHXTS;
 import com.hospital.util.AgeUtils;
 import com.hospital.util.GetOpenIdOauth2;
 import com.opensymphony.xwork2.ActionContext;
@@ -83,23 +82,19 @@ public class surveyAction extends ActionSupport {
     public String doSurvey() {
 
         if (code == null) {
-            System.out.println("no code provided");
             errorMsg = "获取用户失败";
             return ERROR;
         }
 
         if (deliveryID == null) {
-            System.out.println("No deliveryID");
             errorMsg = "发送ID错误";
             return ERROR;
         } else {
-            System.out.println("deliveryID = " + deliveryID);
         }
         ServletActionContext.getRequest().setAttribute("deliveryID", deliveryID);
 
-        AccessTokenMgr mgr = AccessTokenMgrHXTS.getInstance();
+        AccessTokenMgr mgr = AccessTokenMgr.getInstance();
         String open_id = GetOpenIdOauth2.getOpenId(code, mgr);
-        System.out.println("openid = " + open_id);
 
 
         if (open_id == null) {
@@ -208,9 +203,7 @@ public class surveyAction extends ActionSupport {
                     Choice choice = choiceService.getChoiceById(tmpChoice);
                     if (choice != null) {
                         choiceset.add(choice);
-                        System.out.println("choice add to choiceset");
                     } else {
-                        System.out.println("choice not found");
                     }
                 }
 
@@ -234,7 +227,6 @@ public class surveyAction extends ActionSupport {
         }
 
         retrieveInfo.setAnswers(answers);
-        System.out.println("add answers to retrieve info");
 
         Integer i = retrieveService.addRetrieveInfo(retrieveInfo);
         HttpServletResponse response = ServletActionContext.getResponse();

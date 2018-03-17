@@ -25,7 +25,6 @@ public class captchaAction extends ActionSupport {
     }
 
     public String getCaptchaImg() {
-        System.out.println("call getCaptcha");
         InputStream inputStream = this.captchaService.getCaptchaImg();
         ServletActionContext.getContext().put("inputStream", inputStream);
         return SUCCESS;
