@@ -166,8 +166,7 @@
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                         data-target="#updateAnswerModal"
                                                         style="float:right;color:white;"
-                                                        onclick="updateAnswerById(<s:property
-                                                                value="#answer.answerId"/>)">修改
+                                                        onclick="updateAnswerById(<s:property value="#answer.answerId"/>)">修改
                                                 </button>
                                             </div>
                                         </div>
@@ -200,8 +199,7 @@
                                                                    id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
                                                                    value='<s:property value="#choice.choiceId"/>'
                                                                    disabled="disabled">
-                                                            <s:property
-                                                                    value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
+                                                            <s:property value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
                                                         </div>
                                                     </s:else>
                                                 </ul>
@@ -218,10 +216,7 @@
                                                         其它：
                                                     </div>
                                                     <div>
-                                                    <textarea class="form-control" rows="3" id="updateQuestionContent"
-                                                              disabled="disabled"><s:property
-                                                            value="#answer.textChoiceContent"/>
-                                                    </textarea>
+                                                    <textarea class="form-control" rows="3" id="updateQuestionContent5" disabled="disabled"><s:property value="#answer.textChoiceContent"/></textarea>
 
                                                     </div>
                                                 </ul>
@@ -244,8 +239,7 @@
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                         data-target="#updateAnswerModal"
                                                         style="float:right;color:white;"
-                                                        onclick="updateAnswerById(<s:property
-                                                                value="#answer.answerId"/>)">修改
+                                                        onclick="updateAnswerById(<s:property value="#answer.answerId"/>)">修改
                                                 </button>
                                             </div>
                                         </div>
@@ -281,8 +275,7 @@
                                                                        id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
                                                                        value='<s:property value="#choice.choiceId"/>'
                                                                        disabled="disabled">
-                                                                <s:property
-                                                                        value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
+                                                                <s:property value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
                                                             </label>
                                                         </div>
                                                     </s:else>
@@ -300,10 +293,7 @@
                                                         其它：
                                                     </div>
                                                     <div>
-                                                    <textarea class="form-control" rows="3" id="updateQuestionContent4"
-                                                              disabled="disabled"><s:property
-                                                            value="#answer.textChoiceContent"/>
-                                                    </textarea>
+                                                    <textarea class="form-control" rows="3" id="updateQuestionContent4" disabled="disabled"><s:property value="#answer.textChoiceContent"/></textarea>
                                                     </div>
                                                 </ul>
                                             </s:if>
@@ -333,8 +323,7 @@
                                         <div class="bootstrap-admin-panel-content"
                                              <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">style="color:red;"</s:if>>
                                             <div>
-                                                <textarea class="form-control" rows="3"
-                                                          id="updateQuestionContent3" disabled="disabled"></textarea>
+                                                <textarea class="form-control" rows="3" id="updateQuestionContent3" disabled="disabled"><s:property value="#answer.textChoiceContent"/></textarea>
                                             </div>
                                         </div>
                                     </div>

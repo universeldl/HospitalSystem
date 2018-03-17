@@ -340,6 +340,7 @@ public class SurveyManageAction extends ActionSupport {
                 //TODO for robustness, we should remove the question and added choices if failed
             }
         } else if (questionType == 3) {
+            question.setTextChoice(1);
             b = questionService.addQuestion(question);
         }
         int success = 0;
@@ -467,6 +468,8 @@ public class SurveyManageAction extends ActionSupport {
                 updateQuestion.getChoices().add(choice);
                 choiceService.addChoice(choice);
             }
+        } else if (questionType == 3) {
+            updateQuestion.setTextChoice(1);
         }
 
         Question newQuestion = questionService.updateQuestionInfo(updateQuestion);  //update question
