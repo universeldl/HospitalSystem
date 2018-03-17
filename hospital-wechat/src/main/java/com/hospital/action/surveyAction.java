@@ -12,6 +12,7 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -100,7 +101,7 @@ public class surveyAction extends ActionSupport {
         if (open_id == null) {
             errorMsg = "获取用户名失败，请稍后再试";
             return ERROR;
-            //open_id = "oaBonw30UBjZkLW5r";
+            //open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
         }
 
 
@@ -169,6 +170,12 @@ public class surveyAction extends ActionSupport {
         tmpDelevery.setDeliveryId(Integer.valueOf(deliveryID));
         DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmpDelevery);
         Date retrieveDate = new Date(System.currentTimeMillis());
+
+        if (deliveryInfo.getEndDate().before(retrieveDate)) {
+            errorMsg = "问卷已经过期，无法作答";
+            return ERROR;
+        }
+
         Survey survey = deliveryInfo.getSurvey();
         Patient patient = deliveryInfo.getPatient();
         Doctor doctor = deliveryInfo.getDoctor();

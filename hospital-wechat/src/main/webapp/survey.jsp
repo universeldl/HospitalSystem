@@ -152,7 +152,7 @@
                             <div class="weui-cell">
                                 <div class="weui-cell__bd">
                                     <textarea class="weui-textarea" placeholder="请输入文本" rows="3"
-                                              id='textquestion<s:property value="#qindex.index"/>'></textarea>
+                                              id='textquestion<s:property value="#question.questionId"/>'></textarea>
                                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                                 </div>
                             </div>
