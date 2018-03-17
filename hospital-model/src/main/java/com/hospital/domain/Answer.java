@@ -9,7 +9,7 @@ public class Answer {
     //private int choiceId;
     //private int questionId;
     //private int surveyId;
-    private int lastModified; //最后修改人，0-by patient, 1-by doctor, 2-by addnDoctor
+    private String lastModified; //最后修改人
     private String modifiedDate;//最后修改日期
     private Survey survey;    //分发问卷
     private Patient patient;    //分发病人
@@ -77,11 +77,11 @@ public class Answer {
         this.answerId = answerId;
     }
 
-    public int getLastModified() {
+    public String getLastModified() {
         return lastModified;
     }
 
-    public void setLastModified(int lastModified) {
+    public void setLastModified(String lastModified) {
         this.lastModified = lastModified;
     }
 

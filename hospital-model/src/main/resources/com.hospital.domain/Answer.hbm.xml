@@ -34,8 +34,8 @@
             <column name="textChoice"/>
         </property>
 
-        <property name="lastModified" type="java.lang.Integer">
-            <column name="lastModified" default="0"/>
+        <property name="lastModified" type="java.lang.String">
+            <column name="lastModified" default=""/>
         </property>
 
         <property name="textChoiceContent" type="java.lang.String">

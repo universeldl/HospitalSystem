@@ -192,11 +192,7 @@ public class RetrieveManageAction extends ActionSupport {
         String modifiedDate = CalendarUtils.getNowTime();//得到当前时间作为最后修改时间
         updateAnswer.setModifiedDate(modifiedDate);
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
-        if (updateAnswer.getPatient().getDoctor().getAid().equals(doctor.getAid())) {
-            updateAnswer.setLastModified(1);
-        } else if (updateAnswer.getPatient().getAddnDoctor().getAid().equals(doctor.getAid())) {
-            updateAnswer.setLastModified(2);
-        }
+        updateAnswer.setLastModified(doctor.getName());
 
         updateAnswer.getChoices().clear();    //clean existing choices in answer
 

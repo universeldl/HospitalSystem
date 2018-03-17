@@ -232,21 +232,14 @@ INSERT INTO hospital VALUES(12,  TRUE, "沪东社区卫生服务中心");
 INSERT INTO hospital VALUES(13, TRUE,  "洋泾社区卫生服务中心");
 INSERT INTO hospital VALUES(14,  TRUE, "泥城社区卫生服务中心");
 INSERT INTO hospital VALUES(15,  TRUE, "大团社区卫生服务中心");
-
-
-/*
 INSERT INTO hospital VALUES(17, TRUE,  "迎博社区卫生服务中心");
 INSERT INTO hospital VALUES(18, TRUE,  "潍坊社区卫生服务中心");
-*/
 
 INSERT INTO PatientType VALUES(1,"哮喘");
-/*
 INSERT INTO PatientType VALUES(2,"咳嗽");
 INSERT INTO surveyType VALUES(1,"第一类");
 INSERT INTO surveyType VALUES(2,"2nd");
-*/
 
-/*
 INSERT INTO doctor VALUES(1,"admin","张三","ISMvKXpXpadDiUoOSoAfww==","13547865412",1, 1);
 INSERT INTO doctor VALUES(2,"admin1","张三1","ISMvKXpXpadDiUoOSoAfww==","13547865412",1, 1);
 INSERT INTO doctor VALUES(3,"d1","张一三","4QrcOUm6Wau+VuBX8g+IPg==","13547865412",1, 0);
@@ -257,10 +250,9 @@ INSERT INTO doctor VALUES(7,"doctor4","张三5","4QrcOUm6Wau+VuBX8g+IPg==","1354
 INSERT INTO doctor VALUES(8,"doctor5","张三6","4QrcOUm6Wau+VuBX8g+IPg==","13547865412",6, 1);
 INSERT INTO doctor VALUES(9,"doctor6","张三7","4QrcOUm6Wau+VuBX8g+IPg==","13547865412",7, 1);
 INSERT INTO doctor VALUES(10,"doctor7","张三8","4QrcOUm6Wau+VuBX8g+IPg==","13547865412",8, 1);
-*/
 INSERT INTO doctor VALUES(6,"lht","lht","3DOSGROTSOLR+Or8OgGwFQ==","13547865412",0, 1);
 
-/*
+
 INSERT INTO Plan VALUES(1, 0, 2, 1, 1, 1, 1, 6);
 INSERT INTO Plan VALUES(2, 2, 5, 2, 1, 2, 1, 6);
 INSERT INTO Plan VALUES(3, 6, 9, 3, 1, 3, 1, 6);
@@ -272,10 +264,9 @@ INSERT INTO Patient VALUES(3,"123456","测试","appid","oaBonw30UBjZkLW5rf19h7Ku
 INSERT INTO Authorization VALUES(2,1,1,1,1,1,1,1,0);
 INSERT INTO Authorization VALUES(1,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(5,0,0,0,0,0,0,0,1);
-*/
 INSERT INTO Authorization VALUES(6,1,1,1,1,1,1,1,1);
 
-/*
+
 INSERT INTO survey VALUES(1,"survey1","admin",10,30, 2,"a1","aaa","2017-06-25 00:00:00",1,1,2,2, TRUE);
 INSERT INTO survey VALUES(2,"survey2","doctor2",10,30, 2,"a2","baa","2017-06-25 00:00:00",1,1,3,6, FALSE);
 
@@ -320,4 +311,3 @@ INSERT INTO answer_choice VALUES(1, 2);
 INSERT INTO answer_choice VALUES(2, 3);
 INSERT INTO answer_choice VALUES(2, 5);
 INSERT INTO answer_choice VALUES(3, 7);
-*/

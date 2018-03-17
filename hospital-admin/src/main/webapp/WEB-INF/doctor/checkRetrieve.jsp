@@ -160,16 +160,11 @@
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
                                             <div class="text-muted bootstrap-admin-box-title"
-                                                 <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
-                                                 <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
-                                                <s:property
-                                                        value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(多选题)
-                                                <s:if test="#answer.lastModified==1">
-                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
+                                                 <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
+                                                <s:property value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(多选题)
+                                                <s:if test="#answer.lastModified!=''">
+                                                    (最后修改人： <s:property value="#answer.lastModified"/>医生修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:if>
-                                                <s:elseif test="#answer.lastModified==2">
-                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
-                                                </s:elseif>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                         data-target="#updateAnswerModal"
                                                         style="float:right;color:white;"
@@ -179,8 +174,7 @@
                                             </div>
                                         </div>
                                         <div class="bootstrap-admin-panel-content"
-                                             <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
-                                             <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
+                                             <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
                                             <s:iterator value="#answer.question.choices" var="choice"
                                                         status="choiceIdx">
                                                 <ul>
@@ -244,16 +238,11 @@
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
                                             <div class="text-muted bootstrap-admin-box-title"
-                                                 <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
-                                                 <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
-                                                <s:property
-                                                        value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(单选题)
-                                                <s:if test="#answer.lastModified==1">
-                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
+                                                 <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
+                                                <s:property value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(单选题)
+                                                <s:if test="#answer.lastModified!=''">
+                                                    (最后修改人： <s:property value="#answer.lastModified"/>医生修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:if>
-                                                <s:elseif test="#answer.lastModified==2">
-                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
-                                                </s:elseif>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                         data-target="#updateAnswerModal"
                                                         style="float:right;color:white;"
@@ -263,8 +252,7 @@
                                             </div>
                                         </div>
                                         <div class="bootstrap-admin-panel-content"
-                                             <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
-                                             <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
+                                             <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
                                             <s:iterator value="#answer.question.choices" var="choice"
                                                         status="choiceIdx">
                                                 <ul>
@@ -331,16 +319,11 @@
                                     <div class="panel panel-info">
                                         <div class="panel-heading">
                                             <div class="text-muted bootstrap-admin-box-title"
-                                                 <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
-                                                 <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
-                                                <s:property
-                                                        value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(问答题)
-                                                <s:if test="#answer.lastModified==1">
-                                                    (最后修改人： 直属医生 <s:property value="#answer.patient.doctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
+                                                 <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
+                                                <s:property value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(问答题)
+                                                <s:if test="#answer.lastModified!=''">
+                                                    (最后修改人： <s:property value="#answer.lastModified"/>医生修改于 <s:property value="#answer.modifiedDate"/>)
                                                 </s:if>
-                                                <s:elseif test="#answer.lastModified==2">
-                                                    (最后修改人： 共享医生 <s:property value="#answer.patient.addnDoctor.name"/> 修改于 <s:property value="#answer.modifiedDate"/>)
-                                                </s:elseif>
                                                 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                         data-target="#updateAnswerModal"
                                                         style="float:right;color:white;"
@@ -350,8 +333,7 @@
                                             </div>
                                         </div>
                                         <div class="bootstrap-admin-panel-content"
-                                             <s:if test="#answer.lastModified==1">style="color:blue;"</s:if>
-                                             <s:elseif test="#answer.lastModified==2">style="color:red;"</s:elseif>>
+                                             <s:if test="#answer.lastModified!=''">style="color:red;"</s:if>>
                                             <div>
                                                 <textarea class="form-control" rows="3"
                                                           id="updateQuestionContent3" disabled="disabled"></textarea>
