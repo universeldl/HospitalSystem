@@ -255,28 +255,23 @@
                                                         </s:if>
                                                     </s:iterator>
                                                     <s:if test="#flag == false">
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio"
-                                                                       name='question<s:property value="#question.questionId"/>'
-                                                                       id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
-                                                                       value='<s:property value="#choice.choiceId"/>'
-                                                                       checked="checked" disabled="disabled">
-                                                                <s:property
-                                                                        value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
-                                                            </label>
+                                                        <div>
+                                                            <input type="radio"
+                                                                name='question<s:property value="#question.questionId"/>'
+                                                                id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
+                                                                value='<s:property value="#choice.choiceId"/>'
+                                                                checked="checked" disabled="disabled">
+                                                            <s:property value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
                                                         </div>
                                                     </s:if>
                                                     <s:else>
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio"
-                                                                       name='question<s:property value="#question.questionId"/>'
-                                                                       id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
-                                                                       value='<s:property value="#choice.choiceId"/>'
-                                                                       disabled="disabled">
-                                                                <s:property value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
-                                                            </label>
+                                                        <div>
+                                                            <input type="radio"
+                                                                name='question<s:property value="#question.questionId"/>'
+                                                                id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
+                                                                value='<s:property value="#choice.choiceId"/>'
+                                                                disabled="disabled">
+                                                            <s:property value="#choiceIdx.index+1"/>. ${choice.choiceContent}.
                                                         </div>
                                                     </s:else>
                                                 </ul>
