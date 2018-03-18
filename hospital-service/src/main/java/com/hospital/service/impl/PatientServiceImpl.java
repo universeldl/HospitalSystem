@@ -453,8 +453,8 @@ public class PatientServiceImpl implements PatientService {
 
 
     @Override
-    public String exportPatient() {
-        List<Patient> findAllPatients = patientDao.findAllPatients();
+    public String exportPatient(Doctor doctor) {
+        List<Patient> findAllPatients = patientDao.findAllPatientsByDoctor(doctor);
         String exportPatientExcel = exportExcel(findAllPatients, "allPatients.xls");
         return "doctor/FileDownloadAction.action?fileName=" + exportPatientExcel;
     }

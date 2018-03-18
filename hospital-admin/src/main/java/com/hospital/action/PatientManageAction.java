@@ -429,8 +429,9 @@ public class PatientManageAction extends ActionSupport {
 
 
     public String exportPatient() {
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         HttpServletResponse response = ServletActionContext.getResponse();
-        String filePath = patientService.exportPatient();
+        String filePath = patientService.exportPatient(doctor);
         try {
             response.getWriter().print(filePath);
         } catch (IOException e) {

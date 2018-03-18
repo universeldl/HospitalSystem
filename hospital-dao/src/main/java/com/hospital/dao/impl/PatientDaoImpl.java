@@ -332,4 +332,17 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     }
 
 
+    @Override
+    public List<Patient> findAllPatientsByDoctor(Doctor doctor) {
+        String hql = "from Patient r where 1=1";
+        //如果不是super
+        if ((doctor.getAuthorization().getSuperSet() == null) ||
+                ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
+            //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+        }
+        List list = this.getHibernateTemplate().find(hql);
+        return list;
+    }
+
 }

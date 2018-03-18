@@ -35,7 +35,7 @@ public interface PatientService {
 
     JSONObject batchAddPatient(String fileName, Doctor doctor);
 
-    String exportPatient();
+    String exportPatient(Doctor doctor);
 
     String exportSinglePatient(Patient patient);
 
