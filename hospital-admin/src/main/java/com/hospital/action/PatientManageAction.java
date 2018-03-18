@@ -283,12 +283,27 @@ public class PatientManageAction extends ActionSupport {
         jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
         JSONObject jsonObject = JSONObject.fromObject(newPatient, jsonConfig);
-        int planId= newPatient.getPlan().getPlanId();
-        String doctorName = newPatient.getDoctor().getName();
-        String addnDoctorName = newPatient.getAddnDoctor().getName();
-        jsonObject.put("planId", planId);
-        jsonObject.put("doctorName", doctorName);
-        jsonObject.put("addnDoctorName", addnDoctorName);
+
+        Plan plan = newPatient.getPlan();
+        if (plan != null) {
+            jsonObject.put("planId", plan.getPlanId());
+        } else {
+            jsonObject.put("planId", "N/A");
+
+        }
+
+        if (newPatient.getDoctor() != null) {
+            jsonObject.put("doctorName", newPatient.getDoctor().getName());
+        } else {
+            jsonObject.put("doctorName", "N/A");
+        }
+
+        if (newPatient.getAddnDoctor() != null) {
+            jsonObject.put("addnDoctorName", newPatient.getAddnDoctor().getName());
+        } else {
+            jsonObject.put("addnDoctorName", "N/A");
+        }
+
         try {
             response.getWriter().print(jsonObject);
         } catch (IOException e) {

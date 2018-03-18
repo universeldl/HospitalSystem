@@ -226,12 +226,15 @@ public class patientRegisterAction extends ActionSupport {
         Plan newPlan = planService.getPlan(plan);
 
         if (newPlan != null) {
+            newPatient.setPlan(newPlan);
+            patient = patientService.updatePatientInfo(newPatient);
+
             Set<Survey> surveySet = newPlan.getSurveys();
 
             for (Survey survey : surveySet) {
                 if (!survey.isSendOnRegister()) continue;
                 DeliveryInfo deliveryInfo = new DeliveryInfo();
-                deliveryInfo.setPatient(newPatient);
+                deliveryInfo.setPatient(patient);
                 deliveryInfo.setSurvey(survey);
                 deliveryInfo.setDoctor(doctor);
                 deliveryInfo.setDeliveryDate(new Date(System.currentTimeMillis()));
