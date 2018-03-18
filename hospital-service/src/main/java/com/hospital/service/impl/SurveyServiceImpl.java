@@ -408,7 +408,7 @@ public class SurveyServiceImpl implements SurveyService {
                 sheet.addCell(label);
                 label = new Label(9, i, surveys.get(i - 1).getDescription());
                 sheet.addCell(label);
-                label = new Label(19, i, (surveys.get(i - 1).isSendOnRegister()?"是":"否"));
+                label = new Label(10, i, (surveys.get(i - 1).isSendOnRegister()?"是":"否"));
                 sheet.addCell(label);
             }
             //写入数据
