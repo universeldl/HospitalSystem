@@ -3,10 +3,12 @@ package com.hospital.action;
 import com.hospital.domain.*;
 import com.hospital.service.DoctorService;
 import com.hospital.service.PatientService;
+import com.hospital.service.PatientTypeService;
 import com.hospital.service.PlanService;
 import com.hospital.util.Md5Utils;
 import com.hospital.util.AgeUtils;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
@@ -30,6 +32,11 @@ public class PatientManageAction extends ActionSupport {
     private PatientService patientService;
     private PlanService planService;
     private DoctorService doctorService;
+    private PatientTypeService patientTypeService;
+
+    public void setPatientTypeService(PatientTypeService patientTypeService) {
+        this.patientTypeService = patientTypeService;
+    }
 
     public void setPlanService(PlanService planService) {
         this.planService = planService;
@@ -448,5 +455,21 @@ public class PatientManageAction extends ActionSupport {
         }
         return null;
     }
+
+
+    public String getAllPatientTypes() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+        List<PatientType> allPatientTypes = patientTypeService.getAllPatientType();
+
+        String json = JSONArray.fromObject(allPatientTypes).toString();//List------->JSONArray
+        try {
+            response.getWriter().print(json);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
 
 }

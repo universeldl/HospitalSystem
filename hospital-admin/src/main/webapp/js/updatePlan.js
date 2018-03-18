@@ -67,7 +67,7 @@ function updatePlan(id) {
     $('#loading').show();
     ajax(
         {
-            url: "doctor/patientTypeManageAction_getAllPatientTypes.action",
+            url: "doctor/patientManageAction_getAllPatientTypes.action",
             type: "json",
             callback: function (data) {
                 // 循环遍历每个病人分类，每个名称生成一个option对象，添加到<select>中

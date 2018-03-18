@@ -2,7 +2,7 @@ window.onload = new function () {
     $('#loading').show();
     ajax(
         {
-            url: "doctor/patientTypeManageAction_getAllPatientTypes.action",
+            url: "doctor/patientManageAction_getAllPatientTypes.action",
             type: "json",
             callback: function (data) {
                 $('#loading').hide();
