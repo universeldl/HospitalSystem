@@ -146,8 +146,8 @@
             <!-- <h2>Hello World!</h2> -->
 
             <!-- content -->
-            <div class="col-md-10">
-                <div class="row">
+            <div class="row">
+                <div class="col-md-10">
 
                     <s:if test="#request.myAnswers!=null">
                         <s:iterator value="#request.myAnswers" var="answer" status="answerIdx">
