@@ -68,7 +68,8 @@ public class DeliveryManageAction extends ActionSupport {
         //给pageSize,每页的记录数赋值
         int pageSize = 5;
 
-        PageBean<DeliveryInfo> pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize);
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        PageBean<DeliveryInfo> pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize, doctor);
         if (pb != null) {
             pb.setUrl("findDeliveryInfoByPage.action?");
         }
@@ -202,10 +203,11 @@ public class DeliveryManageAction extends ActionSupport {
         //给pageSize,每页的记录数赋值
         int pageSize = 5;
         PageBean<DeliveryInfo> pb = null;
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         if ("".equals(patientName.trim()) && deliveryId == 0) {
-            pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize);
+            pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize, doctor);
         } else {
-            pb = deliveryService.queryDeliveryInfo(patientName, deliveryId, pageCode, pageSize);
+            pb = deliveryService.queryDeliveryInfo(patientName, deliveryId, pageCode, pageSize, doctor);
         }
         if (pb != null) {
             pb.setUrl("queryDeliverySearchInfo.action?patientName=" + patientName + "&deliveryId=" + deliveryId + "&");

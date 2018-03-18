@@ -1,10 +1,7 @@
 package com.hospital.dao.impl;
 
 import com.hospital.dao.DeliveryDao;
-import com.hospital.domain.DeliveryInfo;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
-import com.hospital.domain.Survey;
+import com.hospital.domain.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
@@ -44,7 +41,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
 
 
     @Override
-    public PageBean<Integer> getDeliveryIdList(String name, int deliveryId, int pageCode, int pageSize) {
+    public PageBean<Integer> getDeliveryIdList(String name, int deliveryId, int pageCode, int pageSize, Doctor doctor) {
         PageBean<Integer> pb = new PageBean<Integer>();    //pageBean对象，用于分页
         //根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
         pb.setPageCode(pageCode);//设置当前页码
@@ -58,6 +55,13 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         //不支持limit分页
         String hql = "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r "
                 + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+        //如果不是super
+        //if ((doctor.getAuthorization().getSuperSet() == null) ||
+        //        ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
+        //    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+        //    hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+        //    sql = sql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+        //}
         sb.append(hql);
         sb_sql.append(sql);
         if (!"".equals(name.trim())) {
@@ -109,24 +113,67 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         });
     }
 
+
+    public List doSplitPage(final String hql, final int pageCode, final int pageSize, final int aid1, final int aid2) {
+        //调用模板的execute方法，参数是实现了HibernateCallback接口的匿名类，
+        return (List) this.getHibernateTemplate().execute(new HibernateCallback() {
+            //重写其doInHibernate方法返回一个object对象，
+            public Object doInHibernate(Session session)
+                    throws HibernateException {
+                //创建query对象
+                Query query = session.createQuery(hql);
+                query.setParameter("aid1", aid1);
+                query.setParameter("aid2", aid2);
+                //返回其执行了分布方法的list
+                return query.setFirstResult((pageCode - 1) * pageSize).setMaxResults(pageSize).list();
+
+            }
+
+        });
+
+    }
+
+
     @Override
-    public PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize) {
+    public PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize, Doctor doctor) {
         PageBean<DeliveryInfo> pb = new PageBean<DeliveryInfo>();    //pageBean对象，用于分页
         //根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
         pb.setPageCode(pageCode);//设置当前页码
         pb.setPageSize(pageSize);//设置页面记录数
         List deliveryInfoList = null;
         try {
-            String sql = "SELECT count(*) FROM DeliveryInfo";
-            List list = this.getSessionFactory().getCurrentSession().createQuery(sql).list();
-            int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
-            pb.setTotalRecord(totalRecord);    //设置总记录数
-            //this.getSessionFactory().getCurrentSession().close();
+            String sql = "from DeliveryInfo";
+            int totalRecord = 0;
+            //如果是super，全选，否则做判断
+            if ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() == 1)) {
+                List list = this.getHibernateTemplate().find(sql);
+                if (list != null && list.size() > 0) {
+                    totalRecord = list.size();
+                }
+                pb.setTotalRecord(totalRecord);    //设置总记录数
+                //this.getSessionFactory().getCurrentSession().close();
 
-            //不支持limit分页
-            String hql = "from DeliveryInfo";
-            //分页查询
-            deliveryInfoList = doSplitPage(hql, pageCode, pageSize);
+                //不支持limit分页
+                String hql = "from DeliveryInfo";
+                //分页查询
+                deliveryInfoList = doSplitPage(hql, pageCode, pageSize);
+            } else {
+                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+                String addSql = " r where (r.patient.doctor.aid=? or r.patient.addnDoctor.aid=?)";
+                sql += addSql;
+                List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
+                if (list != null && list.size() > 0) {
+                    totalRecord = list.size();
+                }
+                pb.setTotalRecord(totalRecord);    //设置总记录数
+                //this.getSessionFactory().getCurrentSession().close();
+
+                //不支持limit分页
+                String hql = "from DeliveryInfo r where (r.patient.doctor.aid=:aid1 or r.patient.addnDoctor.aid=:aid2)";
+                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
+                //分页查询
+                deliveryInfoList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
+            }
         } catch (Throwable e1) {
             e1.printStackTrace();
             throw new RuntimeException(e1.getMessage());

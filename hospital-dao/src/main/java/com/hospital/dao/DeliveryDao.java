@@ -1,15 +1,12 @@
 package com.hospital.dao;
 
-import com.hospital.domain.DeliveryInfo;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
-import com.hospital.domain.Survey;
+import com.hospital.domain.*;
 
 import java.util.List;
 
 public interface DeliveryDao {
 
-    PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize);
+    PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize, Doctor doctor);
 
     DeliveryInfo getDeliveryInfoById(DeliveryInfo info);
 
@@ -17,7 +14,7 @@ public interface DeliveryDao {
 
     List<DeliveryInfo> getUnansweredDeliveryInfos(Integer patientId);
 
-    PageBean<Integer> getDeliveryIdList(String name, int deliveryId, int pageCode, int pageSize);
+    PageBean<Integer> getDeliveryIdList(String name, int deliveryId, int pageCode, int pageSize, Doctor doctor);
 
     List<DeliveryInfo> getNoRetrieveDeliveryInfoByPatient(Patient patient);
 

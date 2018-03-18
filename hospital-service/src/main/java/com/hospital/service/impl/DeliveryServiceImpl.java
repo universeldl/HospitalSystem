@@ -47,9 +47,9 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
-    public PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize) {
+    public PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize, Doctor doctor) {
         // TODO Auto-generated method stub
-        return deliveryDao.findDeliveryInfoByPage(pageCode, pageSize);
+        return deliveryDao.findDeliveryInfoByPage(pageCode, pageSize, doctor);
     }
 
     @Override
@@ -65,11 +65,11 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
-    public PageBean<DeliveryInfo> queryDeliveryInfo(String name, int deliveryId, int pageCode, int pageSize) {
+    public PageBean<DeliveryInfo> queryDeliveryInfo(String name, int deliveryId, int pageCode, int pageSize, Doctor doctor) {
         PageBean<DeliveryInfo> pageBean = new PageBean<DeliveryInfo>();
         pageBean.setPageCode(pageCode);
         pageBean.setPageSize(pageSize);
-        PageBean<Integer> list = deliveryDao.getDeliveryIdList(name, deliveryId, pageCode, pageSize);
+        PageBean<Integer> list = deliveryDao.getDeliveryIdList(name, deliveryId, pageCode, pageSize, doctor);
         pageBean.setTotalRecord(list.getTotalRecord());
         List<Integer> beanList = list.getBeanList();
         if (beanList.size() == 0) {
