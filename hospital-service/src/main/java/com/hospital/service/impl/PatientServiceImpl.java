@@ -417,6 +417,13 @@ public class PatientServiceImpl implements PatientService {
                 Label surveyTitle = new Label(0, row, retrieveInfo.getSurvey().getSurveyName(), titleFormate);
                 sheet.setRowView(0, 600, false);//设置第一行的高度
                 sheet.addCell(surveyTitle);
+
+                //print retrieveDate
+                Date retrieveDate = retrieveInfo.getRetrieveDate();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String dateString = formatter.format(retrieveDate);
+                label = new Label(2, row, dateString);
+                sheet.addCell(label);
                 row++;
 
                 //构造答卷列表
@@ -424,12 +431,12 @@ public class PatientServiceImpl implements PatientService {
                     label = new Label(0, row, answer.getQuestion().getQuestionContent());
                     sheet.addCell(label);
                     int col = 1;
-                    for(Choice choice : answer.getChoices()) {
+                    for (Choice choice : answer.getChoices()) {
                         label = new Label(col, row, choice.getChoiceContent());
                         sheet.addCell(label);
                         col++;
                     }
-                    if(answer.getTextChoice() == 1) {
+                    if (answer.getTextChoice() == 1) {
                         label = new Label(col, row, answer.getTextChoiceContent());
                         sheet.addCell(label);
                     }
