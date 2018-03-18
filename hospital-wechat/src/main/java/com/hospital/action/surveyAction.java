@@ -99,9 +99,9 @@ public class surveyAction extends ActionSupport {
 
 
         if (open_id == null) {
-            //errorMsg = "获取用户名失败，请稍后再试";
-            //return ERROR;
-            open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
+            errorMsg = "获取用户名失败，请稍后再试";
+            return ERROR;
+            //open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
         }
 
 
