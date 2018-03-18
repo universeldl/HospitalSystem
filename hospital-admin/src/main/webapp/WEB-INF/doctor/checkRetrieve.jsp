@@ -184,7 +184,7 @@
                                                     <s:if test="#flag == false">
                                                         <div>
                                                             <input type="checkbox"
-                                                                   name='question<s:property value="#question.questionId"/>'
+                                                                   name='question<s:property value="#answer.question.questionId"/>'
                                                                    id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
                                                                    value='<s:property value="#choice.choiceId"/>'
                                                                    checked="checked" disabled="disabled">
@@ -195,7 +195,7 @@
                                                     <s:else>
                                                         <div>
                                                             <input type="checkbox"
-                                                                   name='question<s:property value="#question.questionId"/>'
+                                                                   name='question<s:property value="#answer.question.questionId"/>'
                                                                    id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
                                                                    value='<s:property value="#choice.choiceId"/>'
                                                                    disabled="disabled">
@@ -208,7 +208,7 @@
                                                 <ul>
                                                     <div>
                                                         <input type="checkbox"
-                                                               name='question<s:property value="#question.questionId"/>'
+                                                               name='question<s:property value="#answer.question.questionId"/>'
                                                                id='textChoice<s:property value="#answer.question.choices.size+1" />'
                                                                disabled="disabled"
                                                         <s:if test="#answer.textChoice==1"> checked="checked" </s:if> >
@@ -257,7 +257,7 @@
                                                     <s:if test="#flag == false">
                                                         <div>
                                                             <input type="radio"
-                                                                name='question<s:property value="#question.questionId"/>'
+                                                                name='question<s:property value="#answer.question.questionId"/>'
                                                                 id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
                                                                 value='<s:property value="#choice.choiceId"/>'
                                                                 checked="checked" disabled="disabled">
@@ -267,7 +267,7 @@
                                                     <s:else>
                                                         <div>
                                                             <input type="radio"
-                                                                name='question<s:property value="#question.questionId"/>'
+                                                                name='question<s:property value="#answer.question.questionId"/>'
                                                                 id='question<s:property value="#answerIdx.index"/>choice<s:property value="#choiceIdx.index" />'
                                                                 value='<s:property value="#choice.choiceId"/>'
                                                                 disabled="disabled">
@@ -280,7 +280,7 @@
                                                 <ul>
                                                     <div>
                                                         <input type="radio"
-                                                               name='question<s:property value="#question.questionId"/>'
+                                                               name='question<s:property value="#answer.question.questionId"/>'
                                                                id='textChoice<s:property value="#answer.question.choices.size+1" />'
                                                                disabled="disabled"
                                                         <s:if test="#answer.textChoice==1"> checked="checked" </s:if> >
