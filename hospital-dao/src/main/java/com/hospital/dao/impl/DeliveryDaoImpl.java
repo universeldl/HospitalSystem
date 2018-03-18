@@ -7,11 +7,13 @@ import com.hospital.domain.Patient;
 import com.hospital.domain.Survey;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao {
@@ -40,6 +42,72 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
 
     }
 
+
+    @Override
+    public PageBean<Integer> getDeliveryIdList(String name, int deliveryId, int pageCode, int pageSize) {
+        PageBean<Integer> pb = new PageBean<Integer>();    //pageBean对象，用于分页
+        //根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
+        pb.setPageCode(pageCode);//设置当前页码
+        pb.setPageSize(pageSize);//设置页面记录数
+
+        List<Integer> integers = new ArrayList<Integer>();
+        StringBuilder sb = new StringBuilder();
+        StringBuilder sb_sql = new StringBuilder();
+        String sql = "select count(*) from deliveryInfo bo,survey bk,Patient r "
+                + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+        //不支持limit分页
+        String hql = "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r "
+                + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+        sb.append(hql);
+        sb_sql.append(sql);
+        if (!"".equals(name.trim())) {
+            sb.append(" and r.name like '%" + name + "%'");
+            sb_sql.append(" and r.name like '%" + name + "%'");
+        }
+        if (deliveryId != 0) {
+            sb.append(" and bo.deliveryId like '%" + deliveryId + "%'");
+            sb_sql.append(" and bo.deliveryId like '%" + deliveryId + "%'");
+        }
+
+        try {
+            NativeQuery createSQLQuery1 = this.getSessionFactory().getCurrentSession().createNativeQuery(sb_sql.toString());
+            List list = createSQLQuery1.list();
+            int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
+            pb.setTotalRecord(totalRecord);    //设置总记录数
+            //this.getSessionFactory().getCurrentSession().close();
+
+            //不支持limit分页
+            //分页查询
+            List list2 = doLimitDeliveryInfo(sb.toString(), pageCode, pageSize);
+            for (Object object : list2) {
+                Integer i = new Integer(object.toString());
+                integers.add(i);
+            }
+            pb.setBeanList(integers);
+        } catch (Throwable e1) {
+            e1.printStackTrace();
+            throw new RuntimeException(e1.getMessage());
+        }
+
+        return pb;
+    }
+
+
+    public List doLimitDeliveryInfo(final String hql, final int pageCode, final int pageSize) {
+        //调用模板的execute方法，参数是实现了HibernateCallback接口的匿名类，
+        return (List) this.getHibernateTemplate().execute(new HibernateCallback() {
+            //重写其doInHibernate方法返回一个object对象，
+            public Object doInHibernate(Session session)
+                    throws HibernateException {
+                //创建query对象
+                NativeQuery query = session.createNativeQuery(hql);
+                //返回其执行了分布方法的list
+                return query.setFirstResult((pageCode - 1) * pageSize).setMaxResults(pageSize).list();
+
+            }
+
+        });
+    }
 
     @Override
     public PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize) {

@@ -145,7 +145,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">查询</div>
                 <form class="form-horizontal"
-                      action="${pageContext.request.contextPath}/doctor/deliverySearchAction_queryDeliverySearchInfo.action"
+                      action="${pageContext.request.contextPath}/doctor/deliveryManageAction_queryDeliverySearchInfo.action"
                       method="post">
                     <div class="form-group">
                         <div class="col-sm-2 control-label">分发编号</div>
@@ -155,10 +155,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-2 control-label">用户名</div>
+                        <div class="col-sm-2 control-label">姓名</div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="openID"
-                                   placeholder="请输入病人用户名"/>
+                            <input type="text" class="form-control" name="patientName"
+                                   placeholder="请输入病人姓名"/>
                         </div>
                     </div>
                     <div class="form-group">

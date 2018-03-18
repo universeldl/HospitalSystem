@@ -64,6 +64,27 @@ public class DeliveryServiceImpl implements DeliveryService {
         return deliveryDao.getDeliveryInfoById(info);
     }
 
+    @Override
+    public PageBean<DeliveryInfo> queryDeliveryInfo(String name, int deliveryId, int pageCode, int pageSize) {
+        PageBean<DeliveryInfo> pageBean = new PageBean<DeliveryInfo>();
+        pageBean.setPageCode(pageCode);
+        pageBean.setPageSize(pageSize);
+        PageBean<Integer> list = deliveryDao.getDeliveryIdList(name, deliveryId, pageCode, pageSize);
+        pageBean.setTotalRecord(list.getTotalRecord());
+        List<Integer> beanList = list.getBeanList();
+        if (beanList.size() == 0) {
+            return null;
+        }
+        List<DeliveryInfo> deliveryInfos = new ArrayList<DeliveryInfo>();
+        for (Integer i : beanList) {
+            DeliveryInfo deliveryInfo = new DeliveryInfo();
+            deliveryInfo.setDeliveryId(i);
+            DeliveryInfo info = deliveryDao.getDeliveryInfoById(deliveryInfo);
+            deliveryInfos.add(info);
+        }
+        pageBean.setBeanList(deliveryInfos);
+        return pageBean;
+    }
 
     @Override
     public int addDelivery(DeliveryInfo info) {

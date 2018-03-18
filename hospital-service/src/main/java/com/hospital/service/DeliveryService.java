@@ -14,6 +14,8 @@ public interface DeliveryService {
 
     List<DeliveryInfo> getUnansweredDeliveryInfos(Integer patientId);
 
+    PageBean<DeliveryInfo> queryDeliveryInfo(String name, int deliveryId, int pageCode, int pageSize);
+
     /**
      * 返回分发状态码
      *

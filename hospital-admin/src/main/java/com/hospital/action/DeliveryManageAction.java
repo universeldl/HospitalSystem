@@ -30,11 +30,16 @@ public class DeliveryManageAction extends ActionSupport {
     private int patientId;
     private String openID;
     private String pwd;
+    private String patientName;
 
     public void setPatientId(Integer patientId) {this.patientId = patientId;}
 
     public void setOpenID(String openID) {
         this.openID = openID;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 
     public void setPwd(String pwd) {
@@ -188,5 +193,27 @@ public class DeliveryManageAction extends ActionSupport {
 
         return null;
     }
+
+    public String queryDeliverySearchInfo() {
+        //获取页面传递过来的当前页码数
+        if (pageCode == 0) {
+            pageCode = 1;
+        }
+        //给pageSize,每页的记录数赋值
+        int pageSize = 5;
+        PageBean<DeliveryInfo> pb = null;
+        if ("".equals(patientName.trim()) && deliveryId == 0) {
+            pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize);
+        } else {
+            pb = deliveryService.queryDeliveryInfo(patientName, deliveryId, pageCode, pageSize);
+        }
+        if (pb != null) {
+            pb.setUrl("queryDeliverySearchInfo.action?patientName=" + patientName + "&deliveryId=" + deliveryId + "&");
+        }
+
+        ServletActionContext.getRequest().setAttribute("pb", pb);
+        return "success";
+    }
+
 
 }
