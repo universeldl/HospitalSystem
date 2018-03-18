@@ -155,6 +155,7 @@
                     <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
+                            <th>随访计划编号</th>
                             <th>病人类型</th>
                             <th>病人性别</th>
                             <th>年龄范围最小值（含）</th>
@@ -171,6 +172,7 @@
                         <s:if test="#request.plans!=null">
                             <s:iterator value="#request.plans" var="plan">
                                 <tbody>
+                                <td><s:property value="#plan.planId"/></td>
                                 <td><s:property value="#plan.patientType.patientTypeName"/></td>
 
                                 <td>
@@ -224,6 +226,7 @@
                         </s:if>
                         <s:else>
                             <tbody>
+                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
