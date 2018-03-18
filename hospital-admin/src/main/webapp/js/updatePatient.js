@@ -12,8 +12,13 @@ $(function () {
         }
 
         var postdata = "patientId=" + $.trim($("#updatePatientID").val()) + "&patientType=" + $.trim($("#updatePatientType").val())
-            + "&name=" + $.trim($("#updateName").val()) + "&phone=" + $.trim($("#updatePhone").val()) + "&email=" + $.trim($("#updateEmail").val())
+            + "&name=" + $.trim($("#updateName").val()) + "&phone=" + $.trim($("#updatePhone").val())
             + "&openID=" + $.trim($("#updateOpenID").val()) + "&addnDoctorId=" + $.trim($("#updateAddnDoctor").val());
+        if ($.trim($("#updateEmail").val()) != "") {
+            postdat = postdata + "&email=" + $.trim($("#updateEmail").val());
+        } else {
+            postdat = postdata + "&email=n/a";
+        }
         ajax(
             {
                 method: 'POST',
@@ -23,7 +28,9 @@ $(function () {
                     if (data == 1) {
                         $("#updateModal").modal("hide");//关闭模糊框		
                         showInfo("修改成功");
-
+                    } else if (data == -2) {
+                        $("#updateinfo").modal("hide");//关闭模糊框
+                        showInfo("修改失败,直属医生和共享医生不能为同一人");
                     } else {
                         $("#updateinfo").modal("hide");//关闭模糊框
                         showInfo("修改失败");
@@ -164,10 +171,13 @@ function validUpdatePatient() {
     var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
     var email = $.trim($("#updateEmail").val());
     if (email == "") {
+        /*
+        make email address optionnal
         $('#updateEmail').parent().addClass("has-error");
         $('#updateEmail').next().text("请输入邮箱");
         $("#updateEmail").next().show();
         flag = false;
+        */
     } else if (!reg.test(email)) {
         //邮箱格式的校验
         $('#updateEmail').parent().addClass("has-error");

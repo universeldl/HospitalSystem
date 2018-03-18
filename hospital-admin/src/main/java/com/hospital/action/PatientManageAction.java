@@ -320,7 +320,6 @@ public class PatientManageAction extends ActionSupport {
      */
     public String updatePatient() {
         //得到当前医生
-        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         Patient patient = new Patient();
         patient.setPatientId(patientId);
         Patient updatePatient = patientService.getPatientById(patient);//查出需要修改的病人对象;
@@ -332,13 +331,21 @@ public class PatientManageAction extends ActionSupport {
         PatientType type = new PatientType();
         type.setPatientTypeId(patientType);
         updatePatient.setPatientType(type);
+        if (updatePatient.getDoctor().getAid() != addnDoctorId) {
+            Doctor addnDoctor = new Doctor();
+            addnDoctor.setAid(addnDoctorId);
+            Doctor newAddndoctor = doctorService.getDoctorById(addnDoctor);
+            if (newAddndoctor != null) {
+                updatePatient.setAddnDoctor(newAddndoctor);
+            }
+        }
         Patient newPatient = patientService.updatePatientInfo(updatePatient);
         int success = 0;
-        if (newPatient != null) {
+        if (updatePatient.getDoctor().getAid() == addnDoctorId) {
+            success = -2;
+        } else if (newPatient != null) {
             success = 1;
             //由于是转发并且js页面刷新,所以无需重查
-        } else if (doctor.getAid() == addnDoctorId) {
-            success = -2;//共享医生与直属医生不能相同
         }
         try {
             ServletActionContext.getResponse().getWriter().print(success);
