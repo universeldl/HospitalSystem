@@ -219,6 +219,7 @@
                             -->
                             <th>病人姓名</th>
                             <th>病人性别</th>
+                            <th>出生日期</th>
                             <th>病人类型</th>
                             <th>随访计划</th>
                             <th>直属医生</th>
@@ -243,6 +244,7 @@
                                         女
                                     </s:elseif>
                                 </td>
+                                <td><s:date name="#patient.birthday" format="yyyy-MM-dd" /></td>
                                 <td><s:property value="#patient.patientType.patientTypeName"/></td>
                                 <td><s:property value="#patient.plan.planId"/></td>
                                 <td><s:property value="#patient.doctor.name"/></td>
@@ -289,6 +291,7 @@
                         </s:if>
                         <s:else>
                             <tbody>
+                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
