@@ -299,7 +299,7 @@ function submit(to) {
                 } else if (data == -1) {
                     var url =  "https://" + window.location.host;
                     url = url + "/hospital-wechat/message.jsp?msg=答卷出错...";
-                    alert(url)
+                    //alert(url)
                     window.location.href = url;
                 } else {
                     showDialog2("提交失败，请稍后再试", "确认");
