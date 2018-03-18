@@ -429,6 +429,10 @@ public class PatientServiceImpl implements PatientService {
                         sheet.addCell(label);
                         col++;
                     }
+                    if(answer.getTextChoice() == 1) {
+                        label = new Label(col, row, answer.getTextChoiceContent());
+                        sheet.addCell(label);
+                    }
                     row++;
                 }
             }
