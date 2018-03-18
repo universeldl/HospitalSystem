@@ -56,12 +56,12 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         String hql = "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r "
                 + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
         //如果不是super
-        //if ((doctor.getAuthorization().getSuperSet() == null) ||
-        //        ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
-        //    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-        //    hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
-        //    sql = sql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
-        //}
+        if ((doctor.getAuthorization().getSuperSet() == null) ||
+                ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
+            //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+            hql = hql + " and (r.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid() + ")";
+            sql = sql + " and (r.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid() + ")";
+        }
         sb.append(hql);
         sb_sql.append(sql);
         if (!"".equals(name.trim())) {
