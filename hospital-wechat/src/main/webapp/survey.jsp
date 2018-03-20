@@ -77,15 +77,14 @@
                             <s:iterator id="choice" value="#question.sortedChoices" status="cindex">
                                     <label class="weui-cell weui-check__label"
                                            for='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'>
+                                        <div class="weui-cell__bd">
+                                            <p><s:property value="#choice.choiceContent" /></p>
+                                        </div>
                                         <div class="weui-cell__hd">
-                                            <input type="checkbox" class="weui-check"
+                                            <input type="checkbox"
                                                    name='question<s:property value="#question.questionId"/>'
                                                    id='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'
                                                    value='<s:property value="#choice.choiceId" />' />
-                                            <i class="weui-icon-checked"></i>
-                                        </div>
-                                        <div class="weui-cell__bd">
-                                            <p><s:property value="#choice.choiceContent" /></p>
                                         </div>
                                     </label>
                             </s:iterator>
@@ -116,12 +115,11 @@
                                             <p><s:property value="#choice.choiceContent" /></p>
                                         </div>
                                         <div class="weui-cell__ft">
-                                            <input type="radio" class="weui-check"
+                                            <input type="radio"
                                                    name='question<s:property value="#question.questionId"/>'
                                                    id='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'
                                                    onclick=disableTexterea('textquestion<s:property value="#question.questionId"/>');
                                                    value='<s:property value="#choice.choiceId" />'/>
-                                            <span class="weui-icon-checked"></span>
                                         </div>
                                     </label>
                                 </s:iterator>
@@ -132,11 +130,10 @@
                                             <p>其他</p>
                                         </div>
                                         <div class="weui-cell__ft">
-                                            <input type="radio" class="weui-check"
+                                            <input type="radio"
                                                    name='question<s:property value="#question.questionId"/>'
                                                    id='question<s:property value="#qindex.index"/>choiceother'
                                                    onclick=enableTexterea('textquestion<s:property value="#question.questionId"/>') />
-                                            <span class="weui-icon-checked"></span>
                                         </div>
                                     </label>
                                 </s:if>
