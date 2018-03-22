@@ -61,6 +61,38 @@ function addRetrieveFun(id) {
     );
 }
 
+
+function addRetrieveForPatient(id) {
+    let deliveryId = id;
+    $("#addRetrieveDelivery option[value!=-1]").remove();//移除先前的选项
+    $('#loading').show();
+    ajax(
+        {
+            method: 'POST',
+            url: 'doctor/retrieveManageAction_addRetrieveInfoForPatient.action',
+            params: "deliveryId=" + deliveryId,
+            callback: function (data) {
+                $('#loading').hide();
+                if (data == 1) {
+                    $("#addModal").modal("hide");//关闭模糊框
+                    showInfo("添加成功");
+                } else if (data == -1) {
+                    $("#addModal").modal("hide");//关闭模糊框
+                    showInfo("添加失败，该问卷已有答卷");
+                } else if (data == -2) {
+                    $("#addModal").modal("hide");//关闭模糊框
+                    showInfo("添加失败，该问卷已经过期，无法作答");
+                } else {
+                    $("#addModal").modal("hide");//关闭模糊框
+                    showInfo("添加失败");
+                }
+
+            }
+        }
+    );
+}
+
+
 function validAddRetrieve() {
     var flag = true;
 

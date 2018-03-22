@@ -114,9 +114,9 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/doctor/planManageAction_getAllPlan.action"><i
                                         class="fa fa-list"></i> 随访设置</a></li>
-                            <li>
+                            <!-- <li>
                                 <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
-                                        class="fa fa-send-o"></i> 随访信息</a></li>
+                                        class="fa fa-send-o"></i> 随访信息</a></li> -->
                         </ul>
                     </li>
                 </s:if>
@@ -275,14 +275,16 @@
                                     </button>
                                     <s:if test="#session.doctor.authorization.retrieveSet==1">
                                         <input type="hidden" id="patient_action"
-                                               value="${pageContext.request.contextPath}/doctor/retrieveManageAction_patientRetrieveManage.action">
+                                               value="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPageByPatient.action">
                                         <button type="button" class="btn btn-primary btn-xs"
-                                                onclick="managePatient(<s:property value="#patient.patientId"/>)">答卷管理
+                                                onclick="managePatient(<s:property value="#patient.patientId"/>)">问卷管理
                                         </button>
+                                        <!--
                                         <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
                                                 data-target="#addRetrieveModal"
                                                 onclick="addRetrieveFun(<s:property value="#patient.patientId"/>)">添加答卷
                                         </button>
+                                        -->
                                     </s:if>
 
                                 </td>

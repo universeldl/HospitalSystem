@@ -31,6 +31,7 @@ public class DeliveryManageAction extends ActionSupport {
     private String openID;
     private String pwd;
     private String patientName;
+    private String surveyName;
 
     public void setPatientId(Integer patientId) {this.patientId = patientId;}
 
@@ -40,6 +41,10 @@ public class DeliveryManageAction extends ActionSupport {
 
     public void setPatientName(String patientName) {
         this.patientName = patientName;
+    }
+
+    public void setSurveyName(String surveyName) {
+        this.surveyName = surveyName;
     }
 
     public void setPwd(String pwd) {
@@ -77,6 +82,27 @@ public class DeliveryManageAction extends ActionSupport {
         ServletActionContext.getRequest().setAttribute("pb", pb);
         return "success";
     }
+
+
+    public String findDeliveryInfoByPageByPatient() {
+        //获取页面传递过来的当前页码数
+        if (pageCode == 0) {
+            pageCode = 1;
+        }
+        //给pageSize,每页的记录数赋值
+        int pageSize = 5;
+
+        Patient patient = new Patient();
+        patient.setPatientId(patientId);
+        PageBean<DeliveryInfo> pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize, patient);
+        if (pb != null) {
+            pb.setUrl("findDeliveryInfoByPage.action?");
+        }
+        //存入request域中
+        ServletActionContext.getRequest().setAttribute("pb", pb);
+        return "success";
+    }
+
 
 
     /**
@@ -211,6 +237,30 @@ public class DeliveryManageAction extends ActionSupport {
         }
         if (pb != null) {
             pb.setUrl("queryDeliverySearchInfo.action?patientName=" + patientName + "&deliveryId=" + deliveryId + "&");
+        }
+
+        ServletActionContext.getRequest().setAttribute("pb", pb);
+        return "success";
+    }
+
+
+    public String queryDeliverySearchInfoForPatient() {
+        //获取页面传递过来的当前页码数
+        if (pageCode == 0) {
+            pageCode = 1;
+        }
+        //给pageSize,每页的记录数赋值
+        int pageSize = 5;
+        PageBean<DeliveryInfo> pb = null;
+        Patient patient = new Patient();
+        patient.setPatientId(patientId);
+        if ("".equals(surveyName.trim())) {
+            pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize, patient);
+        } else {
+            pb = deliveryService.queryDeliveryInfo(surveyName, pageCode, pageSize, patient);
+        }
+        if (pb != null) {
+            pb.setUrl("queryDeliverySearchInfoForPatient.action?surveyName=" + surveyName + "&patientId=" + patientId + "&");
         }
 
         ServletActionContext.getRequest().setAttribute("pb", pb);

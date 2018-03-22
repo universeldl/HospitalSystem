@@ -134,6 +134,58 @@ public class RetrieveManageAction extends ActionSupport {
     }
 
 
+    public String addRetrieveInfoForPatient() {
+        int success = 1;
+        RetrieveInfo RI = retrieveService.getRetrieveInfoByDeliveryID(deliveryId);
+        if (RI != null) {
+            success = -1;//retrieveInfo already exists
+        } else {
+            RetrieveInfo retrieveInfo = new RetrieveInfo();
+            DeliveryInfo DI = new DeliveryInfo();
+            DI.setDeliveryId(deliveryId);
+            DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(DI);
+            Date retrieveDate = new Date(System.currentTimeMillis());
+            if (deliveryInfo.getEndDate().before(retrieveDate)) {
+                success = -2;//endDate already passed
+            } else {
+                retrieveInfo.setDeliveryInfo(deliveryInfo);
+                retrieveInfo.setSurvey(deliveryInfo.getSurvey());
+                retrieveInfo.setPatient(deliveryInfo.getPatient());
+                retrieveInfo.setDoctor(deliveryInfo.getDoctor());
+                retrieveInfo.setRetrieveDate(retrieveDate);
+                Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+                retrieveInfo.setByDoctor(doctor.getName());
+
+                Set<Answer> answers = new HashSet<Answer>();
+                for (Question question : retrieveInfo.getSurvey().getQuestions()) {
+                    Answer answer = new Answer();
+                    answer.setSurvey(retrieveInfo.getSurvey());
+                    answer.setPatient(retrieveInfo.getPatient());
+                    answer.setDoctor(doctor);
+                    answer.setRetrieveInfo(retrieveInfo);
+                    answer.setQuestion(question);
+                    if (answerService.addAnswer(answer)) {
+                        answers.add(answer);
+                    } else {
+                        success = 0;
+                        break;
+                    }
+                }
+
+                retrieveInfo.setAnswers(answers);
+                //int b = retrieveService.addRetrieveInfo(retrieveInfo);
+            }
+        }
+        try {
+            ServletActionContext.getResponse().getWriter().print(success);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
+
     /**
      * 获取答案
      *
@@ -158,7 +210,7 @@ public class RetrieveManageAction extends ActionSupport {
         // 返回一个JSONArray对象
         JSONArray jsonArray = new JSONArray();
         int idx = 0;
-        for(Choice choice : newAnswer.getQuestion().getChoices()) {
+        for (Choice choice : newAnswer.getQuestion().getChoices()) {
             JSONObject cho = new JSONObject();
             cho.put("choiceId", choice.getChoiceId());
             cho.put("choiceContent", choice.getChoiceContent());
@@ -365,6 +417,27 @@ public class RetrieveManageAction extends ActionSupport {
         try {
             response.getWriter().print(jsonObject);
         } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
+
+    public String checkRetrieveInfoExists() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+        RetrieveInfo retrieveInfo = new RetrieveInfo();
+        retrieveInfo.setDeliveryId(deliveryId);
+        RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
+
+        int exists = 0;
+        if (newRetrieveInfo != null) {
+            exists = 1;
+        }
+        try {
+            ServletActionContext.getResponse().getWriter().print(exists);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
             throw new RuntimeException(e.getMessage());
         }
         return null;

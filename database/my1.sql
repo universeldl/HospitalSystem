@@ -158,6 +158,7 @@ CREATE TABLE `RetrieveInfo` (
   `patientId` varchar(255) NOT NULL,
   `surveyId` int(11) NOT NULL,
   `retrieveDate` datetime DEFAULT NULL,
+  `byDoctor` varchar(25) DEFAULT '',
   `aid` int(11) NOT NULL,
   PRIMARY KEY (`deliveryId`),
   CONSTRAINT  FOREIGN KEY (`deliveryId`) REFERENCES `deliveryInfo` (`deliveryId`) ON DELETE CASCADE,

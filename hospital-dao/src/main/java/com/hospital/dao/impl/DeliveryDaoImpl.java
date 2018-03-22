@@ -41,6 +41,50 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
 
 
     @Override
+    public PageBean<Integer> getDeliveryIdList(String name, int pageCode, int pageSize, Patient patient) {
+        PageBean<Integer> pb = new PageBean<Integer>();    //pageBean对象，用于分页
+        //根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
+        pb.setPageCode(pageCode);//设置当前页码
+        pb.setPageSize(pageSize);//设置页面记录数
+
+        List<Integer> integers = new ArrayList<Integer>();
+        StringBuilder sb = new StringBuilder();
+        StringBuilder sb_sql = new StringBuilder();
+        String sql = "select count(*) from deliveryInfo di,survey bk where bk.surveyId=di.surveyId and di.patientId="+patient.getPatientId();
+        //不支持limit分页
+        String hql = "select di.deliveryId from deliveryInfo di,survey bk where bk.surveyId=di.surveyId and di.patientId="+patient.getPatientId();
+        sb.append(hql);
+        sb_sql.append(sql);
+        if (!"".equals(name.trim())) {
+            sb.append(" and bk.surveyName like '%" + name + "%'");
+            sb_sql.append(" and bk.surveyName like '%" + name + "%'");
+        }
+
+        try {
+            NativeQuery createSQLQuery1 = this.getSessionFactory().getCurrentSession().createNativeQuery(sb_sql.toString());
+            List list = createSQLQuery1.list();
+            int totalRecord = Integer.parseInt(list.get(0).toString()); //得到总记录数
+            pb.setTotalRecord(totalRecord);    //设置总记录数
+            //this.getSessionFactory().getCurrentSession().close();
+
+            //不支持limit分页
+            //分页查询
+            List list2 = doLimitDeliveryInfo(sb.toString(), pageCode, pageSize);
+            for (Object object : list2) {
+                Integer i = new Integer(object.toString());
+                integers.add(i);
+            }
+            pb.setBeanList(integers);
+        } catch (Throwable e1) {
+            e1.printStackTrace();
+            throw new RuntimeException(e1.getMessage());
+        }
+
+        return pb;
+    }
+
+
+    @Override
     public PageBean<Integer> getDeliveryIdList(String name, int deliveryId, int pageCode, int pageSize, Doctor doctor) {
         PageBean<Integer> pb = new PageBean<Integer>();    //pageBean对象，用于分页
         //根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
@@ -174,6 +218,39 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
                 //分页查询
                 deliveryInfoList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
             }
+        } catch (Throwable e1) {
+            e1.printStackTrace();
+            throw new RuntimeException(e1.getMessage());
+        }
+        if (deliveryInfoList != null && deliveryInfoList.size() > 0) {
+            pb.setBeanList(deliveryInfoList);
+            return pb;
+        }
+        return null;
+    }
+
+
+    @Override
+    public PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize, Patient patient) {
+        PageBean<DeliveryInfo> pb = new PageBean<DeliveryInfo>();    //pageBean对象，用于分页
+        //根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
+        pb.setPageCode(pageCode);//设置当前页码
+        pb.setPageSize(pageSize);//设置页面记录数
+        List deliveryInfoList = null;
+        try {
+            String sql = "from DeliveryInfo d where d.patient.patientId=?";
+            int totalRecord = 0;
+            List list = this.getHibernateTemplate().find(sql, patient.getPatientId());
+            if (list != null && list.size() > 0) {
+                totalRecord = list.size();
+            }
+            pb.setTotalRecord(totalRecord);    //设置总记录数
+            //this.getSessionFactory().getCurrentSession().close();
+
+            //不支持limit分页
+            String hql = "from DeliveryInfo d where d.patient.patientId=" + patient.getPatientId();
+            //分页查询
+            deliveryInfoList = doSplitPage(hql, pageCode, pageSize);
         } catch (Throwable e1) {
             e1.printStackTrace();
             throw new RuntimeException(e1.getMessage());

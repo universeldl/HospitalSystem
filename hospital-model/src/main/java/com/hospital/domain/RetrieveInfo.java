@@ -22,6 +22,16 @@ public class RetrieveInfo {
     private int aid;
     private Set<Answer> answers = new HashSet<>();
 
+    private String byDoctor; //由该医生添加
+
+    public String getByDoctor() {
+        return byDoctor;
+    }
+
+    public void setByDoctor(String byDoctor) {
+        this.byDoctor = byDoctor;
+    }
+
     public Set<Answer> getAnswers() {
         return answers;
     }

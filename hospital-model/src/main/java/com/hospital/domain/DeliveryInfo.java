@@ -18,7 +18,15 @@ public class DeliveryInfo implements Serializable {
     private Date endDate;    //截止日期
     private Integer overday;    //逾期天数
     private Integer state; //状态 (已简化为： 未答卷=0,已答卷=-1,重发未答卷>0[次数])
+    private RetrieveInfo retrieveInfo;
 
+    public RetrieveInfo getRetrieveInfo() {
+        return retrieveInfo;
+    }
+
+    public void setRetrieveInfo(RetrieveInfo retrieveInfo) {
+        this.retrieveInfo = retrieveInfo;
+    }
 
     public Integer getOverday() {
         return overday;

@@ -11,11 +11,15 @@ public interface DeliveryService {
 
     PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize, Doctor doctor);
 
+    PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize, Patient patient);
+
     DeliveryInfo getDeliveryInfoById(DeliveryInfo info);
 
     List<DeliveryInfo> getUnansweredDeliveryInfos(Integer patientId);
 
     PageBean<DeliveryInfo> queryDeliveryInfo(String name, int deliveryId, int pageCode, int pageSize, Doctor doctor);
+
+    PageBean<DeliveryInfo> queryDeliveryInfo(String name, int pageCode, int pageSize, Patient patient);
 
     /**
      * 返回分发状态码

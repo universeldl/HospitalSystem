@@ -25,6 +25,8 @@
             <column name="state" default="0"/>
         </property>
 
+        <one-to-one name="RetrieveInfo" cascade="delete,save-update" lazy="false"></one-to-one>
+
 
         <many-to-one name="patient" class="com.hospital.domain.Patient" lazy="false">
             <column name="patientId"></column>

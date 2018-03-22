@@ -158,6 +158,7 @@ CREATE TABLE `RetrieveInfo` (
   `patientId` varchar(255) NOT NULL,
   `surveyId` int(11) NOT NULL,
   `retrieveDate` datetime DEFAULT NULL,
+  `byDoctor` varchar(25) DEFAULT '',
   `aid` int(11) NOT NULL,
   PRIMARY KEY (`deliveryId`),
   CONSTRAINT  FOREIGN KEY (`deliveryId`) REFERENCES `deliveryInfo` (`deliveryId`) ON DELETE CASCADE,
@@ -302,10 +303,10 @@ INSERT INTO Choice VALUES(7,3,7,"choice_7",6);
 INSERT INTO Choice VALUES(14,4,1,"choice_14",6);
 INSERT INTO Choice VALUES(15,4,2,"choice_15",6);
 
-INSERT INTO RetrieveInfo VALUES(1,1,1,"2017-06-25 00:00:00",6);
-INSERT INTO RetrieveInfo VALUES(3,2,1,"2017-05-25 00:00:00",6);
-INSERT INTO RetrieveInfo VALUES(4,2,1,"2017-06-25 00:00:00",6);
-INSERT INTO RetrieveInfo VALUES(5,2,2,"2017-06-25 00:00:00",6);
+INSERT INTO RetrieveInfo VALUES(1,1,1,"2017-06-25 00:00:00","张三",6);
+INSERT INTO RetrieveInfo VALUES(3,2,1,"2017-05-25 00:00:00","",6);
+INSERT INTO RetrieveInfo VALUES(4,2,1,"2017-06-25 00:00:00","",6);
+INSERT INTO RetrieveInfo VALUES(5,2,2,"2017-06-25 00:00:00","",6);
 
 INSERT INTO plan_survey VALUES(1, 1);
 INSERT INTO plan_survey VALUES(1, 2);

@@ -32,6 +32,10 @@
             <column name="retrieveDate"/>
         </property>
 
+        <property name="byDoctor" type="java.lang.String">
+            <column name="byDoctor" default=""/>
+        </property>
+
         <one-to-one name="deliveryInfo" constrained="true" lazy="false"></one-to-one>
 
         <many-to-one name="doctor" class="com.hospital.domain.Doctor" lazy="false">

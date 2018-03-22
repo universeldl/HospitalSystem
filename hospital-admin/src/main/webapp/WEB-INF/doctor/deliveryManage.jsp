@@ -4,6 +4,7 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    String paramPatientId = request.getParameter("patientId");
 %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -38,7 +39,9 @@
 
     <!-- add specific js in here -->
     <script src="${pageContext.request.contextPath}/js/getDeliveryInfo.js"></script>
-    <script src="${pageContext.request.contextPath}/js/resendSurvey.js"></script>
+    <script src="${pageContext.request.contextPath}/js/addRetrieve.js"></script>
+    <script src="${pageContext.request.contextPath}/js/getRetrieve.js"></script>
+    <script src="${pageContext.request.contextPath}/js/getRetrieveInfo.js"></script>
     <!-- add specific js in here -->
 
     <script src="${pageContext.request.contextPath}/js/app.js"></script>
@@ -93,8 +96,9 @@
                                 <a href="${pageContext.request.contextPath}/doctor/planManageAction_getAllPlan.action"><i
                                         class="fa fa-list"></i> 随访设置</a></li>
                             <li>
+                            <!-- <li>
                                 <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
-                                        class="fa fa-send-o"></i> 随访信息</a></li>
+                                        class="fa fa-send-o"></i> 随访信息</a></li> -->
                         </ul>
                     </li>
                 </s:if>
@@ -145,20 +149,16 @@
             <div class="panel panel-info">
                 <div class="panel-heading">查询</div>
                 <form class="form-horizontal"
-                      action="${pageContext.request.contextPath}/doctor/deliveryManageAction_queryDeliverySearchInfo.action"
+                      action="${pageContext.request.contextPath}/doctor/deliveryManageAction_queryDeliverySearchInfoForPatient.action"
                       method="post">
                     <div class="form-group">
-                        <div class="col-sm-2 control-label">分发编号</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="deliveryId"
-                                   placeholder="请输入分发编号"/>
-                        </div>
+                        <input type="hidden" name="patientId" value="<%=paramPatientId%>"/>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-2 control-label">姓名</div>
+                        <div class="col-sm-2 control-label">问卷名称</div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="patientName"
-                                   placeholder="请输入病人姓名"/>
+                            <input type="text" class="form-control" name="surveyName"
+                                   placeholder="请输入问卷名称（支持模糊查询）"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -172,7 +172,6 @@
                     <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>分发编号</th>
                             <th>问卷名称</th>
                             <!--
                             <th>病人用户名</th>
@@ -180,6 +179,8 @@
                             <th>病人名称</th>
                             <th>分发日期</th>
                             <th>截止答卷日期</th>
+                            <th>答卷日期</th>
+                            <th>答卷人</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -188,17 +189,36 @@
                         <!---在此插入信息-->
                         <s:if test="#request.pb.beanList!=null">
                             <s:iterator value="#request.pb.beanList" var="deliveryInfo">
-                                <tbody>
-                                <td><s:property value="#deliveryInfo.deliveryId"/></td>
+                                <tbody <s:if test="#deliveryInfo.retrieveInfo.byDoctor!=null && #deliveryInfo.retrieveInfo.byDoctor!=''">style="color:red;"</s:if>>
                                 <td><s:property value="#deliveryInfo.survey.surveyName"/></td>
                                 <td><s:property value="#deliveryInfo.patient.name"/></td>
                                 <td><s:date name="#deliveryInfo.deliveryDate" format="yyyy-MM-dd"/></td>
                                 <td><s:date name="#deliveryInfo.endDate" format="yyyy-MM-dd"/></td>
+                                <td><s:date name="#deliveryInfo.retrieveInfo.retrieveDate" format="yyyy-MM-dd"/></td>
+                                <s:if test="#deliveryInfo.retrieveInfo.byDoctor!=null && #deliveryInfo.retrieveInfo.byDoctor!=''">
+                                    <td><s:property value="#deliveryInfo.retrieveInfo.byDoctor"/></td>
+                                </s:if>
+                                <s:else>
+                                    <td><s:property value="#deliveryInfo.patient.name"/></td>
+                                </s:else>
                                 <td>
                                     <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
                                             data-target="#findDeliveryModal"
-                                            onclick="getDeliveryInfoById(<s:property value="#deliveryInfo.deliveryId"/>)">查看
+                                            onclick="getDeliveryInfoById(<s:property
+                                                    value="#deliveryInfo.deliveryId"/>)">查看
                                     </button>
+                                    <s:if test="#session.doctor.authorization.retrieveSet==1">
+                                        <input type="hidden" id="check_retrieve"
+                                               value="${pageContext.request.contextPath}/doctor/retrieveManageAction_getAnswerByDeliveryId.action">
+                                        <button type="button" class="btn btn-warning btn-xs"
+                                                onclick="checkRetrieve(<s:property value="#deliveryInfo.deliveryId"/>)">
+                                            查看答卷
+                                        </button>
+                                        <button type="button" class="btn btn-info btn-xs"
+                                                onclick="addRetrieveForPatient(<s:property
+                                                        value="#deliveryInfo.deliveryId"/>)">添加答卷
+                                        </button>
+                                    </s:if>
                                     <!--<button type="button" class="btn btn-success btn-xs"
                                             onclick="resendSurvey(<s:property value="#retrieve.deliveryId"/>)">重发
                                     </button>-->
@@ -208,6 +228,7 @@
                         </s:if>
                         <s:else>
                             <tbody>
+                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
@@ -499,6 +520,53 @@
 
 </form>
 <!-------------------------------------------------------------->
+
+
+<!--------------------------------------添加答卷的模糊框------------------------>
+<form class="form-horizontal">   <!--保证样式水平不混乱-->
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="addRetrieveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        添加新答卷
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <!---------------------表单-------------------->
+
+                    <div class="form-group">
+                        <label for="addRetrieveDelivery" class="col-sm-3 control-label">指定要回答的问卷</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="addRetrieveDelivery">
+                                <option value="-1">请选择</option>
+                            </select>
+                            <label class="control-label" for="addRetrieveDelivery" style="display: none;"></label>
+                        </div>
+                    </div>
+
+
+                    <!---------------------表单-------------------->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="addRetrieveSubmit">
+                        添加
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+<!--------------------------------------添加答卷的模糊框------------------------>
 
 
 <!------------------------------修改密码模糊框-------------------------------->

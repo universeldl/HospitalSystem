@@ -86,9 +86,9 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/doctor/planManageAction_getAllPlan.action"><i
                                         class="fa fa-list"></i> 随访设置</a></li>
-                            <li>
+                            <!-- <li>
                                 <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
-                                        class="fa fa-send-o"></i> 随访信息</a></li>
+                                        class="fa fa-send-o"></i> 随访信息</a></li> -->
                         </ul>
                     </li>
                 </s:if>
@@ -176,8 +176,8 @@
                             </div>
                             <div class="bootstrap-doctor-panel-content">
                                 <ul>
-                                    <li>制定随访计划，修改、删除随访计划</li>
-                                    <li>查询已发送的随访问卷信息</li>
+                                    <li>制定随访计划</li>
+                                    <li>查看、修改、删除随访计划</li>
                                 </ul>
                             </div>
                         </div>
