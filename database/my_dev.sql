@@ -55,7 +55,7 @@ CREATE TABLE `Plan` (
   `planId` int(11) NOT NULL,
   `beginAge` int(2) DEFAULT 0,
   `endAge` int(2) NOT NULL,
-  `oldPatientOnly` int(1) DEFAULT NULL, /*1-仅限旧病例，2-仅限新病例，3-不限 */
+  `oldPatient` int(1) DEFAULT NULL, /*1-新病例，2-既往病例，3-哮喘无忧APP用户， 4-不限 */
   `active` int(1) DEFAULT 1,
   `sex` varchar(1) DEFAULT 1,/*1-男，2-女, 3-不限*/
   `patientTypeId` int(11) DEFAULT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE `Patient` (
   `outpatientID` varchar(50) UNIQUE DEFAULT NULL,  # 预留门诊号
   `inpatientID` varchar(50) UNIQUE DEFAULT NULL,   # 预留住院号
   `sex` varchar(1) NOT NULL,
-  `oldPatient` BOOLEAN NOT NULL,
+  `oldPatient` varchar(1) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
   `birthday` datetime DEFAULT NULL,
@@ -258,9 +258,9 @@ INSERT INTO Plan VALUES(1, 0, 2, 1, 1, 1, 1, 6);
 INSERT INTO Plan VALUES(2, 2, 5, 2, 1, 2, 1, 6);
 INSERT INTO Plan VALUES(3, 6, 9, 3, 1, 3, 1, 6);
 
-INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1", true, "13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,1,3,2);
-INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0", true, "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
-INSERT INTO Patient VALUES(3,"123456","测试","appid","oaBonw30UBjZkLW5rf19h7KunM7s","na",NULL,NULL,"0", false, "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
+INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1", "1", "13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,1,3,2);
+INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0", "2", "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
+INSERT INTO Patient VALUES(3,"123456","测试","appid","oaBonw30UBjZkLW5rf19h7KunM7s","na",NULL,NULL,"0", "3", "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
 
 INSERT INTO Authorization VALUES(2,1,1,1,1,1,1,1,0);
 INSERT INTO Authorization VALUES(1,0,0,0,0,0,0,0,1);

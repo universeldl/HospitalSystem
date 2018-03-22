@@ -24,14 +24,23 @@ public class Patient implements Serializable {
     private Plan plan;    //随访计划
     private String email;    //邮箱
     private Doctor doctor;    //操作医生
-    private boolean oldPatient;
     private Integer sex;
     private Doctor addnDoctor;    //共享医生
+    private Integer oldPatient;
 
     private Date birthday;
     private Date createTime;    //创建时间
     private Set<DeliveryInfo> deliveryInfos;    //该病人的随访问卷分发信息
     private Set<RetrieveInfo> retrieveInfos;    //该病人的答卷信息
+
+
+    public Integer getOldPatient() {
+        return oldPatient;
+    }
+
+    public void setOldPatient(Integer oldPatient) {
+        this.oldPatient = oldPatient;
+    }
 
 
     public String getAppID() {
@@ -73,14 +82,6 @@ public class Patient implements Serializable {
     public void setBirthday(Date birthday) {
 
         this.birthday = birthday;
-    }
-
-    public void setOldPatient(boolean oldPatient) {
-        this.oldPatient = oldPatient;
-    }
-
-    public boolean isOldPatient() {
-        return oldPatient;
     }
 
     public Integer getSex() {
@@ -203,7 +204,7 @@ public class Patient implements Serializable {
 
     }
 
-    public Patient(String name, String pwd, String phone, boolean oldPatient,
+    public Patient(String name, String pwd, String phone, Integer oldPatient,
                    PatientType patientType, String email, Doctor doctor, Doctor addnDoctor,
                    String openID, Date createTime, Integer sex, Plan plan) {
         super();

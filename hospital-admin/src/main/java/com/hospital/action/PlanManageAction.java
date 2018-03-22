@@ -37,7 +37,7 @@ public class PlanManageAction extends ActionSupport {
 
     private Integer beginAge;
     private Integer endAge;
-    private Integer oldPatientOnly;
+    private Integer oldPatient;
     private Integer active;
     private Integer sex;
     private Integer patientType;
@@ -52,8 +52,8 @@ public class PlanManageAction extends ActionSupport {
         this.endAge = endAge;
     }
 
-    public void setOldPatientOnly(Integer oldPatientOnly) {
-        this.oldPatientOnly = oldPatientOnly;
+    public void setOldPatient(Integer oldPatient) {
+        this.oldPatient = oldPatient;
     }
 
     public void setActive(Integer active) {
@@ -117,13 +117,13 @@ public class PlanManageAction extends ActionSupport {
 
     public String updatePlan() {
 
-        System.out.println("update plan oldPatientOnly = " + oldPatientOnly);
+        System.out.println("update plan oldPatient = " + oldPatient);
         Plan plan = new Plan();
         plan.setPlanId(planId);
         Plan updatePlan = planService.getPlanById(plan);
         updatePlan.setBeginAge(beginAge);
         updatePlan.setEndAge(endAge);
-        updatePlan.setOldPatientOnly(oldPatientOnly);
+        updatePlan.setOldPatient(oldPatient);
         updatePlan.setActive(active);
         updatePlan.setSex(sex);
         PatientType type = new PatientType();
@@ -176,7 +176,7 @@ public class PlanManageAction extends ActionSupport {
         //得到当前病人类型
         PatientType type = new PatientType();
         type.setPatientTypeId(patientType);
-        Plan plan = new Plan(beginAge, endAge, oldPatientOnly, sex, active, type, doctor);
+        Plan plan = new Plan(beginAge, endAge, oldPatient, sex, active, type, doctor);
 
         List<Integer> surveyIds = new ArrayList<>();
         ActionContext ctx = ActionContext.getContext();

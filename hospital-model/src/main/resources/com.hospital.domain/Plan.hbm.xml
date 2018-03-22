@@ -16,8 +16,8 @@
             <column name="endAge"/>
         </property>
 
-        <property name="oldPatientOnly" type="java.lang.Integer">
-            <column name="oldPatientOnly"/>
+        <property name="oldPatient" type="java.lang.Integer">
+            <column name="oldPatient"/>
         </property>
 
         <property name="active" type="java.lang.Integer">

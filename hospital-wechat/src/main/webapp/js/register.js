@@ -13,13 +13,8 @@ function registerSubmit() {
     postdata = postdata + "&birthday=" + $.trim($("#birthday").val());
     postdata = postdata + "&captcha=" + $.trim($("#captchaIN").val());
     postdata = postdata + "&invitationCode=" + $.trim($("#invitationCode").val());
-    //postdata = postdata + "&oldPatient=" + $.trim($("#oldPatient").val());
+    postdata = postdata + "&oldPatient=" + $.trim($("#oldPatient").val());
     var oldPatient = document.getElementById("oldPatient");
-    if (oldPatient.checked) {
-        postdata = postdata + "&oldPatient=on";
-    } else {
-        postdata = postdata + "&oldPatient=off";
-    }
     ajax(
         {
             method: 'POST',
@@ -56,10 +51,6 @@ function validLogin() {
         $('#username').focus();
         showDialog2("请输入姓名", "确定");
         return false;
-    } else if (!reg.test($.trim($('#username').val()))) {
-        showDialog2("姓名必须为中文", "确定");
-        $('#username').focus();
-        return false;
     }
 
     if ($('#tel').val().length == 0) {
@@ -95,9 +86,13 @@ function validLogin() {
             return false;
         }
     }
-
+    if ($('#invitationCode').val().length == 0) {
+        showDialog2("请填写邀请码", "确定");
+        $('#captchaIN').focus();
+        return false;
+    }
     if ($('#captchaIN').val().length == 0) {
-        showDialog2("", "确定");
+        showDialog2("请填写验证码", "确定");
         $('#captchaIN').focus();
         return false;
     }

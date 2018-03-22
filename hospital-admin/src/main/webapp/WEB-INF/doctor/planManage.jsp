@@ -189,13 +189,16 @@
                                 <td><s:property value="#plan.beginAge"/></td>
                                 <td><s:property value="#plan.endAge"/></td>
                                 <td>
-                                <s:if test="#plan.oldPatientOnly == 1">
-                                    仅既往病人
+                                <s:if test="#plan.oldPatient == 1">
+                                    仅限新病例
                                 </s:if>
-                                <s:elseif test="#plan.oldPatientOnly == 2">
-                                    仅新病人
+                                <s:elseif test="#plan.oldPatient == 2">
+                                    仅限既往病例
                                 </s:elseif>
-                                <s:elseif test="#plan.oldPatientOnly == 3">
+                                <s:elseif test="#plan.oldPatient == 3">
+                                    仅限哮喘无忧用户
+                                </s:elseif>
+                                <s:elseif test="#plan.oldPatient == 4">
                                     不限
                                 </s:elseif>
                                 </td>
@@ -292,15 +295,16 @@
 
 
                     <div class="form-group">
-                        <label for="addOldPatientOnly" class="col-sm-3 control-label">仅限既往病例</label>
+                        <label for="addOldPatient" class="col-sm-3 control-label">病例类型</label>
                         <div class="col-sm-7">
-                            <select class="form-control" id="addOldPatientOnly">
+                            <select class="form-control" id="addOldPatient">
                                 <option value="-1">请选择</option>
-                                <option value="1">是</option>
-                                <option value="2">否</option>
-                                <option value="3">不限</option>
+                                <option value="1">新病例</option>
+                                <option value="2">既往病例</option>
+                                <option value="3">原哮喘无忧用户</option>
+                                <option value="4">不限</option>
                             </select>
-                            <label class="control-label" for="addOldPatientOnly" style="display: none;"></label>
+                            <label class="control-label" for="addOldPatient" style="display: none;"></label>
                         </div>
                     </div>
 
@@ -389,15 +393,17 @@
 
 
                     <div class="form-group">
-                        <label for="updateOldPatientOnly" class="col-sm-3 control-label">仅限既往病例</label>
+                        <label for="updateOldPatient" class="col-sm-3 control-label">病例类型</label>
                         <div class="col-sm-7">
-                            <select class="form-control" id="updateOldPatientOnly">
+                            <select class="form-control" id="updateOldPatient">
                                 <option value="-1">请选择</option>
-                                <option value="1">是</option>
-                                <option value="2">否</option>
+                                <option value="1">新病例</option>
+                                <option value="2">既往病例</option>
+                                <option value="3">原哮喘无忧用户</option>
                                 <option value="3">不限</option>
+
                             </select>
-                            <label class="control-label" for="updateOldPatientOnly" style="display: none;"></label>
+                            <label class="control-label" for="updateOldPatient" style="display: none;"></label>
                         </div>
                     </div>
 

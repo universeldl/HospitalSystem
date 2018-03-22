@@ -16,7 +16,7 @@ public class Plan implements Serializable {
     private Integer endAge;    //年龄区间上限
     private Integer active;    //激活状态
     private Integer sex;    //性别
-    private Integer oldPatientOnly;
+    private Integer oldPatient;
 
     private PatientType patientType;
     private Doctor doctor;    //操作医生
@@ -56,12 +56,12 @@ public class Plan implements Serializable {
         this.endAge = endAge;
     }
 
-    public void setOldPatientOnly(Integer oldPatientOnly) {
-        this.oldPatientOnly = oldPatientOnly;
+    public void setOldPatient(Integer oldPatient) {
+        this.oldPatient = oldPatient;
     }
 
-    public Integer getOldPatientOnly() {
-        return oldPatientOnly;
+    public Integer getOldPatient() {
+        return oldPatient;
     }
 
     public Integer getActive() {
@@ -108,12 +108,12 @@ public class Plan implements Serializable {
 
     }
 
-    public Plan(Integer beginAge, Integer endAge, Integer oldPatientOnly, Integer sex, Integer active,
+    public Plan(Integer beginAge, Integer endAge, Integer oldPatient, Integer sex, Integer active,
                 PatientType patientType, Doctor doctor) {
         super();
         this.beginAge = beginAge;
         this.endAge = endAge;
-        this.oldPatientOnly = oldPatientOnly;
+        this.oldPatient = oldPatient;
         this.sex = sex;
         this.active = active;
         this.patientType = patientType;

@@ -127,6 +127,8 @@ public class PatientManageAction extends ActionSupport {
      *
      * @return
      */
+    /* obsolate this function since Patient should be added from wechat webpage
+
     public String addPatient() {
         int success = 0;
         //得到当前时间
@@ -179,7 +181,7 @@ public class PatientManageAction extends ActionSupport {
         return null;
 
     }
-
+    */
 
     /**
      * 根据页码查询病人

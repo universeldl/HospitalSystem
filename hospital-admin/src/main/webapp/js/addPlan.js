@@ -56,7 +56,7 @@ $(function () {
         var postdata = "active=1&patientType=" + $.trim($("#addpatientType").val())
             + "&beginAge=" + $.trim($("#addBeginAge").val())
             + "&endAge=" + $.trim($("#addEndAge").val())
-            + "&oldPatientOnly=" + $.trim($("#addOldPatientOnly").val())
+            + "&oldPatient=" + $.trim($("#addOldPatient").val())
             + "&sex=" + $.trim($("#addSex").val()) + "&" + $("#addForm").serialize();
         ajax(
             {
@@ -136,16 +136,16 @@ function validAddPlan() {
         $('#addEndAge').next().hide();
     }
 
-        var oldPatientOnly = $.trim($("#addOldPatientOnly").val());
-    if (sex == -1) {
-        $('#addOldPatientOnly').parent().addClass("has-error");
-        $('#addOldPatientOnly').next().text("请选择是否仅限既往病例");
-        $("#addOldPatientOnly").next().show();
+    var oldPatient = $.trim($("#addOldPatient").val());
+    if (oldPatient == -1) {
+        $('#addOldPatient').parent().addClass("has-error");
+        $('#addOldPatient').next().text("请选择病例类型");
+        $("#addOldPatient").next().show();
         flag = false;
     } else {
-        $('#addOldPatientOnly').parent().removeClass("has-error");
-        $('#addOldPatientOnly').next().text("");
-        $("#addOldPatientOnly").next().hide();
+        $('#addOldPatient').parent().removeClass("has-error");
+        $('#addOldPatient').next().text("");
+        $("#addOldPatient").next().hide();
     }
 
     var sex = $.trim($("#addSex").val());

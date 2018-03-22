@@ -56,7 +56,7 @@
             <column name="createTime"/>
         </property>
 
-        <property name="oldPatient" type="boolean">
+        <property name="oldPatient" type="java.lang.Integer">
             <column name="oldPatient"/>
         </property>
 

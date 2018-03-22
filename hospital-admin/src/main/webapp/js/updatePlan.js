@@ -19,7 +19,7 @@ $(function () {
             + "&beginAge=" + $.trim($("#updateBeginAge").val())
             + "&endAge=" + $.trim($("#updateEndAge").val())
             + "&patientType=" + $.trim($("#updatePatientType").val())
-            + "&oldPatientOnly=" + $.trim($("#updateOldPatientOnly").val())
+            + "&oldPatient=" + $.trim($("#updateOldPatient").val())
             + "&sex=" + $.trim($("#updateSex").val())
             + "&" + $("#updateForm").serialize();
 
@@ -106,7 +106,7 @@ function updatePlan(id) {
                             $('#loading').hide();
                             $("#updateBeginAge").val(data.beginAge);
                             $("#updateEndAge").val(data.endAge);
-                            $("#updateOldPatientOnly").val(data.oldPatientOnly);
+                            $("#updateOldPatient").val(data.oldPatient);
                             $("#updatePatientType").val(data.patientType.patientTypeId);
                         }
                     }
@@ -162,16 +162,16 @@ function validUpdatePlan() {
         $('#updateEndAge').next().hide();
     }
 
-    var oldPatientOnly = $.trim($("updateOldPatientOnly").val());
-    if (oldPatientOnly == -1) {
-        $('#updateOldPatientOnly').parent().addClass("has-error");
-        $('#updateOldPatientOnly').next().text("请选择是否仅限既往病例");
-        $("#updateOldPatientOnly").next().show();
+    var oldPatient = $.trim($("updateOldPatient").val());
+    if (oldPatient == -1) {
+        $('#updateOldPatient').parent().addClass("has-error");
+        $('#updateOldPatient').next().text("请选择病例类型");
+        $("#updateOldPatient").next().show();
         flag = false;
     } else {
-        $('#updateOldPatientOnly').parent().removeClass("has-error");
-        $('#updateOldPatientOnly').next().text("");
-        $("#updateOldPatientOnly").next().hide();
+        $('#updateOldPatient').parent().removeClass("has-error");
+        $('#updateOldPatient').next().text("");
+        $("#updateOldPatient").next().hide();
     }
 
     var sex = $.trim($("#updateSex").val());

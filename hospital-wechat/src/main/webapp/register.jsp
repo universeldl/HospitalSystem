@@ -62,10 +62,17 @@
                     </select>
                 </div>
             </div>
-            <div class="weui-cell weui-cell_switch">
-                <div class="weui-cell__bd">是否既往病人（请咨询您的医生）</div>
-                <div class="weui-cell__ft">
-                    <input class="weui-switch" type="checkbox" id="oldPatient"/>
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="sex" class="weui-label">病例类型<br/><font style="color:grey">请咨询医生</font></label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" id="oldPatient">
+                        <option disabled selected value></option>
+                        <option value=1>新病例</option>
+                        <option value=2>既往病例</option>
+                        <option value=3>哮喘无忧用户</option>
+                    </select>
                 </div>
             </div>
             <div class="weui-cell weui-cell_select weui-cell_select-after">

@@ -27,7 +27,7 @@ public class patientRegisterAction extends ActionSupport {
     String birthday;
     String captcha;
     String invitationCode;
-    boolean oldPatient;
+    Integer oldPatient;
     PatientService patientService;
     DoctorService doctorService;
     PlanService planService;
@@ -38,12 +38,8 @@ public class patientRegisterAction extends ActionSupport {
         this.invitationCode = invitationCode;
     }
 
-    public void setOldPatient(String oldPatient) {
-        if (oldPatient.equals("on")) {
-            this.oldPatient = true;
-        } else {
-            this.oldPatient = false;
-        }
+    public void setOldPatient(Integer oldPatient) {
+        this.oldPatient = oldPatient;
     }
 
     public void setUsername(String username) {
@@ -211,11 +207,8 @@ public class patientRegisterAction extends ActionSupport {
         plan.setBeginAge(age);
         plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
 
-        if (oldPatient) {
-            plan.setOldPatientOnly(1);  //be careful about sex, Patient.sex is not compatible with Plan.sex
-        } else {
-            plan.setOldPatientOnly(2);
-        }
+        plan.setOldPatient(oldPatient);
+
 
         if (sex.toUpperCase().equals("MALE")) {
             plan.setSex(2);  //be careful about sex, Patient.sex is not compatible with Plan.sex
