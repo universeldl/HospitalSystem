@@ -192,6 +192,7 @@ CREATE TABLE `Choice` (
   `questionId` int(11) DEFAULT 0,
   `score` int(11) NOT NULL,
   `choiceContent` varchar(255) NOT NULL,
+  `choiceImgPath` varchar(255) DEFAULT NULL,
   `aid` int(11) NOT NULL,
   PRIMARY KEY (`choiceId`),
   CONSTRAINT  FOREIGN KEY (`aid`) REFERENCES `doctor` (`aid`)
@@ -277,9 +278,9 @@ INSERT INTO deliveryInfo VALUES(3,"2017-03-15 00:00:00","2017-05-04 00:00:00",0,
 INSERT INTO deliveryInfo VALUES(4,"2017-04-15 00:00:00","2017-06-04 00:00:00",0,-1,2,1,6);
 INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,-1,2,2,6);
 INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2017-07-04 00:00:00",0,0,2,2,6);
-INSERT INTO deliveryInfo VALUES(7,"2018-02-02 00:00:00","2018-02-04 00:00:00",30,1,3,2,6);
+INSERT INTO deliveryInfo VALUES(7,"2018-03-02 00:00:00","2018-08-04 00:00:00",30,0,3,1,6);
 
-INSERT INTO Question VALUES(1,1,1,"第一个问题",1,6,0,3);
+INSERT INTO Question VALUES(1,1,1,"第一个问题",1,6,-1, -1);
 INSERT INTO Question VALUES(2,1,0,"2nd question",2,6,3,5);
 INSERT INTO Question VALUES(3,1,1,"3rd question",1,6,-1,-1);
 INSERT INTO Question VALUES(4,1,0,"4th question",2,6,-1,-1);
@@ -293,15 +294,15 @@ INSERT INTO Answer VALUES(5,5,2,2,2,1,"sdfskljfalsdjfklsjkf haha","lht","2017-06
 INSERT INTO Answer VALUES(6,5,4,2,2,1,"sdfskljfalsdjfklsjkf haha","lht","2017-06-04 00:00:00",6);
 INSERT INTO Answer VALUES(10,1,4,1,1,0,NULL,NULL,NULL,1);
 
-INSERT INTO Choice VALUES(1,1,1,"choice_1",6);
-INSERT INTO Choice VALUES(2,1,2,"choice_2",6);
-INSERT INTO Choice VALUES(3,2,3,"choice_3",6);
-INSERT INTO Choice VALUES(4,2,4,"choice_4",6);
-INSERT INTO Choice VALUES(5,4,5,"choice_5",6);
-INSERT INTO Choice VALUES(6,2,6,"choice_6",6);
-INSERT INTO Choice VALUES(7,3,7,"choice_7",6);
-INSERT INTO Choice VALUES(14,4,1,"choice_14",6);
-INSERT INTO Choice VALUES(15,4,2,"choice_15",6);
+INSERT INTO Choice VALUES(1,1,1,"choice_1","./img/survey/choice1.png",6);
+INSERT INTO Choice VALUES(2,1,2,"choice_2","./img/survey/choice2.png",6);
+INSERT INTO Choice VALUES(3,1,3,"choice_3","./img/survey/choice3.png",6);
+INSERT INTO Choice VALUES(4,1,4,"choice_4","",6);
+INSERT INTO Choice VALUES(5,4,5,"choice_5","",6);
+INSERT INTO Choice VALUES(6,2,6,"choice_6","",6);
+INSERT INTO Choice VALUES(7,3,7,"choice_7","",6);
+INSERT INTO Choice VALUES(14,4,1,"choice_14","",6);
+INSERT INTO Choice VALUES(15,4,2,"choice_15","",6);
 
 INSERT INTO RetrieveInfo VALUES(1,1,1,"2017-06-25 00:00:00","张三",6);
 INSERT INTO RetrieveInfo VALUES(3,2,1,"2017-05-25 00:00:00","",6);
