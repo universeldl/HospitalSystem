@@ -4,7 +4,7 @@ window.onload = new function () {
     ajax(
         {
             method: 'GET',
-            url: "doctor/surveyManageAction_findAllSurveys.action",
+            url: "doctor/deliveryManageAction_findAllSurveys.action",
             type: "json",
             callback: function (data) {
                 $('#loading').hide();

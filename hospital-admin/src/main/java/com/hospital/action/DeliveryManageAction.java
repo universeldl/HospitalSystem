@@ -2,6 +2,7 @@ package com.hospital.action;
 
 import com.hospital.domain.*;
 import com.hospital.service.DeliveryService;
+import com.hospital.service.SurveyService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
@@ -19,6 +20,11 @@ import java.util.Set;
 public class DeliveryManageAction extends ActionSupport {
 
     private DeliveryService deliveryService;
+    private SurveyService surveyService;
+
+    public void setSurveyService(SurveyService surveyService) {
+        this.surveyService = surveyService;
+    }
 
     public void setDeliveryService(DeliveryService deliveryService) {
         this.deliveryService = deliveryService;
@@ -241,6 +247,34 @@ public class DeliveryManageAction extends ActionSupport {
 
         ServletActionContext.getRequest().setAttribute("pb", pb);
         return "success";
+    }
+
+    /**
+     * 得到问卷的集合
+     * ajax请求该方法
+     * 返回问卷集合的json对象
+     *
+     * @return
+     */
+    public String findAllSurveys() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+        List<Survey> allSurveys = surveyService.findAllSurveys();
+
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+            public boolean apply(Object obj, String name, Object value) {
+                return !name.equals("surveyId") && !name.equals("surveyName") ;
+            }
+        });
+
+        String json = JSONArray.fromObject(allSurveys, jsonConfig).toString();//List------->JSONArray
+        try {
+            response.getWriter().print(json);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
     }
 
 

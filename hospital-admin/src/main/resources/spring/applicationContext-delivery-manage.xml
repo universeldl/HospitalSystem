@@ -36,10 +36,18 @@
         </property>
     </bean>
 
+    <bean id="surveyService" class="com.hospital.service.impl.SurveyServiceImpl">
+        <property name="surveyDao">
+            <ref bean="surveyDao"/>
+        </property>
+    </bean>
 
     <bean id="deliveryManageAction" class="com.hospital.action.DeliveryManageAction" scope="prototype">
         <property name="deliveryService">
             <ref bean="deliveryService"/>
+        </property>
+        <property name="surveyService">
+            <ref bean="surveyService"/>
         </property>
     </bean>
 
