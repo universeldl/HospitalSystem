@@ -16,7 +16,7 @@ public interface DeliveryDao {
 
     List<DeliveryInfo> getUnansweredDeliveryInfos(Integer patientId);
 
-    PageBean<Integer> getDeliveryIdList(String name, int pageCode, int pageSize, Patient patient);
+    PageBean<Integer> getDeliveryIdList(int surveyId, int pageCode, int pageSize, Patient patient);
 
     PageBean<Integer> getDeliveryIdList(String name, int deliveryId, int pageCode, int pageSize, Doctor doctor);
 

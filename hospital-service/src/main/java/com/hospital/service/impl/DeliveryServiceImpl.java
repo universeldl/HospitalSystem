@@ -93,11 +93,11 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
-    public PageBean<DeliveryInfo> queryDeliveryInfo(String name, int pageCode, int pageSize, Patient patient) {
+    public PageBean<DeliveryInfo> queryDeliveryInfo(int surveyId, int pageCode, int pageSize, Patient patient) {
         PageBean<DeliveryInfo> pageBean = new PageBean<DeliveryInfo>();
         pageBean.setPageCode(pageCode);
         pageBean.setPageSize(pageSize);
-        PageBean<Integer> list = deliveryDao.getDeliveryIdList(name, pageCode, pageSize, patient);
+        PageBean<Integer> list = deliveryDao.getDeliveryIdList(surveyId, pageCode, pageSize, patient);
         pageBean.setTotalRecord(list.getTotalRecord());
         List<Integer> beanList = list.getBeanList();
         if (beanList.size() == 0) {

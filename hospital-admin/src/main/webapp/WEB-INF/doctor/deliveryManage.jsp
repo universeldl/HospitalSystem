@@ -155,12 +155,20 @@
                         <input type="hidden" name="patientId" value="<%=paramPatientId%>"/>
                     </div>
                     <div class="form-group">
+                        <div class="col-sm-2 control-label">选择问卷</div>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="surveyList" name="surveyId">
+                                <option value="-1">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--<div class="form-group">
                         <div class="col-sm-2 control-label">问卷名称</div>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="surveyName"
                                    placeholder="请输入问卷名称（支持模糊查询）"/>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <div class="col-sm-2 control-label"></div>
                         <button type="submit" class="btn btn-primary" id="btn_delivery">查询</button>
@@ -723,4 +731,5 @@
 </div>
 
 </body>
+<script src="${pageContext.request.contextPath}/js/getAllSurveys.js"></script>
 </html>

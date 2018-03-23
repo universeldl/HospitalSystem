@@ -31,7 +31,7 @@ public class DeliveryManageAction extends ActionSupport {
     private String openID;
     private String pwd;
     private String patientName;
-    private String surveyName;
+    private int surveyId;
 
     public void setPatientId(Integer patientId) {this.patientId = patientId;}
 
@@ -43,8 +43,8 @@ public class DeliveryManageAction extends ActionSupport {
         this.patientName = patientName;
     }
 
-    public void setSurveyName(String surveyName) {
-        this.surveyName = surveyName;
+    public void setSurveyId(int surveyId) {
+        this.surveyId = surveyId;
     }
 
     public void setPwd(String pwd) {
@@ -254,13 +254,13 @@ public class DeliveryManageAction extends ActionSupport {
         PageBean<DeliveryInfo> pb = null;
         Patient patient = new Patient();
         patient.setPatientId(patientId);
-        if ("".equals(surveyName.trim())) {
+        if (surveyId == -1) {
             pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize, patient);
         } else {
-            pb = deliveryService.queryDeliveryInfo(surveyName, pageCode, pageSize, patient);
+            pb = deliveryService.queryDeliveryInfo(surveyId, pageCode, pageSize, patient);
         }
         if (pb != null) {
-            pb.setUrl("queryDeliverySearchInfoForPatient.action?surveyName=" + surveyName + "&patientId=" + patientId + "&");
+            pb.setUrl("queryDeliverySearchInfoForPatient.action?surveyId=" + surveyId + "&patientId=" + patientId + "&");
         }
 
         ServletActionContext.getRequest().setAttribute("pb", pb);

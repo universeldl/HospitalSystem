@@ -41,7 +41,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
 
 
     @Override
-    public PageBean<Integer> getDeliveryIdList(String name, int pageCode, int pageSize, Patient patient) {
+    public PageBean<Integer> getDeliveryIdList(int surveyId, int pageCode, int pageSize, Patient patient) {
         PageBean<Integer> pb = new PageBean<Integer>();    //pageBean对象，用于分页
         //根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
         pb.setPageCode(pageCode);//设置当前页码
@@ -55,9 +55,9 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         String hql = "select di.deliveryId from deliveryInfo di,survey bk where bk.surveyId=di.surveyId and di.patientId="+patient.getPatientId();
         sb.append(hql);
         sb_sql.append(sql);
-        if (!"".equals(name.trim())) {
-            sb.append(" and bk.surveyName like '%" + name + "%'");
-            sb_sql.append(" and bk.surveyName like '%" + name + "%'");
+        if (surveyId > 0) {
+            sb.append(" and bk.surveyId=" + surveyId);
+            sb_sql.append(" and bk.surveyId=" + surveyId);
         }
 
         try {

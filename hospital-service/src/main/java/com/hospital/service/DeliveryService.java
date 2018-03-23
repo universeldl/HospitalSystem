@@ -19,7 +19,7 @@ public interface DeliveryService {
 
     PageBean<DeliveryInfo> queryDeliveryInfo(String name, int deliveryId, int pageCode, int pageSize, Doctor doctor);
 
-    PageBean<DeliveryInfo> queryDeliveryInfo(String name, int pageCode, int pageSize, Patient patient);
+    PageBean<DeliveryInfo> queryDeliveryInfo(int surveyId, int pageCode, int pageSize, Patient patient);
 
     /**
      * 返回分发状态码
