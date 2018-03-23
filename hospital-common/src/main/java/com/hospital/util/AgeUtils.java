@@ -63,4 +63,11 @@ public class AgeUtils {
         return getAgeFromBirthTime(birthTimeString);
     }
 
+    // 根据Date类型计算年龄
+    public static int getAgeFromBirthTime(Date birthDate) {
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        String birthTimeString = format.format(birthDate);
+        return getAgeFromBirthTime(birthTimeString);
+    }
+
 }

@@ -1,10 +1,11 @@
 package com.hospital.service.impl;
 
-import com.hospital.dao.ForfeitDao;
 import com.hospital.dao.PatientDao;
 import com.hospital.dao.PatientTypeDao;
+import com.hospital.dao.PlanDao;
 import com.hospital.domain.*;
 import com.hospital.service.PatientService;
+import com.hospital.util.AgeUtils;
 import com.hospital.util.CheckUtils;
 import com.hospital.util.DateUtils;
 import com.hospital.util.Md5Utils;
@@ -26,11 +27,11 @@ public class PatientServiceImpl implements PatientService {
 
     private PatientTypeDao patientTypeDao;
 
-    private ForfeitDao forfeitDao;
+    private PlanDao planDao;
 
 
-    public void setForfeitDao(ForfeitDao forfeitDao) {
-        this.forfeitDao = forfeitDao;
+    public void setPlanDao(PlanDao planDao) {
+        this.planDao = planDao;
     }
 
 
@@ -98,17 +99,8 @@ public class PatientServiceImpl implements PatientService {
         Patient patientById = patientDao.getPatientById(patient);
         Set<DeliveryInfo> deliveryInfos = patientById.getDeliveryInfos();
         for (DeliveryInfo deliveryInfo : deliveryInfos) {
-            if (!(deliveryInfo.getState() == 2 || deliveryInfo.getState() == 5)) {
+            if (deliveryInfo.getState() >= 0) {
                 return -1;//有尚未答卷的问卷
-            }
-            //得到该分发记录的提醒信息
-            ForfeitInfo forfeitInfo = new ForfeitInfo();
-            forfeitInfo.setDeliveryId(deliveryInfo.getDeliveryId());
-            ForfeitInfo forfeitInfoById = forfeitDao.getForfeitInfoById(forfeitInfo);
-            if (forfeitInfoById != null) {
-                if (forfeitInfoById.getIsPay() == 0) {
-                    return -2;//尚未设置的延期
-                }
             }
         }
         boolean deletePatient = patientDao.deletePatient(patient);
@@ -471,6 +463,32 @@ public class PatientServiceImpl implements PatientService {
     public String exportSinglePatient(Patient patient) {
         String exportPatientExcel = exportOnePatient(patient, "patient.xls");
         return "doctor/FileDownloadAction.action?fileName=" + exportPatientExcel;
+    }
+
+
+    @Override
+    public boolean updatePlan() {
+        List<Patient> patients = patientDao.findAllPatients();
+        for (Patient patient : patients) {
+            //System.out.println("plan1:" + patient.getPlan().getPlanId());
+
+            //int age = 7;
+            int age = AgeUtils.getAgeFromBirthTime(patient.getBirthday());
+            Plan plan = new Plan();
+            plan.setBeginAge(age);
+            plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
+            plan.setOldPatient(patient.getPlan().getOldPatient());
+            plan.setSex(patient.getPlan().getSex());
+            plan.setPatientType(patient.getPlan().getPatientType());
+            Plan newPlan = planDao.getPlan(plan);
+
+            if(!patient.getPlan().getPlanId().equals(newPlan.getPlanId())) {
+                patient.setPlan(newPlan);
+            }
+            //System.out.println("plan2:" + patient.getPlan().getPlanId());
+
+        }
+        return true;
     }
 
 

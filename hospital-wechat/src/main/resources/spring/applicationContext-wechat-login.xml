@@ -25,9 +25,6 @@
         <property name="patientDao">
             <ref bean="patientDao"/>
         </property>
-        <property name="forfeitDao">
-            <ref bean="forfeitDao"/>
-        </property>
         <property name="patientTypeDao">
             <ref bean="patientTypeDao"/>
         </property>

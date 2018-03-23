@@ -1,18 +1,11 @@
 package com.hospital.quartz;
 
-import com.hospital.domain.Doctor;
-import com.hospital.domain.Patient;
-import com.hospital.domain.PatientType;
+import com.hospital.service.DeliveryService;
 import com.hospital.service.DoctorService;
 import com.hospital.service.PatientService;
-import com.hospital.service.DeliveryService;
-import com.hospital.util.Md5Utils;
-import org.apache.commons.lang.RandomStringUtils;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-
-import java.util.Date;
 
 
 /**
@@ -20,7 +13,7 @@ import java.util.Date;
  * This file is only for testing Quartz and Charts.
  * @author c
  */
-public class SendSurvey extends QuartzJobBean {
+public class updatePlan extends QuartzJobBean {
 
     private PatientService patientService;
 
@@ -40,22 +33,22 @@ public class SendSurvey extends QuartzJobBean {
         this.doctorService = doctorService;
     }
 
-    public SendSurvey() {
+    public updatePlan() {
         super();
     }
 
     @Override
     protected void executeInternal(JobExecutionContext arg0)
             throws JobExecutionException {
-        boolean checkDeliveryInfo = true;
+        boolean updatePlan = true;
         try {
-            checkDeliveryInfo = deliveryService.checkAndDoDelivery();
+            updatePlan = patientService.updatePlan();
         } catch (Throwable e) {
             // TODO: handle exception
             e.printStackTrace();
         }
-        if (!checkDeliveryInfo) {
-            System.err.println("定时分发随访问卷出现了错误!!!");
+        if (!updatePlan) {
+            System.err.println("定时更新病人随访计划出现了错误!!!");
         }
     }
 }

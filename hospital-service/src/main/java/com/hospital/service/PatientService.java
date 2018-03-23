@@ -37,6 +37,8 @@ public interface PatientService {
 
     String exportPatient(Doctor doctor);
 
+    boolean updatePlan();
+
     String exportSinglePatient(Patient patient);
 
 }
