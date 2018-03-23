@@ -28,6 +28,9 @@
             <column name="aid"/>
         </property>
 
+        <property name="choiceImgPath" type="java.lang.String">
+            <column name="choiceImgPath"/>
+        </property>
        <!-- <many-to-one name="answer" class="com.hospital.domain.Answer" cascade="save-update" lazy="false">
             <column name="answerId"/>
         </many-to-one>-->
