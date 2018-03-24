@@ -324,7 +324,34 @@
                                     </div>
                                 </div>
                             </s:elseif>
-
+                            <!--问答题（日期）-->
+                            <s:elseif test="#answer.question.questionType== 4">
+                                <div class="col-md-12">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <div class="text-muted bootstrap-admin-box-title"
+                                                 <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">style="color:red;"</s:if>>
+                                                <s:property value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(问答题-日期)
+                                                <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">
+                                                    (最后修改人： <s:property value="#answer.lastModified"/>医生修改于 <s:property value="#answer.modifiedDate"/>)
+                                                </s:if>
+                                                <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
+                                                        data-target="#updateAnswerModal"
+                                                        style="float:right;color:white;"
+                                                        onclick="updateAnswerById(<s:property
+                                                                value="#answer.answerId"/>)">修改
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="bootstrap-admin-panel-content"
+                                             <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">style="color:red;"</s:if>>
+                                            <div>
+                                                <textarea class="form-control" rows="3" id="updateQuestionContent2" disabled="disabled"><s:property value="#answer.textChoiceContent"/></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </s:elseif>
                         </s:iterator>
                     </s:if>
                     <!--

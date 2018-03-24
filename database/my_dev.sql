@@ -129,7 +129,7 @@ CREATE TABLE `Question` (
   `surveyId` int(11) NOT NULL,
   `textChoice` int(1) DEFAULT 0,
   `questionContent` varchar(255) NOT NULL,
-  `questionType` int(3) NOT NULL, /*1-'multi_choice', 2-'single_choice',3-'text'*/
+  `questionType` int(3) NOT NULL, /*1-'multi_choice', 2-'single_choice',3-'text', 4-date selector*/
   `aid` int(11) NOT NULL,
   `startAge` int(2) DEFAULT -1,
   `endAge` int(2) DEFAULT -1,
@@ -285,6 +285,9 @@ INSERT INTO Question VALUES(2,1,0,"2nd question",2,6,3,5);
 INSERT INTO Question VALUES(3,1,1,"3rd question",1,6,-1,-1);
 INSERT INTO Question VALUES(4,1,0,"4th question",2,6,-1,-1);
 INSERT INTO Question VALUES(5,1,1,"text question",3,6,-1,-1);
+INSERT INTO Question VALUES(6,1,1,"date question1",4,6,-1,-1);
+INSERT INTO Question VALUES(7,1,1,"date question2",4,6,-1,-1);
+
 
 INSERT INTO Answer VALUES(1,1,1,1,1,0,"","","2016-06-14 00:00:00",6);
 INSERT INTO Answer VALUES(2,3,2,1,1,0,"","","2016-06-14 00:00:00",6);

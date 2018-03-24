@@ -3,7 +3,7 @@ let answerId = 1;
 
 function updateAnswerById(ansId) {
     answerId = ansId;
-
+    //alert(answerId);
     $('#loading').show();
     ajax(
         {
@@ -19,7 +19,7 @@ function updateAnswerById(ansId) {
                 //    $(this).outerHTML = '';
                 //    $(this).remove();
                 //});
-
+                //alert(data.questionType)
                 if (data.questionType == 1) {//多选
                     questionType = 1;
                     str += '<div class="form-group">';
@@ -59,6 +59,14 @@ function updateAnswerById(ansId) {
                             + '<textarea class="form-control" rows="3" name="updateTextChoice" id="updateTextChoice">' + data.textChoiceContent + '</textarea>';
                     }
                     str += '</div>';
+                } else if (data.questionType == 4) {//问答
+                    questionType = 4;
+                    str += '<div class="form-group">';
+                    if (data.textChoice == 1) {
+                        str += '<p>答案:</p>'
+                            + '<textarea class="form-control" rows="3" name="updateTextChoice" id="updateTextChoice">' + data.textChoiceContent + '</textarea>';
+                    }
+                    str += '</div>';
                 }
 
                 document.getElementById("updateChoicesDiv").innerHTML = str;//then set
@@ -79,7 +87,7 @@ $(function () {
 
         var postdata;
         postdata = "answerId=" + answerId + "&" + $("#updateForm").serialize();
-
+        //alert(postdata)
         $('#loading').show();
         ajax(
             {

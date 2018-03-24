@@ -342,6 +342,9 @@ public class SurveyManageAction extends ActionSupport {
         } else if (questionType == 3) {
             question.setTextChoice(1);
             b = questionService.addQuestion(question);
+        } else if (questionType == 4) {
+            question.setTextChoice(1);
+            b = questionService.addQuestion(question);
         }
         int success = 0;
         if (b) {
@@ -469,6 +472,8 @@ public class SurveyManageAction extends ActionSupport {
                 choiceService.addChoice(choice);
             }
         } else if (questionType == 3) {
+            updateQuestion.setTextChoice(1);
+        } else if (questionType == 4) {
             updateQuestion.setTextChoice(1);
         }
 

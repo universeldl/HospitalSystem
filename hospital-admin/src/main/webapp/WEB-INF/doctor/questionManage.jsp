@@ -278,6 +278,9 @@
                                     <s:elseif test="#question.questionType== 3">
                                         问答题
                                     </s:elseif>
+                                    <s:elseif test="#question.questionType== 4">
+                                        问答题(日期）
+                                    </s:elseif>
                                 </td>
                                 <td>
                                     <s:if test="#question.startAge==-1">
@@ -368,6 +371,9 @@
                         </button>
                         <button type="button" class="btn btn-pinterest" onclick="addTextDisplay()" id="add3"><i
                                 class="fa fa-plus"></i> 问答题
+                        </button>
+                        <button type="button" class="btn btn-pinterest" onclick="addTextDateDisplay()" id="add4"><i
+                                class="fa fa-plus"></i> 问答题（日期）
                         </button>
                     </div>
 
@@ -554,6 +560,9 @@
                         </button>
                         <button type="button" class="btn btn-pinterest" onclick="updateTextDisplay()" id="update3"><i
                                 class="fa fa-plus"></i> 问答题
+                        </button>
+                        <button type="button" class="btn btn-pinterest" onclick="updateTextDateDisplay()" id="update4"><i
+                                class="fa fa-plus"></i> 问答题（日期）
                         </button>
                     </div>
 

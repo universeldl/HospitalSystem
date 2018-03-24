@@ -31,8 +31,8 @@ $(function () {
             }
             postdata = postdata + "&" + $("#addForm").serialize();
         }
-        else if (questionType == 3) {
-            postdata = "questionType=3&surveyId=" + surveyId + "&textChoice=0" + "&questionContent=" + $.trim($("#addQuestionContent").val());
+        else if (questionType == 3 || questionType == 4) {
+            postdata = "questionType=" + questionType + "&surveyId=" + surveyId + "&textChoice=0" + "&questionContent=" + $.trim($("#addQuestionContent").val());
             if ($.trim($("#addStartAge").val()) != "" && $.trim($("#addEndAge").val()) != "") {
                 postdata = postdata + "&startAge=" + $.trim($("#addStartAge").val())
                     + "&endAge=" + $.trim($("#addEndAge").val());
@@ -41,7 +41,7 @@ $(function () {
             }
         }
 
-        //alert("add question" + postdata);
+        //alert("add question " + postdata);
         $('#loading').show();
         ajax(
             {
@@ -84,6 +84,8 @@ function addMultiChoiceDisplay() {
     $("#add2").addClass("btn btn-pinterest");
     $("#add3").removeClass();
     $("#add3").addClass("btn btn-pinterest");
+    $("#add4").removeClass();
+    $("#add4").addClass("btn btn-pinterest");
 }
 
 function addSingleChoiceDisplay() {
@@ -95,6 +97,8 @@ function addSingleChoiceDisplay() {
     $("#add2").addClass("btn btn-primary");
     $("#add3").removeClass();
     $("#add3").addClass("btn btn-pinterest");
+    $("#add4").removeClass();
+    $("#add4").addClass("btn btn-pinterest");
 }
 
 function addTextDisplay() {
@@ -106,6 +110,22 @@ function addTextDisplay() {
     $("#add2").addClass("btn btn-pinterest");
     $("#add3").removeClass();
     $("#add3").addClass("btn btn-primary");
+    $("#add4").removeClass();
+    $("#add4").addClass("btn btn-pinterest");
+}
+
+
+function addTextDateDisplay() {
+    questionType = 4;
+    document.getElementById("choicesBlock").style.display = "none";
+    $("#add1").removeClass();
+    $("#add1").addClass("btn btn-pinterest");
+    $("#add2").removeClass();
+    $("#add2").addClass("btn btn-pinterest");
+    $("#add3").removeClass();
+    $("#add3").addClass("btn btn-pinterest");
+    $("#add4").removeClass();
+    $("#add4").addClass("btn btn-primary");
 }
 
 function unique(arr) {

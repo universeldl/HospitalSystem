@@ -335,7 +335,8 @@ public class RetrieveManageAction extends ActionSupport {
                 }
             }
 
-        } else if (updateAnswer.getQuestion().getQuestionType() == 3) {  //问答
+        } else if (updateAnswer.getQuestion().getQuestionType() == 3 ||
+                updateAnswer.getQuestion().getQuestionType() == 4) {  //问答
             if (pMap.size() == 2) {
                 for (String[] value : pMap.values()) {
                     updateAnswer.setTextChoice(1);

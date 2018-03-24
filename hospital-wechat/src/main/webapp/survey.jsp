@@ -157,7 +157,7 @@
                         </s:if>
                     </s:elseif>
                     <!--问答题-->
-                    <s:else>
+                    <s:elseif test="#question.questionType==3">
                         <div class="weui-cells weui-cells_form">
                             <div class="weui-cell">
                                 <div class="weui-cell__bd">
@@ -167,8 +167,23 @@
                                 </div>
                             </div>
                         </div>
-                    </s:else>
+                    </s:elseif>
 
+                    <!-- 问答题（日期）-->
+                    <s:elseif test="#question.questionType==4">
+                        <br/>
+                        <p style="color:grey">请点击选择：</p>
+                        <div class="weui-cells weui-cells_form">
+                            <div class="weui-cell">
+                                <div class="weui-cell__bd">
+                                    <div class="weui-cell__bd">
+                                        <input class="weui-input" type="month" value=""
+                                               id='textquestion<s:property value="#question.questionId"/>'/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </s:elseif>
                     <br/>
 
                     <div class="page__bd page__bd_spacing">

@@ -238,12 +238,15 @@ $(function () {
 });
 
 function isValid(to) {
+    var flag = true;
     var div = document.getElementById('tpl_question' + to);
     var inputs = div.getElementsByTagName("input");
     var all_empty = true;
     for (var i = 0; i < inputs.length; i++) {
-        if(inputs[i].checked) {
+        if (inputs[i].type == "month") {
             all_empty = false;
+        } else if (inputs[i].checked) {
+                all_empty = false;
         }
     }
 
@@ -252,15 +255,20 @@ function isValid(to) {
     if (inputs.length > 0 && all_empty) {
         if (text.length > 0) {
             if (text[0].value == "") {
-                return false;
+                flag = false;
             }
         } else {
-            return false;
+            flag = false;
         }
     } else if (inputs.length == 0 && text[0].value == "") {
-        return false;
+        flag = false;
     }
-    return true;
+
+    if ($("input[type='month']") != null && $("input[type='month']").val() == "") {
+        flag = false;
+    }
+
+    return flag;
 }
 
 function submit(to) {
@@ -283,7 +291,13 @@ function submit(to) {
         }
     });
 
-    //alert(postdata);
+    $("input[type='month']").each(function() {
+        if ($(this).val() != "") {
+            postdata = postdata + $(this).attr("id") + "=" + $(this).val() + "&";
+        }
+    });
+
+    alert(postdata)
 
     ajax(
         {

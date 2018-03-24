@@ -107,8 +107,8 @@ $(function () {
                 + "&surveyId=" + surveyId + "&textChoice=" + updateTextChoice + "&questionId=" + questionId + "&" + $("#updateForm").serialize();
         }
         */
-        else if (questionType == 3) {
-            postdata = "questionType=3&surveyId=" + surveyId + "&questionId=" + questionId + "&textChoice=0"
+        else if (questionType == 3 || questionType == 4) {
+            postdata = "questionType=" + questionType + "&surveyId=" + surveyId + "&questionId=" + questionId + "&textChoice=0"
                 + "&questionContent=" + $.trim($("#updateQuestionContent").val());
             if ($.trim($("#updateStartAge").val()) != "" && $.trim($("#updateEndAge").val()) != "") {
                 postdata = postdata + "&startAge=" + $.trim($("#updateStartAge").val())
@@ -117,8 +117,6 @@ $(function () {
                 postdata = postdata + "&startAge=-1&endAge=-1";
             }
         }
-
-        //alert(postdata);
 
         $('#loading').show();
         ajax(
@@ -162,6 +160,8 @@ function updateMultiChoiceDisplay() {
     $("#update2").addClass("btn btn-pinterest");
     $("#update3").removeClass();
     $("#update3").addClass("btn btn-pinterest");
+    $("#update4").removeClass();
+    $("#update4").addClass("btn btn-pinterest");
 }
 
 function updateSingleChoiceDisplay() {
@@ -173,6 +173,8 @@ function updateSingleChoiceDisplay() {
     $("#update2").addClass("btn btn-primary");
     $("#update3").removeClass();
     $("#update3").addClass("btn btn-pinterest");
+    $("#update4").removeClass();
+    $("#update4").addClass("btn btn-pinterest");
 }
 
 function updateTextDisplay() {
@@ -184,6 +186,21 @@ function updateTextDisplay() {
     $("#update2").addClass("btn btn-pinterest");
     $("#update3").removeClass();
     $("#update3").addClass("btn btn-primary");
+    $("#update4").removeClass();
+    $("#update4").addClass("btn btn-pinterest");
+}
+
+function updateTextDateDisplay() {
+    questionType = 4;
+    document.getElementById("updateChoicesBlock").style.display = "none";
+    $("#update1").removeClass();
+    $("#update1").addClass("btn btn-pinterest");
+    $("#update2").removeClass();
+    $("#update2").addClass("btn btn-pinterest");
+    $("#update3").removeClass();
+    $("#update3").addClass("btn btn-pinterest");
+    $("#update4").removeClass();
+    $("#update4").addClass("btn btn-primary");
 }
 
 function getUpdateCount() {
