@@ -118,11 +118,6 @@ public class DeliveryServiceImpl implements DeliveryService {
     public int addDelivery(DeliveryInfo info) {
         Patient patient = patientDao.getPatientByopenID(info.getPatient());
 
-        //先检查病人的用户名是否正确存在
-        if (patient == null) {
-            return 2;//病人用户名有误
-        }
-
         //得到该病人的最长答卷天数，过期将不再接受该次答卷
         int maxDay = info.getSurvey().getBday();//允许填卷天数
 
@@ -145,7 +140,7 @@ public class DeliveryServiceImpl implements DeliveryService {
         deliveryInfo.setDeliveryDate(deliveryDate);
         deliveryInfo.setEndDate(endDate);
 
-        int id = deliveryDao.addDelivery(deliveryInfo);//返回1成功添加,返回0添加失败
+        int id = deliveryDao.addDelivery(deliveryInfo);//返回非0成功添加,返回0添加失败
 
         return id;
     }
@@ -216,6 +211,98 @@ public class DeliveryServiceImpl implements DeliveryService {
         return true;
     }
 
+
+    @Override
+    public boolean checkAndDoDeliveryNew() {
+        List<Patient> patients = patientDao.findAllPatients();
+        for (Patient patient : patients) {
+            //get sorted surveys, sort to make sure that the survey we are going to send is always in a order
+            Set<Survey> surveys = patient.getPlan().getSurveys();
+
+            //get all deliveryInfos of this patient
+            Set<DeliveryInfo> deliveryInfos = patient.getDeliveryInfos();
+
+            //do check and send
+            for (Survey survey : surveys) {//每个survey有自己固定的随访次数
+                int num = 0;//当前survey已经随访次数
+                int newestDeliveryId = 0;//当前survey的最新一次发送的问卷id
+                boolean createNewDeliveryAndSend = false;
+                for (DeliveryInfo deliveryInfo : deliveryInfos) {
+                    if (deliveryInfo.getSurvey().getSurveyId() == survey.getSurveyId()
+                            && deliveryInfo.getPatient().getPatientId() == patient.getPatientId()) {
+                        if (deliveryInfo.getDeliveryId() > newestDeliveryId) {
+                            newestDeliveryId = deliveryInfo.getDeliveryId();
+                        }
+                        ++num;
+                    }
+                }
+                if (num == 0) {//如果该问卷从未发送过
+                    createNewDeliveryAndSend = true;
+                }
+                else if (num < survey.getTimes()) {//未达到随访次数
+                    DeliveryInfo DI = new DeliveryInfo();
+                    DI.setDeliveryId(newestDeliveryId);
+                    DeliveryInfo deliveryInfo = deliveryDao.getDeliveryInfoById(DI);//拿到当前survey的最新一次发送的问卷
+                    if (deliveryInfo.getState() >= 0) {//如果最新的一次尚未答卷，要检查是否重发提醒
+                        try {
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTime(patient.getCreateTime());
+                            calendar.add(Calendar.MONTH, (num + 1) * survey.getFrequency());
+                            Date sendDate = calendar.getTime();
+                            calendar.add(Calendar.DAY_OF_MONTH, survey.getBday());
+                            Date endDate = calendar.getTime();
+                            if (System.currentTimeMillis() > sendDate.getTime() && System.currentTimeMillis() < endDate.getTime()) {//尚未逾期，重发提醒，但是并不新建deliveryInfo
+                                deliveryInfo.setState(deliveryInfo.getState() + 1);//state+1
+                                deliveryDao.updateDeliveryInfo(deliveryInfo);
+                                sendTemplateMessage(deliveryInfo);
+                            } else { //已经逾期，该问卷作废
+                                deliveryInfo.setState(-2);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (deliveryInfo.getState() == -1 && deliveryInfo.getState() == -2) {//如果最新的一次已经答卷或者逾期仍未答卷，说明要发送新一期的问卷
+                        createNewDeliveryAndSend = true;
+                    }
+                }
+                if (createNewDeliveryAndSend) {//新建deliveryInfo并发送
+                    //check if it's the right day, if so, do the delivery
+                    try {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(patient.getCreateTime());
+                        calendar.add(Calendar.MONTH, (num + 1) * survey.getFrequency());
+                        Date sendDate = calendar.getTime();
+                        calendar.add(Calendar.DAY_OF_MONTH, survey.getBday());
+                        Date endDate = calendar.getTime();
+                        if (System.currentTimeMillis() > sendDate.getTime() && System.currentTimeMillis() < endDate.getTime()) {//Now it's the time to deliver the survey~~
+                            //add new DeliveryInfo and send survey to Patient
+                            DeliveryInfo newDI = new DeliveryInfo();
+                            newDI.setDoctor(patient.getDoctor());
+                            newDI.setSurvey(survey);
+                            newDI.setPatient(patient);
+                            newDI.setState(0);//新deliveryInfo
+                            int addDelivery = addDelivery(newDI);
+                            newDI.setDeliveryId(addDelivery);
+                            DeliveryInfo newDeliveryInfo = getDeliveryInfoById(newDI);
+                            if (newDeliveryInfo != null) {
+                                sendTemplateMessage(newDeliveryInfo);
+                                survey.setNum(survey.getNum() + 1);
+                                surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
+                            } else {
+                                return false;
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+
     @Override
     public boolean sendTemplateMessage(DeliveryInfo deliveryInfo) {
         JSONObject d1 = new JSONObject();
@@ -225,11 +312,11 @@ public class DeliveryServiceImpl implements DeliveryService {
         JSONObject d5 = new JSONObject();
         JSONObject data = new JSONObject();
 
-        d1.put("value","上海儿童医学中心呼吸科随访问卷\n");
+        d1.put("value", "上海儿童医学中心呼吸科随访问卷\n");
         d1.put("color", colors[colorNum]);
 
         Patient patient = deliveryInfo.getPatient();
-        d2.put("value",patient.getName());
+        d2.put("value", patient.getName());
         d2.put("color", colors[colorNum]);
 
         String date = DateFormat.getDateTimeInstance().format(deliveryInfo.getDeliveryDate());
@@ -240,20 +327,19 @@ public class DeliveryServiceImpl implements DeliveryService {
         d4.put("value", survey.getSurveyName());
         d4.put("color", colors[colorNum]);
 
-        d5.put("value","\n请点击\"详情\"开始随访。");
+        d5.put("value", "\n请点击\"详情\"开始随访。");
         d5.put("color", colors[colorNum]);
 
-        colorNum = (colorNum>=4)?0:(colorNum+1);
+        colorNum = (colorNum >= 4) ? 0 : (colorNum + 1);
 
-        data.put("first",    d1);
+        data.put("first", d1);
         data.put("keyword1", d2);
         data.put("keyword2", d3);
         data.put("keyword3", d4);
         data.put("remark", d5);
 
         AccessTokenMgr mgr = AccessTokenMgr.getInstance();
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
-                .get(ServletActionContext.HTTP_REQUEST);
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 
         StringBuffer url1 = request.getRequestURL();
         String tempContextUrl1 = url1.delete(url1.length() - request.getRequestURI().length(), url1.length()).append("/").toString();

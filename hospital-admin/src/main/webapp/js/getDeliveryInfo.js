@@ -31,6 +31,8 @@ function getDeliveryInfoById(id) {
                     $("#state").val("已答卷");
                 } else if (data.state == 0) {
                     $("#state").val("未答卷");
+                } else if (data.state == -2) {
+                    $("#state").val("逾期未答卷");
                 } else if (data.state > 0) {
                     $("#state").val("重发未答卷");
                 }

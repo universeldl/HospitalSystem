@@ -49,7 +49,7 @@ public class SendSurvey extends QuartzJobBean {
             throws JobExecutionException {
         boolean checkDeliveryInfo = true;
         try {
-            checkDeliveryInfo = deliveryService.checkAndDoDelivery();
+            checkDeliveryInfo = deliveryService.checkAndDoDeliveryNew();
         } catch (Throwable e) {
             // TODO: handle exception
             e.printStackTrace();

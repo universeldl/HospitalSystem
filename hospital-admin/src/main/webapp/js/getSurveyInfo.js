@@ -40,9 +40,9 @@ function getSurveyInfo(id) {
                     $("#findFrequency").val("2个月");
                 else if (data.frequency == 3)
                     $("#findFrequency").val("3个月");
-                else if (data.frequency == 4)
+                else if (data.frequency == 6)
                     $("#findFrequency").val("6个月");
-                else if (data.frequency == 5)
+                else if (data.frequency == 12)
                     $("#findFrequency").val("12个月");
             }
         }

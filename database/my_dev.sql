@@ -259,7 +259,7 @@ INSERT INTO Plan VALUES(1, 0, 2, 1, 1, 1, 1, 6);
 INSERT INTO Plan VALUES(2, 2, 5, 2, 1, 2, 1, 6);
 INSERT INTO Plan VALUES(3, 6, 9, 4, 1, 3, 1, 6);
 
-INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1", "1", "13567891234","123@abc.com", "2016-6-10","2017-06-25 00:00:00",1,1,3,2);
+INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1", "1", "13567891234","123@abc.com", "2016-6-10","2017-12-15 00:00:00",1,1,3,2);
 INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0", "2", "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
 INSERT INTO Patient VALUES(3,"123456","测试","appid","oaBonw30UBjZkLW5rf19h7KunM7s","na",NULL,NULL,"0", "3", "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
 
@@ -269,8 +269,8 @@ INSERT INTO Authorization VALUES(5,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(6,1,1,1,1,1,1,1,1);
 
 
-INSERT INTO survey VALUES(1,"survey1","admin",10,30, 2,"a1","aaa","2017-06-25 00:00:00",1,1,2,2, TRUE);
-INSERT INTO survey VALUES(2,"survey2","doctor2",10,30, 2,"a2","baa","2017-06-25 00:00:00",1,1,3,6, FALSE);
+INSERT INTO survey VALUES(1,"survey1","admin",10,30, 2,"a1","aaa","2017-06-25 00:00:00",1,2,6,2, TRUE);
+INSERT INTO survey VALUES(2,"survey2","doctor2",10,30, 2,"a2","baa","2017-06-25 00:00:00",1,3,6,6, FALSE);
 
 INSERT INTO deliveryInfo VALUES(1,"2017-01-15 00:00:00","2017-03-04 00:00:00",0,-1,1,1,6);
 INSERT INTO deliveryInfo VALUES(2,"2017-02-15 00:00:00","2018-04-04 00:00:00",0,0,1,1,6);
