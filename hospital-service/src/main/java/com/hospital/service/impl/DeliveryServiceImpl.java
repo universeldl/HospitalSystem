@@ -255,7 +255,7 @@ public class DeliveryServiceImpl implements DeliveryService {
                                 deliveryInfo.setState(deliveryInfo.getState() + 1);//state+1
                                 deliveryDao.updateDeliveryInfo(deliveryInfo);
                                 sendTemplateMessage(deliveryInfo);
-                            } else { //已经逾期，该问卷作废
+                            } else if(System.currentTimeMillis() > endDate.getTime()){ //已经逾期，该问卷作废
                                 deliveryInfo.setState(-2);
                             }
                         } catch (Exception e) {
