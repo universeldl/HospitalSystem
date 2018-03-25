@@ -406,8 +406,20 @@ public class PatientServiceImpl implements PatientService {
 
             int headerRow = 0;
             int headerCol = 0;
-            //开始写所有随访答卷内容
+
+            List<Survey> surveys = new ArrayList<>();
+
+            //拿到该病人所有随访问卷(不止是当前Plan里有的survey，还包含之前plan里的survey)
             for (Survey survey : surveyDao.findAllSurveys()) {
+                for (RetrieveInfo retrieveInfo : patient.getRetrieveInfos()) {
+                    if (survey.getSurveyId().equals(retrieveInfo.getSurvey().getSurveyId())) {
+                        surveys.add(survey);
+                    }
+                }
+            }
+
+            //开始写所有随访答卷内容
+            for (Survey survey : surveys) {
                 row++;
                 headerCol = 0;
                 headerRow = row;
