@@ -5,8 +5,6 @@ import com.hospital.service.DoctorService;
 import com.hospital.service.PatientService;
 import com.hospital.service.PatientTypeService;
 import com.hospital.service.PlanService;
-import com.hospital.util.Md5Utils;
-import com.hospital.util.AgeUtils;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -24,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import static com.hospital.util.TimeUtils.getLast12Months;
 import static com.hospital.util.CalculateUtils.getMax;
@@ -525,5 +522,25 @@ public class PatientManageAction extends ActionSupport {
         return null;
     }
 
+    public String getAllDoctors() {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+        List<Doctor> allDoctors = doctorService.getAllDoctors();
+
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+            public boolean apply(Object obj, String name, Object value) {
+                return name.equals("authorization") || name.equals("hospital") ;
+            }
+        });
+
+        String json = JSONArray.fromObject(allDoctors, jsonConfig).toString();//List------->JSONArray
+        try {
+            response.getWriter().print(json);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
 
 }

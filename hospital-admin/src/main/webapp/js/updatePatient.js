@@ -79,7 +79,7 @@ function updatePatient(id) {
                 }
                 ajax(
                     {
-                        url: "doctor/doctorManageAction_getAllDoctors.action",
+                        url: "doctor/patientManageAction_getAllDoctors.action",
                         type: "json",
                         callback: function (data) {
                             // 循环遍历每个医生，每个医生姓名生成一个option对象，添加到<select>中
