@@ -304,13 +304,15 @@ function submit(to) {
             method: 'POST',
             url: 'surveyAction_retrieveAnswer.action',
             params: postdata,
+            type: "json",
+            scriptCharset: 'utf-8',
             callback: function (data) {
                 hideLoadingToast();
-                if (data == 1) {
+                if (data.success == 1) {
                     var url =  "https://" + window.location.host;
-                    url = url + "/hospital-wechat/message.jsp?msg=恭喜您，答卷提交成功!";
+                    url = url + "/hospital-wechat/message.jsp?msg=答卷提交成功!<br/><br/>" + data.msg;
                     window.location.href = url;
-                } else if (data == -1) {
+                } else if (data.success == -1) {
                     var url =  "https://" + window.location.host;
                     url = url + "/hospital-wechat/message.jsp?msg=答卷出错...";
                     //alert(url)

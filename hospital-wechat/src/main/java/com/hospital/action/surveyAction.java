@@ -7,6 +7,7 @@ import com.hospital.util.AgeUtils;
 import com.hospital.util.GetOpenIdOauth2;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -166,6 +167,8 @@ public class surveyAction extends ActionSupport {
             return ERROR;
         }
 
+        int score = 0;
+
         DeliveryInfo tmpDelevery = new DeliveryInfo();
         tmpDelevery.setDeliveryId(Integer.valueOf(deliveryID));
         DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmpDelevery);
@@ -219,6 +222,7 @@ public class surveyAction extends ActionSupport {
                     Choice choice = choiceService.getChoiceById(tmpChoice);
                     if (choice != null) {
                         choiceset.add(choice);
+                        score += choice.getScore();
                     }
                 }
 
@@ -290,8 +294,20 @@ public class surveyAction extends ActionSupport {
         RetrieveInfo tmpRetrieveInfo = retrieveService.updateRetrieveInfo(newRetrieveInfo);
         Integer i = (tmpRetrieveInfo==null)?-1:1;
         HttpServletResponse response = ServletActionContext.getResponse();
+        response.setCharacterEncoding("UTF-8");
+        JSONObject json = new JSONObject();
+        json.put("success", i);
+
+        if (survey.getSurveyName().equals("TRACK儿童呼吸和哮喘控制测试")) {
+            if (score >= 80) {
+                json.put("msg", "本次TRACK测试评分为"+score+"分，<br/>恭喜您，您孩子的呼吸问题似乎得到了控制。");
+            } else {
+                json.put("msg", "本次TRACK测试评分为"+score+"分，<br/>您孩子的呼吸问题可能未得到控制。");
+            }
+        }
+
         try {
-            response.getWriter().print(i);
+            response.getWriter().print(json);
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
