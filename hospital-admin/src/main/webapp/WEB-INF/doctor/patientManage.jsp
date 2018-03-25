@@ -769,6 +769,15 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">直属医生</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="updateDoctor">
+                                <option value="-1">请选择</option>
+                            </select>
+                            <label class="control-label" for="updateDoctor" style="display: none;"></label>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">共享医生</label>

@@ -58,6 +58,7 @@ public class PatientManageAction extends ActionSupport {
     private String phone;
     private Integer patientType;
     private Integer addnDoctorId;
+    private Integer doctorId;
     private Integer sex;
     private int pageCode;
     private String openID;
@@ -69,6 +70,10 @@ public class PatientManageAction extends ActionSupport {
     /**
      * @param fileName the fileName to set
      */
+    public void setDoctorId(Integer doctorId) {
+        this.doctorId = doctorId;
+    }
+
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
@@ -309,8 +314,11 @@ public class PatientManageAction extends ActionSupport {
 
         if (newPatient.getDoctor() != null) {
             jsonObject.put("doctorName", newPatient.getDoctor().getName());
+            jsonObject.put("doctorId", newPatient.getDoctor().getAid());
         } else {
             jsonObject.put("doctorName", "N/A");
+            jsonObject.put("doctorId", "-1");
+
         }
 
         if (newPatient.getAddnDoctor() != null) {
@@ -348,7 +356,10 @@ public class PatientManageAction extends ActionSupport {
         updatePatient.setName(name);
         updatePatient.setPhone(phone);
         updatePatient.setOpenID(openID);
-        updatePatient.setEmail(email);
+        String email_format = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
+        if (email.matches(email_format)) {
+            updatePatient.setEmail(email);
+        }
 
         Date cday = updatePatient.getCreateTime();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -374,10 +385,24 @@ public class PatientManageAction extends ActionSupport {
         } else {
             updatePatient.setAddnDoctor(null);
         }
+
+        if (doctorId != -1) {
+            if (updatePatient.getDoctor().getAid() != doctorId) {
+                Doctor addnDoctor = new Doctor();
+                addnDoctor.setAid(doctorId);
+                Doctor newAddndoctor = doctorService.getDoctorById(addnDoctor);
+                if (newAddndoctor != null) {
+                    updatePatient.setDoctor(newAddndoctor);
+                }
+            }
+        }
+
         Patient newPatient = patientService.updatePatientInfo(updatePatient);
         int success = 0;
         if (updatePatient.getDoctor().getAid() == addnDoctorId) {
             success = -2;
+        } else if (doctorId == -1) {
+            success = -1;
         } else if (newPatient != null) {
             success = 1;
             //由于是转发并且js页面刷新,所以无需重查

@@ -15,14 +15,14 @@ $(function () {
         var postdata = "patientId=" + $.trim($("#updatePatientID").val()) + "&patientType=" + $.trim($("#updatePatientType").val())
             + "&name=" + $.trim($("#updateName").val()) + "&phone=" + $.trim($("#updatePhone").val())
             + "&openID=" + $.trim($("#updateOpenID").val()) + "&addnDoctorId=" + $.trim($("#updateAddnDoctor").val())
-            + "&createTime=" + $.trim($("#updateCreateTime").val());
+            + "&createTime=" + $.trim($("#updateCreateTime").val()) + "&doctorId=" + $.trim($("#updateDoctor").val());
         if ($.trim($("#updateEmail").val()) != "") {
-            postdat = postdata + "&email=" + $.trim($("#updateEmail").val());
+            postdata = postdata + "&email=" + $.trim($("#updateEmail").val());
         } else {
-            postdat = postdata + "&email=n/a";
+            postdata = postdata + "&email=n/a";
         }
 
-
+        //alert(postdata)
         ajax(
             {
                 method: 'POST',
@@ -88,8 +88,14 @@ function updatePatient(id) {
                                 op.value = data[index].aid;//设置op的实际值为当前的医生aid
                                 var textNode = document.createTextNode(data[index].name);//创建文本节点--医生姓名
                                 op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
-
                                 document.getElementById("updateAddnDoctor").appendChild(op);
+                            }
+                            for (var index in data) {
+                                var op = document.createElement("option");//创建一个指名名称元素
+                                op.value = data[index].aid;//设置op的实际值为当前的医生aid
+                                var textNode = document.createTextNode(data[index].name);//创建文本节点--医生姓名
+                                op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
+                                document.getElementById("updateDoctor").appendChild(op);
                             }
                         }
                     }
@@ -111,6 +117,11 @@ function updatePatient(id) {
                             $("#updateAddnDoctor option:checked").attr("selected", "");
                             var addnDoctorId = data.addnDoctorId;
                             $("#updateAddnDoctor option[value='"+addnDoctorId+"']").attr("selected", "selected");
+
+                            $("#updateDoctor option:checked").attr("selected", "");
+                            var doctorId = data.doctorId;
+                            $("#updateDoctor option[value='"+doctorId+"']").attr("selected", "selected");
+
                             $('#updateCreateTime').val(data.createTime);
                         }
                     }
@@ -224,6 +235,28 @@ function validUpdatePatient() {
         $('#updateAddnDoctor').parent().removeClass("has-error");
         $('#updateAddnDoctor').next().text("");
         $("#updateAddnDoctor").next().hide();
+    }
+
+    var doctor = $.trim($("#updateDoctor").val());
+    if (doctor == -1) {
+         $('#updateDoctor').parent().addClass("has-error");
+         $('#updateDoctor').next().text("请选择直属医生");
+         $("#updateDoctor").next().show();
+         flag = false;
+    } else {
+        $('#updateDoctor').parent().removeClass("has-error");
+        $('#updateDoctor').next().text("");
+        $("#updateDoctor").next().hide();
+    }
+
+    if(doctor == addnDoctor) {
+        $('#updateAddnDoctor').parent().addClass("has-error");
+        $('#updateAddnDoctor').next().text("共享医生和直属医生不能相同");
+        $("#updateAddnDoctor").next().show();
+        $('#updateDoctor').parent().addClass("has-error");
+        $('#updateDoctor').next().text("共享医生和直属医生不能相同");
+        $("#updateDoctor").next().show();
+        flag = false;
     }
 
     var createTime = new Date(($("#updateCreateTime").val()).replace(/-/g,"/"));

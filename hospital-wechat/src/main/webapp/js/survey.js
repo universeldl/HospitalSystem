@@ -297,7 +297,7 @@ function submit(to) {
         }
     });
 
-    alert(postdata)
+    //alert(postdata)
 
     ajax(
         {
