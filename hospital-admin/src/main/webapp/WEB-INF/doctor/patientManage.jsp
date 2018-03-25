@@ -225,7 +225,7 @@
                             <th>直属医生</th>
                             <th>共享医生</th>
                             <th>联系号码</th>
-                            <th>创建时间</th>
+                            <th>注册时间</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -745,6 +745,16 @@
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="updateEmail" placeholder="请输入病人邮箱">
                             <label class="control-label" for="updateEmail" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">注册日期</label>
+                        <div class="col-sm-7">
+                            <input type="date" class="form-control" id="updateCreateTime" >
+                            <!--
+                            <label class="control-label" for="updateCreateDate" style="display: none;"></label>
+                            -->
                         </div>
                     </div>
 

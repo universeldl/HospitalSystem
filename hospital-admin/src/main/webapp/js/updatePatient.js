@@ -2,6 +2,7 @@
  * ajax提交修改医生的信息
  * @param {Object} '#updatePatient'
  */
+
 $(function () {
 
     $('#updatePatient').click(function () {
@@ -13,12 +14,15 @@ $(function () {
 
         var postdata = "patientId=" + $.trim($("#updatePatientID").val()) + "&patientType=" + $.trim($("#updatePatientType").val())
             + "&name=" + $.trim($("#updateName").val()) + "&phone=" + $.trim($("#updatePhone").val())
-            + "&openID=" + $.trim($("#updateOpenID").val()) + "&addnDoctorId=" + $.trim($("#updateAddnDoctor").val());
+            + "&openID=" + $.trim($("#updateOpenID").val()) + "&addnDoctorId=" + $.trim($("#updateAddnDoctor").val())
+            + "&createTime=" + $.trim($("#updateCreateTime").val());
         if ($.trim($("#updateEmail").val()) != "") {
             postdat = postdata + "&email=" + $.trim($("#updateEmail").val());
         } else {
             postdat = postdata + "&email=n/a";
         }
+
+
         ajax(
             {
                 method: 'POST',
@@ -104,6 +108,10 @@ function updatePatient(id) {
                             $("#updateEmail").val(data.email);
                             $("#updatePhone").val(data.phone);
                             $("#updatePatientType").val(data.patientType.patientTypeId);
+                            $("#updateAddnDoctor option:checked").attr("selected", "");
+                            var addnDoctorId = data.addnDoctorId;
+                            $("#updateAddnDoctor option[value='"+addnDoctorId+"']").attr("selected", "selected");
+                            $('#updateCreateTime').val(data.createTime);
                         }
                     }
                 );
@@ -206,16 +214,24 @@ function validUpdatePatient() {
 
     var addnDoctor = $.trim($("#updateAddnDoctor").val());
     if (addnDoctor == -1) {
+        /* addndoctor is not a required option
         $('#updateAddnDoctor').parent().addClass("has-error");
         $('#updateAddnDoctor').next().text("请选择共享医生");
         $("#updateAddnDoctor").next().show();
         flag = false;
+        */
     } else {
         $('#updateAddnDoctor').parent().removeClass("has-error");
         $('#updateAddnDoctor').next().text("");
         $("#updateAddnDoctor").next().hide();
     }
 
+    var createTime = new Date(($("#updateCreateTime").val()).replace(/-/g,"/"));
+    var curDate = new Date();
+    if (createTime >= curDate) {
+        alert("请填写正确的注册日期");
+        return false;
+    }
 
     return flag;
 }

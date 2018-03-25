@@ -15,6 +15,8 @@ import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -62,11 +64,15 @@ public class PatientManageAction extends ActionSupport {
     private String email;
     private String birthday;
     private String fileName;
-
+    private String createTime;
 
     /**
      * @param fileName the fileName to set
      */
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
@@ -283,7 +289,7 @@ public class PatientManageAction extends ActionSupport {
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
                 //过滤掉集合
-                return  name.equals("deliveryInfos") || name.equals("retrieveInfos") ||
+                return name.equals("deliveryInfos") || name.equals("retrieveInfos") ||
                         name.equals("doctor") || name.equals("addnDoctor") ||
                         name.equals("plan") || name.equals("pwd");
             }
@@ -309,9 +315,16 @@ public class PatientManageAction extends ActionSupport {
 
         if (newPatient.getAddnDoctor() != null) {
             jsonObject.put("addnDoctorName", newPatient.getAddnDoctor().getName());
+            jsonObject.put("addnDoctorId", newPatient.getAddnDoctor().getAid());
         } else {
             jsonObject.put("addnDoctorName", "N/A");
+            jsonObject.put("addnDoctorId", "-1");
         }
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(newPatient.getCreateTime());
+
+        jsonObject.put("createTime", dateString);
 
         try {
             response.getWriter().print(jsonObject);
@@ -336,17 +349,30 @@ public class PatientManageAction extends ActionSupport {
         updatePatient.setPhone(phone);
         updatePatient.setOpenID(openID);
         updatePatient.setEmail(email);
+
+        Date cday = updatePatient.getCreateTime();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            cday = format.parse(createTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        updatePatient.setCreateTime(cday);
         //设置patient的值
         PatientType type = new PatientType();
         type.setPatientTypeId(patientType);
         updatePatient.setPatientType(type);
-        if (updatePatient.getDoctor().getAid() != addnDoctorId) {
-            Doctor addnDoctor = new Doctor();
-            addnDoctor.setAid(addnDoctorId);
-            Doctor newAddndoctor = doctorService.getDoctorById(addnDoctor);
-            if (newAddndoctor != null) {
-                updatePatient.setAddnDoctor(newAddndoctor);
+        if (addnDoctorId != -1) {
+            if (updatePatient.getDoctor().getAid() != addnDoctorId) {
+                Doctor addnDoctor = new Doctor();
+                addnDoctor.setAid(addnDoctorId);
+                Doctor newAddndoctor = doctorService.getDoctorById(addnDoctor);
+                if (newAddndoctor != null) {
+                    updatePatient.setAddnDoctor(newAddndoctor);
+                }
             }
+        } else {
+            updatePatient.setAddnDoctor(null);
         }
         Patient newPatient = patientService.updatePatientInfo(updatePatient);
         int success = 0;
