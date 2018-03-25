@@ -25,6 +25,11 @@ public class RetrieveManageAction extends ActionSupport {
     private PatientService patientService;
     private AnswerService answerService;
     private ChoiceService choiceService;
+    private SurveyService surveyService;
+
+    public void setSurveyService(SurveyService surveyService) {
+        this.surveyService = surveyService;
+    }
 
     public void setRetrieveService(RetrieveService retrieveService) {
         this.retrieveService = retrieveService;
@@ -54,6 +59,16 @@ public class RetrieveManageAction extends ActionSupport {
     private int patientId;
     private int surveyId;
     private String openID;
+    private Date sendDate;
+    private Date retrieveDate;
+
+    public void setSendDate(Date sendDate) {
+        this.sendDate = sendDate;
+    }
+
+    public void setRetrieveDate(Date retrieveDate) {
+        this.retrieveDate = retrieveDate;
+    }
 
     public void setOpenID(String openID) {
         this.openID = openID;
@@ -145,38 +160,106 @@ public class RetrieveManageAction extends ActionSupport {
             DI.setDeliveryId(deliveryId);
             DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(DI);
             Date retrieveDate = new Date(System.currentTimeMillis());
-            if (deliveryInfo.getEndDate().before(retrieveDate)) {
-                success = -2;//endDate already passed
-            } else {
-                retrieveInfo.setDeliveryInfo(deliveryInfo);
-                retrieveInfo.setSurvey(deliveryInfo.getSurvey());
-                retrieveInfo.setPatient(deliveryInfo.getPatient());
-                retrieveInfo.setDoctor(deliveryInfo.getDoctor());
-                retrieveInfo.setRetrieveDate(retrieveDate);
-                Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
-                retrieveInfo.setByDoctor(doctor.getName());
+            retrieveInfo.setDeliveryInfo(deliveryInfo);
+            retrieveInfo.setSurvey(deliveryInfo.getSurvey());
+            retrieveInfo.setPatient(deliveryInfo.getPatient());
+            retrieveInfo.setDoctor(deliveryInfo.getDoctor());
+            retrieveInfo.setRetrieveDate(retrieveDate);
+            Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+            retrieveInfo.setByDoctor(doctor.getName());
 
-                Set<Answer> answers = new HashSet<Answer>();
-                for (Question question : retrieveInfo.getSurvey().getQuestions()) {
-                    Answer answer = new Answer();
-                    answer.setSurvey(retrieveInfo.getSurvey());
-                    answer.setPatient(retrieveInfo.getPatient());
-                    answer.setDoctor(doctor);
-                    answer.setRetrieveInfo(retrieveInfo);
-                    answer.setQuestion(question);
-                    if (answerService.addAnswer(answer)) {
-                        answers.add(answer);
-                    } else {
-                        success = 0;
-                        break;
-                    }
+            Set<Answer> answers = new HashSet<Answer>();
+            for (Question question : retrieveInfo.getSurvey().getQuestions()) {
+                Answer answer = new Answer();
+                answer.setSurvey(retrieveInfo.getSurvey());
+                answer.setPatient(retrieveInfo.getPatient());
+                answer.setDoctor(doctor);
+                answer.setRetrieveInfo(retrieveInfo);
+                answer.setQuestion(question);
+                if (answerService.addAnswer(answer)) {
+                    answers.add(answer);
+                } else {
+                    success = 0;
+                    break;
                 }
-
-                retrieveInfo.setAnswers(answers);
-                deliveryInfo.setState(-1);//状态改为已答卷
-                deliveryService.updateDeliveryInfo(deliveryInfo);
-                //int b = retrieveService.addRetrieveInfo(retrieveInfo);
             }
+
+            retrieveInfo.setAnswers(answers);
+            deliveryInfo.setState(-1);//状态改为已答卷
+            deliveryService.updateDeliveryInfo(deliveryInfo);
+            //int b = retrieveService.addRetrieveInfo(retrieveInfo);
+        }
+        try {
+            ServletActionContext.getResponse().getWriter().print(success);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
+
+    public String addRetrieveInfoWithoutDeliveryInfo() {
+        //add new DeliveryInfo
+        DeliveryInfo newDI = new DeliveryInfo();
+
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        newDI.setDoctor(doctor);
+
+        Survey survey = new Survey();
+        survey.setSurveyId(surveyId);
+        Survey newSurvey = surveyService.getSurveyById(survey);
+        newDI.setSurvey(newSurvey);
+
+        Patient patient = new Patient();
+        patient.setPatientId(patientId);
+        Patient newPatient = patientService.getPatientById(patient);
+        newDI.setPatient(newPatient);
+
+        newDI.setState(-1);
+        newDI.setDeliveryDate(sendDate);
+
+        int addDelivery = deliveryService.addDelivery(newDI);
+        newDI.setDeliveryId(addDelivery);
+        DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(newDI);
+        if (deliveryInfo != null) {
+            newSurvey.setNum(newSurvey.getNum() + 1);
+            surveyService.updateSurveyInfo(newSurvey);// 问卷的总发送数增加
+        }
+
+        int success = 1;
+        RetrieveInfo RI = retrieveService.getRetrieveInfoByDeliveryID(deliveryId);
+        if (RI != null) {
+            success = -1;//retrieveInfo already exists
+        } else {
+            RetrieveInfo retrieveInfo = new RetrieveInfo();
+            retrieveInfo.setDeliveryInfo(deliveryInfo);
+            retrieveInfo.setSurvey(deliveryInfo.getSurvey());
+            retrieveInfo.setPatient(deliveryInfo.getPatient());
+            retrieveInfo.setDoctor(deliveryInfo.getDoctor());
+            retrieveInfo.setRetrieveDate(retrieveDate);
+            retrieveInfo.setByDoctor(doctor.getName());
+
+            Set<Answer> answers = new HashSet<>();
+            for (Question question : retrieveInfo.getSurvey().getQuestions()) {
+                Answer answer = new Answer();
+                answer.setSurvey(retrieveInfo.getSurvey());
+                answer.setPatient(retrieveInfo.getPatient());
+                answer.setDoctor(doctor);
+                answer.setRetrieveInfo(retrieveInfo);
+                answer.setQuestion(question);
+                if (answerService.addAnswer(answer)) {
+                    answers.add(answer);
+                } else {
+                    success = 0;
+                    break;
+                }
+            }
+
+            retrieveInfo.setAnswers(answers);
+            retrieveService.addRetrieveInfo(retrieveInfo);
+            deliveryInfo.setRetrieveInfo(retrieveInfo);
+            deliveryService.updateDeliveryInfo(deliveryInfo);
         }
         try {
             ServletActionContext.getResponse().getWriter().print(success);

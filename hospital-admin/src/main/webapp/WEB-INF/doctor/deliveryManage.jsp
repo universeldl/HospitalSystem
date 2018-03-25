@@ -175,6 +175,15 @@
                     </div>
                 </form>
             </div>
+            <div name="showList">
+                <div class="grid-btn">
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#addRetrieveModal" id="btn_add"
+                            onclick="addRetrieveWithoutDeliveryInfo(<%=paramPatientId%>)"><i
+                            class="fa fa-plus"></i> 添加新答卷
+                    </button>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
@@ -556,6 +565,22 @@
                                 <option value="-1">请选择</option>
                             </select>
                             <label class="control-label" for="addRetrieveDelivery" style="display: none;"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="addDeliverySendDate" class="col-sm-3 control-label">问卷分发日期</label>
+                        <div class="col-sm-7">
+                            <input type="date" class="form-control" id="addDeliverySendDate" >
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="addDeliveryRetrieveDate" class="col-sm-3 control-label">答卷日期</label>
+                        <div class="col-sm-7">
+                            <input type="date" class="form-control" id="addDeliveryRetrieveDate" >
                         </div>
                     </div>
 
