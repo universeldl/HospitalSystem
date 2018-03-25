@@ -339,12 +339,15 @@ public class DeliveryServiceImpl implements DeliveryService {
         data.put("remark", d5);
 
         AccessTokenMgr mgr = AccessTokenMgr.getInstance();
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 
+        /*
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         StringBuffer url1 = request.getRequestURL();
         String tempContextUrl1 = url1.delete(url1.length() - request.getRequestURI().length(), url1.length()).append("/").toString();
-
         String url = tempContextUrl1 + "/hospital-wechat/doSurvey.jsp?deliveryID=" + deliveryInfo.getDeliveryId();
+        */
+
+        String url = "https://www.chjtech.top/hospital-wechat/doSurvey.jsp?deliveryID=" + deliveryInfo.getDeliveryId();
 
         return TemplateMessageMgr.sendSurveyTemplate(data, patient.getOpenID(), url, mgr);
     }
