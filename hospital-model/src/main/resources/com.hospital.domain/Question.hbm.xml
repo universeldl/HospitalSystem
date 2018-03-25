@@ -9,6 +9,9 @@
             <column name="questionId"/>
             <generator class="increment"/>
         </id>
+        <property name="sortId" type="java.lang.Integer">
+            <column name="sortId" />
+        </property>
         <property name="surveyId" type="java.lang.Integer">
             <column name="surveyId"/>
         </property>

@@ -126,6 +126,7 @@ CREATE TABLE `plan_survey` ( /*plan与survey的ManyToMany中间表*/
 
 CREATE TABLE `Question` (
   `questionId` int(11) NOT NULL AUTO_INCREMENT,
+  `sortId` int(11) NOT NULL,
   `surveyId` int(11) NOT NULL,
   `textChoice` int(1) DEFAULT 0,
   `questionContent` varchar(255) NOT NULL,
@@ -280,13 +281,13 @@ INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,
 INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2018-07-04 00:00:00",0,0,2,2,6);
 INSERT INTO deliveryInfo VALUES(7,"2018-03-02 00:00:00","2018-08-04 00:00:00",30,0,3,1,6);
 
-INSERT INTO Question VALUES(1,1,1,"第一个问题",1,6,-1, -1);
-INSERT INTO Question VALUES(2,1,0,"2nd question",2,6,3,5);
-INSERT INTO Question VALUES(3,1,1,"3rd question",1,6,-1,-1);
-INSERT INTO Question VALUES(4,1,0,"4th question",2,6,-1,-1);
-INSERT INTO Question VALUES(5,1,1,"text question",3,6,-1,-1);
-INSERT INTO Question VALUES(6,1,1,"date question1",4,6,-1,-1);
-INSERT INTO Question VALUES(7,1,1,"date question2",4,6,-1,-1);
+INSERT INTO Question VALUES(1,7,1,1,"第一个问题",1,6,-1, -1);
+INSERT INTO Question VALUES(2,6,1,0,"2nd question",2,6,3,5);
+INSERT INTO Question VALUES(3,5,1,1,"3rd question",1,6,-1,-1);
+INSERT INTO Question VALUES(4,4,1,0,"4th question",2,6,-1,-1);
+INSERT INTO Question VALUES(5,3,1,1,"text question",3,6,-1,-1);
+INSERT INTO Question VALUES(6,2,1,1,"date question1",4,6,-1,-1);
+INSERT INTO Question VALUES(7,1,1,1,"date question2",4,6,-1,-1);
 
 
 INSERT INTO Answer VALUES(1,1,1,1,1,0,"","","2016-06-14 00:00:00",6);

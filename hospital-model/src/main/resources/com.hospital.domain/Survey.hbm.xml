@@ -52,7 +52,7 @@
         </property>
 
 
-        <set name="questions" lazy="false" inverse="true" order-by="questionId asc">
+        <set name="questions" lazy="false" inverse="true" order-by="sortId asc">
             <key>
                 <column name="surveyId"></column>
             </key>

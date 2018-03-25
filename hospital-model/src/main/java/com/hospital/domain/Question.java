@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Question {
     private int questionId;
+    private int sortId;
     private int surveyId;
     private String questionContent;
     private int textChoice;
@@ -14,6 +15,14 @@ public class Question {
     //private Survey survey;
     private Set<Choice> choices = new HashSet<>();
     private List<Choice> sortedChoices;
+
+    public void setSortId(int sortId) {
+        this.sortId = sortId;
+    }
+
+    public int getSortId() {
+        return sortId;
+    }
 
     public void setStartAge(int startAge) {
         this.startAge = startAge;
