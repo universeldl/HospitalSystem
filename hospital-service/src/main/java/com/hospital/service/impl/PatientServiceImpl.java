@@ -3,6 +3,7 @@ package com.hospital.service.impl;
 import com.hospital.dao.PatientDao;
 import com.hospital.dao.PatientTypeDao;
 import com.hospital.dao.PlanDao;
+import com.hospital.dao.SurveyDao;
 import com.hospital.domain.*;
 import com.hospital.service.PatientService;
 import com.hospital.util.AgeUtils;
@@ -29,6 +30,12 @@ public class PatientServiceImpl implements PatientService {
 
     private PlanDao planDao;
 
+
+    private SurveyDao surveyDao;
+
+    public void setSurveyDao(SurveyDao surveyDao) {
+        this.surveyDao = surveyDao;
+    }
 
     public void setPlanDao(PlanDao planDao) {
         this.planDao = planDao;
@@ -400,7 +407,7 @@ public class PatientServiceImpl implements PatientService {
             int headerRow = 0;
             int headerCol = 0;
             //开始写所有随访答卷内容
-            for (Survey survey : patient.getPlan().getSurveys()) {
+            for (Survey survey : surveyDao.findAllSurveys()) {
                 row++;
                 headerCol = 0;
                 headerRow = row;

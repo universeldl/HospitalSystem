@@ -12,6 +12,22 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 
+    <bean id="patientService" class="com.hospital.service.impl.PatientServiceImpl">
+        <property name="patientDao">
+            <ref bean="patientDao"/>
+        </property>
+        <property name="planDao">
+            <ref bean="planDao"/>
+        </property>
+        <property name="surveyDao">
+            <ref bean="surveyDao"/>
+        </property>
+        <property name="patientTypeDao">
+            <ref bean="patientTypeDao"/>
+        </property>
+    </bean>
+
+
     <bean id="patientManageAction" class="com.hospital.action.PatientManageAction" scope="prototype">
         <property name="patientService">
             <ref bean="patientService"/>
