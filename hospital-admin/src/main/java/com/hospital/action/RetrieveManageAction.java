@@ -173,6 +173,8 @@ public class RetrieveManageAction extends ActionSupport {
                 }
 
                 retrieveInfo.setAnswers(answers);
+                deliveryInfo.setState(-1);//状态改为已答卷
+                deliveryService.updateDeliveryInfo(deliveryInfo);
                 //int b = retrieveService.addRetrieveInfo(retrieveInfo);
             }
         }
