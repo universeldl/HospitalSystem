@@ -397,42 +397,74 @@ public class PatientServiceImpl implements PatientService {
             row++;
 
 
+            int headerRow = 0;
+            int headerCol = 0;
             //开始写所有随访答卷内容
-            for (RetrieveInfo retrieveInfo : patient.getRetrieveInfos()) {
+            for (Survey survey : patient.getPlan().getSurveys()) {
                 row++;
+                headerCol = 0;
+                headerRow = row;
                 //构造表头
-                sheet.mergeCells(0, row, 1, row);//添加合并单元格，第一个参数是起始列，第二个参数是起始行，第三个参数是终止列，第四个参数是终止行
+                //sheet.mergeCells(0, row, 1, row);//添加合并单元格，第一个参数是起始列，第二个参数是起始行，第三个参数是终止列，第四个参数是终止行
                 WritableFont bold = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);//设置字体种类和黑体显示,字体为Arial,字号大小为10,采用黑体显示
                 WritableCellFormat titleFormate = new WritableCellFormat(bold);//生成一个单元格样式控制对象
                 titleFormate.setAlignment(jxl.format.Alignment.CENTRE);//单元格中的内容水平方向居中
                 titleFormate.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);//单元格的内容垂直方向居中
-                Label surveyTitle = new Label(0, row, retrieveInfo.getSurvey().getSurveyName(), titleFormate);
-                sheet.setRowView(0, 600, false);//设置第一行的高度
+                Label surveyTitle = new Label(0, headerRow, survey.getSurveyName(), titleFormate);
+                sheet.setRowView(headerRow, 600, false);//设置第一行的高度
                 sheet.addCell(surveyTitle);
-
-                //print retrieveDate
-                Date retrieveDate = retrieveInfo.getRetrieveDate();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String dateString = formatter.format(retrieveDate);
-                label = new Label(2, row, dateString);
-                sheet.addCell(label);
-                row++;
-
-                //构造答卷列表
-                for (Answer answer : retrieveInfo.getAnswers()) {
-                    label = new Label(0, row, answer.getQuestion().getQuestionContent());
-                    sheet.addCell(label);
-                    int col = 1;
-                    for (Choice choice : answer.getChoices()) {
-                        label = new Label(col, row, choice.getChoiceContent());
-                        sheet.addCell(label);
-                        col++;
-                    }
-                    if (answer.getTextChoice() == 1) {
-                        label = new Label(col, row, answer.getTextChoiceContent());
-                        sheet.addCell(label);
-                    }
+                //构造问题列
+                int qId = 0;
+                for (Question question : survey.getQuestions()) {
                     row++;
+                    qId++;
+                    label = new Label(0, row, qId + "." + question.getQuestionContent());
+                    sheet.addCell(label);
+                }
+                for (RetrieveInfo retrieveInfo : patient.getRetrieveInfos()) {
+                    //构造答案列
+                    if (survey.getSurveyId().equals(retrieveInfo.getSurvey().getSurveyId())) {
+                        row = headerRow;
+                        headerCol++;
+
+                        //print retrieveDate
+                        bold = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);//设置字体种类和黑体显示,字体为Arial,字号大小为10,采用黑体显示
+                        titleFormate = new WritableCellFormat(bold);//生成一个单元格样式控制对象
+                        titleFormate.setAlignment(jxl.format.Alignment.CENTRE);//单元格中的内容水平方向居中
+                        titleFormate.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);//单元格的内容垂直方向居中
+                        Date retrieveDate = retrieveInfo.getRetrieveDate();
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        String dateString = formatter.format(retrieveDate);
+                        label = new Label(headerCol, headerRow, dateString, titleFormate);
+                        sheet.addCell(label);
+                        row++;
+
+                        for (Answer answer : retrieveInfo.getAnswers()) {
+                            //label = new Label(headerCol, row, answer.getQuestion().getQuestionContent());
+                            //sheet.addCell(label);
+                            String choiceContents = "";
+                            for (Choice choice : answer.getChoices()) {
+                                if(choiceContents.equals("")) {
+                                    choiceContents = choiceContents + choice.getChoiceContent();
+                                }
+                                else {
+                                    choiceContents = choiceContents + "," + choice.getChoiceContent();
+                                }
+                            }
+                            if (answer.getTextChoice() == 1) {
+                                if(choiceContents.equals("")) {
+                                    choiceContents = choiceContents + answer.getTextChoiceContent();
+                                }
+                                else {
+                                    choiceContents = choiceContents + "," + answer.getTextChoiceContent();
+                                }
+                            }
+                            label = new Label(headerCol, row, choiceContents);
+                            sheet.addCell(label);
+                            row++;
+                        }
+                        row++;
+                    }
                 }
             }
             //结束写所有随访答卷内容
@@ -482,7 +514,7 @@ public class PatientServiceImpl implements PatientService {
             plan.setPatientType(patient.getPlan().getPatientType());
             Plan newPlan = planDao.getPlan(plan);
 
-            if(!patient.getPlan().getPlanId().equals(newPlan.getPlanId())) {
+            if (!patient.getPlan().getPlanId().equals(newPlan.getPlanId())) {
                 patient.setPlan(newPlan);
             }
             //System.out.println("plan2:" + patient.getPlan().getPlanId());
