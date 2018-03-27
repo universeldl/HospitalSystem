@@ -12,6 +12,7 @@ public class Authorization implements Serializable {
     private Integer retrieveSet;    //答卷设置权限
     private Integer forfeitSet;    //逾期设置权限
     private Integer superSet;    //超级管理权限
+    private Integer planSet;    //随访计划管理权限
     private Doctor doctor;
 
 
@@ -30,6 +31,14 @@ public class Authorization implements Serializable {
     //	this.admin = admin;
     //}
 
+
+    public Integer getPlanSet() {
+        return planSet;
+    }
+
+    public void setPlanSet(Integer planSet) {
+        this.planSet = planSet;
+    }
 
     public Integer getForfeitSet() {
         return forfeitSet;

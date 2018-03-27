@@ -39,6 +39,7 @@ CREATE TABLE `Authorization` (
   `typeSet` int(2) DEFAULT 0,
   `retrieveSet` int(2) DEFAULT 0,
   `forfeitSet` int(2) DEFAULT 0,
+  `planSet` int(2) DEFAULT 0,
   `sysSet` int(2) DEFAULT 0,
   `superSet` int(2) DEFAULT 0,
   PRIMARY KEY (`aid`),
@@ -264,10 +265,10 @@ INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatien
 INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0", "2", "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
 INSERT INTO Patient VALUES(3,"123456","测试","appid","oaBonw30UBjZkLW5rf19h7KunM7s","na",NULL,NULL,"0", "3", "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
 
-INSERT INTO Authorization VALUES(2,1,1,1,1,1,1,1,0);
-INSERT INTO Authorization VALUES(1,0,0,0,0,0,0,0,1);
-INSERT INTO Authorization VALUES(5,0,0,0,0,0,0,0,1);
-INSERT INTO Authorization VALUES(6,1,1,1,1,1,1,1,1);
+INSERT INTO Authorization VALUES(2,1,1,1,1,1,1,1,1,0);
+INSERT INTO Authorization VALUES(1,0,0,0,0,0,0,0,0,1);
+INSERT INTO Authorization VALUES(5,0,0,0,0,0,0,0,0,1);
+INSERT INTO Authorization VALUES(6,1,1,1,1,1,1,1,1,1);
 
 
 INSERT INTO survey VALUES(1,"survey1","admin",10,30, 2,"a1","aaa","2017-06-25 00:00:00",1,2,6,2, TRUE);

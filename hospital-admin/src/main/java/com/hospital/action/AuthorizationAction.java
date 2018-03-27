@@ -68,11 +68,12 @@ public class AuthorizationAction extends ActionSupport {
             if (s.equals("patientSet")) {
                 authorization.setPatientSet(1);
             }
-            if (s.equals("deliverySet")) {
-                authorization.setDeliverySet(1);
+            if (s.equals("planSet")) {
+                authorization.setPlanSet(1);
             }
             if (s.equals("retrieveSet")) {
                 authorization.setRetrieveSet(1);
+                authorization.setDeliverySet(1);
             }
             if (s.equals("forfeitSet")) {
                 authorization.setForfeitSet(1);

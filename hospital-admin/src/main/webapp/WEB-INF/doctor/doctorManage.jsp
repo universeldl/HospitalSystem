@@ -87,7 +87,7 @@
                         </ul>
                     </li>
                 </s:if>
-                <s:if test="#session.doctor.authorization.deliverySet==1">
+                <s:if test="#session.doctor.authorization.planSet==1">
                     <li class="active"><a href="javascript:;"><i class="fa fa-files-o"></i><span>随访管理</span><i
                             class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu menu-open" style="display: block;">
@@ -504,7 +504,7 @@
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">随访计划管理权限</label>
                         <div class="col-sm-7">
-                            <input type="checkbox" name="power" id="deliverySet" value="deliverySet">
+                            <input type="checkbox" name="power" id="planSet" value="planSet">
                         </div>
                     </div>
                     <div class="form-group">

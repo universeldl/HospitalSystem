@@ -88,7 +88,7 @@
                         </ul>
                     </li>
                 </s:if>
-                <s:if test="#session.doctor.authorization.deliverySet==1">
+                <s:if test="#session.doctor.authorization.planSet==1">
                     <li class="active"><a href="javascript:;"><i class="fa fa-files-o"></i><span>随访管理</span><i
                             class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu menu-open" style="display: block;">

@@ -32,7 +32,7 @@ public class PlanInterceptor implements Interceptor {
         if (obj != null && obj instanceof Doctor) {
             Doctor doctor = (Doctor) obj;
             Authorization authorization = doctor.getAuthorization();
-            if (authorization.getSysSet() == 1 || authorization.getSuperSet() == 1) {
+            if (authorization.getPlanSet() == 1 || authorization.getSuperSet() == 1) {
                 return invocation.invoke();
             }
         }

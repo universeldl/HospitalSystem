@@ -63,6 +63,9 @@ function power(id) {
                 if (data.patientSet != 0) {
                     $("#patientSet").attr("checked", "checked");
                 }
+                if (data.planSet != 0) {
+                    $("#planSet").attr("checked", "checked");
+                }
                 if (data.deliverySet != 0) {
                     $("#deliverySet").attr("checked", "checked");
                 }
