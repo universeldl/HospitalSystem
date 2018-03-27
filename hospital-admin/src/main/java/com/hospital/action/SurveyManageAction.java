@@ -236,7 +236,7 @@ public class SurveyManageAction extends ActionSupport {
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
-                return !name.equals("surveyId") && !name.equals("surveyName") ;
+                return !name.equals("surveyId") && !name.equals("surveyName");
             }
         });
 
@@ -507,6 +507,43 @@ public class SurveyManageAction extends ActionSupport {
             choiceService.deleteChoice(choice);
         }
         int success = questionService.deleteQuestion(question);
+        try {
+            ServletActionContext.getResponse().getWriter().print(success);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
+
+    /**
+     * 问题排序
+     *
+     * @return
+     */
+    public String sortQuestion() {
+        ActionContext ctx = ActionContext.getContext();
+        HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+        Map<String, String[]> pMap = request.getParameterMap();
+        int success = 1;
+        int idx = 1;
+        for (String[] value : pMap.values()) {
+            if (idx == 2) {
+                for (int i = 1; i < value.length; i++) {//i increase from [1] since [0] is ""(table header).
+                    Question question = new Question();
+                    question.setQuestionId(Integer.parseInt(value[i]));
+                    Question sortQuestion = questionService.getQuestionById(question);
+                    sortQuestion.setSortId(i);
+                    Question newQuestion = questionService.updateQuestionInfo(sortQuestion);  //update question
+                    if (newQuestion == null) {
+                        success = 0;
+                    }
+                }
+            }
+            idx++;
+        }
+
         try {
             ServletActionContext.getResponse().getWriter().print(success);
         } catch (IOException e) {

@@ -33,6 +33,8 @@
     <script src="${pageContext.request.contextPath}/js/doctorUpdatePwd.js"></script>
 
     <!-- add specific js in here -->
+    <script src="${pageContext.request.contextPath}/js/jquery.tablednd_0_5.js"></script>
+    <script src="${pageContext.request.contextPath}/js/sortQuestion.js"></script>
     <script src="${pageContext.request.contextPath}/js/addQuestion.js"></script>
     <script src="${pageContext.request.contextPath}/js/updateQuestion.js"></script>
     <script src="${pageContext.request.contextPath}/js/deleteQuestion.js"></script>
@@ -265,63 +267,67 @@
 
                         <!---在此插入信息-->
                         <s:if test="#request.survey.questions!=null">
+                            <tbody>
                             <s:iterator value="#request.survey.questions" var="question">
-                                <tbody>
-                                <td><s:property value="#question.questionContent"/></td>
-                                <td>
-                                    <s:if test="#question.questionType== 1">
-                                        多选题
-                                    </s:if>
-                                    <s:elseif test="#question.questionType== 2">
-                                        单选题
-                                    </s:elseif>
-                                    <s:elseif test="#question.questionType== 3">
-                                        问答题
-                                    </s:elseif>
-                                    <s:elseif test="#question.questionType== 4">
-                                        问答题(日期）
-                                    </s:elseif>
-                                </td>
-                                <td>
-                                    <s:if test="#question.startAge==-1">
-                                        N/A
-                                    </s:if>
-                                    <s:else>
-                                        <s:property value="#question.startAge"/>
-                                    </s:else>
-                                </td>
-                                <td>
-                                    <s:if test="#question.endAge==-1">
-                                        N/A
-                                    </s:if>
-                                    <s:else>
-                                        <s:property value="#question.endAge"/>
-                                    </s:else>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
-                                            data-target="#findModal"
-                                            onclick="getQuestionInfo(<s:property value="#question.questionId"/>)">查看
-                                    </button>
-                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
-                                            data-target="#updateModal" id="btn_update"
-                                            onclick="updateQuestion(<s:property value="#request.survey.surveyId"/>,
-                                                <s:property value="#question.questionId"/>)">修改
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs"
-                                            onclick="deleteQuestion(<s:property value="#question.questionId"/>)">删除
-                                    </button>
-                                </td>
-                                </tbody>
+                                <tr id="<s:property value="#question.questionId"/>">
+                                    <td><s:property value="#question.questionContent"/></td>
+                                    <td>
+                                        <s:if test="#question.questionType== 1">
+                                            多选题
+                                        </s:if>
+                                        <s:elseif test="#question.questionType== 2">
+                                            单选题
+                                        </s:elseif>
+                                        <s:elseif test="#question.questionType== 3">
+                                            问答题
+                                        </s:elseif>
+                                        <s:elseif test="#question.questionType== 4">
+                                            问答题(日期）
+                                        </s:elseif>
+                                    </td>
+                                    <td>
+                                        <s:if test="#question.startAge==-1">
+                                            N/A
+                                        </s:if>
+                                        <s:else>
+                                            <s:property value="#question.startAge"/>
+                                        </s:else>
+                                    </td>
+                                    <td>
+                                        <s:if test="#question.endAge==-1">
+                                            N/A
+                                        </s:if>
+                                        <s:else>
+                                            <s:property value="#question.endAge"/>
+                                        </s:else>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
+                                                data-target="#findModal"
+                                                onclick="getQuestionInfo(<s:property value="#question.questionId"/>)">查看
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
+                                                data-target="#updateModal" id="btn_update"
+                                                onclick="updateQuestion(<s:property value="#request.survey.surveyId"/>,
+                                                    <s:property value="#question.questionId"/>)">修改
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-xs"
+                                                onclick="deleteQuestion(<s:property value="#question.questionId"/>)">删除
+                                        </button>
+                                    </td>
+                                </tr>
                             </s:iterator>
+                            </tbody>
                         </s:if>
                         <s:else>
                             <tbody>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
-                            <td>暂无数据</td>
+                            <tr>
+                                <td>暂无数据</td>
+                                <td>暂无数据</td>
+                                <td>暂无数据</td>
+                                <td>暂无数据</td>
+                                <td>暂无数据</td>
+                            </tr>
                             </tbody>
                         </s:else>
 
@@ -561,11 +567,11 @@
                         <button type="button" class="btn btn-pinterest" onclick="updateTextDisplay()" id="update3"><i
                                 class="fa fa-plus"></i> 问答题
                         </button>
-                        <button type="button" class="btn btn-pinterest" onclick="updateTextDateDisplay()" id="update4"><i
-                                class="fa fa-plus"></i> 问答题（日期）
+                        <button type="button" class="btn btn-pinterest" onclick="updateTextDateDisplay()" id="update4">
+                            <i
+                                    class="fa fa-plus"></i> 问答题（日期）
                         </button>
                     </div>
-
 
 
                     <div class="form-group">
