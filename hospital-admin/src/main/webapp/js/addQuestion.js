@@ -20,8 +20,12 @@ $(function () {
         }
 
         var postdata;
+
+        var questionContent = $.trim($("#addQuestionContent").val());
+        questionContent = removeSpetialChar(questionContent);
+
         if (questionType == 1 || questionType == 2) {
-            postdata = "questionType=" + questionType + "&questionContent=" + $.trim($("#addQuestionContent").val())
+            postdata = "questionType=" + questionType + "&questionContent=" + questionContent
                 + "&surveyId=" + surveyId + "&textChoice=" + textChoice;
             if ($.trim($("#addStartAge").val()) != "" &&  $.trim($("#addEndAge").val()) != "") {
                 postdata = postdata + "&startAge=" + $.trim($("#addStartAge").val())
@@ -32,7 +36,7 @@ $(function () {
             postdata = postdata + "&" + $("#addForm").serialize();
         }
         else if (questionType == 3 || questionType == 4) {
-            postdata = "questionType=" + questionType + "&surveyId=" + surveyId + "&textChoice=0" + "&questionContent=" + $.trim($("#addQuestionContent").val());
+            postdata = "questionType=" + questionType + "&surveyId=" + surveyId + "&textChoice=0" + "&questionContent=" + questionContent;
             if ($.trim($("#addStartAge").val()) != "" && $.trim($("#addEndAge").val()) != "") {
                 postdata = postdata + "&startAge=" + $.trim($("#addStartAge").val())
                     + "&endAge=" + $.trim($("#addEndAge").val());
@@ -252,3 +256,9 @@ function showInfo(msg) {
 }
 
 
+function removeSpetialChar(str) {
+    str = str.replace(/%/g, "%25");
+    str = str.replace(/\&/g, "%26");
+    str = str.replace(/\+/g, "%2B");
+    return str;
+}

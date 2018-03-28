@@ -506,6 +506,7 @@ public class SurveyManageAction extends ActionSupport {
         for (Choice choice : question.getChoices()) {
             choiceService.deleteChoice(choice);
         }
+        question.getChoices().clear();
         int success = questionService.deleteQuestion(question);
         try {
             ServletActionContext.getResponse().getWriter().print(success);
