@@ -4,7 +4,7 @@ public class Choice {
     private int choiceId;
     //private int questionId;
     //private int answerId;
-    private int score;
+    private float score;
     //private int surveyId;
     private String choiceContent;
     private int aid;
@@ -30,11 +30,11 @@ public class Choice {
 
     //public void setAnswerId(int answerId) { this.answerId = answerId; }
 
-    public int getScore() {
+    public float getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(float score) {
         this.score = score;
     }
 
@@ -80,7 +80,7 @@ public class Choice {
     public Choice() {
     }
 
-    public Choice(int aid, /*int surveyId, int questionId, */ String choiceContent, int score) {
+    public Choice(int aid, /*int surveyId, int questionId, */ String choiceContent, float score) {
         super();
         this.aid = aid;
         //this.surveyId = surveyId;

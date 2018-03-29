@@ -235,7 +235,7 @@ function validAddQuestion() {
             }
             else if (isNaN(parseInt(tmp)) || parseInt(tmp) < 0 || parseInt(tmp) > 99) {
                 $(this).parent().addClass("has-error");
-                $(this).next().text("分数必须为0～99之间的正整数");
+                $(this).next().text("分数必须为0～99之间的正数");
                 $(this).next().show();
                 flag = false;
             } else {

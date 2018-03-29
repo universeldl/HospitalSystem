@@ -312,7 +312,7 @@ public class SurveyManageAction extends ActionSupport {
 
         if (questionType == 1 || questionType == 2) {  //is a selection question
             List<String> choices = new ArrayList<>();
-            List<Integer> scores = new ArrayList<>();
+            List<Float> scores = new ArrayList<>();
             ActionContext ctx = ActionContext.getContext();
             HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
             Map<String, String[]> pMap = request.getParameterMap();
@@ -324,7 +324,7 @@ public class SurveyManageAction extends ActionSupport {
                     if (idx % 2 == 0) {
                         choices.add(value[0]);
                     } else {
-                        scores.add(Integer.parseInt(value[0]));
+                        scores.add(Float.parseFloat(value[0]));
                     }
                     idx++;
                 }
@@ -447,7 +447,7 @@ public class SurveyManageAction extends ActionSupport {
 
         if (questionType == 1 || questionType == 2) {  //is a selection question
             List<String> choices = new ArrayList<>();
-            List<Integer> scores = new ArrayList<>();
+            List<Float> scores = new ArrayList<>();
             ActionContext ctx = ActionContext.getContext();
             HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
             Map<String, String[]> pMap = request.getParameterMap();
@@ -459,7 +459,7 @@ public class SurveyManageAction extends ActionSupport {
                     if (idx % 2 == 1) {
                         choices.add(value[0]);
                     } else {
-                        scores.add(Integer.parseInt(value[0]));
+                        scores.add(Float.parseFloat(value[0]));
                     }
                     idx++;
                 }

@@ -15,7 +15,7 @@
         <property name="answerId" type="java.lang.Integer">
             <column name="answerId"/>
         </property>-->
-        <property name="score" type="java.lang.Integer">
+        <property name="score" type="java.lang.Float">
             <column name="score"/>
         </property>
         <!--    <property name="surveyId" type="java.lang.Integer">

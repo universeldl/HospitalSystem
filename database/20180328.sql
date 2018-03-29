@@ -99,7 +99,7 @@ DROP TABLE IF EXISTS `Choice`;
 CREATE TABLE `Choice` (
   `choiceId` int(11) NOT NULL AUTO_INCREMENT,
   `questionId` int(11) DEFAULT '0',
-  `score` int(11) NOT NULL,
+  `score` FLOAT(5,2) NOT NULL,
   `choiceContent` varchar(255) NOT NULL,
   `choiceImgPath` varchar(255) DEFAULT NULL,
   `aid` int(11) NOT NULL,

@@ -167,7 +167,7 @@ public class surveyAction extends ActionSupport {
             return ERROR;
         }
 
-        int score = 0;
+        float score = 0;
 
         DeliveryInfo tmpDelevery = new DeliveryInfo();
         tmpDelevery.setDeliveryId(Integer.valueOf(deliveryID));
