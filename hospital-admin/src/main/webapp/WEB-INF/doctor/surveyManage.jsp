@@ -31,6 +31,7 @@
 
     <script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap-dropdown.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
 
     <script src="${pageContext.request.contextPath}/ajax-lib/ajaxutils.js"></script>
     <script src="${pageContext.request.contextPath}/js/doctorUpdateInfo.js"></script>

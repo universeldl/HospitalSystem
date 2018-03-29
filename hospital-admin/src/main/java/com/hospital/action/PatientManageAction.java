@@ -235,25 +235,34 @@ public class PatientManageAction extends ActionSupport {
 
         //calculate total numbers for each month in last 12 months
         Integer[] total = new Integer[12];
-        total[11] = patientService.getPatientsByDoctor(doctor).size();
-        for (int s = 11; s > 0; s--) {
-            total[s - 1] = total[s] - additions[s];
-        }
-
-        //calculate units and add-on's for additions and total
-        Integer units1 = (getMax(additions) / 100 + 1) * 100;
-        Integer addon1 = units1 / 5;
-        Integer units2 = (total[11] / 100 + 1) * 100;
-        Integer addon2 = units2 / 5;
 
         Integer male = 0, female = 0;
-        List<Patient> allPatients = patientService.getPatientsByDoctor(doctor);
+        Integer units1 = 0;
+        Integer addon1 = 0;
+        Integer units2 = 0;
+        Integer addon2 = 0;
 
-        for (Patient p : allPatients) {
-            if (p.getSex() == 1)
-                male++;
-            else
-                female++;
+        List<Patient> patients = patientService.getPatientsByDoctor(doctor);
+        if (patients != null) {
+            total[11] = patients.size();
+            for (int s = 11; s > 0; s--) {
+                total[s - 1] = total[s] - additions[s];
+            }
+
+            //calculate units and add-on's for additions and total
+            units1 = (getMax(additions) / 100 + 1) * 100;
+            addon1 = units1 / 5;
+            units2 = (total[11] / 100 + 1) * 100;
+            addon2 = units2 / 5;
+
+            List<Patient> allPatients = patientService.getPatientsByDoctor(doctor);
+
+            for (Patient p : allPatients) {
+                if (p.getSex() == 1)
+                    male++;
+                else
+                    female++;
+            }
         }
 
         JSONObject jsonObject = new JSONObject();

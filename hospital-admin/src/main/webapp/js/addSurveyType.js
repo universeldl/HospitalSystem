@@ -12,7 +12,7 @@ $(function () {
             return;
         }
 
-        var postdata = "typeName=" + $.trim($("#addSurveyTypeName").val());
+        var postdata = "typeName=" + replaceSpectialChar($.trim($("#addSurveyTypeName").val()));
         $('#loading').show();
         ajax(
             {

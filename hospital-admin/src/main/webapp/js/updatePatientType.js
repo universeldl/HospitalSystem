@@ -13,7 +13,7 @@ $(function () {
         }
 
         var postdata = "id=" + $.trim($("#patientTypeId").val())
-            + "&patientTypeName=" + $.trim($("#patientTypeName").val());
+            + "&patientTypeName=" + replaceSpectialChar($.trim($("#patientTypeName").val()));
         $('#loading').show();
         ajax(
             {

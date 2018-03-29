@@ -21,10 +21,11 @@
     </style>
 
 
-    <script src="./ajax-lib/ajaxutils.js"></script>
-    <script src="./jQuery/jquery-3.1.1.min.js"></script>
-    <script src="./js/zepto.min.js"></script>
-    <script src="./js/survey.js"></script>
+    <script src="./ajax-lib/ajaxutils.js"/>
+    <script src="./jQuery/jquery-3.1.1.min.js"/>
+    <script src="./js/zepto.min.js"/>
+    <script src="./js/survey.js"/>
+    <script src="./js/common.js"/>
 </head>
 <body ontouchstart>
 

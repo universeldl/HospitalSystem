@@ -22,7 +22,7 @@ $(function () {
         var postdata;
 
         var questionContent = $.trim($("#addQuestionContent").val());
-        questionContent = removeSpetialChar(questionContent);
+        questionContent = replaceSpectialChar(questionContent);
 
         if (questionType == 1 || questionType == 2) {
             postdata = "questionType=" + questionType + "&questionContent=" + questionContent
@@ -255,10 +255,11 @@ function showInfo(msg) {
     $("#modal_info").modal('show');
 }
 
-
+/*
 function removeSpetialChar(str) {
     str = str.replace(/%/g, "%25");
     str = str.replace(/\&/g, "%26");
     str = str.replace(/\+/g, "%2B");
     return str;
 }
+    */

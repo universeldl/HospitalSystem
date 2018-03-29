@@ -287,7 +287,9 @@ function submit(to) {
     });
     $("textarea").each(function(){
         if ($(this).val() != "") {
-            postdata = postdata + $(this).attr("id") + "=" + $(this).val() + "&";
+            var text = $(this).val();
+            text = replaceSpectialChar(text);
+            postdata = postdata + $(this).attr("id") + "=" + text + "&";
         }
     });
 

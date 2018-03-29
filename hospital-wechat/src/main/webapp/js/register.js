@@ -4,7 +4,7 @@ function registerSubmit() {
     }
     showLoadingToast("提交中...");
 
-    var postdata = "username=" + $.trim($("#username").val());
+    var postdata = "username=" + replaceSpectialChar($.trim($("#username").val()));
     postdata = postdata + "&tel=" + $.trim($("#tel").val());
     postdata = postdata + "&sex=" + $.trim($("#sex option:selected").val());
     postdata = postdata + "&typeID=" + $.trim($("#patientType option:selected").val());

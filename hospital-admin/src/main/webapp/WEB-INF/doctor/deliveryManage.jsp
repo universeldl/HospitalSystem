@@ -36,6 +36,7 @@
     <script src="${pageContext.request.contextPath}/ajax-lib/ajaxutils.js"></script>
     <script src="${pageContext.request.contextPath}/js/doctorUpdateInfo.js"></script>
     <script src="${pageContext.request.contextPath}/js/doctorUpdatePwd.js"></script>
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
 
     <!-- add specific js in here -->
     <script src="${pageContext.request.contextPath}/js/getDeliveryInfo.js"></script>

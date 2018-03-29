@@ -2,6 +2,7 @@
  * ajax提交添加医生的信息
  * @param {Object} '#addDoctor'
  */
+
 $(function () {
 
 
@@ -10,11 +11,10 @@ $(function () {
         if (!validAddDoctor()) {
             return;
         }
-        var postdata = "username=" + $.trim($("#addUsername").val())
+        var postdata = "username=" + replaceSpectialChar($.trim($("#addUsername").val()))
             + "&name=" + $.trim($("#addName").val())
             + "&phone=" + $.trim($("#addPhone").val())
             + "&hospitalId=" + $.trim($("#addHospital").val());
-
         $('#loading').show();
         ajax(
             {

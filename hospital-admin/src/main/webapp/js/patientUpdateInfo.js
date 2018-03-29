@@ -9,7 +9,8 @@ $(function () {
             return;
         }
 
-        var postdata = "name=" + $.trim($("#name").val()) + "&phone=" + $.trim($("#phone").val()) + "&email=" + $.trim($("#email").val());
+        var postdata = "name=" + replaceSpectialChar($.trim($("#name").val()))
+            + "&phone=" + $.trim($("#phone").val()) + "&email=" + $.trim($("#email").val());
         ajax(
             {
                 method: 'POST',

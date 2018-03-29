@@ -8,12 +8,17 @@ $(function () {
             return;
         }
 
-        var postdata = "surveyId=" + surveyId + "&surveyName=" + $.trim($("#updateSurveyName").val()) + "&surveyTypeId=" + $.trim($("#updateSurveyType").val())
-            + "&frequency=" + $.trim($("#updateFrequency").val()) + "&author=" + $.trim($("#updateAuthor").val())
-            + "&times=" + $.trim($("#updateTimes").val()) + "&department=" + $.trim($("#updateDepartment").val())
+        var postdata = "surveyId=" + surveyId
+            + "&surveyName=" + replaceSpectialChar($.trim($("#updateSurveyName").val()))
+            + "&surveyTypeId=" + $.trim($("#updateSurveyType").val())
+            + "&frequency=" + $.trim($("#updateFrequency").val())
+            + "&author=" + replaceSpectialChar($.trim($("#updateAuthor").val()))
+            + "&times=" + $.trim($("#updateTimes").val())
+            + "&department=" + replaceSpectialChar($.trim($("#updateDepartment").val()))
             + "&bday=" + $.trim($("#updateBday").val())
             + "&sendOnRegister=" + $.trim($("#updateSendOnRegister").val())
-            + "&description=" + $.trim($("#updateDescription").val());
+            + "&description=" + replaceSpectialChar($.trim($("#updateDescription").val()));
+        //alert(postdata);
         $('#loading').show();
         ajax(
             {

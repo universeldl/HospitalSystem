@@ -46,6 +46,7 @@
     <script src="${pageContext.request.contextPath}/js/getPatientSummary.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/jQuery/ajaxfileupload.js"></script>
     <script src="${pageContext.request.contextPath}/js/ajax_upload.js"></script>
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
 
     <script src="${pageContext.request.contextPath}/js/batchAddPatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/exportPatient.js"></script>

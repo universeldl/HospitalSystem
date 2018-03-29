@@ -12,8 +12,9 @@ $(function () {
             return;
         }
 
-        var postdata = "id=" + $.trim($("#updateId").val()) + "&username=" + $.trim($("#updateUsername").val())
-            + "&name=" + $.trim($("#updateName").val())
+        var postdata = "id=" + $.trim($("#updateId").val())
+            + "&username=" + replaceSpectialChar($.trim($("#updateUsername").val()))
+            + "&name=" + replaceSpectialChar($.trim($("#updateName").val()))
             + "&phone=" + $.trim($("#updatePhone").val())
             + "&hospitalId=" + $.trim($("#updateHospital").val());
         $('#loading').show();

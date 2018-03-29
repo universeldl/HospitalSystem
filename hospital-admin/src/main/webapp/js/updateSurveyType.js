@@ -12,7 +12,8 @@ $(function () {
             return;
         }
 
-        var postdata = "id=" + $.trim($("#updateSurveyTypeId").val()) + "&typeName=" + $.trim($("#updateSurveyTypeName").val());
+        var postdata = "id=" + $.trim($("#updateSurveyTypeId").val())
+            + "&typeName=" + replaceSpectialChar($.trim($("#updateSurveyTypeName").val()));
         $('#loading').show();
         ajax(
             {

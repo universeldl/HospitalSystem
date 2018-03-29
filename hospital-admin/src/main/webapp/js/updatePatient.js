@@ -13,7 +13,7 @@ $(function () {
         }
 
         var postdata = "patientId=" + $.trim($("#updatePatientID").val()) + "&patientType=" + $.trim($("#updatePatientType").val())
-            + "&name=" + $.trim($("#updateName").val()) + "&phone=" + $.trim($("#updatePhone").val())
+            + "&name=" + replaceSpectialChar($.trim($("#updateName").val())) + "&phone=" + $.trim($("#updatePhone").val())
             + "&openID=" + $.trim($("#updateOpenID").val()) + "&addnDoctorId=" + $.trim($("#updateAddnDoctor").val())
             + "&createTime=" + $.trim($("#updateCreateTime").val()) + "&doctorId=" + $.trim($("#updateDoctor").val());
         if ($.trim($("#updateEmail").val()) != "") {
@@ -158,11 +158,13 @@ function validUpdatePatient() {
         $('#updateName').next().text("请输入真实姓名");
         $("#updateName").next().show();
         flag = false;
+        /*
     } else if (!reg.test(name)) {
         $('#updateName').parent().addClass("has-error");
         $('#updateName').next().text("真实姓名必须为中文");
         $("#updateName").next().show();
         flag = false;
+        */
     } else {
         $('#updateName').parent().removeClass("has-error");
         $('#updateName').next().text("");

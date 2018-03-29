@@ -7,7 +7,9 @@ $(function () {
             return;
         }
 
-        var postdata = "oldPwd=" + $.trim($("#oldPwd").val()) + "&newPwd=" + $.trim($("#newPwd").val()) + "&confirmPwd=" + $.trim($("#confirmPwd").val());
+        var postdata = "oldPwd=" + replaceSpectialChar($.trim($("#oldPwd").val()))
+            + "&newPwd=" + replaceSpectialChar($.trim($("#newPwd").val()))
+            + "&confirmPwd=" + replaceSpectialChar($.trim($("#confirmPwd").val()));
         ajax(
             {
                 method: 'POST',

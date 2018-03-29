@@ -46,7 +46,9 @@ function updateQuestion(sid, qid) {
                 else if (data.questionType == 3) {
                     updateTextDisplay();
                 }
-
+                else if (data.questionType == 4) {
+                    updateTextDateDisplay();
+                }
                 var str = '';
                 $("#updateChoicesDiv").nextUntil("p").each(function () {//clean first
                     $(this).outerHTML = '';
@@ -89,12 +91,10 @@ $(function () {
             return;
         }
 
-        var quesitonContent = $.trim($("#updateQuestionContent").val());
-        quesitonContent = removeSpetialChar(quesitonContent);
-        //alert(quesitonContent);
         var postdata;
         if (questionType == 1 || questionType == 2) {
-            postdata = "questionType=" + questionType + "&questionContent=" + quesitonContent
+            postdata = "questionType=" + questionType
+                + "&questionContent=" + replaceSpectialChar($.trim($("#updateQuestionContent").val()))
                 + "&surveyId=" + surveyId + "&textChoice=" + updateTextChoice + "&questionId=" + questionId;
             if ($.trim($("#updateStartAge").val()) != "" && $.trim($("#updateEndAge").val()) != "") {
                 postdata = postdata + "&startAge=" + $.trim($("#updateStartAge").val())
@@ -112,7 +112,7 @@ $(function () {
         */
         else if (questionType == 3 || questionType == 4) {
             postdata = "questionType=" + questionType + "&surveyId=" + surveyId + "&questionId=" + questionId + "&textChoice=0"
-                + "&questionContent=" + quesitonContent;
+                + "&questionContent=" + replaceSpectialChar($.trim($("#updateQuestionContent").val()));
             if ($.trim($("#updateStartAge").val()) != "" && $.trim($("#updateEndAge").val()) != "") {
                 postdata = postdata + "&startAge=" + $.trim($("#updateStartAge").val())
                     + "&endAge=" + $.trim($("#updateEndAge").val());
@@ -193,13 +193,6 @@ function updateTextDisplay() {
     $("#update3").addClass("btn btn-primary");
     $("#update4").removeClass();
     $("#update4").addClass("btn btn-pinterest");
-}
-
-function removeSpetialChar(str) {
-    str = str.replace(/%/g, "%25");
-    str = str.replace(/\&/g, "%26");
-    str = str.replace(/\+/g, "%2B");
-    return str;
 }
 
 function updateTextDateDisplay() {

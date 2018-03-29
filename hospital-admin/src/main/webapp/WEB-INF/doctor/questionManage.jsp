@@ -39,6 +39,8 @@
     <script src="${pageContext.request.contextPath}/js/updateQuestion.js"></script>
     <script src="${pageContext.request.contextPath}/js/deleteQuestion.js"></script>
     <script src="${pageContext.request.contextPath}/js/getQuestionInfo.js"></script>
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
+
     <!-- add specific js in here -->
 
     <script src="${pageContext.request.contextPath}/js/app.js"></script>

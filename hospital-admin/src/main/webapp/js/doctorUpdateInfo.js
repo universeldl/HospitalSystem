@@ -13,7 +13,8 @@ $(function () {
             return;
         }
 
-        var postdata = "username=" + $.trim($("#username").val()) + "&name=" + $.trim($("#name").val()) + "&phone=" + $.trim($("#phone").val());
+        var postdata = "username=" + replaceSpectialChar($.trim($("#username").val()))
+            + "&name=" + replaceSpectialChar($.trim($("#name").val())) + "&phone=" + $.trim($("#phone").val());
         $('#loading').show();
         ajax(
             {

@@ -7,7 +7,8 @@ $(function () {
         }
 
 
-        var postdata = "openID=" + $.trim($("#username").val()) + "&pwd=" + $.trim($("#password").val());
+        var postdata = "openID=" + replaceSpectialChar($.trim($("#username").val()))
+            + "&pwd=" + replaceSpectialChar($.trim($("#password").val()));
         ajax(
             {
                 method: 'POST',

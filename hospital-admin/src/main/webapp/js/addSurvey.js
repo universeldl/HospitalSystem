@@ -8,9 +8,11 @@ $(function () {
             return;
         }
 
-        var postdata = "surveyName=" + $.trim($("#addSurveyName").val()) + "&author=" + $.trim($("#addAuthor").val())
-            + "&frequency=" + $.trim($("#addFrequency").val()) + "&department=" + $.trim($("#addDepartment").val())
-            + "&description=" + $.trim($("#addDescription").val())
+        var postdata = "surveyName=" + replaceSpectialChar($.trim($("#addSurveyName").val()))
+            + "&author=" + replaceSpectialChar($.trim($("#addAuthor").val()))
+            + "&frequency=" + $.trim($("#addFrequency").val())
+            + "&department=" + replaceSpectialChar($.trim($("#addDepartment").val()))
+            + "&description=" + replaceSpectialChar($.trim($("#addDescription").val()))
             + "&sendOnRegister=" + $.trim($("#addSendOnRegister").val())
             + "&bday=" + $.trim($("#addBday").val())
             + "&times=" + $.trim($("#addTimes").val()) + "&surveyTypeId=" + $.trim($("#addSurveyType").val());

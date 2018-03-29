@@ -1,3 +1,5 @@
+/*obsolated*/
+
 window.onload = new function () {
     $('#loading').show();
     ajax(
