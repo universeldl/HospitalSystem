@@ -1,10 +1,12 @@
 package com.hospital.domain;
 
+import java.math.BigDecimal;
+
 public class Choice {
     private int choiceId;
     //private int questionId;
     //private int answerId;
-    private float score;
+    private BigDecimal score;
     //private int surveyId;
     private String choiceContent;
     private int aid;
@@ -30,11 +32,11 @@ public class Choice {
 
     //public void setAnswerId(int answerId) { this.answerId = answerId; }
 
-    public float getScore() {
+    public BigDecimal getScore() {
         return score;
     }
 
-    public void setScore(float score) {
+    public void setScore(BigDecimal score) {
         this.score = score;
     }
 
@@ -80,7 +82,7 @@ public class Choice {
     public Choice() {
     }
 
-    public Choice(int aid, /*int surveyId, int questionId, */ String choiceContent, float score) {
+    public Choice(int aid, /*int surveyId, int questionId, */ String choiceContent, BigDecimal score) {
         super();
         this.aid = aid;
         //this.surveyId = surveyId;

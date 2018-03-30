@@ -232,13 +232,13 @@ function validAddQuestion() {
                 $(this).next().text("分数不能为空");
                 $(this).next().show();
                 flag = false;
-            }
+            }/*
             else if (isNaN(parseInt(tmp)) || parseInt(tmp) < 0 || parseInt(tmp) > 99) {
                 $(this).parent().addClass("has-error");
                 $(this).next().text("分数必须为0～99之间的正数");
                 $(this).next().show();
                 flag = false;
-            } else {
+            } */ else {
                 $(this).parent().removeClass("has-error");
                 $(this).next().text("");
                 $(this).next().hide();

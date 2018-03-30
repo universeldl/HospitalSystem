@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -312,7 +313,7 @@ public class SurveyManageAction extends ActionSupport {
 
         if (questionType == 1 || questionType == 2) {  //is a selection question
             List<String> choices = new ArrayList<>();
-            List<Float> scores = new ArrayList<>();
+            List<BigDecimal> scores = new ArrayList<>();
             ActionContext ctx = ActionContext.getContext();
             HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
             Map<String, String[]> pMap = request.getParameterMap();
@@ -324,7 +325,7 @@ public class SurveyManageAction extends ActionSupport {
                     if (idx % 2 == 0) {
                         choices.add(value[0]);
                     } else {
-                        scores.add(Float.parseFloat(value[0]));
+                        scores.add(new BigDecimal(value[0]));
                     }
                     idx++;
                 }
@@ -447,7 +448,7 @@ public class SurveyManageAction extends ActionSupport {
 
         if (questionType == 1 || questionType == 2) {  //is a selection question
             List<String> choices = new ArrayList<>();
-            List<Float> scores = new ArrayList<>();
+            List<BigDecimal> scores = new ArrayList<>();
             ActionContext ctx = ActionContext.getContext();
             HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
             Map<String, String[]> pMap = request.getParameterMap();
@@ -459,7 +460,7 @@ public class SurveyManageAction extends ActionSupport {
                     if (idx % 2 == 1) {
                         choices.add(value[0]);
                     } else {
-                        scores.add(Float.parseFloat(value[0]));
+                        scores.add(new BigDecimal(value[0]));
                     }
                     idx++;
                 }

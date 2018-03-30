@@ -192,7 +192,7 @@ CREATE TABLE `Answer` (
 CREATE TABLE `Choice` (
   `choiceId` int(11) NOT NULL AUTO_INCREMENT,
   `questionId` int(11) DEFAULT 0,
-  `score` FLOAT(5,2) NOT NULL,
+  `score` decimal(8,2) NOT NULL,
   `choiceContent` varchar(255) NOT NULL,
   `choiceImgPath` varchar(255) DEFAULT NULL,
   `aid` int(11) NOT NULL,

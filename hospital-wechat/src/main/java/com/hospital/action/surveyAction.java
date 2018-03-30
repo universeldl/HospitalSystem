@@ -13,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -167,7 +168,7 @@ public class surveyAction extends ActionSupport {
             return ERROR;
         }
 
-        float score = 0;
+        BigDecimal score = new BigDecimal("0");
 
         DeliveryInfo tmpDelevery = new DeliveryInfo();
         tmpDelevery.setDeliveryId(Integer.valueOf(deliveryID));
@@ -222,7 +223,7 @@ public class surveyAction extends ActionSupport {
                     Choice choice = choiceService.getChoiceById(tmpChoice);
                     if (choice != null) {
                         choiceset.add(choice);
-                        score += choice.getScore();
+                        score.add(choice.getScore());
                     }
                 }
 
@@ -299,7 +300,7 @@ public class surveyAction extends ActionSupport {
         json.put("success", i);
 
         if (survey.getSurveyName().equals("TRACK儿童呼吸和哮喘控制测试")) {
-            if (score >= 80) {
+            if (score.compareTo(new BigDecimal("80")) >= 0) {
                 json.put("msg", "本次TRACK测试评分为"+score+"分，<br/>恭喜您，您孩子的呼吸问题似乎得到了控制。");
             } else {
                 json.put("msg", "本次TRACK测试评分为"+score+"分，<br/>您孩子的呼吸问题可能未得到控制。");
