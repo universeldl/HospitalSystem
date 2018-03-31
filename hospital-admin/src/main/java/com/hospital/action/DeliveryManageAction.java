@@ -131,8 +131,22 @@ public class DeliveryManageAction extends ActionSupport {
         // arr is a 2-D array of {surveyId-questionId}.
         // If questionId==-1, will output total scores of this survey
         // If questionId>0, will output the answers of this specified question
-        int[][] arr = {{1, 1}, {1, -1}};//answers for 1st question of survey1; total score for survey1
-        String[] titles = {"这是问题1", "看看总分是多少"};
+        /*
+        int[][] arr = {{4, 112}, {4, 113},{1,-1},{6,-1},{5, -1},
+                {4,121},{4, 122},{4,123},{4,124},
+                {4,125},{4,177},{4,126},{4,127}};//answers for 1st question of survey1; total score for survey1
+
+        String[] titles = {
+        "哮喘发作次数", "感染次数","TRACK儿童呼吸和哮喘控制测试总分","哮喘控制测试评分总分","生命质量随访问卷总分",
+        "在过去4周内，您的孩子白天出现哮喘症状（持续几分钟）是否多于1次/周？","在过去4周内，您的孩子是否有因哮喘而出现至少1次的活动受限？",
+        "在过去4周内，您的孩子是否需要使用缓解药物多于1次/周？","在过去4周内，您的孩子是否因哮喘而出现至少1次的夜间醒来或夜间咳嗽？",
+        "在过去4周内，您的孩子白天出现哮喘症状是否多于2次/周？","在过去4周内，您的孩子是否因哮喘而出现至少1次的活动受限？",
+        "在过去4周内，您的孩子是否需要使用缓解药物多于2次/周？","在过去的4周内，您的孩子是否因哮喘而出现至少1次的夜间醒来或夜间咳嗽？"
+        };
+        */
+
+        int[][] arr = {{4, 112}, {4, 113}, {1,-1}, {5, -1}, {4, -1}};
+        String[] titles = {"哮喘发作次数", "感染次数","哮喘控制测试评分","生命质量评分", "GINA"};
 
         int maxTotalMonth = 0;//max total months to display
         //get maxTotalMonth
@@ -177,26 +191,91 @@ public class DeliveryManageAction extends ActionSupport {
                 if (survey.isSendOnRegister()) {
                     //there will be only one retrieveInfo for this survey, get it and the remaining col will all be "".
                     if (arr[i][1] == -1) {//calculate total scores
-                        JSONObject obj = new JSONObject();
-                        obj.put("col0", titles[i]);//1st col
-                        for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
-                            RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+                        if (survey.getSurveyId() == 1) {
+                            JSONObject obj = new JSONObject();
+                            obj.put("col0", titles[i]);//1st col
+                            for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                                RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
 
-                            if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {//there will be only one
-                                BigDecimal totalScore = new BigDecimal("0");
-                                for (Answer answer : retrieveInfo.getAnswers()) {
-                                    for (Choice choice : answer.getChoices()) {//should be single choice
-                                        totalScore = totalScore.add(choice.getScore());
+                                if (retrieveInfo != null && (deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId()) ||
+                                        deliveryInfo.getSurvey().getSurveyId().equals(-6))) {//there will be only one
+                                    BigDecimal totalScore = new BigDecimal("0");
+                                    for (Answer answer : retrieveInfo.getAnswers()) {
+                                        for (Choice choice : answer.getChoices()) {//should be single choice
+                                            totalScore = totalScore.add(choice.getScore());
+                                        }
                                     }
+                                    obj.put("col1", totalScore);//2nd col
+                                    break;
                                 }
-                                obj.put("col1", totalScore);//2nd col
-                                break;
                             }
+                            for (int j = 2; j < maxTotalMonth; j++) {//from the 3rd col will all be ""
+                                obj.put("col" + j, "");
+                            }
+                            jsonArray.add(i + 1, obj);
+                        } else if (survey.getSurveyId() == 4) {
+                            JSONObject obj = new JSONObject();
+                            obj.put("col0", titles[i]);//1st col
+                            for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                                RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+
+                                if (retrieveInfo != null && (deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId()) ||
+                                        deliveryInfo.getSurvey().getSurveyId().equals(-6))) {//there will be only one
+                                    BigDecimal totalScore = new BigDecimal("0");
+                                    for (Answer answer : retrieveInfo.getAnswers()) {
+                                        if (answer.getQuestion().getQuestionId() != 121 ||
+                                            answer.getQuestion().getQuestionId() != 122 ||
+                                            answer.getQuestion().getQuestionId() != 123 ||
+                                            answer.getQuestion().getQuestionId() != 124 ||
+                                            answer.getQuestion().getQuestionId() != 125 ||
+                                            answer.getQuestion().getQuestionId() != 126 ||
+                                            answer.getQuestion().getQuestionId() != 127 ||
+                                            answer.getQuestion().getQuestionId() != 177 ) {
+                                            continue;
+                                        }
+                                        for (Choice choice : answer.getChoices()) {//should be single choice
+                                            totalScore = totalScore.add(choice.getScore());
+                                        }
+                                    }
+                                    String str = new String();
+                                    if (totalScore.compareTo(new BigDecimal("0")) == 0) {
+                                        str = "完全控制";
+                                    } else if (totalScore.compareTo(new BigDecimal("1")) == 0 ||
+                                            totalScore.compareTo(new BigDecimal("2")) == 0) {
+                                        str = "部分控制";
+                                    } else {
+                                        str = "未控制";
+                                    }
+                                    obj.put("col1", str);//2nd col
+                                    break;
+                                }
+                            }
+                            for (int j = 2; j < maxTotalMonth; j++) {//from the 3rd col will all be ""
+                                obj.put("col" + j, "");
+                            }
+                            jsonArray.add(i + 1, obj);
+                        } else {
+                            JSONObject obj = new JSONObject();
+                            obj.put("col0", titles[i]);//1st col
+                            for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                                RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+
+                                if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {//there will be only one
+                                    BigDecimal totalScore = new BigDecimal("0");
+                                    for (Answer answer : retrieveInfo.getAnswers()) {
+                                        for (Choice choice : answer.getChoices()) {//should be single choice
+                                            totalScore = totalScore.add(choice.getScore());
+                                        }
+                                    }
+                                    obj.put("col1", totalScore);//2nd col
+                                    break;
+                                }
+                            }
+                            for (int j = 2; j < maxTotalMonth; j++) {//from the 3rd col will all be ""
+                                obj.put("col" + j, "");
+                            }
+                            jsonArray.add(i + 1, obj);
                         }
-                        for (int j = 2; j < maxTotalMonth; j++) {//from the 3rd col will all be ""
-                            obj.put("col" + j, "");
-                        }
-                        jsonArray.add(i + 1, obj);
                     } else {//get all answers
                         for (Question question : survey.getQuestions()) {
                             if (question.getQuestionId() == arr[i][1]) {//question is found
@@ -235,36 +314,119 @@ public class DeliveryManageAction extends ActionSupport {
                 } else {
                     //tmp can start from 1, set tmp[0] col to titles and tmp[1] to "".
                     if (arr[i][1] == -1) {//calculate total scores
-                        int shift = 2;
-                        int tmp = 2;
-                        JSONObject obj = new JSONObject();
-                        obj.put("col0", titles[i]);//1st col
-                        obj.put("col1", "");//2nd col
-                        //for each retrieveInfo, get the total score
-                        for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
-                            RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
-                            shift += survey.getFrequency();
-                            while (tmp < shift) {
-                                obj.put("col" + tmp, "");
-                                tmp++;
-                            }
-
-                            if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {
-
-                                BigDecimal totalScore = new BigDecimal("0");
-                                for (Answer answer : retrieveInfo.getAnswers()) {
-                                    for (Choice choice : answer.getChoices()) {//should be single choice
-                                        totalScore = totalScore.add(choice.getScore());
-                                    }
+                        if (survey.getSurveyId() == 1) {
+                            int shift = 2;
+                            int tmp = 2;
+                            JSONObject obj = new JSONObject();
+                            obj.put("col0", titles[i]);//1st col
+                            obj.put("col1", "");//2nd col
+                            //for each retrieveInfo, get the total score
+                            for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                                RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+                                shift += survey.getFrequency();
+                                while (tmp < shift) {
+                                    obj.put("col" + tmp, "");
+                                    tmp++;
                                 }
-                                obj.put("col" + shift, totalScore);
-                                tmp++;
+
+                                if (retrieveInfo != null && (deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId()) ||
+                                                             deliveryInfo.getSurvey().getSurveyId().equals(6))) {
+                                    BigDecimal totalScore = new BigDecimal("0");
+                                    for (Answer answer : retrieveInfo.getAnswers()) {
+                                        for (Choice choice : answer.getChoices()) {//should be single choice
+                                            totalScore = totalScore.add(choice.getScore());
+                                        }
+                                    }
+                                    obj.put("col" + shift, totalScore);
+                                    tmp++;
+                                }
                             }
+                            for (int j = shift; j < maxTotalMonth; j++) {
+                                obj.put("col" + j, "");
+                            }
+                            jsonArray.add(i + 1, obj);
+                        } else if (survey.getSurveyId() == 4) {
+                            int shift = 2;
+                            int tmp = 2;
+                            JSONObject obj = new JSONObject();
+                            obj.put("col0", titles[i]);//1st col
+                            obj.put("col1", "");//2nd col
+                            //for each retrieveInfo, get the total score
+                            for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                                RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+                                shift += survey.getFrequency();
+                                while (tmp < shift) {
+                                    obj.put("col" + tmp, "");
+                                    tmp++;
+                                }
+
+                                if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {
+
+                                    BigDecimal totalScore = new BigDecimal("0");
+                                    for (Answer answer : retrieveInfo.getAnswers()) {
+                                        if (answer.getQuestion().getQuestionId() != 121 ||
+                                            answer.getQuestion().getQuestionId() != 122 ||
+                                            answer.getQuestion().getQuestionId() != 123 ||
+                                            answer.getQuestion().getQuestionId() != 124 ||
+                                            answer.getQuestion().getQuestionId() != 125 ||
+                                            answer.getQuestion().getQuestionId() != 126 ||
+                                            answer.getQuestion().getQuestionId() != 127 ||
+                                            answer.getQuestion().getQuestionId() != 177 ) {
+                                            continue;
+                                        }
+                                        for (Choice choice : answer.getChoices()) {//should be single choice
+                                            totalScore = totalScore.add(choice.getScore());
+                                        }
+                                    }
+                                    String str;
+                                    if (totalScore.compareTo(new BigDecimal("0")) == 0) {
+                                        str = "完全控制";
+                                    } else if (totalScore.compareTo(new BigDecimal("1")) == 0 ||
+                                                totalScore.compareTo(new BigDecimal("2")) == 0) {
+                                        str = "部分控制";
+                                    } else {
+                                        str = "未控制";
+                                    }
+                                    obj.put("col" + shift, str);
+                                    tmp++;
+                                }
+                            }
+                            for (int j = shift; j < maxTotalMonth; j++) {
+                                obj.put("col" + j, "");
+                            }
+                            jsonArray.add(i + 1, obj);
+                        } else {
+                            int shift = 2;
+                            int tmp = 2;
+                            JSONObject obj = new JSONObject();
+                            obj.put("col0", titles[i]);//1st col
+                            obj.put("col1", "");//2nd col
+                            //for each retrieveInfo, get the total score
+                            for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                                RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+                                shift += survey.getFrequency();
+                                while (tmp < shift) {
+                                    obj.put("col" + tmp, "");
+                                    tmp++;
+                                }
+
+                                if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {
+
+                                    BigDecimal totalScore = new BigDecimal("0");
+                                    for (Answer answer : retrieveInfo.getAnswers()) {
+                                        for (Choice choice : answer.getChoices()) {//should be single choice
+                                            totalScore = totalScore.add(choice.getScore());
+                                        }
+                                    }
+                                    obj.put("col" + shift, totalScore);
+                                    tmp++;
+                                }
+                            }
+                            for (int j = shift; j < maxTotalMonth; j++) {
+                                obj.put("col" + j, "");
+                            }
+                            jsonArray.add(i + 1, obj);
                         }
-                        for (int j = shift; j < maxTotalMonth; j++) {
-                            obj.put("col" + j, "");
-                        }
-                        jsonArray.add(i + 1, obj);
                     } else {//get all answers
                         for (Question question : survey.getQuestions()) {
                             if (question.getQuestionId() == arr[i][1]) {//question is found
