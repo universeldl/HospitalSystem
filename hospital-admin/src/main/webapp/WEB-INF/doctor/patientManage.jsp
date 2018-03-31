@@ -280,6 +280,11 @@
                                         <button type="button" class="btn btn-primary btn-xs"
                                                 onclick="managePatient(<s:property value="#patient.patientId"/>)">问卷管理
                                         </button>
+                                        <input type="hidden" id="patient_allInOne"
+                                               value="${pageContext.request.contextPath}/doctor/deliveryManageAction_findPatientAllInOne.action">
+                                        <button type="button" class="btn btn-info btn-xs"
+                                                onclick="allInOne(<s:property value="#patient.patientId"/>)">综合一览
+                                        </button>
                                         <!--
                                         <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
                                                 data-target="#addRetrieveModal"

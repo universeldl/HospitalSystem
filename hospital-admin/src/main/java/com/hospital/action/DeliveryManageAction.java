@@ -2,6 +2,7 @@ package com.hospital.action;
 
 import com.hospital.domain.*;
 import com.hospital.service.DeliveryService;
+import com.hospital.service.PatientService;
 import com.hospital.service.SurveyService;
 import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
@@ -12,8 +13,13 @@ import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +27,11 @@ public class DeliveryManageAction extends ActionSupport {
 
     private DeliveryService deliveryService;
     private SurveyService surveyService;
+    private PatientService patientService;
+
+    public void setPatientService(PatientService patientService) {
+        this.patientService = patientService;
+    }
 
     public void setSurveyService(SurveyService surveyService) {
         this.surveyService = surveyService;
@@ -39,7 +50,9 @@ public class DeliveryManageAction extends ActionSupport {
     private String patientName;
     private int surveyId;
 
-    public void setPatientId(Integer patientId) {this.patientId = patientId;}
+    public void setPatientId(Integer patientId) {
+        this.patientId = patientId;
+    }
 
     public void setOpenID(String openID) {
         this.openID = openID;
@@ -110,6 +123,202 @@ public class DeliveryManageAction extends ActionSupport {
     }
 
 
+    public String findPatientAllInOne() {
+        Patient patient = new Patient();
+        patient.setPatientId(patientId);
+
+        Patient patient1 = patientService.getPatientById(patient);
+        // arr is a 2-D array of {surveyId-questionId}.
+        // If questionId==-1, will output total scores of this survey
+        // If questionId>0, will output the answers of this specified question
+        int[][] arr = {{1, 1}, {1, -1}};//answers for 1st question of survey1; total score for survey1
+        String[] titles = {"这是问题1", "看看总分是多少"};
+
+        int maxTotalMonth = 0;//max total months to display
+        //get maxTotalMonth
+        for (int i = 0; i < arr.length; i++) {
+            Survey s = new Survey();
+            s.setSurveyId(arr[i][0]);
+            Survey survey = surveyService.getSurveyById(s);
+            if (survey != null) {
+                int totalMonth = survey.getFrequency() * survey.getTimes() + 2;// +1 to include the titles in first col; +1 again to include the date of sign-in in 2nd col.
+                if (totalMonth > maxTotalMonth) {
+                    maxTotalMonth = totalMonth;
+                }
+            }
+        }
+
+        JSONArray jsonArray = new JSONArray();
+
+        //create the first row
+        JSONObject object = new JSONObject();
+        object.put("col0", "");//1st col is ""
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(patient1.getCreateTime());
+        Date createDate = calendar.getTime();
+        String dateString = formatter.format(createDate);
+        object.put("col1", dateString);//2nd col, create date
+        for (int j = 2; j < maxTotalMonth; j++) {//from the 3rd col till the end
+            calendar.add(Calendar.MONTH, 1);
+            Date sendDate = calendar.getTime();
+            String ds = formatter.format(sendDate);
+            object.put("col" + j, ds);
+        }
+        jsonArray.add(0, object);
+
+
+        //calculate the remaining rows of the table
+        for (int i = 0; i < arr.length; i++) {
+            Survey s = new Survey();
+            s.setSurveyId(arr[i][0]);
+            Survey survey = surveyService.getSurveyById(s);
+            if (survey != null) {
+                if (survey.isSendOnRegister()) {
+                    //there will be only one retrieveInfo for this survey, get it and the remaining col will all be "".
+                    if (arr[i][1] == -1) {//calculate total scores
+                        JSONObject obj = new JSONObject();
+                        obj.put("col0", titles[i]);//1st col
+                        for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                            RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+
+                            if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {//there will be only one
+                                BigDecimal totalScore = new BigDecimal("0");
+                                for (Answer answer : retrieveInfo.getAnswers()) {
+                                    for (Choice choice : answer.getChoices()) {//should be single choice
+                                        totalScore = totalScore.add(choice.getScore());
+                                    }
+                                }
+                                obj.put("col1", totalScore);//2nd col
+                                break;
+                            }
+                        }
+                        for (int j = 2; j < maxTotalMonth; j++) {//from the 3rd col will all be ""
+                            obj.put("col" + j, "");
+                        }
+                        jsonArray.add(i + 1, obj);
+                    } else {//get all answers
+                        for (Question question : survey.getQuestions()) {
+                            if (question.getQuestionId() == arr[i][1]) {//question is found
+
+                                JSONObject obj = new JSONObject();
+                                obj.put("col0", titles[i]);//1st col
+                                //for each retrieveInfo, get the answer choice of that question
+                                for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                                    RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+
+                                    if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {
+
+                                        //for each answer, get the choice of that question
+                                        for (Answer answer : retrieveInfo.getAnswers()) {
+                                            if (answer.getQuestion().getQuestionId() == question.getQuestionId()) {//answer is found
+                                                if (answer.getTextChoice() == 1) {//text choice
+                                                    obj.put(answer.getTextChoiceContent(), answer.getTextChoiceContent());
+                                                } else {//choice
+                                                    for (Choice choice : answer.getChoices()) {//should be single choice
+                                                        obj.put("col1", choice.getChoiceContent());//2nd col
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                for (int j = 2; j < maxTotalMonth; j++) {//from the 3rd col will all be ""
+                                    obj.put("col" + j, "");
+                                }
+                                jsonArray.add(i + 1, obj);
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    //tmp can start from 1, set tmp[0] col to titles and tmp[1] to "".
+                    if (arr[i][1] == -1) {//calculate total scores
+                        int shift = 2;
+                        int tmp = 2;
+                        JSONObject obj = new JSONObject();
+                        obj.put("col0", titles[i]);//1st col
+                        obj.put("col1", "");//2nd col
+                        //for each retrieveInfo, get the total score
+                        for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                            RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+                            shift += survey.getFrequency();
+                            while (tmp < shift) {
+                                obj.put("col" + tmp, "");
+                                tmp++;
+                            }
+
+                            if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {
+
+                                BigDecimal totalScore = new BigDecimal("0");
+                                for (Answer answer : retrieveInfo.getAnswers()) {
+                                    for (Choice choice : answer.getChoices()) {//should be single choice
+                                        totalScore = totalScore.add(choice.getScore());
+                                    }
+                                }
+                                obj.put("col" + shift, totalScore);
+                                tmp++;
+                            }
+                        }
+                        for (int j = shift; j < maxTotalMonth; j++) {
+                            obj.put("col" + j, "");
+                        }
+                        jsonArray.add(i + 1, obj);
+                    } else {//get all answers
+                        for (Question question : survey.getQuestions()) {
+                            if (question.getQuestionId() == arr[i][1]) {//question is found
+
+                                int shift = 2;
+                                int tmp = 2;
+                                JSONObject obj = new JSONObject();
+                                obj.put("col0", titles[i]);//1st col
+                                obj.put("col1", "");//2nd col
+                                //for each retrieveInfo, get the answer choice of that question
+                                for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                                    RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+                                    shift += survey.getFrequency();
+                                    while (tmp < shift) {
+                                        obj.put("col" + tmp, "");
+                                        tmp++;
+                                    }
+
+                                    if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {
+
+                                        //for each answer, get the choice of that question
+                                        for (Answer answer : retrieveInfo.getAnswers()) {
+                                            if (answer.getQuestion().getQuestionId() == question.getQuestionId()) {//answer is found
+                                                if (answer.getTextChoice() == 1) {//text choice
+                                                    obj.put(answer.getTextChoiceContent(), answer.getTextChoiceContent());
+                                                } else {//choice
+                                                    for (Choice choice : answer.getChoices()) {//should be single choice
+                                                        obj.put("col" + shift, choice.getChoiceContent());
+                                                    }
+                                                    tmp++;
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                for (int j = shift; j < maxTotalMonth; j++) {
+                                    obj.put("col" + j, "");
+                                }
+                                jsonArray.add(i + 1, obj);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //存入request域中
+        ServletActionContext.getRequest().setAttribute("allInOne", jsonArray);
+
+        return "allInOne";
+    }
+
 
     /**
      * 根据分发id查询该分发信息
@@ -168,7 +377,7 @@ public class DeliveryManageAction extends ActionSupport {
 
         JSONArray jsonArray = new JSONArray();
         int idx = 0;
-        for(DeliveryInfo deliveryInfo : unanswered) {
+        for (DeliveryInfo deliveryInfo : unanswered) {
             JSONObject di = new JSONObject();
             di.put("deliveryId", deliveryInfo.getDeliveryId());
             di.put("surveyName", deliveryInfo.getSurvey().getSurveyName());
@@ -264,7 +473,7 @@ public class DeliveryManageAction extends ActionSupport {
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
-                return !name.equals("surveyId") && !name.equals("surveyName") ;
+                return !name.equals("surveyId") && !name.equals("surveyName");
             }
         });
 

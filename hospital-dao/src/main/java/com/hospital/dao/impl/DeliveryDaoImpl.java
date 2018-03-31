@@ -283,6 +283,14 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
 
 
     @Override
+    public List<DeliveryInfo> getDeliveryInfosByPatientId(Patient patient) {
+        String hql = "from DeliveryInfo b where b.patient.patientId=?";
+        List list = this.getHibernateTemplate().find(hql, patient.getPatientId());
+        return list;
+    }
+
+
+    @Override
     public int addDelivery(DeliveryInfo info) {
         Integer integer = 0;
         try {

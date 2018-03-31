@@ -23,6 +23,7 @@
 
         <action name="deliveryManageAction_*" method="{1}" class="deliveryManageAction">
             <result name="success">/WEB-INF/doctor/deliveryManage.jsp</result>
+            <result name="allInOne">/WEB-INF/doctor/allInOne.jsp</result>
             <result name="nopass" type="redirect">/error/nopass.jsp</result>
         </action>
     </package>

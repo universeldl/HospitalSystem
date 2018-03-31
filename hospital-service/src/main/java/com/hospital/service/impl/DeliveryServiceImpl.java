@@ -71,6 +71,12 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
+    public List<DeliveryInfo> getDeliveryInfosByPatientId(Patient patient) {
+        // TODO Auto-generated method stub
+        return deliveryDao.getDeliveryInfosByPatientId(patient);
+    }
+
+    @Override
     public PageBean<DeliveryInfo> queryDeliveryInfo(String name, int deliveryId, int pageCode, int pageSize, Doctor doctor) {
         PageBean<DeliveryInfo> pageBean = new PageBean<DeliveryInfo>();
         pageBean.setPageCode(pageCode);

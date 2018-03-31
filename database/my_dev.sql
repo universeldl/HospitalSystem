@@ -271,7 +271,7 @@ INSERT INTO Authorization VALUES(5,0,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(6,1,1,1,1,1,1,1,1,1);
 
 
-INSERT INTO survey VALUES(1,"survey1","admin",10,30, 2,"a1","aaa","2017-06-25 00:00:00",1,2,6,2, TRUE);
+INSERT INTO survey VALUES(1,"survey1","admin",10,30, 2,"a1","aaa","2017-06-25 00:00:00",1,2,6,2, FALSE);
 INSERT INTO survey VALUES(2,"survey2","doctor2",10,30, 2,"a2","baa","2017-06-25 00:00:00",1,3,6,6, FALSE);
 
 INSERT INTO deliveryInfo VALUES(1,"2017-01-15 00:00:00","2017-03-04 00:00:00",0,-1,1,1,6);

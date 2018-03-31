@@ -15,6 +15,8 @@ public interface DeliveryService {
 
     DeliveryInfo getDeliveryInfoById(DeliveryInfo info);
 
+    List<DeliveryInfo> getDeliveryInfosByPatientId(Patient patient);
+
     List<DeliveryInfo> getUnansweredDeliveryInfos(Integer patientId);
 
     PageBean<DeliveryInfo> queryDeliveryInfo(String name, int deliveryId, int pageCode, int pageSize, Doctor doctor);

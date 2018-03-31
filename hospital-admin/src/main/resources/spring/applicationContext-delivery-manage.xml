@@ -36,6 +36,23 @@
         </property>
     </bean>
 
+
+    <bean id="patientService" class="com.hospital.service.impl.PatientServiceImpl">
+        <property name="patientDao">
+            <ref bean="patientDao"/>
+        </property>
+        <property name="planDao">
+            <ref bean="planDao"/>
+        </property>
+        <property name="surveyDao">
+            <ref bean="surveyDao"/>
+        </property>
+        <property name="patientTypeDao">
+            <ref bean="patientTypeDao"/>
+        </property>
+    </bean>
+
+
     <bean id="surveyService" class="com.hospital.service.impl.SurveyServiceImpl">
         <property name="surveyDao">
             <ref bean="surveyDao"/>
@@ -45,6 +62,9 @@
     <bean id="deliveryManageAction" class="com.hospital.action.DeliveryManageAction" scope="prototype">
         <property name="deliveryService">
             <ref bean="deliveryService"/>
+        </property>
+        <property name="patientService">
+            <ref bean="patientService"/>
         </property>
         <property name="surveyService">
             <ref bean="surveyService"/>
