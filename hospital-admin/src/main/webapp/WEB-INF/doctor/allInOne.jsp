@@ -168,7 +168,19 @@
                                 <s:if test="#status.index != 0">
                                     <tbody>
                                     <s:iterator value="#row" var="col">
-                                        <td><s:property value="#col.value"/></td>
+                                       <%-- <td><s:property value="#col.value"/></td>--%>
+                                        <s:if test="#col.value=='完全控制'">
+                                            <td bgcolor="#00CD00"><s:property value="#col.value"/></td>
+                                        </s:if>
+                                        <s:elseif test="#col.value=='部分控制'">
+                                            <td bgcolor="#EEEE00"><s:property value="#col.value"/></td>
+                                        </s:elseif>
+                                        <s:elseif test="#col.value=='未控制'">
+                                            <td bgcolor="#FF4500"><s:property value="#col.value"/></td>
+                                        </s:elseif>
+                                        <s:else>
+                                            <td><s:property value="#col.value"/></td>
+                                        </s:else>
                                     </s:iterator>
                                     </tbody>
                                 </s:if>

@@ -591,13 +591,13 @@ public class DeliveryManageAction extends ActionSupport {
                             if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {
                                 BigDecimal totalScore = new BigDecimal("0");
                                 for (Answer answer : retrieveInfo.getAnswers()) {
-                                    if (answer.getQuestion().getQuestionId() != 121 ||
-                                            answer.getQuestion().getQuestionId() != 122 ||
-                                            answer.getQuestion().getQuestionId() != 123 ||
-                                            answer.getQuestion().getQuestionId() != 124 ||
-                                            answer.getQuestion().getQuestionId() != 125 ||
-                                            answer.getQuestion().getQuestionId() != 126 ||
-                                            answer.getQuestion().getQuestionId() != 127 ||
+                                    if (answer.getQuestion().getQuestionId() != 121 &&
+                                            answer.getQuestion().getQuestionId() != 122 &&
+                                            answer.getQuestion().getQuestionId() != 123 &&
+                                            answer.getQuestion().getQuestionId() != 124 &&
+                                            answer.getQuestion().getQuestionId() != 125 &&
+                                            answer.getQuestion().getQuestionId() != 126 &&
+                                            answer.getQuestion().getQuestionId() != 127 &&
                                             answer.getQuestion().getQuestionId() != 177) {
                                         continue;
                                     }
