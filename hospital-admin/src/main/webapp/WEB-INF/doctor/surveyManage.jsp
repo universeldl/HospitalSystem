@@ -782,8 +782,8 @@
                                 <option value="1">1个月</option>
                                 <option value="2">2个月</option>
                                 <option value="3">3个月</option>
-                                <option value="4">6个月</option>
-                                <option value="5">12个月</option>
+                                <option value="6">6个月</option>
+                                <option value="12">12个月</option>
                             </select>
                             <label class="control-label" for="updateFrequency" style="display: none;"></label>
                         </div>

@@ -576,6 +576,8 @@ public class SurveyManageAction extends ActionSupport {
         updateSurvey.setDepartment(department);
         updateSurvey.setSendOnRegister(sendOnRegister);
         updateSurvey.setBday(bday);
+        updateSurvey.setTimes(times);
+
         Survey newSurvey = surveyService.updateSurveyInfo(updateSurvey);//修改问卷信息对象
         int success = 0;
         if (newSurvey != null) {

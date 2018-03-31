@@ -21,11 +21,11 @@
     </style>
 
 
-    <script src="./ajax-lib/ajaxutils.js"/>
-    <script src="./jQuery/jquery-3.1.1.min.js"/>
-    <script src="./js/zepto.min.js"/>
-    <script src="./js/survey.js"/>
-    <script src="./js/common.js"/>
+    <script src="./ajax-lib/ajaxutils.js"></script>
+    <script src="./jQuery/jquery-3.1.1.min.js"></script>
+    <script src="./js/zepto.min.js"></script>
+    <script src="./js/survey.js"></script>
+    <script src="./js/common.js"></script>
 </head>
 <body ontouchstart>
 
@@ -80,8 +80,10 @@
                                            for='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'>
                                         <div class="weui-cell__bd">
 
-                                            <s:if test="#choice.choiceImgPath!=''">
-                                                <img src='<s:property value="#choice.choiceImgPath"/>' width=80px height=80px>
+                                            <s:if test="#choice.choiceImgPath!=null">
+                                                <s:if test="#choice.choiceImgPath!=''">
+                                                    <img src='<s:property value="#choice.choiceImgPath"/>' width=80px height=80px>
+                                                </s:if>
                                             </s:if>
                                             <p><s:property value="#choice.choiceContent" /></p>
                                         </div>

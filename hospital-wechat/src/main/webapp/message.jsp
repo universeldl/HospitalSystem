@@ -28,7 +28,9 @@
 <div align="center">
     <font size="19" color="red">
         ${param.msg}
-        <s:property value="errorMsg"/>
+        <s:if test="#errorMsg!=null">
+            <s:property value="errorMsg"/>
+        </s:if>
     </font>
 </div>
 <!--

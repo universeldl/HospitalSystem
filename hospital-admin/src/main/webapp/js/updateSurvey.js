@@ -87,6 +87,7 @@ function updateSurvey(id) {
                             $("#updateDescription").val(data.description);
                             $("#updateTimes").val(data.times);
                             $("#updateBday").val(data.bday);
+                            $("#updateFrequency").val(data.frequency);
 
                         }
                     }

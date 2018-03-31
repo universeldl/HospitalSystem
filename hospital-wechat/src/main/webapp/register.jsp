@@ -11,6 +11,8 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="ajax-lib/ajaxutils.js"></script>
     <script src="js/register.js"></script>
+    <script src="./js/common.js"></script>
+
 </head>
 
 <body>

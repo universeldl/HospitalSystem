@@ -223,7 +223,7 @@ public class surveyAction extends ActionSupport {
                     Choice choice = choiceService.getChoiceById(tmpChoice);
                     if (choice != null) {
                         choiceset.add(choice);
-                        score.add(choice.getScore());
+                        score = score.add(choice.getScore());
                     }
                 }
 
@@ -301,10 +301,21 @@ public class surveyAction extends ActionSupport {
 
         if (survey.getSurveyName().equals("TRACK儿童呼吸和哮喘控制测试")) {
             if (score.compareTo(new BigDecimal("80")) >= 0) {
-                json.put("msg", "本次TRACK测试评分为"+score+"分，<br/>恭喜您，您孩子的呼吸问题似乎得到了控制。");
+                json.put("msg", "本次TRACK测试评分为"+score.toString()+"分，<br/>恭喜您，您孩子的呼吸问题似乎得到了控制。");
             } else {
-                json.put("msg", "本次TRACK测试评分为"+score+"分，<br/>您孩子的呼吸问题可能未得到控制。");
+                json.put("msg", "本次TRACK测试评分为"+score.toString()+"分，<br/>您孩子的呼吸问题可能未得到控制。");
             }
+        } else if (survey.getSurveyName().equals("哮喘控制测试评分")) {
+            if (score.compareTo(new BigDecimal("19")) <= 0) {
+                json.put("msg", "您孩子本次哮喘控制测试得分为"+score.toString()+"分，<br/>您孩子的哮喘未得到有效控制。");
+            } else if (score.compareTo(new BigDecimal("20")) >= 0 &&
+                    score.compareTo(new BigDecimal("23")) <= 0) {
+                json.put("msg", "您孩子本次哮喘控制测试得分为"+score.toString()+"分，<br/>您孩子的哮喘得到了部分控制。");
+            } else {
+                json.put("msg", "您孩子本次哮喘控制测试得分为"+score.toString()+"分，<br/>恭喜您，您孩子的哮喘得到了完全控制。");
+            }
+        } else {
+            json.put("msg", " ");
         }
 
         try {

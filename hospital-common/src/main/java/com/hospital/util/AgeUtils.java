@@ -29,7 +29,8 @@ public class AgeUtils {
         int age = yearMinus;// 先大致赋值
         if (yearMinus < 0) {// 选了未来的年份
             age = 0;
-        } else if (yearMinus == 0) {// 同年的，要么为1，要么为0
+        } else if (yearMinus == 0) {// 同年就是0周岁
+            /*
             if (monthMinus < 0) {// 选了未来的月份
                 age = 0;
             } else if (monthMinus == 0) {// 同月份的
@@ -40,16 +41,15 @@ public class AgeUtils {
                 }
             } else if (monthMinus > 0) {
                 age = 1;
-            }
+            }*/
+
         } else if (yearMinus > 0) {
             if (monthMinus < 0) {// 当前月>生日月
+                age = age - 1;
             } else if (monthMinus == 0) {// 同月份的，再根据日期计算年龄
                 if (dayMinus < 0) {
-                } else if (dayMinus >= 0) {
-                    age = age + 1;
+                    age = age - 1;
                 }
-            } else if (monthMinus > 0) {
-                age = age + 1;
             }
         }
         return age;
