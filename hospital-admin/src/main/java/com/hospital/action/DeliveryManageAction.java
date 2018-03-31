@@ -18,10 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class DeliveryManageAction extends ActionSupport {
 
@@ -123,7 +120,7 @@ public class DeliveryManageAction extends ActionSupport {
     }
 
 
-    public String findPatientAllInOne() {
+    public String findPatientAllInOneBK() {
         Patient patient = new Patient();
         patient.setPatientId(patientId);
 
@@ -145,8 +142,8 @@ public class DeliveryManageAction extends ActionSupport {
         };
         */
 
-        int[][] arr = {{4, 112}, {4, 113}, {1,-1}, {5, -1}, {4, -1}};
-        String[] titles = {"哮喘发作次数", "感染次数","哮喘控制测试评分","生命质量评分", "GINA"};
+        int[][] arr = {{4, 112}, {4, 113}, {1, -1}, {5, -1}, {4, -1}};
+        String[] titles = {"哮喘发作次数", "感染次数", "哮喘控制测试评分", "生命质量评分", "GINA"};
 
         int maxTotalMonth = 0;//max total months to display
         //get maxTotalMonth
@@ -224,13 +221,13 @@ public class DeliveryManageAction extends ActionSupport {
                                     BigDecimal totalScore = new BigDecimal("0");
                                     for (Answer answer : retrieveInfo.getAnswers()) {
                                         if (answer.getQuestion().getQuestionId() != 121 ||
-                                            answer.getQuestion().getQuestionId() != 122 ||
-                                            answer.getQuestion().getQuestionId() != 123 ||
-                                            answer.getQuestion().getQuestionId() != 124 ||
-                                            answer.getQuestion().getQuestionId() != 125 ||
-                                            answer.getQuestion().getQuestionId() != 126 ||
-                                            answer.getQuestion().getQuestionId() != 127 ||
-                                            answer.getQuestion().getQuestionId() != 177 ) {
+                                                answer.getQuestion().getQuestionId() != 122 ||
+                                                answer.getQuestion().getQuestionId() != 123 ||
+                                                answer.getQuestion().getQuestionId() != 124 ||
+                                                answer.getQuestion().getQuestionId() != 125 ||
+                                                answer.getQuestion().getQuestionId() != 126 ||
+                                                answer.getQuestion().getQuestionId() != 127 ||
+                                                answer.getQuestion().getQuestionId() != 177) {
                                             continue;
                                         }
                                         for (Choice choice : answer.getChoices()) {//should be single choice
@@ -330,7 +327,7 @@ public class DeliveryManageAction extends ActionSupport {
                                 }
 
                                 if (retrieveInfo != null && (deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId()) ||
-                                                             deliveryInfo.getSurvey().getSurveyId().equals(6))) {
+                                        deliveryInfo.getSurvey().getSurveyId().equals(6))) {
                                     BigDecimal totalScore = new BigDecimal("0");
                                     for (Answer answer : retrieveInfo.getAnswers()) {
                                         for (Choice choice : answer.getChoices()) {//should be single choice
@@ -365,13 +362,13 @@ public class DeliveryManageAction extends ActionSupport {
                                     BigDecimal totalScore = new BigDecimal("0");
                                     for (Answer answer : retrieveInfo.getAnswers()) {
                                         if (answer.getQuestion().getQuestionId() != 121 ||
-                                            answer.getQuestion().getQuestionId() != 122 ||
-                                            answer.getQuestion().getQuestionId() != 123 ||
-                                            answer.getQuestion().getQuestionId() != 124 ||
-                                            answer.getQuestion().getQuestionId() != 125 ||
-                                            answer.getQuestion().getQuestionId() != 126 ||
-                                            answer.getQuestion().getQuestionId() != 127 ||
-                                            answer.getQuestion().getQuestionId() != 177 ) {
+                                                answer.getQuestion().getQuestionId() != 122 ||
+                                                answer.getQuestion().getQuestionId() != 123 ||
+                                                answer.getQuestion().getQuestionId() != 124 ||
+                                                answer.getQuestion().getQuestionId() != 125 ||
+                                                answer.getQuestion().getQuestionId() != 126 ||
+                                                answer.getQuestion().getQuestionId() != 127 ||
+                                                answer.getQuestion().getQuestionId() != 177) {
                                             continue;
                                         }
                                         for (Choice choice : answer.getChoices()) {//should be single choice
@@ -382,7 +379,7 @@ public class DeliveryManageAction extends ActionSupport {
                                     if (totalScore.compareTo(new BigDecimal("0")) == 0) {
                                         str = "完全控制";
                                     } else if (totalScore.compareTo(new BigDecimal("1")) == 0 ||
-                                                totalScore.compareTo(new BigDecimal("2")) == 0) {
+                                            totalScore.compareTo(new BigDecimal("2")) == 0) {
                                         str = "部分控制";
                                     } else {
                                         str = "未控制";
@@ -473,6 +470,199 @@ public class DeliveryManageAction extends ActionSupport {
                     }
                 }
             }
+        }
+
+        //存入request域中
+        ServletActionContext.getRequest().setAttribute("allInOne", jsonArray);
+
+        return "allInOne";
+    }
+
+
+    public String findPatientAllInOne() {
+        Patient patient = new Patient();
+        patient.setPatientId(patientId);
+
+        Patient patient1 = patientService.getPatientById(patient);
+        // arr is a 2-D array of {surveyId-questionId}.
+        // If questionId==-1, will output total scores of this survey
+        // If questionId>0, will output the answers of this specified question
+        /*
+        int[][] arr = {{4, 112}, {4, 113},{1,-1},{6,-1},{5, -1},
+                {4,121},{4, 122},{4,123},{4,124},
+                {4,125},{4,177},{4,126},{4,127}};//answers for 1st question of survey1; total score for survey1
+
+        String[] titles = {
+        "哮喘发作次数", "感染次数","TRACK儿童呼吸和哮喘控制测试总分","哮喘控制测试评分总分","生命质量随访问卷总分",
+        "在过去4周内，您的孩子白天出现哮喘症状（持续几分钟）是否多于1次/周？","在过去4周内，您的孩子是否有因哮喘而出现至少1次的活动受限？",
+        "在过去4周内，您的孩子是否需要使用缓解药物多于1次/周？","在过去4周内，您的孩子是否因哮喘而出现至少1次的夜间醒来或夜间咳嗽？",
+        "在过去4周内，您的孩子白天出现哮喘症状是否多于2次/周？","在过去4周内，您的孩子是否因哮喘而出现至少1次的活动受限？",
+        "在过去4周内，您的孩子是否需要使用缓解药物多于2次/周？","在过去的4周内，您的孩子是否因哮喘而出现至少1次的夜间醒来或夜间咳嗽？"
+        };
+        */
+
+        int[][] arr = {{4, 112}, {4, 113}, {1, -1}, {5, -1}, {4, -1}};
+        String[] titles = {"哮喘发作次数", "感染次数", "哮喘控制测试评分", "生命质量评分", "GINA"};
+
+        int maxTotalMonth = 0;//max total months to display
+        //get maxTotalMonth
+        for (int i = 0; i < arr.length; i++) {
+            Survey s = new Survey();
+            s.setSurveyId(arr[i][0]);
+            Survey survey = surveyService.getSurveyById(s);
+            if (survey != null) {
+                int totalMonth = survey.getFrequency() * survey.getTimes() + 2;// +1 to include the titles in first col; +1 again to include the date of sign-in in 2nd col.
+                if (totalMonth > maxTotalMonth) {
+                    maxTotalMonth = totalMonth;
+                }
+            }
+        }
+
+        JSONArray jsonArray = new JSONArray();
+        List<String> headers = new LinkedList<>();// store the first row, to be headers of the remaining rows
+
+        //create the first row
+        JSONObject object = new JSONObject();
+        object.put("col0", "");//1st col is ""
+        headers.add("col0");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(patient1.getCreateTime());
+        Date createDate = calendar.getTime();
+        String dateString = formatter.format(createDate);
+        object.put(dateString, dateString);//2nd col, create date
+        headers.add(dateString);
+        for (int j = 2; j < maxTotalMonth; j++) {//from the 3rd col till the end
+            calendar.add(Calendar.MONTH, 1);
+            Date sendDate = calendar.getTime();
+            String ds = formatter.format(sendDate);
+            object.put(ds, ds);
+            headers.add(ds);
+        }
+        jsonArray.add(0, object);
+
+
+        //fill in the remaining rows of the table with ""
+        //for (int i = 1; i < arr.length; i++) {
+        //    JSONObject obj = new JSONObject();
+        //    for (String header : headers) {
+        //        obj.put(header, "");
+        //    }
+        //    jsonArray.add(i, obj);
+        //}
+
+
+        //calculate the remaining rows of the table
+        for (int i = 0; i < arr.length; i++) {
+            Survey s = new Survey();
+            s.setSurveyId(arr[i][0]);
+            Survey survey = surveyService.getSurveyById(s);
+
+            JSONObject obj = new JSONObject();
+            for (String header : headers) {
+                obj.put(header, "");
+            }
+            obj.put("col0", titles[i]);//1st col
+
+            if (survey != null) {
+                //tmp can start from 1, set tmp[0] col to titles and tmp[1] to "".
+                if (arr[i][1] == -1) {//calculate total scores
+                    if (survey.getSurveyId() == 1) {
+                        //for each retrieveInfo, get the total score
+                        for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                            RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+
+                            if (retrieveInfo != null && (deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId()) ||
+                                    deliveryInfo.getSurvey().getSurveyId().equals(6))) {
+                                BigDecimal totalScore = new BigDecimal("0");
+                                for (Answer answer : retrieveInfo.getAnswers()) {
+                                    for (Choice choice : answer.getChoices()) {//should be single choice
+                                        totalScore = totalScore.add(choice.getScore());
+                                    }
+                                }
+                                obj.put(formatter.format(deliveryInfo.getDeliveryDate()), totalScore);
+                            }
+                        }
+                    } else if (survey.getSurveyId() == 4) {
+                        //for each retrieveInfo, get the total score
+                        for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                            RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+
+                            if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {
+                                BigDecimal totalScore = new BigDecimal("0");
+                                for (Answer answer : retrieveInfo.getAnswers()) {
+                                    if (answer.getQuestion().getQuestionId() != 121 ||
+                                            answer.getQuestion().getQuestionId() != 122 ||
+                                            answer.getQuestion().getQuestionId() != 123 ||
+                                            answer.getQuestion().getQuestionId() != 124 ||
+                                            answer.getQuestion().getQuestionId() != 125 ||
+                                            answer.getQuestion().getQuestionId() != 126 ||
+                                            answer.getQuestion().getQuestionId() != 127 ||
+                                            answer.getQuestion().getQuestionId() != 177) {
+                                        continue;
+                                    }
+                                    for (Choice choice : answer.getChoices()) {//should be single choice
+                                        totalScore = totalScore.add(choice.getScore());
+                                    }
+                                }
+                                String str;
+                                if (totalScore.compareTo(new BigDecimal("0")) == 0) {
+                                    str = "完全控制";
+                                } else if (totalScore.compareTo(new BigDecimal("1")) == 0 ||
+                                        totalScore.compareTo(new BigDecimal("2")) == 0) {
+                                    str = "部分控制";
+                                } else {
+                                    str = "未控制";
+                                }
+                                obj.put(formatter.format(deliveryInfo.getDeliveryDate()), str);
+                            }
+                        }
+                    } else {
+                        //for each retrieveInfo, get the total score
+                        for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                            RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+
+                            if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {
+                                BigDecimal totalScore = new BigDecimal("0");
+                                for (Answer answer : retrieveInfo.getAnswers()) {
+                                    for (Choice choice : answer.getChoices()) {//should be single choice
+                                        totalScore = totalScore.add(choice.getScore());
+                                    }
+                                }
+                                obj.put(formatter.format(deliveryInfo.getDeliveryDate()), totalScore);
+                            }
+                        }
+                    }
+                } else {//get all answers
+                    for (Question question : survey.getQuestions()) {
+                        if (question.getQuestionId() == arr[i][1]) {//question is found
+
+                            //for each retrieveInfo, get the answer choice of that question
+                            for (DeliveryInfo deliveryInfo : deliveryService.getDeliveryInfosByPatientId(patient1)) {
+                                RetrieveInfo retrieveInfo = deliveryInfo.getRetrieveInfo();
+
+                                if (retrieveInfo != null && deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) {
+                                    //for each answer, get the choice of that question
+                                    for (Answer answer : retrieveInfo.getAnswers()) {
+                                        if (answer.getQuestion().getQuestionId() == question.getQuestionId()) {//answer is found
+                                            if (answer.getTextChoice() == 1) {//text choice
+                                                obj.put(formatter.format(deliveryInfo.getDeliveryDate()), answer.getTextChoiceContent());
+                                            } else {//choice
+                                                for (Choice choice : answer.getChoices()) {//should be single choice
+                                                    obj.put(formatter.format(deliveryInfo.getDeliveryDate()), choice.getChoiceContent());
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            jsonArray.add(i + 1, obj);
         }
 
         //存入request域中
