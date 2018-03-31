@@ -91,6 +91,9 @@ public class RetrieveServiceImpl implements RetrieveService {
         survey.setCurrentNum(survey.getCurrentNum() + 1);
         Survey b = surveyDao.updateSurveyInfo(survey);// 问卷的总回收数增加
         Date retrieveDate = new Date(System.currentTimeMillis());//获取当前时间
+        if(retrieveInfo.getRetrieveDate() != null) {
+            retrieveDate = retrieveInfo.getRetrieveDate();
+        }
         retrieveInfo.setRetrieveDate(retrieveDate);//设置答卷时间
         int ba = 0;
         if (b != null) {

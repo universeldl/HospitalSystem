@@ -216,7 +216,7 @@ public class RetrieveManageAction extends ActionSupport {
         Patient newPatient = patientService.getPatientById(patient);
         newDI.setPatient(newPatient);
 
-        newDI.setState(-1);
+        newDI.setState(0);
         newDI.setDeliveryDate(sendDate);
 
         int addDelivery = deliveryService.addDelivery(newDI);
@@ -257,8 +257,9 @@ public class RetrieveManageAction extends ActionSupport {
             }
 
             retrieveInfo.setAnswers(answers);
-            retrieveService.addRetrieveInfo(retrieveInfo);
+            //retrieveService.addRetrieveInfo(retrieveInfo);
             deliveryInfo.setRetrieveInfo(retrieveInfo);
+            deliveryInfo.setState(-1);
             deliveryService.updateDeliveryInfo(deliveryInfo);
         }
         try {

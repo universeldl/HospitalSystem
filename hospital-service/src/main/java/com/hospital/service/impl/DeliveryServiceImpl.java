@@ -129,6 +129,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
         //获得当前时间
         Date deliveryDate = new Date(System.currentTimeMillis());
+        if(info.getDeliveryDate() != null) {
+            deliveryDate = info.getDeliveryDate();
+        }
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(deliveryDate);

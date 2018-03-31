@@ -36,7 +36,7 @@
             <column name="byDoctor" default=""/>
         </property>
 
-        <one-to-one name="deliveryInfo" constrained="true" lazy="false"></one-to-one>
+        <one-to-one name="deliveryInfo" cascade="save-update" constrained="true" lazy="false"></one-to-one>
 
         <many-to-one name="doctor" class="com.hospital.domain.Doctor" lazy="false">
             <column name="aid"></column>
