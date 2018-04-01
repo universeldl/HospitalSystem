@@ -146,15 +146,15 @@
 
             <div class="row">
                 <div class="col-lg-12" style="overflow:scroll;">
-                    <table id="allInOne" class="table table-hover table-bordered" cellspacing="0" width="100%"
-                           style="min-width:1000px;">
+                    <table id="allInOne" class="table table-hover table-bordered" cellspacing="10" width="100%"
+                           style="min-width:1000px; text-align:center">
                         <thead>
                         <tr>
                             <s:if test="#request.allInOne!=null">
                                 <s:iterator value="#request.allInOne" var="row" status="status">
                                     <s:if test="#status.index == 0">
                                         <s:iterator value="#row" var="col">
-                                            <th><s:property value="#col.value"/></th>
+                                            <th style="min-width: 150px; width: 100%; text-align: center"><s:property value="#col.value"/></th>
                                         </s:iterator>
                                     </s:if>
                                 </s:iterator>
