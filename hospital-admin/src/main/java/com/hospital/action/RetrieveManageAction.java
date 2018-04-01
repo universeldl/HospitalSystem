@@ -53,7 +53,7 @@ public class RetrieveManageAction extends ActionSupport {
     }
 
     private int pageCode;
-    private Set<Answer> myAnswers;
+    private List<Answer> myAnswers;
 
     private int deliveryId;
     private int answerId;
@@ -75,7 +75,7 @@ public class RetrieveManageAction extends ActionSupport {
         this.openID = openID;
     }
 
-    public void setMyAnswers(Set<Answer> myAnswers) {
+    public void setMyAnswers(List<Answer> myAnswers) {
         this.myAnswers = myAnswers;
     }
 
@@ -466,7 +466,7 @@ public class RetrieveManageAction extends ActionSupport {
         int age = AgeUtils.getAgeFromBirthTime(patient.getBirthday());
 
         //myAnswers.clear();
-        myAnswers = new HashSet<>();
+        myAnswers = new ArrayList<>();
         for (Answer answer : tmpAnswers) {
             Question question = answer.getQuestion();
             if ((question.getStartAge() == 99 && question.getEndAge() == 99) ||
@@ -476,6 +476,15 @@ public class RetrieveManageAction extends ActionSupport {
                 myAnswers.add(answer);
             }
         }
+
+        Collections.sort(myAnswers, new Comparator<Answer>() {
+            @Override
+            public int compare(Answer s1, Answer s2) {
+                return s1.getQuestion().getSortId()-(s2.getQuestion().getSortId());
+            }
+        });
+
+
 
         ActionContext actionContext = ActionContext.getContext();
         actionContext.put("myAnswers", myAnswers);
