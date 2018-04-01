@@ -118,6 +118,11 @@
                                 <s:iterator id="choice" value="#question.sortedChoices" status="cindex">
                                     <label class="weui-cell weui-check__label"
                                             for='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'>
+                                        <s:if test="#choice.choiceImgPath!=null">
+                                            <s:if test="#choice.choiceImgPath!=''">
+                                                <img src='<s:property value="#choice.choiceImgPath"/>' width=80px height=80px>
+                                            </s:if>
+                                        </s:if>
                                         <div class="weui-cell__bd">
                                             <p><s:property value="#choice.choiceContent" /></p>
                                         </div>

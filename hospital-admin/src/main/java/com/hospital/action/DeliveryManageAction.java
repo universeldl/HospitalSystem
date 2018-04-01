@@ -487,19 +487,6 @@ public class DeliveryManageAction extends ActionSupport {
         // arr is a 2-D array of {surveyId-questionId}.
         // If questionId==-1, will output total scores of this survey
         // If questionId>0, will output the answers of this specified question
-        /*
-        int[][] arr = {{4, 112}, {4, 113},{1,-1},{6,-1},{5, -1},
-                {4,121},{4, 122},{4,123},{4,124},
-                {4,125},{4,177},{4,126},{4,127}};//answers for 1st question of survey1; total score for survey1
-
-        String[] titles = {
-        "哮喘发作次数", "感染次数","TRACK儿童呼吸和哮喘控制测试总分","哮喘控制测试评分总分","生命质量随访问卷总分",
-        "在过去4周内，您的孩子白天出现哮喘症状（持续几分钟）是否多于1次/周？","在过去4周内，您的孩子是否有因哮喘而出现至少1次的活动受限？",
-        "在过去4周内，您的孩子是否需要使用缓解药物多于1次/周？","在过去4周内，您的孩子是否因哮喘而出现至少1次的夜间醒来或夜间咳嗽？",
-        "在过去4周内，您的孩子白天出现哮喘症状是否多于2次/周？","在过去4周内，您的孩子是否因哮喘而出现至少1次的活动受限？",
-        "在过去4周内，您的孩子是否需要使用缓解药物多于2次/周？","在过去的4周内，您的孩子是否因哮喘而出现至少1次的夜间醒来或夜间咳嗽？"
-        };
-        */
 
         int[][] arr = {{4, 112}, {4, 113}, {1, -1}, {5, -1}, {4, -1}};
         String[] titles = {"哮喘发作次数", "感染次数", "哮喘控制测试评分", "生命质量评分", "GINA"};

@@ -42,6 +42,8 @@ function getQuestionInfo(id) {
                     $("#findQuestionType").val("单选题");
                 else if (data.questionType == 3)
                     $("#findQuestionType").val("问答题");
+                else if (data.questionType == 4)
+                    $("#findQuestionType").val("问答题(日期)");
 
                 if (data.questionType == 3) {
                     $("#checkTextChoice").outerHTML = '';
