@@ -92,7 +92,7 @@ public class DeliveryManageAction extends ActionSupport {
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         PageBean<DeliveryInfo> pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize, doctor);
         if (pb != null) {
-            pb.setUrl("findDeliveryInfoByPage.action?");
+            pb.setUrl("findDeliveryInfoByPage.action?patientId=" + patientId + "&");
         }
         //存入request域中
         ServletActionContext.getRequest().setAttribute("pb", pb);
@@ -112,7 +112,7 @@ public class DeliveryManageAction extends ActionSupport {
         patient.setPatientId(patientId);
         PageBean<DeliveryInfo> pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize, patient);
         if (pb != null) {
-            pb.setUrl("findDeliveryInfoByPage.action?");
+            pb.setUrl("findDeliveryInfoByPage.action?patientId=" + patientId + "&");
         }
         //存入request域中
         ServletActionContext.getRequest().setAttribute("pb", pb);
