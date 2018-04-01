@@ -2,6 +2,7 @@ package com.hospital.action;
 
 import com.hospital.domain.*;
 import com.hospital.service.*;
+import com.hospital.util.AgeUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
@@ -456,7 +457,24 @@ public class RetrieveManageAction extends ActionSupport {
         response.setContentType("application/json;charset=utf-8");
         RetrieveInfo retrieveInfo = new RetrieveInfo();
         retrieveInfo.setDeliveryId(deliveryId);
-        myAnswers = retrieveService.getAnswerByDeliveryId(retrieveInfo);
+        Set<Answer> tmpAnswers = retrieveService.getAnswerByDeliveryId(retrieveInfo);
+
+        DeliveryInfo tmp_deliveryInfo = new DeliveryInfo();
+        tmp_deliveryInfo.setDeliveryId(deliveryId);
+        DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmp_deliveryInfo);
+        Patient patient = deliveryInfo.getPatient();
+        int age = AgeUtils.getAgeFromBirthTime(patient.getBirthday());
+
+        //myAnswers.clear();
+        myAnswers = new HashSet<>();
+        for (Answer answer : tmpAnswers) {
+            Question question = answer.getQuestion();
+            if (question.getStartAge() == 99 && question.getEndAge() == 99) {
+                myAnswers.add(answer);
+            } else if (age >= question.getStartAge() && age <= question.getEndAge()) {
+                myAnswers.add(answer);
+            }
+        }
 
         ActionContext actionContext = ActionContext.getContext();
         actionContext.put("myAnswers", myAnswers);
