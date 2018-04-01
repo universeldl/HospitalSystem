@@ -14,7 +14,7 @@ public class Question {
     private int endAge;
     //private Survey survey;
     private Set<Choice> choices = new HashSet<>();
-    private List<Choice> sortedChoices;
+    /*private List<Choice> sortedChoices;*/
 
     public void setSortId(int sortId) {
         this.sortId = sortId;
@@ -113,7 +113,7 @@ public class Question {
 
     }
 
-    public List<Choice> getSortedChoices() {
+/*    public List<Choice> getSortedChoices() {
         sortedChoices = new ArrayList<>(choices);
         Collections.sort(sortedChoices, new Comparator<Choice>() {
             @Override
@@ -122,7 +122,7 @@ public class Question {
             }
         });
         return sortedChoices;
-    }
+    }*/
     public Question(int aid, int surveyId, String questionContent, int questionType, int textChoice, int startAge, int endAge) {
         super();
         this.aid = aid;

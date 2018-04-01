@@ -13,7 +13,7 @@
     <title>问卷名称</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <link rel="stylesheet" href="./css/weui.css"/>
+    <link rel="stylesheet" href="./css/weui.min.css"/>
     <link rel="stylesheet" href="./css/example.css"/>
 
     <style type="text/css">
@@ -34,12 +34,14 @@
 <script type="text/html" id="tpl_home">
     <div class="page">
         <div class="page__hd">
-            <s:if test="#request.survey!=null">
+            <s:if test="#request.surveyName!=null">
                 <h1 class="page__title">
-                    <s:property value="#request.survey.surveyName" />
+                    <s:property value="#request.surveyName" />
                 </h1>
+            </s:if>
+            <s:if test="#request.surveyDescription!=null">
                 <p class="page__desc">
-                    <s:property value="#request.survey.description" />
+                    <s:property value="#request.surveyDescription" />
                 </p>
             </s:if>
             <br/>
@@ -75,7 +77,7 @@
                     <s:if test="#question.questionType==1">
                         <s:if test="#question.choices.size > 0">
                             <div class="weui-cells weui-cells_checkbox">
-                            <s:iterator id="choice" value="#question.sortedChoices" status="cindex">
+                            <s:iterator id="choice" value="#question.choices" status="cindex">
                                     <label class="weui-cell weui-check__label"
                                            for='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'>
                                         <div class="weui-cell__bd">
@@ -115,7 +117,7 @@
                     <s:elseif test="#question.questionType==2">
                         <s:if test="#question.choices.size > 0">
                             <div class="weui-cells weui-cells_radio">
-                                <s:iterator id="choice" value="#question.sortedChoices" status="cindex">
+                                <s:iterator id="choice" value="#question.choices" status="cindex">
                                     <label class="weui-cell weui-check__label"
                                             for='question<s:property value="#qindex.index"/>choice<s:property value="#cindex.index" />'>
                                         <s:if test="#choice.choiceImgPath!=null">

@@ -142,7 +142,9 @@ public class surveyAction extends ActionSupport {
             return ERROR;
         }
 
-        ServletActionContext.getRequest().setAttribute("survey", survey);
+        ServletActionContext.getRequest().setAttribute("surveyName", survey.getSurveyName());
+        ServletActionContext.getRequest().setAttribute("surveyDescription", survey.getDescription());
+
         //List<Question> questions = survey.getSortedQuestions();
         Set<Question> all_questions = survey.getQuestions();
         List<Question> questions = new ArrayList<>();
