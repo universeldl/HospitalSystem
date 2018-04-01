@@ -469,7 +469,8 @@ public class RetrieveManageAction extends ActionSupport {
         myAnswers = new HashSet<>();
         for (Answer answer : tmpAnswers) {
             Question question = answer.getQuestion();
-            if (question.getStartAge() == 99 && question.getEndAge() == 99) {
+            if ((question.getStartAge() == 99 && question.getEndAge() == 99) ||
+                    (question.getStartAge() == -1 && question.getEndAge() == -1)) {
                 myAnswers.add(answer);
             } else if (age >= question.getStartAge() && age <= question.getEndAge()) {
                 myAnswers.add(answer);
