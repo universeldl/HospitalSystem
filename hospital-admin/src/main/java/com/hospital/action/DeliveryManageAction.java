@@ -584,8 +584,8 @@ public class DeliveryManageAction extends ActionSupport {
                                             answer.getQuestion().getQuestionId() != 124 &&
                                             answer.getQuestion().getQuestionId() != 125 &&
                                             answer.getQuestion().getQuestionId() != 126 &&
-                                            answer.getQuestion().getQuestionId() != 127 &&
-                                            answer.getQuestion().getQuestionId() != 177) {
+                                            answer.getQuestion().getQuestionId() != 177 &&
+                                            answer.getQuestion().getQuestionId() != 178) {
                                         continue;
                                     }
                                     for (Choice choice : answer.getChoices()) {//should be single choice

@@ -10,7 +10,7 @@
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <html lang="zh-CN" class="ax-vertical-centered">
 <head>
-    <title>问卷名称</title>
+    <title>随访问卷</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <link rel="stylesheet" href="./css/weui.min.css"/>
