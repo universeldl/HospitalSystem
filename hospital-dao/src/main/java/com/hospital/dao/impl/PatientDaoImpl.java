@@ -272,9 +272,8 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
             int totalRecord = 0;
             List<Patient> patientList = null;
             List list = this.getHibernateTemplate().find(sql);
-            if (list != null && list.size() > 0) {
-                totalRecord = list.size();
-            }
+            Long total = (Long)list.get(0);
+            totalRecord = total.intValue();
             pb.setTotalRecord(totalRecord);    //设置总记录数
             //this.getSessionFactory().getCurrentSession().close();
 
