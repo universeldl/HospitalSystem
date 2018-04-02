@@ -202,7 +202,7 @@ public class PatientManageAction extends ActionSupport {
             pageCode = 1;
         }
         //给pageSize,每页的记录数赋值
-        int pageSize = 10;
+        int pageSize = 40;
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         PageBean<Patient> pb = patientService.findPatientByPage(pageCode, pageSize, doctor);
         if (pb != null) {
