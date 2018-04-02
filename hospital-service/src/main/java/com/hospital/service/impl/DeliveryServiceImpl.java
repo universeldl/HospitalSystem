@@ -129,7 +129,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
         //获得当前时间
         Date deliveryDate = new Date(System.currentTimeMillis());
-        if(info.getDeliveryDate() != null) {
+        if (info.getDeliveryDate() != null) {
             deliveryDate = info.getDeliveryDate();
         }
 
@@ -236,19 +236,29 @@ public class DeliveryServiceImpl implements DeliveryService {
                 int num = 0;//当前survey已经随访次数
                 int newestDeliveryId = 0;//当前survey的最新一次发送的问卷id
                 boolean createNewDeliveryAndSend = false;
-                for (DeliveryInfo deliveryInfo : deliveryInfos) {
-                    if (deliveryInfo.getSurvey().getSurveyId() == survey.getSurveyId()
-                            && deliveryInfo.getPatient().getPatientId() == patient.getPatientId()) {
-                        if (deliveryInfo.getDeliveryId() > newestDeliveryId) {
-                            newestDeliveryId = deliveryInfo.getDeliveryId();
+                try {
+                    Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("1949-10-01 20:27:00");
+                    Calendar ori = Calendar.getInstance();
+                    ori.setTime(date);
+                    Date oriDate = ori.getTime();
+                    for (DeliveryInfo deliveryInfo : deliveryInfos) {
+                        if (deliveryInfo.getSurvey().getSurveyId() == survey.getSurveyId()
+                                && deliveryInfo.getPatient().getPatientId() == patient.getPatientId()) {
+                            ori.setTime(deliveryInfo.getDeliveryDate());
+                            Date lastDate = ori.getTime();
+                            if (lastDate.after(oriDate)) {
+                                oriDate = lastDate;
+                                newestDeliveryId = deliveryInfo.getDeliveryId();
+                            }
+                            ++num;
                         }
-                        ++num;
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 if (num == 0) {//如果该问卷从未发送过
                     createNewDeliveryAndSend = true;
-                }
-                else if (num < survey.getTimes()) {//未达到随访次数
+                } else if (num <= survey.getTimes()) {//未达到随访次数
                     DeliveryInfo DI = new DeliveryInfo();
                     DI.setDeliveryId(newestDeliveryId);
                     DeliveryInfo deliveryInfo = deliveryDao.getDeliveryInfoById(DI);//拿到当前survey的最新一次发送的问卷
@@ -264,14 +274,14 @@ public class DeliveryServiceImpl implements DeliveryService {
                                 deliveryInfo.setState(deliveryInfo.getState() + 1);//state+1
                                 deliveryDao.updateDeliveryInfo(deliveryInfo);
                                 sendTemplateMessage(deliveryInfo);
-                            } else if(System.currentTimeMillis() > endDate.getTime()){ //已经逾期，该问卷作废
+                            } else if (System.currentTimeMillis() > endDate.getTime()) { //已经逾期，该问卷作废
                                 deliveryInfo.setState(-2);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
-                    if (deliveryInfo.getState() == -1 && deliveryInfo.getState() == -2) {//如果最新的一次已经答卷或者逾期仍未答卷，说明要发送新一期的问卷
+                    if (deliveryInfo.getState() == -1 && deliveryInfo.getState() == -2 && num != survey.getTimes()) {//如果最新的一次已经答卷或者逾期仍未答卷，说明要发送新一期的问卷
                         createNewDeliveryAndSend = true;
                     }
                 }
