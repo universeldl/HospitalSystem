@@ -261,8 +261,8 @@ INSERT INTO Plan VALUES(1, 0, 2, 1, 1, 1, 1, 6);
 INSERT INTO Plan VALUES(2, 2, 5, 2, 1, 2, 1, 6);
 INSERT INTO Plan VALUES(3, 6, 9, 4, 1, 3, 1, 6);
 
-INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1", "1", "13567891234","123@abc.com", "2016-6-10","2017-12-15 00:00:00",1,1,3,2);
-INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0", "2", "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
+INSERT INTO Patient VALUES(1,"123456","李四","appid","p1","uniqid1","outpatientid1", "inpatientid1","1", "1", "13567891234","123@abc.com", "2016-6-10","2018-04-03 00:00:00",1,1,3,2);
+INSERT INTO Patient VALUES(2,"123456","赵六","appid","p2","uniqid2","outpatientid2","inpatientid2","0", "2", "13567891234","456@abc.com","2013-10-10","2017-10-02 00:00:00",1,2,3,6);
 INSERT INTO Patient VALUES(3,"123456","测试","appid","oaBonw30UBjZkLW5rf19h7KunM7s","na",NULL,NULL,"0", "3", "13567891234","456@abc.com","2013-10-10","2017-03-01 00:00:00",1,2,3,6);
 
 INSERT INTO Authorization VALUES(2,1,1,1,1,1,1,1,1,0);
@@ -271,16 +271,18 @@ INSERT INTO Authorization VALUES(5,0,0,0,0,0,0,0,0,1);
 INSERT INTO Authorization VALUES(6,1,1,1,1,1,1,1,1,1);
 
 
-INSERT INTO survey VALUES(1,"survey1","admin",10,30, 2,"a1","aaa","2017-06-25 00:00:00",1,2,6,2, FALSE);
-INSERT INTO survey VALUES(2,"survey2","doctor2",10,30, 2,"a2","baa","2017-06-25 00:00:00",1,3,6,6, FALSE);
+INSERT INTO survey VALUES(1,"survey1","admin",10,30, 2,"a1","aaa","2017-06-25 00:00:00",1,2,1,2, TRUE);
+INSERT INTO survey VALUES(2,"survey2","doctor2",10,30, 2,"a2","baa","2017-06-25 00:00:00",1,3,99,6, FALSE);
 
-INSERT INTO deliveryInfo VALUES(1,"2017-01-15 00:00:00","2017-03-04 00:00:00",0,-1,1,1,6);
-INSERT INTO deliveryInfo VALUES(2,"2017-02-15 00:00:00","2018-04-04 00:00:00",0,0,1,1,6);
-INSERT INTO deliveryInfo VALUES(3,"2017-03-15 00:00:00","2017-05-04 00:00:00",0,-1,2,1,6);
-INSERT INTO deliveryInfo VALUES(4,"2017-04-15 00:00:00","2017-06-04 00:00:00",0,-1,2,1,6);
-INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",0,-1,2,2,6);
-INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2018-07-04 00:00:00",0,0,2,2,6);
-INSERT INTO deliveryInfo VALUES(7,"2018-03-02 00:00:00","2018-08-04 00:00:00",30,0,3,1,6);
+INSERT INTO deliveryInfo VALUES(1,"2018-04-03 00:00:00","2018-04-06 00:00:00",30,0,1,1,6);
+#INSERT INTO deliveryInfo VALUES(1,"2018-04-03 00:00:00","2018-04-06 00:00:00",30,-1,1,2,6);
+#INSERT INTO deliveryInfo VALUES(2,"2018-04-03 00:00:00","2018-04-06 00:00:00",30,0,1,1,6);
+#INSERT INTO deliveryInfo VALUES(3,"2017-03-15 00:00:00","2017-05-04 00:00:00",30,-1,2,1,6);
+#INSERT INTO deliveryInfo VALUES(4,"2017-04-15 00:00:00","2017-06-04 00:00:00",30,-1,2,2,6);
+#INSERT INTO deliveryInfo VALUES(5,"2017-05-15 00:00:00","2017-07-04 00:00:00",30,-1,2,2,6);
+#INSERT INTO deliveryInfo VALUES(6,"2017-06-15 00:00:00","2017-07-04 00:00:00",30,0,2,2,6);
+#INSERT INTO deliveryInfo VALUES(7,"2018-03-02 00:00:00","2018-04-02 00:00:00",30,0,2,2,6);
+INSERT INTO deliveryInfo VALUES(2,"2018-01-02 10:00:00","2018-02-02 00:00:00",30,0,2,2,6);
 
 INSERT INTO Question VALUES(1,7,1,1,"第一个问题",1,6,-1, -1);
 INSERT INTO Question VALUES(2,6,1,0,"2nd question",2,6,3,5);
@@ -292,11 +294,11 @@ INSERT INTO Question VALUES(7,1,1,1,"date question2",4,6,-1,-1);
 
 
 INSERT INTO Answer VALUES(1,1,1,1,1,0,"","","2016-06-14 00:00:00",6);
-INSERT INTO Answer VALUES(2,3,2,1,1,0,"","","2016-06-14 00:00:00",6);
-INSERT INTO Answer VALUES(3,3,3,1,1,1,"dfjkldfjskljdfklkdljfskldf","","2017-02-04 00:00:00",6);
-INSERT INTO Answer VALUES(4,4,2,2,1,0,"","张一三","2018-02-04 00:00:00",6);
-INSERT INTO Answer VALUES(5,5,2,2,2,1,"sdfskljfalsdjfklsjkf haha","lht","2017-06-04 00:00:00",6);
-INSERT INTO Answer VALUES(6,5,4,2,2,1,"sdfskljfalsdjfklsjkf haha","lht","2017-06-04 00:00:00",6);
+INSERT INTO Answer VALUES(2,1,2,1,1,0,"","","2016-06-14 00:00:00",6);
+INSERT INTO Answer VALUES(3,1,3,1,1,1,"dfjkldfjskljdfklkdljfskldf","","2017-02-04 00:00:00",6);
+INSERT INTO Answer VALUES(4,2,2,2,1,0,"","张一三","2018-02-04 00:00:00",6);
+INSERT INTO Answer VALUES(5,2,2,2,2,1,"sdfskljfalsdjfklsjkf haha","lht","2017-06-04 00:00:00",6);
+INSERT INTO Answer VALUES(6,2,4,2,2,1,"sdfskljfalsdjfklsjkf haha","lht","2017-06-04 00:00:00",6);
 INSERT INTO Answer VALUES(10,1,4,1,1,0,NULL,NULL,NULL,1);
 
 INSERT INTO Choice VALUES(1,1,1,"choice_1","./img/survey/choice1.png",6);
@@ -309,14 +311,14 @@ INSERT INTO Choice VALUES(7,3,7,"choice_7","",6);
 INSERT INTO Choice VALUES(14,4,1,"choice_14","",6);
 INSERT INTO Choice VALUES(15,4,2,"choice_15","",6);
 
-INSERT INTO RetrieveInfo VALUES(1,1,1,"2017-06-25 00:00:00","张三",6);
-INSERT INTO RetrieveInfo VALUES(3,2,1,"2017-05-25 00:00:00","",6);
-INSERT INTO RetrieveInfo VALUES(4,2,1,"2017-06-25 00:00:00","",6);
-INSERT INTO RetrieveInfo VALUES(5,2,2,"2017-06-25 00:00:00","",6);
+#INSERT INTO RetrieveInfo VALUES(1,1,2,"2018-04-03 10:00:00","张三",6);
+#INSERT INTO RetrieveInfo VALUES(3,2,1,"2017-03-25 00:00:00","",6);
+#INSERT INTO RetrieveInfo VALUES(4,2,2,"2017-04-25 00:00:00","",6);
+#INSERT INTO RetrieveInfo VALUES(5,2,2,"2017-05-25 00:00:00","",6);
 
 INSERT INTO plan_survey VALUES(1, 1);
 INSERT INTO plan_survey VALUES(1, 2);
-INSERT INTO plan_survey VALUES(2, 1);
+INSERT INTO plan_survey VALUES(2, 2);
 
 INSERT INTO answer_choice VALUES(1, 1);
 INSERT INTO answer_choice VALUES(1, 2);

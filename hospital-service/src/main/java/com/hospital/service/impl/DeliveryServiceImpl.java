@@ -99,6 +99,28 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
+    public PageBean<DeliveryInfo> queryDeliveryInfo(int queryType, int pageCode, int pageSize, Doctor doctor) {
+        PageBean<DeliveryInfo> pageBean = new PageBean<DeliveryInfo>();
+        pageBean.setPageCode(pageCode);
+        pageBean.setPageSize(pageSize);
+        PageBean<Integer> list = deliveryDao.getDeliveryIdList(queryType, pageCode, pageSize, doctor);
+        pageBean.setTotalRecord(list.getTotalRecord());
+        List<Integer> beanList = list.getBeanList();
+        if (beanList.size() == 0) {
+            return null;
+        }
+        List<DeliveryInfo> deliveryInfos = new ArrayList<DeliveryInfo>();
+        for (Integer i : beanList) {
+            DeliveryInfo deliveryInfo = new DeliveryInfo();
+            deliveryInfo.setDeliveryId(i);
+            DeliveryInfo info = deliveryDao.getDeliveryInfoById(deliveryInfo);
+            deliveryInfos.add(info);
+        }
+        pageBean.setBeanList(deliveryInfos);
+        return pageBean;
+    }
+
+    @Override
     public PageBean<DeliveryInfo> queryDeliveryInfo(int surveyId, int pageCode, int pageSize, Patient patient) {
         PageBean<DeliveryInfo> pageBean = new PageBean<DeliveryInfo>();
         pageBean.setPageCode(pageCode);
@@ -266,7 +288,9 @@ public class DeliveryServiceImpl implements DeliveryService {
                         try {
                             Calendar calendar = Calendar.getInstance();
                             calendar.setTime(patient.getCreateTime());
-                            calendar.add(Calendar.MONTH, (num + 1) * survey.getFrequency());
+                            if(!survey.isSendOnRegister()) {
+                                calendar.add(Calendar.MONTH, num * survey.getFrequency());
+                            }
                             Date sendDate = calendar.getTime();
                             calendar.add(Calendar.DAY_OF_MONTH, survey.getBday());
                             Date endDate = calendar.getTime();
@@ -276,12 +300,13 @@ public class DeliveryServiceImpl implements DeliveryService {
                                 sendTemplateMessage(deliveryInfo);
                             } else if (System.currentTimeMillis() > endDate.getTime()) { //已经逾期，该问卷作废
                                 deliveryInfo.setState(-2);
+                                deliveryDao.updateDeliveryInfo(deliveryInfo);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
-                    if (deliveryInfo.getState() == -1 && deliveryInfo.getState() == -2 && num != survey.getTimes()) {//如果最新的一次已经答卷或者逾期仍未答卷，说明要发送新一期的问卷
+                    if ((deliveryInfo.getState() == -1 || deliveryInfo.getState() == -2) && num != survey.getTimes()) {//如果最新的一次已经答卷或者逾期仍未答卷，说明要发送新一期的问卷
                         createNewDeliveryAndSend = true;
                     }
                 }
@@ -290,7 +315,9 @@ public class DeliveryServiceImpl implements DeliveryService {
                     try {
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(patient.getCreateTime());
-                        calendar.add(Calendar.MONTH, (num + 1) * survey.getFrequency());
+                        if(!survey.isSendOnRegister()) {
+                            calendar.add(Calendar.MONTH, (num + 1) * survey.getFrequency());
+                        }
                         Date sendDate = calendar.getTime();
                         calendar.add(Calendar.DAY_OF_MONTH, survey.getBday());
                         Date endDate = calendar.getTime();
@@ -300,6 +327,7 @@ public class DeliveryServiceImpl implements DeliveryService {
                             newDI.setDoctor(patient.getDoctor());
                             newDI.setSurvey(survey);
                             newDI.setPatient(patient);
+                            newDI.setOverday(survey.getBday());
                             newDI.setState(0);//新deliveryInfo
                             int addDelivery = addDelivery(newDI);
                             newDI.setDeliveryId(addDelivery);
@@ -368,7 +396,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
         String url = "https://www.chjtech.top/hospital-wechat/doSurvey.jsp?deliveryID=" + deliveryInfo.getDeliveryId();
 
-        return TemplateMessageMgr.sendSurveyTemplate(data, patient.getOpenID(), url, mgr);
+        return TemplateMessageMgr.sendSurveyTemplate(data, "o5bAaxOX09XMfb4hKYE927K8DQr0", url, mgr);
     }
 
     @Override
