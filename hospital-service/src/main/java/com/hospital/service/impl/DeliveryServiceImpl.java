@@ -396,7 +396,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
         String url = "https://www.chjtech.top/hospital-wechat/doSurvey.jsp?deliveryID=" + deliveryInfo.getDeliveryId();
 
-        return TemplateMessageMgr.sendSurveyTemplate(data, "o5bAaxOX09XMfb4hKYE927K8DQr0", url, mgr);
+        return TemplateMessageMgr.sendSurveyTemplate(data, patient.getOpenID(), url, mgr);
     }
 
     @Override
