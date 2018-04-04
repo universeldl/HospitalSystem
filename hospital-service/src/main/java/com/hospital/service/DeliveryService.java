@@ -21,6 +21,8 @@ public interface DeliveryService {
 
     PageBean<DeliveryInfo> queryDeliveryInfo(String name, int deliveryId, int pageCode, int pageSize, Doctor doctor);
 
+    PageBean<DeliveryInfo> queryDeliveryInfo(int queryType, int pageCode, int pageSize, Doctor doctor);
+
     PageBean<DeliveryInfo> queryDeliveryInfo(int surveyId, int pageCode, int pageSize, Patient patient);
 
     /**

@@ -65,6 +65,18 @@ public class CalendarUtils {
     }
 
     /**
+     * 描述:获取当前月的第一天.
+     *
+     * @return
+     */
+    public static String getFirstDayOfMonth() {
+        SimpleDateFormat dft = new SimpleDateFormat("yyyyMMdd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        return dft.format(calendar.getTime());
+    }
+
+    /**
      * 描述:获取上个月的最后一天.
      *
      * @return

@@ -37,9 +37,10 @@
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
 
     <!-- add specific js in here -->
-    <script src="${pageContext.request.contextPath}/js/addSurveyType.js"></script>
-    <script src="${pageContext.request.contextPath}/js/updateSurveyType.js"></script>
-    <script src="${pageContext.request.contextPath}/js/deleteSurveyType.js"></script>
+    <script src="${pageContext.request.contextPath}/js/getDeliveryInfo.js"></script>
+    <script src="${pageContext.request.contextPath}/js/addRetrieve.js"></script>
+    <script src="${pageContext.request.contextPath}/js/getRetrieve.js"></script>
+    <script src="${pageContext.request.contextPath}/js/getRetrieveInfo.js"></script>
     <!-- add specific js in here -->
 
     <script src="${pageContext.request.contextPath}/js/app.js"></script>
@@ -93,9 +94,6 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/doctor/planManageAction_getAllPlan.action"><i
                                         class="fa fa-list"></i> 随访设置</a></li>
-                            <!-- <li>
-                                <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
-                                        class="fa fa-send-o"></i> 随访信息</a></li> -->
                         </ul>
                     </li>
                 </s:if>
@@ -106,6 +104,9 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/doctor/patientManageAction_findPatientByPage.action"><i
                                         class="fa fa-medkit"></i> 病人列表</a></li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
+                                        class="fa fa-send-o"></i> 随访信息</a></li>
                         </ul>
                     </li>
                 </s:if>
@@ -143,7 +144,181 @@
         </section>
         <section class="content" style="background: rgb(255, 255, 255); height: 898px;">
             <!-- <h2>Hello World!</h2> -->
-            <h3>此页面需要重新做，不用设置手动分发，所有问卷都是自动分发，只需要设置分发时间，分发周期，分发类型（根据问卷类型决定）等即可。</h3>
+            <div class="panel panel-info">
+                <div class="panel-heading">查询</div>
+                <form class="form-horizontal"
+                      action="${pageContext.request.contextPath}/doctor/deliveryManageAction_queryDeliverySearchInfoNew.action"
+                      method="post">
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">选择问卷</div>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="queryType" name="queryType">
+                                <option value="0">全部问卷</option>
+                                <option value="1">本月未答</option>
+                                <option value="2">近30天未答</option>
+                                <option value="3">所有未答</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--<div class="form-group">
+                        <div class="col-sm-2 control-label">问卷名称</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="surveyName"
+                                   placeholder="请输入问卷名称（支持模糊查询）"/>
+                        </div>
+                    </div> -->
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label"></div>
+                        <button type="submit" class="btn btn-primary" id="btn_delivery">查询</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>问卷名称</th>
+                            <!--
+                            <th>病人用户名</th>
+                            -->
+                            <th>病人名称</th>
+                            <th>分发日期</th>
+                            <th>截止答卷日期</th>
+                            <th>答卷日期</th>
+                            <th>答卷人</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+
+
+                        <!---在此插入信息-->
+                        <s:if test="#request.pb.beanList!=null">
+                            <s:iterator value="#request.pb.beanList" var="deliveryInfo">
+                                <tbody <s:if test="#deliveryInfo.retrieveInfo.byDoctor!=null && #deliveryInfo.retrieveInfo.byDoctor!=''">style="color:red;"</s:if>>
+                                <td><s:property value="#deliveryInfo.survey.surveyName"/></td>
+                                <td><s:property value="#deliveryInfo.patient.name"/></td>
+                                <td><s:date name="#deliveryInfo.deliveryDate" format="yyyy-MM-dd"/></td>
+                                <td><s:date name="#deliveryInfo.endDate" format="yyyy-MM-dd"/></td>
+                                <td><s:date name="#deliveryInfo.retrieveInfo.retrieveDate" format="yyyy-MM-dd"/></td>
+                                <s:if test="#deliveryInfo.retrieveInfo.byDoctor!=null && #deliveryInfo.retrieveInfo.byDoctor!=''">
+                                    <td><s:property value="#deliveryInfo.retrieveInfo.byDoctor"/></td>
+                                </s:if>
+                                <s:else>
+                                    <td><s:property value="#deliveryInfo.patient.name"/></td>
+                                </s:else>
+                                <td>
+                                    <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
+                                            data-target="#findDeliveryModal"
+                                            onclick="getDeliveryInfoById(<s:property
+                                                    value="#deliveryInfo.deliveryId"/>)">查看
+                                    </button>
+                                    <s:if test="#session.doctor.authorization.retrieveSet==1">
+                                        <input type="hidden" id="check_retrieve"
+                                               value="${pageContext.request.contextPath}/doctor/retrieveManageAction_getAnswerByDeliveryId.action">
+                                        <button type="button" class="btn btn-warning btn-xs"
+                                                onclick="checkRetrieve(<s:property value="#deliveryInfo.deliveryId"/>)">
+                                            查看答卷
+                                        </button>
+                                        <button type="button" class="btn btn-info btn-xs"
+                                                onclick="addRetrieveForPatient(<s:property
+                                                        value="#deliveryInfo.deliveryId"/>)">添加答卷
+                                        </button>
+                                    </s:if>
+                                    <!--<button type="button" class="btn btn-success btn-xs"
+                                            onclick="resendSurvey(<s:property value="#retrieve.deliveryId"/>)">重发
+                                    </button>-->
+                                </td>
+                                </tbody>
+                            </s:iterator>
+                        </s:if>
+                        <s:else>
+                            <tbody>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
+                            </tbody>
+                        </s:else>
+
+                    </table>
+
+
+                    <s:if test="#request.pb!=null">
+
+                        <%-- 定义页码列表的长度，5个长 --%>
+                        <c:choose>
+                            <%-- 第一条：如果总页数<=5，那么页码列表为1 ~ totalPage 从第一页到总页数--%>
+                            <%--如果总页数<=5的情况 --%>
+                            <c:when test="${pb.totalPage <= 5 }">
+                                <c:set var="begin" value="1"/>
+                                <c:set var="end" value="${pb.totalPage }"/>
+                            </c:when>
+                            <%--总页数>5的情况 --%>
+                            <c:otherwise>
+                                <%-- 第二条：按公式计算，让列表的头为当前页-2；列表的尾为当前页+2 --%>
+                                <c:set var="begin" value="${pb.pageCode-2 }"/>
+                                <c:set var="end" value="${pb.pageCode+2 }"/>
+
+                                <%-- 第三条：第二条只适合在中间，而两端会出问题。这里处理begin出界！ --%>
+                                <%-- 如果begin<1，那么让begin=1，相应end=5 --%>
+                                <c:if test="${begin<1 }">
+                                    <c:set var="begin" value="1"/>
+                                    <c:set var="end" value="5"/>
+                                </c:if>
+                                <%-- 第四条：处理end出界。如果end>tp，那么让end=tp，相应begin=tp-4 --%>
+                                <c:if test="${end>pb.totalPage }">
+                                    <c:set var="begin" value="${pb.totalPage-4 }"/>
+                                    <c:set var="end" value="${pb.totalPage }"/>
+                                </c:if>
+                            </c:otherwise>
+                        </c:choose>
+
+
+                        <div class="pull-right"><!--右对齐--->
+                            <ul class="pagination">
+                                <li class="disabled"><a href="#">第<s:property
+                                        value="#request.pb.pageCode"/>页/共<s:property
+                                        value="#request.pb.totalPage"/>页</a></li>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_${pb.url }pageCode=1">首页</a>
+                                </li>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a>
+                                </li><!-- 上一页 -->
+                                    <%-- 循环显示页码列表 --%>
+                                <c:forEach begin="${begin }" end="${end }" var="i">
+                                    <c:choose>
+                                        <%--如果是当前页则设置无法点击超链接 --%>
+                                        <c:when test="${i eq pb.pageCode }">
+                                            <li class="active"><a>${i }</a>
+                                            <li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_${pb.url }pageCode=${i}">${i}</a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                    <%--如果当前页数没到总页数，即没到最后一页,则需要显示下一页 --%>
+                                <c:if test="${pb.pageCode < pb.totalPage }">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a>
+                                    </li>
+                                </c:if>
+                                    <%--否则显示尾页 --%>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_${pb.url }pageCode=${pb.totalPage}">尾页</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </s:if>
+                </div>
+            </div>
 
 
         </section>
@@ -161,7 +336,7 @@
 <!--------------------------------------查看的模糊框------------------------>
 <form class="form-horizontal">   <!--保证样式水平不混乱-->
     <!-- 模态框（Modal） -->
-    <div class="modal fade" id="findRetrieveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade" id="findDeliveryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -207,7 +382,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">病人名称</label>
+                        <label for="firstname" class="col-sm-3 control-label">病人姓名</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="patientName" readonly="readonly">
 
@@ -260,6 +435,7 @@
 
 </form>
 <!--------------------------------------查看的模糊框------------------------>
+
 
 
 <!------------------------------修改密码模糊框-------------------------------->

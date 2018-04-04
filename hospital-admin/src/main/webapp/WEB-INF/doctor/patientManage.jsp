@@ -115,9 +115,6 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/doctor/planManageAction_getAllPlan.action"><i
                                         class="fa fa-list"></i> 随访设置</a></li>
-                            <!-- <li>
-                                <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
-                                        class="fa fa-send-o"></i> 随访信息</a></li> -->
                         </ul>
                     </li>
                 </s:if>
@@ -128,6 +125,9 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/doctor/patientManageAction_findPatientByPage.action"><i
                                         class="fa fa-medkit"></i> 病人列表</a></li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
+                                        class="fa fa-send-o"></i> 随访信息</a></li>
                         </ul>
                     </li>
                 </s:if>

@@ -20,6 +20,8 @@ public interface DeliveryDao {
 
     PageBean<Integer> getDeliveryIdList(int surveyId, int pageCode, int pageSize, Patient patient);
 
+    PageBean<Integer> getDeliveryIdList(int queryType, int pageCode, int pageSize, Doctor doctor);
+
     PageBean<Integer> getDeliveryIdList(String name, int deliveryId, int pageCode, int pageSize, Doctor doctor);
 
     List<DeliveryInfo> getNoRetrieveDeliveryInfoByPatient(Patient patient);

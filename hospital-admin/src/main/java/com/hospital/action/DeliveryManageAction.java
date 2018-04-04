@@ -41,6 +41,7 @@ public class DeliveryManageAction extends ActionSupport {
 
     private int pageCode;
     private int deliveryId;
+    private int queryType;
     private int patientId;
     private String openID;
     private String pwd;
@@ -65,6 +66,10 @@ public class DeliveryManageAction extends ActionSupport {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
+    }
+
+    public void setQueryType(Integer queryType) {
+        this.queryType = queryType;
     }
 
     public void setDeliveryId(Integer deliveryId) {
@@ -96,7 +101,7 @@ public class DeliveryManageAction extends ActionSupport {
         }
         //存入request域中
         ServletActionContext.getRequest().setAttribute("pb", pb);
-        return "success";
+        return "delivery";
     }
 
 
@@ -796,6 +801,30 @@ public class DeliveryManageAction extends ActionSupport {
         ServletActionContext.getRequest().setAttribute("pb", pb);
         return "success";
     }
+
+
+    public String queryDeliverySearchInfoNew() {
+        //获取页面传递过来的当前页码数
+        if (pageCode == 0) {
+            pageCode = 1;
+        }
+        //给pageSize,每页的记录数赋值
+        int pageSize = 5;
+        PageBean<DeliveryInfo> pb = null;
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        if (queryType == 0) {
+            pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize, doctor);
+        } else {
+            pb = deliveryService.queryDeliveryInfo(queryType, pageCode, pageSize, doctor);
+        }
+        if (pb != null) {
+            pb.setUrl("queryDeliverySearchInfoNew.action?");
+        }
+
+        ServletActionContext.getRequest().setAttribute("pb", pb);
+        return "delivery";
+    }
+
 
     /**
      * 得到问卷的集合
