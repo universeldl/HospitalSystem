@@ -7,15 +7,16 @@ import com.hospital.util.AgeUtils;
 import com.hospital.util.GetOpenIdOauth2;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -82,6 +83,44 @@ public class surveyAction extends ActionSupport {
         this.choiceService = choiceService;
     }
 
+
+    public String getQuestions() {
+
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+        DeliveryInfo tmpDeliveryInfo = new DeliveryInfo();
+        tmpDeliveryInfo.setDeliveryId(Integer.valueOf(deliveryID));
+        DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmpDeliveryInfo);//得到问卷
+        Survey survey = deliveryInfo.getSurvey();
+        Patient patient = deliveryInfo.getPatient();
+
+        Set<Question> all_questions = survey.getQuestions();
+        List<Question> questions = new ArrayList<>();
+
+        int age = AgeUtils.getAgeFromBirthTime(patient.getBirthday());
+        for (Question question : all_questions) {
+            if (question.getStartAge() == -1 && question.getEndAge() == -1) {
+                questions.add(question);
+            } else if (question.getStartAge() <= age && question.getEndAge() >= age) {
+                questions.add(question);
+            }
+        }
+
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+
+        String json = JSONArray.fromObject(questions, jsonConfig).toString();
+
+        System.out.println(json);
+        try {
+            response.getWriter().print(json);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
+
     public String doSurvey() {
 
         if (code == null) {
@@ -145,13 +184,10 @@ public class surveyAction extends ActionSupport {
         ServletActionContext.getRequest().setAttribute("surveyName", survey.getSurveyName());
         ServletActionContext.getRequest().setAttribute("surveyDescription", survey.getDescription());
 
-        //List<Question> questions = survey.getSortedQuestions();
         Set<Question> all_questions = survey.getQuestions();
         List<Question> questions = new ArrayList<>();
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        String dateString = formatter.format(patient.getBirthday());
 
-        int age = AgeUtils.getAgeFromBirthTime(dateString);
+        int age = AgeUtils.getAgeFromBirthTime(patient.getBirthday());
         for (Question question : all_questions) {
             if (question.getStartAge() == -1 && question.getEndAge() == -1) {
                 questions.add(question);

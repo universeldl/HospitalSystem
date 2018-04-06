@@ -12,7 +12,7 @@
 </head>
 
 
-<body ontouchstart background="./img/survey/bg.jpg">
+<body ontouchstart background="./img/survey/bg.jpg" style="margin:50px 30px 30px 30px;">
 
 
 <br/>
