@@ -3,7 +3,7 @@
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <html lang="zh-CN" class="ax-vertical-centered">
 <head>
-    <title>注册页面</title>
+    <title>随访问卷</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
 
     <link rel="stylesheet" href="css/weui.css"/>
