@@ -268,9 +268,11 @@
                                             data-target="#updateModal"
                                             onclick="updatePatient(<s:property value="#patient.patientId"/>)">修改
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-xs"
-                                            onclick="deletePatient(<s:property value="#patient.patientId"/>)">删除
-                                    </button>
+                                    <s:if test="#session.doctor.authorization.superSet==1">
+                                        <button type="button" class="btn btn-danger btn-xs"
+                                                onclick="deletePatient(<s:property value="#patient.patientId"/>)">删除
+                                        </button>
+                                    </s:if>
                                     <button type="button" class="btn btn-success btn-xs"
                                             onclick="exportSinglePatient(<s:property value="#patient.patientId"/>)">导出
                                     </button>
@@ -285,12 +287,12 @@
                                         <button type="button" class="btn btn-info btn-xs"
                                                 onclick="allInOne(<s:property value="#patient.patientId"/>)">综合一览
                                         </button>
-                                        <!--
-                                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
+
+<%--                                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
                                                 data-target="#addRetrieveModal"
                                                 onclick="addRetrieveFun(<s:property value="#patient.patientId"/>)">添加答卷
-                                        </button>
-                                        -->
+                                        </button>--%>
+
                                     </s:if>
 
                                 </td>
