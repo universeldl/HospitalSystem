@@ -288,7 +288,10 @@ public class DeliveryServiceImpl implements DeliveryService {
                         try {
                             Calendar calendar = Calendar.getInstance();
                             calendar.setTime(patient.getCreateTime());
-                            if(!survey.isSendOnRegister()) {
+                            if(survey.isSendOnRegister()) {
+                                calendar.add(Calendar.MONTH, (num - 1) * survey.getFrequency());
+                            }
+                            else {
                                 calendar.add(Calendar.MONTH, num * survey.getFrequency());
                             }
                             Date sendDate = calendar.getTime();
@@ -315,7 +318,10 @@ public class DeliveryServiceImpl implements DeliveryService {
                     try {
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(patient.getCreateTime());
-                        if(!survey.isSendOnRegister()) {
+                        if(survey.isSendOnRegister()) {
+                            calendar.add(Calendar.MONTH, num * survey.getFrequency());
+                        }
+                        else {
                             calendar.add(Calendar.MONTH, (num + 1) * survey.getFrequency());
                         }
                         Date sendDate = calendar.getTime();
@@ -327,7 +333,6 @@ public class DeliveryServiceImpl implements DeliveryService {
                             newDI.setDoctor(patient.getDoctor());
                             newDI.setSurvey(survey);
                             newDI.setPatient(patient);
-                            newDI.setOverday(survey.getBday());
                             newDI.setState(0);//新deliveryInfo
                             int addDelivery = addDelivery(newDI);
                             newDI.setDeliveryId(addDelivery);
