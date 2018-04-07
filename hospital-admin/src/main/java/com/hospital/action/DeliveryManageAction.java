@@ -117,7 +117,7 @@ public class DeliveryManageAction extends ActionSupport {
         patient.setPatientId(patientId);
         PageBean<DeliveryInfo> pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize, patient);
         if (pb != null) {
-            pb.setUrl("findDeliveryInfoByPage.action?patientId=" + patientId + "&");
+            pb.setUrl("findDeliveryInfoByPageByPatient.action?patientId=" + patientId + "&");
         }
         //存入request域中
         ServletActionContext.getRequest().setAttribute("pb", pb);
