@@ -284,19 +284,18 @@ public class DeliveryServiceImpl implements DeliveryService {
                     DeliveryInfo DI = new DeliveryInfo();
                     DI.setDeliveryId(newestDeliveryId);
                     DeliveryInfo deliveryInfo = deliveryDao.getDeliveryInfoById(DI);//拿到当前survey的最新一次发送的问卷
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(patient.getCreateTime());
+                    if (survey.isSendOnRegister()) {
+                        calendar.add(Calendar.MONTH, (num - 1) * survey.getFrequency());
+                    } else {
+                        calendar.add(Calendar.MONTH, num * survey.getFrequency());
+                    }
+                    Date sendDate = calendar.getTime();
+                    calendar.add(Calendar.DAY_OF_MONTH, survey.getBday());
+                    Date endDate = calendar.getTime();
                     if (deliveryInfo.getState() >= 0) {//如果最新的一次尚未答卷，要检查是否重发提醒
                         try {
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTime(patient.getCreateTime());
-                            if(survey.isSendOnRegister()) {
-                                calendar.add(Calendar.MONTH, (num - 1) * survey.getFrequency());
-                            }
-                            else {
-                                calendar.add(Calendar.MONTH, num * survey.getFrequency());
-                            }
-                            Date sendDate = calendar.getTime();
-                            calendar.add(Calendar.DAY_OF_MONTH, survey.getBday());
-                            Date endDate = calendar.getTime();
                             if (System.currentTimeMillis() > sendDate.getTime() && System.currentTimeMillis() < endDate.getTime()) {//尚未逾期，重发提醒，但是并不新建deliveryInfo
                                 deliveryInfo.setState(deliveryInfo.getState() + 1);//state+1
                                 deliveryDao.updateDeliveryInfo(deliveryInfo);
@@ -309,7 +308,7 @@ public class DeliveryServiceImpl implements DeliveryService {
                             e.printStackTrace();
                         }
                     }
-                    if ((deliveryInfo.getState() == -1 || deliveryInfo.getState() == -2) && num != survey.getTimes()) {//如果最新的一次已经答卷或者逾期仍未答卷，说明要发送新一期的问卷
+                    if ((deliveryInfo.getState() == -1 || deliveryInfo.getState() == -2) && num != survey.getTimes() && !(deliveryInfo.getDeliveryDate().after(sendDate) && deliveryInfo.getDeliveryDate().before(endDate))) {//如果最新的一次已经答卷或者逾期仍未答卷且本周期未发过问卷，说明要发送新一期的问卷
                         createNewDeliveryAndSend = true;
                     }
                 }
@@ -318,10 +317,9 @@ public class DeliveryServiceImpl implements DeliveryService {
                     try {
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(patient.getCreateTime());
-                        if(survey.isSendOnRegister()) {
+                        if (survey.isSendOnRegister()) {
                             calendar.add(Calendar.MONTH, num * survey.getFrequency());
-                        }
-                        else {
+                        } else {
                             calendar.add(Calendar.MONTH, (num + 1) * survey.getFrequency());
                         }
                         Date sendDate = calendar.getTime();
