@@ -1,73 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <Configuration status="OFF">
-    <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
-        </Console>
-        <File name="log" fileName="log/wechat.log" append="true">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
-        </File>
-    </Appenders>
-    <Loggers>
-        <Logger name="hive.server2.query.ApiQueryTest" level="trace">
-            <AppenderRef ref="Console"/>
-        </Logger>
-        <Logger name="hive.server2.query" level="debug">
-            <AppenderRef ref="Console"/>
-        </Logger>
-        <Root level="error">
-            <AppenderRef ref="Console"/>
-        </Root>
+    <properties>
+        <!-- 基本的文件的输出信息的配置 -->
+        <property name="LOG_HOME">/tmp/logs</property>
+        <property name="CATALINA_BASE">/tmp/tomcat_logs</property>
+        <!-- 日志备份目录 -->
+        <property name="SERVER_NAME">HospitalSystem_wechat</property>
+        <property name="SERVER_ERROR_NAME">HospitalSystem_wechat_error</property>
+    </properties>
 
+    <appenders>
+        <!-- 定义控制台输出 -->
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+
+        <!-- catalina.out -->
+        <RollingRandomAccessFile name="CATALINA_BASE_ROLLING" fileName="${CATALINA_BASE}/catalina.out" filePattern="${CATALINA_BASE}/catalina_%d{yyyy-MM-dd}_%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="102400 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+
+        <!-- 全量日志 -->
+        <RollingRandomAccessFile name="ROLLING" fileName="${LOG_HOME}/${SERVER_NAME}.log" filePattern="${LOG_HOME}/${SERVER_NAME}_%d{yyyy-MM-dd}_%i.log">
+            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="102400 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+            <Filters>
+                <!--<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>-->
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingRandomAccessFile>
+        <!-- 错误日志-->
+        <RollingRandomAccessFile name="ROLLING_ERROR" fileName="${LOG_HOME}/${SERVER_ERROR_NAME}.log" filePattern="${LOG_HOME}/${SERVER_ERROR_NAME}_%d{yyyy-MM-dd}_%i.log">
+            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="51200 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingRandomAccessFile>
+    </appenders>
+
+    <loggers>
         <!-- Log everything in hibernate -->
-        <Logger name="org.hibernate" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </Logger>
+        <Logger name="org.hibernate" level="debug" additivity="false"/>
 
         <!-- Log SQL statements -->
-        <Logger name="org.hibernate.SQL" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </Logger>
+        <Logger name="org.hibernate.SQL" level="debug" additivity="false"/>
 
         <!-- Log JDBC bind parameters -->
-        <Logger name="org.hibernate.type.descriptor.sql" level="trace" additivity="false">
-            <AppenderRef ref="Console"/>
-        </Logger>
+        <Logger name="org.hibernate.type.descriptor.sql" level="trace" additivity="false"/>
 
         <!-- Log custom packages -->
-        <Logger name="com.hospital.*" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </Logger>
+        <Logger name="com.hospital.*" level="debug" additivity="false"/>
 
         <!-- 3rdparty Loggers -->
-        <logger name="org.springframework.core" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </logger>
-        <logger name="org.springframework.beans" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </logger>
-        <logger name="org.springframework.context" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </logger>
-        <logger name="org.springframework.web" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </logger>
-        <logger name="org.apache.struts" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </logger>
-        <logger name="org.quartz-scheduler" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </logger>
-        <logger name="org.quartz" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </logger>
-
+        <logger name="org.springframework.core" level="debug" additivity="false"/>
+        <logger name="org.springframework.beans" level="debug" additivity="false"/>
+        <logger name="org.springframework.context" level="debug" additivity="false"/>
+        <logger name="org.springframework.web" level="debug" additivity="false"/>
+        <logger name="org.apache.struts" level="debug" additivity="false"/>
+        <logger name="org.quartz-scheduler" level="debug" additivity="false"/>
+        <logger name="org.quartz" level="debug" additivity="false"/>
         <logger name="org.apache.http" level="warn"/>
 
         <Root level="debug">
-            <AppenderRef ref="Console"/>
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="CATALINA_BASE_ROLLING" />
+            <appender-ref ref="ROLLING"/>
+            <appender-ref ref="ROLLING_ERROR"/>
         </Root>
 
-    </Loggers>
+    </loggers>
 </Configuration>
