@@ -818,7 +818,7 @@ public class DeliveryManageAction extends ActionSupport {
             pb = deliveryService.queryDeliveryInfo(queryType, pageCode, pageSize, doctor);
         }
         if (pb != null) {
-            pb.setUrl("queryDeliverySearchInfoNew.action?");
+            pb.setUrl("queryDeliverySearchInfoNew.action?queryType="+queryType+"&");
         }
 
         ServletActionContext.getRequest().setAttribute("pb", pb);

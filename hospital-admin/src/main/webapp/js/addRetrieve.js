@@ -7,7 +7,7 @@ $(function () {
         if (!validAddRetrieve()) {
             return;
         }
-
+        $('#loading').show();
         var postdata = "surveyId=" + $.trim($("#addRetrieveDelivery").val())
                         + "&sendDate=" + $.trim($("#addDeliverySendDate").val())
                         + "&patientId=" + patientId
@@ -18,6 +18,7 @@ $(function () {
                 url: 'doctor/retrieveManageAction_addRetrieveInfoWithoutDeliveryInfo.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#addModal").modal("hide");//关闭模糊框
                         showInfo("添加成功");
@@ -137,6 +138,27 @@ function validAddRetrieve() {
         $("#addRetrieveDelivery").next().hide();
     }
 
+    if ($.trim($("#addDeliverySendDate").val()) == "") {
+        alert("请填写问卷发送日期");
+        return false;
+    }
+
+    if ($.trim($("#addDeliveryRetrieveDate").val()) == "") {
+        alert("请填写答卷日期");
+        return false;
+    }
+
+    var reg = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+    var regExp = new RegExp(reg);
+    if(!regExp.test($.trim($("#addDeliverySendDate").val()))){
+        alert("日期格式不正确，正确格式为：2014-01-01");
+        return false;
+    }
+    if(!regExp.test($.trim($("#addDeliveryRetrieveDate").val()))){
+        alert("日期格式不正确，正确格式为：2014-01-01");
+        return false;
+    }
+
     var sendDate = new Date(($("#addDeliverySendDate").val()).replace(/-/g,"/"));
     var curDate = new Date();
     if (sendDate >= curDate) {
@@ -145,6 +167,7 @@ function validAddRetrieve() {
     }
 
     var retrieveDate = new Date(($("#addDeliveryRetrieveDate").val()).replace(/-/g,"/"));
+
     if (retrieveDate >= curDate) {
         alert("请填写正确的答卷日期");
         return false;

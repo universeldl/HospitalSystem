@@ -220,6 +220,8 @@ public class RetrieveManageAction extends ActionSupport {
         newDI.setState(0);
         newDI.setDeliveryDate(sendDate);
 
+        int age = AgeUtils.getAgeFromBirthTime(newPatient.getBirthday(), sendDate);
+
         int addDelivery = deliveryService.addDelivery(newDI);
         newDI.setDeliveryId(addDelivery);
         DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(newDI);
@@ -243,6 +245,12 @@ public class RetrieveManageAction extends ActionSupport {
 
             Set<Answer> answers = new HashSet<>();
             for (Question question : retrieveInfo.getSurvey().getQuestions()) {
+                if (question.getStartAge() != -1 && question.getEndAge() != -1 &&
+                        question.getStartAge() != 99 && question.getEndAge() != 99) {
+                    if (question.getStartAge() > age || question.getEndAge() < age) {
+                        continue;
+                    }
+                }
                 Answer answer = new Answer();
                 answer.setSurvey(retrieveInfo.getSurvey());
                 answer.setPatient(retrieveInfo.getPatient());
@@ -463,7 +471,7 @@ public class RetrieveManageAction extends ActionSupport {
         tmp_deliveryInfo.setDeliveryId(deliveryId);
         DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmp_deliveryInfo);
         Patient patient = deliveryInfo.getPatient();
-        int age = AgeUtils.getAgeFromBirthTime(patient.getBirthday());
+        int age = AgeUtils.getAgeFromBirthTime(patient.getBirthday(), deliveryInfo.getDeliveryDate());
 
         //myAnswers.clear();
         myAnswers = new ArrayList<>();
