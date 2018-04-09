@@ -2,8 +2,8 @@
 <Configuration status="OFF">
 	<properties>
 		<!-- 基本的文件的输出信息的配置 -->
-		<property name="LOG_HOME">/home/haitao/logs</property>
-		<property name="CATALINA_BASE">/home/haitao/apache-tomcat-8.5.23/logs</property>
+		<property name="LOG_HOME">/tmp/logs</property>
+		<property name="CATALINA_BASE">/tmp/tomcat_logs</property>
 		<!-- 日志备份目录 -->
 		<property name="SERVER_NAME">HospitalSystem</property>
 		<property name="SERVER_ERROR_NAME">HospitalSystem_error</property>
