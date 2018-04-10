@@ -58,7 +58,7 @@ CREATE TABLE `Plan` (
   `endAge` int(2) NOT NULL,
   `oldPatient` int(1) DEFAULT NULL, /*1-新病例，2-既往病例，3-哮喘无忧APP用户， 4-不限 */
   `active` int(1) DEFAULT 1,
-  `sex` varchar(1) DEFAULT 1,/*1-男，2-女, 3-不限*/
+  `sex` int(1) DEFAULT 1,/*1-男，2-女, 3-不限*/
   `patientTypeId` int(11) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,
   PRIMARY KEY (`planId`),
@@ -67,7 +67,7 @@ CREATE TABLE `Plan` (
 );
 
 CREATE TABLE `Patient` (
-  `patientId` varchar(255) NOT NULL,
+  `patientId` int(11) NOT NULL,
   `pwd` varchar(64) DEFAULT NULL,
   `name` varchar(20) NOT NULL,
   `appID` varchar(28) DEFAULT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE `Patient` (
   `uniqID` varchar(50) UNIQUE DEFAULT NULL,
   `outpatientID` varchar(50) UNIQUE DEFAULT NULL,  # 预留门诊号
   `inpatientID` varchar(50) UNIQUE DEFAULT NULL,   # 预留住院号
-  `sex` varchar(1) NOT NULL,
+  `sex` INT(1) NOT NULL,
   `oldPatient` varchar(1) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
@@ -146,7 +146,7 @@ CREATE TABLE `deliveryInfo` (
   `endDate` datetime DEFAULT NULL,
   `overday` int(11) DEFAULT '0',
   `state` int(2) DEFAULT '0',
-  `patientId` varchar(255) DEFAULT NULL,
+  `patientId` INT(11) DEFAULT NULL,
   `surveyId` int(11) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,
   PRIMARY KEY (`deliveryId`),
@@ -157,7 +157,7 @@ CREATE TABLE `deliveryInfo` (
 
 CREATE TABLE `RetrieveInfo` (
   `deliveryId` int(11) NOT NULL,
-  `patientId` varchar(255) NOT NULL,
+  `patientId` INT(11) NOT NULL,
   `surveyId` int(11) NOT NULL,
   `retrieveDate` datetime DEFAULT NULL,
   `byDoctor` varchar(25) DEFAULT '',
@@ -174,7 +174,7 @@ CREATE TABLE `Answer` (
   `deliveryId` int(11) NOT NULL,
   `questionId` int(11) NOT NULL,
   `surveyId` int(11) NOT NULL,
-  `patientId` varchar(255) NOT NULL,
+  `patientId` INT(11) NOT NULL,
   `textChoice` int(1) DEFAULT 0,
   `textChoiceContent` varchar(255) DEFAULT NULL,
   #`choiceContent` varchar(255) NOT NULL,
