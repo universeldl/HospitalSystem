@@ -247,6 +247,19 @@ public class DeliveryServiceImpl implements DeliveryService {
     public boolean checkAndDoDeliveryNew() {
         List<Patient> patients = patientDao.findAllPatients();
         for (Patient patient : patients) {
+
+            //get current time. Per quartz settings, will be 10:00~19:00, then we only get number of hours, i.e.,10~19.
+            //Then, use "int(hours)-10" to get 0~9, devided by patientId to judge whether to send now or later.
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat dft = new SimpleDateFormat("HH");
+            int lastCharOfCurrentHour = Integer.parseInt(dft.format(cal.getTime())) - 10;// 0~9
+            String patientId = String.valueOf(patient.getPatientId());
+            int lastCharOfPatientId = Integer.parseInt(patientId.substring(patientId.length()-1, patientId.length()));
+            if(lastCharOfCurrentHour != lastCharOfPatientId) {
+                continue;
+            }
+
+
             //get sorted surveys, sort to make sure that the survey we are going to send is always in a order
             Set<Survey> surveys = patient.getPlan().getSurveys();
 
