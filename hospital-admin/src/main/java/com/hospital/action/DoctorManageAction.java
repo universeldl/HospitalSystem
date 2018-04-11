@@ -210,6 +210,7 @@ public class DoctorManageAction extends ActionSupport {
             doctor.setHospital(hospitalByID);
             Authorization authorization = new Authorization();
             authorization.setDoctor(doctor);
+            authorization.setPatientSet(1);
             authorization.setDeliverySet(1);
             authorization.setRetrieveSet(1);
             doctor.setAuthorization(authorization);//设置权限
