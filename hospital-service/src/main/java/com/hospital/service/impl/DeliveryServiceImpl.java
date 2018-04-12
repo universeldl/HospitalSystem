@@ -268,9 +268,30 @@ public class DeliveryServiceImpl implements DeliveryService {
 
             //do check and send
             for (Survey survey : surveys) {//每个survey有自己固定的随访次数
-                int num = 0;//当前survey已经随访次数
+                int num = 0;//当前survey已经随访次数--理论值
+                int realNum = 0;//当前survey已经随访次数--实际值
                 int newestDeliveryId = 0;//当前survey的最新一次发送的问卷id
                 boolean createNewDeliveryAndSend = false;
+                try {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(patient.getCreateTime());
+                    int total = survey.getTimes();
+                    if (survey.isSendOnRegister()) {
+                        ++num;
+                        --total;
+                    }
+                    for (int i = 1; i <= total; ++i) {
+                        calendar.add(Calendar.MONTH, survey.getFrequency());
+                        Date sendDate = calendar.getTime();
+                        if (System.currentTimeMillis() > sendDate.getTime()) {
+                            ++num;
+                        } else {
+                            break;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 try {
                     Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("1949-10-01 20:27:00");
                     Calendar ori = Calendar.getInstance();
@@ -285,13 +306,13 @@ public class DeliveryServiceImpl implements DeliveryService {
                                 oriDate = lastDate;
                                 newestDeliveryId = deliveryInfo.getDeliveryId();
                             }
-                            ++num;
+                            ++realNum;
                         }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (num == 0) {//如果该问卷从未发送过
+                if (num == 0 || realNum == 0) {//如果该问卷从未发送过
                     createNewDeliveryAndSend = true;
                 } else if (num <= survey.getTimes()) {//未达到随访次数
                     DeliveryInfo DI = new DeliveryInfo();
@@ -313,7 +334,7 @@ public class DeliveryServiceImpl implements DeliveryService {
                                 deliveryInfo.setState(deliveryInfo.getState() + 1);//state+1
                                 deliveryDao.updateDeliveryInfo(deliveryInfo);
                                 sendTemplateMessage(deliveryInfo);
-                            } else if (System.currentTimeMillis() > endDate.getTime()) { //已经逾期，该问卷作废
+                            } else if (System.currentTimeMillis() > deliveryInfo.getEndDate().getTime()) { //已经逾期，该问卷作废
                                 deliveryInfo.setState(-2);
                                 deliveryDao.updateDeliveryInfo(deliveryInfo);
                             }
