@@ -14,15 +14,16 @@ function registerSubmit() {
     postdata = postdata + "&captcha=" + $.trim($("#captchaIN").val());
     postdata = postdata + "&invitationCode=" + $.trim($("#invitationCode").val());
     postdata = postdata + "&oldPatient=" + $.trim($("#oldPatient").val());
-    var oldPatient = document.getElementById("oldPatient");
-    ajax(
+    //var oldPatient = document.getElementById("oldPatient");
+    var xhr = $.ajax(
         {
             method: 'POST',
             url: 'patientRegisterAction_register.action',
-            params: postdata,
-            callback: function (data) {
+            data: postdata,
+            timeout:20000,
+            dataType: "text",
+            success:function(data){ //请求成功的回调函数
                 hideLoadingToast();
-
                 if (data == 1) {
                     // 注册成功
                     window.location.href = "message.jsp?msg=注册完成！";
@@ -34,10 +35,20 @@ function registerSubmit() {
                     $('invitationCode').focus();
                     reloadCaptchaImg();
                     showDialog2("邀请码错误", "确认")
+                } else if (data == -4) {
+                    showDialog2("用户已经存在，不能重复注册", "确认")
                 } else {
                     // 登陆失败
                     reloadCaptchaImg();
                     showDialog2("登录失败，请重试", "确认");
+                }
+            },
+            complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+                if(status=='timeout'){//超时,status还有success,error等值的情况
+                    xhr.abort();    // 超时后中断请求
+                    reloadCaptchaImg();
+                    hideLoadingToast();
+                    showDialog2("网络连接失败，请稍后再试", "确认");
                 }
             }
         }
@@ -64,6 +75,16 @@ function validLogin() {
 
     if ($('#sex option:selected').val().length == 0) {
         showDialog2("请选择宝宝性别", "确定");
+        return false;
+    }
+
+    if ($('#patientType option:selected').val().length == 0) {
+        showDialog2("请选择疾病类型", "确定");
+        return false;
+    }
+
+    if ($('#oldPatient option:selected').val().length == 0) {
+        showDialog2("请选择病例类型", "确定");
         return false;
     }
 

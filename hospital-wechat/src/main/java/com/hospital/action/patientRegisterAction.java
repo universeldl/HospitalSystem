@@ -119,135 +119,150 @@ public class patientRegisterAction extends ActionSupport {
 
 
     public String register() {
+        try {
 
-        String ref_captcha = ServletActionContext.getContext().getSession().get("captcha").toString();
-        captcha = captcha.toLowerCase();
-        Patient patient = (Patient) ServletActionContext.getContext().getSession().get("patient");
-        String appID = (String) ServletActionContext.getContext().getSession().get("appID");
+            String ref_captcha = ServletActionContext.getContext().getSession().get("captcha").toString();
+            captcha = captcha.toLowerCase();
+            Patient patient = (Patient) ServletActionContext.getContext().getSession().get("patient");
+            String appID = (String) ServletActionContext.getContext().getSession().get("appID");
 
         /* status : 1 add patient successfully, redirect to info page
          * status : -1 captcha error
          * status : -2 invitation code error
          * status : -3 other errors
          */
-        int status = 1;
-        if (ref_captcha.length() == 0 || patient == null) {
-            writeStatus(-3);
-            return null;
-        } else if (!ref_captcha.equals(captcha)) {
-            writeStatus(-1);
-            return null;
-        }
-        String ref_invitationCode = InvitationCode.getInvitationCode();
-        if (!ref_invitationCode.equals(invitationCode)) {
-            writeStatus(-2);
-            return null;
-        }
+            int status = 1;
+            if (ref_captcha.length() == 0 || patient == null) {
+                writeStatus(-3);
+                return null;
+            } else if (!ref_captcha.equals(captcha)) {
+                writeStatus(-1);
+                return null;
+            }
+            String ref_invitationCode = InvitationCode.getInvitationCode();
+            if (!ref_invitationCode.equals(invitationCode)) {
+                writeStatus(-2);
+                return null;
+            }
 
-        if (patientService.getPatientByOpenID(patient) != null) {
-            writeStatus(-3);
-            return null;
-        }
+            if (patientService.getPatientByOpenID(patient) != null) {
+                writeStatus(-4);
+                return null;
+            }
 
-        // 写入新病人
-        Doctor tmp_doctor = new Doctor();
-        // modify later
-        tmp_doctor.setAid(Integer.valueOf(doctorID));
-        Doctor doctor = doctorService.getDoctorById(tmp_doctor);
-        if (doctor == null) {
-            writeStatus(-3);
-            return null;
-        }
+            // 写入新病人
+            Doctor tmp_doctor = new Doctor();
+            // modify later
+            tmp_doctor.setAid(Integer.valueOf(doctorID));
+            Doctor doctor = doctorService.getDoctorById(tmp_doctor);
+            if (doctor == null) {
+                writeStatus(-3);
+                return null;
+            }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date birthday_date;
-        try {
-            birthday_date = sdf.parse(birthday);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date birthday_date;
+            try {
+                birthday_date = sdf.parse(birthday);
+            } catch (Exception e) {
+                writeStatus(-3);
+                return null;
+            }
+
+            PatientType type = new PatientType();
+            type.setPatientTypeId(Integer.valueOf(typeID));
+            patient.setPatientType(type);
+            patient.setAppID(appID);
+            patient.setUniqID(patient.getOpenID());
+            patient.setName(username);
+            patient.setPwd(Md5Utils.md5("NA"));
+            patient.setPhone(tel);
+            patient.setDoctor(doctor);
+            patient.setCreateTime(new Date(System.currentTimeMillis()));
+            patient.setBirthday(birthday_date);
+            patient.setOldPatient(oldPatient);
+            if (sex.toUpperCase().equals("MALE")) {
+                patient.setSex(1);
+            } else {
+                patient.setSex(0);
+            }
+
+            if (!patientService.addPatient(patient)) {
+                writeStatus(-3);
+                return null;
+            }
+
+            Patient newPatient = patientService.getPatientByopenID(patient);
+
+            if (sendSurvey(newPatient)) {
+                System.out.println("sendSurvey true");
+            } else {
+                System.out.println("sendSurvey false");
+            }
+            writeStatus(1);
+            return null;
         } catch (Exception e) {
+            e.printStackTrace();
             writeStatus(-3);
             return null;
         }
+    }
 
-        PatientType type = new PatientType();
-        patient.setPatientType(type);
-        type.setPatientTypeId(Integer.valueOf(typeID));
-        patient.setAppID(appID);
-        patient.setUniqID(patient.getOpenID());
-        patient.setName(username);
-        patient.setPwd(Md5Utils.md5("NA"));
-        patient.setPhone(tel);
-        patient.setDoctor(doctor);
-        patient.setCreateTime(new Date(System.currentTimeMillis()));
-        patient.setBirthday(birthday_date);
-        patient.setOldPatient(oldPatient);
-        if (sex.toUpperCase().equals("MALE")) {
-            patient.setSex(1);
-        } else {
-            patient.setSex(0);
-        }
+    public boolean sendSurvey(Patient patient) {
+        try {
+            int age = AgeUtils.getAgeFromBirthTime(patient.getBirthday());
+            Plan plan = new Plan();
+            plan.setBeginAge(age);
+            plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
 
-        if (!patientService.addPatient(patient)) {
-            writeStatus(-3);
-            return null;
-        }
+            plan.setOldPatient(patient.getOldPatient());
 
-        Patient newPatient = patientService.getPatientByopenID(patient);
+            if (patient.getSex() == 1) {
+                plan.setSex(2);  //be careful about sex, Patient.sex is not compatible with Plan.sex
+            } else if (patient.getSex() == 0) {
+                plan.setSex(1);
+            }
+            plan.setPatientType(patient.getPatientType());
+            Plan newPlan = planService.getPlan(plan);
 
-
-        int age = 0;
-        String[] bd = birthday.split("-");
-        if (bd.length != 3) {
-            writeStatus(-3);
-            return null;
-        }
-
-        String tmp_bd = bd[1] + "/" + bd[2] + "/" + bd[0];
-        age = AgeUtils.getAgeFromBirthTime(tmp_bd);
-        Plan plan = new Plan();
-        plan.setBeginAge(age);
-        plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
-
-        plan.setOldPatient(oldPatient);
+            if (newPlan != null) {
+                patient.setPlan(newPlan);
+                Patient new_patient = patientService.updatePatientInfo(patient);
+                if (new_patient == null) {
+                    System.out.println("update patient failed");
+                }
+            } else {
+                System.out.println("patient " + patient.getName() + " don't have a plan!");
+            }
 
 
-        if (sex.toUpperCase().equals("MALE")) {
-            plan.setSex(2);  //be careful about sex, Patient.sex is not compatible with Plan.sex
-        } else if (sex.toUpperCase().equals("FEMALE")) {
-            plan.setSex(1);
-        }
-        plan.setPatientType(type);
-        Plan newPlan = planService.getPlan(plan);
+            if (newPlan != null) {
 
-        if (newPlan != null) {
-            newPatient.setPlan(newPlan);
-            patient = patientService.updatePatientInfo(newPatient);
+                Set<Survey> surveySet = newPlan.getSurveys();
 
-            Set<Survey> surveySet = newPlan.getSurveys();
+                for (Survey survey : surveySet) {
+                    if (!survey.isSendOnRegister()) continue;
+                    DeliveryInfo deliveryInfo = new DeliveryInfo();
+                    deliveryInfo.setPatient(patient);
+                    deliveryInfo.setSurvey(survey);
+                    deliveryInfo.setDoctor(patient.getDoctor());
+                    deliveryInfo.setDeliveryDate(new Date(System.currentTimeMillis()));
+                    deliveryInfo.setState(0);
+                    int deliveryId = deliveryService.addDelivery(deliveryInfo);
+                    deliveryInfo.setDeliveryId(deliveryId);
 
-            for (Survey survey : surveySet) {
-                if (!survey.isSendOnRegister()) continue;
-                DeliveryInfo deliveryInfo = new DeliveryInfo();
-                deliveryInfo.setPatient(patient);
-                deliveryInfo.setSurvey(survey);
-                deliveryInfo.setDoctor(doctor);
-                deliveryInfo.setDeliveryDate(new Date(System.currentTimeMillis()));
-                deliveryInfo.setState(0);
-                int deliveryId = deliveryService.addDelivery(deliveryInfo);
-                deliveryInfo.setDeliveryId(deliveryId);
-
-                DeliveryInfo newDeliveryInfo = deliveryService.getDeliveryInfoById(deliveryInfo);
-                if (newDeliveryInfo != null) {
-                    deliveryService.sendTemplateMessage(newDeliveryInfo);
-                } else {
-                    writeStatus(-3);
-                    return null;
+                    DeliveryInfo newDeliveryInfo = deliveryService.getDeliveryInfoById(deliveryInfo);
+                    if (newDeliveryInfo != null) {
+                        deliveryService.sendTemplateMessage(newDeliveryInfo);
+                    }
                 }
             }
-        } else {
+            return true;
+        } catch (Exception e) {
+            System.out.println("send survey in register failed");
+            e.printStackTrace();
+            return false;
         }
-
-        writeStatus(1);
-        return null;
     }
 
 
