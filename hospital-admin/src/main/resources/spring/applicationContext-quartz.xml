@@ -85,7 +85,7 @@
             <ref bean="sendSurveyQuartzClock"></ref>
         </property>
         <property name="cronExpression">
-            <value>0 0 10-19 ? * *</value><!-- 每天上午10点到晚上19点执行 -->
+            <value>0 1 10-19 ? * *</value><!-- 每天上午10点到晚上19点执行 -->
             <!--<value>*/30 * * * * ?</value> -->
         </property>
     </bean>
