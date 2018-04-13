@@ -352,9 +352,9 @@ public class DeliveryServiceImpl implements DeliveryService {
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(patient.getCreateTime());
                         if (survey.isSendOnRegister()) {
-                            calendar.add(Calendar.MONTH, num * survey.getFrequency());
+                            calendar.add(Calendar.MONTH, (num - 1) * survey.getFrequency());
                         } else {
-                            calendar.add(Calendar.MONTH, (num + 1) * survey.getFrequency());
+                            calendar.add(Calendar.MONTH, num * survey.getFrequency());
                         }
                         Date sendDate = calendar.getTime();
                         calendar.add(Calendar.DAY_OF_MONTH, survey.getBday());
