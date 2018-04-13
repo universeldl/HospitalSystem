@@ -273,8 +273,11 @@ public class surveyAction extends ActionSupport {
                 answer.setQuestion(question);
                 answer.setChoices(choiceset);
                 if (pMap.containsKey("textquestion"+questionid)) {
-                    answer.setTextChoice(1);
-                    answer.setTextChoiceContent(pMap.get("textquestion" + questionid)[0]);
+                    String tmpKey = "textquestion"+questionid;
+                    if (!pMap.get(tmpKey)[0].isEmpty()) {
+                        answer.setTextChoice(1);
+                        answer.setTextChoiceContent(pMap.get("textquestion" + questionid)[0]);
+                    }
                     processedQuestionId.add(questionid);
                 }
                 if (answerService.addAnswer(answer)) {
