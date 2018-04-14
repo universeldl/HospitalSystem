@@ -262,26 +262,48 @@ function submit() {
 
     var po = "deliveryID=" + $.trim($("#deliveryID").val()) + "&";
     po = po + postdata;
-    ajax({
-         method: 'POST',
-         url: 'surveyAction_retrieveAnswer.action',
-         params: po,
-         type: "json",
-         scriptCharset: 'utf-8',
-         callback: function (data) {
-             hideLoadingToast();
-             if (data.success == 1) {
-                 var url =  "https://" + window.location.host;
-                 url = url + "/hospital-wechat/message.jsp?msg=答卷提交成功!<br/><br/>" + data.msg;
-                 window.location.href = url;
-             } else if (data.success == -1) {
-                 var url =  "https://" + window.location.host;
-                 url = url + "/hospital-wechat/message.jsp?msg=答卷出错...";
-                 window.location.href = url;
-             } else {
+    var xhr = $.ajax({
+        method: 'POST',
+        url: 'surveyAction_retrieveAnswer.action',
+        data: po,
+        dataType: "json",
+        timeout:20000,
+        scriptCharset: 'utf-8',
+        success:function(data){ //请求成功的回调函数
+            hideLoadingToast();
+            if (data.success == 1) {
+                var url =  "https://" + window.location.host;
+                url = url + "/hospital-wechat/message.jsp?msg=答卷提交成功!<br/><br/>" + data.msg;
+                window.location.href = url;
+            } else if (data.success == -1) {
+                var url =  "https://" + window.location.host;
+                url = url + "/hospital-wechat/message.jsp?msg=答卷出错...";
+                window.location.href = url;
+            } else {
                 showDialog2("提交失败，请稍后再试", "确认");
-             }
-         }
+            }
+        },
+        complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+            if(status=='timeout'){//超时,status还有success,error等值的情况
+                xhr.abort();    // 超时后中断请求
+                hideLoadingToast();
+                showDialog2("答卷提交失败，请稍后再试", "确认");
+            }
+        }
+            /*         callback: function (data) {
+                         hideLoadingToast();
+                         if (data.success == 1) {
+                             var url =  "https://" + window.location.host;
+                             url = url + "/hospital-wechat/message.jsp?msg=答卷提交成功!<br/><br/>" + data.msg;
+                             window.location.href = url;
+                         } else if (data.success == -1) {
+                             var url =  "https://" + window.location.host;
+                             url = url + "/hospital-wechat/message.jsp?msg=答卷出错...";
+                             window.location.href = url;
+                         } else {
+                            showDialog2("提交失败，请稍后再试", "确认");
+                         }
+                     }*/
     });
 
 }
