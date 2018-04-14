@@ -142,7 +142,7 @@ public class surveyAction extends ActionSupport {
         if (open_id == null) {
             errorMsg = "获取用户名失败，请稍后再试";
             return ERROR;
-            //open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
+            //open_id = "o5bAaxGhIV0ZksDNy8y26pk_XUI8";
         }
 
 
@@ -215,6 +215,17 @@ public class surveyAction extends ActionSupport {
 
         if (deliveryInfo.getEndDate().before(retrieveDate)) {
             errorMsg = "问卷已经过期，无法作答";
+            return ERROR;
+        }
+
+        if (deliveryInfo.getState() == -1) {
+            errorMsg = "问卷已经完成，无法作答";
+            return ERROR;
+        }
+
+        RetrieveInfo checkRetrieve = retrieveService.getRetrieveInfoByDeliveryID(Integer.valueOf(deliveryID));
+        if (checkRetrieve != null) {
+            errorMsg = "问卷已经完成，无法作答";
             return ERROR;
         }
 

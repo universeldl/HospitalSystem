@@ -197,16 +197,22 @@ function next() {
 function last() {
     location.href = "#top";
     quesitonIndex = quesitonIndex - 1;
+    var questinId = questions[quesitonIndex].questionId;
 
-    var remove = "question" + quesitonIndex;
-    var index = postdata.indexOf(remove);
+
+    remove = "textquestion" + questinId;
+    index = postdata.indexOf(remove);
     if (index > 0) {
+        postdata = postdata.substr(0, index-1);
+    } else if (index == 0) {
         postdata = postdata.substr(0, index);
     }
 
-    remove = "textquestion" + quesitonIndex;
-    index = postdata.indexOf(remove);
+    var remove = "question" + questinId;
+    var index = postdata.indexOf(remove);
     if (index > 0) {
+        postdata = postdata.substr(0, index-1);
+    } else if (index == 0) {
         postdata = postdata.substr(0, index);
     }
 
