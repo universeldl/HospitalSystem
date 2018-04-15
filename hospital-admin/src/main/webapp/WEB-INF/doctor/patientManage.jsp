@@ -207,6 +207,7 @@
                     <a class="btn btn-primary" data-toggle="modal" data-target="#batchAddModal"><i
                             class="fa fa-times"></i> 批量添加</a>-->
                     <a class="btn btn-primary" onclick="exportPatient()"><i class="fa fa-share"></i> 导出</a>
+                    当前病人总数：<s:property value="#request.pb.totalRecord"/>
                 </div>
             </div>
 
@@ -221,10 +222,10 @@
                             <th>病人姓名</th>
                             <th>病人性别</th>
                             <th>出生日期</th>
-                            <th>病人类型</th>
-                            <th>随访计划</th>
+                            <th>病例类型</th>
                             <th>直属医生</th>
                             <th>共享医生</th>
+                            <th>所属医院</th>
                             <th>联系号码</th>
                             <th>注册时间</th>
                             <th>操作</th>
@@ -246,8 +247,17 @@
                                     </s:elseif>
                                 </td>
                                 <td><s:date name="#patient.birthday" format="yyyy-MM-dd" /></td>
-                                <td><s:property value="#patient.patientType.patientTypeName"/></td>
-                                <td><s:property value="#patient.plan.planId"/></td>
+                                <td>
+                                    <s:if test="#patient.oldPatient == 1">
+                                        新病例
+                                    </s:if>
+                                    <s:elseif test="#patient.oldPatient == 2">
+                                        既往病例
+                                    </s:elseif>
+                                    <s:elseif test="#patient.oldPatient == 0">
+                                        哮喘无忧用户
+                                    </s:elseif>
+                                </td>
                                 <td><s:property value="#patient.doctor.name"/></td>
                                 <td>
                                     <s:if test="#patient.addnDoctor != null">
@@ -257,6 +267,7 @@
                                         无
                                     </s:else>
                                 </td>
+                                <td><s:property value="#patient.doctor.hospital.name"/></td>
                                 <td><s:property value="#patient.phone"/></td>
                                 <td><s:date name="#patient.createTime" format="yyyy-MM-dd"/></td>
                                 <td>

@@ -312,7 +312,7 @@ public class DeliveryServiceImpl implements DeliveryService {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (num == 0 || realNum == 0) {//如果该问卷从未发送过
+                if (num == 1 && realNum == 0) {//如果该问卷从未发送过
                     createNewDeliveryAndSend = true;
                 } else if (num <= survey.getTimes()) {//未达到随访次数
                     DeliveryInfo DI = new DeliveryInfo();
