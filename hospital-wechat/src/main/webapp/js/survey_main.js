@@ -78,7 +78,7 @@ function displayChoices(question) {
         if (question.textChoice == 1) {
             $("#textArea").show();
             $("#textQuestionArea").attr("placeholder","其他...");
-            $("#textQuestionArea").attr("name","textquestion"+question.questionId);
+            $("#textQuestionArea").attr("name","tq"+question.questionId);
             $("#textQuestionArea").attr("disabled",false);
         } else {
             $("#textArea").hide();
@@ -89,17 +89,17 @@ function displayChoices(question) {
         if (question.textChoice == 1) {
             $("#textArea").show();
             $("#textQuestionArea").attr("placeholder","其他...");
-            $("#textQuestionArea").attr("name","textquestion"+question.questionId);
+            $("#textQuestionArea").attr("name","tq"+question.questionId);
             $("#textQuestionArea").attr("disabled",true);
         }
     } else if (question.questionType == 3) {
         $("#textArea").show();
         $("#textQuestionArea").attr("placeholder","请输入答案...");
-        $("#textQuestionArea").attr("name","textquestion"+question.questionId);
+        $("#textQuestionArea").attr("name","tq"+question.questionId);
         $("#textQuestionArea").attr("disabled",false);
     } else if (question.questionType == 4) {
         $("#dateSelection").show();
-        $("#dateQuestion").attr("name","textquestion"+question.questionId);
+        $("#dateQuestion").attr("name","tq"+question.questionId);
     }
 }
 
@@ -116,7 +116,7 @@ function getMultiChoiceLabel(question) {
         }
         str = str + "<div class='weui-cell__bd'> <p>" + choice.choiceContent + "</p> </div>";
         str = str + "<div class='weui-cell__ft'>";
-        str = str + "<input type='checkbox' name='question";
+        str = str + "<input type='checkbox' name='q";
         str = str + question.questionId + "'";
         str = str + " id='question" + question.questionId + "choice" + choice.choiceId + "'";
         str = str + " value='" + choice.choiceId + "' /> </div> </label>"
@@ -139,7 +139,7 @@ function getSingleChoiceLabel(question) {
 
         str = str + "<div class='weui-cell__bd'> <p>" + choice.choiceContent + "</p> </div>";
         str = str + "<div class='weui-cell__ft'>";
-        str = str + "<input type='radio' name='question";
+        str = str + "<input type='radio' name='q";
         str = str + question.questionId + "'";
         str = str + " id='question" + question.questionId + "choice" + choice.choiceId + "'";
 
@@ -153,7 +153,7 @@ function getSingleChoiceLabel(question) {
         str = str + question.questionId + "choiceother'>"
         str = str + "<div class='weui-cell__bd'> <p> 其他 </p> </div>";
         str = str + "<div class='weui-cell__ft'>";
-        str = str + "<input type='radio' name='question";
+        str = str + "<input type='radio' name='q";
         str = str + question.questionId + "'";
         str = str + " id='question" + question.questionId + "choiceother'";
         str = str + " onclick=enableTextArea() /> </div></label>"
@@ -164,7 +164,7 @@ function getSingleChoiceLabel(question) {
 function next() {
     location.href = "#top";
     var data = $('form').serialize();
-    var RegExp = /^textquestion\d+\=$/g
+    var RegExp = /^tq\d+\=$/g
     if (data) {
         if (data != "") {
             if (RegExp.test(data)) {
@@ -200,7 +200,7 @@ function last() {
     var questinId = questions[quesitonIndex].questionId;
 
 
-    remove = "textquestion" + questinId;
+    remove = "tq" + questinId;
     index = postdata.indexOf(remove);
     if (index > 0) {
         postdata = postdata.substr(0, index-1);
@@ -208,7 +208,7 @@ function last() {
         postdata = postdata.substr(0, index);
     }
 
-    var remove = "question" + questinId;
+    var remove = "q" + questinId;
     var index = postdata.indexOf(remove);
     if (index > 0) {
         postdata = postdata.substr(0, index-1);

@@ -241,8 +241,8 @@ public class surveyAction extends ActionSupport {
         retrieveInfo.setPatient(patient);
         retrieveInfo.setDoctor(doctor);
 
-        retrieveService.addRetrieveInfo(retrieveInfo);
-        RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
+        //retrieveService.addRetrieveInfo(retrieveInfo);
+        //RetrieveInfo newRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
 
         Set<Answer> answers = new HashSet<Answer>();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext()
@@ -253,8 +253,8 @@ public class surveyAction extends ActionSupport {
         for (Map.Entry<String, String[]> entry : pMap.entrySet()) {
             String key = entry.getKey();
             int questionid = -1;
-            if (key.startsWith("question")) {
-                questionid = Integer.valueOf(key.substring(8));
+            if (key.startsWith("q")) {
+                questionid = Integer.valueOf(key.substring(1));
                 Question tmpQuestion = new Question();
                 tmpQuestion.setQuestionId(questionid);
                 Question question = questionService.getQuestionById(tmpQuestion);
@@ -280,20 +280,22 @@ public class surveyAction extends ActionSupport {
                 answer.setSurvey(survey);
                 answer.setPatient(patient);
                 answer.setDoctor(doctor);
-                answer.setRetrieveInfo(newRetrieveInfo);
+                answer.setRetrieveInfo(retrieveInfo);
                 answer.setQuestion(question);
                 answer.setChoices(choiceset);
-                if (pMap.containsKey("textquestion"+questionid)) {
-                    String tmpKey = "textquestion"+questionid;
+                if (pMap.containsKey("tq" + questionid)) {
+                    String tmpKey = "tq"+questionid;
                     if (!pMap.get(tmpKey)[0].isEmpty()) {
                         answer.setTextChoice(1);
-                        answer.setTextChoiceContent(pMap.get("textquestion" + questionid)[0]);
+                        answer.setTextChoiceContent(pMap.get("tq" + questionid)[0]);
                     }
                     processedQuestionId.add(questionid);
                 }
-                if (answerService.addAnswer(answer)) {
+                answers.add(answer);
+
+/*                if (answerService.addAnswer(answer)) {
                     answers.add(answer);
-                }
+                }*/
             } else {
                 System.out.println("key " + key + " not processed");
             }
@@ -303,8 +305,8 @@ public class surveyAction extends ActionSupport {
         for (Map.Entry<String, String[]> entry : pMap.entrySet()) {
             String key = entry.getKey();
             int questionid = -1;
-            if (key.startsWith("textquestion")) {
-                questionid = Integer.valueOf(key.substring(12));
+            if (key.startsWith("tq")) {
+                questionid = Integer.valueOf(key.substring(2));
                 if (processedQuestionId.contains(questionid)) {
                     continue;
                 }
@@ -315,13 +317,15 @@ public class surveyAction extends ActionSupport {
                 answer.setSurvey(survey);
                 answer.setPatient(patient);
                 answer.setDoctor(doctor);
-                answer.setRetrieveInfo(newRetrieveInfo);
+                answer.setRetrieveInfo(retrieveInfo);
                 answer.setQuestion(question);
                 answer.setTextChoice(1);
-                answer.setTextChoiceContent(pMap.get("textquestion" + questionid)[0]);
-                if (answerService.addAnswer(answer)) {
+                answer.setTextChoiceContent(pMap.get("tq" + questionid)[0]);
+                answers.add(answer);
+
+/*                if (answerService.addAnswer(answer)) {
                     answers.add(answer);
-                }
+                }*/
             }
         }
 
@@ -333,18 +337,22 @@ public class surveyAction extends ActionSupport {
                 answer.setSurvey(survey);
                 answer.setPatient(patient);
                 answer.setDoctor(doctor);
-                answer.setRetrieveInfo(newRetrieveInfo);
+                answer.setRetrieveInfo(retrieveInfo);
                 answer.setQuestion(question);
                 answer.setTextChoice(1);
-                if (answerService.addAnswer(answer)) {
+                answers.add(answer);
+/*                if (answerService.addAnswer(answer)) {
                     answers.add(answer);
-                }
+                }*/
             }
         }
 
-        newRetrieveInfo.setAnswers(answers);
+        retrieveInfo.setAnswers(answers);
 
-        RetrieveInfo tmpRetrieveInfo = retrieveService.updateRetrieveInfo(newRetrieveInfo);
+        //RetrieveInfo tmpRetrieveInfo = retrieveService.updateRetrieveInfo(newRetrieveInfo);
+
+        retrieveService.addRetrieveInfo(retrieveInfo);
+        RetrieveInfo tmpRetrieveInfo = retrieveService.getRetrieveInfoById(retrieveInfo);
         Integer i = (tmpRetrieveInfo==null)?-1:1;
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setCharacterEncoding("UTF-8");
