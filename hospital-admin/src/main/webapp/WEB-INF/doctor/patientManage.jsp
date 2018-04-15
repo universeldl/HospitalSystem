@@ -254,7 +254,7 @@
                                     <s:elseif test="#patient.oldPatient == 2">
                                         既往病例
                                     </s:elseif>
-                                    <s:elseif test="#patient.oldPatient == 0">
+                                    <s:elseif test="#patient.oldPatient == 3">
                                         哮喘无忧用户
                                     </s:elseif>
                                 </td>
