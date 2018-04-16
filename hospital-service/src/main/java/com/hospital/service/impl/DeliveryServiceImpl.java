@@ -314,7 +314,7 @@ public class DeliveryServiceImpl implements DeliveryService {
                 }
                 if (num == 1 && realNum == 0) {//如果该问卷从未发送过
                     createNewDeliveryAndSend = true;
-                } else if (num <= survey.getTimes()) {//未达到随访次数
+                } else if (num > 0 && num <= survey.getTimes()) {//未达到随访次数
                     DeliveryInfo DI = new DeliveryInfo();
                     DI.setDeliveryId(newestDeliveryId);
                     DeliveryInfo deliveryInfo = deliveryDao.getDeliveryInfoById(DI);//拿到当前survey的最新一次发送的问卷
