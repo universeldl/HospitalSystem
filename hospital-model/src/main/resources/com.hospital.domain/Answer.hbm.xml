@@ -35,7 +35,7 @@
         </property>
 
         <property name="lastModified" type="java.lang.String">
-            <column name="lastModified" default=""/>
+            <column name="lastModified"/>
         </property>
 
         <property name="textChoiceContent" type="java.lang.String">

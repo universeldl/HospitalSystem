@@ -33,7 +33,7 @@
         </property>
 
         <property name="byDoctor" type="java.lang.String">
-            <column name="byDoctor" default=""/>
+            <column name="byDoctor"/>
         </property>
 
         <one-to-one name="deliveryInfo" cascade="save-update" constrained="true" lazy="false"></one-to-one>
