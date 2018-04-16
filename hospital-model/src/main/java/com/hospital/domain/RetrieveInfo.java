@@ -19,7 +19,7 @@ public class RetrieveInfo {
     private Patient patient;    //分发病人
     private Doctor doctor;    //操作员
     //private String choiceContent;
-    private int aid;
+    private Integer aid;
     private Set<Answer> answers = new HashSet<>();
 
     private String byDoctor; //由该医生添加
@@ -100,11 +100,11 @@ public class RetrieveInfo {
     //public String getChoiceContent() { return choiceContent; }
     //public void setChoiceContent(String choiceContent) { this.choiceContent = choiceContent; }
 
-    public int getAid() {
+    public Integer getAid() {
         return aid;
     }
 
-    public void setAid(int aid) {
+    public void setAid(Integer aid) {
         this.aid = aid;
     }
 
