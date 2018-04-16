@@ -13,7 +13,7 @@ public class ForfeitInfo implements Serializable {
     private DeliveryInfo deliveryInfo;
     private Doctor doctor;    //操作员
     private Double forfeit;    //提醒金额
-    private int isPay;    //是否已经支付提醒
+    private Integer isPay;    //是否已经支付提醒
 
     public Integer getDeliveryId() {
         return deliveryId;
@@ -47,11 +47,11 @@ public class ForfeitInfo implements Serializable {
         this.forfeit = forfeit;
     }
 
-    public int getIsPay() {
+    public Integer getIsPay() {
         return isPay;
     }
 
-    public void setIsPay(int isPay) {
+    public void setIsPay(Integer isPay) {
         this.isPay = isPay;
     }
 

@@ -3,40 +3,40 @@ package com.hospital.domain;
 import java.util.*;
 
 public class Question {
-    private int questionId;
-    private int sortId;
-    private int surveyId;
+    private Integer questionId;
+    private Integer sortId;
+    private Integer surveyId;
     private String questionContent;
-    private int textChoice;
-    private int questionType;
-    private int aid;
-    private int startAge;
-    private int endAge;
+    private Integer textChoice;
+    private Integer questionType;
+    private Integer aid;
+    private Integer startAge;
+    private Integer endAge;
     //private Survey survey;
     private Set<Choice> choices = new HashSet<>();
     /*private List<Choice> sortedChoices;*/
 
-    public void setSortId(int sortId) {
+    public void setSortId(Integer sortId) {
         this.sortId = sortId;
     }
 
-    public int getSortId() {
+    public Integer getSortId() {
         return sortId;
     }
 
-    public void setStartAge(int startAge) {
+    public void setStartAge(Integer startAge) {
         this.startAge = startAge;
     }
 
-    public int getStartAge() {
+    public Integer getStartAge() {
         return startAge;
     }
 
-    public void setEndAge(int endAge) {
+    public void setEndAge(Integer endAge) {
         this.endAge = endAge;
     }
 
-    public int getEndAge() {
+    public Integer getEndAge() {
         return endAge;
     }
 
@@ -51,27 +51,27 @@ public class Question {
     //public Survey getSurvey() { return survey; }
     //public void setSurvey(Survey survey) { this.survey = survey; }
 
-    public int getQuestionId() {
+    public Integer getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
     }
 
-    public int getSurveyId() {
+    public Integer getSurveyId() {
         return surveyId;
     }
 
-    public void setSurveyId(int surveyId) {
+    public void setSurveyId(Integer surveyId) {
         this.surveyId = surveyId;
     }
 
-    public int getTextChoice() {
+    public Integer getTextChoice() {
         return textChoice;
     }
 
-    public void setTextChoice(int textChoice) {
+    public void setTextChoice(Integer textChoice) {
         this.textChoice = textChoice;
     }
 
@@ -93,19 +93,19 @@ public class Question {
     }
 
 */
-    public int getQuestionType() {
+    public Integer getQuestionType() {
         return questionType;
     }
 
-    public void setQuestionType(int questionType) {
+    public void setQuestionType(Integer questionType) {
         this.questionType = questionType;
     }
 
-    public int getAid() {
+    public Integer getAid() {
         return aid;
     }
 
-    public void setAid(int aid) {
+    public void setAid(Integer aid) {
         this.aid = aid;
     }
 
@@ -123,7 +123,8 @@ public class Question {
         });
         return sortedChoices;
     }*/
-    public Question(int aid, int surveyId, String questionContent, int questionType, int textChoice, int startAge, int endAge) {
+    public Question(Integer aid, Integer surveyId, String questionContent,
+                    Integer questionType, Integer textChoice, Integer startAge, Integer endAge) {
         super();
         this.aid = aid;
         this.surveyId = surveyId;

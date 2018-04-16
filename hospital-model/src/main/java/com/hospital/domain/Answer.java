@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Answer {
-    private int answerId;
+    private Integer answerId;
     //private int choiceId;
     //private int questionId;
     //private int surveyId;
@@ -15,7 +15,7 @@ public class Answer {
     private Patient patient;    //分发病人
     private Doctor doctor;    //操作员
     private String textChoiceContent;
-    private int textChoice;
+    private Integer textChoice;
     //private int aid;
     private RetrieveInfo retrieveInfo;
     private Question question;
@@ -69,11 +69,11 @@ public class Answer {
         this.retrieveInfo = retrieveInfo;
     }
 
-    public int getAnswerId() {
+    public Integer getAnswerId() {
         return answerId;
     }
 
-    public void setAnswerId(int answerId) {
+    public void setAnswerId(Integer answerId) {
         this.answerId = answerId;
     }
 
@@ -85,11 +85,11 @@ public class Answer {
         this.lastModified = lastModified;
     }
 
-    public int getTextChoice() {
+    public Integer getTextChoice() {
         return textChoice;
     }
 
-    public void setTextChoice(int textChoice) {
+    public void setTextChoice(Integer textChoice) {
         this.textChoice = textChoice;
     }
 

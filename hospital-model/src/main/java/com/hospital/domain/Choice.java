@@ -3,13 +3,13 @@ package com.hospital.domain;
 import java.math.BigDecimal;
 
 public class Choice {
-    private int choiceId;
+    private Integer choiceId;
     //private int questionId;
     //private int answerId;
     private BigDecimal score;
     //private int surveyId;
     private String choiceContent;
-    private int aid;
+    private Integer aid;
     private Question question;
     //private Answer answer;
     private String choiceImgPath;
@@ -40,11 +40,11 @@ public class Choice {
         this.score = score;
     }
 
-    public int getChoiceId() {
+    public Integer getChoiceId() {
         return choiceId;
     }
 
-    public void setChoiceId(int choiceId) {
+    public void setChoiceId(Integer choiceId) {
         this.choiceId = choiceId;
     }
 
@@ -70,11 +70,11 @@ public class Choice {
         this.choiceContent = choiceContent;
     }
 
-    public int getAid() {
+    public Integer getAid() {
         return aid;
     }
 
-    public void setAid(int aid) {
+    public void setAid(Integer aid) {
         this.aid = aid;
     }
 
@@ -82,7 +82,7 @@ public class Choice {
     public Choice() {
     }
 
-    public Choice(int aid, /*int surveyId, int questionId, */ String choiceContent, BigDecimal score) {
+    public Choice(Integer aid, /*int surveyId, int questionId, */ String choiceContent, BigDecimal score) {
         super();
         this.aid = aid;
         //this.surveyId = surveyId;
