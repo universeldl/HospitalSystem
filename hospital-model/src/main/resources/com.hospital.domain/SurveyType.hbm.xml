@@ -8,7 +8,7 @@
             <generator class="increment"/>
         </id>
         <property name="typeName" type="java.lang.String">
-            <column name="typeName"/>
+            <column name="typeName" unique="true"/>
         </property>
 
     </class>

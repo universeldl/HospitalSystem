@@ -9,7 +9,7 @@
         </id>
 
         <property name="username" type="java.lang.String">
-            <column name="username"/>
+            <column name="username" unique="true"/>
         </property>
 
 

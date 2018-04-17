@@ -41,8 +41,7 @@
         <property name="textChoiceContent" type="java.lang.String">
             <column name="textChoiceContent"/>
         </property>
-        <many-to-one name="question" class="com.hospital.domain.Question" lazy="false" column="questionId"
-                     unique="true"></many-to-one> <!-- 唯一外键关联到Question -->
+        <many-to-one name="question" class="com.hospital.domain.Question" lazy="false" column="questionId"></many-to-one> <!-- 唯一外键关联到Question -->
 
         <many-to-one name="retrieveInfo" class="com.hospital.domain.RetrieveInfo" cascade="save-update" lazy="false">
             <column name="deliveryId"></column>
