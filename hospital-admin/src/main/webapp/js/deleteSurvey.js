@@ -1,25 +1,27 @@
 function deleteSurvey(id) {
-    $('#loading').show();
-    ajax(
-        {
-            method: 'POST',
-            url: 'doctor/surveyManageAction_deleteSurvey.action',
-            params: "surveyId=" + id,
-            callback: function (data) {
-                $('#loading').hide();
-                if (data == 1) {
-                    showInfo("删除成功");
-                } else if (data == -1) {
-                    showInfo("该答卷有未答卷记录,不能删除");
-                } else if (data == -2) {
-                    showInfo("该答卷有未设置的延期,不能删除");
-                } else {
-                    showInfo("删除失败");
-                }
+  if(confirm('删除问卷会同时删除所有该问卷的答卷，确定要执行此操作吗?')) {
+      $('#loading').show();
+      ajax(
+          {
+              method: 'POST',
+              url: 'doctor/surveyManageAction_deleteSurvey.action',
+              params: "surveyId=" + id,
+              callback: function (data) {
+                  $('#loading').hide();
+                  if (data == 1) {
+                      showInfo("删除成功");
+                  } else if (data == -1) {
+                      showInfo("该答卷有未答卷记录,不能删除");
+                  } else if (data == -2) {
+                      showInfo("该答卷有未设置的延期,不能删除");
+                  } else {
+                      showInfo("删除失败");
+                  }
 
-            }
-        }
-    );
+              }
+          }
+      );
+  }
 
 
 }
