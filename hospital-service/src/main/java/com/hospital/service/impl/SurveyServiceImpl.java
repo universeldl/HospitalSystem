@@ -89,23 +89,6 @@ public class SurveyServiceImpl implements SurveyService {
     @Override
     public int deleteSurvey(Survey survey) {
         // TODO Auto-generated method stub
-        //删除问卷需要注意的事项：如果该答卷有尚未答卷的记录或者尚未设置的延期记录,则不能删除
-        //得到该答卷的分发记录
-        List<DeliveryInfo> deliveryInfos = deliveryDao.getDeliveryInfoBySurvey(survey);
-        for (DeliveryInfo deliveryInfo : deliveryInfos) {
-            if (!(deliveryInfo.getState() == 2 || deliveryInfo.getState() == 5)) {
-                return -1;//该答卷还在分发中,无法删除
-            }
-            //得到该分发记录的提醒信息
-            ForfeitInfo forfeitInfo = new ForfeitInfo();
-            forfeitInfo.setDeliveryId(deliveryInfo.getDeliveryId());
-            ForfeitInfo forfeitInfoById = forfeitDao.getForfeitInfoById(forfeitInfo);
-            if (forfeitInfoById != null) {
-                if (forfeitInfoById.getIsPay() == 0) {
-                    return -2;//尚未设置的延期
-                }
-            }
-        }
         boolean deleteSurvey = surveyDao.deleteSurvey(survey);
         if (deleteSurvey) {
             return 1;
