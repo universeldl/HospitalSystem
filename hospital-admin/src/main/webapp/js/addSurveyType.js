@@ -59,9 +59,9 @@ function validAddSurveyType() {
         $("#addSurveyTypeName").next().show();
         flag = false;
     } else if (!reg.test(surveyType)) {
-        $('#addName').parent().addClass("has-error");
-        $('#addName').next().text("问卷分类名称必须为中文");
-        $("#addName").next().show();
+        $('#addSurveyTypeName').parent().addClass("has-error");
+        $('#addSurveyTypeName').next().text("问卷分类名称必须为中文");
+        $("#addSurveyTypeName").next().show();
         flag = false;
     } else {
         $('#addSurveyTypeName').parent().removeClass("has-error");
