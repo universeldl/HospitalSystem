@@ -9,7 +9,7 @@
         </id>
 
         <property name="patientTypeName" type="java.lang.String">
-            <column name="patientTypeName"/>
+            <column name="patientTypeName" unique="true"/>
         </property>
 
 

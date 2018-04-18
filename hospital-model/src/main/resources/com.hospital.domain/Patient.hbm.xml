@@ -20,19 +20,19 @@
         </property>
 
         <property name="openID" type="java.lang.String">
-            <column name="openID"/>
+            <column name="openID" unique="true"/>
         </property>
 
         <property name="uniqID" type="java.lang.String">
-            <column name="uniqID"/>
+            <column name="uniqID" unique="true"/>
         </property>
 
         <property name="outpatientID" type="java.lang.String">
-            <column name="outpatientID"/>
+            <column name="outpatientID" unique="true"/>
         </property>
 
         <property name="inpatientID" type="java.lang.String">
-            <column name="inpatientID"/>
+            <column name="inpatientID" unique="true"/>
         </property>
 
 
