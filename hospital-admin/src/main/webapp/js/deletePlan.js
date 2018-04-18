@@ -1,20 +1,22 @@
 function deletePlan(id) {
-    $('#loading').show();
-    ajax({
-            method: 'POST',
-            url: 'doctor/planManageAction_deletePlan.action',
-            params: "planId=" + id,
-            callback: function (data) {
-                $('#loading').hide();
-                if (data == 1) {
-                    showInfo("删除成功");
-                }
-                else {
-                    showInfo("删除失败");
-                }
+  if(confirm('确定要删除该计划吗?')) {
+      $('#loading').show();
+      ajax({
+          method: 'POST',
+          url: 'doctor/planManageAction_deletePlan.action',
+          params: "planId=" + id,
+          callback: function (data) {
+              $('#loading').hide();
+              if (data == 1) {
+                  showInfo("删除成功");
+              }
+              else {
+                  showInfo("删除失败");
+              }
 
-            }
-        });
+          }
+      });
+  }
 
 }
 

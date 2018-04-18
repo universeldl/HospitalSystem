@@ -1,22 +1,24 @@
 function deleteSurveyType(id) {
-    $('#loading').show();
-    ajax(
-        {
-            method: 'POST',
-            url: 'doctor/surveyTypeManageAction_deleteSurveyType.action',
-            params: "id=" + id,
-            callback: function (data) {
-                $('#loading').hide();
-                if (data == 1) {
-                    showInfo("删除成功");
-                }
-                else {
-                    showInfo("删除失败");
-                }
+  if(confirm('确定要删除该问卷类型吗?')) {
+      $('#loading').show();
+      ajax(
+          {
+              method: 'POST',
+              url: 'doctor/surveyTypeManageAction_deleteSurveyType.action',
+              params: "id=" + id,
+              callback: function (data) {
+                  $('#loading').hide();
+                  if (data == 1) {
+                      showInfo("删除成功");
+                  }
+                  else {
+                      showInfo("删除失败");
+                  }
 
-            }
-        }
-    );
+              }
+          }
+      );
+  }
 
 
 }
