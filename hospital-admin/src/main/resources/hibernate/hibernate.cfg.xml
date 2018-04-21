@@ -20,7 +20,9 @@
             password
         -->
         <!--	<property name="connection.password">asdfasdf</property>-->
+<!--
         <property name="hbm2ddl.auto">update</property>
+-->
         <property name="show_sql">true</property>
 
         <!--	<mapping resource="com.hospital.domain/Doctor.hbm.xml" />
