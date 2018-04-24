@@ -8,7 +8,7 @@ function registerSubmit() {
     postdata = postdata + "&tel=" + $.trim($("#tel").val());
     postdata = postdata + "&sex=" + $.trim($("#sex option:selected").val());
     postdata = postdata + "&typeID=" + $.trim($("#patientType option:selected").val());
-    postdata = postdata + "&hospitalID=" + $.trim($("#doctorlist option:selected").val());
+    postdata = postdata + "&hospitalID=" + $.trim($("#hospitallist option:selected").val());
     postdata = postdata + "&doctorID=" + $.trim($("#doctorlist option:selected").val());
     postdata = postdata + "&birthday=" + $.trim($("#birthday").val());
     postdata = postdata + "&captcha=" + $.trim($("#captchaIN").val());
@@ -88,7 +88,7 @@ function validLogin() {
         return false;
     }
 
-    if ($('#hospital option:selected').val().length == 0) {
+    if ($('#hospitallist option:selected').val().length == 0) {
         showDialog2("请选择首诊医院", "确定");
         return false;
     }
