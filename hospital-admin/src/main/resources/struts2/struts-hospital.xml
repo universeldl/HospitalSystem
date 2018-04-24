@@ -3,7 +3,23 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
         "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
+
+
     <package name="hospital" extends="struts-default" namespace="/doctor">
+
+        <interceptors>
+            <interceptor name="hospitalInterceptor" class="com.hospital.action.interceptor.HospitalInterceptor"/>
+
+            <interceptor-stack name="hospitalStack">
+                <interceptor-ref name="defaultStack"/>
+
+                <interceptor-ref name="hospitalInterceptor"/>
+
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="hospitalStack"/>
+
         <action name="hospitalManageAction_*" method="{1}" class="com.hospital.action.HospitalManageAction">
             <result name="success">/WEB-INF/doctor/hospitalManger.jsp</result>
         </action>

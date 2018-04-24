@@ -66,7 +66,7 @@
           </ul>
         </li>
       </s:if>
-      <s:if test="#session.doctor.authorization.superSet==1"><!-- 对超级医生和普通医生进行权限区分 -->
+      <s:if test="#session.doctor.authorization.sysSet==1"><!-- 对超级医生和普通医生进行权限区分 -->
       <li class="active"><a href="javascript:;"><i class="fa fa-user-md"></i><span>医生管理</span><i
               class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu menu-open" style="display: block;">
