@@ -25,5 +25,7 @@ public interface DoctorDao {
 
     boolean deleteDoctor(Doctor doctor);
 
+/*
     List<Doctor> findDoctorByHospital(Hospital hospital);
+*/
 }

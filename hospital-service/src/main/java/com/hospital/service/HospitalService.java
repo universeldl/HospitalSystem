@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface HospitalService {
     Hospital getHospitalByID(Hospital hospital);
+    Hospital getHospitalByName(Hospital hospital);
+    Hospital updateHospital(Hospital hospital);
     List<Hospital> getAllHospitals();
     List<Hospital> getAllVisibleHospitals();
     boolean addHospital(Hospital hospital);

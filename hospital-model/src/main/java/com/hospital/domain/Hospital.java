@@ -1,6 +1,7 @@
 package com.hospital.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * 病人类
@@ -8,12 +9,14 @@ import java.io.Serializable;
  * @author c
  */
 public class Hospital implements Serializable {
-    private Integer aid;
+    private Integer hospitalId;
     private String name;
     private boolean visible;
+    private Set<Doctor> doctors;
+    private City city;
 
-    public Integer getAid() { return aid; }
-    public void setAid(Integer aid) { this.aid = aid; }
+    public Integer getHospitalId() { return hospitalId; }
+    public void setHospitalId(Integer hospitalId) { this.hospitalId = hospitalId; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -26,9 +29,19 @@ public class Hospital implements Serializable {
         this.visible = visible;
     }
 
-    public Hospital() {
-
+    public void setDoctors(Set<Doctor> doctors) {
+        this.doctors = doctors;
     }
 
+    public Set<Doctor> getDoctors() {
+        return doctors;
+    }
 
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public City getCity() {
+        return city;
+    }
 }

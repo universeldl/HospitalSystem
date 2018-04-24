@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.hospital.domain.Province" table="Province" dynamic-insert="true" dynamic-update="true">
+        <id name="provinceId" type="java.lang.Integer">
+            <column name="provinceId"/>
+            <generator class="increment"/>
+        </id>
+
+        <property name="name" type="java.lang.String">
+            <column name="name" unique="true"/>
+        </property>
+
+        <set name="cities" lazy="false" order-by="cityId asc">
+            <key>
+                <column name="provinceId"></column>
+            </key>
+            <one-to-many class="com.hospital.domain.City"/>
+        </set>
+
+
+    </class>
+</hibernate-mapping>

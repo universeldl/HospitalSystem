@@ -200,18 +200,18 @@ public class DoctorDaoImpl extends HibernateDaoSupport implements DoctorDao {
         return b;
     }
 
-    @Override
+/*    @Override
     public List<Doctor> findDoctorByHospital(Hospital hospital) {
-        System.out.println("doctordaoimpl finddoctor begin, hospitalid = " + hospital.getAid());
+        System.out.println("doctordaoimpl finddoctor begin, hospitalid = " + hospital.getHospitalId());
         String hql = "from Doctor r where r.hospital.aid=? and r.state=1";
         List<Doctor> list = null;
         try {
-            list = (List<Doctor>) this.getHibernateTemplate().find(hql, hospital.getAid());
+            list = (List<Doctor>) this.getHibernateTemplate().find(hql, hospital.getHospitalId());
             System.out.println("findDoctorByHospital list = " + list.toString());
         } catch (Throwable e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
         return list;
-    }
+    }*/
 }

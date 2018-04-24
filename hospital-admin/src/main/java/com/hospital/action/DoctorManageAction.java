@@ -101,7 +101,7 @@ public class DoctorManageAction extends ActionSupport {
         int idx = 0;
         for (Hospital hospital : hospitals) {
             JSONObject h = new JSONObject();
-            h.put("aid", hospital.getAid());
+            h.put("aid", hospital.getHospitalId());
             h.put("name", hospital.getName());
             jsonArray.add(idx, h);
             idx++;
@@ -159,7 +159,7 @@ public class DoctorManageAction extends ActionSupport {
         doctor.setAid(id);
         Doctor updateDoctor = doctorService.getDoctorById(doctor);//查出需要修改的医生对象
         Hospital hospital = new Hospital();
-        hospital.setAid(hospitalId);
+        hospital.setHospitalId(hospitalId);
         Hospital hospitalByID = hospitalService.getHospitalByID(hospital);
         int success = 0;
 
@@ -196,7 +196,7 @@ public class DoctorManageAction extends ActionSupport {
         doctor.setUsername(username);
         Doctor doctor2 = doctorService.getDoctorByUserName(doctor);//按照姓名查找医生，查看用户名是否已经存在
         Hospital hospital = new Hospital();
-        hospital.setAid(hospitalId);
+        hospital.setHospitalId(hospitalId);
         Hospital hospitalByID = hospitalService.getHospitalByID(hospital);
         int success = 0;
         if (hospitalByID == null ) {
@@ -219,7 +219,6 @@ public class DoctorManageAction extends ActionSupport {
                 success = 1;
             } else {
                 success = 0;
-
             }
         }
         try {

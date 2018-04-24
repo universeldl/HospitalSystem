@@ -3,8 +3,8 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="com.hospital.domain.Hospital" table="hospital" dynamic-insert="true" dynamic-update="true">
-        <id name="aid" type="java.lang.Integer">
-            <column name="aid"/>
+        <id name="hospitalId" type="java.lang.Integer">
+            <column name="hospitalId"/>
             <generator class="increment"/>
         </id>
 
@@ -15,6 +15,17 @@
         <property name="name" type="java.lang.String">
             <column name="name" unique="true"/>
         </property>
+
+        <set name="doctors" lazy="false" order-by="aid asc">
+            <key>
+                <column name="hospitalId"></column>
+            </key>
+            <one-to-many class="com.hospital.domain.Doctor"/>
+        </set>
+
+        <many-to-one name="city" class="com.hospital.domain.City" lazy="false">
+            <column name="cityId"></column>
+        </many-to-one>
 
     </class>
 </hibernate-mapping>

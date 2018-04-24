@@ -9,7 +9,8 @@ import java.util.List;
 public interface HospitalDao {
 
     Hospital getHospitalByID(Hospital hospital);
-
+    Hospital getHospitalByName(Hospital hospital);
+    Hospital updateHospital(Hospital hospital);
     List<Hospital> getAllHospitals();
 
     List<Hospital> getAllVisibleHospitals();

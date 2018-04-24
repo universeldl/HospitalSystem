@@ -1,14 +1,15 @@
 package com.hospital.action;
 
-import com.hospital.domain.Patient;
-import com.hospital.domain.PatientType;
+import com.hospital.domain.*;
 import com.hospital.service.PatientService;
-import com.hospital.domain.Hospital;
 import com.hospital.service.HospitalService;
 import com.hospital.service.PatientTypeService;
+import com.hospital.service.ProvinceService;
 import com.hospital.util.AccessTokenMgr;
 import com.hospital.util.GetOpenIdOauth2;
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 import java.io.PrintWriter;
 import java.util.List;
@@ -41,9 +42,13 @@ public class wechatLoginAction extends ActionSupport {
 
     private HospitalService hospitalService;
 
+    private ProvinceService provinceService;
+
     public void setHospitalService(HospitalService hospitalService) {
         this.hospitalService = hospitalService;
     }
+
+    public void setProvinceService(ProvinceService provinceService) { this.provinceService = provinceService; }
 
     private PatientTypeService patientTypeService;
     public void setPatientTypeService(PatientTypeService patientTypeService) {
@@ -56,8 +61,21 @@ public class wechatLoginAction extends ActionSupport {
         AccessTokenMgr mgr = AccessTokenMgr.getInstance();
         ServletActionContext.getContext().getSession().put("appID", mgr.getAppId());
 
-        List<Hospital> hospitalList = hospitalService.getAllVisibleHospitals();
-        ServletActionContext.getRequest().setAttribute("hl", hospitalList);
+/*        List<Hospital> hospitalList = hospitalService.getAllVisibleHospitals();
+        ServletActionContext.getRequest().setAttribute("hl", hospitalList);*/
+
+        List<Province> provinceList = provinceService.getAllProvinces();
+
+        JSONArray jsonArray = new JSONArray();
+
+        for(Province province : provinceList) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", province.getProvinceId().toString());
+            jsonObject.put("name", province.getName());
+            jsonArray.add(jsonObject);
+        }
+
+        ServletActionContext.getRequest().setAttribute("pl", jsonArray);
 
         List<PatientType> patientTypeList = patientTypeService.getAllPatientType();
         ServletActionContext.getRequest().setAttribute("ptl", patientTypeList);
@@ -67,9 +85,9 @@ public class wechatLoginAction extends ActionSupport {
             String open_id = GetOpenIdOauth2.getOpenId(code, mgr);
 
             // testing
-            //if(open_id == null) {
-            //    open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
-            //}
+/*            if(open_id == null) {
+                open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
+            }*/
 
             if (open_id != null) {
                 Patient patient = new Patient();

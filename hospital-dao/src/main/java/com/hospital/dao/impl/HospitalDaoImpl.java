@@ -12,12 +12,37 @@ public class HospitalDaoImpl extends HibernateDaoSupport implements HospitalDao 
 
     @Override
     public Hospital getHospitalByID(Hospital hospital) {
-        String hql = "from Hospital a where a.aid=?";
-        List list = this.getHibernateTemplate().find(hql, hospital.getAid());
+        String hql = "from Hospital a where a.hospitalId=?";
+        List list = this.getHibernateTemplate().find(hql, hospital.getHospitalId());
         if (list != null && list.size() > 0) {
             return (Hospital) list.get(0);
         }
         return null;
+    }
+
+    @Override
+    public Hospital getHospitalByName(Hospital hospital) {
+        String hql = "from Hospital a where a.name=?";
+        List list = this.getHibernateTemplate().find(hql, hospital.getName());
+        if (list != null && list.size() > 0) {
+            return (Hospital) list.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public Hospital updateHospital(Hospital hospital) {
+        Hospital newHospital = null;
+        try {
+            this.getHibernateTemplate().clear();
+            //将传入的detached(分离的)状态的对象的属性复制到持久化对象中，并返回该持久化对象
+            newHospital = (Hospital) this.getHibernateTemplate().merge(hospital);
+            this.getHibernateTemplate().flush();
+        } catch (Throwable e1) {
+            e1.printStackTrace();
+            throw new RuntimeException(e1.getMessage());
+        }
+        return newHospital;
     }
 
     @Override
