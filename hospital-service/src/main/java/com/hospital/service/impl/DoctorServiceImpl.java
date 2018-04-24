@@ -60,8 +60,8 @@ public class DoctorServiceImpl implements DoctorService {
 
     }
 
-    @Override
+/*    @Override
     public List<Doctor> findDoctorByHospital(Hospital hospital) {
         return doctorDao.findDoctorByHospital(hospital);
-    }
+    }*/
 }

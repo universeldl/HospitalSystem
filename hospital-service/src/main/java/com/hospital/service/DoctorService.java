@@ -65,5 +65,7 @@ public interface DoctorService {
      */
     boolean deleteDoctor(Doctor doctor);
 
+/*
     List<Doctor> findDoctorByHospital(Hospital hospital);
+*/
 }

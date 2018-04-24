@@ -51,7 +51,9 @@
 <body class="skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div id="rrapp" class="wrapper">
-    <header class="main-header"><a href="javascript:void(0);" class="logo"><span class="logo-mini"><b>后台</b></span>
+    <%@include file="sidebar.jsp"%>
+
+<%--    <header class="main-header"><a href="javascript:void(0);" class="logo"><span class="logo-mini"><b>后台</b></span>
         <span class="logo-lg"><b>呼吸天使问卷管理系统</b></span></a>
         <nav role="navigation" class="navbar navbar-static-top"><a href="#" data-toggle="offcanvas" role="button"
                                                                    class="sidebar-toggle"><span class="sr-only">Toggle navigation</span></a>
@@ -132,7 +134,7 @@
                 </s:if>
             </ul>
         </section>
-    </aside>
+    </aside>--%>
     <div class="content-wrapper" style="min-height: 800px;">
         <section class="content-header">
             <ol id="nav_title" class="breadcrumb" style="position: static; float: none;">

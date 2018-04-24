@@ -31,8 +31,22 @@ public class patientRegisterAction extends ActionSupport {
     PatientService patientService;
     DoctorService doctorService;
     PlanService planService;
-    SurveyService surveyService;
+    //SurveyService surveyService;
     DeliveryService deliveryService;
+    HospitalService hospitalService;
+    ProvinceService provinceService;
+    CityService cityService;
+
+    String provinceID;
+    String cityID;
+
+    public void setProvinceID(String provinceID) {
+        this.provinceID = provinceID;
+    }
+
+    public void setCityID(String cityID) {
+        this.cityID = cityID;
+    }
 
     public void setInvitationCode(String invitationCode) {
         this.invitationCode = invitationCode;
@@ -83,24 +97,79 @@ public class patientRegisterAction extends ActionSupport {
     public void setDoctorService(DoctorService doctorService) {
         this.doctorService = doctorService;
     }
-    public void setSurveyService(SurveyService surveyService) {
-        this.surveyService = surveyService;
-    }
     public void setDeliveryService(DeliveryService deliveryService) {
         this.deliveryService = deliveryService;
     }
+    public void setHospitalService(HospitalService hospitalService) { this.hospitalService = hospitalService; }
+    public void setProvinceService(ProvinceService provinceService) {
+        this.provinceService = provinceService;
+    }
+    public void setCityService(CityService cityService) {
+        this.cityService = cityService;
+    }
 
+    public String findHospitalByCityID() {
+        if (cityID != null) {
+            City tmpCity = new City();
+            tmpCity.setCityId(Integer.valueOf(cityID));
+            City city = cityService.getCityByID(tmpCity);
+            Set<Hospital> hospitals = city.getHospitals();
+            JSONArray jsonArray = new JSONArray();
+            for(Hospital hospital : hospitals) {
+                if (hospital.isVisible()) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("id", hospital.getHospitalId().toString());
+                    jsonObject.put("name", hospital.getName());
+                    jsonArray.add(jsonObject);
+                }
+            }
+            try {
+                HttpServletResponse response = ServletActionContext.getResponse();
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().print(jsonArray.toString());
+            } catch (IOException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return null;
+    }
 
+    public String findCityByProvinceID() {
+        if (provinceID != null) {
+            Province tmpProvince = new Province();
+            tmpProvince.setProvinceId(Integer.valueOf(provinceID));
+            Province province = provinceService.getProvinceByID(tmpProvince);
+            Set<City> cites = province.getCities();
+            JSONArray jsonArray = new JSONArray();
+            for(City city : cites) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", city.getCityId().toString());
+                jsonObject.put("name", city.getName());
+                jsonArray.add(jsonObject);
+            }
+            try {
+                HttpServletResponse response = ServletActionContext.getResponse();
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().print(jsonArray.toString());
+            } catch (IOException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return null;
+    }
 
     public String findDoctorsByHospital() {
         if (hospitalID!=null) {
             Hospital tmpHospital = new Hospital();
-            tmpHospital.setAid(Integer.valueOf(hospitalID));
+            tmpHospital.setHospitalId(Integer.valueOf(hospitalID));
+            Hospital hospital = hospitalService.getHospitalByID(tmpHospital);
+/*
             List<Doctor> list = doctorService.findDoctorByHospital(tmpHospital);
+*/
+            Set<Doctor> list = hospital.getDoctors();
             JSONArray jsonArray = new JSONArray();
 
-            for(int i = 0; i < list.size(); i++) {
-                Doctor doctor = list.get(i);
+            for(Doctor doctor : list) {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("id", doctor.getAid().toString());
                 jsonObject.put("name", doctor.getName());

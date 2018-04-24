@@ -14,4 +14,7 @@
     <import resource="applicationContext-answer.xml"/>
     <import resource="applicationContext-survey.xml"/>
     <import resource="applicationContext-question.xml"/>
+    <import resource="applicationContext-city.xml"/>
+    <import resource="applicationContext-province.xml"/>
+
 </beans>

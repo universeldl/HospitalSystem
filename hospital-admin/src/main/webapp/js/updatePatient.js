@@ -4,10 +4,7 @@
  */
 
 $(function () {
-
     $('#updatePatient').click(function () {
-
-
         if (!validUpdatePatient()) {
             return;
         }
@@ -21,6 +18,7 @@ $(function () {
         } else {
             postdata = postdata + "&email=n/a";
         }
+        $('#loading').show();
 
         //alert(postdata)
         ajax(
@@ -29,6 +27,7 @@ $(function () {
                 url: 'doctor/patientManageAction_updatePatient.action',
                 params: postdata,
                 callback: function (data) {
+                    $('#loading').hide();
                     if (data == 1) {
                         $("#updateModal").modal("hide");//关闭模糊框		
                         showInfo("修改成功");

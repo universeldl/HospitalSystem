@@ -8,7 +8,7 @@ function registerSubmit() {
     postdata = postdata + "&tel=" + $.trim($("#tel").val());
     postdata = postdata + "&sex=" + $.trim($("#sex option:selected").val());
     postdata = postdata + "&typeID=" + $.trim($("#patientType option:selected").val());
-    postdata = postdata + "&hospitalID=" + $.trim($("#hospital option:selected").val());
+    postdata = postdata + "&hospitalID=" + $.trim($("#doctorlist option:selected").val());
     postdata = postdata + "&doctorID=" + $.trim($("#doctorlist option:selected").val());
     postdata = postdata + "&birthday=" + $.trim($("#birthday").val());
     postdata = postdata + "&captcha=" + $.trim($("#captchaIN").val());
@@ -135,9 +135,53 @@ function reloadCaptchaImg() {
 
 }
 
+function loadCites() {
+    var postdata = "provinceID=";
+    postdata = postdata + $('#province option:selected').val();
+    ajax(
+        {
+            method: 'POST',
+            url: 'patientRegisterAction_findCityByProvinceID.action',
+            type: "json",
+            scriptCharset: 'utf-8',
+            params: postdata,
+            callback: function (data) {
+                $('#citylist').html("<option disabled selected value></option>");
+                $('#hospitallist').html("<option disabled selected value></option>");
+                $('#doctorlist').html("<option disabled selected value></option>");
+
+                for(var i = 0; i < data.length; i++) {
+                    $("#citylist").append("<option value='"+data[i].id+"' >"+data[i].name+"</option>");
+                }
+            }
+        }
+    );
+}
+
+function loadHospitals() {
+    var postdata = "cityID=";
+    postdata = postdata + $('#citylist option:selected').val();
+    ajax(
+        {
+            method: 'POST',
+            url: 'patientRegisterAction_findHospitalByCityID.action',
+            type: "json",
+            scriptCharset: 'utf-8',
+            params: postdata,
+            callback: function (data) {
+                $('#hospitallist').html("<option disabled selected value></option>");
+                $('#doctorlist').html("<option disabled selected value></option>");
+                for(var i = 0; i < data.length; i++) {
+                    $("#hospitallist").append("<option value='"+data[i].id+"' >"+data[i].name+"</option>");
+                }
+            }
+        }
+    );
+}
+
 function loadDoctors() {
     var postdata = "hospitalID=";
-    postdata = postdata + $('#hospital option:selected').val();
+    postdata = postdata + $('#hospitallist option:selected').val();
     ajax(
         {
             method: 'POST',

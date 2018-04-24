@@ -29,5 +29,14 @@
         <property name="deliveryService">
             <ref bean="deliveryService"/>
         </property>
+        <property name="hospitalService">
+            <ref bean="hospitalService"/>
+        </property>
+        <property name="provinceService">
+            <ref bean="provinceService"/>
+        </property>
+        <property name="cityService">
+            <ref bean="cityService"/>
+        </property>
     </bean>
 </beans>

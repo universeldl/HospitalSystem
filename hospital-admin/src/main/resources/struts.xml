@@ -34,4 +34,6 @@
     <include file="struts2/struts-forfeit.xml"></include>
     <include file="struts2/struts-download.xml"></include>
     <include file="struts2/struts-upload.xml"></include>
+    <include file="struts2/struts-hospital.xml"></include>
+
 </struts>

@@ -51,7 +51,7 @@
             </div>
             <div class="weui-cell weui-cell_select weui-cell_select-after">
                 <div class="weui-cell__hd">
-                    <label for="hospital" class="weui-label">疾病类型</label>
+                    <label for="patientType" class="weui-label">疾病类型</label>
                 </div>
                 <div class="weui-cell__bd">
                     <select class="weui-select" id="patientType" >
@@ -77,18 +77,40 @@
                     </select>
                 </div>
             </div>
+
             <div class="weui-cell weui-cell_select weui-cell_select-after">
                 <div class="weui-cell__hd">
-                    <label for="hospital" class="weui-label">首诊医院</label>
+                    <label for="province" class="weui-label">省（直辖市）</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <select class="weui-select" id="hospital" onchange="loadDoctors()">
+                    <select class="weui-select" id="province" onchange="loadCites()">
                         <option disabled selected value></option>
-                        <s:if test="#request.hl!=null">
-                            <s:iterator value="#request.hl" var="hospital">
-                                <option value=<s:property value="#hospital.aid"/> > <s:property value="#hospital.name"/> </option>
+                        <s:if test="#request.pl!=null">
+                            <s:iterator value="#request.pl" var="province">
+                                <option value=<s:property value="#province.id"/> > <s:property value="#province.name"/> </option>
                             </s:iterator>
                         </s:if>
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="citylist" class="weui-label">市（区、县）</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" id="citylist" onchange="loadHospitals()">
+                        <option disabled selected value></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="hospitallist" class="weui-label">首诊医院</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" id="hospitallist" onchange="loadDoctors()">
+                        <option disabled selected value></option>
                     </select>
                 </div>
             </div>
