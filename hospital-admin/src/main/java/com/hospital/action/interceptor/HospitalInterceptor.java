@@ -9,7 +9,7 @@ import org.apache.struts2.ServletActionContext;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public class DoctorInterceptor implements Interceptor {
+public class HospitalInterceptor implements Interceptor {
 
     @Override
     public void destroy() {
