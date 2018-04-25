@@ -473,10 +473,10 @@ CREATE TABLE `hospital` (
   `hospitalId` int(11) NOT NULL,
   `visible` bit(1) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `cityId` int(11) NOT NULL,
+  `cityId` int(11) DEFAULT NULL,
   PRIMARY KEY (`hospitalId`),
   UNIQUE KEY `UK_mg15n86jud2riqbr0ah93p7mw` (`name`),
-  CONSTRAINT  FOREIGN KEY (`cityId`) REFERENCES `City` (`cityId`) ON DELETE CASCADE
+  CONSTRAINT  FOREIGN KEY (`cityId`) REFERENCES `City` (`cityId`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
