@@ -425,14 +425,15 @@ public class HospitalManageAction extends ActionSupport {
         City city = hospital.getCity();
         if (city != null) {
             jsonObject.put("cityId", hospital.getCity().getCityId());
+
+            Province province = city.getProvince();
+            if (province != null) {
+                jsonObject.put("provinceId", province.getProvinceId());
+            } else {
+                jsonObject.put("provinceId", -1);
+            }
         } else {
             jsonObject.put("cityId", -1);
-        }
-
-        Province province = city.getProvince();
-        if (province != null) {
-            jsonObject.put("provinceId", province.getProvinceId());
-        } else {
             jsonObject.put("provinceId", -1);
         }
 
