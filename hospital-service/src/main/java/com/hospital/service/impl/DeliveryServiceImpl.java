@@ -242,6 +242,125 @@ public class DeliveryServiceImpl implements DeliveryService {
         return true;
     }
 
+    @Override
+    public boolean checkAndDoDelivery2() {
+        List<Patient> patients = patientDao.findAllPatients();
+
+        // current date
+        Calendar curCalendar = Calendar.getInstance();
+
+        System.out.println("current date = " + curCalendar.toString());
+
+        for (Patient patient : patients) {
+            // screen patient
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat dft = new SimpleDateFormat("HH");
+            int lastCharOfCurrentHour = Integer.parseInt(dft.format(cal.getTime())) - 10;// 0~9
+            String patientId = String.valueOf(patient.getPatientId());
+            int lastCharOfPatientId = Integer.parseInt(patientId.substring(patientId.length() - 1, patientId.length()));
+            if(lastCharOfCurrentHour != lastCharOfPatientId) {
+                continue;
+            }
+
+            System.out.println("checkAndDoDelivery2 LOG patient = " + patient.getName());
+
+            // get create time
+            Calendar createDate = Calendar.getInstance();
+            createDate.setTime(patient.getCreateTime());
+            System.out.println("checkAndDoDelivery2 LOG createDate = " + createDate.getTime().toString());
+
+            // all survey
+            Set<Survey> surveys = patient.getPlan().getSurveys();
+
+            // all deliveryInfo
+            Set<DeliveryInfo> deliveryInfos = patient.getDeliveryInfos();
+
+            for (Survey survey : surveys) {
+                System.out.println("checkAndDoDelivery2 LOG survey = " + survey.getSurveyName());
+
+                Calendar start = (Calendar) createDate.clone();
+
+                Integer num_cycle = 0;
+                while(true) {
+                    num_cycle += 1;
+
+                    // finished all survey
+                    if (num_cycle > survey.getTimes()) break;
+
+                    Calendar end = (Calendar) start.clone();
+                    end.add(Calendar.DATE, survey.getBday());
+
+                    System.out.println("checkAndDoDelivery2 LOG num_cycle = " + num_cycle.toString());
+                    System.out.println("checkAndDoDelivery2 LOG start = " + start.getTime().toString());
+                    System.out.println("checkAndDoDelivery2 LOG end = " + end.getTime().toString());
+
+
+                    if ((curCalendar.after(start) || curCalendar.equals(start)) && curCalendar.before(end)) {
+                        if (num_cycle == 1 && !survey.isSendOnRegister()) {
+                            // do nothing;
+                            System.out.println("checkAndDoDelivery2 LOG donoting!");
+
+                        } else {
+                            // should send message
+                            DeliveryInfo deliveryInfoInCycle = null;
+                            for (DeliveryInfo deliveryInfo : deliveryInfos) {
+                                if (!deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) continue;
+                                Calendar deliveryInfoDate = Calendar.getInstance();
+                                deliveryInfoDate.setTime(deliveryInfo.getDeliveryDate());
+                                if ((deliveryInfoDate.after(start) || deliveryInfoDate.equals(start))
+                                        && deliveryInfoDate.before(end)) {
+                                    deliveryInfoInCycle = deliveryInfo;
+                                    break;
+                                }
+                            }
+
+                            // there is already delivery Info
+                            if (deliveryInfoInCycle != null) {
+                                System.out.println("checkAndDoDelivery2 LOG already have delivery id = " + deliveryInfoInCycle.getDeliveryId());
+
+                                if (deliveryInfoInCycle.getRetrieveInfo() == null) {
+                                    System.out.println("checkAndDoDelivery2 LOG resend delivery id = " + deliveryInfoInCycle.getDeliveryId());
+
+                                    deliveryInfoInCycle.setState(deliveryInfoInCycle.getState() + 1);
+                                    deliveryDao.updateDeliveryInfo(deliveryInfoInCycle);
+                                    //sendTemplateMessage(deliveryInfoInCycle);
+                                } else {
+                                    System.out.println("checkAndDoDelivery2 LOG delivery id = " + deliveryInfoInCycle.getDeliveryId() + " already answered");
+                                }
+                            } else {
+                                DeliveryInfo newDI = new DeliveryInfo();
+                                newDI.setDoctor(patient.getDoctor());
+                                newDI.setSurvey(survey);
+                                newDI.setPatient(patient);
+                                newDI.setState(0);//新deliveryInfo
+                                int addDelivery = addDelivery(newDI);
+                                newDI.setDeliveryId(addDelivery);
+                                DeliveryInfo newDeliveryInfo = getDeliveryInfoById(newDI);
+                                System.out.println("checkAndDoDelivery2 LOG create new delivery = " + addDelivery);
+
+                                if (newDeliveryInfo != null) {
+                                    //sendTemplateMessage(newDeliveryInfo);
+                                    survey.setNum(survey.getNum() + 1);
+                                    surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
+                                    System.out.println("checkAndDoDelivery2 survey number +1 = " + survey.getNum());
+
+                                } else {
+                                    System.out.println("checkAndDoDelivery2 newDeliveryInfo = null!!");
+                                    return false;
+                                }
+                            }
+                        }
+
+                        break;
+                    }
+
+                    start.add(Calendar.MONTH, survey.getFrequency());
+                }
+            }
+        }
+        return true;
+    }
+
 
     @Override
     public boolean checkAndDoDeliveryNew() {

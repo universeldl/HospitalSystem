@@ -39,6 +39,8 @@ public interface DeliveryService {
 
     boolean checkAndDoDeliveryNew();
 
+    boolean checkAndDoDelivery2();
+
     boolean checkDeliveryInfo();
 
     int resendSurvey(DeliveryInfo deliveryInfo);
