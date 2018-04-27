@@ -106,7 +106,7 @@ public class PatientServiceImpl implements PatientService {
         Patient patientById = patientDao.getPatientById(patient);
         Set<DeliveryInfo> deliveryInfos = patientById.getDeliveryInfos();
         for (DeliveryInfo deliveryInfo : deliveryInfos) {
-            if (deliveryInfo.getState() >= 0) {
+            if (deliveryInfo.getRetrieveInfo() == null) {
                 return -1;//有尚未答卷的问卷
             }
         }
