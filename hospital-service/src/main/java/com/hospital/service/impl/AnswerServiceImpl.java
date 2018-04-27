@@ -73,7 +73,10 @@ public class AnswerServiceImpl implements AnswerService {
         Answer answerById = answerDao.getAnswerById(answer);
         Set<DeliveryInfo> deliveryInfos = null;
         for (DeliveryInfo deliveryInfo : deliveryInfos) {
+/*
             if (!(deliveryInfo.getState() == 2 || deliveryInfo.getState() == 5)) {
+*/
+            if (deliveryInfo.getRetrieveInfo() == null) {
                 return -1;//有尚未答卷的问卷
             }
             //得到该分发记录的提醒信息

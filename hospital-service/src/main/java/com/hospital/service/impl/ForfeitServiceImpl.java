@@ -93,8 +93,9 @@ public class ForfeitServiceImpl implements ForfeitService {
         info.setDeliveryId(forfeitInfo.getDeliveryId());
         DeliveryInfo deliveryInfoById = deliveryDao.getDeliveryInfoById(info);
         //查看当前的分发状态
-        int state = deliveryInfoById.getState();
-        if (state == 1 || state == 4) {
+/*        int state = deliveryInfoById.getState();
+        if (state == 1 || state == 4) {*/
+        if (deliveryInfoById.getRetrieveInfo() == null) {
             //如果当前状态为未答卷(逾期未答卷,分发逾期未答卷),则提示病人先去答卷再来设置提醒,返回-1
             return -1;
         }

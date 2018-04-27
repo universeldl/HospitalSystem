@@ -84,7 +84,7 @@ public class RetrieveServiceImpl implements RetrieveService {
     @Override
     public int addRetrieveInfo(RetrieveInfo retrieveInfo) {
         DeliveryInfo deliveryInfo = retrieveInfo.getDeliveryInfo();
-        if (deliveryInfo.getState() == -1) {//如果已经答卷了。
+        if (deliveryInfo.getRetrieveInfo() != null) {//如果已经答卷了。
             return -1;//已经答卷
         }
         Survey survey = deliveryInfo.getSurvey();

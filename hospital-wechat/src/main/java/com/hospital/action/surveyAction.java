@@ -218,13 +218,7 @@ public class surveyAction extends ActionSupport {
             return ERROR;
         }
 
-        if (deliveryInfo.getState() == -1) {
-            errorMsg = "问卷已经完成，无法作答";
-            return ERROR;
-        }
-
-        RetrieveInfo checkRetrieve = retrieveService.getRetrieveInfoByDeliveryID(Integer.valueOf(deliveryID));
-        if (checkRetrieve != null) {
+        if (deliveryInfo.getRetrieveInfo() != null) {
             errorMsg = "问卷已经完成，无法作答";
             return ERROR;
         }
