@@ -125,7 +125,7 @@ public class TemplateMessageMgr {
             String requestUrl = send_template_url.replace("ACCESS_TOKEN", token);
             JSONObject jsonObject = WeixinUtil.HttpsRequest(requestUrl, "POST", f1.toString());
             if (jsonObject != null) {
-                System.out.println("return = " + jsonObject.toString());
+                System.out.println("sendTemplateMessage return = " + jsonObject.toString());
                 return true;
             } else {
                 System.out.println("Cannot find openids");

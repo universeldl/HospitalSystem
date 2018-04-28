@@ -186,7 +186,9 @@ public class RetrieveManageAction extends ActionSupport {
             }
 
             retrieveInfo.setAnswers(answers);
+/*
             deliveryInfo.setState(-1);//状态改为已答卷
+*/
             deliveryService.updateDeliveryInfo(deliveryInfo);
             //int b = retrieveService.addRetrieveInfo(retrieveInfo);
         }
@@ -268,7 +270,9 @@ public class RetrieveManageAction extends ActionSupport {
             retrieveInfo.setAnswers(answers);
             //retrieveService.addRetrieveInfo(retrieveInfo);
             deliveryInfo.setRetrieveInfo(retrieveInfo);
+/*
             deliveryInfo.setState(-1);
+*/
             deliveryService.updateDeliveryInfo(deliveryInfo);
         }
         try {

@@ -99,7 +99,9 @@ public class RetrieveServiceImpl implements RetrieveService {
         if (b != null) {
             ba = retrieveDao.addRetrieve(retrieveInfo);
         }
+/*
         deliveryInfo.setState(-1);//设置分发的状态为已答卷
+*/
         DeliveryInfo bi = null;
         if (ba != -1) {
             bi = deliveryDao.updateDeliveryInfo(deliveryInfo);
