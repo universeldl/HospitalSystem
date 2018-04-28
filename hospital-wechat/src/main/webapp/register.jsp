@@ -99,7 +99,7 @@
                 </div>
                 <div class="weui-cell__bd">
                     <select class="weui-select" id="citylist" onchange="loadHospitals()">
-                        <option disabled selected value></option>
+                        <option disabled selected value>请先选择省份</option>
                     </select>
                 </div>
             </div>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="weui-cell__bd">
                     <select class="weui-select" id="hospitallist" onchange="loadDoctors()">
-                        <option disabled selected value></option>
+                        <option disabled selected value>请先选择城市（区、县）</option>
                     </select>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="weui-cell__bd">
                     <select class="weui-select" id="doctorlist">
-                        <option disabled selected value></option>
+                        <option disabled selected value>请先选择首诊医院</option>
                     </select>
                 </div>
             </div>
@@ -140,7 +140,7 @@
             <div class="weui-cell weui-cell_vcode">
                 <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="请输入验证码" id="captchaIN"/>
+                    <input class="weui-input" type="text" placeholder="不区分大小写" id="captchaIN"/>
                 </div>
                 <div class="weui-cell__ft">
                     <img class="weui-vcode-img" id="CAPTCHAIMG" src="captchaAction_getCaptchaImg.action"/>

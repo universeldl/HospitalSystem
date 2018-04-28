@@ -244,20 +244,34 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public boolean checkAndDoDelivery2() {
+/*
         List<Patient> patients = patientDao.findAllPatients();
+*/
 
+        List<Integer> patientIds = patientDao.findAllPatientIds();
         // current date
         Calendar curCalendar = Calendar.getInstance();
 
         System.out.println("current date = " + curCalendar.toString());
 
+/*
         for (Patient patient : patients) {
+*/
+        for (Integer patientId : patientIds) {
+            Patient tmpPatient = new Patient();
+            tmpPatient.setPatientId(patientId);
+            Patient patient = patientDao.getPatientById(tmpPatient);
+            if (patient == null) {
+                continue;
+            }
+
             // screen patient
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat dft = new SimpleDateFormat("HH");
             int lastCharOfCurrentHour = Integer.parseInt(dft.format(cal.getTime())) - 10;// 0~9
-            String patientId = String.valueOf(patient.getPatientId());
-            int lastCharOfPatientId = Integer.parseInt(patientId.substring(patientId.length() - 1, patientId.length()));
+/*            String patientIdStr = String.valueOf(patient.getPatientId());
+            int lastCharOfPatientId = Integer.parseInt(patientIdStr.substring(patientIdStr.length() - 1, patientIdStr.length()));*/
+            int lastCharOfPatientId = patientId % 10;
             if(lastCharOfCurrentHour != lastCharOfPatientId) {
                 continue;
             }

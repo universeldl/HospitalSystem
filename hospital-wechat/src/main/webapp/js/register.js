@@ -87,7 +87,14 @@ function validLogin() {
         showDialog2("请选择病例类型", "确定");
         return false;
     }
-
+    if ($('#province option:selected').val().length == 0) {
+        showDialog2("请选择所在省份", "确定");
+        return false;
+    }
+    if ($('#citylist option:selected').val().length == 0) {
+        showDialog2("请选择所在城市（区、县）", "确定");
+        return false;
+    }
     if ($('#hospitallist option:selected').val().length == 0) {
         showDialog2("请选择首诊医院", "确定");
         return false;
@@ -146,9 +153,10 @@ function loadCites() {
             scriptCharset: 'utf-8',
             params: postdata,
             callback: function (data) {
+
                 $('#citylist').html("<option disabled selected value></option>");
-                $('#hospitallist').html("<option disabled selected value></option>");
-                $('#doctorlist').html("<option disabled selected value></option>");
+                $('#hospitallist').html("<option disabled selected value>请先选择城市（区、县）</option>");
+                $('#doctorlist').html("<option disabled selected value>请先选择首诊医院</option>");
 
                 for(var i = 0; i < data.length; i++) {
                     $("#citylist").append("<option value='"+data[i].id+"' >"+data[i].name+"</option>");
@@ -170,7 +178,7 @@ function loadHospitals() {
             params: postdata,
             callback: function (data) {
                 $('#hospitallist').html("<option disabled selected value></option>");
-                $('#doctorlist').html("<option disabled selected value></option>");
+                $('#doctorlist').html("<option disabled selected value>请先选择首诊医院</option>");
                 for(var i = 0; i < data.length; i++) {
                     $("#hospitallist").append("<option value='"+data[i].id+"' >"+data[i].name+"</option>");
                 }
@@ -190,7 +198,7 @@ function loadDoctors() {
             scriptCharset: 'utf-8',
             params: postdata,
             callback: function (data) {
-                $('#doctorlist').html("");
+                $('#doctorlist').html("<option disabled selected value></option>");
                 for(var i = 0; i < data.length; i++) {
                     $("#doctorlist").append("<option value='"+data[i].id+"' >"+data[i].name+"</option>");
                 }

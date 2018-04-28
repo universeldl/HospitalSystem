@@ -330,6 +330,13 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         return list;
     }
 
+    @Override
+    public List<Integer> findAllPatientIds() {
+        String hql = "select patientId from Patient ";
+        List list = this.getHibernateTemplate().find(hql);
+        return list;
+    }
+
 
     @Override
     public List<Patient> findAllPatientsByDoctor(Doctor doctor) {
