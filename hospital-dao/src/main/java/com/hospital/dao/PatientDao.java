@@ -33,6 +33,8 @@ public interface PatientDao {
 
     List<Patient> findAllPatients();
 
+    List<Integer> findAllPatientIds();
+
     List<Patient> findAllPatientsByDoctor(Doctor doctor);
 
 }
