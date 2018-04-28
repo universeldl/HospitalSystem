@@ -323,7 +323,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
                                     deliveryInfoInCycle.setState(deliveryInfoInCycle.getState() + 1);
                                     deliveryDao.updateDeliveryInfo(deliveryInfoInCycle);
-                                    //sendTemplateMessage(deliveryInfoInCycle);
+                                    sendTemplateMessage(deliveryInfoInCycle);
                                 } else {
                                     System.out.println("checkAndDoDelivery2 LOG delivery id = " + deliveryInfoInCycle.getDeliveryId() + " already answered");
                                 }
@@ -339,7 +339,7 @@ public class DeliveryServiceImpl implements DeliveryService {
                                 System.out.println("checkAndDoDelivery2 LOG create new delivery = " + addDelivery);
 
                                 if (newDeliveryInfo != null) {
-                                    //sendTemplateMessage(newDeliveryInfo);
+                                    sendTemplateMessage(newDeliveryInfo);
                                     survey.setNum(survey.getNum() + 1);
                                     surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
                                     System.out.println("checkAndDoDelivery2 survey number +1 = " + survey.getNum());
