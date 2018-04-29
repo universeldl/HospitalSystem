@@ -23,7 +23,7 @@ public class Survey implements Serializable {
     private Integer times;    //随访次数
     private boolean sendOnRegister;
     private Set<Question> questions = new HashSet<>();
-    private Set<RetrieveInfo> retrieveInfos = new HashSet<>();
+    //private Set<RetrieveInfo> retrieveInfos = new HashSet<>();
     private Integer bday;
 
     public void setBday(Integer bday) {
@@ -74,13 +74,13 @@ public class Survey implements Serializable {
         this.questions = questions;
     }
 
-    public Set<RetrieveInfo> getRetrieveInfos() {
+/*    public Set<RetrieveInfo> getRetrieveInfos() {
         return retrieveInfos;
     }
 
     public void setRetrieveInfos(Set<RetrieveInfo> retrieveInfos) {
         this.retrieveInfos = retrieveInfos;
-    }
+    }*/
 
     public SurveyType getSurveyType() {
         return surveyType;

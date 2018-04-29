@@ -59,12 +59,12 @@
             <one-to-many class="com.hospital.domain.Question"/>
         </set>
 
-        <set name="retrieveInfos" lazy="false" inverse="true">
+<!--        <set name="retrieveInfos" lazy="false" inverse="true">
             <key>
                 <column name="surveyId"></column>
             </key>
             <one-to-many class="com.hospital.domain.RetrieveInfo"/>
-        </set>
+        </set>-->
 
         <many-to-one name="surveyType" class="com.hospital.domain.SurveyType" lazy="false">
             <column name="typeId"></column>
