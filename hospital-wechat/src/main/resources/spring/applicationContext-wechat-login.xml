@@ -48,8 +48,8 @@
         <property name="patientService">
             <ref bean="patientService"/>
         </property>
-        <property name="hospitalService">
-            <ref bean="hospitalService"/>
+        <property name="deliveryService">
+            <ref bean="deliveryService"/>
         </property>
         <property name="patientTypeService">
             <ref bean="patientTypeService"/>
