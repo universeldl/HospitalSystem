@@ -37,6 +37,7 @@ function registerSubmit() {
                     showDialog2("邀请码错误", "确认")
                 } else if (data == -4) {
                     showDialog2("用户已经存在，不能重复注册", "确认")
+                    window.location.href = "index.jsp";
                 } else {
                     // 登陆失败
                     reloadCaptchaImg();

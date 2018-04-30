@@ -4,6 +4,8 @@
 <html lang="zh-CN" class="ax-vertical-centered">
 
 <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+
     <title>随访</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/weui.css"/>
@@ -12,8 +14,7 @@
 </head>
 
 
-<body ontouchstart background="./img/survey/bg.jpg" style="margin:50px 30px 30px 30px;">
-
+<body style="background-image:url(./img/survey/bg.jpg);background-size: cover; margin:30px 30px 30px 30px;"
 
 <br/>
 <br/>
@@ -25,14 +26,22 @@
 <br/>
 <div class="container" id="container"></div>
 
-<div align="center">
-    <font size="19" color="red">
-        ${param.msg}
-        <s:if test="#errorMsg!=null">
-            <s:property value="errorMsg"/>
-        </s:if>
-    </font>
-</div>
+
+<h2 style="text-align:center; color:darkred">
+    ${param.msg}
+    <s:if test="#errorMsg!=null">
+        <s:property value="errorMsg"/>
+    </s:if>
+</h2>
+
+
+<br/>
+<br/>
+<br/>
+
+
+<a href="index.jsp" class="weui-btn weui-btn_primary" id="startButton">回到主页</a>
+
 <!--
 <h1 align="center">
         test123
