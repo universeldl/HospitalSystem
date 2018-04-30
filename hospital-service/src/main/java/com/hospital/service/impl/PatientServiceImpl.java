@@ -65,10 +65,10 @@ public class PatientServiceImpl implements PatientService {
         return patientDao.getAdditionsForLast12Months(doctor);
     }
 
-    @Override
+/*    @Override
     public List<Patient> findAllPatients() {
         return patientDao.findAllPatients();
-    }
+    }*/
 
     @Override
     public List<Patient> getPatientsByDoctor(Doctor doctor) {

@@ -13,7 +13,9 @@ public interface PatientService {
 
     Integer[] getAdditionsForLast12Months(Doctor doctor);
 
+/*
     List<Patient> findAllPatients();
+*/
 
     List<Patient> getPatientsByDoctor(Doctor doctor);
 
