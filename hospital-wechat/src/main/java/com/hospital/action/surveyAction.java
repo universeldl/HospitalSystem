@@ -33,18 +33,18 @@ public class surveyAction extends ActionSupport {
         this.deliveryID = deliveryID;
     }
 
-    private String errorMsg;
+/*    private String errorMsg;
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }
     public String getErrorMsg() {
         return errorMsg;
-    }
+    }*/
 
-    private SurveyService surveyService;
+/*    private SurveyService surveyService;
     public void setSurveyService(SurveyService surveyService) {
         this.surveyService = surveyService;
-    }
+    }*/
 
     /*
     private QuestionService questionService;
@@ -73,10 +73,10 @@ public class surveyAction extends ActionSupport {
         this.retrieveService = retrieveService;
     }
 
-    private AnswerService answerService;
+ /*   private AnswerService answerService;
     public void setAnswerService(AnswerService answerService) {
         this.answerService = answerService;
-    }
+    }*/
 
     private ChoiceService choiceService;
     public void setChoiceService(ChoiceService choiceService) {
@@ -124,12 +124,12 @@ public class surveyAction extends ActionSupport {
     public String doSurvey() {
 
         if (code == null) {
-            errorMsg = "获取用户失败";
+            ServletActionContext.getRequest().setAttribute("errorMsg", "获取用户失败");
             return ERROR;
         }
 
         if (deliveryID == null) {
-            errorMsg = "发送ID错误";
+            ServletActionContext.getRequest().setAttribute("errorMsg", "发送ID错误");
             return ERROR;
         } else {
         }
@@ -140,9 +140,9 @@ public class surveyAction extends ActionSupport {
 
 
         if (open_id == null) {
-            errorMsg = "获取用户名失败，请稍后再试";
+            ServletActionContext.getRequest().setAttribute("errorMsg", "获取用户名失败，请稍后再试");
             return ERROR;
-            //open_id = "o5bAaxGhIV0ZksDNy8y26pk_XUI8";
+            //open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
         }
 
 
@@ -151,33 +151,33 @@ public class surveyAction extends ActionSupport {
         DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmpDelevery);
 
         if (deliveryInfo == null) {
-            errorMsg = "问卷发送错误";
+            ServletActionContext.getRequest().setAttribute("errorMsg", "问卷发送错误");
             return ERROR;
         }
 
         // check patient
         Patient patient = deliveryInfo.getPatient();
         if (!patient.getOpenID().equals(open_id)) {
-            errorMsg = "用户名错误";
+            ServletActionContext.getRequest().setAttribute("errorMsg", "用户名错误");
             return ERROR;
         }
 
         // check validate date
         Date cur_date = new Date(System.currentTimeMillis());
         if (cur_date.after(deliveryInfo.getEndDate())) {
-            errorMsg = "问卷已过期";
+            ServletActionContext.getRequest().setAttribute("errorMsg", "问卷已过期");
             return ERROR;
         }
 
         RetrieveInfo retrieveInfo = retrieveService.getRetrieveInfoByDeliveryID(deliveryInfo.getDeliveryId());
         if (retrieveInfo != null) {
-            errorMsg = "问卷已经完成，无需重新作答";
+            ServletActionContext.getRequest().setAttribute("errorMsg", "问卷已经完成，无需重新作答");
             return ERROR;
         }
 
         Survey survey = deliveryInfo.getSurvey();
         if (survey == null) {
-            errorMsg = "没有找到问卷";
+            ServletActionContext.getRequest().setAttribute("errorMsg", "没有找到问卷");
             return ERROR;
         }
 
@@ -202,7 +202,7 @@ public class surveyAction extends ActionSupport {
 
     public String retrieveAnswer() {
         if (deliveryID == null) {
-            errorMsg = "没有找到问卷";
+            ServletActionContext.getRequest().setAttribute("errorMsg", "没有找到问卷");
             return ERROR;
         }
 
@@ -214,12 +214,12 @@ public class surveyAction extends ActionSupport {
         Date retrieveDate = new Date(System.currentTimeMillis());
 
         if (deliveryInfo.getEndDate().before(retrieveDate)) {
-            errorMsg = "问卷已经过期，无法作答";
+            ServletActionContext.getRequest().setAttribute("errorMsg", "问卷已过期");
             return ERROR;
         }
 
         if (deliveryInfo.getRetrieveInfo() != null) {
-            errorMsg = "问卷已经完成，无法作答";
+            ServletActionContext.getRequest().setAttribute("errorMsg", "问卷已经完成，无需重新作答");
             return ERROR;
         }
 

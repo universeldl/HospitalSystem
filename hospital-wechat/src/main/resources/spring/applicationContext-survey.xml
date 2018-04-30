@@ -81,9 +81,11 @@
         </property>
         -->
 
+<!--
         <property name="surveyService">
             <ref bean="surveyService" />
         </property>
+-->
 
         <!--
         <property name="questionService">
@@ -97,9 +99,9 @@
         <property name="questionService">
             <ref bean="questionService"/>
         </property>
-        <property name="answerService">
+<!--        <property name="answerService">
             <ref bean="answerService"/>
-        </property>
+        </property>-->
 
         <property name="deliveryService">
             <ref bean="deliveryService" />

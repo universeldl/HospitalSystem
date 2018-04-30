@@ -25,12 +25,6 @@ public class wechatLoginAction extends ActionSupport {
         this.code = code;
     }
 
-    private String errorMsg;
-
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
-    }
-
     private PatientService patientService;
 
     public void setPatientService(PatientService patientService) {
@@ -138,11 +132,11 @@ public class wechatLoginAction extends ActionSupport {
                     return LOGIN;
                 }
             } else {
-                errorMsg = "用户名获取错误,请稍后再试";
+                ServletActionContext.getRequest().setAttribute("errorMsg", "用户名获取错误,请稍后再试");
                 return ERROR;
             }
         }
-        errorMsg = "无法获取用户名";
+        ServletActionContext.getRequest().setAttribute("errorMsg", "无法获取用户名");
         return ERROR;
     }
 
