@@ -22,12 +22,12 @@
 <div class="container" id="container"></div>
 
 
-<h2 style="text-align:center; color:darkred">
+<h3 style="text-align:center; color:darkred">
     ${param.msg}
     <s:if test="#errorMsg!=null">
         <s:property value="errorMsg"/>
     </s:if>
-</h2>
+</h3>
 
 
 <br/>
