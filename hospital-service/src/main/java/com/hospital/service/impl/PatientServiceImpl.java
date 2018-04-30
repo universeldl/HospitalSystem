@@ -541,8 +541,8 @@ public class PatientServiceImpl implements PatientService {
 
             if (!patient.getPlan().getPlanId().equals(newPlan.getPlanId())) {
                 patient.setPlan(newPlan);
+                patientDao.updatePatientInfo(patient);
             }
-            patientDao.updatePatientInfo(patient);
             //System.out.println("plan2:" + patient.getPlan().getPlanId());
 
         }
