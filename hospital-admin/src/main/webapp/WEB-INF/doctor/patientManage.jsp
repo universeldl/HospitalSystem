@@ -740,7 +740,7 @@
                         <label for="firstname" class="col-sm-3 control-label">病人用户名</label>
                         <div class="col-sm-7">
                             <input type="hidden" id="updatePatientID">
-                            <input type="text" class="form-control" id="updateOpenID" placeholder="请输入病人用户名">
+                            <input type="text" class="form-control" id="updateOpenID" placeholder="请输入病人用户名"  readonly="readonly">
                             <label class="control-label" for="updateOpenID" style="display: none;"></label>
                         </div>
                     </div>
