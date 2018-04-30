@@ -24,8 +24,8 @@
 
                     </h4>
                     <p class="weui-media-box__desc">
-                        <s:if test="#request.patient.sex==0">男</s:if>
-                        <s:elseif test="#request.patient.sex==1">女</s:elseif>
+                        <s:if test="#request.patient.sex==0">女</s:if>
+                        <s:elseif test="#request.patient.sex==1">男</s:elseif>
                         <s:date name="#request.patient.birthday" format="yyyy-MM-dd"/>
                     </p>
                 </div>
