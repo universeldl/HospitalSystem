@@ -165,16 +165,15 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         pb.setPageSize(pageSize);//设置页面记录数
         List patientList = null;
         try {
-            String sql = "from Patient";
-            int totalRecord = 0;
+            String sql = "select count(patientId) from Patient";
+            Long totalRecord = null;
             //如果是super，全选，否则做判断
             if ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() == 1)) {
                 List list = this.getHibernateTemplate().find(sql);
                 if (list != null && list.size() > 0) {
-                    totalRecord = list.size();
+                    totalRecord = (Long) list.get(0);
                 }
-                pb.setTotalRecord(totalRecord);    //设置总记录数
-                //this.getSessionFactory().getCurrentSession().close();
+                pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
 
                 //不支持limit分页
                 String hql = "from Patient";
@@ -186,10 +185,9 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 sql += addSql;
                 List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
                 if (list != null && list.size() > 0) {
-                    totalRecord = list.size();
+                    totalRecord = (Long) list.get(0);
                 }
-                pb.setTotalRecord(totalRecord);    //设置总记录数
-                //this.getSessionFactory().getCurrentSession().close();
+                pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
 
                 //不支持limit分页
                 String hql = "from Patient r where (r.doctor.aid=:aid1 or r.addnDoctor.aid=:aid2)";
