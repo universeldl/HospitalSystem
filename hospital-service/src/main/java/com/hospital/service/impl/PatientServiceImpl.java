@@ -519,10 +519,16 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public boolean updatePlan() {
+/*
         List<Patient> patients = patientDao.findAllPatients();
-        for (Patient patient : patients) {
+*/
+        List<Integer> patientIds = patientDao.findAllPatientIds();
+        for (Integer patientId : patientIds) {
             //System.out.println("plan1:" + patient.getPlan().getPlanId());
 
+            Patient tmpPatient = new Patient();
+            tmpPatient.setPatientId(patientId);
+            Patient patient = patientDao.getPatientById(tmpPatient);
             //int age = 7;
             int age = AgeUtils.getAgeFromBirthTime(patient.getBirthday());
             Plan plan = new Plan();
