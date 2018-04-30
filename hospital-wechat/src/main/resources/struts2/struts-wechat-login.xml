@@ -7,7 +7,7 @@
         <action name="wechatLoginAction_*" method="{1}" class="wechatLoginAction">
             <result name="none">register.jsp</result>
             <result name="login">WEB-INF/patient_main.jsp</result>
-            <result name="error">error.jsp</result>
+            <result name="error">message.jsp</result>
         </action>
     </package>
 </struts>

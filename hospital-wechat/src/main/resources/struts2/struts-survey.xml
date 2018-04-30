@@ -6,7 +6,7 @@
     <package name="survey" extends="struts-default" namespace="/">
         <action name="surveyAction_*" method="{1}" class="surveyAction">
             <result name="success">WEB-INF/survey_main.jsp</result>
-            <result name="error">error.jsp</result>
+            <result name="error">message.jsp</result>
         </action>
     </package>
 </struts>
