@@ -59,9 +59,9 @@ public class wechatLoginAction extends ActionSupport {
             String open_id = GetOpenIdOauth2.getOpenId(code, mgr);
 
             // testing
-            if(open_id == null) {
+/*            if(open_id == null) {
                 open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
-            }
+            }*/
 
             if (open_id != null) {
                 Patient patient = new Patient();
