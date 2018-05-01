@@ -24,9 +24,9 @@ public class Patient implements Serializable {
     private Plan plan;    //随访计划
     private String email;    //邮箱
     private Doctor doctor;    //操作医生
-    private Integer sex;
+    private Integer sex;      //  male == 1, female == 0; different from sex in Plan
     private Doctor addnDoctor;    //共享医生
-    private Integer oldPatient;
+    private Integer oldPatient;  // 1 新病例, 2 既往病例, 3 哮喘无忧用户
 
     private Date birthday;
     private Date createTime;    //创建时间

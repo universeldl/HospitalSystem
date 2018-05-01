@@ -24,7 +24,7 @@ public class Survey implements Serializable {
     private boolean sendOnRegister;
     private Set<Question> questions = new HashSet<>();
     //private Set<RetrieveInfo> retrieveInfos = new HashSet<>();
-    private Integer bday;
+    private Integer bday;  // overdue day
 
     public void setBday(Integer bday) {
         this.bday = bday;
