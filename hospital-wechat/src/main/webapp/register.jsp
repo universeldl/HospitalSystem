@@ -148,6 +148,9 @@
             </div>
         </div>
 
+
+        <input id="patient" style="display:none" value='<s:property value="#request.patient"/>' />
+        <input id="appID" style="display:none" value='<s:property value="#request.appID"/>' />
         <!--
         <label for="weuiAgree" class="weui-agree">
             <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" checked="checked"/>

@@ -61,10 +61,17 @@ public class wechatLoginAction extends ActionSupport {
                 Patient patient = new Patient();
                 patient.setOpenID(open_id);
                 Patient new_patient = patientService.getPatientByOpenID(patient);
-                if (new_patient == null) {
 
-                    ServletActionContext.getContext().getSession().put("appID", mgr.getAppId());
-                    ServletActionContext.getContext().getSession().put("patient", patient);
+                System.out.println("openid = " + open_id);
+                if (new_patient == null) {
+                    System.out.println("newpatient == null");
+                } else {
+                    System.out.println("new patient = " + new_patient.getName() + " openid = " + new_patient.getOpenID());
+                }
+
+                if (new_patient == null) {
+                    ServletActionContext.getRequest().setAttribute("appID", mgr.getAppId());
+                    ServletActionContext.getRequest().setAttribute("patient", patient.getOpenID());
 
                     List<Province> provinceList = provinceService.getAllProvinces();
                     JSONArray jsonArray = new JSONArray();

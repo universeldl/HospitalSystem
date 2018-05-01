@@ -36,9 +36,19 @@ public class patientRegisterAction extends ActionSupport {
     HospitalService hospitalService;
     ProvinceService provinceService;
     CityService cityService;
+    String openID;
+    String appID;
 
     String provinceID;
     String cityID;
+
+    public void setOpenID(String openID) {
+        this.openID = openID;
+    }
+
+    public void setAppID(String appID) {
+        this.appID = appID;
+    }
 
     public void setProvinceID(String provinceID) {
         this.provinceID = provinceID;
@@ -192,16 +202,13 @@ public class patientRegisterAction extends ActionSupport {
 
             String ref_captcha = ServletActionContext.getContext().getSession().get("captcha").toString();
             captcha = captcha.toLowerCase();
-            Patient patient = (Patient) ServletActionContext.getContext().getSession().get("patient");
-            String appID = (String) ServletActionContext.getContext().getSession().get("appID");
 
         /* status : 1 add patient successfully, redirect to info page
          * status : -1 captcha error
          * status : -2 invitation code error
          * status : -3 other errors
          */
-            int status = 1;
-            if (ref_captcha.length() == 0 || patient == null) {
+            if (ref_captcha.length() == 0 || openID.isEmpty() || appID.isEmpty()) {
                 writeStatus(-3);
                 return null;
             } else if (!ref_captcha.equals(captcha)) {
@@ -213,6 +220,9 @@ public class patientRegisterAction extends ActionSupport {
                 writeStatus(-2);
                 return null;
             }
+
+            Patient patient = new Patient();
+            patient.setOpenID(openID);
 
             if (patientService.getPatientByOpenID(patient) != null) {
                 writeStatus(-4);

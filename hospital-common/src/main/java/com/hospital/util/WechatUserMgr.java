@@ -10,6 +10,8 @@ public class WechatUserMgr {
 
     static public JSONObject getUserInfo(String openid, AccessTokenMgr mgr) {
         try {
+            System.out.println("WechatUserMgr.getUserInfo openid = " + openid);
+
             String token = mgr.getAccessToken();
             if (token == null) {
                 System.out.println("get token failed");
@@ -20,6 +22,7 @@ public class WechatUserMgr {
 
             // first catch
             JSONObject js_obj = WeixinUtil.HttpsRequest(requestUrl, "GET", null);
+            System.out.println("WechatUserMgr.getUserInfo return = " + js_obj);
             if (js_obj != null) {
                 return js_obj;
             } else {

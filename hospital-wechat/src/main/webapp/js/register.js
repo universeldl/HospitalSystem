@@ -5,6 +5,8 @@ function registerSubmit() {
     showLoadingToast("提交中...");
 
     var postdata = "username=" + replaceSpectialChar($.trim($("#username").val()));
+    postdata = postdata + "&openID=" + $.trim($("#patient").val());
+    postdata = postdata + "&appID=" + $.trim($("#appID").val())
     postdata = postdata + "&tel=" + $.trim($("#tel").val());
     postdata = postdata + "&sex=" + $.trim($("#sex option:selected").val());
     postdata = postdata + "&typeID=" + $.trim($("#patientType option:selected").val());
@@ -14,7 +16,6 @@ function registerSubmit() {
     postdata = postdata + "&captcha=" + $.trim($("#captchaIN").val());
     postdata = postdata + "&invitationCode=" + $.trim($("#invitationCode").val());
     postdata = postdata + "&oldPatient=" + $.trim($("#oldPatient").val());
-    //var oldPatient = document.getElementById("oldPatient");
     var xhr = $.ajax(
         {
             method: 'POST',
