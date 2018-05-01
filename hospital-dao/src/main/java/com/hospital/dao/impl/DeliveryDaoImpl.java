@@ -252,13 +252,13 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         pb.setPageSize(pageSize);//设置页面记录数
         List deliveryInfoList = null;
         try {
-            String sql = "from DeliveryInfo";
+            String sql = "SELECT count(deliveryId) from DeliveryInfo";
             int totalRecord = 0;
             //如果是super，全选，否则做判断
             if ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() == 1)) {
                 List list = this.getHibernateTemplate().find(sql);
                 if (list != null && list.size() > 0) {
-                    totalRecord = list.size();
+                    totalRecord = ((Long)list.get(0)).intValue();
                 }
                 pb.setTotalRecord(totalRecord);    //设置总记录数
                 //this.getSessionFactory().getCurrentSession().close();
@@ -273,7 +273,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
                 sql += addSql;
                 List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
                 if (list != null && list.size() > 0) {
-                    totalRecord = list.size();
+                    totalRecord = ((Long)list.get(0)).intValue();
                 }
                 pb.setTotalRecord(totalRecord);    //设置总记录数
                 //this.getSessionFactory().getCurrentSession().close();

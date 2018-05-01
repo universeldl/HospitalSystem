@@ -15,8 +15,8 @@ public class Plan implements Serializable {
     private Integer beginAge;    //年龄区间下限
     private Integer endAge;    //年龄区间上限
     private Integer active;    //激活状态
-    private Integer sex;    //性别
-    private Integer oldPatient;
+    private Integer sex;    //性别: 1 male, 2 female, 3 either
+    private Integer oldPatient; //1 仅限新病例, 2 仅限既往病例, 3 仅限哮喘无忧用户, 4 不限
 
     private PatientType patientType;
     private Doctor doctor;    //操作医生
