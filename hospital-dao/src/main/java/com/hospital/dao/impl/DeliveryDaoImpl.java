@@ -153,10 +153,12 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         StringBuilder sb = new StringBuilder();
         StringBuilder sb_sql = new StringBuilder();
         String sql = "select count(*) from deliveryInfo bo,survey bk,Patient r "
-                + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+                + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId and " +
+                "(bo.deliveryId not in (select deliveryId from RetrieveInfo))";
         //不支持limit分页
         String hql = "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r "
-                + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+                + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId and " +
+                "(bo.deliveryId not in (select deliveryId from RetrieveInfo))";
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
@@ -167,18 +169,14 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         if (queryType == 1) {//本月未答
             String firstDayOfMonth = CalendarUtils.getFirstDayOfMonth();
             String currentDay = CalendarUtils.getNowTime();
-            hql = hql + "and bo.state>=0 and bo.deliveryDate between \"" + firstDayOfMonth + "\" and \"" + currentDay + "\"";
-            sql = sql + "and bo.state>=0 and bo.deliveryDate between \"" + firstDayOfMonth + "\" and \"" + currentDay + "\"";
+            hql = hql + "and  bo.deliveryDate between \"" + firstDayOfMonth + "\" and \"" + currentDay + "\"";
+            sql = sql + "and  bo.deliveryDate between \"" + firstDayOfMonth + "\" and \"" + currentDay + "\"";
         }
         else if (queryType == 2) {//近30天未答
             String daysAgo = CalendarUtils.getModifyNumDaysAgo("", 30);//date of 30 days ago
             String currentDay = CalendarUtils.getNowTime();
-            hql = hql + "and bo.state>=0 and bo.deliveryDate between \"" + daysAgo + "\" and \"" + currentDay + "\"";
-            sql = sql + "and bo.state>=0 and bo.deliveryDate between \"" + daysAgo + "\" and \"" + currentDay + "\"";
-        }
-        else if (queryType == 3) {//所有未答
-            hql = hql + "and bo.state>=0";
-            sql = sql + "and bo.state>=0";
+            hql = hql + "and  bo.deliveryDate between \"" + daysAgo + "\" and \"" + currentDay + "\"";
+            sql = sql + "and  bo.deliveryDate between \"" + daysAgo + "\" and \"" + currentDay + "\"";
         }
         sb.append(hql);
         sb_sql.append(sql);
