@@ -534,9 +534,13 @@ public class PatientServiceImpl implements PatientService {
             Plan plan = new Plan();
             plan.setBeginAge(age);
             plan.setEndAge(age);  //trick here, set beginAge=endAge to get plan
-            plan.setOldPatient(patient.getPlan().getOldPatient());
-            plan.setSex(patient.getPlan().getSex());
-            plan.setPatientType(patient.getPlan().getPatientType());
+            plan.setOldPatient(patient.getOldPatient());
+            if (patient.getSex() == 1) {
+                plan.setSex(2);  //be careful about sex, Patient.sex is not compatible with Plan.sex
+            } else if (patient.getSex() == 0) {
+                plan.setSex(1);
+            }
+            plan.setPatientType(patient.getPatientType());
             Plan newPlan = planDao.getPlan(plan);
 
             if (!patient.getPlan().getPlanId().equals(newPlan.getPlanId())) {
