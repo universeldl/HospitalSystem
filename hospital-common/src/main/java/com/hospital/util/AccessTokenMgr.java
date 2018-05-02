@@ -57,7 +57,11 @@ public class AccessTokenMgr {
                         System.out.println("return token =" + jsonObject.toString());
                         m_AccessToken = jsonObject.getString("access_token");
                         m_TokenTime = new Date().getTime();
+/*
                         m_expiresIn = jsonObject.getLong("expires_in") * 1000;
+*/
+                        m_expiresIn = 270 * 1000; // workaround to resolve token bug
+
                     }
                 } else {
                     m_AccessToken = null;
