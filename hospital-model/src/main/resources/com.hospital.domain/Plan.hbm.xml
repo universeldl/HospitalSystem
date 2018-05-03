@@ -5,7 +5,7 @@
     <class name="com.hospital.domain.Plan" dynamic-insert="true" dynamic-update="true">
         <id name="planId" type="java.lang.Integer">
             <column name="planId"/>
-            <generator class="increment"/>
+            <generator class="identity"/>
         </id>
 
         <property name="beginAge" type="java.lang.Integer">

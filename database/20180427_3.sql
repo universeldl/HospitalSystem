@@ -15,6 +15,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+drop database HospitalSurvey;
+create database HospitalSurvey DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+use HospitalSurvey;
+
+
 --
 -- Table structure for table `Answer`
 --
@@ -23,7 +29,7 @@ DROP TABLE IF EXISTS `Answer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Answer` (
-  `answerId` int(11) NOT NULL,
+  `answerId` int(11) NOT NULL AUTO_INCREMENT,
   `modifiedDate` varchar(255) DEFAULT NULL,
   `textChoice` int(11) DEFAULT NULL,
   `lastModified` varchar(255) DEFAULT NULL,
@@ -98,7 +104,7 @@ DROP TABLE IF EXISTS `Choice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Choice` (
-  `choiceId` int(11) NOT NULL,
+  `choiceId` int(11) NOT NULL AUTO_INCREMENT,
   `score` decimal(19,2) DEFAULT NULL,
   `choiceContent` varchar(255) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,
@@ -130,7 +136,7 @@ DROP TABLE IF EXISTS `City`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `City` (
-  `cityId` int(11) NOT NULL,
+  `cityId` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `provinceId` int(11) DEFAULT NULL,
   PRIMARY KEY (`cityId`),
@@ -186,7 +192,7 @@ DROP TABLE IF EXISTS `Patient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Patient` (
-  `patientId` int(11) NOT NULL,
+  `patientId` int(11) NOT NULL AUTO_INCREMENT,
   `pwd` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `appID` varchar(255) DEFAULT NULL,
@@ -238,7 +244,7 @@ DROP TABLE IF EXISTS `PatientType`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PatientType` (
-  `patientTypeId` int(11) NOT NULL,
+  `patientTypeId` int(11) NOT NULL AUTO_INCREMENT,
   `patientTypeName` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`patientTypeId`),
   UNIQUE KEY `UK_swkg635ihx8wnjbyw5qtk44gf` (`patientTypeName`)
@@ -263,7 +269,7 @@ DROP TABLE IF EXISTS `Plan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Plan` (
-  `planId` int(11) NOT NULL,
+  `planId` int(11) NOT NULL AUTO_INCREMENT,
   `beginAge` int(11) DEFAULT NULL,
   `endAge` int(11) DEFAULT NULL,
   `oldPatient` int(11) DEFAULT NULL,
@@ -297,7 +303,7 @@ DROP TABLE IF EXISTS `Province`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Province` (
-  `provinceId` int(11) NOT NULL,
+  `provinceId` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`provinceId`),
   UNIQUE KEY `UK_moejme3ohebd07k2d4b70l8vh` (`name`)
@@ -322,7 +328,7 @@ DROP TABLE IF EXISTS `Question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Question` (
-  `questionId` int(11) NOT NULL,
+  `questionId` int(11) NOT NULL AUTO_INCREMENT,
   `sortId` int(11) DEFAULT NULL,
   `surveyId` int(11) DEFAULT NULL,
   `textChoice` int(11) DEFAULT NULL,
@@ -419,7 +425,7 @@ DROP TABLE IF EXISTS `deliveryInfo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `deliveryInfo` (
-  `deliveryId` int(11) NOT NULL,
+  `deliveryId` int(11) NOT NULL AUTO_INCREMENT,
   `deliveryDate` datetime DEFAULT NULL,
   `endDate` datetime DEFAULT NULL,
   `overday` int(11) DEFAULT '0',
@@ -455,7 +461,7 @@ DROP TABLE IF EXISTS `doctor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `doctor` (
-  `aid` int(11) NOT NULL,
+  `aid` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `pwd` varchar(255) DEFAULT NULL,
@@ -487,7 +493,7 @@ DROP TABLE IF EXISTS `hospital`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hospital` (
-  `hospitalId` int(11) NOT NULL,
+  `hospitalId` int(11) NOT NULL AUTO_INCREMENT,
   `visible` bit(1) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `cityId` int(11) DEFAULT NULL,
@@ -543,7 +549,7 @@ DROP TABLE IF EXISTS `survey`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `survey` (
-  `surveyId` int(11) NOT NULL,
+  `surveyId` int(11) NOT NULL AUTO_INCREMENT,
   `surveyName` varchar(255) DEFAULT NULL,
   `author` varchar(255) DEFAULT NULL,
   `num` int(11) DEFAULT NULL,
@@ -583,7 +589,7 @@ DROP TABLE IF EXISTS `surveyType`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `surveyType` (
-  `typeId` int(11) NOT NULL,
+  `typeId` int(11) NOT NULL AUTO_INCREMENT,
   `typeName` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`typeId`),
   UNIQUE KEY `UK_gjg9moqye9twxnaai5ynoa0rg` (`typeName`)
