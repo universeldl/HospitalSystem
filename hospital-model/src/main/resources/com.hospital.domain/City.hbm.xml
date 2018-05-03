@@ -5,7 +5,7 @@
     <class name="com.hospital.domain.City" table="City" dynamic-insert="true" dynamic-update="true">
         <id name="cityId" type="java.lang.Integer">
             <column name="cityId"/>
-            <generator class="increment"/>
+            <generator class="identity"/>
         </id>
 
         <property name="name" type="java.lang.String">

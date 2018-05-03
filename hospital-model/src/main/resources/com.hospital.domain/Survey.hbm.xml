@@ -5,7 +5,7 @@
     <class name="com.hospital.domain.Survey" table="survey" dynamic-insert="true" dynamic-update="true">
         <id name="surveyId" type="java.lang.Integer" length="7">
             <column name="surveyId"/>
-            <generator class="increment"/>
+            <generator class="identity"/>
         </id>
         <property name="surveyName" type="java.lang.String">
             <column name="surveyName"/>

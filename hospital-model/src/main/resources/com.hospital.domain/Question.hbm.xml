@@ -7,7 +7,7 @@
     <class name="com.hospital.domain.Question" table="Question">
         <id name="questionId" type="java.lang.Integer">
             <column name="questionId"/>
-            <generator class="increment"/>
+            <generator class="identity"/>
         </id>
         <property name="sortId" type="java.lang.Integer">
             <column name="sortId" />

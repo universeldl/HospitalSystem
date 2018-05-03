@@ -5,7 +5,7 @@
     <class name="com.hospital.domain.PatientType" dynamic-insert="true" dynamic-update="true">
         <id name="patientTypeId" type="java.lang.Integer">
             <column name="patientTypeId"/>
-            <generator class="increment"/>
+            <generator class="identity"/>
         </id>
 
         <property name="patientTypeName" type="java.lang.String">
