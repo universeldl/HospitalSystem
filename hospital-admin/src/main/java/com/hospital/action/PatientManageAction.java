@@ -337,8 +337,12 @@ public class PatientManageAction extends ActionSupport {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = formatter.format(newPatient.getCreateTime());
-
         jsonObject.put("createTime", dateString);
+
+
+        String birthdayStr = formatter.format(newPatient.getBirthday());
+        jsonObject.put("birthday", birthdayStr);
+
 
         try {
             response.getWriter().print(jsonObject);
@@ -363,7 +367,7 @@ public class PatientManageAction extends ActionSupport {
         updatePatient.setPhone(phone);
         updatePatient.setOpenID(openID);
         String email_format = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
-        if (email.matches(email_format)) {
+        if (email!= null && email.matches(email_format)) {
             updatePatient.setEmail(email);
         }
 
@@ -375,6 +379,15 @@ public class PatientManageAction extends ActionSupport {
             e.printStackTrace();
         }
         updatePatient.setCreateTime(cday);
+
+        Date bday = updatePatient.getBirthday();
+        try {
+            bday = format.parse(birthday);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        updatePatient.setBirthday(bday);
+
         //设置patient的值
         PatientType type = new PatientType();
         type.setPatientTypeId(patientType);

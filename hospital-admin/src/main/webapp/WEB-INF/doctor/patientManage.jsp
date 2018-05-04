@@ -779,6 +779,16 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">出生日期</label>
+                        <div class="col-sm-7">
+                            <input type="date" class="form-control" id="updateBirthday" >
+                            <!--
+                            <label class="control-label" for="updateCreateDate" style="display: none;"></label>
+                            -->
+                        </div>
+                    </div>
+
 
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">病人类型</label>
