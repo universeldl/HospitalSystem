@@ -153,7 +153,7 @@
                 <li class="active">控制台</li>
             </ol>
         </section>
-        <section class="content" style="background: rgb(255, 255, 255); height: 898px;">
+        <section class="content" style="background: rgb(255, 255, 255); height: auto;">
             <!-- <h2>Hello World!</h2> -->
 
             <div class="panel panel-info">
