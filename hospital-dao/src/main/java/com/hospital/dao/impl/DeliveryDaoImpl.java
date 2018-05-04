@@ -178,6 +178,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
             hql = hql + "and  bo.deliveryDate between \"" + daysAgo + "\" and \"" + currentDay + "\"";
             sql = sql + "and  bo.deliveryDate between \"" + daysAgo + "\" and \"" + currentDay + "\"";
         }
+        hql = hql + " ORDER BY bo.deliveryId";
         sb.append(hql);
         sb_sql.append(sql);
 
