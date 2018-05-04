@@ -12,11 +12,10 @@ $(function () {
         var postdata = "patientId=" + $.trim($("#updatePatientID").val()) + "&patientType=" + $.trim($("#updatePatientType").val())
             + "&name=" + replaceSpectialChar($.trim($("#updateName").val())) + "&phone=" + $.trim($("#updatePhone").val())
             + "&openID=" + $.trim($("#updateOpenID").val()) + "&addnDoctorId=" + $.trim($("#updateAddnDoctor").val())
-            + "&createTime=" + $.trim($("#updateCreateTime").val()) + "&doctorId=" + $.trim($("#updateDoctor").val());
+            + "&createTime=" + $.trim($("#updateCreateTime").val()) + "&doctorId=" + $.trim($("#updateDoctor").val())
+            + "&birthday=" + $.trim($("#updateBirthday").val());
         if ($.trim($("#updateEmail").val()) != "") {
             postdata = postdata + "&email=" + $.trim($("#updateEmail").val());
-        } else {
-            postdata = postdata + "&email=n/a";
         }
         $('#loading').show();
 
@@ -122,6 +121,7 @@ function updatePatient(id) {
                             $("#updateDoctor option[value='"+doctorId+"']").attr("selected", "selected");
 
                             $('#updateCreateTime').val(data.createTime);
+                            $('#updateBirthday').val(data.birthday)
                         }
                     }
                 );
@@ -260,11 +260,37 @@ function validUpdatePatient() {
         flag = false;
     }
 
-    var createTime = new Date(($("#updateCreateTime").val()).replace(/-/g,"/"));
-    var curDate = new Date();
-    if (createTime >= curDate) {
+    var reg2 = /^([0-9])+-([0-9])+-([0-9])/;
+    var updateCreateTime = $.trim($("#updateCreateTime").val());
+    if (updateCreateTime == "") {
         alert("请填写正确的注册日期");
+        flag = false;
+    } else if (!reg2.test(updateCreateTime)) {
+        alert("请使用正确的日期格式（1990-09-10）");
+        flag = false;
+    } else {
+        var createTime = new Date(($("#updateCreateTime").val()).replace(/-/g,"/"));
+        var curDate = new Date();
+        if (createTime >= curDate) {
+            alert("请填写正确的注册日期");
+            flag = false;
+        }
+    }
+
+    var updateBirthday = $.trim($("#updateBirthday").val());
+    if (updateBirthday == "") {
+        alert("请填写正确的出生日期");
         return false;
+    } else if (!reg2.test(updateBirthday)) {
+        alert("请使用正确的日期格式（1990-09-10）");
+        return false;
+    } else {
+        var bday = new Date(($("#updateBirthday").val()).replace(/-/g,"/"));
+        var curDate = new Date();
+        if (bday >= curDate) {
+            alert("请填写正确的出生日期");
+            return false;
+        }
     }
 
     return flag;
