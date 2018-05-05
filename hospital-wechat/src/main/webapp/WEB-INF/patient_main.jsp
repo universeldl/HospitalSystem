@@ -25,8 +25,11 @@
                     </h4>
                     <p class="weui-media-box__desc">
                         <s:if test="#request.patient.sex==0">女</s:if>
-                        <s:elseif test="#request.patient.sex==1">男</s:elseif>
+                        <s:elseif test="#request.patient.sex==1">男</s:elseif>&nbsp;
                         <s:date name="#request.patient.birthday" format="yyyy-MM-dd"/>
+                    </p>
+                    <p class="weui-media-box__desc">
+                        直属医生：<s:property value="#request.patient.doctor.name" />
                     </p>
                 </div>
             </a>
