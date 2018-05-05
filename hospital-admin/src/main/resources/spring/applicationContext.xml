@@ -36,6 +36,7 @@
     <import resource="applicationContext-delivery.xml"/>
     <import resource="applicationContext-forfeit.xml"/>
     <import resource="applicationContext-download.xml"/>
+    <import resource="applicationContext-redis.xml"/>
     <import resource="applicationContext-upload.xml"/>
     <import resource="applicationContext-hospital.xml"/>
     <import resource="applicationContext-city.xml"/>

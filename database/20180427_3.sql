@@ -3,7 +3,6 @@
 -- Host: localhost    Database: HospitalSurvey
 -- ------------------------------------------------------
 -- Server version	5.7.17
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -31,9 +30,9 @@ DROP TABLE IF EXISTS `Answer`;
 CREATE TABLE `Answer` (
   `answerId` int(11) NOT NULL AUTO_INCREMENT,
   `modifiedDate` varchar(255) DEFAULT NULL,
-  `textChoice` int(11) DEFAULT NULL,
+  `textChoice` int(11) DEFAULT 0,
   `lastModified` varchar(255) DEFAULT NULL,
-  `textChoiceContent` varchar(255) DEFAULT NULL,
+  `textChoiceContent` varchar(255) DEFAULT '',
   `questionId` int(11) DEFAULT NULL,
   `deliveryId` int(11) DEFAULT NULL,
   `patientId` int(11) DEFAULT NULL,

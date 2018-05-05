@@ -27,6 +27,11 @@
         </property>
     </bean>
 
+    <bean id="redisService" class="com.hospital.service.impl.RedisServiceImpl">
+        <property name="redisTemplate">
+            <ref bean="redisTemplate"/>
+        </property>
+    </bean>
 
     <bean id="patientManageAction" class="com.hospital.action.PatientManageAction" scope="prototype">
         <property name="patientService">
@@ -40,6 +45,9 @@
         </property>
         <property name="patientTypeService">
             <ref bean="patientTypeService"/>
+        </property>
+        <property name="redisService">
+            <ref bean="redisService"/>
         </property>
     </bean>
 </beans>
