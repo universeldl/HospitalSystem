@@ -26,12 +26,23 @@ import java.util.List;
 import static com.hospital.util.TimeUtils.getLast12Months;
 import static com.hospital.util.CalculateUtils.getMax;
 
+import com.hospital.util.RedisUtil;
+import com.hospital.service.RedisService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+
 public class PatientManageAction extends ActionSupport {
 
     private PatientService patientService;
     private PlanService planService;
     private DoctorService doctorService;
     private PatientTypeService patientTypeService;
+    private RedisService redisService;
+
+    public void setRedisService(RedisService redisService) {
+        this.redisService = redisService;
+    }
 
     public void setPatientTypeService(PatientTypeService patientTypeService) {
         this.patientTypeService = patientTypeService;
@@ -296,6 +307,8 @@ public class PatientManageAction extends ActionSupport {
         patient.setPatientId(patientId);
         Patient newPatient = patientService.getPatientById(patient);
         JsonConfig jsonConfig = new JsonConfig();
+        boolean isOk = redisService.set("patient name is", "who knows");
+        System.out.println("putting patient to redis!!!");
 
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
