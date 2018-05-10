@@ -35,22 +35,30 @@ import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer
 public class PatientManageAction extends ActionSupport {
 
     private PatientService patientService;
+/*
     private PlanService planService;
+*/
     private DoctorService doctorService;
     private PatientTypeService patientTypeService;
+/*
     private RedisService redisService;
+*/
 
+/*
     public void setRedisService(RedisService redisService) {
         this.redisService = redisService;
     }
+*/
 
     public void setPatientTypeService(PatientTypeService patientTypeService) {
         this.patientTypeService = patientTypeService;
     }
 
+/*
     public void setPlanService(PlanService planService) {
         this.planService = planService;
     }
+*/
 
     public void setDoctorService(DoctorService doctorService) {
         this.doctorService = doctorService;
@@ -307,8 +315,8 @@ public class PatientManageAction extends ActionSupport {
         patient.setPatientId(patientId);
         Patient newPatient = patientService.getPatientById(patient);
         JsonConfig jsonConfig = new JsonConfig();
-        boolean isOk = redisService.set("patient name is", "who knows");
-        System.out.println("putting patient to redis!!!");
+/*        boolean isOk = redisService.set("patient name is", "who knows");
+        System.out.println("putting patient to redis!!!");*/
 
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {

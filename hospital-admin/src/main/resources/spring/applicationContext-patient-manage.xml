@@ -27,27 +27,27 @@
         </property>
     </bean>
 
-    <bean id="redisService" class="com.hospital.service.impl.RedisServiceImpl">
+<!--    <bean id="redisService" class="com.hospital.service.impl.RedisServiceImpl">
         <property name="redisTemplate">
             <ref bean="redisTemplate"/>
         </property>
-    </bean>
+    </bean>-->
 
     <bean id="patientManageAction" class="com.hospital.action.PatientManageAction" scope="prototype">
         <property name="patientService">
             <ref bean="patientService"/>
         </property>
-        <property name="planService">
+<!--        <property name="planService">
             <ref bean="planService"/>
-        </property>
+        </property>-->
         <property name="doctorService">
             <ref bean="doctorService"/>
         </property>
         <property name="patientTypeService">
             <ref bean="patientTypeService"/>
         </property>
-        <property name="redisService">
+<!--        <property name="redisService">
             <ref bean="redisService"/>
-        </property>
+        </property>-->
     </bean>
 </beans>
