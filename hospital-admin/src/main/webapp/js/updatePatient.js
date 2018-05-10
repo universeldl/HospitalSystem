@@ -66,19 +66,24 @@ function updatePatient(id) {
             url: "doctor/patientManageAction_getAllPatientTypes.action",
             type: "json",
             callback: function (data) {
+                $('#updateAddnDoctor').html('<option value="-1">无</option>');
+                $('#updateDoctor').html('<option value="-1">无</option>');
+                $('#updatePatientType').html('<option value="-1">无</option>');
+
                 // 循环遍历每个病人分类，每个名称生成一个option对象，添加到<select>中
                 for (var index in data) {
                     var op = document.createElement("option");//创建一个指名名称元素
                     op.value = data[index].patientTypeId;//设置op的实际值为当前的病人分类编号
                     var textNode = document.createTextNode(data[index].patientTypeName);//创建文本节点
                     op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
-
                     document.getElementById("updatePatientType").appendChild(op);
                 }
                 ajax(
                     {
+                        method: 'GET',
                         url: "doctor/patientManageAction_getAllDoctors.action",
                         type: "json",
+                        async: false,
                         callback: function (data) {
                             // 循环遍历每个医生，每个医生姓名生成一个option对象，添加到<select>中
                             for (var index in data) {
@@ -95,36 +100,38 @@ function updatePatient(id) {
                                 op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
                                 document.getElementById("updateDoctor").appendChild(op);
                             }
+
+                            ajax(
+                                {
+                                    method: 'POST',
+                                    url: 'doctor/patientManageAction_getPatient.action',
+                                    params: "patientId=" + id,
+                                    type: "json",
+                                    callback: function (data) {
+                                        $('#loading').hide();
+                                        $("#updatePatientID").val(data.patientId);
+                                        $("#updateOpenID").val(data.openID);
+                                        $("#updateName").val(data.name);
+                                        $("#updateEmail").val(data.email);
+                                        $("#updatePhone").val(data.phone);
+                                        $("#updatePatientType").val(data.patientType.patientTypeId);
+                                        $("#updateAddnDoctor option:checked").attr("selected", "");
+                                        var addnDoctorId = data.addnDoctorId;
+                                        $("#updateAddnDoctor option[value='"+addnDoctorId+"']").attr("selected", "selected");
+
+                                        $("#updateDoctor option:checked").attr("selected", "");
+                                        var doctorId = data.doctorId;
+                                        $("#updateDoctor option[value='"+doctorId+"']").attr("selected", "selected");
+
+                                        $('#updateCreateTime').val(data.createTime);
+                                        $('#updateBirthday').val(data.birthday)
+                                    }
+                                }
+                            );
                         }
                     }
                 );
-                ajax(
-                    {
-                        method: 'POST',
-                        url: 'doctor/patientManageAction_getPatient.action',
-                        params: "patientId=" + id,
-                        type: "json",
-                        callback: function (data) {
-                            $('#loading').hide();
-                            $("#updatePatientID").val(data.patientId);
-                            $("#updateOpenID").val(data.openID);
-                            $("#updateName").val(data.name);
-                            $("#updateEmail").val(data.email);
-                            $("#updatePhone").val(data.phone);
-                            $("#updatePatientType").val(data.patientType.patientTypeId);
-                            $("#updateAddnDoctor option:checked").attr("selected", "");
-                            var addnDoctorId = data.addnDoctorId;
-                            $("#updateAddnDoctor option[value='"+addnDoctorId+"']").attr("selected", "selected");
 
-                            $("#updateDoctor option:checked").attr("selected", "");
-                            var doctorId = data.doctorId;
-                            $("#updateDoctor option[value='"+doctorId+"']").attr("selected", "selected");
-
-                            $('#updateCreateTime').val(data.createTime);
-                            $('#updateBirthday').val(data.birthday)
-                        }
-                    }
-                );
             }
 
 

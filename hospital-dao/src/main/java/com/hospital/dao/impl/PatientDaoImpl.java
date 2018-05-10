@@ -176,7 +176,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
 
                 //不支持limit分页
-                String hql = "from Patient ORDER BY patientId DESC";
+                String hql = "from Patient ORDER BY createTime DESC";
                 //分页查询
                 patientList = doSplitPage(hql, pageCode, pageSize);
             } else {
@@ -190,7 +190,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
 
                 //不支持limit分页
-                String hql = "from Patient r where (r.doctor.aid=:aid1 or r.addnDoctor.aid=:aid2) ORDER BY patientId DESC";
+                String hql = "from Patient r where (r.doctor.aid=:aid1 or r.addnDoctor.aid=:aid2) ORDER BY createTime DESC";
                 //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
                 //分页查询
                 patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
