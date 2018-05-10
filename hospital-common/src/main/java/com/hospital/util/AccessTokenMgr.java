@@ -1,8 +1,7 @@
 package com.hospital.util;
 
 import com.alibaba.fastjson.JSONObject;
-
-import java.util.Date;
+import redis.clients.jedis.Jedis;
 
 public class AccessTokenMgr {
     public AccessTokenMgr() {
@@ -22,15 +21,17 @@ public class AccessTokenMgr {
 
 
     static AccessTokenMgr m_instance = new AccessTokenMgr();
+    static Jedis jedis = new Jedis("127.0.0.1", 6379); //新建Jedis对象
+
 
     public static synchronized AccessTokenMgr getInstance() {
         return m_instance;
     }
 
-    private String m_AccessToken = null;
-    private long m_TokenTime = 0;
+    //private String m_AccessToken = null;
+    //private long m_TokenTime = 0;
     // 凭证有效时间
-    private long m_expiresIn;
+    //private long m_expiresIn;
 
     public String getAppSecret() {
         return AppSecret;
@@ -41,7 +42,33 @@ public class AccessTokenMgr {
     }
 
     public synchronized String getAccessToken() {
-        long currentTime = new Date().getTime();
+        if (!jedis.isConnected()) {
+            jedis.connect();
+        }
+        jedis.auth("ILfr6LTKhpNJ0x5i");
+        String token = jedis.get(AppId);
+        if (token == null) {
+            try {
+                String requestUrl = access_token_url.replace("APPID", AppId).replace("APPSECRET", AppSecret);
+                JSONObject jsonObject = WeixinUtil.HttpsRequest(requestUrl, "GET", null);
+                if (jsonObject != null) {
+                    if (jsonObject.containsKey("errcode")) {
+                        System.out.println("error = " + jsonObject.toString());
+                    } else {
+                        //请求成功
+                        System.out.println("return token =" + jsonObject.toString());
+                        token = jsonObject.getString("access_token");
+                        Integer tokenTime = (jsonObject.getInteger("expires_in") - 1) * 1000;
+                        jedis.setex(AppId, tokenTime, token);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return token;
+
+/*        long currentTime = new Date().getTime();
         if (m_AccessToken == null || (currentTime - m_TokenTime) > m_expiresIn) {
             //重新取得凭证
             try {
@@ -57,9 +84,9 @@ public class AccessTokenMgr {
                         System.out.println("return token =" + jsonObject.toString());
                         m_AccessToken = jsonObject.getString("access_token");
                         m_TokenTime = new Date().getTime();
-/*
+*//*
                         m_expiresIn = jsonObject.getLong("expires_in") * 1000;
-*/
+*//*
                         m_expiresIn = 270 * 1000; // workaround to resolve token bug
 
                     }
@@ -73,6 +100,6 @@ public class AccessTokenMgr {
             }
             return m_AccessToken;
         }
-        return m_AccessToken;
+        return m_AccessToken;*/
     }
 }
