@@ -76,6 +76,11 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public List<Integer> getPatientSexByDoctor(Doctor doctor) {
+        return patientDao.getPatientSexByDoctor(doctor);
+    }
+
+    @Override
     public Patient updatePatientInfo(Patient patient) {
         return patientDao.updatePatientInfo(patient);
     }

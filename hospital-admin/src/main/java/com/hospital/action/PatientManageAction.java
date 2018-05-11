@@ -261,7 +261,7 @@ public class PatientManageAction extends ActionSupport {
         Integer units2 = 0;
         Integer addon2 = 0;
 
-        List<Patient> patients = patientService.getPatientsByDoctor(doctor);
+        List<Integer> patients = patientService.getPatientSexByDoctor(doctor);
         if (patients != null) {
             total[11] = patients.size();
             for (int s = 11; s > 0; s--) {
@@ -274,10 +274,12 @@ public class PatientManageAction extends ActionSupport {
             units2 = (total[11] / 100 + 1) * 100;
             addon2 = units2 / 5;
 
+/*
             List<Patient> allPatients = patientService.getPatientsByDoctor(doctor);
+*/
 
-            for (Patient p : allPatients) {
-                if (p.getSex() == 1)
+            for (Integer sex : patients) {
+                if (sex.equals(1))
                     male++;
                 else
                     female++;

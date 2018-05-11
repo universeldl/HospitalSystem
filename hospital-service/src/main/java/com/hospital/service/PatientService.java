@@ -16,6 +16,7 @@ public interface PatientService {
 /*
     List<Patient> findAllPatients();
 */
+    List<Integer> getPatientSexByDoctor(Doctor doctor);
 
     List<Patient> getPatientsByDoctor(Doctor doctor);
 
