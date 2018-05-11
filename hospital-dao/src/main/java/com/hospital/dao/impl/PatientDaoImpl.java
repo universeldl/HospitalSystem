@@ -33,6 +33,24 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     }
 
     @Override
+    public List<Integer> getPatientSexByDoctor(Doctor doctor) {
+
+        String hql = "select sex from Patient";
+        //如果不是super
+        if ((doctor.getAuthorization().getSuperSet() == null) ||
+                ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
+            //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+            hql = hql + " r where r.doctor.aid=" + doctor.getAid();
+        }
+        List list = this.getHibernateTemplate().find(hql);
+        if (list != null && list.size() > 0) {
+            return list;
+        }
+        return null;
+
+    }
+
+    @Override
     public Patient getPatient(Patient patient) {
         //this.getHibernateTemplate().find(hql, value)方法无法执行的问题
         //解决需要catch (Throwable e)
@@ -57,7 +75,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     public Integer[] getAdditionsForLast12Months(Doctor doctor) {
         Integer[] additions = new Integer[12];
 
-        String hql = "from Patient r where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =?";
+        String hql = "select count(*) from Patient r where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =?";
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
@@ -67,7 +85,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         try {
             for (int i = 11; i >= 0; i--) {
                 List list = this.getHibernateTemplate().find(hql, i);
-                additions[11 - i] = list.size();
+                additions[11 - i] =  ((Long) list.get(0)).intValue();
             }
         } catch (Throwable e1) {
             e1.printStackTrace();

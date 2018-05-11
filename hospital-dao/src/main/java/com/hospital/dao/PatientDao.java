@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface PatientDao {
 
+    List<Integer> getPatientSexByDoctor(Doctor doctor);
 
     List<Patient> getPatientsByDoctor(Doctor doctor);
 
