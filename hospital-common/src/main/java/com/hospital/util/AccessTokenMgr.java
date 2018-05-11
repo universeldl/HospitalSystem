@@ -58,7 +58,7 @@ public class AccessTokenMgr {
                         //请求成功
                         System.out.println("return token =" + jsonObject.toString());
                         token = jsonObject.getString("access_token");
-                        Integer tokenTime = (jsonObject.getInteger("expires_in") - 1) * 1000;
+                        Integer tokenTime = jsonObject.getInteger("expires_in") - 60;
                         jedis.setex(AppId, tokenTime, token);
                     }
                 }
