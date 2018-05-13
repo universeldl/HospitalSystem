@@ -210,6 +210,7 @@ public class PatientManageAction extends ActionSupport {
     }
     */
 
+
     /**
      * 根据页码查询病人
      *
@@ -231,6 +232,24 @@ public class PatientManageAction extends ActionSupport {
         ServletActionContext.getRequest().setAttribute("pb", pb);
         return "success";
     }
+
+    public String findRecyclePatientByPage() {
+        //获取页面传递过来的当前页码数
+        if (pageCode == 0) {
+            pageCode = 1;
+        }
+        //给pageSize,每页的记录数赋值
+        int pageSize = 20;
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        PageBean<Patient> pb = patientService.findRecyclePatientByPage(pageCode, pageSize, doctor);
+        if (pb != null) {
+            pb.setUrl("findRecyclePatientByPage.action?");
+        }
+        //存入request域中
+        ServletActionContext.getRequest().setAttribute("pb", pb);
+        return "recycle";
+    }
+
 
 
     /**
@@ -458,6 +477,59 @@ public class PatientManageAction extends ActionSupport {
         return null;
     }
 
+    public String restorePatient() {
+        if (patientId != null) {
+            Patient tmpPatient = new Patient();
+            tmpPatient.setPatientId(patientId);
+
+            Patient patient = patientService.getPatientById(tmpPatient);
+
+            if (patient == null) {
+                try {
+                    ServletActionContext.getResponse().getWriter().print(-1);
+                } catch (IOException e) {
+                    throw new RuntimeException(e.getMessage());
+                }
+                return null;
+            }
+
+            patient.setState(1);
+            Patient newPatient = patientService.updatePatientInfo(patient);
+            try {
+                ServletActionContext.getResponse().getWriter().print((newPatient == null)?-1:1);
+            } catch (IOException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    public String recyclePatient() {
+        if (patientId != null) {
+            Patient tmpPatient = new Patient();
+            tmpPatient.setPatientId(patientId);
+
+            Patient patient = patientService.getPatientById(tmpPatient);
+
+            if (patient == null) {
+                try {
+                    ServletActionContext.getResponse().getWriter().print(-1);
+                } catch (IOException e) {
+                    throw new RuntimeException(e.getMessage());
+                }
+                return null;
+            }
+
+            patient.setState(-1);
+            Patient newPatient = patientService.updatePatientInfo(patient);
+            try {
+                ServletActionContext.getResponse().getWriter().print((newPatient == null)?-1:1);
+            } catch (IOException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return null;
+    }
 
     /**
      * 删除指定医生
@@ -506,6 +578,33 @@ public class PatientManageAction extends ActionSupport {
         }
         ServletActionContext.getRequest().setAttribute("pb", pb);
         return "success";
+    }
+
+    public String queryRecyclePatient() {
+        //获取页面传递过来的当前页码数
+        if (pageCode == 0) {
+            pageCode = 1;
+        }
+        //给pageSize,每页的记录数赋值
+        int pageSize = 20;
+        PageBean<Patient> pb = null;
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        if ("".equals(openID.trim()) && "".equals(name.trim()) && patientType == -1) {
+            pb = patientService.findRecyclePatientByPage(pageCode, pageSize, doctor);
+        } else {
+            Patient patient = new Patient();
+            patient.setOpenID(openID);
+            PatientType type = new PatientType();
+            type.setPatientTypeId(patientType);
+            patient.setPatientType(type);
+            patient.setName(name);
+            pb = patientService.queryRecyclePatient(patient, pageCode, pageSize, doctor);
+        }
+        if (pb != null) {
+            pb.setUrl("queryRecyclePatient.action?openID=" + openID + "&name=" + name + "&patientType=" + patientType + "&");
+        }
+        ServletActionContext.getRequest().setAttribute("pb", pb);
+        return "recycle";
     }
 
 

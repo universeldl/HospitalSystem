@@ -60,7 +60,7 @@ public class wechatLoginAction extends ActionSupport {
             if (open_id != null) {
                 Patient patient = new Patient();
                 patient.setOpenID(open_id);
-                Patient new_patient = patientService.getPatientByOpenID(patient);
+                Patient new_patient = patientService.getPatientByOpenId(patient);
 
                 System.out.println("openid = " + open_id);
                 if (new_patient == null) {

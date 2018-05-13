@@ -22,11 +22,15 @@ public interface PatientDao {
 
     PageBean<Patient> findPatientByPage(int pageCode, int pageSize, Doctor doctor);
 
+    PageBean<Patient> findRecyclePatientByPage(int pageCode, int pageSize, Doctor doctor);
+
     Patient getPatientById(Patient patient);
 
     boolean deletePatient(Patient patient);
 
     PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize, Doctor doctor);
+
+    PageBean<Patient> queryRecyclePatient(Patient patient, int pageCode, int pageSize, Doctor doctor);
 
     Patient getPatientByopenID(Patient patient);
 
@@ -34,7 +38,7 @@ public interface PatientDao {
 
     List<Patient> findAllPatients();
 
-    List<Integer> findAllPatientIds();
+    List<Integer> findAllActivePatientIds();
 
     List<Patient> findAllPatientsByDoctor(Doctor doctor);
 

@@ -22,7 +22,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
             //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-            hql = hql + " r where r.doctor.aid=" + doctor.getAid();
+            hql = hql + " r where r.state>0 and r.doctor.aid=" + doctor.getAid();
         }
         List list = this.getHibernateTemplate().find(hql);
         if (list != null && list.size() > 0) {
@@ -35,12 +35,12 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     @Override
     public List<Integer> getPatientSexByDoctor(Doctor doctor) {
 
-        String hql = "select sex from Patient";
+        String hql = "select sex from Patient r where r.state>0";
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
             //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-            hql = hql + " r where r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid();
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
         }
         List list = this.getHibernateTemplate().find(hql);
         if (list != null && list.size() > 0) {
@@ -75,7 +75,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     public Integer[] getAdditionsForLast12Months(Doctor doctor) {
         Integer[] additions = new Integer[12];
 
-        String hql = "select count(*) from Patient r where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =?";
+        String hql = "select count(*) from Patient r where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =? and r.state>0 ";
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
@@ -183,7 +183,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         pb.setPageSize(pageSize);//设置页面记录数
         List patientList = null;
         try {
-            String sql = "select count(patientId) from Patient";
+            String sql = "select count(patientId) from Patient r where r.state>0";
             Long totalRecord = null;
             //如果是super，全选，否则做判断
             if ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() == 1)) {
@@ -194,12 +194,12 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
 
                 //不支持limit分页
-                String hql = "from Patient ORDER BY createTime DESC";
+                String hql = "from Patient r where r.state>0 ORDER BY createTime DESC";
                 //分页查询
                 patientList = doSplitPage(hql, pageCode, pageSize);
             } else {
                 //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-                String addSql = " r where (r.doctor.aid=? or r.addnDoctor.aid=?)";
+                String addSql = " and (r.doctor.aid=? or r.addnDoctor.aid=?)";
                 sql += addSql;
                 List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
                 if (list != null && list.size() > 0) {
@@ -208,7 +208,8 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
 
                 //不支持limit分页
-                String hql = "from Patient r where (r.doctor.aid=:aid1 or r.addnDoctor.aid=:aid2) ORDER BY createTime DESC";
+                String hql = "from Patient r where (r.state>0 and (r.doctor.aid=:aid1 or r.addnDoctor.aid=:aid2))" +
+                        " ORDER BY createTime DESC";
                 //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
                 //分页查询
                 patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
@@ -226,6 +227,58 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         return null;
     }
 
+
+    @Override
+    public PageBean<Patient> findRecyclePatientByPage(int pageCode, int pageSize, Doctor doctor) {
+        PageBean<Patient> pb = new PageBean<Patient>();    //pageBean对象，用于分页
+        //根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
+        pb.setPageCode(pageCode);//设置当前页码
+        pb.setPageSize(pageSize);//设置页面记录数
+        List patientList = null;
+        try {
+            String sql = "select count(patientId) from Patient r where r.state=-1";
+            Long totalRecord = null;
+            //如果是super，全选，否则做判断
+            if ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() == 1)) {
+                List list = this.getHibernateTemplate().find(sql);
+                if (list != null && list.size() > 0) {
+                    totalRecord = (Long) list.get(0);
+                }
+                pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
+
+                //不支持limit分页
+                String hql = "from Patient r where r.state=-1 ORDER BY createTime DESC";
+                //分页查询
+                patientList = doSplitPage(hql, pageCode, pageSize);
+            } else {
+                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+                String addSql = " and (r.doctor.aid=? or r.addnDoctor.aid=?)";
+                sql += addSql;
+                List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
+                if (list != null && list.size() > 0) {
+                    totalRecord = (Long) list.get(0);
+                }
+                pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
+
+                //不支持limit分页
+                String hql = "from Patient r where (r.state=-1 and (r.doctor.aid=:aid1 or r.addnDoctor.aid=:aid2))" +
+                        " ORDER BY createTime DESC";
+                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
+                //分页查询
+                patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
+            }
+
+
+        } catch (Throwable e1) {
+            e1.printStackTrace();
+            throw new RuntimeException(e1.getMessage());
+        }
+        if (patientList != null && patientList.size() > 0) {
+            pb.setBeanList(patientList);
+            return pb;
+        }
+        return null;
+    }
 
     @Override
     public Patient getPatientById(Patient patient) {
@@ -263,8 +316,8 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         pb.setPageSize(pageSize);//设置页面记录数
 
 
-        String sql = "SELECT count(*) FROM Patient r where 1=1";
-        String hql = "from Patient r where 1=1";
+        String sql = "SELECT count(*) FROM Patient r where 1=1 and r.state=-1";
+        String hql = "from Patient r where 1=1 and r.state>1 ";
         if (!"".equals(patient.getOpenID().trim())) {
             hql += " and r.openID like '%" + patient.getOpenID() + "%'";
             sql += " and r.openID like '%" + patient.getOpenID() + "%'";
@@ -306,6 +359,56 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         return null;
     }
 
+    @Override
+    public PageBean<Patient> queryRecyclePatient(Patient patient, int pageCode, int pageSize, Doctor doctor) {
+        PageBean<Patient> pb = new PageBean<Patient>();    //pageBean对象，用于分页
+        //根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
+        pb.setPageCode(pageCode);//设置当前页码
+        pb.setPageSize(pageSize);//设置页面记录数
+
+
+        String sql = "SELECT count(*) FROM Patient r where 1=1 and r.state=-1";
+        String hql = "from Patient r where 1=1 and r.state=-1 ";
+        if (!"".equals(patient.getOpenID().trim())) {
+            hql += " and r.openID like '%" + patient.getOpenID() + "%'";
+            sql += " and r.openID like '%" + patient.getOpenID() + "%'";
+        }
+        if (!"".equals(patient.getName().trim())) {
+            hql += " and r.name like '%" + patient.getName() + "%'";
+            sql += " and r.name like '%" + patient.getName() + "%'";
+        }
+        if (patient.getPatientType().getPatientTypeId() != -1) {
+            hql += " and r.patientType=" + patient.getPatientType().getPatientTypeId();
+            sql += " and r.patientType=" + patient.getPatientType().getPatientTypeId();
+        }
+        //如果不是super
+        if ((doctor.getAuthorization().getSuperSet() == null) ||
+                ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
+            //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+            sql = sql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+        }
+        try {
+            int totalRecord = 0;
+            List<Patient> patientList = null;
+            List list = this.getHibernateTemplate().find(sql);
+            Long total = (Long)list.get(0);
+            totalRecord = total.intValue();
+            pb.setTotalRecord(totalRecord);    //设置总记录数
+            //this.getSessionFactory().getCurrentSession().close();
+
+
+            patientList = doSplitPage(hql, pageCode, pageSize);
+            if (patientList != null && patientList.size() > 0) {
+                pb.setBeanList(patientList);
+                return pb;
+            }
+        } catch (Throwable e1) {
+            e1.printStackTrace();
+            throw new RuntimeException(e1.getMessage());
+        }
+        return null;
+    }
 
     @Override
     public Patient getPatientByopenID(Patient patient) {
@@ -347,8 +450,8 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     }
 
     @Override
-    public List<Integer> findAllPatientIds() {
-        String hql = "select patientId from Patient ";
+    public List<Integer> findAllActivePatientIds() {
+        String hql = "select patientId from Patient r where r.state>0";
         List list = this.getHibernateTemplate().find(hql);
         return list;
     }
@@ -356,7 +459,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
 
     @Override
     public List<Patient> findAllPatientsByDoctor(Doctor doctor) {
-        String hql = "from Patient r where 1=1";
+        String hql = "from Patient r where 1=1 and r.state>0";
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {

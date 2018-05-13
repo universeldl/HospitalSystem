@@ -303,6 +303,28 @@ function validUpdatePatient() {
     return flag;
 }
 
+function restorePatient(id) {
+    if(confirm('确定要还原此病人吗?')) {
+        $('#loading').show();
+        ajax(
+            {
+                method: 'POST',
+                url: 'doctor/patientManageAction_restorePatient.action',
+                params: "patientId=" + id,
+                callback: function (data) {
+                    $('#loading').hide();
+                    if (data == 1) {
+                        showInfo("还原成功");
+                    } else {
+                        showInfo("还原失败");
+                    }
+
+                }
+            }
+        );
+    }
+}
+
 
 function showInfo(msg) {
     $("#div_info").text(msg);

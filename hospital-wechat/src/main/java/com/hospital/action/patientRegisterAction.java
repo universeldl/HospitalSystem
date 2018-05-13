@@ -224,7 +224,7 @@ public class patientRegisterAction extends ActionSupport {
             Patient patient = new Patient();
             patient.setOpenID(openID);
 
-            if (patientService.getPatientByOpenID(patient) != null) {
+            if (patientService.getPatientByOpenId(patient) != null) {
                 writeStatus(-4);
                 return null;
             }
@@ -260,6 +260,7 @@ public class patientRegisterAction extends ActionSupport {
             patient.setCreateTime(new Date(System.currentTimeMillis()));
             patient.setBirthday(birthday_date);
             patient.setOldPatient(oldPatient);
+            patient.setState(1);
             if (sex.toUpperCase().equals("MALE")) {
                 patient.setSex(1);
             } else {
@@ -271,7 +272,7 @@ public class patientRegisterAction extends ActionSupport {
                 return null;
             }
 
-            Patient newPatient = patientService.getPatientByopenID(patient);
+            Patient newPatient = patientService.getPatientByOpenId(patient);
 
             if (sendSurvey(newPatient)) {
                 System.out.println("sendSurvey true");

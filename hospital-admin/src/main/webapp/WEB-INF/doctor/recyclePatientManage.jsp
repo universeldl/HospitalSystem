@@ -171,7 +171,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">查询</div>
                 <form class="form-horizontal"
-                      action="${pageContext.request.contextPath}/doctor/patientManageAction_queryPatient.action"
+                      action="${pageContext.request.contextPath}/doctor/patientManageAction_queryRecyclePatient.action"
                       method="post">
                     <div class="form-group">
                         <div class="col-sm-2 control-label">病人用户名</div>
@@ -200,7 +200,7 @@
                     </div>
                 </form>
             </div>
-            <div name="showList">
+<%--            <div name="showList">
                 <div class="grid-btn">
                     <a class="btn btn-primary" data-toggle="modal" data-target="#checkSummary" onclick="getSummary()"><i
                             class="fa fa-pie-chart"></i> 统计信息</a>
@@ -211,7 +211,7 @@
                     <a class="btn btn-primary" onclick="exportPatient()"><i class="fa fa-share"></i> 导出</a>
                     当前病人总数：<s:property value="#request.pb.totalRecord"/>
                 </div>
-            </div>
+            </div>--%>
 
             <div class="row">
                 <div class="col-lg-12">
@@ -277,34 +277,48 @@
                                             data-target="#findModal"
                                             onclick="getPatientInfo(<s:property value="#patient.patientId"/>)">查看
                                     </button>
-                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
+<%--                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                             data-target="#updateModal"
                                             onclick="updatePatient(<s:property value="#patient.patientId"/>)">修改
+                                    </button>--%>
+
+                                    <input type="hidden" id="patient_action"
+                                        value="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPageByPatient.action">
+                                    <button type="button" class="btn btn-primary btn-xs"
+                                        onclick="managePatient(<s:property value="#patient.patientId"/>)">问卷管理
                                     </button>
                                     <button type="button" class="btn btn-success btn-xs"
-                                            onclick="exportSinglePatient(<s:property value="#patient.patientId"/>)">导出
+                                            onclick="restorePatient(<s:property value="#patient.patientId"/>)">还原
                                     </button>
-                                    <s:if test="#session.doctor.authorization.retrieveSet==1">
+                                    <button type="button" class="btn btn-danger btn-xs"
+                                            onclick="deletePatient(<s:property value="#patient.patientId"/>)">彻底删除
+                                    </button>
+<%--                                    <button type="button" class="btn btn-success btn-xs"
+                                            onclick="exportSinglePatient(<s:property value="#patient.patientId"/>)">导出
+                                    </button>--%>
+<%--                                    <s:if test="#session.doctor.authorization.retrieveSet==1">
                                         <input type="hidden" id="patient_action"
                                                value="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPageByPatient.action">
                                         <button type="button" class="btn btn-primary btn-xs"
                                                 onclick="managePatient(<s:property value="#patient.patientId"/>)">问卷管理
-                                        </button>
-                                        <input type="hidden" id="patient_allInOne"
-                                               value="${pageContext.request.contextPath}/doctor/deliveryManageAction_findPatientAllInOne.action">
-                                        <button type="button" class="btn btn-info btn-xs"
+                                        </button>--%>
+<%--                                        <input type="hidden" id="patient_allInOne"
+                                               value="${pageContext.request.contextPath}/doctor/deliveryManageAction_findPatientAllInOne.action">--%>
+<%--                                        <button type="button" class="btn btn-info btn-xs"
                                                 onclick="allInOne(<s:property value="#patient.patientId"/>)">综合一览
-                                        </button>
+                                        </button>--%>
+
 
 <%--                                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
                                                 data-target="#addRetrieveModal"
                                                 onclick="addRetrieveFun(<s:property value="#patient.patientId"/>)">添加答卷
                                         </button>--%>
 
+<%--
                                     </s:if>
-                                    <button type="button" class="btn btn-danger btn-xs"
-                                            onclick="recyclePatient(<s:property value="#patient.patientId"/>)">移入回收站
-                                    </button>
+--%>
+
+
                                 </td>
                                 </tbody>
                             </s:iterator>
@@ -514,7 +528,7 @@
 
 
 <!-------------------------------------批量添加的模糊框------------------------>
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
+<%--<form class="form-horizontal">   <!--保证样式水平不混乱-->
     <!-- 模态框（Modal） -->
     <div class="modal fade" id="batchAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
@@ -878,7 +892,7 @@
         </div><!-- /.modal -->
     </div>
 
-</form>
+</form>--%>
 <!--------------------------------------添加答卷的模糊框------------------------>
 
 

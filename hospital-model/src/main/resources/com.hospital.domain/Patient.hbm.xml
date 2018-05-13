@@ -60,6 +60,10 @@
             <column name="oldPatient"/>
         </property>
 
+        <property name="state" type="java.lang.Integer">
+            <column name="state"/>
+        </property>
+
         <!-- failed to lazily initialize a collection of role: com.hospital.domain.Patient.deliveryInfos,  no session or session was closed -->
         <!-- 解决方案改动 lazy="false" -->
         <set name="deliveryInfos" lazy="false" inverse="true">

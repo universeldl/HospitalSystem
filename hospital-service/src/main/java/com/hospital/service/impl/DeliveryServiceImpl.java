@@ -248,7 +248,7 @@ public class DeliveryServiceImpl implements DeliveryService {
         List<Patient> patients = patientDao.findAllPatients();
 */
 
-        List<Integer> patientIds = patientDao.findAllPatientIds();
+        List<Integer> patientIds = patientDao.findAllActivePatientIds();
         // current date
         Calendar curCalendar = Calendar.getInstance();
 

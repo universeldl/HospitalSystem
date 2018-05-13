@@ -97,6 +97,10 @@ public class PatientServiceImpl implements PatientService {
         return patientDao.findPatientByPage(pageCode, pageSize, doctor);
     }
 
+    @Override
+    public PageBean<Patient> findRecyclePatientByPage(int pageCode, int pageSize, Doctor doctor) {
+        return patientDao.findRecyclePatientByPage(pageCode, pageSize, doctor);
+    }
 
     @Override
     public Patient getPatientById(Patient patient) {
@@ -108,13 +112,13 @@ public class PatientServiceImpl implements PatientService {
     public int deletePatient(Patient patient) {
         //删除病人需要注意的点：如果该病人有尚未答卷的问卷或者尚未设置的延期,则不能删除
         //得到该病人的分发集合
-        Patient patientById = patientDao.getPatientById(patient);
+/*        Patient patientById = patientDao.getPatientById(patient);
         Set<DeliveryInfo> deliveryInfos = patientById.getDeliveryInfos();
         for (DeliveryInfo deliveryInfo : deliveryInfos) {
             if (deliveryInfo.getRetrieveInfo() == null) {
                 return -1;//有尚未答卷的问卷
             }
-        }
+        }*/
         boolean deletePatient = patientDao.deletePatient(patient);
         if (deletePatient) {
             return 1;
@@ -128,20 +132,15 @@ public class PatientServiceImpl implements PatientService {
         return patientDao.queryPatient(patient, pageCode, pageSize, doctor);
     }
 
-
     @Override
-    public Patient getPatientByopenID(Patient patient) {
-        // TODO Auto-generated method stub
-        return patientDao.getPatientByopenID(patient);
+    public PageBean<Patient> queryRecyclePatient(Patient patient, int pageCode, int pageSize, Doctor doctor) {
+        return patientDao.queryRecyclePatient(patient, pageCode, pageSize, doctor);
     }
 
-
     @Override
-    public Patient getPatientByOpenID(Patient patient) {
-        // TODO Auto-generated method stub
+    public Patient getPatientByOpenId(Patient patient) {
         return patientDao.getPatientByopenID(patient);
     }
-
 
     @Override
     public JSONObject batchAddPatient(String fileName, Doctor doctor) {
@@ -527,7 +526,7 @@ public class PatientServiceImpl implements PatientService {
 /*
         List<Patient> patients = patientDao.findAllPatients();
 */
-        List<Integer> patientIds = patientDao.findAllPatientIds();
+        List<Integer> patientIds = patientDao.findAllActivePatientIds();
         for (Integer patientId : patientIds) {
             //System.out.println("plan1:" + patient.getPlan().getPlanId());
 

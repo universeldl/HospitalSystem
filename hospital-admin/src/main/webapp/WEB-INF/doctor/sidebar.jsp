@@ -61,6 +61,9 @@
               <a href="${pageContext.request.contextPath}/doctor/patientManageAction_findPatientByPage.action"><i
                       class="fa fa-medkit"></i> 病人列表</a></li>
             <li>
+              <a href="${pageContext.request.contextPath}/doctor/patientManageAction_findRecyclePatientByPage.action"><i
+                      class="fa fa-recycle"></i> 回收站</a></li>
+            <li>
               <a href="${pageContext.request.contextPath}/doctor/deliveryManageAction_findDeliveryInfoByPage.action"><i
                       class="fa fa-send-o"></i> 随访信息</a></li>
           </ul>
