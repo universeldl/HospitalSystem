@@ -209,6 +209,7 @@ CREATE TABLE `Patient` (
   `patientTypeId` int(11) DEFAULT NULL,
   `aid` int(11) DEFAULT NULL,
   `addnDoctorId` int(11) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`patientId`),
   UNIQUE KEY `UK_gdryvep0wht4jpod1cmcu7ovq` (`openID`),
   UNIQUE KEY `UK_2a26pllg64r213doyjdipypdc` (`uniqID`),

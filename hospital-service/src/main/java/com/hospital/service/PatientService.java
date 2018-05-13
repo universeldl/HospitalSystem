@@ -26,15 +26,17 @@ public interface PatientService {
 
     PageBean<Patient> findPatientByPage(int pageCode, int pageSize, Doctor doctor);
 
+    PageBean<Patient> findRecyclePatientByPage(int pageCode, int pageSize, Doctor doctor);
+
     Patient getPatientById(Patient patient);
 
     int deletePatient(Patient patient);
 
     PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize, Doctor doctor);
 
-    Patient getPatientByopenID(Patient patient);
+    PageBean<Patient> queryRecyclePatient(Patient patient, int pageCode, int pageSize, Doctor doctor);
 
-    Patient getPatientByOpenID(Patient patient);
+    Patient getPatientByOpenId(Patient patient);
 
     JSONObject batchAddPatient(String fileName, Doctor doctor);
 

@@ -20,6 +20,7 @@
 
         <action name="patientManageAction_*" method="{1}" class="patientManageAction">
             <result name="success">/WEB-INF/doctor/patientManage.jsp</result>
+            <result name="recycle">/WEB-INF/doctor/recyclePatientManage.jsp</result>
             <result name="nopass" type="redirect">/error/nopass.jsp</result>
         </action>
     </package>

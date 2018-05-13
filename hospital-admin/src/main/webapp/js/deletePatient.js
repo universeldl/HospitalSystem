@@ -25,6 +25,27 @@ function deletePatient(id) {
 
 }
 
+function recyclePatient(id) {
+    if(confirm('回收站中的病人将不会收到随访提醒，确定要移入吗?')) {
+        $('#loading').show();
+        ajax(
+            {
+                method: 'POST',
+                url: 'doctor/patientManageAction_recyclePatient.action',
+                params: "patientId=" + id,
+                callback: function (data) {
+                    $('#loading').hide();
+                    if (data == 1) {
+                        showInfo("移入回收站成功");
+                    } else {
+                        showInfo("移入回收站失败");
+                    }
+                }
+            }
+        );
+    }
+}
+
 $('#modal_info').on('hide.bs.modal', function () {//提示模糊框隐藏时候触发
     location.reload();  	//刷新当前页面
 });

@@ -46,7 +46,7 @@ public class PatientLoginAction extends ActionSupport {
         patient.setOpenID(openID);
         patient.setPwd(Md5Utils.md5(pwd));
         int login = 1;
-        Patient newPatient = patientService.getPatientByOpenID(patient);
+        Patient newPatient = patientService.getPatientByOpenId(patient);
         if (newPatient == null) {
             //用户名不存在
             login = -1;

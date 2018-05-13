@@ -27,12 +27,19 @@ public class Patient implements Serializable {
     private Integer sex;      //  male == 1, female == 0; different from sex in Plan
     private Doctor addnDoctor;    //共享医生
     private Integer oldPatient;  // 1 新病例, 2 既往病例, 3 哮喘无忧用户
+    private Integer state; // 状态， -1为未激活（出现在回收站且不发送问卷），
 
     private Date birthday;
     private Date createTime;    //创建时间
     private Set<DeliveryInfo> deliveryInfos;    //该病人的随访问卷分发信息
     private Set<RetrieveInfo> retrieveInfos;    //该病人的答卷信息
 
+
+    public Integer getState() { return state; }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
     public Integer getOldPatient() {
         return oldPatient;
