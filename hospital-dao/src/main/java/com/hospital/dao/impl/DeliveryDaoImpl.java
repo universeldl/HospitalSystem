@@ -178,7 +178,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
             hql = hql + "and  bo.deliveryDate between \"" + daysAgo + "\" and \"" + currentDay + "\"";
             sql = sql + "and  bo.deliveryDate between \"" + daysAgo + "\" and \"" + currentDay + "\"";
         }
-        hql = hql + " ORDER BY bo.deliveryId";
+        hql = hql + " ORDER BY bo.deliveryDate DESC";
         sb.append(hql);
         sb_sql.append(sql);
 
@@ -263,12 +263,12 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
                 //this.getSessionFactory().getCurrentSession().close();
 
                 //不支持limit分页
-                String hql = "from DeliveryInfo";
+                String hql = "from DeliveryInfo ORDER BY deliveryDate DESC";
                 //分页查询
                 deliveryInfoList = doSplitPage(hql, pageCode, pageSize);
             } else {
                 //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-                String addSql = " r where (r.patient.doctor.aid=? or r.patient.addnDoctor.aid=?)";
+                String addSql = " r where (r.patient.doctor.aid=? or r.patient.addnDoctor.aid=?) ";
                 sql += addSql;
                 List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
                 if (list != null && list.size() > 0) {
@@ -278,7 +278,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
                 //this.getSessionFactory().getCurrentSession().close();
 
                 //不支持limit分页
-                String hql = "from DeliveryInfo r where (r.patient.doctor.aid=:aid1 or r.patient.addnDoctor.aid=:aid2)";
+                String hql = "from DeliveryInfo r where (r.patient.doctor.aid=:aid1 or r.patient.addnDoctor.aid=:aid2) BY deliveryDate DESC";
                 //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
                 //分页查询
                 deliveryInfoList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
@@ -303,17 +303,18 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         pb.setPageSize(pageSize);//设置页面记录数
         List deliveryInfoList = null;
         try {
-            String sql = "from DeliveryInfo d where d.patient.patientId=?";
+            String sql = "select count(*) from DeliveryInfo d where d.patient.patientId=?";
             int totalRecord = 0;
             List list = this.getHibernateTemplate().find(sql, patient.getPatientId());
             if (list != null && list.size() > 0) {
-                totalRecord = list.size();
+                totalRecord = ((Long) list.get(0)).intValue();
             }
             pb.setTotalRecord(totalRecord);    //设置总记录数
             //this.getSessionFactory().getCurrentSession().close();
 
             //不支持limit分页
             String hql = "from DeliveryInfo d where d.patient.patientId=" + patient.getPatientId();
+            hql += " ORDER BY deliveryDate DESC";
             //分页查询
             deliveryInfoList = doSplitPage(hql, pageCode, pageSize);
         } catch (Throwable e1) {
