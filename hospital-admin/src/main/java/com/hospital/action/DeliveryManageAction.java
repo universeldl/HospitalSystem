@@ -92,7 +92,7 @@ public class DeliveryManageAction extends ActionSupport {
             pageCode = 1;
         }
         //给pageSize,每页的记录数赋值
-        int pageSize = 5;
+        int pageSize = 20;
 
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         PageBean<DeliveryInfo> pb = deliveryService.findDeliveryInfoByPage(pageCode, pageSize, doctor);
@@ -111,7 +111,7 @@ public class DeliveryManageAction extends ActionSupport {
             pageCode = 1;
         }
         //给pageSize,每页的记录数赋值
-        int pageSize = 5;
+        int pageSize = 20;
 
         Patient patient = new Patient();
         patient.setPatientId(patientId);
@@ -786,7 +786,7 @@ public class DeliveryManageAction extends ActionSupport {
             pageCode = 1;
         }
         //给pageSize,每页的记录数赋值
-        int pageSize = 5;
+        int pageSize = 20;
         PageBean<DeliveryInfo> pb = null;
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         if ("".equals(patientName.trim()) && deliveryId == 0) {
@@ -809,7 +809,7 @@ public class DeliveryManageAction extends ActionSupport {
             pageCode = 1;
         }
         //给pageSize,每页的记录数赋值
-        int pageSize = 5;
+        int pageSize = 20;
         PageBean<DeliveryInfo> pb = null;
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         if (queryType == 0) {
@@ -861,7 +861,7 @@ public class DeliveryManageAction extends ActionSupport {
             pageCode = 1;
         }
         //给pageSize,每页的记录数赋值
-        int pageSize = 5;
+        int pageSize = 20;
         PageBean<DeliveryInfo> pb = null;
         Patient patient = new Patient();
         patient.setPatientId(patientId);
