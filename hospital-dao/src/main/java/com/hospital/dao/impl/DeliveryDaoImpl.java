@@ -278,7 +278,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
                 //this.getSessionFactory().getCurrentSession().close();
 
                 //不支持limit分页
-                String hql = "from DeliveryInfo r where (r.patient.doctor.aid=:aid1 or r.patient.addnDoctor.aid=:aid2) BY deliveryDate DESC";
+                String hql = "from DeliveryInfo r where (r.patient.doctor.aid=:aid1 or r.patient.addnDoctor.aid=:aid2) ORDER BY deliveryDate DESC";
                 //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
                 //分页查询
                 deliveryInfoList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
