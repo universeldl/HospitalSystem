@@ -316,8 +316,8 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         pb.setPageSize(pageSize);//设置页面记录数
 
 
-        String sql = "SELECT count(*) FROM Patient r where 1=1 and r.state=-1";
-        String hql = "from Patient r where 1=1 and r.state>1 ";
+        String sql = "SELECT count(*) FROM Patient r where 1=1 and r.state>0";
+        String hql = "from Patient r where 1=1 and r.state>0 ";
         if (!"".equals(patient.getOpenID().trim())) {
             hql += " and r.openID like '%" + patient.getOpenID() + "%'";
             sql += " and r.openID like '%" + patient.getOpenID() + "%'";
