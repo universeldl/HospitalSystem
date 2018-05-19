@@ -128,8 +128,9 @@ public class PatientServiceImpl implements PatientService {
 
 
     @Override
-    public PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize, Doctor doctor) {
-        return patientDao.queryPatient(patient, pageCode, pageSize, doctor);
+    public PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize, Doctor doctor,
+                                          Integer hospitalId, Integer cityId, Integer provinceId) {
+        return patientDao.queryPatient(patient, pageCode, pageSize, doctor, hospitalId, cityId, provinceId);
     }
 
     @Override

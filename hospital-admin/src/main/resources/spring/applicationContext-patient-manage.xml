@@ -34,6 +34,9 @@
     </bean>-->
 
     <bean id="patientManageAction" class="com.hospital.action.PatientManageAction" scope="prototype">
+        <property name="provinceService">
+            <ref bean="provinceService"/>
+        </property>
         <property name="patientService">
             <ref bean="patientService"/>
         </property>
