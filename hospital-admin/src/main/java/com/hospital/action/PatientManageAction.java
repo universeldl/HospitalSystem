@@ -1,10 +1,7 @@
 package com.hospital.action;
 
 import com.hospital.domain.*;
-import com.hospital.service.DoctorService;
-import com.hospital.service.PatientService;
-import com.hospital.service.PatientTypeService;
-import com.hospital.service.PlanService;
+import com.hospital.service.*;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -27,7 +24,6 @@ import static com.hospital.util.TimeUtils.getLast12Months;
 import static com.hospital.util.CalculateUtils.getMax;
 
 import com.hospital.util.RedisUtil;
-import com.hospital.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
@@ -40,6 +36,7 @@ public class PatientManageAction extends ActionSupport {
 */
     private DoctorService doctorService;
     private PatientTypeService patientTypeService;
+    private ProvinceService provinceService;
 /*
     private RedisService redisService;
 */
@@ -68,6 +65,9 @@ public class PatientManageAction extends ActionSupport {
         this.patientService = patientService;
     }
 
+    public void setProvinceService(ProvinceService provinceService) {
+        this.provinceService = provinceService;
+    }
 
     private Integer patientId;
     private String name;
@@ -82,10 +82,19 @@ public class PatientManageAction extends ActionSupport {
     private String birthday;
     private String fileName;
     private String createTime;
+    private Integer province;
+    private Integer city;
+    private Integer hospital;
 
     /**
      * @param fileName the fileName to set
      */
+    public void setProvince(Integer province) { this.province = province; }
+
+    public void setCity(Integer city) { this.city = city; }
+
+    public void setHospital(Integer hospital) { this.hospital = hospital; }
+
     public void setDoctorId(Integer doctorId) {
         this.doctorId = doctorId;
     }
@@ -230,6 +239,13 @@ public class PatientManageAction extends ActionSupport {
         }
         //存入request域中
         ServletActionContext.getRequest().setAttribute("pb", pb);
+
+        List<Province> provinceList = provinceService.getAllProvinces();
+        ServletActionContext.getRequest().setAttribute("pl", provinceList);
+
+        List<PatientType> patientTypeList = patientTypeService.getAllPatientType();
+        ServletActionContext.getRequest().setAttribute("ptl", patientTypeList);
+
         return "success";
     }
 
@@ -562,21 +578,28 @@ public class PatientManageAction extends ActionSupport {
         int pageSize = 20;
         PageBean<Patient> pb = null;
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
-        if ("".equals(openID.trim()) && "".equals(name.trim()) && patientType == -1) {
+        if ("".equals(name.trim()) && patientType == -1 && hospital == -1 && city == -1 && province == -1) {
             pb = patientService.findPatientByPage(pageCode, pageSize, doctor);
         } else {
             Patient patient = new Patient();
-            patient.setOpenID(openID);
             PatientType type = new PatientType();
             type.setPatientTypeId(patientType);
             patient.setPatientType(type);
             patient.setName(name);
-            pb = patientService.queryPatient(patient, pageCode, pageSize, doctor);
+            pb = patientService.queryPatient(patient, pageCode, pageSize, doctor, hospital, city, province);
         }
         if (pb != null) {
-            pb.setUrl("queryPatient.action?openID=" + openID + "&name=" + name + "&patientType=" + patientType + "&");
+            pb.setUrl("queryPatient.action?openID=" + openID + "&name=" + name + "&patientType="
+                            + patientType + "&hospital=" + hospital + "&city=" + city + "&province=" + province + "&");
         }
         ServletActionContext.getRequest().setAttribute("pb", pb);
+
+        List<Province> provinceList = provinceService.getAllProvinces();
+        ServletActionContext.getRequest().setAttribute("pl", provinceList);
+
+        List<PatientType> patientTypeList = patientTypeService.getAllPatientType();
+        ServletActionContext.getRequest().setAttribute("ptl", patientTypeList);
+
         return "success";
     }
 

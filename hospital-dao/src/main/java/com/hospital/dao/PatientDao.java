@@ -28,7 +28,8 @@ public interface PatientDao {
 
     boolean deletePatient(Patient patient);
 
-    PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize, Doctor doctor);
+    PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize, Doctor doctor,
+                                   Integer hospitalId, Integer cityId, Integer provinceId);
 
     PageBean<Patient> queryRecyclePatient(Patient patient, int pageCode, int pageSize, Doctor doctor);
 

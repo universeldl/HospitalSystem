@@ -309,7 +309,8 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
 
     //TODO auth of doctor
     @Override
-    public PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize, Doctor doctor) {
+    public PageBean<Patient> queryPatient(Patient patient, int pageCode, int pageSize, Doctor doctor,
+                                          Integer hospitalId, Integer cityId, Integer provinceId) {
         PageBean<Patient> pb = new PageBean<Patient>();    //pageBean对象，用于分页
         //根据传入的pageCode当前页码和pageSize页面记录数来设置pb对象
         pb.setPageCode(pageCode);//设置当前页码
@@ -317,11 +318,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
 
 
         String sql = "SELECT count(*) FROM Patient r where 1=1 and r.state>0";
-        String hql = "from Patient r where 1=1 and r.state>0 ";
-        if (!"".equals(patient.getOpenID().trim())) {
-            hql += " and r.openID like '%" + patient.getOpenID() + "%'";
-            sql += " and r.openID like '%" + patient.getOpenID() + "%'";
-        }
+        String hql = "from Patient r where 1=1 and r.state>0";
         if (!"".equals(patient.getName().trim())) {
             hql += " and r.name like '%" + patient.getName() + "%'";
             sql += " and r.name like '%" + patient.getName() + "%'";
@@ -330,6 +327,18 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
             hql += " and r.patientType=" + patient.getPatientType().getPatientTypeId();
             sql += " and r.patientType=" + patient.getPatientType().getPatientTypeId();
         }
+
+        if (hospitalId != -1) {
+            hql += " and r.doctor.hospital.hospitalId=" + hospitalId;
+            sql += " and r.doctor.hospital.hospitalId=" + hospitalId;
+        } else if (cityId != -1) {
+            hql += " and r.doctor.hospital.city.cityId=" + cityId;
+            sql += " and r.doctor.hospital.city.cityId=" + cityId;
+        } else if (provinceId != -1) {
+            hql += " and r.doctor.hospital.city.province.provinceId=" + provinceId;
+            sql += " and r.doctor.hospital.city.province.provinceId=" + provinceId;
+        }
+
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
@@ -337,6 +346,8 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
             hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
             sql = sql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
         }
+
+        hql += " ORDER BY createTime DESC";
         try {
             int totalRecord = 0;
             List<Patient> patientList = null;

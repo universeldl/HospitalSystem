@@ -44,6 +44,8 @@
     <script src="${pageContext.request.contextPath}/js/deletePatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/getPatient.js"></script>
     <script src="${pageContext.request.contextPath}/js/getPatientSummary.js"></script>
+    <script src="${pageContext.request.contextPath}/js/queryPatient.js"></script>
+
     <script type="text/javascript" src="${pageContext.request.contextPath}/jQuery/ajaxfileupload.js"></script>
     <script src="${pageContext.request.contextPath}/js/ajax_upload.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
@@ -173,12 +175,12 @@
                 <form class="form-horizontal"
                       action="${pageContext.request.contextPath}/doctor/patientManageAction_queryPatient.action"
                       method="post">
-                    <div class="form-group">
+<%--                    <div class="form-group">
                         <div class="col-sm-2 control-label">病人用户名</div>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="patientId" name="openID" placeholder="病人用户名"/>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="form-group">
                         <div class="col-sm-2 control-label">病人姓名</div>
                         <div class="col-sm-10">
@@ -191,12 +193,46 @@
                         <div class="col-sm-10">
                             <select class="form-control" id="patientType" name="patientType">
                                 <option value="-1">请选择</option>
+                                <s:iterator value="#request.ptl" var="patientType">
+                                    <option value='<s:property value="#patientType.patientTypeId"/>'>
+                                        <s:property value="#patientType.patientTypeName"/>
+                                    </option>
+                                </s:iterator>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">省份（直辖市）</div>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="province" name="province" onchange="loadCity()">
+                                <option value="-1">请选择</option>
+                                <s:iterator value="#request.pl" var="province">
+                                    <option value='<s:property value="#province.provinceId"/>'>
+                                        <s:property value="#province.name"/>
+                                    </option>
+                                </s:iterator>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">城市（区、县）</div>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="city" name="city" onchange="loadHospital()">
+                                <option value="-1">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">所属医院</div>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="hospital" name="hospital">
+                                <option value="-1">请选择</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-2 control-label"></div>
-                        <button type="submit" class="btn btn-primary" id="btn_query" onclick="query()">查询</button>
+                        <button type="submit" class="btn btn-primary" id="btn_query">查询</button>
                     </div>
                 </form>
             </div>
@@ -1036,5 +1072,7 @@
 </div>
 
 </body>
+<%--
 <script src="${pageContext.request.contextPath}/js/getAllPatientTypes.js"></script>
+--%>
 </html>
