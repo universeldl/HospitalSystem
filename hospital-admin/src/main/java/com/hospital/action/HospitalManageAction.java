@@ -540,6 +540,29 @@ public class HospitalManageAction extends ActionSupport {
         return;
     }
 
+    public void findHospitalByCityId() {
+        if (cityId != null) {
+            City tmpCity = new City();
+            tmpCity.setCityId(cityId);
+            City city = cityService.getCityByID(tmpCity);
+            Set<Hospital> hospitals = city.getHospitals();
+            JSONArray jsonArray = new JSONArray();
+            for(Hospital hospital : hospitals) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", hospital.getHospitalId().toString());
+                jsonObject.put("name", hospital.getName());
+                jsonArray.add(jsonObject);
+            }
+            try {
+                HttpServletResponse response = ServletActionContext.getResponse();
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().print(jsonArray.toString());
+            } catch (IOException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
     public void getProvinceById() {
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
