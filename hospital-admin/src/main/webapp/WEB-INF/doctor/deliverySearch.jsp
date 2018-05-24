@@ -185,6 +185,8 @@
                             <th>病人用户名</th>
                             -->
                             <th>病人名称</th>
+                            <th>直属医生</th>
+                            <th>医院</th>
                             <th>分发日期</th>
                             <th>截止答卷日期</th>
                             <th>答卷日期</th>
@@ -200,6 +202,8 @@
                                 <tbody <s:if test="#deliveryInfo.retrieveInfo.byDoctor!=null && #deliveryInfo.retrieveInfo.byDoctor!=''">style="color:red;"</s:if>>
                                 <td><s:property value="#deliveryInfo.survey.surveyName"/></td>
                                 <td><s:property value="#deliveryInfo.patient.name"/></td>
+                                <td><s:property value="#deliveryInfo.patient.doctor.name"/></td>
+                                <td><s:property value="#deliveryInfo.patient.doctor.hospital.name"/></td>
                                 <td><s:date name="#deliveryInfo.deliveryDate" format="yyyy-MM-dd"/></td>
                                 <td><s:date name="#deliveryInfo.endDate" format="yyyy-MM-dd"/></td>
                                 <td><s:date name="#deliveryInfo.retrieveInfo.retrieveDate" format="yyyy-MM-dd"/></td>
@@ -236,6 +240,8 @@
                         </s:if>
                         <s:else>
                             <tbody>
+                            <td>暂无数据</td>
+                            <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
