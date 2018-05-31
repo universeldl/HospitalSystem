@@ -4,16 +4,13 @@ import com.hospital.domain.*;
 import com.hospital.service.DeliveryService;
 import com.hospital.service.PatientService;
 import com.hospital.service.SurveyService;
-import com.hospital.util.Md5Utils;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
-import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -487,6 +484,409 @@ public class DeliveryManageAction extends ActionSupport {
     public String findPatientAllInOne() {
         Patient patient = new Patient();
         patient.setPatientId(patientId);
+        Patient patient1 = patientService.getPatientById(patient);
+
+        // all used surveys
+        int[] surveyIds = {1, 3, 4, 5, 6};
+
+        int maxTotalMonth = 0;//max total months to display
+        //get maxTotalMonth
+        for (int i = 0; i < surveyIds.length; i++) {
+            Survey s = new Survey();
+            s.setSurveyId(surveyIds[i]);
+            Survey survey = surveyService.getSurveyById(s);
+            if (survey != null) {
+                int totalMonth = survey.getFrequency() * survey.getTimes() + 2;// +1 to include the titles in first col; +1 again to include the date of sign-in in 2nd col.
+                if (totalMonth > maxTotalMonth) {
+                    maxTotalMonth = totalMonth;
+                }
+            }
+        }
+
+        JSONArray jsonArray = new JSONArray();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        //create the first row
+        JSONObject headObject = new JSONObject();
+        headObject.put("col0", "");
+        for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+            Calendar startCal = Calendar.getInstance();
+            startCal.setTime(patient1.getCreateTime());
+            startCal.add(Calendar.MONTH, j);
+            String ds = "第" + (j+1) + "个月";
+            headObject.put(formatter.format(startCal.getTime()), ds);
+        }
+        jsonArray.add(0, headObject);
+
+
+        JSONObject object = new JSONObject();
+        object.put("col0", "日期");//1st col is ""
+        for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+            Calendar startCal = Calendar.getInstance();
+            startCal.setTime(patient1.getCreateTime());
+            startCal.add(Calendar.MONTH, j);
+
+            Calendar endCal = Calendar.getInstance();
+            endCal.setTime(patient1.getCreateTime());
+            endCal.add(Calendar.MONTH, j + 1);
+            endCal.add(Calendar.DATE, -1);
+
+
+            String ds = formatter.format(startCal.getTime()) + " —— "
+                    + formatter.format(endCal.getTime());
+            object.put(formatter.format(startCal.getTime()), ds);
+        }
+        jsonArray.add(1, object);
+
+        // 哮喘发作次数
+        JSONObject object1 = new JSONObject();
+
+        object1.put("col0", "哮喘发作次数");//1st col is ""
+
+        Survey tmpSurvey = new Survey();
+        tmpSurvey.setSurveyId(4);
+        Survey survey = surveyService.getSurveyById(tmpSurvey);
+        if (survey == null) {
+            return null;
+        }
+
+        DeliveryInfo tmpDeliveryInfo = new DeliveryInfo();
+        tmpDeliveryInfo.setPatient(patient1);
+        tmpDeliveryInfo.setSurvey(survey);
+
+        for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+            Calendar startCal = Calendar.getInstance();
+            startCal.setTime(patient1.getCreateTime());
+            startCal.add(Calendar.MONTH, j);
+
+            Calendar endCal = Calendar.getInstance();
+            endCal.setTime(patient1.getCreateTime());
+            endCal.add(Calendar.MONTH, j + 1);
+            endCal.add(Calendar.DATE, -1);
+
+            List<DeliveryInfo> deliveryInfos = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
+
+            if (deliveryInfos != null && !deliveryInfos.isEmpty()) {
+                RetrieveInfo retrieveInfo = deliveryInfos.get(0).getRetrieveInfo();
+                if (retrieveInfo != null) {
+                    for (Answer answer : retrieveInfo.getAnswers()) {
+                        if (answer.getQuestion().getQuestionId().equals(112)) {
+                            for (Choice choice : answer.getChoices()) {//should be single choice
+                                object1.put(formatter.format(startCal.getTime()), choice.getChoiceContent());
+                            }
+                            break;
+                        }
+                    }
+                } else {
+                    object1.put(formatter.format(startCal.getTime()), "");
+                }
+            } else {
+                object1.put(formatter.format(startCal.getTime()), "");
+            }
+        }
+        jsonArray.add(2, object1);
+
+        // 哮喘发作次数
+        JSONObject object2 = new JSONObject();
+        object2.put("col0", "感染次数");//1st col is ""
+        for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+            Calendar startCal = Calendar.getInstance();
+            startCal.setTime(patient1.getCreateTime());
+            startCal.add(Calendar.MONTH, j);
+
+            Calendar endCal = Calendar.getInstance();
+            endCal.setTime(patient1.getCreateTime());
+            endCal.add(Calendar.MONTH, j + 1);
+            endCal.add(Calendar.DATE, -1);
+
+            List<DeliveryInfo> deliveryInfos = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
+
+            if (deliveryInfos != null && !deliveryInfos.isEmpty()) {
+                RetrieveInfo retrieveInfo = deliveryInfos.get(0).getRetrieveInfo();
+                if (retrieveInfo != null) {
+                    for (Answer answer : retrieveInfo.getAnswers()) {
+                        if (answer.getQuestion().getQuestionId().equals(113)) {
+                            for (Choice choice : answer.getChoices()) {//should be single choice
+                                object2.put(formatter.format(startCal.getTime()), choice.getChoiceContent());
+                            }
+                            break;
+                        }
+                    }
+                } else {
+                    object2.put(formatter.format(startCal.getTime()), "");
+                }
+            } else {
+                object2.put(formatter.format(startCal.getTime()), "");
+            }
+        }
+        jsonArray.add(3, object2);
+
+
+        //哮喘控制测试评分
+        JSONObject object3 = new JSONObject();
+
+        object3.put("col0", "哮喘控制测试评分");//1st col is ""
+
+        tmpSurvey.setSurveyId(6);
+         survey = surveyService.getSurveyById(tmpSurvey);
+        if (survey == null) {
+            return null;
+        }
+
+        tmpDeliveryInfo.setPatient(patient1);
+        tmpDeliveryInfo.setSurvey(survey);
+
+        for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+            Calendar startCal = Calendar.getInstance();
+            startCal.setTime(patient1.getCreateTime());
+            startCal.add(Calendar.MONTH, j);
+
+            Calendar endCal = Calendar.getInstance();
+            endCal.setTime(patient1.getCreateTime());
+            endCal.add(Calendar.MONTH, j + 1);
+            endCal.add(Calendar.DATE, -1);
+
+            List<DeliveryInfo> deliveryInfos = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
+
+            if (deliveryInfos != null && !deliveryInfos.isEmpty()) {
+                RetrieveInfo retrieveInfo = deliveryInfos.get(0).getRetrieveInfo();
+                if (retrieveInfo != null) {
+                    BigDecimal totalScore = new BigDecimal("0");
+                    for (Answer answer : retrieveInfo.getAnswers()) {
+                        for (Choice choice : answer.getChoices()) {//should be single choice
+                            totalScore = totalScore.add(choice.getScore());
+                        }
+                    }
+                    if (totalScore.compareTo(new BigDecimal("19")) <= 0) {
+                        object3.put(formatter.format(startCal.getTime()), "未控制");
+                    } else if (totalScore.compareTo(new BigDecimal("20")) >= 0 &&
+                            totalScore.compareTo(new BigDecimal("23")) <= 0) {
+                        object3.put(formatter.format(startCal.getTime()), "部分控制");
+                    } else {
+                        object3.put(formatter.format(startCal.getTime()), "完全控制");
+                    }
+
+                } else {
+                    object3.put(formatter.format(startCal.getTime()), "");
+                }
+            } else {
+                object3.put(formatter.format(startCal.getTime()), "");
+            }
+        }
+        jsonArray.add(4, object3);
+
+
+        //生命质量评分
+        JSONObject object4 = new JSONObject();
+
+        object4.put("col0", "生命质量评分");//1st col is ""
+
+        tmpSurvey.setSurveyId(5);
+        survey = surveyService.getSurveyById(tmpSurvey);
+        if (survey == null) {
+            return null;
+        }
+
+        tmpDeliveryInfo.setPatient(patient1);
+        tmpDeliveryInfo.setSurvey(survey);
+
+        for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+            Calendar startCal = Calendar.getInstance();
+            startCal.setTime(patient1.getCreateTime());
+            startCal.add(Calendar.MONTH, j);
+
+            Calendar endCal = Calendar.getInstance();
+            endCal.setTime(patient1.getCreateTime());
+            endCal.add(Calendar.MONTH, j + 1);
+            endCal.add(Calendar.DATE, -1);
+
+            List<DeliveryInfo> deliveryInfos = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
+
+            if (deliveryInfos != null && !deliveryInfos.isEmpty()) {
+                RetrieveInfo retrieveInfo = deliveryInfos.get(0).getRetrieveInfo();
+                if (retrieveInfo != null) {
+                    BigDecimal totalScore = new BigDecimal("0");
+                    for (Answer answer : retrieveInfo.getAnswers()) {
+                        for (Choice choice : answer.getChoices()) {//should be single choice
+                            totalScore = totalScore.add(choice.getScore());
+                        }
+                    }
+                    object4.put(formatter.format(startCal.getTime()), totalScore.toString());
+
+                } else {
+                    object4.put(formatter.format(startCal.getTime()), "");
+                }
+            } else {
+                object4.put(formatter.format(startCal.getTime()), "");
+            }
+        }
+        jsonArray.add(5, object4);
+
+
+        //GINA
+        JSONObject object5 = new JSONObject();
+
+        object5.put("col0", "GINA");//1st col is ""
+
+        tmpSurvey.setSurveyId(3);
+        Survey survey1 = surveyService.getSurveyById(tmpSurvey);
+        if (survey1 == null) {
+            return null;
+        }
+        tmpSurvey.setSurveyId(4);
+        Survey survey2 = surveyService.getSurveyById(tmpSurvey);
+        if (survey2 == null) {
+            return null;
+        }
+
+        DeliveryInfo tmpDeliveryInfo1 = new DeliveryInfo();
+        tmpDeliveryInfo1.setPatient(patient1);
+        tmpDeliveryInfo1.setSurvey(survey1);
+        DeliveryInfo tmpDeliveryInfo2 = new DeliveryInfo();
+        tmpDeliveryInfo2.setPatient(patient1);
+        tmpDeliveryInfo2.setSurvey(survey2);
+
+        for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+            Calendar startCal = Calendar.getInstance();
+            startCal.setTime(patient1.getCreateTime());
+            startCal.add(Calendar.MONTH, j);
+
+            Calendar endCal = Calendar.getInstance();
+            endCal.setTime(patient1.getCreateTime());
+            endCal.add(Calendar.MONTH, j + 1);
+            endCal.add(Calendar.DATE, -1);
+
+            List<DeliveryInfo> deliveryInfos1 = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo1, startCal, endCal);
+            List<DeliveryInfo> deliveryInfos2 = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo2, startCal, endCal);
+
+            if ( deliveryInfos1 != null && !deliveryInfos1.isEmpty()) {
+                RetrieveInfo retrieveInfo = deliveryInfos1.get(0).getRetrieveInfo();
+                if (retrieveInfo != null) {
+                    BigDecimal totalScore = new BigDecimal("0");
+                    for (Answer answer : retrieveInfo.getAnswers()) {
+                        if (answer.getQuestion().getQuestionId() != 90 &&
+                                answer.getQuestion().getQuestionId() != 91 &&
+                                answer.getQuestion().getQuestionId() != 92 &&
+                                answer.getQuestion().getQuestionId() != 93 &&
+                                answer.getQuestion().getQuestionId() != 94 &&
+                                answer.getQuestion().getQuestionId() != 95 &&
+                                answer.getQuestion().getQuestionId() != 96 &&
+                                answer.getQuestion().getQuestionId() != 97) {
+                            continue;
+                        }
+                        for (Choice choice : answer.getChoices()) {//should be single choice
+                            totalScore = totalScore.add(choice.getScore());
+                        }
+                    }
+                    String str;
+                    if (totalScore.compareTo(new BigDecimal("0")) == 0) {
+                        str = "完全控制";
+                    } else if (totalScore.compareTo(new BigDecimal("1")) == 0 ||
+                            totalScore.compareTo(new BigDecimal("2")) == 0) {
+                        str = "部分控制";
+                    } else {
+                        str = "未控制";
+                    }
+                    object5.put(formatter.format(startCal.getTime()), str);
+                } else {
+                    object5.put(formatter.format(startCal.getTime()), "");
+                }
+            } else if (deliveryInfos2 != null & !deliveryInfos2.isEmpty()) {
+                RetrieveInfo retrieveInfo = deliveryInfos2.get(0).getRetrieveInfo();
+                if (retrieveInfo != null) {
+                    BigDecimal totalScore = new BigDecimal("0");
+                    for (Answer answer : retrieveInfo.getAnswers()) {
+                        if (answer.getQuestion().getQuestionId() != 121 &&
+                                answer.getQuestion().getQuestionId() != 122 &&
+                                answer.getQuestion().getQuestionId() != 123 &&
+                                answer.getQuestion().getQuestionId() != 124 &&
+                                answer.getQuestion().getQuestionId() != 125 &&
+                                answer.getQuestion().getQuestionId() != 126 &&
+                                answer.getQuestion().getQuestionId() != 177 &&
+                                answer.getQuestion().getQuestionId() != 178) {
+                            continue;
+                        }
+                        for (Choice choice : answer.getChoices()) {//should be single choice
+                            totalScore = totalScore.add(choice.getScore());
+                        }
+                    }
+                    String str;
+                    if (totalScore.compareTo(new BigDecimal("0")) == 0) {
+                        str = "完全控制";
+                    } else if (totalScore.compareTo(new BigDecimal("1")) == 0 ||
+                            totalScore.compareTo(new BigDecimal("2")) == 0) {
+                        str = "部分控制";
+                    } else {
+                        str = "未控制";
+                    }
+                    object5.put(formatter.format(startCal.getTime()), str);
+                } else {
+                    object5.put(formatter.format(startCal.getTime()), "");
+                }
+            } else {
+                object5.put(formatter.format(startCal.getTime()), "");
+            }
+        }
+        jsonArray.add(6, object5);
+
+        // TRACK
+        JSONObject object6 = new JSONObject();
+
+        object6.put("col0", "TRACK");//1st col is ""
+
+        tmpSurvey.setSurveyId(1);
+        survey = surveyService.getSurveyById(tmpSurvey);
+        if (survey == null) {
+            return null;
+        }
+
+        tmpDeliveryInfo.setPatient(patient1);
+        tmpDeliveryInfo.setSurvey(survey);
+
+        for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+            Calendar startCal = Calendar.getInstance();
+            startCal.setTime(patient1.getCreateTime());
+            startCal.add(Calendar.MONTH, j);
+
+            Calendar endCal = Calendar.getInstance();
+            endCal.setTime(patient1.getCreateTime());
+            endCal.add(Calendar.MONTH, j + 1);
+            endCal.add(Calendar.DATE, -1);
+
+            List<DeliveryInfo> deliveryInfos = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
+
+            if (deliveryInfos != null && !deliveryInfos.isEmpty()) {
+                RetrieveInfo retrieveInfo = deliveryInfos.get(0).getRetrieveInfo();
+                if (retrieveInfo != null) {
+                    BigDecimal totalScore = new BigDecimal("0");
+                    for (Answer answer : retrieveInfo.getAnswers()) {
+                        for (Choice choice : answer.getChoices()) {//should be single choice
+                            totalScore = totalScore.add(choice.getScore());
+                        }
+                    }
+                    object6.put(formatter.format(startCal.getTime()), totalScore.toString());
+
+                } else {
+                    object6.put(formatter.format(startCal.getTime()), "");
+                }
+            } else {
+                object6.put(formatter.format(startCal.getTime()), "");
+            }
+        }
+        jsonArray.add(7, object6);
+
+
+        //存入request域中
+        ServletActionContext.getRequest().setAttribute("allInOne", jsonArray);
+
+        return "allInOne";
+    }
+
+
+    public String findPatientAllInOneBK2() {
+        Patient patient = new Patient();
+        patient.setPatientId(patientId);
 
         Patient patient1 = patientService.getPatientById(patient);
         // arr is a 2-D array of {surveyId-questionId}.
@@ -662,7 +1062,6 @@ public class DeliveryManageAction extends ActionSupport {
 
         return "allInOne";
     }
-
 
     /**
      * 根据分发id查询该分发信息

@@ -1,10 +1,8 @@
 package com.hospital.service;
 
-import com.hospital.domain.DeliveryInfo;
-import com.hospital.domain.Doctor;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
+import com.hospital.domain.*;
 
+import java.util.Calendar;
 import java.util.List;
 
 public interface DeliveryService {
@@ -25,6 +23,7 @@ public interface DeliveryService {
 
     PageBean<DeliveryInfo> queryDeliveryInfo(int surveyId, int pageCode, int pageSize, Patient patient);
 
+    List<DeliveryInfo> getDelivryInfoBySurveyAndDate(DeliveryInfo deliveryInfo, Calendar start, Calendar end);
     /**
      * 返回分发状态码
      *
