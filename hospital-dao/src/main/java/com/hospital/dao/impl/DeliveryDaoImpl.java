@@ -12,6 +12,8 @@ import com.hospital.util.CalendarUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao {
@@ -430,6 +432,32 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
             throw new RuntimeException(e.getMessage());
         }
         return list;
+    }
+
+    @Override
+    public List<DeliveryInfo> getDelivryInfoBySurveyAndDate(DeliveryInfo deliveryInfo, Calendar start, Calendar end){
+        String hql = "from DeliveryInfo as b where b.survey.surveyId = :sid and b.patient.patientId = :pid" +
+                " and b.deliveryDate >= :startDate and b.deliveryDate <= :endDate ORDER BY b.deliveryDate DESC";
+        try {
+            Date startDate = start.getTime();
+            startDate.setHours(0);
+            startDate.setMinutes(0);
+            startDate.setSeconds(0);
+
+            Date endDate = end.getTime();
+            endDate.setHours(23);
+            endDate.setMinutes(59);
+            endDate.setSeconds(59);
+
+            String[] params = { "sid", "pid", "startDate", "endDate" };
+            Object[] args = { deliveryInfo.getSurvey().getSurveyId(), deliveryInfo.getPatient().getPatientId(), startDate, endDate };
+
+            List list = this.getHibernateTemplate().findByNamedParam(hql, params, args);
+            return list;
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
 

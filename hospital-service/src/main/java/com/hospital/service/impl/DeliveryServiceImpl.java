@@ -121,6 +121,12 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
+    public List<DeliveryInfo> getDelivryInfoBySurveyAndDate(DeliveryInfo deliveryInfo, Calendar start, Calendar end) {
+        return deliveryDao.getDelivryInfoBySurveyAndDate(deliveryInfo, start, end);
+    }
+
+
+    @Override
     public PageBean<DeliveryInfo> queryDeliveryInfo(int surveyId, int pageCode, int pageSize, Patient patient) {
         PageBean<DeliveryInfo> pageBean = new PageBean<DeliveryInfo>();
         pageBean.setPageCode(pageCode);

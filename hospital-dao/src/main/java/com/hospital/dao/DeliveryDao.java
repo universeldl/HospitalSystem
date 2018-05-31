@@ -2,6 +2,7 @@ package com.hospital.dao;
 
 import com.hospital.domain.*;
 
+import java.util.Calendar;
 import java.util.List;
 
 public interface DeliveryDao {
@@ -32,5 +33,7 @@ public interface DeliveryDao {
     List<DeliveryInfo> getDeliveryInfoByNoRetrieveState();
 
     List<DeliveryInfo> getDeliveryInfoBySurvey(Survey survey);
+
+    List<DeliveryInfo> getDelivryInfoBySurveyAndDate(DeliveryInfo deliveryInfo, Calendar start, Calendar end);
 
 }
