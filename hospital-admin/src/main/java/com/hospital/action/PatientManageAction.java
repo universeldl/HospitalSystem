@@ -85,10 +85,13 @@ public class PatientManageAction extends ActionSupport {
     private Integer province;
     private Integer city;
     private Integer hospital;
+    private Integer oldPatient;
 
     /**
      * @param fileName the fileName to set
      */
+    public void setOldPatient(Integer oldPatient) { this.oldPatient = oldPatient; }
+
     public void setProvince(Integer province) { this.province = province; }
 
     public void setCity(Integer city) { this.city = city; }
@@ -246,6 +249,8 @@ public class PatientManageAction extends ActionSupport {
         List<PatientType> patientTypeList = patientTypeService.getAllPatientType();
         ServletActionContext.getRequest().setAttribute("ptl", patientTypeList);
 
+
+
         return "success";
     }
 
@@ -393,6 +398,8 @@ public class PatientManageAction extends ActionSupport {
             jsonObject.put("addnDoctorId", "-1");
         }
 
+        jsonObject.put("oldPatient", newPatient.getOldPatient());
+
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = formatter.format(newPatient.getCreateTime());
         jsonObject.put("createTime", dateString);
@@ -424,6 +431,8 @@ public class PatientManageAction extends ActionSupport {
         updatePatient.setName(name);
         updatePatient.setPhone(phone);
         updatePatient.setOpenID(openID);
+        updatePatient.setOldPatient(oldPatient);
+
         String email_format = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
         if (email!= null && email.matches(email_format)) {
             updatePatient.setEmail(email);
