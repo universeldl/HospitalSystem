@@ -522,22 +522,23 @@ public class DeliveryManageAction extends ActionSupport {
 
         JSONObject object = new JSONObject();
         object.put("col0", "日期");//1st col is ""
-        for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
-            Calendar startCal = Calendar.getInstance();
-            startCal.setTime(patient1.getCreateTime());
-            startCal.add(Calendar.MONTH, j);
+        Calendar startCal = Calendar.getInstance();
+        startCal.setTime(patient1.getCreateTime());
 
-            Calendar endCal = Calendar.getInstance();
-            endCal.setTime(patient1.getCreateTime());
-            endCal.add(Calendar.MONTH, j + 1);
+        for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+            Calendar endCal = (Calendar) startCal.clone();
+            endCal.add(Calendar.MONTH, 1);
             endCal.add(Calendar.DATE, -1);
 
 
             String ds = formatter.format(startCal.getTime()) + " —— "
                     + formatter.format(endCal.getTime());
             object.put(formatter.format(startCal.getTime()), ds);
+            startCal.add(Calendar.MONTH, 1);
         }
         jsonArray.add(1, object);
+
+
 
         // 哮喘发作次数
         JSONObject object1 = new JSONObject();
@@ -554,15 +555,10 @@ public class DeliveryManageAction extends ActionSupport {
         DeliveryInfo tmpDeliveryInfo = new DeliveryInfo();
         tmpDeliveryInfo.setPatient(patient1);
         tmpDeliveryInfo.setSurvey(survey);
-
+        startCal.setTime(patient1.getCreateTime());
         for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
-            Calendar startCal = Calendar.getInstance();
-            startCal.setTime(patient1.getCreateTime());
-            startCal.add(Calendar.MONTH, j);
-
-            Calendar endCal = Calendar.getInstance();
-            endCal.setTime(patient1.getCreateTime());
-            endCal.add(Calendar.MONTH, j + 1);
+            Calendar endCal = (Calendar) startCal.clone();
+            endCal.add(Calendar.MONTH, 1);
             endCal.add(Calendar.DATE, -1);
 
             List<DeliveryInfo> deliveryInfos = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
@@ -584,20 +580,17 @@ public class DeliveryManageAction extends ActionSupport {
             } else {
                 object1.put(formatter.format(startCal.getTime()), "");
             }
+            startCal.add(Calendar.MONTH, 1);
         }
         jsonArray.add(2, object1);
 
         // 哮喘发作次数
         JSONObject object2 = new JSONObject();
         object2.put("col0", "感染次数");//1st col is ""
+        startCal.setTime(patient1.getCreateTime());
         for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
-            Calendar startCal = Calendar.getInstance();
-            startCal.setTime(patient1.getCreateTime());
-            startCal.add(Calendar.MONTH, j);
-
-            Calendar endCal = Calendar.getInstance();
-            endCal.setTime(patient1.getCreateTime());
-            endCal.add(Calendar.MONTH, j + 1);
+            Calendar endCal = (Calendar) startCal.clone();
+            endCal.add(Calendar.MONTH, 1);
             endCal.add(Calendar.DATE, -1);
 
             List<DeliveryInfo> deliveryInfos = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
@@ -619,6 +612,7 @@ public class DeliveryManageAction extends ActionSupport {
             } else {
                 object2.put(formatter.format(startCal.getTime()), "");
             }
+            startCal.add(Calendar.MONTH, 1);
         }
         jsonArray.add(3, object2);
 
@@ -636,15 +630,10 @@ public class DeliveryManageAction extends ActionSupport {
 
         tmpDeliveryInfo.setPatient(patient1);
         tmpDeliveryInfo.setSurvey(survey);
-
+        startCal.setTime(patient1.getCreateTime());
         for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
-            Calendar startCal = Calendar.getInstance();
-            startCal.setTime(patient1.getCreateTime());
-            startCal.add(Calendar.MONTH, j);
-
-            Calendar endCal = Calendar.getInstance();
-            endCal.setTime(patient1.getCreateTime());
-            endCal.add(Calendar.MONTH, j + 1);
+            Calendar endCal = (Calendar) startCal.clone();
+            endCal.add(Calendar.MONTH, 1);
             endCal.add(Calendar.DATE, -1);
 
             List<DeliveryInfo> deliveryInfos = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
@@ -673,6 +662,7 @@ public class DeliveryManageAction extends ActionSupport {
             } else {
                 object3.put(formatter.format(startCal.getTime()), "");
             }
+            startCal.add(Calendar.MONTH, 1);
         }
         jsonArray.add(4, object3);
 
@@ -690,15 +680,10 @@ public class DeliveryManageAction extends ActionSupport {
 
         tmpDeliveryInfo.setPatient(patient1);
         tmpDeliveryInfo.setSurvey(survey);
-
+        startCal.setTime(patient1.getCreateTime());
         for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
-            Calendar startCal = Calendar.getInstance();
-            startCal.setTime(patient1.getCreateTime());
-            startCal.add(Calendar.MONTH, j);
-
-            Calendar endCal = Calendar.getInstance();
-            endCal.setTime(patient1.getCreateTime());
-            endCal.add(Calendar.MONTH, j + 1);
+            Calendar endCal = (Calendar) startCal.clone();
+            endCal.add(Calendar.MONTH, 1);
             endCal.add(Calendar.DATE, -1);
 
             List<DeliveryInfo> deliveryInfos = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
@@ -720,6 +705,7 @@ public class DeliveryManageAction extends ActionSupport {
             } else {
                 object4.put(formatter.format(startCal.getTime()), "");
             }
+            startCal.add(Calendar.MONTH, 1);
         }
         jsonArray.add(5, object4);
 
@@ -746,15 +732,11 @@ public class DeliveryManageAction extends ActionSupport {
         DeliveryInfo tmpDeliveryInfo2 = new DeliveryInfo();
         tmpDeliveryInfo2.setPatient(patient1);
         tmpDeliveryInfo2.setSurvey(survey2);
+        startCal.setTime(patient1.getCreateTime());
 
         for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
-            Calendar startCal = Calendar.getInstance();
-            startCal.setTime(patient1.getCreateTime());
-            startCal.add(Calendar.MONTH, j);
-
-            Calendar endCal = Calendar.getInstance();
-            endCal.setTime(patient1.getCreateTime());
-            endCal.add(Calendar.MONTH, j + 1);
+            Calendar endCal = (Calendar) startCal.clone();
+            endCal.add(Calendar.MONTH, 1);
             endCal.add(Calendar.DATE, -1);
 
             List<DeliveryInfo> deliveryInfos1 = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo1, startCal, endCal);
@@ -827,6 +809,8 @@ public class DeliveryManageAction extends ActionSupport {
             } else {
                 object5.put(formatter.format(startCal.getTime()), "");
             }
+            startCal.add(Calendar.MONTH, 1);
+
         }
         jsonArray.add(6, object5);
 
@@ -843,15 +827,10 @@ public class DeliveryManageAction extends ActionSupport {
 
         tmpDeliveryInfo.setPatient(patient1);
         tmpDeliveryInfo.setSurvey(survey);
-
+        startCal.setTime(patient1.getCreateTime());
         for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
-            Calendar startCal = Calendar.getInstance();
-            startCal.setTime(patient1.getCreateTime());
-            startCal.add(Calendar.MONTH, j);
-
-            Calendar endCal = Calendar.getInstance();
-            endCal.setTime(patient1.getCreateTime());
-            endCal.add(Calendar.MONTH, j + 1);
+            Calendar endCal = (Calendar) startCal.clone();
+            endCal.add(Calendar.MONTH, 1);
             endCal.add(Calendar.DATE, -1);
 
             List<DeliveryInfo> deliveryInfos = deliveryService.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
@@ -873,9 +852,10 @@ public class DeliveryManageAction extends ActionSupport {
             } else {
                 object6.put(formatter.format(startCal.getTime()), "");
             }
+            startCal.add(Calendar.MONTH, 1);
+
         }
         jsonArray.add(7, object6);
-
 
         //存入request域中
         ServletActionContext.getRequest().setAttribute("allInOne", jsonArray);
