@@ -13,7 +13,7 @@ $(function () {
             + "&name=" + replaceSpectialChar($.trim($("#updateName").val())) + "&phone=" + $.trim($("#updatePhone").val())
             + "&openID=" + $.trim($("#updateOpenID").val()) + "&addnDoctorId=" + $.trim($("#updateAddnDoctor").val())
             + "&createTime=" + $.trim($("#updateCreateTime").val()) + "&doctorId=" + $.trim($("#updateDoctor").val())
-            + "&birthday=" + $.trim($("#updateBirthday").val());
+            + "&birthday=" + $.trim($("#updateBirthday").val()) + "&oldPatient=" + $.trim($("#updateOldPatient").val());
         if ($.trim($("#updateEmail").val()) != "") {
             postdata = postdata + "&email=" + $.trim($("#updateEmail").val());
         }
@@ -115,6 +115,11 @@ function updatePatient(id) {
                                         $("#updateEmail").val(data.email);
                                         $("#updatePhone").val(data.phone);
                                         $("#updatePatientType").val(data.patientType.patientTypeId);
+
+                                        $("#updateOldPatient option:checked").attr("selected", "");
+                                        var oldPatient = data.oldPatient;
+                                        $("#updateOldPatient option[value='"+oldPatient+"']").attr("selected", "selected");
+
                                         $("#updateAddnDoctor option:checked").attr("selected", "");
                                         var addnDoctorId = data.addnDoctorId;
                                         $("#updateAddnDoctor option[value='"+addnDoctorId+"']").attr("selected", "selected");
