@@ -469,10 +469,10 @@ public class PatientServiceImpl implements PatientService {
                             String choiceContents = "";
                             for (Choice choice : answer.getChoices()) {
                                 if(choiceContents.equals("")) {
-                                    choiceContents = choiceContents + choice.getChoiceContent();
+                                    choiceContents = choiceContents + choice.getScore().intValue();
                                 }
                                 else {
-                                    choiceContents = choiceContents + "," + choice.getChoiceContent();
+                                    choiceContents = choiceContents + "," + choice.getScore().intValue();
                                 }
                             }
                             if (answer.getTextChoice() != null && answer.getTextChoiceContent() != null && answer.getTextChoice() == 1) {
