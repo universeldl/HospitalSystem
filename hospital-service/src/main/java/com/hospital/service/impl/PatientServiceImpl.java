@@ -475,7 +475,7 @@ public class PatientServiceImpl implements PatientService {
                                     choiceContents = choiceContents + "," + choice.getChoiceContent();
                                 }
                             }
-                            if (answer.getTextChoice() == 1) {
+                            if (answer.getTextChoice() != null && answer.getTextChoiceContent() != null && answer.getTextChoice() == 1) {
                                 if(choiceContents.equals("")) {
                                     choiceContents = choiceContents + answer.getTextChoiceContent();
                                 }
