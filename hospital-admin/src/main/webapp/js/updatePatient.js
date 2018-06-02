@@ -115,10 +115,7 @@ function updatePatient(id) {
                                         $("#updateEmail").val(data.email);
                                         $("#updatePhone").val(data.phone);
                                         $("#updatePatientType").val(data.patientType.patientTypeId);
-
-                                        $("#updateOldPatient option:checked").attr("selected", "");
-                                        var oldPatient = data.oldPatient;
-                                        $("#updateOldPatient option[value='"+oldPatient+"']").attr("selected", "selected");
+                                        $("#updateOldPatient").val(data.oldPatient);
 
                                         $("#updateAddnDoctor option:checked").attr("selected", "");
                                         var addnDoctorId = data.addnDoctorId;

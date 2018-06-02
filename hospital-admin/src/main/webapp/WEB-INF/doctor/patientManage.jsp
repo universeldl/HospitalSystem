@@ -834,7 +834,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="updateOldPatient" class="col-sm-3 control-label">病例类型</label>
+                        <label for="firstname" class="col-sm-3 control-label">病例类型</label>
                         <div class="col-sm-7">
                             <select class="form-control" id="updateOldPatient">
                                 <option value="1">新病例</option>
