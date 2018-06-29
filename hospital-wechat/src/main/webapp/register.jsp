@@ -73,7 +73,9 @@
                         <option disabled selected value></option>
                         <option value=1>新病例</option>
                         <option value=2>既往病例</option>
+<%--
                         <option value=3>哮喘无忧用户</option>
+--%>
                     </select>
                 </div>
             </div>
