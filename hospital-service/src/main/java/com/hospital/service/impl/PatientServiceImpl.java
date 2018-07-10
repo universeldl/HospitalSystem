@@ -412,7 +412,7 @@ public class PatientServiceImpl implements PatientService {
             int headerRow = 0;
             int headerCol = 0;
 
-            List<Survey> surveys = new ArrayList<>();
+            Set<Survey> surveys = new HashSet<Survey>();
 
             //拿到该病人所有随访问卷(不止是当前Plan里有的survey，还包含之前plan里的survey)
             for (Survey survey : surveyDao.findAllSurveys()) {
@@ -445,6 +445,11 @@ public class PatientServiceImpl implements PatientService {
                     label = new Label(0, row, qId + "." + question.getQuestionContent());
                     sheet.addCell(label);
                 }
+                if(survey.getSurveyId() == 6) {
+                    row++;
+                    label = new Label(0, row, "C-ACT评分", titleFormate);
+                    sheet.addCell(label);
+                }
                 for (RetrieveInfo retrieveInfo : patient.getRetrieveInfos()) {
                     //构造答案列
                     if (survey.getSurveyId().equals(retrieveInfo.getSurvey().getSurveyId())) {
@@ -456,13 +461,14 @@ public class PatientServiceImpl implements PatientService {
                         titleFormate = new WritableCellFormat(bold);//生成一个单元格样式控制对象
                         titleFormate.setAlignment(jxl.format.Alignment.CENTRE);//单元格中的内容水平方向居中
                         titleFormate.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);//单元格的内容垂直方向居中
-                        Date retrieveDate = retrieveInfo.getRetrieveDate();
+                        Date retrieveDate = retrieveInfo.getDeliveryInfo().getDeliveryDate();
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                         String dateString = formatter.format(retrieveDate);
                         label = new Label(headerCol, headerRow, dateString, titleFormate);
                         sheet.addCell(label);
                         row++;
 
+                        int cact_score = 0;
                         for (Answer answer : retrieveInfo.getAnswers()) {
                             //label = new Label(headerCol, row, answer.getQuestion().getQuestionContent());
                             //sheet.addCell(label);
@@ -470,6 +476,8 @@ public class PatientServiceImpl implements PatientService {
                             for (Choice choice : answer.getChoices()) {
                                 if(choiceContents.equals("")) {
                                     choiceContents = choiceContents + choice.getScore().intValue();
+                                    if(survey.getSurveyId() == 6)
+                                        cact_score = cact_score + choice.getScore().intValue();
                                 }
                                 else {
                                     choiceContents = choiceContents + "," + choice.getScore().intValue();
@@ -484,6 +492,11 @@ public class PatientServiceImpl implements PatientService {
                                 }
                             }
                             label = new Label(headerCol, row, choiceContents);
+                            sheet.addCell(label);
+                            row++;
+                        }
+                        if(survey.getSurveyId() == 6) {
+                            label = new Label(headerCol, row, String.valueOf(cact_score), titleFormate);
                             sheet.addCell(label);
                             row++;
                         }
