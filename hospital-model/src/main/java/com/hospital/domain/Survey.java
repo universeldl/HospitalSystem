@@ -171,7 +171,7 @@ public class Survey implements Serializable {
     }
 
     public Survey(SurveyType surveyType, String surveyName, String author,
-                  String department, Date putdate, String description,
+                  String department, Date putdate, String description, Integer num, Integer currentNum,
                   Doctor doctor, Integer frequency, Integer times, boolean sendOnRegister, Integer bday) {
         super();
         this.surveyType = surveyType;
@@ -185,6 +185,8 @@ public class Survey implements Serializable {
         this.times = times;
         this.sendOnRegister = sendOnRegister;
         this.bday = bday;
+        this.num = num;
+        this.currentNum = currentNum;
     }
 
     public Survey(SurveyType surveyType, String surveyName, String author,
