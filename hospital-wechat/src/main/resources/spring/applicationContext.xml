@@ -16,5 +16,6 @@
     <import resource="applicationContext-question.xml"/>
     <import resource="applicationContext-city.xml"/>
     <import resource="applicationContext-province.xml"/>
+    <import resource="applicationContext-uploadImg.xml"/>
 
 </beans>
