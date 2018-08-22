@@ -298,6 +298,33 @@ public class DeliveryServiceImpl implements DeliveryService {
             for (Survey survey : surveys) {
                 System.out.println("checkAndDoDelivery2 LOG survey = " + survey.getSurveyName());
 
+                try {
+                    //threshold, only registry date after this date we will send this survey
+                    Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2018-08-23 00:00:00");
+
+                    //register date
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(patient.getCreateTime());
+                    Date regDate = calendar.getTime();
+
+                    //one month later of the register date
+                    calendar.add(Calendar.MONTH, 1);
+                    Date endDate = calendar.getTime();
+
+                    if (survey.getSurveyId() == 7) {
+                        if (regDate.before(date) || (regDate.after(date) && System.currentTimeMillis() > endDate.getTime())) {
+                            continue;
+                        }
+                    }
+                    else if (survey.getSurveyId() == 8) {
+                        if (regDate.before(date) || (regDate.after(date) && System.currentTimeMillis() < endDate.getTime())) {
+                            continue;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 Calendar start = (Calendar) createDate.clone();
 
                 Integer num_cycle = 0;
