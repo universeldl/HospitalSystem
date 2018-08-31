@@ -1,9 +1,6 @@
 package com.hospital.service.impl;
 
-import com.hospital.dao.PatientDao;
-import com.hospital.dao.PatientTypeDao;
-import com.hospital.dao.PlanDao;
-import com.hospital.dao.SurveyDao;
+import com.hospital.dao.*;
 import com.hospital.domain.*;
 import com.hospital.service.PatientService;
 import com.hospital.util.AgeUtils;
@@ -18,6 +15,7 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -39,6 +37,12 @@ public class PatientServiceImpl implements PatientService {
 
     public void setPlanDao(PlanDao planDao) {
         this.planDao = planDao;
+    }
+
+    private DeliveryDao deliveryDao;
+
+    public void setDeliveryDao(DeliveryDao deliveryDao) {
+        this.deliveryDao = deliveryDao;
     }
 
 
@@ -359,16 +363,14 @@ public class PatientServiceImpl implements PatientService {
             //创建工作簿
             WritableWorkbook workbook = Workbook.createWorkbook(file);
             WritableSheet sheet = workbook.createSheet("sheet1", 0);
+            WritableFont bold = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);//设置字体种类和黑体显示,字体为Arial,字号大小为10,采用黑体显示
+            WritableCellFormat titleFormate = new WritableCellFormat(bold);//生成一个单元格样式控制对象
+            titleFormate.setAlignment(jxl.format.Alignment.CENTRE);//单元格中的内容水平方向居中
+            titleFormate.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);//单元格的内容垂直方向居中
 
             Label label = null;
 
             int row = 0; //row, from 0 to the end
-
-            label = new Label(0, row, "用户名");
-            sheet.addCell(label);
-            label = new Label(1, row, patient.getOpenID());
-            sheet.addCell(label);
-            row++;
 
             label = new Label(0, row, "姓名");
             sheet.addCell(label);
@@ -390,121 +392,492 @@ public class PatientServiceImpl implements PatientService {
             sheet.addCell(label);
             row++;
 
-            label = new Label(0, row, "病人类型");
+            label = new Label(0, row, "年龄");
             sheet.addCell(label);
-            label = new Label(1, row, patient.getPatientType().getPatientTypeName());
-            sheet.addCell(label);
-            row++;
-
-            label = new Label(0, row, "邮箱");
-            sheet.addCell(label);
-            label = new Label(1, row, patient.getEmail());
+            String age = String.valueOf(AgeUtils.getAgeFromBirthTime(patient.getBirthday()));
+            label = new Label(1, row, age);
             sheet.addCell(label);
             row++;
 
-            label = new Label(0, row, "联系方式");
+            label = new Label(0, row, "生日");
+            sheet.addCell(label);
+            String birthday = patient.getBirthday().toLocaleString();
+            label = new Label(1, row, birthday);
+            sheet.addCell(label);
+            row++;
+
+            label = new Label(0, row, "身高");
+            sheet.addCell(label);
+            row++;
+
+            label = new Label(0, row, "体重");
+            sheet.addCell(label);
+            row++;
+
+            label = new Label(0, row, "家长手机");
             sheet.addCell(label);
             label = new Label(1, row, patient.getPhone());
             sheet.addCell(label);
             row++;
 
+            label = new Label(0, row, "入组日期");
+            sheet.addCell(label);
+            label = new Label(1, row, patient.getCreateTime().toLocaleString());
+            sheet.addCell(label);
+            row++;
 
-            int headerRow = 0;
+            label = new Label(0, row, "治疗方案");
+            sheet.addCell(label);
+            row++;
+
+            label = new Label(0, row, "过敏原");
+            sheet.addCell(label);
+            row++;
+
+            int headerRow = row;
             int headerCol = 0;
 
-            Set<Survey> surveys = new HashSet<Survey>();
+            sheet.setColumnView(headerCol, 6000);
 
-            //拿到该病人所有随访问卷(不止是当前Plan里有的survey，还包含之前plan里的survey)
-            for (Survey survey : surveyDao.findAllSurveys()) {
-                for (RetrieveInfo retrieveInfo : patient.getRetrieveInfos()) {
-                    if (survey.getSurveyId().equals(retrieveInfo.getSurvey().getSurveyId())) {
-                        surveys.add(survey);
+
+
+
+            // Survey == 2 || survey == 3
+            for (RetrieveInfo retrieveInfo : patient.getRetrieveInfos()) {
+                DeliveryInfo deliveryInfo = retrieveInfo.getDeliveryInfo();
+                Survey survey = deliveryInfo.getSurvey();
+
+                if (survey.getSurveyId() == 2 || survey.getSurveyId() == 3) {
+
+                    Label surveyTitle = new Label(0, headerRow, survey.getSurveyName(), titleFormate);
+                    sheet.setRowView(headerRow, 600, false);//设置第一行的高度
+                    sheet.addCell(surveyTitle);
+                    row++;
+
+                    Set<Answer> tmpAnswers = retrieveInfo.getAnswers();
+
+                    int age1 = AgeUtils.getAgeFromBirthTime(patient.getBirthday(), deliveryInfo.getDeliveryDate());
+
+                    List<Answer> myAnswers = new ArrayList<>();
+                    for (Answer answer : tmpAnswers) {
+                        Question question = answer.getQuestion();
+                        if ((question.getStartAge() == 99 && question.getEndAge() == 99) ||
+                                (question.getStartAge() == -1 && question.getEndAge() == -1)) {
+                            myAnswers.add(answer);
+                        } else if (age1 >= question.getStartAge() && age1 <= question.getEndAge()) {
+                            myAnswers.add(answer);
+                        }
                     }
-                }
-            }
 
-            //开始写所有随访答卷内容
-            for (Survey survey : surveys) {
-                row++;
-                headerCol = 0;
-                headerRow = row;
-                //构造表头
-                //sheet.mergeCells(0, row, 1, row);//添加合并单元格，第一个参数是起始列，第二个参数是起始行，第三个参数是终止列，第四个参数是终止行
-                WritableFont bold = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);//设置字体种类和黑体显示,字体为Arial,字号大小为10,采用黑体显示
-                WritableCellFormat titleFormate = new WritableCellFormat(bold);//生成一个单元格样式控制对象
-                titleFormate.setAlignment(jxl.format.Alignment.CENTRE);//单元格中的内容水平方向居中
-                titleFormate.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);//单元格的内容垂直方向居中
-                Label surveyTitle = new Label(0, headerRow, survey.getSurveyName(), titleFormate);
-                sheet.setRowView(headerRow, 600, false);//设置第一行的高度
-                sheet.addCell(surveyTitle);
-                //构造问题列
-                int qId = 0;
-                for (Question question : survey.getQuestions()) {
-                    row++;
-                    qId++;
-                    label = new Label(0, row, qId + "." + question.getQuestionContent());
-                    sheet.addCell(label);
-                }
-                if(survey.getSurveyId() == 6) {
-                    row++;
-                    label = new Label(0, row, "C-ACT评分", titleFormate);
-                    sheet.addCell(label);
-                }
-                for (RetrieveInfo retrieveInfo : patient.getRetrieveInfos()) {
-                    //构造答案列
-                    if (survey.getSurveyId().equals(retrieveInfo.getSurvey().getSurveyId())) {
-                        row = headerRow;
-                        headerCol++;
+                    Collections.sort(myAnswers, new Comparator<Answer>() {
+                        @Override
+                        public int compare(Answer s1, Answer s2) {
+                            return s1.getQuestion().getSortId()-(s2.getQuestion().getSortId());
+                        }
+                    });
 
-                        //print retrieveDate
-                        bold = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);//设置字体种类和黑体显示,字体为Arial,字号大小为10,采用黑体显示
-                        titleFormate = new WritableCellFormat(bold);//生成一个单元格样式控制对象
-                        titleFormate.setAlignment(jxl.format.Alignment.CENTRE);//单元格中的内容水平方向居中
-                        titleFormate.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);//单元格的内容垂直方向居中
-                        Date retrieveDate = retrieveInfo.getDeliveryInfo().getDeliveryDate();
-                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                        String dateString = formatter.format(retrieveDate);
-                        label = new Label(headerCol, headerRow, dateString, titleFormate);
+
+                    int control_score = 0;
+                    for (Answer answer : myAnswers) {
+                        Question question = answer.getQuestion();
+                        label = new Label(headerCol, row, question.getQuestionContent());
+                        sheet.addCell(label);
+
+                        if (answer.getTextChoiceContent() == null) {
+                            Integer score = 0;
+                            for (Choice choice : answer.getChoices()) {
+                                score += choice.getScore().intValue();
+                            }
+                            label = new Label(headerCol+1, row, String.valueOf(score));
+                        } else {
+                            label = new Label(headerCol+1, row, answer.getTextChoiceContent());
+                        }
                         sheet.addCell(label);
                         row++;
 
-                        int cact_score = 0;
-                        for (Answer answer : retrieveInfo.getAnswers()) {
-                            //label = new Label(headerCol, row, answer.getQuestion().getQuestionContent());
-                            //sheet.addCell(label);
-                            String choiceContents = "";
-                            for (Choice choice : answer.getChoices()) {
-                                if(choiceContents.equals("")) {
-                                    choiceContents = choiceContents + choice.getScore().intValue();
-                                    if(survey.getSurveyId() == 6)
-                                        cact_score = cact_score + choice.getScore().intValue();
-                                }
-                                else {
-                                    choiceContents = choiceContents + "," + choice.getScore().intValue();
+                        if (survey.getSurveyId() == 3) {
+                            if (question.getQuestionId() >= 90 && question.getQuestionId() <=97) {
+                                for (Choice choice : answer.getChoices()) {
+                                    control_score += choice.getScore().intValue();
                                 }
                             }
-                            if (answer.getTextChoice() != null && answer.getTextChoiceContent() != null && answer.getTextChoice() == 1) {
-                                if(choiceContents.equals("")) {
-                                    choiceContents = choiceContents + answer.getTextChoiceContent();
-                                }
-                                else {
-                                    choiceContents = choiceContents + "," + answer.getTextChoiceContent();
-                                }
+
+                            if (question.getQuestionId() == 93 || question.getQuestionId() == 97) {
+                                label = new Label(headerCol, row, "哮喘控制\n" +
+                                        "0=控制，1-2分=部分控制，3-4分=未控制", titleFormate);
+                                sheet.addCell(label);
+
+                                label = new Label(headerCol+1, row, String.valueOf(control_score));
+                                sheet.addCell(label);
+                                row++;
                             }
-                            label = new Label(headerCol, row, choiceContents);
-                            sheet.addCell(label);
-                            row++;
                         }
-                        if(survey.getSurveyId() == 6) {
-                            label = new Label(headerCol, row, String.valueOf(cact_score), titleFormate);
-                            sheet.addCell(label);
-                            row++;
-                        }
-                        row++;
                     }
+                    break;
                 }
             }
-            //结束写所有随访答卷内容
+
+            // survey == 4
+            int maxTotalMonth = 0;//max total months to display
+            Survey s = new Survey();
+            s.setSurveyId(4);
+            Survey survey = surveyDao.getSurveyById(s);
+            if (survey != null) {
+                int totalMonth = survey.getFrequency() * survey.getTimes() + 2;// +1 to include the titles in first col; +1 again to include the date of sign-in in 2nd col.
+                if (totalMonth > maxTotalMonth) {
+                    maxTotalMonth = totalMonth;
+                }
+            } else {
+                return null;
+            }
+
+            Label surveyTitle = new Label(0, row, survey.getSurveyName(), titleFormate);
+            sheet.setRowView(row, 600, false);
+            sheet.addCell(surveyTitle);
+
+            int cur_col = 1;
+
+            Calendar startCal = Calendar.getInstance();
+            startCal.setTime(patient.getCreateTime());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+
+                Calendar endCal = (Calendar) startCal.clone();
+                endCal.add(Calendar.MONTH, 1);
+                endCal.add(Calendar.DATE, -1);
+
+                String ds = "第" + j + "个月\r";
+
+/*                ds += formatter.format(startCal.getTime()) + " —— "
+                        + formatter.format(endCal.getTime());*/
+                Label monthLabel = new Label(cur_col, row, ds);
+                sheet.setColumnView(cur_col, 1800);
+
+                sheet.addCell(monthLabel);
+
+                startCal.add(Calendar.MONTH, 1);
+                cur_col += 2;
+            }
+            row++;
+
+            int cur_row = row;
+            int max_row = 0;
+            for (Question question : survey.getQuestions()) {
+
+
+                int age1 = AgeUtils.getAgeFromBirthTime(patient.getBirthday());
+                if ((question.getStartAge() == 99 && question.getEndAge() == 99) ||
+                        (question.getStartAge() == -1 && question.getEndAge() == -1)) {
+                } else if (age1 >= question.getStartAge() && age1 <= question.getEndAge()) {
+                } else {
+                    System.out.println("age  = " + age1 + " quesiton id = " + question.getQuestionId() + " continued");
+                    continue;
+                }
+                System.out.println("age  = " + age1 + " quesiton id = " + question.getQuestionId() + " NOT continued");
+
+                String title = String.valueOf(question.getQuestionId());
+                title += question.getQuestionContent();
+                label = new Label(headerCol, cur_row, title);
+                sheet.addCell(label);
+                cur_row++;
+
+                if (question.getQuestionId() == 124 ||
+                        question.getQuestionId() == 178) {
+                    label = new Label(headerCol, cur_row, "哮喘控制\r0=控制，1-2分=部分控制，3-4分=未控制", titleFormate);
+                    sheet.addCell(label);
+                    cur_row++;
+
+                    label = new Label(headerCol, cur_row, "控制水平（控制／部分控制／未控制)", titleFormate);
+                    sheet.addCell(label);
+                    cur_row++;
+                }
+                max_row = max_row > cur_row ? max_row : cur_row;
+            }
+
+            cur_col = 1;
+            DeliveryInfo tmpDeliveryInfo = new DeliveryInfo();
+            tmpDeliveryInfo.setPatient(patient);
+            tmpDeliveryInfo.setSurvey(survey);
+            startCal.setTime(patient.getCreateTime());
+            for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+                Calendar endCal = (Calendar) startCal.clone();
+                endCal.add(Calendar.MONTH, 1);
+                endCal.add(Calendar.DATE, -1);
+
+                cur_row = row;
+
+                List<DeliveryInfo> deliveryInfos = deliveryDao.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
+                if (deliveryInfos != null && !deliveryInfos.isEmpty()) {
+
+                    RetrieveInfo retrieveInfo = deliveryInfos.get(0).getRetrieveInfo();
+                    if (retrieveInfo != null) {
+                        Set<Answer> tmpAnswers = retrieveInfo.getAnswers();
+
+                        int age1 = AgeUtils.getAgeFromBirthTime(patient.getBirthday(), retrieveInfo.getDeliveryInfo().getDeliveryDate());
+
+                        List<Answer> myAnswers = new ArrayList<>();
+                        for (Answer answer : tmpAnswers) {
+                            Question question = answer.getQuestion();
+                            if ((question.getStartAge() == 99 && question.getEndAge() == 99) ||
+                                    (question.getStartAge() == -1 && question.getEndAge() == -1)) {
+                                myAnswers.add(answer);
+                            } else if (age1 >= question.getStartAge() && age1 <= question.getEndAge()) {
+                                myAnswers.add(answer);
+                            }
+                        }
+
+                        Collections.sort(myAnswers, new Comparator<Answer>() {
+                            @Override
+                            public int compare(Answer s1, Answer s2) {
+                                return s1.getQuestion().getSortId()-(s2.getQuestion().getSortId());
+                            }
+                        });
+
+                        int totalScore = 0;
+                        for(Answer answer : myAnswers) {
+                            if (answer.getTextChoiceContent() == null) {
+                                Integer score = 0;
+                                for (Choice choice : answer.getChoices()) {
+                                    score += choice.getScore().intValue();
+                                }
+                                label = new Label(cur_col, cur_row, String.valueOf(score));
+                            } else {
+                                label = new Label(cur_col, cur_row, answer.getTextChoiceContent());
+                            }
+                            sheet.addCell(label);
+                            cur_row++;
+
+                            if (answer.getQuestion().getQuestionId() == 121 ||
+                                answer.getQuestion().getQuestionId() == 122 ||
+                                answer.getQuestion().getQuestionId() == 123 ||
+                                answer.getQuestion().getQuestionId() == 124 ||
+                                answer.getQuestion().getQuestionId() == 125 ||
+                                answer.getQuestion().getQuestionId() == 126 ||
+                                answer.getQuestion().getQuestionId() == 177 ||
+                                answer.getQuestion().getQuestionId() == 178) {
+                                for (Choice choice : answer.getChoices()) {
+                                    totalScore += choice.getScore().intValue();
+                                }
+                            }
+
+                            if (answer.getQuestion().getQuestionId() == 124 ||
+                                    answer.getQuestion().getQuestionId() == 178) {
+                                String ds = "第" + j + "个月";
+                                label = new Label(cur_col, cur_row, ds, titleFormate);
+                                sheet.addCell(label);
+                                cur_row++;
+
+                                label = new Label(cur_col, cur_row, String.valueOf(totalScore), titleFormate);
+                                sheet.addCell(label);
+                                cur_row++;
+                            }
+
+                        }
+                    }
+
+                }
+                startCal.add(Calendar.MONTH, 1);
+                cur_col += 2;
+            }
+
+            row = max_row;
+            // survey = 6 CACT
+            s.setSurveyId(6);
+            survey = surveyDao.getSurveyById(s);
+            if (survey == null) {
+                return null;
+            }
+
+            surveyTitle = new Label(0, row, survey.getSurveyName(), titleFormate);
+            sheet.addCell(surveyTitle);
+
+            cur_col = 1;
+            startCal = Calendar.getInstance();
+            startCal.setTime(patient.getCreateTime());
+            for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+
+                Calendar endCal = (Calendar) startCal.clone();
+                endCal.add(Calendar.MONTH, 1);
+                endCal.add(Calendar.DATE, -1);
+
+                String ds = "第" + j + "个月\r";
+
+/*                ds += formatter.format(startCal.getTime()) + " —— "
+                        + formatter.format(endCal.getTime());*/
+                Label monthLabel = new Label(cur_col, row, ds);
+                sheet.setColumnView(cur_col, 1800);
+
+                sheet.addCell(monthLabel);
+
+                startCal.add(Calendar.MONTH, 1);
+                cur_col += 2;
+            }
+            row++;
+
+            surveyTitle = new Label(0, row, "总分", titleFormate);
+            sheet.addCell(surveyTitle);
+
+            cur_col = 1;
+            tmpDeliveryInfo = new DeliveryInfo();
+            tmpDeliveryInfo.setPatient(patient);
+            tmpDeliveryInfo.setSurvey(survey);
+            startCal.setTime(patient.getCreateTime());
+            for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+                Calendar endCal = (Calendar) startCal.clone();
+                endCal.add(Calendar.MONTH, 1);
+                endCal.add(Calendar.DATE, -1);
+                int totalScore = 0;
+
+                List<DeliveryInfo> deliveryInfos = deliveryDao.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
+                if (deliveryInfos != null && !deliveryInfos.isEmpty()) {
+
+                    RetrieveInfo retrieveInfo = deliveryInfos.get(0).getRetrieveInfo();
+                    if (retrieveInfo != null) {
+                        Set<Answer> tmpAnswers = retrieveInfo.getAnswers();
+                        for(Answer answer : tmpAnswers) {
+                            for (Choice choice : answer.getChoices()) {
+                                totalScore += choice.getScore().intValue();
+                            }
+                        }
+                        label = new Label(cur_col, row, String.valueOf(totalScore));
+                        sheet.addCell(label);
+                    }
+                }
+                startCal.add(Calendar.MONTH, 1);
+                cur_col += 2;
+            }
+            row++;
+
+            // survey = 5
+            s.setSurveyId(5);
+            survey = surveyDao.getSurveyById(s);
+            if (survey == null) {
+                return null;
+            }
+
+            surveyTitle = new Label(0, row, survey.getSurveyName(), titleFormate);
+            sheet.addCell(surveyTitle);
+
+            cur_col = 1;
+            startCal = Calendar.getInstance();
+            startCal.setTime(patient.getCreateTime());
+            for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+
+                Calendar endCal = (Calendar) startCal.clone();
+                endCal.add(Calendar.MONTH, 1);
+                endCal.add(Calendar.DATE, -1);
+
+                String ds = "第" + j + "个月\r";
+/*
+                ds += formatter.format(startCal.getTime()) + " —— "
+                        + formatter.format(endCal.getTime());*/
+                Label monthLabel = new Label(cur_col, row, ds);
+                sheet.setColumnView(cur_col, 1800);
+
+                sheet.addCell(monthLabel);
+
+                startCal.add(Calendar.MONTH, 1);
+                cur_col += 2;
+            }
+            row++;
+
+            cur_row = row;
+            max_row = 0;
+            for (Question question : survey.getQuestions()) {
+
+
+                int age1 = AgeUtils.getAgeFromBirthTime(patient.getBirthday());
+                if ((question.getStartAge() == 99 && question.getEndAge() == 99) ||
+                        (question.getStartAge() == -1 && question.getEndAge() == -1)) {
+                } else if (age1 >= question.getStartAge() && age1 <= question.getEndAge()) {
+                } else {
+                    System.out.println("age  = " + age1 + " quesiton id = " + question.getQuestionId() + " continued");
+                    continue;
+                }
+                System.out.println("age  = " + age1 + " quesiton id = " + question.getQuestionId() + " NOT continued");
+
+                String title = String.valueOf(question.getQuestionId());
+                title += question.getQuestionContent();
+                label = new Label(headerCol, cur_row, title);
+                sheet.addCell(label);
+                cur_row++;
+                max_row = max_row > cur_row ? max_row : cur_row;
+            }
+
+            cur_col = 1;
+            tmpDeliveryInfo = new DeliveryInfo();
+            tmpDeliveryInfo.setPatient(patient);
+            tmpDeliveryInfo.setSurvey(survey);
+            startCal.setTime(patient.getCreateTime());
+            for (int j = 0; j < maxTotalMonth; j++) {//from the 3rd col till the end
+                Calendar endCal = (Calendar) startCal.clone();
+                endCal.add(Calendar.MONTH, 1);
+                endCal.add(Calendar.DATE, -1);
+
+                cur_row = row;
+
+                List<DeliveryInfo> deliveryInfos = deliveryDao.getDelivryInfoBySurveyAndDate(tmpDeliveryInfo, startCal, endCal);
+                if (deliveryInfos != null && !deliveryInfos.isEmpty()) {
+
+                    RetrieveInfo retrieveInfo = deliveryInfos.get(0).getRetrieveInfo();
+                    if (retrieveInfo != null) {
+                        Set<Answer> tmpAnswers = retrieveInfo.getAnswers();
+
+                        int age1 = AgeUtils.getAgeFromBirthTime(patient.getBirthday(), retrieveInfo.getDeliveryInfo().getDeliveryDate());
+
+                        List<Answer> myAnswers = new ArrayList<>();
+                        for (Answer answer : tmpAnswers) {
+                            Question question = answer.getQuestion();
+                            if ((question.getStartAge() == 99 && question.getEndAge() == 99) ||
+                                    (question.getStartAge() == -1 && question.getEndAge() == -1)) {
+                                myAnswers.add(answer);
+                            } else if (age1 >= question.getStartAge() && age1 <= question.getEndAge()) {
+                                myAnswers.add(answer);
+                            }
+                        }
+
+                        Collections.sort(myAnswers, new Comparator<Answer>() {
+                            @Override
+                            public int compare(Answer s1, Answer s2) {
+                                return s1.getQuestion().getSortId()-(s2.getQuestion().getSortId());
+                            }
+                        });
+
+                        int totalScore = 0;
+                        for(Answer answer : myAnswers) {
+                            if (answer.getTextChoiceContent() == null) {
+                                Integer score = 0;
+                                for (Choice choice : answer.getChoices()) {
+                                    score += choice.getScore().intValue();
+                                }
+                                label = new Label(cur_col, cur_row, String.valueOf(score));
+                            } else {
+                                label = new Label(cur_col, cur_row, answer.getTextChoiceContent());
+                            }
+                            sheet.addCell(label);
+                            cur_row++;
+
+
+                            if (answer.getQuestion().getQuestionId() == 124 ||
+                                    answer.getQuestion().getQuestionId() == 178) {
+                                String ds = "第" + j + "个月";
+                                label = new Label(cur_col, cur_row, ds, titleFormate);
+                                sheet.addCell(label);
+                                cur_row++;
+
+                                label = new Label(cur_col, cur_row, String.valueOf(totalScore), titleFormate);
+                                sheet.addCell(label);
+                                cur_row++;
+                            }
+
+                        }
+                    }
+
+                }
+                startCal.add(Calendar.MONTH, 1);
+                cur_col += 2;
+            }
+
 
 
             //写入数据
