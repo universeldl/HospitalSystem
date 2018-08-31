@@ -50,6 +50,9 @@
         <property name="patientTypeDao">
             <ref bean="patientTypeDao"/>
         </property>
+        <property name="deliveryDao">
+            <ref bean="deliveryDao"/>
+        </property>
     </bean>
 
 
