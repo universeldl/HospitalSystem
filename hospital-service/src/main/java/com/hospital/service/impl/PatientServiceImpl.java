@@ -575,8 +575,7 @@ public class PatientServiceImpl implements PatientService {
                 }
                 System.out.println("age  = " + age1 + " quesiton id = " + question.getQuestionId() + " NOT continued");
 
-                String title = String.valueOf(question.getQuestionId());
-                title += question.getQuestionContent();
+                String title = question.getQuestionContent();
                 label = new Label(headerCol, cur_row, title);
                 sheet.addCell(label);
                 cur_row++;
@@ -800,8 +799,7 @@ public class PatientServiceImpl implements PatientService {
                 }
                 System.out.println("age  = " + age1 + " quesiton id = " + question.getQuestionId() + " NOT continued");
 
-                String title = String.valueOf(question.getQuestionId());
-                title += question.getQuestionContent();
+                String title = question.getQuestionContent();
                 label = new Label(headerCol, cur_row, title);
                 sheet.addCell(label);
                 cur_row++;
