@@ -4,6 +4,7 @@ import com.hospital.domain.*;
 import com.hospital.service.*;
 import com.hospital.util.AccessTokenMgr;
 import com.hospital.util.AgeUtils;
+import com.hospital.util.AliOssConfig;
 import com.hospital.util.GetOpenIdOauth2;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -123,24 +124,26 @@ public class surveyAction extends ActionSupport {
 
     public String doSurvey() {
 
+        HttpServletRequest request = ServletActionContext.getRequest();
+
         if (code == null) {
-            ServletActionContext.getRequest().setAttribute("errorMsg", "获取用户失败");
+            request.setAttribute("errorMsg", "获取用户失败");
             return ERROR;
         }
 
         if (deliveryID == null) {
-            ServletActionContext.getRequest().setAttribute("errorMsg", "发送ID错误");
+            request.setAttribute("errorMsg", "发送ID错误");
             return ERROR;
         } else {
         }
-        ServletActionContext.getRequest().setAttribute("deliveryID", deliveryID);
+        request.setAttribute("deliveryID", deliveryID);
 
         AccessTokenMgr mgr = AccessTokenMgr.getInstance();
         String open_id = GetOpenIdOauth2.getOpenId(code, mgr);
 
 
         if (open_id == null) {
-            ServletActionContext.getRequest().setAttribute("errorMsg", "获取用户名失败，请稍后再试");
+            request.setAttribute("errorMsg", "获取用户名失败，请稍后再试");
             return ERROR;
             //open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
         }
@@ -151,38 +154,38 @@ public class surveyAction extends ActionSupport {
         DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmpDelevery);
 
         if (deliveryInfo == null) {
-            ServletActionContext.getRequest().setAttribute("errorMsg", "问卷发送错误");
+            request.setAttribute("errorMsg", "问卷发送错误");
             return ERROR;
         }
 
         // check patient
         Patient patient = deliveryInfo.getPatient();
         if (!patient.getOpenID().equals(open_id)) {
-            ServletActionContext.getRequest().setAttribute("errorMsg", "用户名错误");
+            request.setAttribute("errorMsg", "用户名错误");
             return ERROR;
         }
 
         // check validate date
         Date cur_date = new Date(System.currentTimeMillis());
         if (cur_date.after(deliveryInfo.getEndDate())) {
-            ServletActionContext.getRequest().setAttribute("errorMsg", "问卷已过期");
+            request.setAttribute("errorMsg", "问卷已过期");
             return ERROR;
         }
 
         RetrieveInfo retrieveInfo = retrieveService.getRetrieveInfoByDeliveryID(deliveryInfo.getDeliveryId());
         if (retrieveInfo != null) {
-            ServletActionContext.getRequest().setAttribute("errorMsg", "问卷已经完成，无需重新作答");
+            request.setAttribute("errorMsg", "问卷已经完成，无需重新作答");
             return ERROR;
         }
 
         Survey survey = deliveryInfo.getSurvey();
         if (survey == null) {
-            ServletActionContext.getRequest().setAttribute("errorMsg", "没有找到问卷");
+            request.setAttribute("errorMsg", "没有找到问卷");
             return ERROR;
         }
 
-        ServletActionContext.getRequest().setAttribute("surveyName", survey.getSurveyName());
-        ServletActionContext.getRequest().setAttribute("surveyDescription", survey.getDescription());
+        request.setAttribute("surveyName", survey.getSurveyName());
+        request.setAttribute("surveyDescription", survey.getDescription());
 
         Set<Question> all_questions = survey.getQuestions();
         List<Question> questions = new ArrayList<>();
@@ -196,8 +199,15 @@ public class surveyAction extends ActionSupport {
             }
         }
 
-        ServletActionContext.getRequest().setAttribute("questions", questions);
-        return SUCCESS;
+        request.setAttribute("questions", questions);
+        if (survey.getSurveyId() != 8 && survey.getSurveyId() != 7) {
+            return SUCCESS;
+        } else {
+
+            String ossConfig = AliOssConfig.getPostPolicyString();
+            request.setAttribute("ossConfig", ossConfig);
+            return INPUT;
+        }
     }
 
     public String retrieveAnswer() {

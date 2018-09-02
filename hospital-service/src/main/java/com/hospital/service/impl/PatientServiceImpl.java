@@ -292,6 +292,21 @@ public class PatientServiceImpl implements PatientService {
         String fileName = time + "_" + name;
         //创建Excel文件
         File file = new File(path, fileName);
+
+        Calendar firstRegisterDate = Calendar.getInstance();
+        firstRegisterDate.set(3000,1,1);
+        for (Patient patient : failPatients) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(patient.getCreateTime());
+            if (firstRegisterDate.after(calendar)) {
+                firstRegisterDate = calendar;
+            }
+        }
+
+        System.out.println("first register date = " + firstRegisterDate.toString());
+
+
+
         try {
             file.createNewFile();
             //创建工作簿
