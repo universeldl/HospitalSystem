@@ -483,7 +483,7 @@ public class PatientServiceImpl implements PatientService {
                         label = new Label(headerCol, row, question.getQuestionContent());
                         sheet.addCell(label);
 
-                        if (answer.getTextChoiceContent() == null) {
+                        if (question.getQuestionType() == 1 || question.getQuestionType() == 2) {
                             Integer score = 0;
                             for (Choice choice : answer.getChoices()) {
                                 score += choice.getScore().intValue();
@@ -635,7 +635,9 @@ public class PatientServiceImpl implements PatientService {
 
                         int totalScore = 0;
                         for(Answer answer : myAnswers) {
-                            if (answer.getTextChoiceContent() == null) {
+                            Question question = answer.getQuestion();
+                            //if (answer.getTextChoiceContent() == null) {
+                            if (question.getQuestionType() == 1 || question.getQuestionType() == 2) {
                                 Integer score = 0;
                                 for (Choice choice : answer.getChoices()) {
                                     score += choice.getScore().intValue();
@@ -689,6 +691,7 @@ public class PatientServiceImpl implements PatientService {
             }
 
             surveyTitle = new Label(0, row, survey.getSurveyName(), titleFormate);
+            sheet.setRowView(row, 600, false);
             sheet.addCell(surveyTitle);
 
             cur_col = 1;
@@ -756,6 +759,7 @@ public class PatientServiceImpl implements PatientService {
             }
 
             surveyTitle = new Label(0, row, survey.getSurveyName(), titleFormate);
+            sheet.setRowView(row, 600, false);
             sheet.addCell(surveyTitle);
 
             cur_col = 1;
@@ -845,7 +849,8 @@ public class PatientServiceImpl implements PatientService {
 
                         int totalScore = 0;
                         for(Answer answer : myAnswers) {
-                            if (answer.getTextChoiceContent() == null) {
+                            Question question = answer.getQuestion();
+                            if (question.getQuestionType() == 1 || question.getQuestionType() == 2) {
                                 Integer score = 0;
                                 for (Choice choice : answer.getChoices()) {
                                     score += choice.getScore().intValue();
