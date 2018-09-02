@@ -134,8 +134,8 @@
 <pre id="console"></pre>
 
 </body>
-<script type="text/javascript" src="lib/plupload-2.1.2/js/moxie.js"></script>
-<script type="text/javascript" src="lib/plupload-2.1.2/js/plupload.min.js"></script>
+<script type="text/javascript" src="lib/plupload/js/moxie.js"></script>
+<script type="text/javascript" src="lib/plupload/js/plupload.min.js"></script>
 <script type="text/javascript" src="jQuery/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/upload.js"></script>
 <%--

@@ -37,8 +37,8 @@ function wxconfig() {
         runtimes : 'html5,flash,silverlight,html4',
         browse_button : 'selectfiles',
         container: document.getElementById('container'),
-        flash_swf_url : 'lib/plupload-2.1.2/js/Moxie.swf',
-        silverlight_xap_url : 'lib/plupload-2.1.2/js/Moxie.xap',
+        flash_swf_url : 'lib/plupload/js/Moxie.swf',
+        silverlight_xap_url : 'lib/plupload/js/Moxie.xap',
 
         url : 'http://oss.aliyuncs.com',
 
