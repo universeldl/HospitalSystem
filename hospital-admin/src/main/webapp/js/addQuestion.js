@@ -35,7 +35,7 @@ $(function () {
             }
             postdata = postdata + "&" + $("#addForm").serialize();
         }
-        else if (questionType == 3 || questionType == 4) {
+        else if (questionType == 3 || questionType == 4 || questionType == 5) {
             postdata = "questionType=" + questionType + "&surveyId=" + surveyId + "&textChoice=0" + "&questionContent=" + questionContent;
             if ($.trim($("#addStartAge").val()) != "" && $.trim($("#addEndAge").val()) != "") {
                 postdata = postdata + "&startAge=" + $.trim($("#addStartAge").val())
@@ -130,6 +130,21 @@ function addTextDateDisplay() {
     $("#add3").addClass("btn btn-pinterest");
     $("#add4").removeClass();
     $("#add4").addClass("btn btn-primary");
+}
+
+function addPictureDisplay() {
+    questionType = 5;
+    document.getElementById("choicesBlock").style.display = "none";
+    $("#add1").removeClass();
+    $("#add1").addClass("btn btn-pinterest");
+    $("#add2").removeClass();
+    $("#add2").addClass("btn btn-pinterest");
+    $("#add3").removeClass();
+    $("#add3").addClass("btn btn-pinterest");
+    $("#add4").removeClass();
+    $("#add4").addClass("btn btn-pinterest");
+    $("#add5").removeClass();
+    $("#add5").addClass("btn btn-primary");
 }
 
 function unique(arr) {
