@@ -340,10 +340,7 @@ public class SurveyManageAction extends ActionSupport {
                 if (!b) break;//break whenever add failing
                 //TODO for robustness, we should remove the question and added choices if failed
             }
-        } else if (questionType == 3) {
-            question.setTextChoice(1);
-            b = questionService.addQuestion(question);
-        } else if (questionType == 4) {
+        } else {
             question.setTextChoice(1);
             b = questionService.addQuestion(question);
         }
