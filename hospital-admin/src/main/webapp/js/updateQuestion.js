@@ -49,6 +49,9 @@ function updateQuestion(sid, qid) {
                 else if (data.questionType == 4) {
                     updateTextDateDisplay();
                 }
+                else if (data.questionType == 5) {
+                    updatePictureDisplay();
+                }
                 var str = '';
                 $("#updateChoicesDiv").nextUntil("p").each(function () {//clean first
                     $(this).outerHTML = '';
@@ -110,7 +113,7 @@ $(function () {
                 + "&surveyId=" + surveyId + "&textChoice=" + updateTextChoice + "&questionId=" + questionId + "&" + $("#updateForm").serialize();
         }
         */
-        else if (questionType == 3 || questionType == 4) {
+        else if (questionType == 3 || questionType == 4 || questionType == 5) {
             postdata = "questionType=" + questionType + "&surveyId=" + surveyId + "&questionId=" + questionId + "&textChoice=0"
                 + "&questionContent=" + replaceSpectialChar($.trim($("#updateQuestionContent").val()));
             if ($.trim($("#updateStartAge").val()) != "" && $.trim($("#updateEndAge").val()) != "") {
@@ -206,6 +209,21 @@ function updateTextDateDisplay() {
     $("#update3").addClass("btn btn-pinterest");
     $("#update4").removeClass();
     $("#update4").addClass("btn btn-primary");
+}
+
+function updatePictureDisplay() {
+    questionType = 5;
+    document.getElementById("updateChoicesBlock").style.display = "none";
+    $("#update1").removeClass();
+    $("#update1").addClass("btn btn-pinterest");
+    $("#update2").removeClass();
+    $("#update2").addClass("btn btn-pinterest");
+    $("#update3").removeClass();
+    $("#update3").addClass("btn btn-pinterest");
+    $("#update4").removeClass();
+    $("#update4").addClass("btn btn-pinterest");
+    $("#update5").removeClass();
+    $("#update5").addClass("btn btn-primary");
 }
 
 function getUpdateCount() {

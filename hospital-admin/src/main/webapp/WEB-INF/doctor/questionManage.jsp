@@ -288,6 +288,9 @@
                                         <s:elseif test="#question.questionType== 4">
                                             问答题(日期）
                                         </s:elseif>
+                                        <s:elseif test="#question.questionType== 5">
+                                            图片题
+                                        </s:elseif>
                                     </td>
                                     <td>
                                         <s:if test="#question.startAge==-1">
@@ -384,6 +387,9 @@
                         </button>
                         <button type="button" class="btn btn-pinterest" onclick="addTextDateDisplay()" id="add4"><i
                                 class="fa fa-plus"></i> 问答题（日期）
+                        </button>
+                        <button type="button" class="btn btn-pinterest" onclick="addPictureDisplay()" id="add5"><i
+                                class="fa fa-plus"></i> 图片题
                         </button>
                     </div>
 
@@ -564,16 +570,17 @@
                             <i
                                     class="fa fa-plus"></i> 多选题
                         </button>
-                        <button type="button" class="btn btn-pinterest" onclick="updateSingleChoiceDisplay()"
-                                id="update2"><i
-                                class="fa fa-plus"></i> 单选题
+                        <button type="button" class="btn btn-pinterest" onclick="updateSingleChoiceDisplay()" id="update2">
+                            <i class="fa fa-plus"></i> 单选题
                         </button>
                         <button type="button" class="btn btn-pinterest" onclick="updateTextDisplay()" id="update3"><i
                                 class="fa fa-plus"></i> 问答题
                         </button>
                         <button type="button" class="btn btn-pinterest" onclick="updateTextDateDisplay()" id="update4">
-                            <i
-                                    class="fa fa-plus"></i> 问答题（日期）
+                            <i class="fa fa-plus"></i> 问答题（日期）
+                        </button>
+                        <button type="button" class="btn btn-pinterest" onclick="updatePictureDisplay()" id="update5">
+                            <i class="fa fa-plus"></i> 图片题
                         </button>
                     </div>
 
