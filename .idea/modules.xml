@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HospitalSystem.iml" filepath="$PROJECT_DIR$/HospitalSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aliyun-oss/aliyun-sdk-oss.iml" filepath="$PROJECT_DIR$/aliyun-oss/aliyun-sdk-oss.iml" />
       <module fileurl="file://$PROJECT_DIR$/hospital-admin/hospital-admin.iml" filepath="$PROJECT_DIR$/hospital-admin/hospital-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/hospital-common/hospital-common.iml" filepath="$PROJECT_DIR$/hospital-common/hospital-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/hospital-dao/hospital-dao.iml" filepath="$PROJECT_DIR$/hospital-dao/hospital-dao.iml" />
