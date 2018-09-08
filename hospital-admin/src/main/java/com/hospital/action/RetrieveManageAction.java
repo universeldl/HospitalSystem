@@ -1,5 +1,7 @@
 package com.hospital.action;
 
+import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.model.OSSObject;
 import com.hospital.domain.*;
 import com.hospital.service.*;
 import com.hospital.util.AgeUtils;
@@ -12,12 +14,14 @@ import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 import com.hospital.util.CalendarUtils;
+import com.hospital.util.AliOssConfig;
 
 public class RetrieveManageAction extends ActionSupport {
 
@@ -63,6 +67,8 @@ public class RetrieveManageAction extends ActionSupport {
     private Date sendDate;
     private Date retrieveDate;
 
+    private String imgName;
+
     public void setSendDate(Date sendDate) {
         this.sendDate = sendDate;
     }
@@ -73,6 +79,10 @@ public class RetrieveManageAction extends ActionSupport {
 
     public void setOpenID(String openID) {
         this.openID = openID;
+    }
+
+    public void setImgName(String imgName) {
+        this.imgName = imgName;
     }
 
     public void setMyAnswers(List<Answer> myAnswers) {
@@ -631,6 +641,59 @@ public class RetrieveManageAction extends ActionSupport {
         return "success";
     }
 
+	public String IoReadImage() {
+		ServletOutputStream out = null;
+		InputStream ips = null;
+		try {
+			OSSClient ossClient = AliOssConfig.getOssClient();
+            HttpServletResponse response = ServletActionContext.getResponse();
+			//response.setContentType("multipart/form-data");
+            //response.setContentType("image/png");
+            if(!ossClient.doesObjectExist(AliOssConfig.getBucketName(), imgName)){
+                throw new Exception("bucket=["+AliOssConfig.getBucketName()+"]中不存在文件=["+imgName+"]");
+            }
+            //ossClient.getObject(new GetObjectRequest(bucket, fileName), new File(localURL));
+            //InputStream ips = ossClient.getObject(bucketName, fileName).getObjectContent();
+            OSSObject object = ossClient.getObject(AliOssConfig.getBucketName(), imgName);
+            ips = object.getObjectContent();
+            //ObjectMetadata om = object.getObjectMetadata();
+            //long cl = om.getContentLength();
+            //int i = ips.available(); // 得到文件大小
+            //System.out.println(i);
+            response.setContentType("image/*"); // 设置返回的文件类型
+            response.setCharacterEncoding("utf-8");
+			out = response.getOutputStream();
+			//final Base64.Encoder encoder = Base64.getEncoder();
+			//读取文件流
+			int len = 0;
+			byte[] buffer = new byte[1024];
+			while ((len = ips.read(buffer, 0, 1024)) != -1){
+				out.write(buffer,0,len);
+			}
+            //byte[] buffer = new byte[cl];
+            //ips.read(buffer);
+            //byte[] buffer = new byte[j];
+            //inputStream.read(buffer);
+            out.write(buffer);
+			//out.flush();
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				if(ips != null)
+				{
+					ips.close();
+				}
+				if(out != null){
+					out.flush();
+					out.close();
+				}
+			} catch (IOException e) {
+                e.printStackTrace();
+            }
+		}
+		return null;
+	}
 
 }
 
