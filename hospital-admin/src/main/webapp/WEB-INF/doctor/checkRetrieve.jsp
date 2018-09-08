@@ -355,6 +355,38 @@
                                     </div>
                                 </div>
                             </s:elseif>
+                            <!--图片题-->
+                            <s:elseif test="#answer.question.questionType== 5">
+                                <div class="col-md-12">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <div class="text-muted bootstrap-admin-box-title"
+                                                 <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">style="color:red;"</s:if>>
+                                                <s:property value="#answerIdx.index+1"/>. ${answer.question.questionContent}.(图片题)
+                                                <s:if test="#answer.lastModified!=null && #answer.lastModified!=''">
+                                                    (最后修改人： <s:property value="#answer.lastModified"/>医生修改于 <s:property value="#answer.modifiedDate"/>)
+                                                </s:if>
+                                                <!--<button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
+                                                        data-target="#updateAnswerModal"
+                                                        style="float:right;color:white;"
+                                                        onclick="updateAnswerById(<s:property
+                                                                value="#answer.answerId"/>)">修改
+                                                </button> -->
+                                            </div>
+                                        </div>
+                                        <div class="bootstrap-admin-panel-content"
+                                            <s:generator val="#answer.textChoiceContent"  separator=";" id="tc" >
+                                                <s:iterator status="st" value="#tc" id="pic" >
+                                                    <br/>
+                                                        <img id="mutationImage" style="width:750px;" src="${pageContext.request.contextPath}/doctor/retrieveManageAction_IoReadImage.action?imgName=<s:property value="pic"/>"/>
+                                                        <input type="hidden" id="photo" name="photo"/>
+                                                    <br/>
+                                                </s:iterator>
+                                            </s:generator>
+                                        </div>
+                                    </div>
+                                </div>
+                            </s:elseif>
                         </s:iterator>
                     </s:if>
                     <!--

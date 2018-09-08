@@ -58,4 +58,12 @@ public class AliOssConfig {
         }
     }
 
+	static public OSSClient getOssClient() {
+        return new OSSClient(endpoint, accessKeyId, accessKeySecret);
+	}
+
+	static public String getBucketName() {
+        return bucketName;
+	}
+
 }
