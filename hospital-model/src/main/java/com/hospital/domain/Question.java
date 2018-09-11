@@ -133,6 +133,7 @@ public class Question {
         this.textChoice = textChoice;
         this.startAge = startAge;
         this.endAge = endAge;
+        this.sortId = 9999;
     }
 
 /*    @Override
