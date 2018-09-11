@@ -1,95 +1,147 @@
-
 accessid = ''
 accesskey = ''
 host = ''
 policyBase64 = ''
 signature = ''
 callbackbody = ''
+/*
 filename = ''
+*/
 key = ''
 expire = 0
 g_object_name = ''
-g_object_name_type = ''
-now = timestamp = Date.parse(new Date()) / 1000;
+var quesitonIndex = 0;
+var questions;
+var postdata = "";
+var filenames = [];
+var uploaded_count = 0;
 
-/*function send_request()
-{
-    var xmlhttp = null;
-    if (window.XMLHttpRequest)
-    {
-        xmlhttp=new XMLHttpRequest();
-    }
-    else if (window.ActiveXObject)
-    {
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
+function getQuestions() {
+    questions = $.parseJSON($.trim($("#questionStr").val()));
+    $("#startButton").fadeIn();
+}
 
-    if (xmlhttp!=null)
-    {
-        serverUrl = './php/get.php'
-        xmlhttp.open( "GET", serverUrl, false );
-        xmlhttp.send( null );
-        return xmlhttp.responseText
-    }
-    else
-    {
-        alert("Your browser does not support XMLHTTP.");
-    }
-};*/
+function questionStart() {
+    $('#surveyName').hide();
+    $('#surveyDescription').hide();
+    $('#startButton').hide();
+    displayPage(quesitonIndex);
+}
 
-function check_object_radio() {
-    var tt = document.getElementsByName('myradio');
-    for (var i = 0; i < tt.length ; i++ )
-    {
-        if(tt[i].checked)
-        {
-            g_object_name_type = tt[i].value;
-            break;
+function displayPage(index) {
+    var showIndex = index + 1;
+    var question = questions[index];
+
+    $('#questionIndex').text("问题（" + showIndex + "/" + questions.length + "）").show();
+    $('#questionContent').text(question.questionContent).show();
+
+    displayUpload();
+    displayButton(index);
+}
+
+function displayUpload(){
+    document.getElementById("uploaderdiv").style.display = "";
+    $("#selectfiles").fadeIn();
+
+    $("#file-list").each(function(){
+        var y = $(this).children();
+        y.remove();
+    });
+    filenames = [];
+
+}
+
+function next(str) {
+    location.href = "#top";
+    alert("str = " + str);
+    if (str != "") {
+        postdata = postdata + "&tq" + questions[quesitonIndex].questionId + "=" + str;
+    }
+    alert(postdata);
+
+    if (quesitonIndex == questions.length -1) {
+        submit();
+    } else {
+        quesitonIndex = quesitonIndex + 1;
+        displayPage(quesitonIndex);
+    }
+}
+
+function submit() {
+    showLoadingToast("提交答案...");
+
+    var po = "deliveryID=" + $.trim($("#deliveryID").val()) + "&";
+    po = po + postdata;
+    var xhr = $.ajax({
+        method: 'POST',
+        url: 'surveyAction_retrieveAnswer.action',
+        data: po,
+        dataType: "json",
+        timeout:20000,
+        scriptCharset: 'utf-8',
+        success:function(data){ //请求成功的回调函数
+            hideLoadingToast();
+            if (data.success == 1) {
+                var url =  "https://" + window.location.host;
+                url = url + "/hospital-wechat/message.jsp?msg=答卷提交成功!<br/><br/>" + data.msg;
+                window.location.href = url;
+            } else if (data.success == -1) {
+                var url =  "https://" + window.location.host;
+                url = url + "/hospital-wechat/message.jsp?msg=答卷出错...";
+                window.location.href = url;
+            } else {
+                showDialog2("提交失败，请稍后再试", "确认");
+            }
+        },
+        complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+            if(status=='timeout'){//超时,status还有success,error等值的情况
+                xhr.abort();    // 超时后中断请求
+                hideLoadingToast();
+                showDialog2("答卷提交失败，请稍后再试", "确认");
+            }
         }
+        /*         callback: function (data) {
+                     hideLoadingToast();
+                     if (data.success == 1) {
+                         var url =  "https://" + window.location.host;
+                         url = url + "/hospital-wechat/message.jsp?msg=答卷提交成功!<br/><br/>" + data.msg;
+                         window.location.href = url;
+                     } else if (data.success == -1) {
+                         var url =  "https://" + window.location.host;
+                         url = url + "/hospital-wechat/message.jsp?msg=答卷出错...";
+                         window.location.href = url;
+                     } else {
+                        showDialog2("提交失败，请稍后再试", "确认");
+                     }
+                 }*/
+    });
+
+}
+
+function displayButton(index) {
+    if (index == questions.length - 1) {
+        $("#selectfiles").show();
+        document.getElementById("nextButton").innerHTML = "上传并提交"
+        document.getElementById("nextButton").style.display = "";
+    } else {
+        $("#selectfiles").show();
+        document.getElementById("nextButton").innerHTML = "上传并开始下一题"
+        document.getElementById("nextButton").style.display = "";
     }
 }
 
 function get_signature()
 {
-    //可以判断当前expire是否超过了当前时间,如果超过了当前时间,就重新取一下.3s 做为缓冲
-    now = timestamp = Date.parse(new Date()) / 1000;
-    if (expire < now + 3)
-    {
-/*
-        body = send_request()
-        var obj = eval ("(" + body + ")");
-*/
-        var _ossConfig = $.parseJSON($.trim($("#ossConfig").val()));
-        host = _ossConfig.host;
-        policyBase64 = _ossConfig.policy;
-        accessid = _ossConfig.accessid;
-        signature = _ossConfig.signature;
-        expire = _ossConfig.expire;
-        callbackbody = _ossConfig.callback;
-        key = "";
-
-/*        host = obj['host']
-        policyBase64 = obj['policy']
-        accessid = obj['accessid']
-        signature = obj['signature']
-        expire = parseInt(obj['expire'])
-        callbackbody = obj['callback']
-        key = obj['dir']*/
-        return true;
-    }
-    return false;
+    var _ossConfig = $.parseJSON($.trim($("#ossConfig").val()));
+    host = _ossConfig.host;
+    policyBase64 = _ossConfig.policy;
+    accessid = _ossConfig.accessid;
+    signature = _ossConfig.signature;
+    expire = _ossConfig.expire;
+    callbackbody = _ossConfig.callback;
+    key = "";
+    return true;
 };
-
-function random_string(len) {
-    len = len || 32;
-    var chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
-    var maxPos = chars.length;
-    var pwd = '';
-    for (i = 0; i < len; i++) {
-        pwd += chars.charAt(Math.floor(Math.random() * maxPos));
-    }
-    return pwd;
-}
 
 function get_suffix(filename) {
     pos = filename.lastIndexOf('.')
@@ -102,31 +154,16 @@ function get_suffix(filename) {
 
 function calculate_object_name(filename)
 {
-    if (g_object_name_type == 'local_name')
-    {
-        g_object_name += "${filename}"
-    }
-    else if (g_object_name_type == 'random_name')
-    {
-        suffix = get_suffix(filename)
-        g_object_name = key + random_string(10) + suffix
-    }
+    suffix = get_suffix(filename)
+    var deliveryId = document.getElementById("deliveryID").value
+    g_object_name = deliveryId + "_" + quesitonIndex + "_" +filenames.length;
     return ''
 }
 
-function get_uploaded_object_name(filename)
+/*function get_uploaded_object_name(filename)
 {
-    if (g_object_name_type == 'local_name')
-    {
-        tmp_name = g_object_name
-        tmp_name = tmp_name.replace("${filename}", filename);
-        return tmp_name
-    }
-    else if(g_object_name_type == 'random_name')
-    {
-        return g_object_name
-    }
-}
+    return g_object_name
+}*/
 
 function set_upload_param(up, filename, ret)
 {
@@ -152,7 +189,6 @@ function set_upload_param(up, filename, ret)
         'url': host,
         'multipart_params': new_multipart_params
     });
-
     up.start();
 }
 
@@ -167,24 +203,16 @@ var uploader = new plupload.Uploader({
 
     filters: {
         mime_types : [ //只允许上传图片和zip,rar文件
-/*
-            { title : "Image files", extensions : "jpg,gif,png,bmp" },
-*/
             { title : "Image files", extensions : "image/*,jpg,jpeg,png,gif" },
-/*
-            { title : "Zip files", extensions : "zip,rar" }
-*/
         ],
         max_file_size : '10mb', //最大只能上传10mb的文件
-/*
-        prevent_duplicates : true //不允许选取重复文件
-*/
+        prevent_duplicates : true
     },
 
     init: {
         PostInit: function() {
             document.getElementById('ossfile').innerHTML = '';
-            document.getElementById('postfiles').onclick = function() {
+            document.getElementById('nextButton').onclick = function() {
                 set_upload_param(uploader, '', false);
                 return false;
             };
@@ -193,87 +221,73 @@ var uploader = new plupload.Uploader({
         FilesAdded: function(up, files) {
             var len = len = files.length;
             for(var i = 0; i<len; i++){
-                var file_name = files[i].name; //文件名
-                var file_size = files[i].size;//文件大小
-                //构造html来更新UI
-                //var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '(' + plupload.formatSize(file_size) + ')' + '</p><p class="progress"></p></li>';
-                var html = '<li id="file-' + files[i].id +'"><span class="close"></span></li>';
+                var html = '<li class="weui-uploader__file" id="file-' + files[i].id +'" style=""></li>';
                 $(html).appendTo('#file-list');
                 !function(i){
                     previewImage(files[i],function(imgsrc){
-                        $('#file-'+files[i].id).append('<a><img src="'+ imgsrc +'" /><span class="progress"></span></a>');
+                        document.getElementById('file-'+files[i].id).style.cssText = "background-image:url("+imgsrc+")"
                     })
                 }(i);
-                $("#uploadfiles").trigger('click');
             }
-
-            plupload.each(files, function(file) {
-                document.getElementById('ossfile').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ')<b></b>'
-                    +'<div class="progress"><div class="progress-bar" style="width: 0%"></div></div>'
-                    +'</div>';
-            });
         },
 
         BeforeUpload: function(up, file) {
-            check_object_radio();
             set_upload_param(up, file.name, true);
+            showLoadingToast("图片上传中...");
         },
 
         UploadProgress: function(up, file) {
-            $('#file-'+file.id +" .progress").html(file.percent + "%");
-
-            /*            var d = document.getElementById(file.id);
-                        d.getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
-                        var prog = d.getElementsByTagName('div')[0];
-                        var progBar = prog.getElementsByTagName('div')[0]
-                        progBar.style.width= 2*file.percent+'px';
-                        progBar.setAttribute('aria-valuenow', file.percent)*/;
+            document.getElementById('file-'+file.id).setAttribute("class",
+                "weui-uploader__file weui-uploader__file_status");
+            document.getElementById('file-'+file.id).innerHTML =
+                '<div class="weui-uploader__file-content">' + file.percent + '%</div>';
         },
 
         FileUploaded: function(up, file, info) {
-/*            console.log(res.response);
-            var data = JSON.parse(res.response).data;
-            $('#file-'+file.id).children('.close').attr('img_id',data.img_id);
-            var img = $("#images_upload");
-            var str = img.val();
-            if(str == ''){
-                str = data.img_id;
-            }else{
-                str += ','+data.img_id;
-            }
-            img.val(str);*/
-
             if (info.status == 200)
             {
-                document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = 'upload to oss success, object name:' + get_uploaded_object_name(file.name);
+                filenames.push(g_object_name);
             }
             else
             {
-                document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = info.response;
+                alert(info.response)
+            }
+        },
+
+        UploadComplete: function(up, files) {
+            if (files.length > uploaded_count) {
+                hideLoadingToast();
+                alert("all complete")
+                alert(filenames.join(";"));
+                next(filenames.join(";"));
+                uploaded_count += files.length;
+            } else {
+                showDialog1("没有选择任何照片，本题不需要上传照片吗？","需要","不需要");
             }
         },
 
         Error: function(up, err) {
             if (err.code == -600) {
-                document.getElementById('console').appendChild(document.createTextNode("\n选择的文件太大了,可以根据应用情况，在upload.js 设置一下上传的最大大小"));
+                showDialog2("所选图片过大，请勿超过10M:" + err.file.name, "确定");
+            } else if (err.code == -601) {
+                showDialog2("所选文件不是图片:" + err.file.name, "确定");
+            } else if (err.code == -602) {
+                showDialog2("请勿重复上传图片:" + err.file.name, "确定");
+            } else {
+                showDialog2("图片\'"+err.file.name+"\'上传失败，请重试", "确定");
+                document.getElementById('file-'+err.file.id).setAttribute("class",
+                    "weui-uploader__file weui-uploader__file_status");
+                document.getElementById('file-'+err.file.id).innerHTML =
+                    '<div class="weui-uploader__file-content">' +
+                        '<i class="weui-icon-warn"></i>' +
+                    '</div>'
             }
-            else if (err.code == -601) {
-                document.getElementById('console').appendChild(document.createTextNode("\n选择的文件后缀不对,可以根据应用情况，在upload.js进行设置可允许的上传文件类型"));
-            }
-            else if (err.code == -602) {
-                document.getElementById('console').appendChild(document.createTextNode("\n这个文件已经上传过一遍了"));
-            }
-            else
-            {
-                document.getElementById('console').appendChild(document.createTextNode("\nError xml:" + err.response));
-            }
+            hideLoadingToast();
         }
     }
 });
 
-//plupload中为我们提供了mOxie对象
-//有关mOxie的介绍和说明请看：https://github.com/moxiecode/moxie/wiki/API
-//file为plupload事件监听函数参数中的file对象,callback为预览图片准备完成的回调函数
+
 function previewImage(file,callback){
     if(!file || !/image\//.test(file.type)) return; //确保文件是图片
     if(file.type=='image/gif'){ //gif使用FileReader进行预览,因为mOxie.Image只支持jpg和png
@@ -306,5 +320,58 @@ $("#file-list").on('click',".close",function(){
     img.val(items.join(','));
     $(this).parent().remove();
 });
+
+function showDialog2(str1, str2) {
+    var $dialog = $('#iosDialog2');
+    $("#dialog2Str1").html(str1);
+    $("#dialog2Str2").html(str2);
+    $dialog.fadeIn(200);
+
+    $dialog.on('click', '.weui-dialog__btn', function () {
+        $(this).parents('.js_dialog').fadeOut(200);
+    });
+}
+
+function showDialog1(str1, str2,str3) {
+    var $dialog = $('#iosDialog1');
+    $("#dialog1Str1").html(str1);
+    $("#dialog1Str2").html(str2);
+    $("#dialog1Str3").html(str3);
+
+    $dialog.fadeIn(200);
+
+    $dialog.on('click', '.weui-dialog__btn_default', function () {
+        $(this).parents('.js_dialog').fadeOut(200);
+    });
+
+    $dialog.on('click', '.weui-dialog__btn_primary', function () {
+        $(this).parents('.js_dialog').fadeOut(200);
+        next("");
+    });
+}
+
+function showToast(str) {
+    var $toast = $('#toast');
+    if ($toast.css('display') != 'none') return;
+    $("#toastStr").html(str);
+    $toast.fadeIn(100);
+    setTimeout(function () {
+        $toast.fadeOut(100);
+    }, 2000);
+
+}
+
+function showLoadingToast(str) {
+    var $loadingToast = $('#loadingToast');
+    if ($loadingToast.css('display') != 'none') {
+        return;
+    }
+    $("#loadToastStr").html(str);
+    $loadingToast.fadeIn(100);
+}
+
+function hideLoadingToast() {
+    $('#loadingToast').fadeOut(100);
+}
 
 uploader.init();
