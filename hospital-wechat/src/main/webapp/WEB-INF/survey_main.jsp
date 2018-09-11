@@ -25,6 +25,14 @@
         <s:property value="#request.surveyName" />
     </h3>
 </s:if>
+
+<s:if test="#request.questions!=null" >
+    <%--
+        <input type="hidden" value='<%=request.getAttribute("wechatConfig")%>' id="wechatConfig"/>
+    --%>
+    <input type="hidden" value='<%=request.getAttribute("questions")%>' id="questionStr"/>
+</s:if>
+
 <h3 class="page__title" id="questionIndex" style="display:none"></h3>
 
 <br/>

@@ -199,11 +199,16 @@ public class surveyAction extends ActionSupport {
             }
         }
 
-        request.setAttribute("questions", questions);
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+
+        String json = JSONArray.fromObject(questions, jsonConfig).toString();
+
+        request.setAttribute("questions", json);
+
         if (survey.getSurveyId() != 8 && survey.getSurveyId() != 7) {
             return SUCCESS;
         } else {
-
             String ossConfig = AliOssConfig.getPostPolicyString();
             request.setAttribute("ossConfig", ossConfig);
             return INPUT;

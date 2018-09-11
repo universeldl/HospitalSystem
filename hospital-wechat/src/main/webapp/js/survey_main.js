@@ -3,7 +3,7 @@ var questions;
 var postdata = "";
 
 function getQuestions() {
-    showLoadingToast("正在加载问题...");
+/*    showLoadingToast("正在加载问题...");
 
     var po = "deliveryID=" + $.trim($("#deliveryID").val());
     ajax(
@@ -19,7 +19,9 @@ function getQuestions() {
                 questions = data;
             }
         }
-    );
+    );*/
+    questions = $.parseJSON($.trim($("#questionStr").val()));
+    $("#startButton").fadeIn();
 }
 
 function questionStart() {
