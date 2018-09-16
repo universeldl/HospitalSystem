@@ -315,9 +315,15 @@ public class DeliveryServiceImpl implements DeliveryService {
                         if (regDate.before(date) || (regDate.after(date) && System.currentTimeMillis() > endDate.getTime())) {
                             continue;
                         }
+                        if (patient.getOpenID() != "o5bAaxGhIV0ZksDNy8y26pk_XUI8") {
+                            continue;
+                        }
                     }
                     else if (survey.getSurveyId() == 8) {
                         if (regDate.before(date) || (regDate.after(date) && System.currentTimeMillis() < endDate.getTime())) {
+                            continue;
+                        }
+                        if (patient.getOpenID() != "o5bAaxGhIV0ZksDNy8y26pk_XUI8") {
                             continue;
                         }
                     }
