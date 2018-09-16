@@ -191,14 +191,13 @@ function set_upload_param(up, filename, ret)
 var uploader = new plupload.Uploader({
     runtimes : 'html5,flash,silverlight,html4',
     browse_button : 'selectfiles',
-    //multi_selection: false,
     container: document.getElementById('container'),
     flash_swf_url : 'lib/plupload/js/Moxie.swf',
     silverlight_xap_url : 'lib/plupload/js/Moxie.xap',
     url : 'http://oss.aliyuncs.com',
 
     filters: {
-        mime_types : [ //只允许上传图片和zip,rar文件
+        mime_types : [
             { title : "Image files", extensions : "image/*,jpg,jpeg,png,gif" },
         ],
         max_file_size : '10mb', //最大只能上传10mb的文件
@@ -263,7 +262,7 @@ var uploader = new plupload.Uploader({
                 next(filenames.join(";"));
                 uploaded_count += files.length;
             } else {
-                showDialog1("没有选择任何照片，本题不需要上传照片吗？","需要","不需要");
+                showDialog1("本题不需要上传照片吗？","需要","不需要");
             }
         },
 
