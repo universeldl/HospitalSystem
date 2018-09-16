@@ -68,6 +68,16 @@
 <input type="hidden" id="images_upload" name="images" value=""/>
 --%>
 
+<div class="weui-gallery" id="gallery">
+    <span class="weui-gallery__img" id="galleryImg"></span>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del" id="galleryImgDel">
+            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+        </a>
+        <input id="curFileName" type="hidden" />
+    </div>
+</div>
+
 <div id="container">
     <div class="weui-cells weui-cells_form" id="uploaderdiv" style="display:none">
         <div class="weui-cell">
