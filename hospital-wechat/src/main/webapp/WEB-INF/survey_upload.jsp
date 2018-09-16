@@ -166,8 +166,7 @@
 
 <!--BEGIN dialog2-->
 <div id="dialogs">
-    <div class="js_dialog" id="iosDialog2
-" style="display: none;">
+    <div class="js_dialog" id="iosDialog2" style="display: none;">
         <div class="weui-mask"></div>
         <div class="weui-dialog">
             <div class="weui-dialog__bd" id="dialog2Str1">dialog2Str1</div>
