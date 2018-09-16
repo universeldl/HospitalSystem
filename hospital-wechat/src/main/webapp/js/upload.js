@@ -53,11 +53,7 @@ function displayUpload(){
 
 function next(str) {
     location.href = "#top";
-    alert("str = " + str);
-    if (str != "") {
-        postdata = postdata + "&tq" + questions[quesitonIndex].questionId + "=" + str;
-    }
-    alert(postdata);
+    postdata = postdata + "&tq" + questions[quesitonIndex].questionId + "=" + str;
 
     if (quesitonIndex == questions.length -1) {
         submit();
@@ -125,7 +121,7 @@ function displayButton(index) {
         document.getElementById("nextButton").style.display = "";
     } else {
         $("#selectfiles").show();
-        document.getElementById("nextButton").innerHTML = "上传并开始下一题"
+        document.getElementById("nextButton").innerHTML = "上传并回答下一题"
         document.getElementById("nextButton").style.display = "";
     }
 }
@@ -231,6 +227,13 @@ var uploader = new plupload.Uploader({
             }
         },
 
+        FilesRemoved: function(up, files) {
+            var len = len = files.length;
+            for(var i = 0; i<len; i++) {
+                document.getElementById('file-'+files[i].id).remove();
+            }
+        },
+
         BeforeUpload: function(up, file) {
             set_upload_param(up, file.name, true);
             showLoadingToast("图片上传中...");
@@ -250,15 +253,13 @@ var uploader = new plupload.Uploader({
             }
             else
             {
-                alert(info.response)
+                //alert(info.response)
             }
         },
 
         UploadComplete: function(up, files) {
             if (files.length > uploaded_count) {
                 hideLoadingToast();
-                alert("all complete")
-                alert(filenames.join(";"));
                 next(filenames.join(";"));
                 uploaded_count += files.length;
             } else {
@@ -311,14 +312,21 @@ function previewImage(file,callback){
     }
 }
 
-$("#file-list").on('click',".close",function(){
-    var img_id = $(this).attr("img_id");
-    var img = $("#images_upload");
-    var items=img.val().split(",");
-    var index = items.indexOf(img_id);
-    items.splice(index,1);//删除元素
-    img.val(items.join(','));
-    $(this).parent().remove();
+$("#file-list").on("click", "li", function(){
+    $("#galleryImg").attr("style", this.getAttribute("style"));
+    $("#gallery").fadeIn(100);
+    $("#curFileName").val(this.getAttribute("id"));
+});
+
+$("#gallery").on("click", function(){
+    $("#gallery").fadeOut(100);
+    $("#curFileName").val("");
+});
+
+$("#galleryImgDel").on("click", function(){
+    $("#gallery").fadeOut(100);
+    var remove_file_name = $("#curFileName").val().slice(5);
+    uploader.removeFile(remove_file_name);
 });
 
 function showDialog2(str1, str2) {
