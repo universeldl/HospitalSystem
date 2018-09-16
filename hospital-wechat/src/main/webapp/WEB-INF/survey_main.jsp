@@ -91,7 +91,7 @@
         <div class="weui-flex__item">
         </div>
         <div class="weui-flex__item">
-            <a href="javascript:next();" class="weui-btn weui-btn_primary" id="nextButton" style="display:none">下一题</a>
+            <a href="javascript:;" class="weui-btn weui-btn_primary" id="nextButton" style="display:none">下一题</a>
         </div>
     </div>
 </div>
