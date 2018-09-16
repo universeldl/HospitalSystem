@@ -194,7 +194,7 @@ var uploader = new plupload.Uploader({
     container: document.getElementById('container'),
     flash_swf_url : 'lib/plupload/js/Moxie.swf',
     silverlight_xap_url : 'lib/plupload/js/Moxie.xap',
-    url : 'http://oss.aliyuncs.com',
+    url : 'https://oss.aliyuncs.com',
 
     filters: {
         mime_types : [
@@ -260,7 +260,7 @@ var uploader = new plupload.Uploader({
             if (files.length > uploaded_count) {
                 hideLoadingToast();
                 next(filenames.join(";"));
-                uploaded_count += files.length;
+                uploaded_count = files.length;
             } else {
                 showDialog1("本题不需要上传照片吗？","需要","不需要");
             }
@@ -346,16 +346,18 @@ function showDialog1(str1, str2,str3) {
     $("#dialog1Str3").html(str3);
 
     $dialog.fadeIn(200);
-
-    $dialog.on('click', '.weui-dialog__btn_default', function () {
-        $(this).parents('.js_dialog').fadeOut(200);
-    });
-
-    $dialog.on('click', '.weui-dialog__btn_primary', function () {
-        $(this).parents('.js_dialog').fadeOut(200);
-        next("");
-    });
 }
+
+$("#dialog1Str2").on('click', function () {
+    $(this).parents('.js_dialog').fadeOut(200);
+});
+
+$("#dialog1Str3").on('click', function () {
+    $(this).parents('.js_dialog').fadeOut(200);
+    next("");
+});
+
+
 
 function showToast(str) {
     var $toast = $('#toast');
