@@ -117,11 +117,11 @@ function submit() {
 function displayButton(index) {
     if (index == questions.length - 1) {
         $("#selectfiles").show();
-        document.getElementById("nextButton").innerHTML = "上传并提交"
+        document.getElementById("nextButton").innerHTML = "提交"
         document.getElementById("nextButton").style.display = "";
     } else {
         $("#selectfiles").show();
-        document.getElementById("nextButton").innerHTML = "上传并回答下一题"
+        document.getElementById("nextButton").innerHTML = "下一题"
         document.getElementById("nextButton").style.display = "";
     }
 }
@@ -302,7 +302,7 @@ function previewImage(file,callback){
     }else{
         var image = new moxie.image.Image();
         image.onload = function() {
-            image.downsize( 150, 150 );//先压缩一下要预览的图片,宽300，高300
+            //image.downsize( 300, 300 );//先压缩一下要预览的图片,宽300，高300
             var imgsrc = image.type=='image/jpeg' ? image.getAsDataURL('image/jpeg',80) : image.getAsDataURL(); //得到图片src,实质为一个base64编码的数据
             callback && callback(imgsrc); //callback传入的参数为预览图片的url
             image.destroy();
