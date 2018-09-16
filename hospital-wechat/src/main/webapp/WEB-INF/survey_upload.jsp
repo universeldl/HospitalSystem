@@ -88,7 +88,7 @@
                     </div>
                     <div class="weui-uploader__bd">
                         <div class="weui-uploader__input-box">
-                            <input id="selectfiles" class="weui-uploader__input" type="file" accept="image/*"  capture="camera"/>
+                            <input id="selectfiles" class="weui-uploader__input" type="file" accept="image/*" multiple capture="camera"/>
                         </div>
                         <ul class="weui-uploader__files" id="file-list">
                         </ul>
@@ -104,34 +104,6 @@
 
 
 <pre id="console"></pre>
-
-<%--<div id="container">
-    <div id="ossfile">您的微信版本过低请升级</div>
-    <ul id="file-list">
-    </ul>
-    <div class="weui-uploader__input-box" id="uploaderdiv">
-        <input id="selectfiles" class="weui-uploader__input" type="hidden file" accept="image/*"  capture="camera"/>
-    </div>
-
-    <br/>
-    <br/>
-
-    <a href="javascript:questionStart();" class="weui-btn weui-btn_primary" id="startButton" style="display:none">开始填写</a>
-    <a href="javascript:next();" class="weui-btn weui-btn_primary" id="nextButton" style="display:none"></a>
-</div>--%>
-
-<%--<div id="container2" class="weui-uploader__bd">
-    <ul id="file-list">
-    </ul>
-
-    <div class="weui-uploader__input-box">
-        <input id="selectfiles" type="hidden" />
-    </div>
-</div>--%>
-
-
-
-
 
 <s:if test="#request.deliveryID!=null" >
     <input type="hidden" value="<%=request.getAttribute("deliveryID")%>" id="deliveryID"/>
@@ -199,9 +171,5 @@
 <script type="text/javascript" src="lib/plupload/js/moxie.js"></script>
 <script type="text/javascript" src="lib/plupload/js/plupload.min.js"></script>
 <script type="text/javascript" src="js/upload.js"></script>
-
-<%--
-    <script src="js/survey_upload.js"></script>
---%>
 <script src="./js/common.js"></script>
 </html>
