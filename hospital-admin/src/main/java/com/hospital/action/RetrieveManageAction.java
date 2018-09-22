@@ -284,6 +284,8 @@ public class RetrieveManageAction extends ActionSupport {
             deliveryInfo.setState(-1);
 */
             deliveryService.updateDeliveryInfo(deliveryInfo);
+            newSurvey.setCurrentNum(newSurvey.getCurrentNum() + 1);
+            surveyService.updateSurveyInfo(newSurvey);// 问卷的总回收数增加
         }
         try {
             ServletActionContext.getResponse().getWriter().print(success);
