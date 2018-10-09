@@ -42,7 +42,9 @@ public class updatePlan extends QuartzJobBean {
             throws JobExecutionException {
         boolean updatePlan = true;
         try {
+            System.out.println("update plan begin");
             updatePlan = patientService.updatePlan();
+            System.out.println("update plan end");
         } catch (Throwable e) {
             // TODO: handle exception
             e.printStackTrace();
