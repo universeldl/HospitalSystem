@@ -7,3 +7,9 @@ HospitalSystem/WebRoot/WEB-INF/classes/
 
 *.class
 */target/*
+target/*
+
+aliyun-oss/upload/*
+
+aliyun-oss/src/test/*
+.DS_Store
