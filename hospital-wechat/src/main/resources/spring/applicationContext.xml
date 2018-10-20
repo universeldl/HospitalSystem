@@ -17,5 +17,7 @@
     <import resource="applicationContext-city.xml"/>
     <import resource="applicationContext-province.xml"/>
     <import resource="applicationContext-uploadImg.xml"/>
+    <import resource="applicationContext-weather.xml"/>
+
 
 </beans>

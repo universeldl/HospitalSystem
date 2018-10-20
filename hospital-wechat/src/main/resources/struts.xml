@@ -19,6 +19,6 @@
     <include file="struts2/struts-survey.xml"></include>
     <include file="struts2/struts-patient-register.xml"></include>
     <include file="struts2/struts-uploadImg.xml"></include>
-    <include file="struts2/struts-oss-list.xml"></include>
+    <include file="struts2/struts-weather.xml"></include>
 
 </struts>
