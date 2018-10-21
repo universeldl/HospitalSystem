@@ -940,6 +940,11 @@ public class PatientServiceImpl implements PatientService {
             Patient patient = patientDao.getPatientById(tmpPatient);
             //int age = 7;
             System.out.println("update plan for : " + patient.getName());
+
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            System.out.println("\ttime:" + df.format(new Date()));
+
+
             int age = AgeUtils.getAgeFromBirthTime(patient.getBirthday());
             Plan plan = new Plan();
             plan.setBeginAge(age);
