@@ -28,6 +28,7 @@ public class Patient implements Serializable {
     private Doctor addnDoctor;    //共享医生
     private Integer oldPatient;  // 1 新病例, 2 既往病例, 3 哮喘无忧用户
     private Integer state; // 状态， -1为未激活（出现在回收站且不发送问卷），
+    private String bannedSurveyList;
 
     private Date birthday;
     private Date createTime;    //创建时间
@@ -147,6 +148,14 @@ public class Patient implements Serializable {
         this.patientType = patientType;
     }
 
+
+    public String getBannedSurveyList() {
+        return bannedSurveyList;
+    }
+
+    public void setBannedSurveyList(String bannedSurveyList) {
+        this.bannedSurveyList = bannedSurveyList;
+    }
 
     public String getEmail() {
         return email;
