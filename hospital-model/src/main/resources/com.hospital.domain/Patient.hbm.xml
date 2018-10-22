@@ -48,6 +48,10 @@
             <column name="email"/>
         </property>
 
+        <property name="bannedSurveyList" type="java.lang.String">
+            <column name="bannedSurveyList"/>
+        </property>
+
         <property name="birthday" type="java.util.Date">
             <column name="birthday"/>
         </property>

@@ -10,6 +10,7 @@ import com.hospital.util.TemplateMessageMgr;
 import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.ServletActionContext;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -284,6 +285,14 @@ public class DeliveryServiceImpl implements DeliveryService {
 
             System.out.println("checkAndDoDelivery2 LOG patient = " + patient.getName());
 
+            //get all banned survey list of this patient
+            String sourceStr = patient.getBannedSurveyList();
+            String[] sourceStrArray = sourceStr.split(",");
+            Set<Integer> bannedList = new HashSet<>();
+            for (int i = 0; i < sourceStrArray.length; i++) {
+                bannedList.add(Integer.parseInt(sourceStrArray[i]));
+            }
+
             // get create time
             Calendar createDate = Calendar.getInstance();
             createDate.setTime(patient.getCreateTime());
@@ -297,6 +306,14 @@ public class DeliveryServiceImpl implements DeliveryService {
 
             for (Survey survey : surveys) {
                 System.out.println("checkAndDoDelivery2 LOG survey = " + survey.getSurveyName());
+
+                boolean isBanned = false;
+                for (Integer sId : bannedList) {
+                    if (sId.equals(survey.getSurveyId())) {
+                        isBanned = true;
+                    }
+                }
+                //if (isBanned) continue;
 
                 try {
                     //threshold, only registry date after this date we will send this survey
@@ -376,7 +393,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
                                     deliveryInfoInCycle.setState(deliveryInfoInCycle.getState() + 1);
                                     deliveryDao.updateDeliveryInfo(deliveryInfoInCycle);
-                                    sendTemplateMessage(deliveryInfoInCycle);
+                                    if ( !isBanned ) {
+                                        sendTemplateMessage(deliveryInfoInCycle);
+                                    }
                                 } else {
                                     System.out.println("checkAndDoDelivery2 LOG delivery id = " + deliveryInfoInCycle.getDeliveryId() + " already answered");
                                 }
@@ -392,7 +411,9 @@ public class DeliveryServiceImpl implements DeliveryService {
                                 System.out.println("checkAndDoDelivery2 LOG create new delivery = " + addDelivery);
 
                                 if (newDeliveryInfo != null) {
-                                    sendTemplateMessage(newDeliveryInfo);
+                                    if ( !isBanned ) {
+                                        sendTemplateMessage(newDeliveryInfo);
+                                    }
                                     survey.setNum(survey.getNum() + 1);
                                     surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
                                     System.out.println("checkAndDoDelivery2 survey number +1 = " + survey.getNum());

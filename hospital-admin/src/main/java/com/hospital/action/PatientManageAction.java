@@ -86,6 +86,7 @@ public class PatientManageAction extends ActionSupport {
     private Integer city;
     private Integer hospital;
     private Integer oldPatient;
+    private Integer bannedSurveyId;
 
     /**
      * @param fileName the fileName to set
@@ -133,6 +134,11 @@ public class PatientManageAction extends ActionSupport {
 
     public void setSex(Integer sex) {
         this.sex = sex;
+    }
+
+
+    public void setBannedSurveyId(Integer bannedSurveyId) {
+        this.bannedSurveyId = bannedSurveyId;
     }
 
 
@@ -519,6 +525,39 @@ public class PatientManageAction extends ActionSupport {
             }
 
             patient.setState(1);
+            Patient newPatient = patientService.updatePatientInfo(patient);
+            try {
+                ServletActionContext.getResponse().getWriter().print((newPatient == null)?-1:1);
+            } catch (IOException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return null;
+    }
+    public String updatePatientBannedSurveyList() {
+        if (patientId != null) {
+            Patient tmpPatient = new Patient();
+            tmpPatient.setPatientId(patientId);
+
+            Patient patient = patientService.getPatientById(tmpPatient);
+
+            if (patient == null) {
+                try {
+                    ServletActionContext.getResponse().getWriter().print(-1);
+                } catch (IOException e) {
+                    throw new RuntimeException(e.getMessage());
+                }
+                return null;
+            }
+
+            String banList = patient.getBannedSurveyList();
+            if ("".equals(banList)) {
+                banList = bannedSurveyId.toString();
+            }
+            else {
+                banList = banList + "," + bannedSurveyId.toString();
+            }
+            patient.setBannedSurveyList(banList);
             Patient newPatient = patientService.updatePatientInfo(patient);
             try {
                 ServletActionContext.getResponse().getWriter().print((newPatient == null)?-1:1);
