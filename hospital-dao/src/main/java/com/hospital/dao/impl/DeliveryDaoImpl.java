@@ -270,7 +270,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
                 deliveryInfoList = doSplitPage(hql, pageCode, pageSize);
             } else {
                 //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-                String addSql = " r where (r.patient.doctor.aid=? or r.patient.addnDoctor.aid=?) ";
+                String addSql = " and (r.patient.doctor.aid=? or r.patient.addnDoctor.aid=?) ";
                 sql += addSql;
                 List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
                 if (list != null && list.size() > 0) {
