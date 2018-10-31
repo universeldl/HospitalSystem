@@ -283,9 +283,9 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     @Override
     public Patient getPatientById(Patient patient) {
         String hql = "from Patient r where r.patientId=?";
-        this.getHibernateTemplate().clear();
         List list = this.getHibernateTemplate().find(hql, patient.getPatientId());
         if (list != null && list.size() > 0) {
+            this.getHibernateTemplate().evict(list.get(0));
             return (Patient) list.get(0);
         }
         return null;
