@@ -50,7 +50,7 @@ public class PlanDaoImpl extends HibernateDaoSupport implements PlanDao {
             //将传入的detached(分离的)状态的对象的属性复制到持久化对象中，并返回该持久化对象
             newPlan = (Plan) this.getHibernateTemplate().merge(updatePlan);
             this.getHibernateTemplate().flush();
-            this.getHibernateTemplate().clear();
+            this.getHibernateTemplate().evict(newPlan);
         } catch (Throwable e1) {
             e1.printStackTrace();
             throw new RuntimeException(e1.getMessage());
