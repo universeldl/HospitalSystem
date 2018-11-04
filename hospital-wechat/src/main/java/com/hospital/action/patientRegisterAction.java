@@ -261,6 +261,8 @@ public class patientRegisterAction extends ActionSupport {
             patient.setBirthday(birthday_date);
             patient.setOldPatient(oldPatient);
             patient.setState(1);
+            patient.setBannedSurveyList("");
+
             if (sex.toUpperCase().equals("MALE")) {
                 patient.setSex(1);
             } else {
