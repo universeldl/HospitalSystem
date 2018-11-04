@@ -290,6 +290,7 @@ public class DeliveryServiceImpl implements DeliveryService {
             String[] sourceStrArray = sourceStr.split(",");
             Set<Integer> bannedList = new HashSet<>();
             for (int i = 0; i < sourceStrArray.length; i++) {
+                if (sourceStrArray[i].equals("")) continue;
                 bannedList.add(Integer.parseInt(sourceStrArray[i]));
             }
 
