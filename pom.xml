@@ -35,13 +35,13 @@
     <!--添加依赖-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>4.3.7.RELEASE</spring.version>
+        <spring.version>4.3.18.RELEASE</spring.version>
 
         <hibernate.version>5.2.12.Final</hibernate.version>
         <json.version>20160810</json.version>
         <jxl.version>2.6.12</jxl.version>
         <quartz.version>2.3.0</quartz.version>
-        <struts.version>2.1.8.1</struts.version>
+        <struts.version>2.3.34</struts.version>
 
         <junit.version>4.12</junit.version>
         <druid.version>1.0.28</druid.version>
