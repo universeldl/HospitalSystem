@@ -237,10 +237,10 @@ public class RetrieveManageAction extends ActionSupport {
         int addDelivery = deliveryService.addDelivery(newDI);
         newDI.setDeliveryId(addDelivery);
         DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(newDI);
-        if (deliveryInfo != null) {
+/*        if (deliveryInfo != null) {
             newSurvey.setNum(newSurvey.getNum() + 1);
             surveyService.updateSurveyInfo(newSurvey);// 问卷的总发送数增加
-        }
+        }*/
 
         int success = 1;
         RetrieveInfo RI = retrieveService.getRetrieveInfoByDeliveryID(deliveryId);
@@ -284,8 +284,10 @@ public class RetrieveManageAction extends ActionSupport {
             deliveryInfo.setState(-1);
 */
             deliveryService.updateDeliveryInfo(deliveryInfo);
+/*
             newSurvey.setCurrentNum(newSurvey.getCurrentNum() + 1);
             surveyService.updateSurveyInfo(newSurvey);// 问卷的总回收数增加
+            */
         }
         try {
             ServletActionContext.getResponse().getWriter().print(success);

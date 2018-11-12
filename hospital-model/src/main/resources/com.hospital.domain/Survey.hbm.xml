@@ -15,9 +15,9 @@
             <column name="author"/>
         </property>
 
-        <property name="num" type="java.lang.Integer">
+<!--        <property name="num" type="java.lang.Integer">
             <column name="num"/>
-        </property>
+        </property>-->
 
         <property name="bday" type="java.lang.Integer">
             <column name="bday"/>
@@ -31,9 +31,9 @@
             <column name="times"/>
         </property>
 
-        <property name="currentNum" type="java.lang.Integer">
+<!--        <property name="currentNum" type="java.lang.Integer">
             <column name="currentNum"/>
-        </property>
+        </property>-->
 
         <property name="department" type="java.lang.String">
             <column name="department"/>

@@ -74,7 +74,7 @@ public class SurveyManageAction extends ActionSupport {
     private String surveyName;    //问卷名称
     private String author;    //作者名称
     private String department;    //科室
-    private Integer num;    //总分发数
+    //private Integer num;    //总分发数
     private String description;    //简介
     private int surveyId;//问卷编号
     private boolean sendOnRegister;
@@ -159,10 +159,10 @@ public class SurveyManageAction extends ActionSupport {
         this.department = department;
     }
 
-
+/*
     public void setNum(Integer num) {
         this.num = num;
-    }
+    }*/
 
 
     public void setDescription(String description) {
@@ -282,7 +282,7 @@ public class SurveyManageAction extends ActionSupport {
         surveyType.setTypeId(surveyTypeId);
         Date putdate = new Date(System.currentTimeMillis());//得到当前时间,作为生成时间
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");//得到操作医生
-        Survey survey = new Survey(surveyType, surveyName, author, department, putdate, description, 0, 0, doctor, frequency, times, sendOnRegister, bday);//设置问卷
+        Survey survey = new Survey(surveyType, surveyName, author, department, putdate, description, doctor, frequency, times, sendOnRegister, bday);//设置问卷
         boolean b = surveyService.addSurvey(survey);//添加问卷.返回是否成功添加
         int success = 0;
         if (b) {
@@ -649,12 +649,13 @@ public class SurveyManageAction extends ActionSupport {
      *
      * @return
      */
+    /*
     public String addSurveyNum() {
         Survey survey = new Survey();
         survey.setSurveyId(surveyId);
         Survey updateSurvey = surveyService.getSurveyById(survey);
-        updateSurvey.setNum(updateSurvey.getNum() + num);
-        updateSurvey.setCurrentNum((updateSurvey.getCurrentNum() + num));
+        //updateSurvey.setNum(updateSurvey.getNum() + num);
+        //updateSurvey.setCurrentNum((updateSurvey.getCurrentNum() + num));
         Survey newSurvey = surveyService.updateSurveyInfo(updateSurvey);
         int success = 0;
         if (newSurvey != null) {
@@ -669,6 +670,7 @@ public class SurveyManageAction extends ActionSupport {
         }
         return null;
     }
+    */
 
     public String batchAddSurvey() {
         HttpServletResponse response = ServletActionContext.getResponse();

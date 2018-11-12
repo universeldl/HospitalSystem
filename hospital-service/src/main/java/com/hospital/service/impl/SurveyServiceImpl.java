@@ -13,6 +13,7 @@ import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.struts2.ServletActionContext;
 
 import java.io.File;
@@ -169,15 +170,15 @@ public class SurveyServiceImpl implements SurveyService {
                 try {
                     if (Integer.parseInt(bday) <= 0) {
                         //说明不是正整数
-                        survey.setNum(-1);
+                        //survey.setNum(-1);
                         failSurveys.add(survey);
                         continue;
                     }
-                    survey.setNum(Integer.parseInt(bday));
-                    survey.setCurrentNum(Integer.parseInt(bday));
+                    //survey.setNum(Integer.parseInt(bday));
+                    //survey.setCurrentNum(Integer.parseInt(bday));
                 } catch (NumberFormatException e) {
                     //说明不是整数
-                    survey.setNum(-1);
+                    //survey.setNum(-1);
                     failSurveys.add(survey);
                     continue;
                 }
@@ -185,15 +186,15 @@ public class SurveyServiceImpl implements SurveyService {
                 try {
                     if (Integer.parseInt(num) <= 0) {
                         //说明不是正整数
-                        survey.setNum(-1);
+                        //survey.setNum(-1);
                         failSurveys.add(survey);
                         continue;
                     }
-                    survey.setNum(Integer.parseInt(num));
-                    survey.setCurrentNum(Integer.parseInt(num));
+                    //survey.setNum(Integer.parseInt(num));
+                    //survey.setCurrentNum(Integer.parseInt(num));
                 } catch (NumberFormatException e) {
                     //说明不是整数
-                    survey.setNum(-1);
+                    //survey.setNum(-1);
                     failSurveys.add(survey);
                     continue;
                 }
@@ -260,7 +261,9 @@ public class SurveyServiceImpl implements SurveyService {
      * @return 返回文件路径
      */
     public String exportExcel(List<Survey> failSurveys) {
+        return null;
         //用数组存储表头
+        /*
         String[] title = {"问卷类型", "问卷名称", "作者名称", "科室", "数量", "允许答卷最长天数", "描述", "用户注册时发送"};
         String path = ServletActionContext.getServletContext().getRealPath("/download");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
@@ -331,6 +334,7 @@ public class SurveyServiceImpl implements SurveyService {
             e.printStackTrace();
         }
         return fileName;
+        */
     }
 
 
@@ -379,11 +383,11 @@ public class SurveyServiceImpl implements SurveyService {
                 sheet.addCell(label);
                 label = new Label(3, i, surveys.get(i - 1).getDepartment());
                 sheet.addCell(label);
-                label = new Label(4, i, surveys.get(i - 1).getNum().toString());
+                //label = new Label(4, i, surveys.get(i - 1).getNum().toString());
                 sheet.addCell(label);
                 label = new Label(5, i, surveys.get(i - 1).getBday().toString());
                 sheet.addCell(label);
-                label = new Label(6, i, surveys.get(i - 1).getCurrentNum().toString());
+                //label = new Label(6, i, surveys.get(i - 1).getCurrentNum().toString());
                 sheet.addCell(label);
                 label = new Label(7, i, surveys.get(i - 1).getPutdate().toLocaleString());
                 sheet.addCell(label);
