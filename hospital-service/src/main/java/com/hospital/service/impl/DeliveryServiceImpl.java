@@ -233,8 +233,8 @@ public class DeliveryServiceImpl implements DeliveryService {
                             DeliveryInfo newDeliveryInfo = getDeliveryInfoById(deliveryInfo);
                             if (newDeliveryInfo != null) {
                                 sendTemplateMessage(newDeliveryInfo);
-                                survey.setNum(survey.getNum() + 1);
-                                surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
+                                //survey.setNum(survey.getNum() + 1);
+                                //surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
                                 break;//each patient only send once, or patients will receive all the remaining surveys
                             } else {
                                 return false;
@@ -415,9 +415,9 @@ public class DeliveryServiceImpl implements DeliveryService {
                                     if ( !isBanned ) {
                                         sendTemplateMessage(newDeliveryInfo);
                                     }
-                                    survey.setNum(survey.getNum() + 1);
-                                    surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
-                                    System.out.println("checkAndDoDelivery2 survey number +1 = " + survey.getNum());
+                                    //survey.setNum(survey.getNum() + 1);
+                                    //surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
+                                    //System.out.println("checkAndDoDelivery2 survey number +1 = " + survey.getNum());
 
                                 } else {
                                     System.out.println("checkAndDoDelivery2 newDeliveryInfo = null!!");
@@ -565,8 +565,8 @@ public class DeliveryServiceImpl implements DeliveryService {
                             DeliveryInfo newDeliveryInfo = getDeliveryInfoById(newDI);
                             if (newDeliveryInfo != null) {
                                 sendTemplateMessage(newDeliveryInfo);
-                                survey.setNum(survey.getNum() + 1);
-                                surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
+                                //survey.setNum(survey.getNum() + 1);
+                                //surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
                             } else {
                                 return false;
                             }

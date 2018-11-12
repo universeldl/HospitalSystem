@@ -15,8 +15,8 @@ public class Survey implements Serializable {
     private String author;    //作者名称
     private String department;    //科室
     private Date putdate;    //生成日期
-    private Integer num;    //总分发数
-    private Integer currentNum;    //总回收数
+    //private Integer num;    //总分发数
+    //private Integer currentNum;    //总回收数
     private String description;    //简介
     private Doctor doctor;    //操作医生
     private Integer frequency;    //随访频率
@@ -122,6 +122,7 @@ public class Survey implements Serializable {
         this.putdate = putdate;
     }
 
+    /*
     public Integer getNum() {
         return num;
     }
@@ -137,6 +138,7 @@ public class Survey implements Serializable {
     public void setCurrentNum(Integer currentNum) {
         this.currentNum = currentNum;
     }
+    */
 
     public String getDescription() {
         return description;
@@ -159,6 +161,7 @@ public class Survey implements Serializable {
 
     }
 
+    /*
     public List<Question> getSortedQuestions() {
         List<Question> sortedQuestions = new ArrayList<Question>(questions);
         Collections.sort(sortedQuestions, new Comparator<Question>() {
@@ -169,9 +172,10 @@ public class Survey implements Serializable {
         });
         return sortedQuestions;
     }
+    */
 
     public Survey(SurveyType surveyType, String surveyName, String author,
-                  String department, Date putdate, String description, Integer num, Integer currentNum,
+                  String department, Date putdate, String description,/* Integer num, Integer currentNum,*/
                   Doctor doctor, Integer frequency, Integer times, boolean sendOnRegister, Integer bday) {
         super();
         this.surveyType = surveyType;
@@ -185,8 +189,8 @@ public class Survey implements Serializable {
         this.times = times;
         this.sendOnRegister = sendOnRegister;
         this.bday = bday;
-        this.num = num;
-        this.currentNum = currentNum;
+/*        this.num = num;
+        this.currentNum = currentNum;*/
     }
 
     public Survey(SurveyType surveyType, String surveyName, String author,
