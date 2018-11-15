@@ -283,6 +283,23 @@ public class DeliveryServiceImpl implements DeliveryService {
                 continue;
             }
 
+            Set<DeliveryInfo> deliveryInfos = patient.getDeliveryInfos();
+
+            for (DeliveryInfo deliveryInfo : deliveryInfos) {
+                Calendar endTime = Calendar.getInstance();
+                endTime.setTime(deliveryInfo.getEndDate());
+
+                if (cal.after(endTime)) {
+                    continue;
+                }
+
+                if (deliveryInfo.getRetrieveInfo() != null) {
+                    continue;
+                }
+
+                sendTemplateMessage(deliveryInfo);
+            }
+/*
             System.out.println("checkAndDoDelivery2 LOG patient = " + patient.getName());
 
             //get all banned survey list of this patient
@@ -431,7 +448,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
                     start.add(Calendar.MONTH, survey.getFrequency());
                 }
-            }
+            }*/
         }
         return true;
     }

@@ -964,9 +964,201 @@ public class PatientServiceImpl implements PatientService {
             }
             //System.out.println("plan2:" + patient.getPlan().getPlanId());
 
+            boolean good = genDeliveryInfoForPatient(patient);
+            System.out.println("generate delivery for patient "+(good?"succeeded":"failed"));
+        }
+        return true;
+    }
+
+    private boolean genDeliveryInfoForPatient(Patient patient) {
+        System.out.println("generate delivery LOG patient = " + patient.getName());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println("\ttime:" + df.format(new Date()));
+
+        Calendar curCalendar = Calendar.getInstance();
+
+        //get all banned survey list of this patient
+        String sourceStr = patient.getBannedSurveyList();
+        String[] sourceStrArray = sourceStr.split(",");
+        Set<Integer> bannedList = new HashSet<>();
+        for (int i = 0; i < sourceStrArray.length; i++) {
+            if (sourceStrArray[i].equals("")) continue;
+            bannedList.add(Integer.parseInt(sourceStrArray[i]));
+        }
+
+        // get create time
+        Calendar createDate = Calendar.getInstance();
+        createDate.setTime(patient.getCreateTime());
+        System.out.println("generate delivery LOG createDate = " + createDate.getTime().toString());
+
+        // all survey
+        Set<Survey> surveys = patient.getPlan().getSurveys();
+
+        // all deliveryInfo
+        Set<DeliveryInfo> deliveryInfos = patient.getDeliveryInfos();
+
+        for (Survey survey : surveys) {
+            System.out.println("generate delivery LOG survey = " + survey.getSurveyName());
+
+            boolean isBanned = false;
+            for (Integer sId : bannedList) {
+                if (sId.equals(survey.getSurveyId())) {
+                    isBanned = true;
+                }
+            }
+            if (isBanned) continue;
+
+            try {
+                //threshold, only registry date after this date we will send this survey
+                Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2018-08-23 00:00:00");
+
+                //register date
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(patient.getCreateTime());
+                Date regDate = calendar.getTime();
+
+                //one month later of the register date
+                calendar.add(Calendar.MONTH, 1);
+                Date endDate = calendar.getTime();
+
+                if (survey.getSurveyId() == 7) {
+                    if (regDate.before(date) || (regDate.after(date) && System.currentTimeMillis() > endDate.getTime())) {
+                        continue;
+                    }
+                    if (patient.getOpenID() != "o5bAaxGhIV0ZksDNy8y26pk_XUI8") {
+                        continue;
+                    }
+                }
+                else if (survey.getSurveyId() == 8) {
+                    if (regDate.before(date) || (regDate.after(date) && System.currentTimeMillis() < endDate.getTime())) {
+                        continue;
+                    }
+                    if (patient.getOpenID() != "o5bAaxGhIV0ZksDNy8y26pk_XUI8") {
+                        continue;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Calendar start = (Calendar) createDate.clone();
+
+            Integer num_cycle = 0;
+            while(true) {
+                num_cycle += 1;
+
+                // finished all survey
+                if (num_cycle > survey.getTimes()) break;
+
+                Calendar end = (Calendar) start.clone();
+                end.add(Calendar.DATE, survey.getBday());
+
+                System.out.println("generate delivery LOG num_cycle = " + num_cycle.toString());
+                System.out.println("generate delivery LOG start = " + start.getTime().toString());
+                System.out.println("generate delivery LOG end = " + end.getTime().toString());
+
+
+                if ((curCalendar.after(start) || curCalendar.equals(start)) && curCalendar.before(end)) {
+                    if (num_cycle == 1 && !survey.isSendOnRegister()) {
+                        // do nothing;
+                        System.out.println("generate delivery LOG donoting!");
+
+                    } else {
+                        // should send message
+                        DeliveryInfo deliveryInfoInCycle = null;
+                        for (DeliveryInfo deliveryInfo : deliveryInfos) {
+                            if (!deliveryInfo.getSurvey().getSurveyId().equals(survey.getSurveyId())) continue;
+                            Calendar deliveryInfoDate = Calendar.getInstance();
+                            deliveryInfoDate.setTime(deliveryInfo.getDeliveryDate());
+                            if ((deliveryInfoDate.after(start) || deliveryInfoDate.equals(start))
+                                    && deliveryInfoDate.before(end)) {
+                                deliveryInfoInCycle = deliveryInfo;
+                                break;
+                            }
+                        }
+
+                        // there is already delivery Info
+                        if (deliveryInfoInCycle != null) {
+                            System.out.println("generate delivery LOG already have delivery id = " + deliveryInfoInCycle.getDeliveryId());
+
+                            if (deliveryInfoInCycle.getRetrieveInfo() == null) {
+                                System.out.println("generate delivery LOG resend delivery id = " + deliveryInfoInCycle.getDeliveryId());
+
+                                deliveryInfoInCycle.setState(deliveryInfoInCycle.getState() + 1);
+                                deliveryDao.updateDeliveryInfo(deliveryInfoInCycle);
+                                /*
+                                if ( !isBanned ) {
+                                    sendTemplateMessage(deliveryInfoInCycle);
+                                }
+                                */
+                            } else {
+                                System.out.println("generate delivery LOG delivery id = " + deliveryInfoInCycle.getDeliveryId() + " already answered");
+                            }
+                        } else {
+                            DeliveryInfo newDI = new DeliveryInfo();
+                            newDI.setDoctor(patient.getDoctor());
+                            newDI.setSurvey(survey);
+                            newDI.setPatient(patient);
+                            newDI.setState(0);//新deliveryInfo
+                            int addDelivery = addDelivery(newDI);
+                            newDI.setDeliveryId(addDelivery);
+                            DeliveryInfo newDeliveryInfo = deliveryDao.getDeliveryInfoById(newDI);
+                            System.out.println("generate delivery LOG create new delivery = " + addDelivery);
+
+                            if (newDeliveryInfo != null) {
+                                //if ( !isBanned ) {
+                                //    sendTemplateMessage(newDeliveryInfo);
+                                //}
+                                //survey.setNum(survey.getNum() + 1);
+                                //surveyDao.updateSurveyInfo(survey);// 问卷的总发送数增加
+                                //System.out.println("checkAndDoDelivery2 survey number +1 = " + survey.getNum());
+                            } else {
+                                System.out.println("generate delivery newDeliveryInfo = null!!");
+                                return false;
+                            }
+                        }
+                    }
+
+                    break;
+                }
+
+                start.add(Calendar.MONTH, survey.getFrequency());
+            }
         }
         return true;
     }
 
 
+    private int addDelivery(DeliveryInfo info) {
+        Patient patient = patientDao.getPatientByopenID(info.getPatient());
+
+        //得到该病人的最长答卷天数，过期将不再接受该次答卷
+        int maxDay = info.getSurvey().getBday();//允许填卷天数
+
+        //获得当前时间
+        Date deliveryDate = new Date(System.currentTimeMillis());
+        if (info.getDeliveryDate() != null) {
+            deliveryDate = info.getDeliveryDate();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(deliveryDate);
+        calendar.add(Calendar.DAY_OF_MONTH, +maxDay);//+maxDay今天的时间加maxDay天
+
+        // 根据最大分发天数,计算出截止日期
+        Date endDate = calendar.getTime();
+
+        //获得该病人的信息,为分发信息设置病人信息
+        DeliveryInfo deliveryInfo = new DeliveryInfo();
+        deliveryInfo.setPatient(patient);
+        deliveryInfo.setDoctor(info.getDoctor());
+        deliveryInfo.setState(info.getState());
+        deliveryInfo.setSurvey(info.getSurvey());
+        deliveryInfo.setDeliveryDate(deliveryDate);
+        deliveryInfo.setEndDate(endDate);
+
+        int id = deliveryDao.addDelivery(deliveryInfo);//返回非0成功添加,返回0添加失败
+
+        return id;
+    }
 }
