@@ -1062,7 +1062,6 @@ public class PatientServiceImpl implements PatientService {
                     if (num_cycle == 1 && !survey.isSendOnRegister()) {
                         // do nothing;
                         System.out.println("generate delivery LOG donoting!");
-
                     } else {
                         // should send message
                         DeliveryInfo deliveryInfoInCycle = null;

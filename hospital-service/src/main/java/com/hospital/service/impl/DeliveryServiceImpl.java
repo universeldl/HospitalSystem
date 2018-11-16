@@ -251,20 +251,21 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public boolean checkAndDoDelivery2() {
-/*
-        List<Patient> patients = patientDao.findAllPatients();
-*/
-
         List<Integer> patientIds = patientDao.findAllActivePatientIds();
         // current date
         Calendar curCalendar = Calendar.getInstance();
 
         System.out.println("current date = " + curCalendar.toString());
+        SimpleDateFormat dft = new SimpleDateFormat("HH");
+        int lastCharOfCurrentHour = Integer.parseInt(dft.format(curCalendar.getTime())) - 10;// 0~9
 
-/*
-        for (Patient patient : patients) {
-*/
         for (Integer patientId : patientIds) {
+            // screen patient
+            int lastCharOfPatientId = patientId % 10;
+            if(lastCharOfCurrentHour != lastCharOfPatientId) {
+                continue;
+            }
+
             Patient tmpPatient = new Patient();
             tmpPatient.setPatientId(patientId);
             Patient patient = patientDao.getPatientById(tmpPatient);
@@ -272,34 +273,31 @@ public class DeliveryServiceImpl implements DeliveryService {
                 continue;
             }
 
-            // screen patient
-            Calendar cal = Calendar.getInstance();
-            SimpleDateFormat dft = new SimpleDateFormat("HH");
-            int lastCharOfCurrentHour = Integer.parseInt(dft.format(cal.getTime())) - 10;// 0~9
-/*            String patientIdStr = String.valueOf(patient.getPatientId());
-            int lastCharOfPatientId = Integer.parseInt(patientIdStr.substring(patientIdStr.length() - 1, patientIdStr.length()));*/
-            int lastCharOfPatientId = patientId % 10;
-            if(lastCharOfCurrentHour != lastCharOfPatientId) {
-                continue;
-            }
-
+            System.out.println("check and do delivery2 for patient = " + patient.getName()) ;
             Set<DeliveryInfo> deliveryInfos = patient.getDeliveryInfos();
 
             for (DeliveryInfo deliveryInfo : deliveryInfos) {
-                Calendar endTime = Calendar.getInstance();
-                endTime.setTime(deliveryInfo.getEndDate());
-
-                if (cal.after(endTime)) {
-                    continue;
-                }
 
                 if (deliveryInfo.getRetrieveInfo() != null) {
                     continue;
                 }
 
+                Calendar endTime = Calendar.getInstance();
+                endTime.setTime(deliveryInfo.getEndDate());
+
+                if (curCalendar.after(endTime)) {
+                    continue;
+                }
                 sendTemplateMessage(deliveryInfo);
             }
-/*
+
+        }
+        return true;
+    }
+
+
+
+    /*
             System.out.println("checkAndDoDelivery2 LOG patient = " + patient.getName());
 
             //get all banned survey list of this patient
@@ -449,9 +447,6 @@ public class DeliveryServiceImpl implements DeliveryService {
                     start.add(Calendar.MONTH, survey.getFrequency());
                 }
             }*/
-        }
-        return true;
-    }
 
 
     @Override
