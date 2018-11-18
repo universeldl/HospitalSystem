@@ -113,6 +113,12 @@ public class RetrieveServiceImpl implements RetrieveService {
     }
 
     @Override
+    public Integer getSurveyCurNum(Survey survey) {
+        return retrieveDao.getSurveyCurNum(survey);
+    }
+
+
+    @Override
     public PageBean<RetrieveInfo> findMyDeliveryInfoByPage(Patient patient,
                                                            int pageCode, int pageSize) {
         // TODO Auto-generated method stub

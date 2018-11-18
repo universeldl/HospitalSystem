@@ -391,6 +391,22 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         return list;
     }
 
+    @Override
+    public Integer getSurveyNum(Survey survey) {
+        String sql = "select count(*) from DeliveryInfo d where d.survey.surveyId=?";
+        Integer totalRecord = 0;
+        try {
+            List list = this.getHibernateTemplate().find(sql, survey.getSurveyId());
+            if (list != null && list.size() > 0) {
+                totalRecord = ((Long) list.get(0)).intValue();
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+        return totalRecord;
+    }
+
 
     @Override
     public DeliveryInfo updateDeliveryInfo(DeliveryInfo deliveryInfoById) {

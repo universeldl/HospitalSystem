@@ -1,9 +1,6 @@
 package com.hospital.service;
 
-import com.hospital.domain.Answer;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.Patient;
-import com.hospital.domain.RetrieveInfo;
+import com.hospital.domain.*;
 
 import java.util.Set;
 
@@ -25,6 +22,8 @@ public interface RetrieveService {
 
     PageBean<RetrieveInfo> findMyDeliveryInfoByPage(Patient patient,
                                                     int pageCode, int pageSize);
+
+    Integer getSurveyCurNum(Survey survey);
 
     RetrieveInfo getRetrieveInfoByDeliveryID(Integer deliveryID);
 }

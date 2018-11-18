@@ -150,6 +150,15 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
+    public Integer getSurveyNum(Survey survey) {
+        return deliveryDao.getSurveyNum(survey);
+    }
+
+    public Integer getSurveyCurNum(Survey survey) {
+        return retrieveDao.getSurveyCurNum(survey);
+    }
+
+    @Override
     public int addDelivery(DeliveryInfo info) {
         Patient patient = patientDao.getPatientByopenID(info.getPatient());
 

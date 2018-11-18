@@ -32,6 +32,11 @@ public interface DeliveryService {
      */
     int addDelivery(DeliveryInfo info);
 
+    Integer getSurveyNum(Survey survey);
+
+    Integer getSurveyCurNum(Survey survey);
+
+
     DeliveryInfo updateDeliveryInfo(DeliveryInfo deliveryInfo);
 
     boolean checkAndDoDelivery();

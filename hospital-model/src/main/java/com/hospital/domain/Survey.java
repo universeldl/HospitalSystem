@@ -15,8 +15,8 @@ public class Survey implements Serializable {
     private String author;    //作者名称
     private String department;    //科室
     private Date putdate;    //生成日期
-    //private Integer num;    //总分发数
-    //private Integer currentNum;    //总回收数
+    private Integer num;    //总分发数
+    private Integer currentNum;    //总回收数
     private String description;    //简介
     private Doctor doctor;    //操作医生
     private Integer frequency;    //随访频率
@@ -122,7 +122,7 @@ public class Survey implements Serializable {
         this.putdate = putdate;
     }
 
-    /*
+
     public Integer getNum() {
         return num;
     }
@@ -138,7 +138,6 @@ public class Survey implements Serializable {
     public void setCurrentNum(Integer currentNum) {
         this.currentNum = currentNum;
     }
-    */
 
     public String getDescription() {
         return description;

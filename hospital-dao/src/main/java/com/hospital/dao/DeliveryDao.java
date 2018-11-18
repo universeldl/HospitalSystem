@@ -29,6 +29,7 @@ public interface DeliveryDao {
 
     DeliveryInfo updateDeliveryInfo(DeliveryInfo deliveryInfoById);
 
+    Integer getSurveyNum(Survey survey);
 
     List<DeliveryInfo> getDeliveryInfoByNoRetrieveState();
 

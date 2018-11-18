@@ -1,10 +1,7 @@
 package com.hospital.action;
 
 import com.hospital.domain.*;
-import com.hospital.service.ChoiceService;
-import com.hospital.service.QuestionService;
-import com.hospital.service.SurveyService;
-import com.hospital.service.SurveyTypeService;
+import com.hospital.service.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
@@ -36,11 +33,20 @@ public class SurveyManageAction extends ActionSupport {
     private QuestionService questionService;
     private ChoiceService choiceService;
 
+    private DeliveryService deliveryService;
+    private RetrieveService retrieveService;
 
     public void setSurveyTypeService(SurveyTypeService surveyTypeService) {
         this.surveyTypeService = surveyTypeService;
     }
 
+    public void setDeliveryService(DeliveryService deliveryService) {
+        this.deliveryService = deliveryService;
+    }
+
+    public void setRetrieveService(RetrieveService retrieveService) {
+        this.retrieveService = retrieveService;
+    }
 
     public void setSurveyService(SurveyService surveyService) {
         this.surveyService = surveyService;
@@ -267,6 +273,15 @@ public class SurveyManageAction extends ActionSupport {
         if (pb != null) {
             pb.setUrl("findSurveyByPage.action?");
         }
+
+        for (Survey survey : pb.getBeanList()) {
+            Integer num  = deliveryService.getSurveyNum(survey);
+            survey.setNum(num);
+
+            Integer curNum = retrieveService.getSurveyCurNum(survey);
+            survey.setCurrentNum(curNum);
+        }
+
         //存入request域中
         ServletActionContext.getRequest().setAttribute("pb", pb);
         return "success";

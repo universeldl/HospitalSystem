@@ -47,5 +47,11 @@
         <property name="choiceService">
             <ref bean="choiceService"/>
         </property>
+        <property name="deliveryService">
+            <ref bean="deliveryService"/>
+        </property>
+        <property name="retrieveService">
+            <ref bean="retrieveService"/>
+        </property>
     </bean>
 </beans>

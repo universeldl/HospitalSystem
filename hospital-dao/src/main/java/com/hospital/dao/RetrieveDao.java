@@ -3,6 +3,7 @@ package com.hospital.dao;
 import com.hospital.domain.Answer;
 import com.hospital.domain.PageBean;
 import com.hospital.domain.RetrieveInfo;
+import com.hospital.domain.Survey;
 
 import java.util.Set;
 
@@ -25,4 +26,5 @@ public interface RetrieveDao {
 
     RetrieveInfo getRetrieveInfoByDeliveryID(Integer deliveryID);
 
+    Integer getSurveyCurNum(Survey survey);
 }
