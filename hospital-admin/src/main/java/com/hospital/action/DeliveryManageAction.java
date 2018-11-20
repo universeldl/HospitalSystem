@@ -568,10 +568,15 @@ public class DeliveryManageAction extends ActionSupport {
                 if (retrieveInfo != null) {
                     for (Answer answer : retrieveInfo.getAnswers()) {
                         if (answer.getQuestion().getQuestionId().equals(112)) {
+                            boolean isAnswered = false;
                             for (Choice choice : answer.getChoices()) {//should be single choice
+                                isAnswered = true;
                                 object1.put(formatter.format(startCal.getTime()), choice.getChoiceContent());
                             }
-                            break;
+                            if(isAnswered)
+                                break;
+                            else
+                                object1.put(formatter.format(startCal.getTime()), "");
                         }
                     }
                 } else {
@@ -584,7 +589,7 @@ public class DeliveryManageAction extends ActionSupport {
         }
         jsonArray.add(2, object1);
 
-        // 哮喘发作次数
+        // 感染次数
         JSONObject object2 = new JSONObject();
         object2.put("col0", "感染次数");//1st col is ""
         startCal.setTime(patient1.getCreateTime());
@@ -600,10 +605,15 @@ public class DeliveryManageAction extends ActionSupport {
                 if (retrieveInfo != null) {
                     for (Answer answer : retrieveInfo.getAnswers()) {
                         if (answer.getQuestion().getQuestionId().equals(113)) {
+                            boolean isAnswered = false;
                             for (Choice choice : answer.getChoices()) {//should be single choice
+                                isAnswered = true;
                                 object2.put(formatter.format(startCal.getTime()), choice.getChoiceContent());
                             }
-                            break;
+                            if(isAnswered)
+                                break;
+                            else
+                                object2.put(formatter.format(startCal.getTime()), "");
                         }
                     }
                 } else {
