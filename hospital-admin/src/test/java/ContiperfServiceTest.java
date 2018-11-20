@@ -104,7 +104,7 @@ public class ContiperfServiceTest extends BaseTesting{
 	 */
     @Test
     @PerfTest(invocations = 10, threads = 5)
-	@Required(max = 2200, average = 1000, totalTime = 60000)
+	@Required(max = 10000, average = 5000, totalTime = 60000)
     public void sendTemplateMessageTest() {
         Patient patient = new Patient();
         patient.setPatientId(52);
@@ -125,7 +125,7 @@ public class ContiperfServiceTest extends BaseTesting{
 	addDeliveryTest is to test adding deliveryInfo in parallel
 	 */
     @Test
-    @PerfTest(invocations = 100, threads = 50)//共执行100次，50个线程同时执行
+    @PerfTest(invocations = 10, threads = 5)//共执行100次，50个线程同时执行
 	@Required(max = 10000, average = 5000)   //最长每个不多于10s,平均时间不超过5s
     public void addDeliveryTest() {
         Patient patient = new Patient();
