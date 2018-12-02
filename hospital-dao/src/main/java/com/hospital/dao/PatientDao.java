@@ -4,6 +4,8 @@ import com.hospital.domain.Doctor;
 import com.hospital.domain.PageBean;
 import com.hospital.domain.Patient;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public interface PatientDao {
@@ -43,4 +45,6 @@ public interface PatientDao {
 
     List<Patient> findAllPatientsByDoctor(Doctor doctor);
 
+    List<Integer> findPatientIdsByFilter(Doctor doctor, Integer sex, Integer oldPatient, Date start,
+                                         Date end, Integer hospitalId, Integer cityId);
 }

@@ -1,10 +1,7 @@
 package com.hospital.dao.impl;
 
 import com.hospital.dao.RetrieveDao;
-import com.hospital.domain.Answer;
-import com.hospital.domain.PageBean;
-import com.hospital.domain.RetrieveInfo;
-import com.hospital.domain.Survey;
+import com.hospital.domain.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
@@ -227,6 +224,17 @@ public class RetrieveDaoImpl extends HibernateDaoSupport implements RetrieveDao 
         return totalRecord;
     }
 
+    @Override
+    public List<RetrieveInfo> getRetrieveBySurveyId(Integer patient, Integer id) {
+        String sql = "from RetrieveInfo d where d.survey.surveyId=? and d.patient.patientId=?";
+        try {
+            List list = this.getHibernateTemplate().find(sql, id, patient);
+            return list;
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
     @Override
     public RetrieveInfo getRetrieveInfoByDeliveryID(Integer deliveryID) {

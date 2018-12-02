@@ -28,6 +28,12 @@
         <property name="deliveryDao">
             <ref bean="deliveryDao"/>
         </property>
+        <property name="answerDao">
+            <ref bean="answerDao"/>
+        </property>
+        <property name="retrieveDao">
+            <ref bean="retrieveDao"/>
+        </property>
     </bean>
 
 <!--    <bean id="redisService" class="com.hospital.service.impl.RedisServiceImpl">

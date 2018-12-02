@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 import static com.hospital.util.TimeUtils.getLast12Months;
 import static com.hospital.util.CalculateUtils.getMax;
@@ -87,10 +88,16 @@ public class PatientManageAction extends ActionSupport {
     private Integer hospital;
     private Integer oldPatient;
     private Integer bannedSurveyId;
-
+    private String startDate;
+    private String endDate;
+    private String surveyIds;
     /**
      * @param fileName the fileName to set
      */
+    public void setStartDate(String startDate) { this.startDate = startDate; }
+
+    public void setEndDate(String endDate) { this.endDate = endDate; }
+
     public void setOldPatient(Integer oldPatient) { this.oldPatient = oldPatient; }
 
     public void setProvince(Integer province) { this.province = province; }
@@ -697,6 +704,69 @@ public class PatientManageAction extends ActionSupport {
         Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
         HttpServletResponse response = ServletActionContext.getResponse();
         String filePath = patientService.exportPatient(doctor);
+        try {
+            response.getWriter().print(filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
+
+    public String exportSelectedPatient() {
+        Doctor doctor = (Doctor) ServletActionContext.getContext().getSession().get("doctor");
+        HttpServletResponse response = ServletActionContext.getResponse();
+
+        // filter
+        sex = -1;
+        oldPatient = 1;
+        startDate = "";
+        endDate = "";
+        hospital = 1;
+        city = -1;
+        surveyIds = "2";
+
+        Vector<Integer> surveyList = new Vector<>();
+        for (String retval: surveyIds.split(",")){
+            surveyList.add(Integer.valueOf(retval));
+        }
+
+        if(surveyList.size() == 0) {
+            return null;
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date start;
+        if (startDate.isEmpty()) {
+            try {
+                start = sdf.parse("2000-1-1");
+            } catch (Exception e) {
+                return null;
+            }
+        } else {
+            try {
+                start = sdf.parse(startDate);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        Date end;
+        if (endDate.isEmpty()) {
+            try {
+                end = sdf.parse("2200-1-1");
+            } catch (Exception e) {
+                return null;
+            }
+        } else {
+            try {
+                end = sdf.parse(endDate);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        String filePath = patientService.exportSelectedPatient(doctor, sex, oldPatient, start, end, hospital, city, surveyList);
         try {
             response.getWriter().print(filePath);
         } catch (IOException e) {

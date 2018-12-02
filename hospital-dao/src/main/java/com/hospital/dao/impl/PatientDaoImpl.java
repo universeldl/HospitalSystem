@@ -10,6 +10,7 @@ import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
+import java.util.Date;
 import java.util.List;
 
 public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
@@ -478,6 +479,35 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
             hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
         }
         List list = this.getHibernateTemplate().find(hql);
+        return list;
+    }
+
+    @Override
+    public List<Integer> findPatientIdsByFilter(Doctor doctor, Integer sex, Integer oldPatient, Date start,
+                                                Date end, Integer hospitalId, Integer cityId) {
+        String hql = "select patientId from Patient r where r.state>0";
+
+        if ((doctor.getAuthorization().getSuperSet() == null) ||
+                ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
+            //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+        }
+
+        hql = hql + " and r.birthday >= :startTime and r.birthday <= :endTime";
+        if (hospitalId != -1) {
+            hql = hql + " and r.doctor.hospital.hospitalId = " + hospitalId;
+        }
+        if (cityId != -1) {
+            hql = hql + " and r.doctor.hospital.city.cityId = " + cityId;
+        }
+        if (oldPatient != -1) {
+            hql = hql + " and r.oldPatient = " + oldPatient;
+        }
+        String[] params = { "startTime", "endTime" };
+        Object[] args = { start, end };
+
+        List list = this.getHibernateTemplate().findByNamedParam(hql, params, args);
+
         return list;
     }
 

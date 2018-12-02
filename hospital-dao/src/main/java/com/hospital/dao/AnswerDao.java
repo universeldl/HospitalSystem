@@ -2,6 +2,8 @@ package com.hospital.dao;
 
 import com.hospital.domain.Answer;
 import com.hospital.domain.PageBean;
+import com.hospital.domain.Question;
+import com.hospital.domain.RetrieveInfo;
 
 import java.util.List;
 
@@ -28,4 +30,5 @@ public interface AnswerDao {
 
     List<Answer> findAllAnswers();
 
+    Answer getAnswerByQuestioin(RetrieveInfo retrieveInfo, Question question);
 }

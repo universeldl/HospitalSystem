@@ -1,3 +1,4 @@
+/*
 import com.hospital.domain.DeliveryInfo;
 import com.hospital.domain.Patient;
 import com.hospital.service.DeliveryService;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+*/
 /*
 主要参数介绍
     1）PerfTest参数
@@ -51,7 +53,8 @@ import java.util.List;
         @Required(percentile95 = 5000)：要求95%的测试不超过5s；
         @Required(percentile99 = 10000)：要求99%的测试不超过10s;
         @Required(percentiles = "66:200,96:500")：要求66%的测试不超过200ms，96%的测试不超过500ms。
-*/
+*//*
+
 
 
 //@RunWith(ParallelRunner.class)    //to run all test functions in this class in parallel, instead of testing one by one.
@@ -63,9 +66,11 @@ public class ContiperfServiceTest extends BaseTesting{
     private DeliveryService deliveryService;
 
 
-    /*
+    */
+/*
     test1() and test2() are combination for testing parallel testing methodology.
-     */
+     *//*
+
     @Test
 	@PerfTest(invocations = 10, threads = 2)
 	@Required(max = 1200, average = 1000, totalTime = 60000)
@@ -83,9 +88,11 @@ public class ContiperfServiceTest extends BaseTesting{
 	}
 
 
-	/*
+	*/
+/*
 	getDeliveryInfosByPatientIdTest is to test spring+hibernate correctness
-	 */
+	 *//*
+
     @Test
     @PerfTest(invocations = 10, threads = 2)
 	@Required(max = 2200, average = 1000, totalTime = 60000)
@@ -98,10 +105,12 @@ public class ContiperfServiceTest extends BaseTesting{
 
 
 
-	/*
+	*/
+/*
 	sendTemplateMessageTest is to test spring+hibernate correctness
 	NOTE: currently NOT working since sendTemplateMessage() needs something from wechat
-	 */
+	 *//*
+
     @Test
     @PerfTest(invocations = 10, threads = 5)
 	@Required(max = 10000, average = 5000, totalTime = 60000)
@@ -121,9 +130,11 @@ public class ContiperfServiceTest extends BaseTesting{
 
 
 
-	/*
+	*/
+/*
 	addDeliveryTest is to test adding deliveryInfo in parallel
-	 */
+	 *//*
+
     @Test
     @PerfTest(invocations = 10, threads = 5)//共执行100次，50个线程同时执行
 	@Required(max = 10000, average = 5000)   //最长每个不多于10s,平均时间不超过5s
@@ -139,4 +150,4 @@ public class ContiperfServiceTest extends BaseTesting{
             System.out.println(" add new deliveryInfo failed!");
         }
     }
-}
+}*/

@@ -3,6 +3,8 @@ package com.hospital.dao.impl;
 import com.hospital.dao.AnswerDao;
 import com.hospital.domain.Answer;
 import com.hospital.domain.PageBean;
+import com.hospital.domain.Question;
+import com.hospital.domain.RetrieveInfo;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -216,6 +218,19 @@ public class AnswerDaoImpl extends HibernateDaoSupport implements AnswerDao {
         }
         return success;
     }
+
+    @Override
+    public Answer getAnswerByQuestioin(RetrieveInfo retrieveInfo, Question question) {
+        String hql = "from Answer r where r.retrieveInfo.deliveryId = " + retrieveInfo.getDeliveryId();
+        hql += " and r.question.questionId = ";
+        hql += question.getQuestionId();
+        List list = this.getHibernateTemplate().find(hql);
+        if (list.size() > 0) {
+            return (Answer)list.get(0);
+        }
+        return null;
+    }
+
 
 
     @Override

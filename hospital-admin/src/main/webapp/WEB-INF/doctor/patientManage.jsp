@@ -245,6 +245,8 @@
                     <a class="btn btn-primary" data-toggle="modal" data-target="#batchAddModal"><i
                             class="fa fa-times"></i> 批量添加</a>-->
                     <a class="btn btn-primary" onclick="exportPatient()"><i class="fa fa-share"></i> 导出</a>
+                    <a class="btn btn-primary" onclick="exportSelectedPatient()"><i class="fa fa-share"></i> 部分导出</a>
+
                     当前病人总数：<s:property value="#request.pb.totalRecord"/>
                 </div>
             </div>

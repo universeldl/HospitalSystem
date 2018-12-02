@@ -3,6 +3,7 @@ package com.hospital.service.impl;
 import com.hospital.dao.*;
 import com.hospital.domain.*;
 import com.hospital.service.PatientService;
+import com.hospital.service.SurveyService;
 import com.hospital.util.AgeUtils;
 import com.hospital.util.CheckUtils;
 import com.hospital.util.DateUtils;
@@ -28,8 +29,13 @@ public class PatientServiceImpl implements PatientService {
 
     private PlanDao planDao;
 
-
     private SurveyDao surveyDao;
+
+    private AnswerDao answerDao;
+
+    private DeliveryDao deliveryDao;
+
+    private RetrieveDao retrieveDao;
 
     public void setSurveyDao(SurveyDao surveyDao) {
         this.surveyDao = surveyDao;
@@ -39,12 +45,15 @@ public class PatientServiceImpl implements PatientService {
         this.planDao = planDao;
     }
 
-    private DeliveryDao deliveryDao;
 
     public void setDeliveryDao(DeliveryDao deliveryDao) {
         this.deliveryDao = deliveryDao;
     }
 
+
+    public void setAnswerDao(AnswerDao answerDao) { this.answerDao = answerDao; }
+
+    public void setRetrieveDao(RetrieveDao retrieveDao) { this.retrieveDao = retrieveDao; }
 
     /**
      * @param patientTypeDao the patientTypeDao to set
@@ -274,6 +283,261 @@ public class PatientServiceImpl implements PatientService {
         }
         return null;
 
+    }
+
+
+    public String exportExcelFromSelectPatientAndSurvey(List<Integer> patientIds, List<Integer> surveyIds, String name) {
+
+        String path = ServletActionContext.getServletContext().getRealPath("/download");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        Calendar cal = Calendar.getInstance();
+        String time = simpleDateFormat.format(cal.getTime());
+        String fileName = time + "_" + name;
+        //创建Excel文件
+        File file = new File(path, fileName);
+
+        try {
+            file.createNewFile();
+            //创建工作簿
+            WritableWorkbook workbook = Workbook.createWorkbook(file);
+            WritableSheet sheet = workbook.createSheet("sheet1", 0);
+
+            Label label = null;
+
+            //第一列
+            int curRow = 0;
+            int curCol = 0;
+            String[] title = {"用户编号", "姓名", "性别", "病人类型", "病历类型", "医生","医院","邮箱", "联系方式"};
+            for (int i = 0; i < title.length; i++) {
+                label = new Label(curCol++, curRow, title[i]);
+                sheet.addCell(label);
+            }
+            label = new Label(curCol++, curRow, "");
+            sheet.addCell(label);
+
+
+            for (Integer surveyId : surveyIds) {
+                Survey tmp = new Survey();
+                tmp.setSurveyId(surveyId);
+                Survey survey = surveyDao.getSurveyById(tmp);
+
+                label = new Label(curCol++, curRow, survey.getSurveyName());
+                sheet.addCell(label);
+
+                for (Question question : survey.getQuestions()) {
+                    label = new Label(curCol++, curRow, question.getQuestionContent());
+                    sheet.addCell(label);
+                }
+                label = new Label(curCol++, curRow, "");
+                sheet.addCell(label);
+            }
+
+            //追加数据
+            for (int i = 0; i < patientIds.size(); i++) {
+                curCol = 0;
+                ++curRow;
+                Patient tmp = new Patient();
+                tmp.setPatientId(patientIds.get(i));
+                Patient patient = getPatientById(tmp);
+
+                label = new Label(curCol++, curRow, String.valueOf(patient.getPatientId()));
+                sheet.addCell(label);
+
+                label = new Label(curCol++, curRow, patient.getName());
+                sheet.addCell(label);
+
+                int sex = patient.getSex();
+                String addSex;
+                if (sex == 1)
+                    addSex = "男";
+                else if (sex == 0)
+                    addSex = "女";
+                else
+                    addSex = "不详";
+                label = new Label(curCol++, curRow, addSex);
+                sheet.addCell(label);
+
+                label = new Label(curCol++, curRow, patient.getPatientType().getPatientTypeName());
+                sheet.addCell(label);
+
+                int oldPatient = patient.getOldPatient();
+                String oldPatientStr;
+                if (oldPatient == 1) {
+                    oldPatientStr = "新病例";
+                } else if (oldPatient == 2) {
+                    oldPatientStr = "既往病例";
+                } else if (oldPatient == 3) {
+                    oldPatientStr = "哮喘无忧用户";
+                } else {
+                    oldPatientStr = "不详";
+                }
+                label = new Label(curCol++, curRow, oldPatientStr);
+                sheet.addCell(label);
+
+                label = new Label(curCol++, curRow, patient.getDoctor().getName());
+                sheet.addCell(label);
+
+                label = new Label(curCol++, curRow, patient.getDoctor().getHospital().getName());
+                sheet.addCell(label);
+
+                label = new Label(curCol++, curRow, patient.getEmail());
+                sheet.addCell(label);
+
+                label = new Label(curCol++, curRow, patient.getPhone());
+                sheet.addCell(label);
+
+
+
+                Integer patientRow = curRow;
+                Integer surveyCol = curCol;
+                Integer lastRow = curCol;
+
+                for (Integer surveyId : surveyIds) {
+
+                    List<RetrieveInfo> retrieveInfos = retrieveDao.getRetrieveBySurveyId(patient.getPatientId(), surveyId);
+
+                    for (RetrieveInfo retrieveInfo : retrieveInfos) {
+
+                        Survey tmps = new Survey();
+                        tmps.setSurveyId(surveyId);
+                        Survey survey = surveyDao.getSurveyById(tmps);
+
+                        curCol = surveyCol;
+
+                        label = new Label(curCol++, curRow, "");
+                        sheet.addCell(label);
+
+                        label = new Label(curCol++, curRow, retrieveInfo.getRetrieveDate().toString());
+                        sheet.addCell(label);
+
+                        Set<Question> questions = survey.getQuestions();
+                        for (Question question : questions) {
+                            Answer answer = answerDao.getAnswerByQuestioin(retrieveInfo, question);
+                            if (answer == null) {
+                                label = new Label(curCol++, curRow, "");
+                                sheet.addCell(label);
+                            } else {
+                                if (question.getQuestionType() == 1 || question.getQuestionType() == 2) {
+                                    Integer score = 0;
+                                    for (Choice choice : answer.getChoices()) {
+                                        score += choice.getScore().intValue();
+                                    }
+                                    label = new Label(curCol++, curRow, String.valueOf(score));
+                                } else {
+                                    label = new Label(curCol++, curRow, answer.getTextChoiceContent());
+                                }
+                                sheet.addCell(label);
+                            }
+                        }
+
+                        curRow++;
+                    }
+
+                    curRow = patientRow;
+                    surveyCol = curCol;
+                    lastRow = (lastRow >curRow)?lastRow:curRow;
+                }
+                curRow = lastRow;
+            }
+
+
+
+
+            //写入数据
+            workbook.write();
+
+            workbook.close();
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+
+        return fileName;
+
+
+
+/*
+        //用数组存储表头
+        String[] title = {"用户名", "姓名", "性别", "病人类型", "邮箱", "联系方式"};
+        String path = ServletActionContext.getServletContext().getRealPath("/download");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        Calendar cal = Calendar.getInstance();
+        String time = simpleDateFormat.format(cal.getTime());
+        String fileName = time + "_" + name;
+        //创建Excel文件
+        File file = new File(path, fileName);
+
+        Calendar firstRegisterDate = Calendar.getInstance();
+        firstRegisterDate.set(3000,1,1);
+        for (Integer patientId : patientIds) {
+            Patient tmp = new Patient();
+            tmp.setPatientId(patientId);
+            Patient patient = getPatientById(tmp);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(patient.getCreateTime());
+            if (firstRegisterDate.after(calendar)) {
+                firstRegisterDate = calendar;
+            }
+        }
+
+        System.out.println("first register date = " + firstRegisterDate.toString());
+
+
+        try {
+            file.createNewFile();
+            //创建工作簿
+            WritableWorkbook workbook = Workbook.createWorkbook(file);
+            WritableSheet sheet = workbook.createSheet("sheet1", 0);
+
+            Label label = null;
+
+            //第一行设置列名
+            for (int i = 0; i < title.length; i++) {
+                label = new Label(i, 0, title[i]);
+                sheet.addCell(label);
+            }
+
+            //追加数据
+            for (int i = 1; i <= patientIds.size(); i++) {
+
+                Patient tmp = new Patient();
+                tmp.setPatientId(i-1);
+                Patient patient = getPatientById(tmp);
+
+                label = new Label(0, i, patient.getOpenID());
+                sheet.addCell(label);
+                label = new Label(1, i, patient.getName());
+                sheet.addCell(label);
+                int sex = patient.getSex();
+                String addSex;
+                if (sex == 1)
+                    addSex = "男";
+                else if (sex == 0)
+                    addSex = "女";
+                else
+                    addSex = "不详";
+                label = new Label(2, i, addSex);
+                sheet.addCell(label);
+                label = new Label(3, i, patient.getPatientType().getPatientTypeName());
+                sheet.addCell(label);
+                label = new Label(4, i, patient.getEmail());
+                sheet.addCell(label);
+                label = new Label(5, i, patient.getPhone());
+                sheet.addCell(label);
+            }
+            //写入数据
+            workbook.write();
+
+            workbook.close();
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return fileName;*/
     }
 
     /**
@@ -915,6 +1179,15 @@ public class PatientServiceImpl implements PatientService {
     public String exportPatient(Doctor doctor) {
         List<Patient> findAllPatients = patientDao.findAllPatientsByDoctor(doctor);
         String exportPatientExcel = exportExcel(findAllPatients, "allPatients.xls");
+        return "doctor/FileDownloadAction.action?fileName=" + exportPatientExcel;
+    }
+
+    @Override
+    public String exportSelectedPatient(Doctor doctor, Integer sex, Integer oldPatient, Date startDate,
+                                        Date endDate, Integer hospitalId, Integer cityId, Vector<Integer> surveyIds) {
+        List<Integer> patientIds = patientDao.findPatientIdsByFilter(doctor, sex, oldPatient, startDate,
+                endDate, hospitalId, cityId);
+        String exportPatientExcel = exportExcelFromSelectPatientAndSurvey(patientIds, surveyIds, "allPatients.xls");
         return "doctor/FileDownloadAction.action?fileName=" + exportPatientExcel;
     }
 

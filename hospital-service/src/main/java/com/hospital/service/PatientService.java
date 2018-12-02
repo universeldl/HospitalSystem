@@ -5,7 +5,10 @@ import com.hospital.domain.PageBean;
 import com.hospital.domain.Patient;
 import net.sf.json.JSONObject;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 public interface PatientService {
 
@@ -42,6 +45,9 @@ public interface PatientService {
     JSONObject batchAddPatient(String fileName, Doctor doctor);
 
     String exportPatient(Doctor doctor);
+
+    String exportSelectedPatient(Doctor doctor, Integer sex, Integer oldPatient, Date startDate,
+                                 Date endDate, Integer hospital, Integer city, Vector<Integer> surveyList);
 
     boolean updatePlan();
 
