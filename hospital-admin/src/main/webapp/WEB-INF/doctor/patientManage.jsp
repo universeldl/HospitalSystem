@@ -467,6 +467,13 @@
 
                     <!---------------------表单-------------------->
                     <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">病人编号</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findID" readonly="readonly">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">病人用户名</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="findOpenID" readonly="readonly">
