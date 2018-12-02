@@ -9,6 +9,7 @@ function getPatientInfo(id) {
             type: "json",
             callback: function (data) {
                 $('#loading').hide();
+                $("#findID").val(data.patientId);
                 $("#findOpenID").val(data.openID);
                 $("#findPatientName").val(data.name);
                 $("#findEmail").val(data.email);
