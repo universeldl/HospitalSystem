@@ -75,11 +75,10 @@
     </bean>
 
     <bean id="surveyAction" class="com.hospital.action.surveyAction" scope="prototype">
-        <!--
+
         <property name="patientService">
             <ref bean="patientService"/>
         </property>
-        -->
 
 <!--
         <property name="surveyService">

@@ -22,6 +22,8 @@ public class Survey implements Serializable {
     private Integer frequency;    //随访频率
     private Integer times;    //随访次数
     private boolean sendOnRegister;
+    private Integer skipSurvey;
+    private Integer skipDeliveryInfo;
     private Set<Question> questions = new HashSet<>();
     //private Set<RetrieveInfo> retrieveInfos = new HashSet<>();
     private Integer bday;  // overdue day
@@ -74,6 +76,22 @@ public class Survey implements Serializable {
         this.questions = questions;
     }
 
+
+    public void setSkipSurvey(Integer skipSurvey) {
+        this.skipSurvey = skipSurvey;
+    }
+
+    public Integer getSkipSurvey() {
+        return skipSurvey;
+    }
+
+    public void setSkipDeliveryInfo(Integer skipDeliveryInfo) {
+        this.skipDeliveryInfo = skipDeliveryInfo;
+    }
+
+    public Integer getSkipDeliveryInfo() {
+        return skipDeliveryInfo;
+    }
 /*    public Set<RetrieveInfo> getRetrieveInfos() {
         return retrieveInfos;
     }

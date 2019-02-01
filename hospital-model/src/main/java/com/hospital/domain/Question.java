@@ -8,6 +8,12 @@ public class Question {
     private Integer surveyId;
     private String questionContent;
     private Integer textChoice;
+
+    // question Type : 1. multi selection
+    //                 2. single selection
+    //                 3. text quesiton
+    //                 4. text question (date)
+    //                 5. picture upload
     private Integer questionType;
     private Integer aid;
     private Integer startAge;

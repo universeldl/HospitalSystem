@@ -29,9 +29,14 @@ public class surveyAction extends ActionSupport {
         this.code = code;
     }
 
-    private String deliveryID;
-    public void setDeliveryID(String deliveryID) {
+    private Integer deliveryID;
+    public void setDeliveryID(Integer deliveryID) {
         this.deliveryID = deliveryID;
+    }
+
+    private String openid;
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
 /*    private String errorMsg;
@@ -51,13 +56,12 @@ public class surveyAction extends ActionSupport {
     private QuestionService questionService;
     public void setQuestionService(QuestionService questionService) {
         this.questionService = questionService;
-    }
+    }*/
 
     private PatientService patientService;
     public void setPatientService(PatientService patientService) {
         this.patientService = patientService;
     }
-    */
 
     private QuestionService questionService;
     public void setQuestionService(QuestionService questionService) {
@@ -84,13 +88,13 @@ public class surveyAction extends ActionSupport {
         this.choiceService = choiceService;
     }
 
-
+/*
     public String getQuestions() {
 
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
         DeliveryInfo tmpDeliveryInfo = new DeliveryInfo();
-        tmpDeliveryInfo.setDeliveryId(Integer.valueOf(deliveryID));
+        tmpDeliveryInfo.setDeliveryId(deliveryID);
         DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmpDeliveryInfo);//得到问卷
         Survey survey = deliveryInfo.getSurvey();
         Patient patient = deliveryInfo.getPatient();
@@ -119,8 +123,111 @@ public class surveyAction extends ActionSupport {
             throw new RuntimeException(e.getMessage());
         }
         return null;
+    }*/
+
+    public String skipDeliveryInfo() {
+        if (ServletActionContext.getContext().getSession().get("openid") == null) {
+            ServletActionContext.getRequest().setAttribute("errorMsg", "用户登录已过期，请重新打开页面");
+            return ERROR;
+        }
+        Integer success = 0;
+        if (deliveryID == null) {
+            success = -1;
+        } else if (openid == null) {
+            success = -2;
+        } else {
+            if (!ServletActionContext.getContext().getSession().get("openid").equals(openid)) {
+                ServletActionContext.getRequest().setAttribute("errorMsg", "用户名错误，操作失败");
+                return ERROR;
+            }
+
+            RetrieveInfo retrieveInfo = new RetrieveInfo();
+            DeliveryInfo DI = new DeliveryInfo();
+            DI.setDeliveryId(deliveryID);
+            DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(DI);
+            Date retrieveDate = new Date(System.currentTimeMillis());
+            retrieveInfo.setDeliveryInfo(deliveryInfo);
+            retrieveInfo.setSurvey(deliveryInfo.getSurvey());
+            retrieveInfo.setPatient(deliveryInfo.getPatient());
+            retrieveInfo.setDoctor(deliveryInfo.getDoctor());
+            retrieveInfo.setRetrieveDate(retrieveDate);
+            retrieveInfo.setByDoctor(deliveryInfo.getPatient().getName());
+
+            Set<Answer> answers = new HashSet<Answer>();
+            for (Question question : retrieveInfo.getSurvey().getQuestions()) {
+                Answer answer = new Answer();
+                answer.setSurvey(retrieveInfo.getSurvey());
+                answer.setPatient(retrieveInfo.getPatient());
+                answer.setRetrieveInfo(retrieveInfo);
+                answer.setQuestion(question);
+                answers.add(answer);
+            }
+
+            retrieveInfo.setAnswers(answers);
+            deliveryInfo.setRetrieveInfo(retrieveInfo);
+            retrieveService.addRetrieveInfo(retrieveInfo);
+            success = 1;
+        }
+        try {
+            ServletActionContext.getResponse().getWriter().print(success);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e.getMessage());
+        }
+
+        return null;
     }
 
+    public String skipSurvey() {
+        if (ServletActionContext.getContext().getSession().get("openid") == null) {
+            ServletActionContext.getRequest().setAttribute("errorMsg", "用户已过期，请重新打开页面");
+            return ERROR;
+        }
+
+        Integer success = 0;
+        if (deliveryID == null) {
+            success = -1;
+        } else if (openid == null) {
+            success = -2;
+        } else {
+            if (!ServletActionContext.getContext().getSession().get("openid").equals(openid)) {
+                ServletActionContext.getRequest().setAttribute("errorMsg", "用户名错误，操作失败");
+                return ERROR;
+            }
+
+            DeliveryInfo tmp = new DeliveryInfo();
+            tmp.setDeliveryId(deliveryID);
+            DeliveryInfo deliveryInfo = deliveryService.getDeliveryInfoById(tmp);
+            if (deliveryInfo == null) {
+                success = -1;
+            } else {
+                Patient patient = deliveryInfo.getPatient();
+                if (patient.getOpenID().equals(openid)) {
+                    String bannedList = patient.getBannedSurveyList();
+                    if (!bannedList.isEmpty()) {
+                        bannedList += ";";
+                    }
+                    bannedList += deliveryInfo.getSurvey().getSurveyId();
+                    patient.setBannedSurveyList(bannedList);
+                    Patient newPatient = patientService.updatePatientInfo(patient);
+                    if (newPatient == null) {
+                        success = -3;
+                    } else {
+                        success = 1;
+                    }
+                } else {
+                    success = -2;
+                }
+            }
+        }
+        try {
+            ServletActionContext.getResponse().getWriter().print(success);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
+    }
 
     public String doSurvey() {
 
@@ -136,16 +243,14 @@ public class surveyAction extends ActionSupport {
             return ERROR;
         } else {
         }
-        request.setAttribute("deliveryID", deliveryID);
 
         AccessTokenMgr mgr = AccessTokenMgr.getInstance();
         String open_id = GetOpenIdOauth2.getOpenId(code, mgr);
 
-
         if (open_id == null) {
             request.setAttribute("errorMsg", "获取用户名失败，请稍后再试");
             return ERROR;
-            //open_id = "oaBonw30UBjZkLW5rf19h7KunM7s";
+            //open_id = "o5bAaxKFzOfL8BwEqshU_1i6DA9U";
         }
 
 
@@ -184,8 +289,13 @@ public class surveyAction extends ActionSupport {
             return ERROR;
         }
 
+
+        ServletActionContext.getContext().getSession().put("openid", patient.getOpenID());
+
+        request.setAttribute("deliveryID", deliveryID);
         request.setAttribute("surveyName", survey.getSurveyName());
         request.setAttribute("surveyDescription", survey.getDescription());
+        request.setAttribute("openid", patient.getOpenID());
 
         Set<Question> all_questions = survey.getQuestions();
         List<Question> questions = new ArrayList<>();
@@ -206,16 +316,25 @@ public class surveyAction extends ActionSupport {
 
         request.setAttribute("questions", json);
 
-        if (survey.getSurveyId() != 8 && survey.getSurveyId() != 7) {
-            return SUCCESS;
-        } else {
-            String ossConfig = AliOssConfig.getPostPolicyString();
-            request.setAttribute("ossConfig", ossConfig);
-            return INPUT;
+        String ossConfig = AliOssConfig.getPostPolicyString();
+        request.setAttribute("ossConfig", ossConfig);
+
+        if (survey.getSkipSurvey() == 1) {
+            request.setAttribute("skipSurvey", 1);
         }
+
+        if (survey.getSkipDeliveryInfo() == 1) {
+            request.setAttribute("skipDeliveryInfo", 1);
+        }
+        return SUCCESS;
     }
 
     public String retrieveAnswer() {
+        if (ServletActionContext.getContext().getSession().get("openid") == null) {
+            ServletActionContext.getRequest().setAttribute("errorMsg", "用户登录过期，请重新打开页面");
+            return ERROR;
+        }
+
         if (deliveryID == null) {
             ServletActionContext.getRequest().setAttribute("errorMsg", "没有找到问卷");
             return ERROR;

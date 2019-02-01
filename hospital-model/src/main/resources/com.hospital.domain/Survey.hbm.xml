@@ -51,6 +51,13 @@
             <column name="sendOnRegister"/>
         </property>
 
+        <property name="skipDeliveryInfo" type="java.lang.Integer">
+            <column name="skipDeliveryInfo"/>
+        </property>
+
+        <property name="skipSurvey" type="java.lang.Integer">
+            <column name="skipSurvey"/>
+        </property>
 
         <set name="questions" lazy="false" inverse="true" order-by="sortId asc">
             <key>
