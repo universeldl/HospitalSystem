@@ -286,7 +286,7 @@ function submit() {
     showLoadingToast("提交答案...");
     var po = "deliveryID=" + $.trim($("#deliveryID").val()) + "&";
     po = po + postdata;
-    alert("po = " + po);
+    //alert("po = " + po);
 
     var xhr = $.ajax({
         method: 'POST',

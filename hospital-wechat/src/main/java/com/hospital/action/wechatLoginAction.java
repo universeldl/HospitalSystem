@@ -91,13 +91,21 @@ public class wechatLoginAction extends ActionSupport {
 
                     com.alibaba.fastjson.JSONObject wechatInfo = WechatUserMgr.getUserInfo(new_patient.getOpenID(), mgr);
 
-                    String url = wechatInfo.getString("headimgurl");
-                    if (url == null || url.isEmpty()) {
+                    String url = "";
+                    String nickname = "";
+                    if (wechatInfo != null) {
+                        if (wechatInfo.containsKey("headimgurl")) {
+                            url = wechatInfo.getString("headimgurl");
+                        }
+                        if (wechatInfo.containsKey("nickname")) {
+                            nickname = wechatInfo.getString("nickname");
+                        }
+                    }
+                    if (url.isEmpty()) {
                         url = "./img/scmc.jpg";
                     }
-                    ServletActionContext.getRequest().setAttribute("imgUrl", url);
 
-                    String nickname = wechatInfo.getString("nickname");
+                    ServletActionContext.getRequest().setAttribute("imgUrl", url);
                     ServletActionContext.getRequest().setAttribute("nickname", nickname);
 
                     List<DeliveryInfo> deliveryInfos = deliveryService.getDeliveryInfosByPatientId(new_patient);
@@ -105,7 +113,6 @@ public class wechatLoginAction extends ActionSupport {
                     JSONArray emptyDeliverys = new JSONArray();
                     JSONArray answeredDeliverys = new JSONArray();
                     JSONArray overdueDeliverys = new JSONArray();
-
 
                     for(DeliveryInfo deliveryInfo : deliveryInfos) {
 
