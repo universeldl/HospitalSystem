@@ -19,7 +19,7 @@ public class AliOssConfig {
 
     static public String getPostPolicyString() {
         String dir = "";
-        String host = "http://" + bucketName + "." + endpoint;
+        String host = "https://" + bucketName + "." + endpoint;
         OSSClient client = new OSSClient(endpoint, accessKeyId, accessKeySecret);
         try {
             long expireTime = 300;
