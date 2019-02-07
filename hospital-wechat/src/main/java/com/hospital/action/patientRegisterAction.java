@@ -324,6 +324,14 @@ public class patientRegisterAction extends ActionSupport {
 
                 for (Survey survey : surveySet) {
                     if (!survey.isSendOnRegister()) continue;
+
+
+                    if (survey.getSurveyId() > 6) {
+                        if (!patient.getOpenID().equals("o5bAaxGhIV0ZksDNy8y26pk_XUI8")) {
+                            continue;
+                        }
+                    }
+
                     DeliveryInfo deliveryInfo = new DeliveryInfo();
                     deliveryInfo.setPatient(patient);
                     deliveryInfo.setSurvey(survey);

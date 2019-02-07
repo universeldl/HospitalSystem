@@ -201,6 +201,29 @@ public class surveyAction extends ActionSupport {
             if (deliveryInfo == null) {
                 success = -1;
             } else {
+                RetrieveInfo retrieveInfo = new RetrieveInfo();
+                Date retrieveDate = new Date(System.currentTimeMillis());
+                retrieveInfo.setDeliveryInfo(deliveryInfo);
+                retrieveInfo.setSurvey(deliveryInfo.getSurvey());
+                retrieveInfo.setPatient(deliveryInfo.getPatient());
+                retrieveInfo.setDoctor(deliveryInfo.getDoctor());
+                retrieveInfo.setRetrieveDate(retrieveDate);
+                retrieveInfo.setByDoctor(deliveryInfo.getPatient().getName());
+
+                Set<Answer> answers = new HashSet<Answer>();
+                for (Question question : retrieveInfo.getSurvey().getQuestions()) {
+                    Answer answer = new Answer();
+                    answer.setSurvey(retrieveInfo.getSurvey());
+                    answer.setPatient(retrieveInfo.getPatient());
+                    answer.setRetrieveInfo(retrieveInfo);
+                    answer.setQuestion(question);
+                    answers.add(answer);
+                }
+
+                retrieveInfo.setAnswers(answers);
+                deliveryInfo.setRetrieveInfo(retrieveInfo);
+                retrieveService.addRetrieveInfo(retrieveInfo);
+
                 Patient patient = deliveryInfo.getPatient();
                 if (patient.getOpenID().equals(openid)) {
                     String bannedList = patient.getBannedSurveyList();
@@ -250,7 +273,7 @@ public class surveyAction extends ActionSupport {
         if (open_id == null) {
             request.setAttribute("errorMsg", "获取用户名失败，请稍后再试");
             return ERROR;
-            //open_id = "o5bAaxKFzOfL8BwEqshU_1i6DA9U";
+            //open_id = "o5bAaxGhIV0ZksDNy8y26pk_XUI8";
         }
 
 
@@ -289,6 +312,17 @@ public class surveyAction extends ActionSupport {
             return ERROR;
         }
 
+        String bandList = patient.getBannedSurveyList();
+        if (bandList != null && !bandList.isEmpty()){
+            String[] bandIds = bandList.split(";");
+            for (String id : bandIds) {
+                Integer surveyId = new Integer(id);
+                if (surveyId.equals(survey.getSurveyId())) {
+                    request.setAttribute("errorMsg", "问卷已经跳过，无需作答");
+                    return ERROR;
+                }
+            }
+        }
 
         ServletActionContext.getContext().getSession().put("openid", patient.getOpenID());
 
