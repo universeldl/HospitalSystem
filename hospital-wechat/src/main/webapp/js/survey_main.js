@@ -385,11 +385,17 @@ var uploader = new plupload.Uploader({
     silverlight_xap_url : 'lib/plupload/js/Moxie.xap',
     url : host,
 
+    resize: {
+        width: 1920,//指定压缩后图片的宽度，如果没有设置该属性则默认为原始图片的宽度
+        quality: 90,//压缩后图片的质量，只对jpg格式的图片有效，默认为90。quality可以跟width和height一起使用，但也可以单独使用，单独使用时，压缩后图片的宽高不会变化，但由于质量降低了，所以体积也会变小
+        preserve_headers: true//压缩后是否保留图片的元数据，true为保留，false为不保留,默认为true。删除图片的元数据能使图片的体积减小一点点
+    },
+
     filters: {
         mime_types : [
-            { title : "Image files", extensions : "image/*,jpg,jpeg,png,gif" },
+            { title : "Image files", extensions : "image/*,jpg,jpeg,png,gif,pdf" },
         ],
-        max_file_size : '10mb', //最大只能上传10mb的文件
+        max_file_size : '30mb', //最大只能上传10mb的文件
         prevent_duplicates : true
     },
 
@@ -488,8 +494,12 @@ var uploader = new plupload.Uploader({
 
 
 function previewImage(file,callback){
-    if(!file || !/image\//.test(file.type)) return; //确保文件是图片
-    if(file.type=='image/gif'){ //gif使用FileReader进行预览,因为mOxie.Image只支持jpg和png
+    if(!file) {
+        return;
+    }
+    if (!/image\//.test(file.type)){
+        callback("./img/survey/pdf.png");
+    }else if(file.type=='image/gif'){ //gif使用FileReader进行预览,因为mOxie.Image只支持jpg和png
         var gif = new moxie.file.FileReader();
         gif.onload = function(){
             callback(gif.result);

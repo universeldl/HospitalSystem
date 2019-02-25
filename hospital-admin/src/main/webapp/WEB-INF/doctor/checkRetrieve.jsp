@@ -42,6 +42,8 @@
     <script src="${pageContext.request.contextPath}/js/getRetrieveInfo.js"></script>
     <script src="${pageContext.request.contextPath}/js/getAnswerSheetInfo.js"></script>
     <script src="${pageContext.request.contextPath}/js/retrieveSurvey.js"></script>
+    <script src="${pageContext.request.contextPath}/js/getPDF.js"></script>
+
     <!-- add specific js in here -->
 
     <script src="${pageContext.request.contextPath}/js/app.js"></script>
@@ -136,6 +138,9 @@
             </ul>
         </section>
     </aside>--%>
+
+    <input type="hidden" value="<%=basePath%>" id="basePath"/>
+
     <div class="content-wrapper" style="min-height: 800px;">
         <section class="content-header">
             <ol id="nav_title" class="breadcrumb" style="position: static; float: none;">
@@ -377,10 +382,21 @@
                                         <div class="bootstrap-admin-panel-content"
                                             <s:generator val="#answer.textChoiceContent"  separator=";" id="tc" >
                                                 <s:iterator status="st" value="#tc" id="pic" >
-                                                    <br/>
+                                                    <s:if test="#pic.contains(\".pdf\")">
+                                                        <h>pdf文件，点击</h>
+                                                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
+                                                                data-target="#modal_info"
+                                                                onclick="getPDFURL('<s:property value="#pic"/>')">这里
+                                                        </button>
+                                                        <h>下载</h>
+                                                    </s:if>
+                                                    <s:else>
+                                                        <br/>
                                                         <img id="mutationImage" style="width:750px;" src="${pageContext.request.contextPath}/doctor/retrieveManageAction_IoReadImage.action?imgName=<s:property value="pic"/>"/>
                                                         <input type="hidden" id="photo" name="photo"/>
-                                                    <br/>
+                                                        <br/>
+                                                    </s:else>
+                                                    <hr/>
                                                 </s:iterator>
                                             </s:generator>
                                         </div>

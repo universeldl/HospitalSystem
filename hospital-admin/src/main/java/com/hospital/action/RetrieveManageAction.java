@@ -1,6 +1,7 @@
 package com.hospital.action;
 
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.OSSObject;
 import com.hospital.domain.*;
 import com.hospital.service.*;
@@ -645,11 +646,44 @@ public class RetrieveManageAction extends ActionSupport {
         return "success";
     }
 
+    public String IoReadPDF() {
+        if (imgName.isEmpty())
+            return null;
+
+        String path = ServletActionContext.getServletContext().getRealPath("/download");
+
+        OSSClient ossClient = AliOssConfig.getOssClient();
+        HttpServletResponse response = ServletActionContext.getResponse();
+
+        String fileName = imgName.replace('/','_');
+
+        try{
+            if(!ossClient.doesObjectExist(AliOssConfig.getBucketName(), imgName)){
+                throw new Exception("bucket=["+AliOssConfig.getBucketName()+"]中不存在文件=["+imgName+"]");
+            }
+            ossClient.getObject(new GetObjectRequest(AliOssConfig.getBucketName(), imgName), new File(path, fileName));
+
+            response.getWriter().print("doctor/FileDownloadAction.action?fileName=" + fileName);
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }finally {
+            //关闭oss连接
+            if (ossClient != null){
+                ossClient.shutdown();
+            }
+        }
+        return null;
+    }
+
 	public String IoReadImage() {
 		ServletOutputStream out = null;
 		InputStream ips = null;
-		try {
-			OSSClient ossClient = AliOssConfig.getOssClient();
+        OSSClient ossClient = AliOssConfig.getOssClient();
+
+        try {
             HttpServletResponse response = ServletActionContext.getResponse();
 			//response.setContentType("multipart/form-data");
             //response.setContentType("image/png");
@@ -692,6 +726,8 @@ public class RetrieveManageAction extends ActionSupport {
 					out.flush();
 					out.close();
 				}
+				if (ossClient != null)
+				    ossClient.shutdown();
 			} catch (IOException e) {
                 e.printStackTrace();
             }
