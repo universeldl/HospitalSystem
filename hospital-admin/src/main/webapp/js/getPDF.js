@@ -11,7 +11,7 @@ $(function () {
 
 
 function getPDFURL(fileName) {
-    alert(fileName)
+//    alert(fileName)
     var postdata = "imgName=" + fileName;
     var basePath = $('#basePath').val();
 
