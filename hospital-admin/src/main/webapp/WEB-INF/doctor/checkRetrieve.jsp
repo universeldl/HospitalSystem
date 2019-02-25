@@ -379,25 +379,33 @@
                                                 </button> -->
                                             </div>
                                         </div>
-                                        <div class="bootstrap-admin-panel-content"
+
+                                        <div class="bootstrap-admin-panel-content">
                                             <s:generator val="#answer.textChoiceContent"  separator=";" id="tc" >
-                                                <s:iterator status="st" value="#tc" id="pic" >
-                                                    <s:if test="#pic.contains(\".pdf\")">
-                                                        <h>pdf文件，点击</h>
-                                                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
-                                                                data-target="#modal_info"
-                                                                onclick="getPDFURL('<s:property value="#pic"/>')">这里
-                                                        </button>
-                                                        <h>下载</h>
-                                                    </s:if>
-                                                    <s:else>
-                                                        <br/>
-                                                        <img id="mutationImage" style="width:750px;" src="${pageContext.request.contextPath}/doctor/retrieveManageAction_IoReadImage.action?imgName=<s:property value="pic"/>"/>
-                                                        <input type="hidden" id="photo" name="photo"/>
-                                                        <br/>
-                                                    </s:else>
-                                                    <hr/>
-                                                </s:iterator>
+                                                <ol>
+                                                    <s:iterator status="st" value="#tc" id="pic" >
+                                                        <s:if test="#pic.contains(\".pdf\")">
+                                                            <li>
+                                                                <h>pdf文件，点击</h>
+                                                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
+                                                                        data-target="#modal_info"
+                                                                        onclick="getPDFURL('<s:property value="#pic"/>')">这里
+                                                                </button>
+                                                                <h>下载</h>
+                                                            </li>
+                                                            <hr/>
+                                                        </s:if>
+                                                        <s:else>
+                                                            <li>
+                                                                <br/>
+                                                                <img id="mutationImage" style="width:750px;" src="${pageContext.request.contextPath}/doctor/retrieveManageAction_IoReadImage.action?imgName=<s:property value="pic"/>"/>
+                                                                <input type="hidden" id="photo" name="photo"/>
+                                                                <br/>
+                                                            </li>
+                                                            <hr/>
+                                                        </s:else>
+                                                    </s:iterator>
+                                                </ol>
                                             </s:generator>
                                         </div>
                                     </div>
