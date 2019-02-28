@@ -8,6 +8,7 @@ import com.hospital.service.AuthorizationService;
 import com.hospital.service.DoctorService;
 import com.hospital.service.HospitalService;
 import com.hospital.util.Md5Utils;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -16,9 +17,12 @@ import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.PropertyFilter;
 import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public class DoctorManageAction extends ActionSupport {
@@ -101,8 +105,8 @@ public class DoctorManageAction extends ActionSupport {
         int idx = 0;
         for (Hospital hospital : hospitals) {
             JSONObject h = new JSONObject();
-            h.put("aid", hospital.getHospitalId());
-            h.put("name", hospital.getName());
+            h.put("hospitalId", hospital.getHospitalId());
+            h.put("hospitalName", hospital.getName());
             jsonArray.add(idx, h);
             idx++;
         }
@@ -136,7 +140,7 @@ public class DoctorManageAction extends ActionSupport {
 
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
-                return name.equals("authorization") || name.equals("hospital") ;
+                return name.equals("authorization") || name.equals("hospital") || name.equals("accessibleHospitals") ;
             }
         });
 
@@ -170,6 +174,32 @@ public class DoctorManageAction extends ActionSupport {
             updateDoctor.setName(name);
             updateDoctor.setPhone(phone);
             updateDoctor.setHospital(hospitalByID);
+
+            //update accessible hospitals
+            updateDoctor.getAccessibleHospitals().clear();
+            List<Integer> hospitalIds = new ArrayList<>();
+            ActionContext ctx = ActionContext.getContext();
+            HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+            Map<String, String[]> pMap = request.getParameterMap();
+            int idx = 0;
+            for (String[] value : pMap.values()) {
+                if (idx < 5) {
+                    idx++;
+                } else {
+                    for (String v : value) {
+                        if(Integer.parseInt(v) != 0)
+                            hospitalIds.add(Integer.parseInt(v));
+                    }
+                    idx++;
+                }
+            }
+            for (int i = 0; i < hospitalIds.size(); i++) {
+                Hospital hospital1 = new Hospital();
+                hospital1.setHospitalId(hospitalIds.get(i));
+                Hospital addHospital = hospitalService.getHospitalByID(hospital1);//得到医院
+                updateDoctor.getAccessibleHospitals().add(addHospital);
+            }
+
             Doctor newDoctor = doctorService.updateDoctorInfo(updateDoctor);//修改该医生
             if (newDoctor != null) {
                 success = 1;
@@ -199,6 +229,7 @@ public class DoctorManageAction extends ActionSupport {
         hospital.setHospitalId(hospitalId);
         Hospital hospitalByID = hospitalService.getHospitalByID(hospital);
         int success = 0;
+        boolean b = false;
         if (hospitalByID == null ) {
             success = -1;//医院错误
         } if (doctor2 != null) {
@@ -214,7 +245,33 @@ public class DoctorManageAction extends ActionSupport {
             authorization.setDeliverySet(1);
             authorization.setRetrieveSet(1);
             doctor.setAuthorization(authorization);//设置权限
-            boolean b = doctorService.addDoctor(doctor);//添加医生,返回是否添加成功
+
+            //add accessible hospitals
+            List<Integer> hospitalIds = new ArrayList<>();
+            ActionContext ctx = ActionContext.getContext();
+            HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+            Map<String, String[]> pMap = request.getParameterMap();
+            int idx = 0;
+            for (String[] value : pMap.values()) {
+                if (idx < 4) {
+                    idx++;
+                } else {
+                    for (String v : value) {
+                        if(Integer.parseInt(v) != 0)
+                            hospitalIds.add(Integer.parseInt(v));
+                    }
+                    idx++;
+                }
+            }
+            for (int i = 0; i < hospitalIds.size(); i++) {
+                Hospital hospital1 = new Hospital();
+                hospital1.setHospitalId(hospitalIds.get(i));
+                Hospital addHospital = hospitalService.getHospitalByID(hospital1);//得到医院
+                b = doctor.getAccessibleHospitals().add(addHospital);
+                if (!b) break;//break whenever add failing
+            }
+
+            b = doctorService.addDoctor(doctor);//添加医生,返回是否添加成功
             if (b) {
                 success = 1;
             } else {
@@ -315,7 +372,7 @@ public class DoctorManageAction extends ActionSupport {
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
-                return name.equals("authorization") || name.equals("hospital") ;
+                return name.equals("authorization") || name.equals("hospital") || name.equals("accessibleHospitals") ;
             }
         });
 

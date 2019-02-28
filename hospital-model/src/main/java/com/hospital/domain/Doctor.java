@@ -1,6 +1,8 @@
 package com.hospital.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 医生类
@@ -16,6 +18,7 @@ public class Doctor implements Serializable {
     private Authorization authorization;//权限
     private Integer state;    //删除状态
     private Hospital hospital;
+    private Set<Hospital> accessibleHospitals = new HashSet<>();
 
     public Integer getAid() {
         return aid;
@@ -78,6 +81,14 @@ public class Doctor implements Serializable {
     public Hospital getHospital() { return hospital; }
 
     public void setHospital(Hospital hospital) { this.hospital = hospital; }
+
+    public Set<Hospital> getAccessibleHospitals() {
+        return accessibleHospitals;
+    }
+
+    public void setAccessibleHospitals(Set<Hospital> accessibleHospitals) {
+        this.accessibleHospitals = accessibleHospitals;
+    }
 
     public Doctor() {
 

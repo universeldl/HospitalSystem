@@ -189,6 +189,9 @@
                             <th>医生姓名</th>
                             <th>联系号码</th>
                             <th>所属医院</th>
+                            <s:if test="#session.doctor.authorization.superSet==1"><!-- 对超级医生和普通医生进行权限区分 -->
+                            <th>可访问的医院</th>
+                            </s:if>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -202,6 +205,13 @@
                                 <td><s:property value="#doctor.name"/></td>
                                 <td><s:property value="#doctor.phone"/></td>
                                 <td><s:property value="#doctor.hospital.name"/></td>
+                                <s:if test="#session.doctor.authorization.superSet==1"><!-- 对超级医生和普通医生进行权限区分 -->
+                                    <td>
+                                        <s:iterator value="#doctor.accessibleHospitals" var="accHspt">
+                                            <p><s:property value="#accHspt.name"/></p>
+                                        </s:iterator>
+                                    </td>
+                                </s:if>
                                 <td>
                                     <s:if test="#doctor.authorization.superSet!=1">
                                         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
@@ -229,6 +239,9 @@
                             <td>暂无数据</td>
                             <td>暂无数据</td>
                             <td>暂无数据</td>
+                            <s:if test="#session.doctor.authorization.superSet==1"><!-- 对超级医生和普通医生进行权限区分 -->
+                            <td>暂无数据</td>
+                            </s:if>
                             <td>暂无数据</td>
                             </tbody>
                         </s:else>
@@ -376,6 +389,19 @@
                         </div>
                     </div>
 
+                    <s:if test="#session.doctor.authorization.superSet==1"><!-- 对超级医生和普通医生进行权限区分 -->
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">可访问的医院（可多选）</label>
+                        <div class="col-sm-7">
+                            <select multiple="multiple" size="12" class="form-control" name="addAccessibleHospitals" id="addAccessibleHospitals">
+                                <!--<option value="-1" selected="selected">无</option> -->
+                                <option value="-1">无</option>
+                            </select>
+                            <label class="control-label" for="addAccessibleHospitals" style="display: none;"></label>
+                        </div>
+                    </div>
+                    </s:if>
+
                     <!---------------------表单-------------------->
                 </div>
                 <div class="modal-footer">
@@ -449,6 +475,20 @@
                             <label class="control-label" for="updateHospital" style="display: none;"></label>
                         </div>
                     </div>
+
+                    <s:if test="#session.doctor.authorization.superSet==1"><!-- 对超级医生和普通医生进行权限区分 -->
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">可访问的医院（可多选）</label>
+                        <div class="col-sm-7">
+                            <select multiple="multiple" size="12" class="form-control" name="updateAccessibleHospitals" id="updateAccessibleHospitals">
+                                <!--<option value="-1" selected="selected">无</option> -->
+                                <option value="-1">无</option>
+                            </select>
+                            <label class="control-label" for="updateAccessibleHospitals" style="display: none;"></label>
+                        </div>
+                    </div>
+                    </s:if>
+
                     <!---------------------表单-------------------->
 
                 </div>

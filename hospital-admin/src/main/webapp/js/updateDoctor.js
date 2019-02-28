@@ -16,7 +16,8 @@ $(function () {
             + "&username=" + replaceSpectialChar($.trim($("#updateUsername").val()))
             + "&name=" + replaceSpectialChar($.trim($("#updateName").val()))
             + "&phone=" + $.trim($("#updatePhone").val())
-            + "&hospitalId=" + $.trim($("#updateHospital").val());
+            + "&hospitalId=" + $.trim($("#updateHospital").val())
+            + "&" + $("#updateAccessibleHospitals").serialize();
         $('#loading').show();
         ajax(
             {
@@ -62,14 +63,32 @@ function updateDoctor(id) {
             type: "json",
             callback: function (data) {
                 $('#loading').hide();
-                // 循环遍历每个问卷分类，每个名称生成一个option对象，添加到<select>中
+                // 循环遍历每个医院，每个名称生成一个option对象，添加到<select>中
                 for (let index in data.hospitals) {
                     var op = document.createElement("option");//创建一个指名名称元素
-                    op.value = data.hospitals[index].aid;//设置op的实际值为当前的问卷分类编号
-                    var textNode = document.createTextNode(data.hospitals[index].name);//创建文本节点
+                    op.value = data.hospitals[index].hospitalId;//设置op的实际值为当前的医院编号
+                    var textNode = document.createTextNode(data.hospitals[index].hospitalName);//创建文本节点
                     op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
                     document.getElementById("updateHospital").appendChild(op);
+                    //document.getElementById("updateAccessibleHospitals").appendChild(op);
                 }
+                ajax(
+                    {
+                        url: "doctorManageAction_getHospitals.action",
+                        type: "json",
+                        callback: function (data) {
+                            $('#loading').hide();
+                            // 循环遍历每个医院，每个名称生成一个option对象，添加到<select>中
+                            for (let index in data.hospitals) {
+                                var op = document.createElement("option");//创建一个指名名称元素
+                                op.value = data.hospitals[index].hospitalId;//设置op的实际值为当前的医院编号
+                                var textNode = document.createTextNode(data.hospitals[index].hospitalName);//创建文本节点
+                                op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
+                                document.getElementById("updateAccessibleHospitals").appendChild(op);
+                            }
+                        }
+                    }
+                );
 
                 ajax(
                     {
@@ -165,6 +184,23 @@ function validUpdateDoctor() {
         $('#updateHospital').next().text("");
         $("#updateHospital").next().hide();
     }
+
+    var numAccessibleHospitals = 0;
+    $("#updateAccessibleHospitals option:selected").each(function(){
+        numAccessibleHospitals++;
+    });
+
+    if (numAccessibleHospitals == 0) {
+        $("#updateAccessibleHospitals").parent().addClass("has-error");
+        $("#updateAccessibleHospitals").next().text("至少需要选择一家医院，没有请选择‘无’");
+        $("#updateAccessibleHospitals").next().show();
+        flag = false;
+    } else {
+        $("#updateAccessibleHospitals").parent().removeClass("has-error");
+        $("#updateAccessibleHospitals").next().text("");
+        $("#updateAccessibleHospitals").next().hide();
+    }
+
     return flag;
 }
 

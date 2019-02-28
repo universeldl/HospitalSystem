@@ -157,7 +157,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
      * @param pageSize每页显示大小
      * @return
      */
-    public List doSplitPage(final String hql, final int pageCode, final int pageSize, final int aid1, final int aid2) {
+    public List doSplitPage(final String hql, final int pageCode, final int pageSize, final int aid1, final int aid2, final int aid3) {
         //调用模板的execute方法，参数是实现了HibernateCallback接口的匿名类，
         return (List) this.getHibernateTemplate().execute(new HibernateCallback() {
             //重写其doInHibernate方法返回一个object对象，
@@ -167,6 +167,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 Query query = session.createQuery(hql);
                 query.setParameter("aid1", aid1);
                 query.setParameter("aid2", aid2);
+                query.setParameter("aid3", aid3);
                 //返回其执行了分布方法的list
                 return query.setFirstResult((pageCode - 1) * pageSize).setMaxResults(pageSize).list();
 
@@ -184,10 +185,10 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         pb.setPageSize(pageSize);//设置页面记录数
         List patientList = null;
         try {
-            String sql = "select count(patientId) from Patient r where r.state>0";
             Long totalRecord = null;
             //如果是super，全选，否则做判断
             if ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() == 1)) {
+                String sql = "select count(patientId) from Patient r where r.state>0";
                 List list = this.getHibernateTemplate().find(sql);
                 if (list != null && list.size() > 0) {
                     totalRecord = (Long) list.get(0);
@@ -199,21 +200,22 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 //分页查询
                 patientList = doSplitPage(hql, pageCode, pageSize);
             } else {
+                String sql = "select count(patientId) from Patient p, Doctor d inner join d.accessibleHospitals as ah where p.state>0";
                 //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-                String addSql = " and (r.doctor.aid=? or r.addnDoctor.aid=?)";
+                String addSql = " and (p.doctor.aid=? or p.addnDoctor.aid=? or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=?))";
                 sql += addSql;
-                List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
+                List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid(), doctor.getAid());
                 if (list != null && list.size() > 0) {
                     totalRecord = (Long) list.get(0);
                 }
                 pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
 
                 //不支持limit分页
-                String hql = "from Patient r where (r.state>0 and (r.doctor.aid=:aid1 or r.addnDoctor.aid=:aid2))" +
+                String hql = "select p from Patient p, Doctor d inner join d.accessibleHospitals as ah where (p.state>0 and (p.doctor.aid=:aid1 or p.addnDoctor.aid=:aid2 or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=:aid3)))" +
                         " ORDER BY createTime DESC";
                 //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
                 //分页查询
-                patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
+                patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid(), doctor.getAid());
             }
 
 
@@ -237,10 +239,10 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         pb.setPageSize(pageSize);//设置页面记录数
         List patientList = null;
         try {
-            String sql = "select count(patientId) from Patient r where r.state=-1";
             Long totalRecord = null;
             //如果是super，全选，否则做判断
             if ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() == 1)) {
+                String sql = "select count(patientId) from Patient r where r.state=-1";
                 List list = this.getHibernateTemplate().find(sql);
                 if (list != null && list.size() > 0) {
                     totalRecord = (Long) list.get(0);
@@ -252,21 +254,22 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 //分页查询
                 patientList = doSplitPage(hql, pageCode, pageSize);
             } else {
+                String sql = "select count(patientId) from Patient p, Doctor d inner join d.accessibleHospitals as ah where p.state=-1";
                 //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-                String addSql = " and (r.doctor.aid=? or r.addnDoctor.aid=?)";
+                String addSql = " and (p.doctor.aid=? or p.addnDoctor.aid=? or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=?))";
                 sql += addSql;
-                List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
+                List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid(), doctor.getAid());
                 if (list != null && list.size() > 0) {
                     totalRecord = (Long) list.get(0);
                 }
                 pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
 
                 //不支持limit分页
-                String hql = "from Patient r where (r.state=-1 and (r.doctor.aid=:aid1 or r.addnDoctor.aid=:aid2))" +
+                String hql = "select p from Patient p, Doctor d inner join d.accessibleHospitals as ah where (p.state=-1 and (p.doctor.aid=:aid1 or p.addnDoctor.aid=:aid2 or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=:aid3)))" +
                         " ORDER BY createTime DESC";
                 //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
                 //分页查询
-                patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
+                patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid(), doctor.getAid());
             }
 
 
