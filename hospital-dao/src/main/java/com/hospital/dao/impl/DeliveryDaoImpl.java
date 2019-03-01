@@ -97,17 +97,32 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         List<Integer> integers = new ArrayList<Integer>();
         StringBuilder sb = new StringBuilder();
         StringBuilder sb_sql = new StringBuilder();
-        String sql = "select count(*) from deliveryInfo bo,survey bk,Patient r "
-                + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
-        //不支持limit分页
-        String hql = "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r "
-                + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+        String sql = "";
+        String hql = "";
+        if(doctor.getAccessibleHospitals().size() != 0) {
+            hql = hql + "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r, Doctor d inner join d.accessibleHospitals as ah where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+            sql = sql + "select count(*) from deliveryInfo bo,survey bk,Patient r where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+        }
+        else {
+            hql = hql + "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r, Doctor d inner join d.accessibleHospitals as ah where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+            sql = sql + "select count(*) from deliveryInfo bo,survey bk,Patient r where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+        }
+
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
             //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-            hql = hql + " and (r.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid() + ")";
-            sql = sql + " and (r.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid() + ")";
+            hql = hql + " and (r.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid();
+            sql = sql + " and (r.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid();
+
+            if(doctor.getAccessibleHospitals().size() != 0) {
+                hql = hql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + "))";
+                sql = sql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + "))";
+            }
+            else {
+                hql = hql + ")";
+                sql = sql + ")";
+            }
         }
         sb.append(hql);
         sb_sql.append(sql);
@@ -154,19 +169,40 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         List<Integer> integers = new ArrayList<Integer>();
         StringBuilder sb = new StringBuilder();
         StringBuilder sb_sql = new StringBuilder();
-        String sql = "select count(*) from deliveryInfo bo,survey bk,Patient r "
-                + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId and " +
-                "(bo.deliveryId not in (select deliveryId from RetrieveInfo))";
-        //不支持limit分页
-        String hql = "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r "
-                + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId and " +
-                "(bo.deliveryId not in (select deliveryId from RetrieveInfo))";
+        String sql = "";
+        String hql = "";
+        if(doctor.getAccessibleHospitals().size() != 0) {
+            sql = sql + "select count(*) from deliveryInfo bo,survey bk,Patient r, Doctor d inner join d.accessibleHospitals as ah "
+                    + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId and " +
+                    "(bo.deliveryId not in (select deliveryId from RetrieveInfo))";
+            //不支持limit分页
+            hql = hql + "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r, Doctor d inner join d.accessibleHospitals as ah "
+                    + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId and " +
+                    "(bo.deliveryId not in (select deliveryId from RetrieveInfo))";
+        }
+        else {
+            sql = sql + "select count(*) from deliveryInfo bo,survey bk,Patient r "
+                    + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId and " +
+                    "(bo.deliveryId not in (select deliveryId from RetrieveInfo))";
+            //不支持limit分页
+            hql = hql + "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r "
+                    + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId and " +
+                    "(bo.deliveryId not in (select deliveryId from RetrieveInfo))";
+        }
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
             //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-            hql = hql + " and (r.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid() + ")";
-            sql = sql + " and (r.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid() + ")";
+            hql = hql + " and (r.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid();
+            sql = sql + " and (r.aid=" + doctor.getAid() + " or r.addnDoctorId=" + doctor.getAid();
+            if(doctor.getAccessibleHospitals().size() != 0) {
+                hql = hql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + "))";
+                sql = sql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + "))";
+            }
+            else {
+                hql = hql + ")";
+                sql = sql + ")";
+            }
         }
         if (queryType == 1) {//本月未答
             String firstDayOfMonth = CalendarUtils.getFirstDayOfMonth();
@@ -245,6 +281,26 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
     }
 
 
+    public List doSplitPage(final String hql, final int pageCode, final int pageSize, final int aid1, final int aid2, final int aid3) {
+        //调用模板的execute方法，参数是实现了HibernateCallback接口的匿名类，
+        return (List) this.getHibernateTemplate().execute(new HibernateCallback() {
+            //重写其doInHibernate方法返回一个object对象，
+            public Object doInHibernate(Session session)
+                    throws HibernateException {
+                //创建query对象
+                Query query = session.createQuery(hql);
+                query.setParameter("aid1", aid1);
+                query.setParameter("aid2", aid2);
+                query.setParameter("aid3", aid3);
+                //返回其执行了分布方法的list
+                return query.setFirstResult((pageCode - 1) * pageSize).setMaxResults(pageSize).list();
+
+            }
+
+        });
+
+    }
+
     @Override
     public PageBean<DeliveryInfo> findDeliveryInfoByPage(int pageCode, int pageSize, Doctor doctor) {
         PageBean<DeliveryInfo> pb = new PageBean<DeliveryInfo>();    //pageBean对象，用于分页
@@ -253,10 +309,10 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         pb.setPageSize(pageSize);//设置页面记录数
         List deliveryInfoList = null;
         try {
-            String sql = "SELECT count(deliveryId) from DeliveryInfo r where r.patient.state>0";
             int totalRecord = 0;
             //如果是super，全选，否则做判断
             if ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() == 1)) {
+                String sql = "SELECT count(deliveryId) from DeliveryInfo r where r.patient.state>0";
                 List list = this.getHibernateTemplate().find(sql);
                 if (list != null && list.size() > 0) {
                     totalRecord = ((Long)list.get(0)).intValue();
@@ -269,22 +325,47 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
                 //分页查询
                 deliveryInfoList = doSplitPage(hql, pageCode, pageSize);
             } else {
-                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-                String addSql = " and (r.patient.doctor.aid=? or r.patient.addnDoctor.aid=?) ";
-                sql += addSql;
-                List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
-                if (list != null && list.size() > 0) {
-                    totalRecord = ((Long)list.get(0)).intValue();
+                String sql = "";
+                if(doctor.getAccessibleHospitals().size() != 0) {
+                    sql = sql + "SELECT count(deliveryId) from DeliveryInfo r, Doctor d inner join d.accessibleHospitals as ah where r.patient.state>0";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+                    String addSql = " and (r.patient.doctor.aid=? or r.patient.addnDoctor.aid=? or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=?)) ";
+                    sql += addSql;
+                    List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid(), doctor.getAid());
+                    if (list != null && list.size() > 0) {
+                        totalRecord = ((Long)list.get(0)).intValue();
+                    }
+                }
+                else {
+                    sql = sql + "SELECT count(deliveryId) from DeliveryInfo r where r.patient.state>0";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+                    String addSql = " and (r.patient.doctor.aid=? or r.patient.addnDoctor.aid=?) ";
+                    sql += addSql;
+                    List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
+                    if (list != null && list.size() > 0) {
+                        totalRecord = ((Long)list.get(0)).intValue();
+                    }
                 }
                 pb.setTotalRecord(totalRecord);    //设置总记录数
                 //this.getSessionFactory().getCurrentSession().close();
 
                 //不支持limit分页
-                String hql = "from DeliveryInfo r where r.patient.state>0 and " +
-                        "(r.patient.doctor.aid=:aid1 or r.patient.addnDoctor.aid=:aid2) ORDER BY deliveryDate DESC";
-                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
-                //分页查询
-                deliveryInfoList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
+                String hql = "";
+                if(doctor.getAccessibleHospitals().size() != 0) {
+                    hql = hql + "select r from DeliveryInfo r, Doctor d inner join d.accessibleHospitals as ah where r.patient.state>0 and " +
+                            "(r.patient.doctor.aid=:aid1 or r.patient.addnDoctor.aid=:aid2 or (ah.hospitalId=r.patient.doctor.hospital.hospitalId and d.aid=:aid3)) GROUP BY r.deliveryId ORDER BY deliveryDate DESC";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
+                    //分页查询
+                    deliveryInfoList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid(), doctor.getAid());
+                }
+                else {
+                    hql = hql + "from DeliveryInfo r where r.patient.state>0 and " +
+                            "(r.patient.doctor.aid=:aid1 or r.patient.addnDoctor.aid=:aid2) ORDER BY deliveryDate DESC";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
+                    //分页查询
+                    deliveryInfoList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
+                }
+
             }
         } catch (Throwable e1) {
             e1.printStackTrace();

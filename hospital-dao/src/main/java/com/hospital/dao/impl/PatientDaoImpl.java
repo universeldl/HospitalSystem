@@ -36,12 +36,24 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     @Override
     public List<Integer> getPatientSexByDoctor(Doctor doctor) {
 
-        String hql = "select sex from Patient r where r.state>0";
+        String hql = "";
+        if(doctor.getAccessibleHospitals().size() != 0) {
+            hql = hql + "select r.sex from Patient r, Doctor d inner join d.accessibleHospitals as ah where r.state>0";
+        }
+        else {
+            hql = hql + "select r.sex from Patient r where r.state>0";
+        }
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
             //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid();
+            if(doctor.getAccessibleHospitals().size() != 0) {
+                hql = hql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + ")) GROUP BY r.patientId";
+            }
+            else {
+                hql = hql + ")";
+            }
         }
         List list = this.getHibernateTemplate().find(hql);
         if (list != null && list.size() > 0) {
@@ -76,12 +88,24 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     public Integer[] getAdditionsForLast12Months(Doctor doctor) {
         Integer[] additions = new Integer[12];
 
-        String hql = "select count(*) from Patient r where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =? and r.state>0 ";
+        String hql = "";
+        if(doctor.getAccessibleHospitals().size() != 0) {
+            hql = hql + "select count(*) from Patient r, Doctor d inner join d.accessibleHospitals as ah where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =? and r.state>0 ";
+        }
+        else {
+            hql = hql + "select count(*) from Patient r where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =? and r.state>0 ";
+        }
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
             //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid();
+            if(doctor.getAccessibleHospitals().size() != 0) {
+                hql = hql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + "))";
+            }
+            else {
+                hql = hql + ")";
+            }
         }
         try {
             for (int i = 11; i >= 0; i--) {
@@ -150,6 +174,31 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
 
     }
 
+    /**
+     * @param hql传入的hql语句
+     * @param pageCode当前页
+     * @param pageSize每页显示大小
+     * @return
+     */
+    public List doSplitPage(final String hql, final int pageCode, final int pageSize, final int aid1, final int aid2) {
+        //调用模板的execute方法，参数是实现了HibernateCallback接口的匿名类，
+        return (List) this.getHibernateTemplate().execute(new HibernateCallback() {
+            //重写其doInHibernate方法返回一个object对象，
+            public Object doInHibernate(Session session)
+                    throws HibernateException {
+                //创建query对象
+                Query query = session.createQuery(hql);
+                query.setParameter("aid1", aid1);
+                query.setParameter("aid2", aid2);
+                //返回其执行了分布方法的list
+                return query.setFirstResult((pageCode - 1) * pageSize).setMaxResults(pageSize).list();
+
+            }
+
+        });
+
+    }
+
 
     /**
      * @param hql传入的hql语句
@@ -200,22 +249,43 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 //分页查询
                 patientList = doSplitPage(hql, pageCode, pageSize);
             } else {
-                String sql = "select count(patientId) from Patient p, Doctor d inner join d.accessibleHospitals as ah where p.state>0";
-                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-                String addSql = " and (p.doctor.aid=? or p.addnDoctor.aid=? or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=?))";
-                sql += addSql;
-                List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid(), doctor.getAid());
-                if (list != null && list.size() > 0) {
-                    totalRecord = (Long) list.get(0);
+                String sql = "";
+                if(doctor.getAccessibleHospitals().size() != 0) {
+                    sql = sql + "select count(DISTINCT patientId) from Patient p, Doctor d inner join d.accessibleHospitals as ah where p.state>0";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+                    String addSql = " and (p.doctor.aid=? or p.addnDoctor.aid=? or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=?))";
+                    sql += addSql;
+                    List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid(), doctor.getAid());
+                    if (list != null && list.size() > 0) {
+                        totalRecord = (Long) list.get(0);
+                    }
+                }
+                else {
+                    sql = sql + "select count(DISTINCT patientId) from Patient p where p.state>0";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+                    String addSql = " and (p.doctor.aid=? or p.addnDoctor.aid=?)";
+                    sql += addSql;
+                    List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
+                    if (list != null && list.size() > 0) {
+                        totalRecord = (Long) list.get(0);
+                    }
                 }
                 pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
 
                 //不支持limit分页
-                String hql = "select p from Patient p, Doctor d inner join d.accessibleHospitals as ah where (p.state>0 and (p.doctor.aid=:aid1 or p.addnDoctor.aid=:aid2 or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=:aid3)))" +
-                        " ORDER BY createTime DESC";
-                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
-                //分页查询
-                patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid(), doctor.getAid());
+                String hql = "";
+                if(doctor.getAccessibleHospitals().size() != 0) {
+                    hql = hql + "select p from Patient p, Doctor d inner join d.accessibleHospitals as ah where (p.state>0 and (p.doctor.aid=:aid1 or p.addnDoctor.aid=:aid2 or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=:aid3)))" + " GROUP BY p.patientId ORDER BY createTime DESC";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
+                    //分页查询
+                    patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid(), doctor.getAid());
+                }
+                else {
+                    hql = hql + "select p from Patient p where (p.state>0 and (p.doctor.aid=:aid1 or p.addnDoctor.aid=:aid2))" + " ORDER BY createTime DESC";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
+                    //分页查询
+                    patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
+                }
             }
 
 
@@ -254,22 +324,43 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
                 //分页查询
                 patientList = doSplitPage(hql, pageCode, pageSize);
             } else {
-                String sql = "select count(patientId) from Patient p, Doctor d inner join d.accessibleHospitals as ah where p.state=-1";
-                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-                String addSql = " and (p.doctor.aid=? or p.addnDoctor.aid=? or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=?))";
-                sql += addSql;
-                List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid(), doctor.getAid());
-                if (list != null && list.size() > 0) {
-                    totalRecord = (Long) list.get(0);
+                String sql = "";
+                if(doctor.getAccessibleHospitals().size() != 0) {
+                    sql = sql + "select count(DISTINCT patientId) from Patient p, Doctor d inner join d.accessibleHospitals as ah where p.state=-1";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+                    String addSql = " and (p.doctor.aid=? or p.addnDoctor.aid=? or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=?))";
+                    sql += addSql;
+                    List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid(), doctor.getAid());
+                    if (list != null && list.size() > 0) {
+                        totalRecord = (Long) list.get(0);
+                    }
+                }
+                else {
+                    sql = sql + "select count(DISTINCT patientId) from Patient p where p.state=-1";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
+                    String addSql = " and (p.doctor.aid=? or p.addnDoctor.aid=?)";
+                    sql += addSql;
+                    List list = this.getHibernateTemplate().find(sql, doctor.getAid(), doctor.getAid());
+                    if (list != null && list.size() > 0) {
+                        totalRecord = (Long) list.get(0);
+                    }
                 }
                 pb.setTotalRecord(totalRecord.intValue());    //设置总记录数
 
                 //不支持limit分页
-                String hql = "select p from Patient p, Doctor d inner join d.accessibleHospitals as ah where (p.state=-1 and (p.doctor.aid=:aid1 or p.addnDoctor.aid=:aid2 or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=:aid3)))" +
-                        " ORDER BY createTime DESC";
-                //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
-                //分页查询
-                patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid(), doctor.getAid());
+                String hql = "";
+                if(doctor.getAccessibleHospitals().size() != 0) {
+                    hql = hql + "select p from Patient p, Doctor d inner join d.accessibleHospitals as ah where (p.state=-1 and (p.doctor.aid=:aid1 or p.addnDoctor.aid=:aid2 or (ah.hospitalId=p.doctor.hospital.hospitalId and d.aid=:aid3)))" + " GROUP BY p.patientId ORDER BY createTime DESC";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
+                    //分页查询
+                    patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid(), doctor.getAid());
+                }
+                else {
+                    hql = hql + "select p from Patient p where (p.state=-1 and (p.doctor.aid=:aid1 or p.addnDoctor.aid=:aid2))" + " ORDER BY createTime DESC";
+                    //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人;把当前医生传进来，如果是super，全选，否则做前面的判断
+                    //分页查询
+                    patientList = doSplitPage(hql, pageCode, pageSize, doctor.getAid(), doctor.getAid());
+                }
             }
 
 
@@ -321,8 +412,16 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         pb.setPageSize(pageSize);//设置页面记录数
 
 
-        String sql = "SELECT count(*) FROM Patient r where 1=1 and r.state>0";
-        String hql = "from Patient r where 1=1 and r.state>0";
+        String sql = "";
+        String hql = "";
+        if(doctor.getAccessibleHospitals().size() != 0) {
+            hql = hql + "select r from Patient r, Doctor d inner join d.accessibleHospitals as ah where 1=1 and r.state>0";
+            sql = sql + "SELECT count(*) FROM Patient r, Doctor d inner join d.accessibleHospitals as ah where 1=1 and r.state>0";
+        }
+        else {
+            hql = hql + "select r from Patient r where 1=1 and r.state>0";
+            sql = sql + "SELECT count(*) FROM Patient r where 1=1 and r.state>0";
+        }
         if (!"".equals(patient.getName().trim())) {
             hql += " and r.name like '%" + patient.getName() + "%'";
             sql += " and r.name like '%" + patient.getName() + "%'";
@@ -347,8 +446,20 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
             //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
-            sql = sql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid();
+            if(doctor.getAccessibleHospitals().size() != 0) {
+                hql = hql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + ")) GROUP BY r.patientId";
+            }
+            else {
+                hql = hql + ")";
+            }
+            sql = sql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid();
+            if(doctor.getAccessibleHospitals().size() != 0) {
+                sql = sql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + "))";
+            }
+            else {
+                sql = sql + ")";
+            }
         }
 
         hql += " ORDER BY createTime DESC";
@@ -382,8 +493,16 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         pb.setPageSize(pageSize);//设置页面记录数
 
 
-        String sql = "SELECT count(*) FROM Patient r where 1=1 and r.state=-1";
-        String hql = "from Patient r where 1=1 and r.state=-1 ";
+        String sql = "";
+        String hql = "";
+        if(doctor.getAccessibleHospitals().size() != 0) {
+            hql = hql + "select r from Patient r, Doctor d inner join d.accessibleHospitals as ah where 1=1 and r.state=-1";
+            sql = sql + "SELECT count(*) FROM Patient r, Doctor d inner join d.accessibleHospitals as ah where 1=1 and r.state=-1";
+        }
+        else {
+            hql = hql + "select r from Patient r where 1=1 and r.state=-1";
+            sql = sql + "SELECT count(*) FROM Patient r where 1=1 and r.state=-1";
+        }
         if (!"".equals(patient.getOpenID().trim())) {
             hql += " and r.openID like '%" + patient.getOpenID() + "%'";
             sql += " and r.openID like '%" + patient.getOpenID() + "%'";
@@ -400,8 +519,20 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
             //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
-            sql = sql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid();
+            if(doctor.getAccessibleHospitals().size() != 0) {
+                hql = hql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + ")) GROUP BY r.patientId";
+            }
+            else {
+                hql = hql + ")";
+            }
+            sql = sql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid();
+            if(doctor.getAccessibleHospitals().size() != 0) {
+                sql = sql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + "))";
+            }
+            else {
+                sql = sql + ")";
+            }
         }
         try {
             int totalRecord = 0;
@@ -474,12 +605,24 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
 
     @Override
     public List<Patient> findAllPatientsByDoctor(Doctor doctor) {
-        String hql = "from Patient r where 1=1 and r.state>0";
+        String hql = "";
+        if(doctor.getAccessibleHospitals().size() != 0) {
+            hql = hql + "select r from Patient r, Doctor d inner join d.accessibleHospitals as ah where 1=1 and r.state>0";
+        }
+        else {
+            hql = hql + "select r from Patient r where 1=1 and r.state>0";
+        }
         //如果不是super
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
             //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid();
+            if(doctor.getAccessibleHospitals().size() != 0) {
+                hql = hql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + ")) GROUP BY r.patientId";
+            }
+            else {
+                hql = hql + ")";
+            }
         }
         List list = this.getHibernateTemplate().find(hql);
         return list;
@@ -488,12 +631,24 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
     @Override
     public List<Integer> findPatientIdsByFilter(Doctor doctor, Integer sex, Integer oldPatient, Date start,
                                                 Date end, Integer hospitalId, Integer cityId) {
-        String hql = "select patientId from Patient r where r.state>0";
+        String hql = "";
+        if(doctor.getAccessibleHospitals().size() != 0) {
+            hql = hql + "select patientId from Patient r, Doctor d inner join d.accessibleHospitals as ah where r.state>0";
+        }
+        else {
+            hql = hql + "select patientId from Patient r where r.state>0";
+        }
 
         if ((doctor.getAuthorization().getSuperSet() == null) ||
                 ((doctor.getAuthorization().getSuperSet() != null) && (doctor.getAuthorization().getSuperSet() != 1))) {
             //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
-            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid() + ")";
+            hql = hql + " and (r.doctor.aid=" + doctor.getAid() + " or r.addnDoctor.aid=" + doctor.getAid();
+            if(doctor.getAccessibleHospitals().size() != 0) {
+                hql = hql + " or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=" + doctor.getAid() + ")) GROUP BY r.patientId";
+            }
+            else {
+                hql = hql + ")";
+            }
         }
 
         hql = hql + " and r.birthday >= :startTime and r.birthday <= :endTime";
