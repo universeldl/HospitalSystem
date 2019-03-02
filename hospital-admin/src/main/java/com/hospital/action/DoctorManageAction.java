@@ -98,7 +98,7 @@ public class DoctorManageAction extends ActionSupport {
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
 
-        List<Hospital> hospitals = hospitalService.getAllHospitals();
+        List<Hospital> hospitals = hospitalService.getAllVisibleHospitals();
 
         JSONArray jsonArray = new JSONArray();
 
@@ -145,6 +145,7 @@ public class DoctorManageAction extends ActionSupport {
         });
 
         JSONObject jsonObject = JSONObject.fromObject(newDoctor, jsonConfig);
+        jsonObject.put("hospitalId", newDoctor.getHospital().getHospitalId());
         try {
             response.getWriter().print(jsonObject);
         } catch (IOException e) {

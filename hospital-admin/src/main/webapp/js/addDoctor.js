@@ -63,10 +63,17 @@ $(function () {
                         var textNode = document.createTextNode(data.hospitals[index].hospitalName);//创建文本节点
                         op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
                         document.getElementById("addHospital").appendChild(op);
+
+                        var op2 = document.createElement("option");//创建一个指名名称元素
+                        op2.value = data.hospitals[index].hospitalId;//设置op的实际值为当前的医院编号
+                        var textNode2 = document.createTextNode(data.hospitals[index].hospitalName);//创建文本节点
+                        op2.appendChild(textNode2);//把文本子节点添加到op元素中，指定其显示值
+                        document.getElementById("addAccessibleHospitals").appendChild(op2);
                     }
                 }
             }
         );
+        /*
         ajax(
             {
                 url: "doctorManageAction_getHospitals.action",
@@ -84,6 +91,7 @@ $(function () {
                 }
             }
         );
+        */
     });
 
 });
