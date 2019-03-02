@@ -101,10 +101,10 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         String hql = "";
         if(doctor.getAccessibleHospitals().size() != 0) {
             hql = hql + "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r, Doctor d inner join d.accessibleHospitals as ah where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
-            sql = sql + "select count(*) from deliveryInfo bo,survey bk,Patient r where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+            sql = sql + "select count(distinct bo.deliveryId) from deliveryInfo bo,survey bk,Patient r, Doctor d inner join d.accessibleHospitals as ah where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
         }
         else {
-            hql = hql + "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r, Doctor d inner join d.accessibleHospitals as ah where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
+            hql = hql + "select bo.deliveryId from deliveryInfo bo,survey bk,Patient r where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
             sql = sql + "select count(*) from deliveryInfo bo,survey bk,Patient r where bk.surveyId=bo.surveyId and bo.patientId=r.patientId ";
         }
 
@@ -172,7 +172,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
         String sql = "";
         String hql = "";
         if(doctor.getAccessibleHospitals().size() != 0) {
-            sql = sql + "select count(*) from deliveryInfo bo,survey bk,Patient r, Doctor d inner join d.accessibleHospitals as ah "
+            sql = sql + "select count(distinct bo.deliveryId) from deliveryInfo bo,survey bk,Patient r, Doctor d inner join d.accessibleHospitals as ah "
                     + "where bk.surveyId=bo.surveyId and bo.patientId=r.patientId and " +
                     "(bo.deliveryId not in (select deliveryId from RetrieveInfo))";
             //不支持limit分页
@@ -327,7 +327,7 @@ public class DeliveryDaoImpl extends HibernateDaoSupport implements DeliveryDao 
             } else {
                 String sql = "";
                 if(doctor.getAccessibleHospitals().size() != 0) {
-                    sql = sql + "SELECT count(deliveryId) from DeliveryInfo r, Doctor d inner join d.accessibleHospitals as ah where r.patient.state>0";
+                    sql = sql + "SELECT count(distinct deliveryId) from DeliveryInfo r, Doctor d inner join d.accessibleHospitals as ah where r.patient.state>0";
                     //p.aid或addnDoctor.aid有任意一个匹配当前医生的aid就说明当前医生有权限查看该病人
                     String addSql = " and (r.patient.doctor.aid=? or r.patient.addnDoctor.aid=? or (ah.hospitalId=r.doctor.hospital.hospitalId and d.aid=?)) ";
                     sql += addSql;

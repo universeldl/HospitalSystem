@@ -90,7 +90,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
 
         String hql = "";
         if(doctor.getAccessibleHospitals().size() != 0) {
-            hql = hql + "select count(*) from Patient r, Doctor d inner join d.accessibleHospitals as ah where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =? and r.state>0 ";
+            hql = hql + "select count(distinct r.patientId) from Patient r, Doctor d inner join d.accessibleHospitals as ah where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =? and r.state>0 ";
         }
         else {
             hql = hql + "select count(*) from Patient r where period_diff(date_format(now(), '%Y%m'), date_format(r.createTime, '%Y%m')) =? and r.state>0 ";
@@ -416,7 +416,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         String hql = "";
         if(doctor.getAccessibleHospitals().size() != 0) {
             hql = hql + "select r from Patient r, Doctor d inner join d.accessibleHospitals as ah where 1=1 and r.state>0";
-            sql = sql + "SELECT count(*) FROM Patient r, Doctor d inner join d.accessibleHospitals as ah where 1=1 and r.state>0";
+            sql = sql + "SELECT count(distinct r.patientId) FROM Patient r, Doctor d inner join d.accessibleHospitals as ah where 1=1 and r.state>0";
         }
         else {
             hql = hql + "select r from Patient r where 1=1 and r.state>0";
@@ -497,7 +497,7 @@ public class PatientDaoImpl extends HibernateDaoSupport implements PatientDao {
         String hql = "";
         if(doctor.getAccessibleHospitals().size() != 0) {
             hql = hql + "select r from Patient r, Doctor d inner join d.accessibleHospitals as ah where 1=1 and r.state=-1";
-            sql = sql + "SELECT count(*) FROM Patient r, Doctor d inner join d.accessibleHospitals as ah where 1=1 and r.state=-1";
+            sql = sql + "SELECT count(distinct r.patientId) FROM Patient r, Doctor d inner join d.accessibleHospitals as ah where 1=1 and r.state=-1";
         }
         else {
             hql = hql + "select r from Patient r where 1=1 and r.state=-1";
